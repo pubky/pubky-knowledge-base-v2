@@ -1,0 +1,74 @@
+name: Check code snippets
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  rust:
+    name: Rust snippets
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy, rustfmt
+
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: snippets/rust
+
+      - name: Install system dependencies
+        run: sudo apt-get update && sudo apt-get install -y pkg-config libssl-dev
+
+      - name: Clippy
+        working-directory: snippets/rust
+        run: cargo clippy -- -D warnings
+
+      - name: Format
+        working-directory: snippets/rust
+        run: cargo fmt --check
+
+  js:
+    name: JS/TS snippets
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install (vanilla JS)
+        working-directory: snippets/js
+        run: npm install
+
+      - name: Type-check (vanilla JS)
+        working-directory: snippets/js
+        run: npx tsc --noEmit
+
+      - name: Lint (vanilla JS)
+        working-directory: snippets/js
+        run: npx eslint src/
+
+      - name: Format (vanilla JS)
+        working-directory: snippets/js
+        run: npx prettier --check src/
+
+      - name: Install (React Native)
+        working-directory: snippets/react-native
+        run: npm install --legacy-peer-deps
+
+      - name: Type-check (React Native)
+        working-directory: snippets/react-native
+        run: npx tsc --noEmit
+
+      - name: Lint (React Native)
+        working-directory: snippets/react-native
+        run: npx eslint src/
+
+      - name: Format (React Native)
+        working-directory: snippets/react-native
+        run: npx prettier --check src/

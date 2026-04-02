@@ -1,0 +1,72 @@
+---
+title: "Pubky"
+description: "Key-based, self-regulating web that puts users in control."
+template: splash
+hero:
+  title: " "
+---
+
+import { Card, CardGrid, LinkCard } from "@astrojs/starlight/components";
+
+## Quick Start
+
+<CardGrid>
+  <LinkCard title="TL;DR" href="tldr/" description="30-second overview of the entire ecosystem" />
+  <LinkCard title="Getting Started" href="getting-started/" description="Complete guide for users and developers" />
+  <LinkCard title="Glossary" href="glossary/" description="Quick reference for key terms" />
+  <LinkCard title="FAQ" href="faq/" description="63+ questions answered" />
+</CardGrid>
+
+## For Users
+
+<CardGrid>
+  <Card title="Pubky.app" icon="rocket">
+    Try the decentralized social media application at [pubky.app](https://pubky.app).
+  </Card>
+  <Card title="Pubky Ring" icon="download">
+    Your keychain for the Pubky ecosystem. [iOS](https://apps.apple.com/us/app/pubky-ring/id6739356756) | [Android](https://play.google.com/store/apps/details?id=to.pubky.ring) | [Page](https://pubkyring.app/) | [Learn more](explore/technologies/pubky-ring/).
+  </Card>
+  <Card title="Pubky Explorer" icon="magnifier">
+    Browse public data stored on homeservers at [explorer.pubky.app](https://explorer.pubky.app). [Learn more](explore/technologies/pubky-explorer/).
+  </Card>
+</CardGrid>
+
+## For Developers
+
+<CardGrid>
+  <Card title="Pubky Core" icon="laptop-code">
+    Open protocol & infrastructure for censorship-resistant apps. [SDK](explore/pubkycore/sdk/) | [API](explore/pubkycore/api/) | [Homeserver](explore/pubkycore/homeserver/)
+  </Card>
+  <Card title="Developer Tools" icon="puzzle">
+    [Docker stack](explore/technologies/pubky-docker/) | [CLI](explore/technologies/pubky-cli/) | [Explorer](explore/technologies/pubky-explorer/) | [PKDNS](explore/technologies/pkdns/)
+  </Card>
+  <Card title="Pubky Apps" icon="setting">
+    Build on the social layer — [Architecture](explore/pubky-apps/app-architectures/introduction/) | [Indexing](explore/pubky-apps/indexing-and-aggregation/introduction/) | [Reference App](explore/pubky-apps/reference-app/introduction/)
+  </Card>
+</CardGrid>
+
+## Key Concepts
+
+<CardGrid>
+  <Card title="PKARR" icon="document">
+    Public key addressable resource records for decentralized identity. [Read more](explore/pubkycore/pkarr/introduction/)
+  </Card>
+  <Card title="Censorship Resistance" icon="warning">
+    Why centralized platforms fail and how Pubky solves it. [Read more](explore/concepts/censorship/)
+  </Card>
+  <Card title="Credible Exit" icon="right-arrow">
+    Freedom to switch providers without losing data. [Read more](explore/concepts/credible-exit/)
+  </Card>
+  <Card title="Semantic Social Graph" icon="star">
+    Tagged relationships and user-controlled filtering. [Read more](explore/concepts/semantic-social-graph/)
+  </Card>
+</CardGrid>
+
+## Community
+
+<CardGrid>
+  <LinkCard title="Join pubky.app" href="https://pubky.app" description="Try the decentralized social media app" />
+  <LinkCard title="Telegram" href="https://t.me/pubkycore" description="Join the community chat" />
+  <LinkCard title="GitHub" href="https://github.com/pubky" description="Source code and repositories" />
+  <LinkCard title="Contributing" href="contributing/" description="How to contribute to Pubky" />
+</CardGrid>

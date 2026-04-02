@@ -1,0 +1,52 @@
+/* Inter font */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+/* Pubky brand dark theme */
+:root {
+	--sl-font: "Inter", system-ui, sans-serif;
+
+	--sl-color-accent-low: #2a2a30;
+	--sl-color-accent: #ffffff;
+	--sl-color-accent-high: #ffffff;
+
+	--sl-color-white: #ffffff;
+	--sl-color-gray-1: #e0e0e3;
+	--sl-color-gray-2: #b0b0b5;
+	--sl-color-gray-3: #89898f;
+	--sl-color-gray-4: #4a4a50;
+	--sl-color-gray-5: #2a2a30;
+	--sl-color-gray-6: #15151a;
+	--sl-color-black: #05050a;
+
+	--sl-color-bg-nav: var(--sl-color-black);
+	--sl-color-bg-sidebar: var(--sl-color-black);
+	--sl-color-hairline-shade: var(--sl-color-gray-5);
+}
+
+/* ── Card hover effects ── */
+.card {
+	transition: transform 0.2s ease, box-shadow 0.2s ease,
+		border-color 0.2s ease;
+	border: 1px solid var(--sl-color-gray-5);
+}
+
+.card:hover {
+	transform: translateY(-2px);
+	border-color: var(--sl-color-gray-3);
+	box-shadow: 0 4px 24px rgba(255, 255, 255, 0.04),
+		0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+
+/* LinkCard hover */
+.sl-link-card {
+	transition: transform 0.2s ease, box-shadow 0.2s ease,
+		border-color 0.2s ease;
+}
+
+.sl-link-card:hover {
+	transform: translateY(-2px);
+	border-color: var(--sl-color-gray-3);
+	box-shadow: 0 4px 24px rgba(255, 255, 255, 0.04),
+		0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+

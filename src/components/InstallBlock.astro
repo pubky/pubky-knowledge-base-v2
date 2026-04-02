@@ -1,0 +1,390 @@
+---
+const commands = [
+  { label: "npm", command: "npm install @synonymdev/pubky" },
+  { label: "RN", command: "npm install @synonymdev/react-native-pubky" },
+  { label: "Rust", command: "cargo add pubky" },
+];
+
+const SITE_URL = (import.meta.env.SITE_URL || "https://docs.pubky.org").replace(/\/+$/, "");
+
+const aiPrompt = `Pubky: open protocol for key-based, censorship-resistant web apps. Public key identity, homeserver storage, Mainline DHT discovery over HTTP/REST.
+
+Fetch the docs and help me build with Pubky:
+- Full (~110k tokens): ${SITE_URL}/llms-full.txt
+- Compact (~53k tokens): ${SITE_URL}/llms-small.txt`;
+
+const aiLinks = [
+  { name: "Claude", url: `https://claude.ai/new?q=${encodeURIComponent(aiPrompt)}`, icon: "claude" },
+  { name: "ChatGPT", url: `https://chat.openai.com/?q=${encodeURIComponent(aiPrompt)}`, icon: "chatgpt" },
+  { name: "Cursor", url: `https://cursor.com/link/prompt?text=${encodeURIComponent(aiPrompt)}`, icon: "cursor" },
+  { name: "Gemini", url: `https://gemini.google.com/app?q=${encodeURIComponent(aiPrompt)}`, icon: "gemini" },
+  { name: "Grok", url: `https://x.com/i/grok?text=${encodeURIComponent(aiPrompt)}`, icon: "grok" },
+];
+---
+
+<div class="install-block">
+
+  <div class="install-header">
+    <p class="install-heading">Build For User Sovereignty</p>
+    <p class="install-tagline">Open protocol for key-based, censorship-resistant apps</p>
+    <div class="open-with">
+      <span class="open-with-label">Open with</span>
+      <div class="open-with-links">
+        {aiLinks.map((link) => (
+          <a href={link.url} target="_blank" rel="noopener noreferrer" class="open-with-btn" aria-label={link.name}>
+            <span class="ai-icon" data-icon={link.icon}></span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <div class="install-sdk desktop-only">
+    <p class="install-title">Pubky SDK</p>
+    <div class="terminal">
+      <div class="terminal-bar">
+        <div class="dots">
+          <span class="dot dot-red"></span>
+          <span class="dot dot-yellow"></span>
+          <span class="dot dot-green"></span>
+        </div>
+        <div class="tabs">
+          {commands.map((cmd, i) => (
+            <button
+              class:list={["tab", { active: i === 0 }]}
+              data-index={i}
+            >
+              {cmd.label}
+            </button>
+          ))}
+        </div>
+      </div>
+      <div class="terminal-body">
+        {commands.map((cmd, i) => (
+          <div class:list={["command", { active: i === 0 }]} data-index={i}>
+            <span class="prompt">$</span>
+            <span class="cmd-text">{cmd.command}</span>
+            <button class="copy-btn" data-command={cmd.command} aria-label="Copy to clipboard">
+              <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </button>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <div class="install-actions desktop-only">
+    <a href="https://github.com/pubky/pubky-core" class="btn btn-github">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"></path></svg>
+      <span>View on GitHub</span>
+    </a>
+    <a href="/explore/pubkycore/sdk/" class="btn btn-docs">
+      <span>SDK Docs</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+    </a>
+  </div>
+
+</div>
+
+<script>
+  document.querySelectorAll('.install-block').forEach((block) => {
+    const tabs = block.querySelectorAll('.tab');
+    const commands = block.querySelectorAll('.command');
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const index = tab.getAttribute('data-index');
+        tabs.forEach((t) => t.classList.remove('active'));
+        commands.forEach((c) => c.classList.remove('active'));
+        tab.classList.add('active');
+        block.querySelector(`.command[data-index="${index}"]`)?.classList.add('active');
+      });
+    });
+
+    block.querySelectorAll('.copy-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const command = btn.getAttribute('data-command') || '';
+        navigator.clipboard.writeText(command);
+        btn.classList.add('copied');
+        setTimeout(() => btn.classList.remove('copied'), 1500);
+      });
+    });
+  });
+</script>
+
+<style is:global>
+  .install-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 580px;
+  }
+
+  .install-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .install-heading {
+    margin: 0;
+    font-weight: 600;
+    color: var(--sl-color-white);
+    letter-spacing: -0.02em;
+  }
+
+  .install-tagline {
+    margin: 0;
+    color: var(--sl-color-gray-3);
+  }
+
+  .open-with {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .open-with-label {
+    color: var(--sl-color-gray-3);
+  }
+
+  .open-with-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .open-with-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: opacity 0.15s ease;
+  }
+
+  .open-with-btn:hover {
+    opacity: 0.75;
+  }
+
+  .ai-icon {
+    display: inline-block;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 8px;
+  }
+
+  .ai-icon[data-icon="claude"] { background-image: url("/images/ai-icons/claude.png"); }
+  .ai-icon[data-icon="chatgpt"] { background-image: url("/images/ai-icons/chatgpt.png"); }
+  .ai-icon[data-icon="cursor"] { background-image: url("/images/ai-icons/cursor.png"); }
+  .ai-icon[data-icon="gemini"] { background-image: url("/images/ai-icons/gemini.png"); }
+  .ai-icon[data-icon="grok"] { background-image: url("/images/ai-icons/grok.png"); }
+
+  .install-sdk {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+  }
+
+  .install-title {
+    margin: 0;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--sl-color-white);
+  }
+
+  .terminal {
+    width: 100%;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--sl-color-gray-6);
+    box-shadow:
+      0 4px 24px rgba(0, 0, 0, 0.3),
+      0 0 0 1px rgba(255, 255, 255, 0.04);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .terminal:hover {
+    border-color: var(--sl-color-gray-4);
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.4),
+      0 0 0 1px rgba(255, 255, 255, 0.06);
+  }
+
+  .terminal-bar {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.6rem 1rem;
+    background: var(--sl-color-gray-5);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  }
+
+  .dots {
+    display: flex;
+    gap: 6px;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+
+  .dot-red { background: #ff5f57; }
+  .dot-yellow { background: #febc2e; }
+  .dot-green { background: #28c840; }
+
+  .tabs {
+    display: flex;
+    gap: 2px;
+  }
+
+  .tab {
+    background: transparent;
+    border: none;
+    color: var(--sl-color-gray-3);
+    font-family: var(--sl-font-system-mono);
+    font-size: 0.9rem;
+    padding: 0.3rem 0.85rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .tab:hover {
+    color: var(--sl-color-gray-1);
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .tab.active {
+    color: var(--sl-color-white);
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .terminal-body {
+    padding: 1rem 1.25rem;
+  }
+
+  .command {
+    display: none;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--sl-font-system-mono);
+    line-height: 1.6;
+  }
+
+  .command.active {
+    display: flex;
+  }
+
+  .prompt {
+    color: var(--sl-color-gray-3);
+    user-select: none;
+  }
+
+  .cmd-text {
+    color: var(--sl-color-white);
+    flex: 1;
+  }
+
+  .copy-btn {
+    background: transparent;
+    border: none;
+    color: var(--sl-color-gray-3);
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    transition: all 0.15s ease;
+    display: flex;
+    align-items: center;
+  }
+
+  .copy-btn:hover {
+    color: var(--sl-color-white);
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  .copy-btn .check-icon { display: none; }
+  .copy-btn.copied .copy-icon { display: none; }
+  .copy-btn.copied .check-icon { display: block; color: #28c840; }
+
+  .install-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .install-actions .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.15s ease;
+  }
+
+  .install-actions .btn-github {
+    background: var(--sl-color-gray-5);
+    color: var(--sl-color-gray-1);
+    border: 1px solid var(--sl-color-gray-4);
+  }
+
+  .install-actions .btn-github:hover {
+    background: var(--sl-color-gray-4);
+    color: var(--sl-color-white);
+    border-color: var(--sl-color-gray-3);
+  }
+
+  .install-actions .btn-docs {
+    background: transparent;
+    color: var(--sl-color-gray-2);
+    border: 1px solid transparent;
+  }
+
+  .install-actions .btn-docs:hover {
+    color: var(--sl-color-white);
+  }
+
+  /* Desktop */
+  @media (min-width: 768px) {
+    .install-block { gap: 3rem; }
+    .install-header { gap: 1rem; }
+    .install-heading { font-size: 2.5rem; }
+    .install-tagline { font-size: 1.3rem; }
+    .install-title { font-size: 1.35rem; }
+    .open-with { gap: 0.6rem; }
+    .open-with-label { font-size: 1.1rem; }
+    .open-with-links { gap: 0.4rem; }
+    .ai-icon { width: 38px; height: 38px; }
+    .command { font-size: 1.15rem; }
+    .install-actions .btn { font-size: 1.05rem; padding: 0.6rem 1.4rem; }
+  }
+
+  /* Mobile */
+  @media (max-width: 767px) {
+    .desktop-only { display: none !important; }
+    .install-block { gap: 1.5rem; }
+    .install-header { gap: 0.75rem; }
+    .install-heading { font-size: 1.55rem; white-space: nowrap; }
+    .install-tagline { font-size: 0.8rem; white-space: nowrap; }
+    .open-with { gap: 0.5rem; margin-bottom: 1.5rem; }
+    .open-with-label { font-size: 0.9rem; }
+    .open-with-links { gap: 0.5rem; }
+    .ai-icon { width: 36px; height: 36px; }
+  }
+</style>

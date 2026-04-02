@@ -1,0 +1,63 @@
+---
+title: "Pubky: 30-Second Overview"
+---
+
+**Pubky is a decentralized web protocol that puts you in control of your identity and data.**
+
+## What It Is
+
+- **Your Identity = Your Key**: No usernames, no accounts. Your public key is your permanent identity.
+- **Your Data, Your Choice**: Store data on any Homeserver you choose. Switch anytime without losing anything.
+- **Censorship Resistant**: Built on the Mainline DHT (15+ years proven, 10M+ nodes). No single authority can block you.
+- **No Blockchain**: Fast, free operations using standard web technologies (HTTP/HTTPS).
+
+## How It Works
+
+```mermaid
+flowchart LR
+    You[Your Key] --> PKARR[PKARR Record]
+    PKARR --> DHT[Mainline DHT]
+    PKARR --> HS[Your Homeserver]
+    Apps[Apps] --> HS
+    Apps --> DHT
+```
+
+1. Generate a cryptographic key pair (your identity)
+2. Publish a PKARR record to the DHT (points to your Homeserver)
+3. Store your data on any Homeserver
+4. Apps discover and access your data via your public key
+
+## Key Components
+
+| Component | Purpose | Status |
+|-----------|---------|--------|
+| **[Pubky Core](/explore/pubkycore/introduction/)** | Protocol, Homeserver, SDK | ✅ Production |
+| **[Pubky Ring](/explore/technologies/pubky-ring/)** | Mobile key manager (iOS/Android) | ✅ Production |
+| **[Pubky App](/explore/pubky-apps/introduction/)** | Social media demo ([pubky.app](https://pubky.app)) | ✅ Live (MVP) |
+| **[Pubky Nexus](/explore/pubky-apps/indexing-and-aggregation/pubky-nexus/)** | Social indexing service | ✅ Production |
+| **[Paykit](/explore/technologies/paykit/)** | Payment protocol | ⚠️ WIP |
+| **[Pubky Noise](/explore/technologies/pubky-noise/)** | Encrypted communication | ⚠️ WIP |
+
+## Why It Matters
+
+**Replace Big Tech**: No algorithm controls your feed. No company owns your data.
+
+**Replace Big State**: Censorship becomes impractical when data lives on millions of distributed nodes.
+
+**Replace Big Banks**: Native integration with Bitcoin/Lightning for true financial freedom (coming soon).
+
+## Get Started
+
+- **Users**: Download [Pubky Ring](/explore/technologies/pubky-ring/) → Try [pubky.app](https://pubky.app)
+- **Developers**: Check [Getting Started Guide](/getting-started/) → Install [SDK](/explore/pubkycore/sdk/)
+
+## Learn More
+
+- **[Full Documentation](/)**: Complete knowledge base
+- **[FAQ](/faq/)**: 63 questions answered
+- **[Glossary](/glossary/)**: Quick term definitions
+- **[Vision](/the-vision-of-pubky/)**: Why we're building this
+
+---
+
+**Bottom Line**: Pubky gives you a self-sovereign identity, censorship-resistant data storage, and the freedom to choose your own infrastructure—all using proven, scalable technology.

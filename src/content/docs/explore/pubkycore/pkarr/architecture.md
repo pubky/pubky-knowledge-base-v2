@@ -1,0 +1,53 @@
+---
+title: "architecture"
+---
+
+In-depth look at the architecture of [PKARR](/explore/pubkycore/pkarr/introduction/), including its components, data formats, and how they interact.
+
+## Components
+
+- **Client**: Applications or users that publish or query [PKARR](/explore/pubkycore/pkarr/introduction/) records. The main Rust crate provides `Keypair`/`PublicKey` types, `SignedPacket` builder, and `Client` for publishing/resolving.
+- **Relay**: HTTP relay for environments without UDP access (browsers, firewalled networks). Also serves as intermediary for services on major cloud providers (AWS, GCP, Azure), whose IP ranges are often blocked by DHT nodes.
+- **[Mainline DHT](/explore/technologies/mainline-dht/)**: The peer-to-peer network used to announce and resolve [PKARR](/explore/pubkycore/pkarr/introduction/) records.
+- **Republisher**: Keeps [PKARR](/explore/pubkycore/pkarr/introduction/) records alive on the [Mainline DHT](/explore/technologies/mainline-dht/) by [periodically republishing](https://github.com/pubky/pkarr-churn/blob/main/results-node_decay.md) them (~hourly). The `pkarr-republisher` component handles this for Homeserver operators.
+
+## SignedPacket Format
+
+```
+SignedPacket = public-key(32) + signature(64) + timestamp(8) + dns-packet(≤1000)
+```
+
+Maximum total size: 1104 bytes. Public keys are encoded as 52-character z-base32 strings for DNS compatibility. All packets are Ed25519-signed, ensuring authenticity and integrity. Published to the DHT using BEP44 mutable item operations. The `dns-packet` is a standard compressed DNS packet (see [Supported DNS Record Types](#supported-dns-record-types) below).
+
+See the [PKARR repository](https://github.com/pubky/pkarr) for the full format specification and API reference.
+
+## Interaction Flow
+
+1. **Publishing**: Clients publish [PKARR](/explore/pubkycore/pkarr/introduction/) to the [Mainline DHT](/explore/technologies/mainline-dht/), either directly or through a relay (required for browsers since the DHT uses UDP).
+2. **Republishing**: Homeservers and relays republish records for their users to [keep them available](https://github.com/pubky/pkarr-churn/blob/main/results-node_decay.md) on the [Mainline DHT](/explore/technologies/mainline-dht/). Records degrade over hours to days without republishing, so hourly republishing is recommended.
+3. **Querying**: Clients query the [Mainline DHT](/explore/technologies/mainline-dht/) for [PKARR](/explore/pubkycore/pkarr/introduction/) using the SHA1 hash of the public key, either directly or through a relay.
+
+## Supported DNS Record Types
+
+A, AAAA, CNAME, TXT, HTTPS/SVCB (RFC 9460).
+
+The `_pubky` SVCB record points to a user's [Homeserver](/explore/pubkycore/homeserver/), enabling discovery, migration, and failover:
+
+```
+_pubky.<public-key> SVCB 1 homeserver.example.com port=443
+```
+
+## Caching
+
+- **InMemoryCache**: LRU cache for lightweight deployments
+- **LmdbCache**: Persistent LMDB-backed cache for relays and servers
+
+## Failure Modes
+
+See [DHT outages](/explore/pubkycore/security-model/#scenario-dht-unreachable), [record expiry](/explore/technologies/mainline-dht/#data-lifecycle), and [attack resilience](/explore/pubkycore/security-model/#dht-attackers).
+
+## Key Technologies
+
+- **[Mainline DHT](/explore/technologies/mainline-dht/)**: A global, censorship-resistant p2p network of 10+ million peers. [PKARR](/explore/pubkycore/pkarr/introduction/) records are announced here using BEP44.
+
+See [Security Model](/explore/pubkycore/security-model/) for the DHT threat model and the [pkarr repository](https://github.com/pubky/pkarr) for code examples and multi-platform support details.
