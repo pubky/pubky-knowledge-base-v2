@@ -135,7 +135,7 @@ async fn snippet_auth_flow() -> anyhow::Result<()> {
 // so it lives in its own module.
 mod social_feed {
     // --8<-- [start:social_feed]
-    use pubky::{Keypair, Pubky, PublicKey, PubkyResource, PubkySession};
+    use pubky::{Keypair, Pubky, PubkyResource, PubkySession, PublicKey};
     use serde::{Deserialize, Serialize};
 
     #[derive(Serialize, Deserialize)]
@@ -269,7 +269,7 @@ async fn snippet_error_handling() -> anyhow::Result<()> {
     let pubky = Pubky::new()?;
     let session = pubky.signer(Keypair::random()).signin().await?;
     // --8<-- [start:error_handling]
-    use pubky::{errors::RequestError, Error};
+    use pubky::{Error, errors::RequestError};
 
     match session.storage().get("/pub/myapp/data").await {
         Ok(resp) => println!("Retrieved: {}", resp.text().await?),
@@ -301,7 +301,10 @@ async fn snippet_check_resource() -> anyhow::Result<()> {
 
     // Also available on public storage
     let user = PublicKey::try_from(user_public_key).unwrap();
-    let public_exists = pubky.public_storage().exists((&user, "/pub/myapp/profile")).await?;
+    let public_exists = pubky
+        .public_storage()
+        .exists((&user, "/pub/myapp/profile"))
+        .await?;
     // --8<-- [end:check_resource]
     Ok(())
 }
