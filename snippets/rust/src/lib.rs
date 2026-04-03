@@ -52,9 +52,10 @@ async fn snippet_put() -> anyhow::Result<()> {
     let session = pubky.signer(Keypair::random()).signin().await?;
     let profile = serde_json::json!({"name": "Alice"});
     // --8<-- [start:put]
+    // Requires the "json" feature on the pubky crate
     session
         .storage()
-        .put("/pub/myapp/profile", serde_json::to_string(&profile)?)
+        .put_json("/pub/myapp/profile", &profile)
         .await?;
     // --8<-- [end:put]
     Ok(())
@@ -65,8 +66,8 @@ async fn snippet_get() -> anyhow::Result<()> {
     let pubky = Pubky::new()?;
     let session = pubky.signer(Keypair::random()).signin().await?;
     // --8<-- [start:get]
-    let resp = session.storage().get("/pub/myapp/profile").await?;
-    let text = resp.text().await?;
+    // Requires the "json" feature on the pubky crate
+    let profile: serde_json::Value = session.storage().get_json("/pub/myapp/profile").await?;
     // --8<-- [end:get]
     Ok(())
 }
@@ -148,10 +149,8 @@ mod social_feed {
         let post_id = post.timestamp.to_string();
         let path = format!("/pub/social/posts/{}", post_id);
 
-        session
-            .storage()
-            .put(&path, serde_json::to_string(post)?)
-            .await?;
+        // Requires the "json" feature on the pubky crate
+        session.storage().put_json(&path, post).await?;
         Ok(())
     }
 
@@ -166,8 +165,8 @@ mod social_feed {
 
         let mut posts = Vec::new();
         for entry in entries {
-            let resp = pubky.public_storage().get(&entry).await?;
-            let post: Post = serde_json::from_slice(&resp.bytes().await?)?;
+            // Requires the "json" feature on the pubky crate
+            let post: Post = pubky.public_storage().get_json(&entry).await?;
             posts.push(post);
         }
 
