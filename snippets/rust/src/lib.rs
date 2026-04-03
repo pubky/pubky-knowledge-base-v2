@@ -269,11 +269,15 @@ async fn snippet_error_handling() -> anyhow::Result<()> {
     let pubky = Pubky::new()?;
     let session = pubky.signer(Keypair::random()).signin().await?;
     // --8<-- [start:error_handling]
-    use pubky::Error;
+    use pubky::{errors::RequestError, Error};
 
     match session.storage().get("/pub/myapp/data").await {
         Ok(resp) => println!("Retrieved: {}", resp.text().await?),
-        Err(e) => eprintln!("Error: {}", e),
+        Err(Error::Request(RequestError::Server { status, message })) => {
+            eprintln!("Server error {status}: {message}");
+        }
+        Err(Error::Authentication(e)) => eprintln!("Auth failed: {e}"),
+        Err(e) => eprintln!("Error: {e}"),
     }
     // --8<-- [end:error_handling]
     Ok(())
