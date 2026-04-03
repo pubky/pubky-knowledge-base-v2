@@ -148,6 +148,18 @@ For gated homeservers, obtain a signup token via [Homegate](/explore/technologie
 ```javascript snippet="snippets/js/src/sdk.ts:js_signin"
 ```
 
+### Sign In: Fast vs Blocking
+
+`signin()` returns quickly by refreshing PKDNS in the background. `signinBlocking()` waits until the user's homeserver is discoverable via PKDNS (~3-5s), which is useful when you need immediate resolvability after sign-in:
+
+**Rust:**
+```rust snippet="snippets/rust/src/lib.rs:signin_blocking"
+```
+
+**JavaScript:**
+```javascript snippet="snippets/js/src/sdk.ts:js_signin_blocking"
+```
+
 ### Store Data (PUT)
 
 **Rust:**
@@ -186,6 +198,18 @@ For gated homeservers, obtain a signup token via [Homegate](/explore/technologie
 
 **JavaScript:**
 ```javascript snippet="snippets/js/src/sdk.ts:js_list"
+```
+
+### Check Resource (Exists & Metadata)
+
+Check if data at a given storage path exists, or retrieve its metadata (size, MIME type, ETag for cache validation) without downloading the body:
+
+**Rust:**
+```rust snippet="snippets/rust/src/lib.rs:check_resource"
+```
+
+**JavaScript:**
+```javascript snippet="snippets/js/src/sdk.ts:js_check_resource"
 ```
 
 ### Public Read (Unauthenticated)
@@ -361,6 +385,18 @@ See the [7-events_stream example](https://github.com/pubky/pubky-core/tree/main/
 Sessions are created via the `Signer` and provide scoped storage access:
 
 ```rust snippet="snippets/rust/src/lib.rs:session_management"
+```
+
+### Session Persistence
+
+Export a session to a string and restore it later without re-authenticating:
+
+**Rust:**
+```rust snippet="snippets/rust/src/lib.rs:session_persistence"
+```
+
+**JavaScript:**
+```javascript snippet="snippets/js/src/sdk.ts:js_session_persistence"
 ```
 
 ### Multiple Identities

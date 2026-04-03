@@ -283,6 +283,60 @@ async fn snippet_error_handling() -> anyhow::Result<()> {
     Ok(())
 }
 
+async fn snippet_check_resource() -> anyhow::Result<()> {
+    use pubky::{Keypair, Pubky, PublicKey};
+    let pubky = Pubky::new()?;
+    let session = pubky.signer(Keypair::random()).signin().await?;
+    let user_public_key = "o1gg96ewuojmopcjbz8895478wdtxtzzuxnfjjz8o8e77csa1ngo";
+    // --8<-- [start:check_resource]
+    // Check if a resource exists (lightweight HEAD request)
+    let exists = session.storage().exists("/pub/myapp/profile").await?;
+
+    // Get resource metadata without downloading the body
+    if let Some(stats) = session.storage().stats("/pub/myapp/profile").await? {
+        println!("Size: {:?}", stats.content_length);
+        println!("Type: {:?}", stats.content_type);
+        println!("ETag: {:?}", stats.etag);
+    }
+
+    // Also available on public storage
+    let user = PublicKey::try_from(user_public_key).unwrap();
+    let public_exists = pubky.public_storage().exists((&user, "/pub/myapp/profile")).await?;
+    // --8<-- [end:check_resource]
+    Ok(())
+}
+
+async fn snippet_signin_blocking() -> anyhow::Result<()> {
+    // --8<-- [start:signin_blocking]
+    use pubky::{Keypair, Pubky};
+
+    let pubky = Pubky::new()?;
+    let signer = pubky.signer(Keypair::random());
+
+    // Fast: PKDNS refresh happens in the background
+    let session = signer.signin().await?;
+
+    // Blocking: waits for PKDNS to be discoverable (~3-5s)
+    // Use this when you need the user's homeserver to be resolvable immediately
+    let session = signer.signin_blocking().await?;
+    // --8<-- [end:signin_blocking]
+    Ok(())
+}
+
+async fn snippet_session_persistence() -> anyhow::Result<()> {
+    use pubky::{Keypair, Pubky};
+    let pubky = Pubky::new()?;
+    let session = pubky.signer(Keypair::random()).signin().await?;
+    // --8<-- [start:session_persistence]
+    // Export session as a portable string
+    let token = session.export_secret();
+
+    // Later, restore without re-authenticating (None = use default client)
+    let restored = pubky::PubkySession::import_secret(&token, None).await?;
+    // --8<-- [end:session_persistence]
+    Ok(())
+}
+
 // =============================================================================
 // Snippets from: src/content/docs/explore/pubkycore/homeserver.md
 // =============================================================================
