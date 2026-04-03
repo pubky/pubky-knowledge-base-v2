@@ -139,24 +139,7 @@ npm install @synonymdev/pubky
 ```
 
 **Quick Example (JavaScript):**
-```javascript
-import { Pubky, Keypair } from '@synonymdev/pubky';
-
-// Create client and signer
-const pubky = new Pubky();
-const signer = pubky.signer(Keypair.random());
-
-// Sign up (pass signup token for gated homeservers, null for open/testnet)
-const session = await signer.signup(homeserverPk, null);
-
-// Store data
-await session.storage.putJson("/pub/myapp/profile", {
-  name: "Alice",
-  bio: "Decentralized and loving it!"
-});
-
-// Retrieve data
-const profile = await session.storage.getJson("/pub/myapp/profile");
+```javascript snippet="snippets/js/src/quick-start-intro.ts:js_intro_quick_example"
 ```
 
 See [SDK Documentation](/explore/pubkycore/sdk/) for complete guides.

@@ -141,34 +141,7 @@ cargo run
 
 **Quick Example (JavaScript):**
 
-```javascript
-import { Pubky, Keypair } from '@synonymdev/pubky';
-
-// Create client and signer
-const pubky = new Pubky();
-const signer = pubky.signer(Keypair.random());
-
-// Sign up (pass signup token for gated homeservers, null for open/testnet)
-const session = await signer.signup(homeserverPk, null);
-console.log('Your pubky:', signer.publicKey.z32());
-
-// Store data
-await session.storage.putJson('/pub/myapp/profile', {
-  name: "Alice",
-  bio: "Building on Pubky!",
-  avatar: "https://example.com/avatar.jpg"
-});
-
-// Retrieve data
-const profile = await session.storage.getJson('/pub/myapp/profile');
-console.log('Profile:', profile);
-
-// List directory
-const files = await session.storage.list('/pub/myapp/');
-console.log('Files:', files);
-
-// Sign out
-await session.signout();
+```javascript snippet="snippets/js/src/quick-start-getting-started.ts:js_getting_started_quick_example"
 ```
 
 **Key concepts:**
