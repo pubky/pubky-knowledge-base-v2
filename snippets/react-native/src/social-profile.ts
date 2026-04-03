@@ -19,7 +19,7 @@ const profile = {
 // Write profile
 const putRes = await put(
   "pubky://alice-pubkey/pub/pubky.app/profile.json",
-  { data: JSON.stringify(profile) },
+  profile,
   secretKey,
 );
 
