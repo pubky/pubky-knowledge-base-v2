@@ -102,13 +102,14 @@ async fn snippet_list() -> anyhow::Result<()> {
 }
 
 async fn snippet_public_read() -> anyhow::Result<()> {
-    use pubky::Pubky;
+    use pubky::{Pubky, PublicKey};
     let pubky = Pubky::new()?;
     let user_public_key = "o1gg96ewuojmopcjbz8895478wdtxtzzuxnfjjz8o8e77csa1ngo";
     // --8<-- [start:public_read]
+    let user = PublicKey::try_from(user_public_key).unwrap();
     let resp = pubky
         .public_storage()
-        .get(format!("{}/pub/myapp/profile", user_public_key))
+        .get((&user, "/pub/myapp/profile"))
         .await?;
     let text = resp.text().await?;
     // --8<-- [end:public_read]
@@ -133,7 +134,7 @@ async fn snippet_auth_flow() -> anyhow::Result<()> {
 // so it lives in its own module.
 mod social_feed {
     // --8<-- [start:social_feed]
-    use pubky::{Keypair, Pubky, PubkyResource, PubkySession};
+    use pubky::{Keypair, Pubky, PublicKey, PubkyResource, PubkySession};
     use serde::{Deserialize, Serialize};
 
     #[derive(Serialize, Deserialize)]
@@ -154,12 +155,10 @@ mod social_feed {
         Ok(())
     }
 
-    async fn get_feed(pubky: &Pubky, public_key: &str) -> anyhow::Result<Vec<Post>> {
-        let path = format!("{}/pub/social/posts/", public_key);
-
+    async fn get_feed(pubky: &Pubky, public_key: &PublicKey) -> anyhow::Result<Vec<Post>> {
         let entries: Vec<PubkyResource> = pubky
             .public_storage()
-            .list(path)?
+            .list((public_key, "/pub/social/posts/"))?
             .limit(50)
             .reverse(true)
             .send()
@@ -167,7 +166,7 @@ mod social_feed {
 
         let mut posts = Vec::new();
         for entry in entries {
-            let resp = pubky.public_storage().get(entry.to_string()).await?;
+            let resp = pubky.public_storage().get(&entry).await?;
             let post: Post = serde_json::from_slice(&resp.bytes().await?)?;
             posts.push(post);
         }

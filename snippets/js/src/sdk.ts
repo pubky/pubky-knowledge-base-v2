@@ -66,7 +66,7 @@ async function snippet_list() {
 async function snippet_public_read() {
   // --8<-- [start:js_public_read]
   const text = await pubky.publicStorage.getText(
-    `${userPk}/pub/myapp/profile` as Address,
+    `pubky://${userPk}/pub/myapp/profile` as Address,
   );
   // --8<-- [end:js_public_read]
 }
