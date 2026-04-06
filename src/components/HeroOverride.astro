@@ -1,0 +1,19 @@
+---
+/**
+ * Overrides Starlight's default Hero component (registered in astro.config.mjs → components.Hero).
+ *
+ * Why this file exists:
+ * Starlight automatically renders a Hero section on pages with `hero` frontmatter.
+ * The homepage uses a fully custom hero (InstallBlock + HomeContent), so we suppress
+ * Starlight's Hero there. On all other pages, we delegate to Starlight's default Hero.
+ *
+ * Removing this file would cause Starlight's default Hero to render on the homepage,
+ * duplicating/conflicting with our custom layout.
+ */
+import Default from "@astrojs/starlight/components/Hero.astro";
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const isHomepage = Astro.url.pathname === base + "/" || Astro.url.pathname === base;
+---
+
+{!isHomepage && <Default><slot /></Default>}

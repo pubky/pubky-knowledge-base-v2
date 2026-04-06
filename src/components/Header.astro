@@ -1,0 +1,91 @@
+---
+/**
+ * Custom header matching Figma "Pubky / Navbar / Home" design.
+ * Figma node: 32263:74183
+ * Layout: flex, gap spacing-12(48), items-center, py spacing-6(24)
+ * Logo: 172×36 Pubky Core Logo
+ * Search: 400px pill, border base/border, radius full, px spacing-6(24), py spacing-3(12)
+ * Icons: flex-1, gap spacing-6(24), 24px each, justify-end
+ */
+import config from 'virtual:starlight/user-config';
+import Search from 'virtual:starlight/components/Search';
+import SocialIcons from 'virtual:starlight/components/SocialIcons';
+
+const shouldRenderSearch =
+  config.pagefind || config.components.Search !== '@astrojs/starlight/components/Search.astro';
+---
+
+<div class="navbar not-content">
+  <a href="/" class="navbar-logo">
+    <img src="/images/pubky-core-logo.svg" alt="Pubky Core" width="172" height="36" />
+  </a>
+  <div class="navbar-search">
+    {shouldRenderSearch && <Search />}
+  </div>
+  <div class="navbar-icons">
+    <SocialIcons />
+  </div>
+</div>
+
+<style>
+  /* Figma: Navbar = 1200px wide, flex, gap spacing-12(48), items-center, py spacing-6(24), bg base-background */
+  .navbar {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-12);
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: var(--spacing-6) var(--spacing-10);
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  /* Figma: Logo = 172×36, shrink-0 */
+  .navbar-logo {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  .navbar-logo img {
+    height: 36px;
+    width: auto;
+  }
+
+  /* Figma: Search Bar wrapper = 688px wide, search itself 400px left-aligned inside */
+  .navbar-search {
+    width: 688px;
+    flex-shrink: 0;
+  }
+
+  /* Figma: Icons container = flex-1, gap spacing-6(24), h 40px, items-center, justify-end */
+  .navbar-icons {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--spacing-6);
+    height: 40px;
+  }
+
+  /* Figma: Mobile header = 80px tall, px 24, logo 172×36, search icon only (37px), no social icons */
+  @media (max-width: 767px) {
+    .navbar {
+      padding: var(--spacing-5) var(--spacing-6);
+      gap: var(--spacing-4);
+    }
+
+    .navbar-search {
+      width: auto;
+      flex-shrink: 0;
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .navbar-icons {
+      display: none;
+    }
+  }
+</style>

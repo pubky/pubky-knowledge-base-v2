@@ -17,42 +17,58 @@ const aiLinks = [
   { name: "Claude", url: `https://claude.ai/new?q=${encodeURIComponent(aiPrompt)}`, icon: "claude" },
   { name: "ChatGPT", url: `https://chat.openai.com/?q=${encodeURIComponent(aiPrompt)}`, icon: "chatgpt" },
   { name: "Cursor", url: `https://cursor.com/link/prompt?text=${encodeURIComponent(aiPrompt)}`, icon: "cursor" },
-  { name: "Gemini", url: `https://gemini.google.com/app?q=${encodeURIComponent(aiPrompt)}`, icon: "gemini" },
+  { name: "Gemini", url: `https://gemini.google.com/prompt?text=${encodeURIComponent(aiPrompt)}`, icon: "gemini" },
   { name: "Grok", url: `https://x.com/i/grok?text=${encodeURIComponent(aiPrompt)}`, icon: "grok" },
 ];
 ---
 
-<div class="install-block">
+<div class="install-section">
+  <div class="install-block">
+  <div class="install-left not-content">
+    <div class="install-header">
+      <h1 class="install-heading">Build For User Sovereignty</h1>
+      <p class="install-tagline">Open protocol for key-based, censorship-resistant apps</p>
+    </div>
 
-  <div class="install-header">
-    <p class="install-heading">Build For User Sovereignty</p>
-    <p class="install-tagline">Open protocol for key-based, censorship-resistant apps</p>
+    <div class="install-actions">
+      <a href="https://github.com/pubky/pubky-core" class="btn btn-github" target="_blank" rel="noopener noreferrer" aria-label="View on GitHub (opens in new tab)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"></path></svg>
+        <span>View on GitHub</span>
+      </a>
+      <a href="/explore/pubkycore/sdk/" class="btn btn-docs">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+        <span>SDK Docs</span>
+      </a>
+    </div>
+
     <div class="open-with">
-      <span class="open-with-label">Open with</span>
+      <span class="open-with-label">Open with:</span>
       <div class="open-with-links">
         {aiLinks.map((link) => (
-          <a href={link.url} target="_blank" rel="noopener noreferrer" class="open-with-btn" aria-label={link.name}>
-            <span class="ai-icon" data-icon={link.icon}></span>
+          <a href={link.url} target="_blank" rel="noopener noreferrer" class="open-with-btn" aria-label={`Open with ${link.name} (opens in new tab)`}>
+            <span class="ai-icon" data-icon={link.icon} aria-hidden="true"></span>
           </a>
         ))}
       </div>
     </div>
   </div>
 
-  <div class="install-sdk desktop-only">
-    <p class="install-title">Pubky SDK</p>
-    <div class="terminal">
+  <div class="install-right not-content">
+    <p class="install-title">PUBKY SDK</p>
+    <div class="terminal not-content">
       <div class="terminal-bar">
         <div class="dots">
           <span class="dot dot-red"></span>
           <span class="dot dot-yellow"></span>
           <span class="dot dot-green"></span>
         </div>
-        <div class="tabs">
+        <div class="tabs" role="tablist" aria-label="Package manager">
           {commands.map((cmd, i) => (
             <button
               class:list={["tab", { active: i === 0 }]}
               data-index={i}
+              role="tab"
+              aria-selected={i === 0 ? "true" : "false"}
             >
               {cmd.label}
             </button>
@@ -64,12 +80,12 @@ const aiLinks = [
           <div class:list={["command", { active: i === 0 }]} data-index={i}>
             <span class="prompt">$</span>
             <span class="cmd-text">{cmd.command}</span>
-            <button class="copy-btn" data-command={cmd.command} aria-label="Copy to clipboard">
-              <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <button class="copy-btn" data-command={cmd.command} aria-label="Copy to clipboard" aria-live="polite">
+              <svg class="copy-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                 <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
               </svg>
-              <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <svg class="check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="20 6 9 17 4 12"></polyline>
               </svg>
             </button>
@@ -78,18 +94,7 @@ const aiLinks = [
       </div>
     </div>
   </div>
-
-  <div class="install-actions desktop-only">
-    <a href="https://github.com/pubky/pubky-core" class="btn btn-github">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"></path></svg>
-      <span>View on GitHub</span>
-    </a>
-    <a href="/explore/pubkycore/sdk/" class="btn btn-docs">
-      <span>SDK Docs</span>
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
-    </a>
-  </div>
-
+</div>
 </div>
 
 <script>
@@ -100,9 +105,10 @@ const aiLinks = [
     tabs.forEach((tab) => {
       tab.addEventListener('click', () => {
         const index = tab.getAttribute('data-index');
-        tabs.forEach((t) => t.classList.remove('active'));
+        tabs.forEach((t) => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
         commands.forEach((c) => c.classList.remove('active'));
         tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
         block.querySelector(`.command[data-index="${index}"]`)?.classList.add('active');
       });
     });
@@ -112,54 +118,147 @@ const aiLinks = [
         const command = btn.getAttribute('data-command') || '';
         navigator.clipboard.writeText(command);
         btn.classList.add('copied');
-        setTimeout(() => btn.classList.remove('copied'), 1500);
+        btn.setAttribute('aria-label', 'Copied!');
+        setTimeout(() => { btn.classList.remove('copied'); btn.setAttribute('aria-label', 'Copy to clipboard'); }, 1500);
       });
     });
   });
 </script>
 
 <style is:global>
-  .install-block {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 580px;
+  /* ── Install section (full-width hero wrapper) ── */
+  .install-section {
+    position: relative;
+    overflow: hidden;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    box-sizing: border-box;
+    background: var(--base-background);
+    padding: var(--spacing-10) 0;
   }
 
+  /* ── Two-column layout ── */
+  /* Figma: Top Hero = flex row, 1280px container with 40px padding = 1200px content */
+  .install-block {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-10);
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  /* Figma: Left col = flex-1, flex-col, gap spacing-6(24), pt spacing-10(40), h 500 */
+  .install-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+    padding-top: var(--spacing-10);
+  }
+
+  /* Figma: Content = flex-col, gap spacing-6(24) */
   .install-header {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    gap: var(--spacing-4);
   }
 
+  /* Figma: H1 = text-6xl (72px/72px) bold, foreground white */
   .install-heading {
     margin: 0;
-    font-weight: 600;
-    color: var(--sl-color-white);
-    letter-spacing: -0.02em;
+    font-size: var(--text-6xl-size);
+    font-weight: 700;
+    line-height: var(--text-6xl-lh);
+    color: var(--base-foreground);
   }
 
+  /* Figma: H5 = text-xl (20px/28px) light, muted-foreground */
   .install-tagline {
     margin: 0;
-    color: var(--sl-color-gray-3);
+    font-size: var(--text-xl-size);
+    font-weight: 300;
+    line-height: var(--text-xl-lh);
+    color: var(--base-muted-foreground);
   }
 
-  .open-with {
+  /* ── Buttons row ── */
+  /* Figma: gap spacing-6(24) */
+  .install-actions {
     display: flex;
+    gap: var(--spacing-6);
     align-items: center;
     flex-wrap: wrap;
+    margin-top: var(--spacing-6);
+  }
+
+  /* Figma: h 60, px spacing-8(32), py spacing-5(20), gap spacing-2(8), font text-sm(14/20) bold, radius full(9999), shadow xs */
+  .install-actions .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-2);
+    height: 60px;
+    padding: var(--spacing-5) var(--spacing-8);
+    border-radius: var(--radius-full);
+    font-size: var(--text-sm-size);
+    font-weight: 700;
+    line-height: var(--text-sm-lh);
+    text-decoration: none;
+    transition: all 0.15s ease;
+    box-shadow: var(--shadow-xs);
+  }
+
+  /* Figma: Secondary variant — bg base/secondary(#303034), text base/secondary-foreground(#d4d4db) */
+  .install-actions .btn-github {
+    background: var(--base-secondary);
+    color: var(--base-secondary-foreground);
+    border: none;
+  }
+
+  .install-actions .btn-github:hover {
+    background: #3a3a3f;
+    color: var(--base-foreground);
+  }
+
+  /* Figma: Default variant — bg alpha/white-16, border 1px base/foreground, text base/foreground */
+  .install-actions .btn-docs {
+    background: var(--alpha-white-16);
+    color: var(--base-foreground);
+    border: 1px solid var(--base-foreground);
+  }
+
+  .install-actions .btn-docs:hover {
+    background: rgba(255, 255, 255, 0.24);
+  }
+
+  /* ── Open with row ── */
+  /* Figma: AI section = flex-col, gap spacing-2(8), justify center */
+  .open-with {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+    margin-top: var(--spacing-6);
+    flex: 1;
     justify-content: center;
   }
 
+  /* Figma: P = text-base(16/24) medium, foreground */
   .open-with-label {
-    color: var(--sl-color-gray-3);
+    color: var(--base-foreground);
+    font-size: var(--text-base-size);
+    font-weight: 500;
+    line-height: var(--text-base-lh);
   }
 
+  /* Figma: Row = flex, gap spacing-3(12) */
   .open-with-links {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    gap: var(--spacing-3);
   }
 
   .open-with-btn {
@@ -168,78 +267,90 @@ const aiLinks = [
     justify-content: center;
     text-decoration: none;
     transition: opacity 0.15s ease;
+    /* WCAG: expand touch target to 44px minimum */
+    padding: 6px;
+    margin: -6px;
   }
 
   .open-with-btn:hover {
     opacity: 0.75;
   }
 
+  /* Figma: Logos = 32x32, border-radius rounded-sm(6) */
   .ai-icon {
     display: inline-block;
+    width: 32px;
+    height: 32px;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    border-radius: 8px;
+    border-radius: var(--radius-sm);
   }
 
   .ai-icon[data-icon="claude"] { background-image: url("/images/ai-icons/claude.png"); }
   .ai-icon[data-icon="chatgpt"] { background-image: url("/images/ai-icons/chatgpt.png"); }
   .ai-icon[data-icon="cursor"] { background-image: url("/images/ai-icons/cursor.png"); }
   .ai-icon[data-icon="gemini"] { background-image: url("/images/ai-icons/gemini.png"); }
-  .ai-icon[data-icon="grok"] { background-image: url("/images/ai-icons/grok.png"); }
+  /* Figma: Grok logo has white background unlike others which have it baked into the image */
+  .ai-icon[data-icon="grok"] { background-image: url("/images/ai-icons/grok.png"); background-color: white; }
 
-  .install-sdk {
+  /* ── Right column ── */
+  /* Figma: flex-1, flex-col, gap spacing-6(24), items center, centered vertically, bg image */
+  .install-right {
+    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.75rem;
-    width: 100%;
+    justify-content: center;
+    gap: var(--spacing-6);
+    height: 500px;
+    background-image: url("/images/bg-pubky-sdk.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
   }
 
+  /* Figma: H3 = text-2xl(24/32) bold, foreground, center */
   .install-title {
     margin: 0;
-    font-weight: 500;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: var(--sl-color-white);
+    font-size: var(--text-2xl-size);
+    font-weight: 700;
+    line-height: var(--text-2xl-lh);
+    color: var(--base-foreground);
+    text-align: center;
   }
 
+  /* ── Terminal ── */
+  /* Figma: 500x140, border 1px base/border, radius rounded-xl(16), bg base/background, overflow clip */
   .terminal {
-    width: 100%;
-    border: 1px solid var(--sl-color-gray-5);
-    border-radius: 10px;
+    width: 500px;
+    height: 140px;
+    border: 1px solid var(--base-border);
+    border-radius: var(--radius-xl);
     overflow: hidden;
-    background: var(--sl-color-gray-6);
-    box-shadow:
-      0 4px 24px rgba(0, 0, 0, 0.3),
-      0 0 0 1px rgba(255, 255, 255, 0.04);
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    background: var(--base-background);
+    display: flex;
+    flex-direction: column;
   }
 
-  .terminal:hover {
-    border-color: var(--sl-color-gray-4);
-    box-shadow:
-      0 8px 32px rgba(0, 0, 0, 0.4),
-      0 0 0 1px rgba(255, 255, 255, 0.06);
-  }
-
+  /* Figma: Dots bar = px spacing-4(16), py 8, bg base/card(#1d1d20), gap 11 */
   .terminal-bar {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    padding: 0.6rem 1rem;
-    background: var(--sl-color-gray-5);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    gap: 11px;
+    padding: var(--spacing-2) var(--spacing-4);
+    background: var(--base-card);
   }
 
+  /* Figma: dots = 9px */
   .dots {
     display: flex;
-    gap: 6px;
+    gap: 11px;
   }
 
   .dot {
-    width: 10px;
-    height: 10px;
+    width: 9px;
+    height: 9px;
     border-radius: 50%;
   }
 
@@ -247,73 +358,103 @@ const aiLinks = [
   .dot-yellow { background: #febc2e; }
   .dot-green { background: #28c840; }
 
+  /* Figma: Tabs = w 200, h 48, p spacing-2(8), gap spacing-2(8), radius rounded-md(8) */
   .tabs {
     display: flex;
-    gap: 2px;
+    align-items: center;
+    width: 200px;
+    height: 48px;
+    padding: var(--spacing-2);
+    gap: var(--spacing-2);
+    border-radius: var(--radius-md);
   }
 
+  /* Figma: Tab trigger = flex-1, p spacing-2(8), radius rounded-md(8), text-xs(12/16) bold */
   .tab {
+    flex: 1;
     background: transparent;
     border: none;
-    color: var(--sl-color-gray-3);
-    font-family: var(--sl-font-system-mono);
-    font-size: 0.9rem;
-    padding: 0.3rem 0.85rem;
-    border-radius: 4px;
+    color: var(--base-secondary-foreground);
+    font-family: var(--sl-font);
+    font-size: var(--text-xs-size);
+    font-weight: 700;
+    line-height: var(--text-xs-lh);
+    padding: var(--spacing-2);
+    border-radius: var(--radius-md);
     cursor: pointer;
     transition: all 0.15s ease;
+    text-align: center;
   }
 
   .tab:hover {
-    color: var(--sl-color-gray-1);
+    color: var(--base-foreground);
     background: rgba(255, 255, 255, 0.05);
   }
 
+  /* Figma: Active tab = bg base/muted(#303034), text foreground, shadow sm */
   .tab.active {
-    color: var(--sl-color-white);
-    background: rgba(255, 255, 255, 0.08);
+    color: var(--base-foreground);
+    background: var(--base-muted);
+    box-shadow: var(--shadow-sm);
   }
 
+  /* Figma: Terminal body = flex-1, p spacing-4(16), gap spacing-4(16), items center */
   .terminal-body {
-    padding: 1rem 1.25rem;
+    display: flex;
+    flex: 1;
+    align-items: center;
+    gap: var(--spacing-4);
+    padding: var(--spacing-4);
   }
 
+  /* Figma: Large typography = text-lg(18/28) semibold, items-center inherited from .terminal-body */
   .command {
     display: none;
     align-items: center;
-    gap: 0.75rem;
-    font-family: var(--sl-font-system-mono);
-    line-height: 1.6;
+    gap: var(--spacing-4);
+    font-family: var(--sl-font);
+    font-size: var(--text-lg-size);
+    font-weight: 600;
+    line-height: var(--text-lg-lh);
+    width: 100%;
   }
 
   .command.active {
     display: flex;
   }
 
+  /* Figma: $ prompt = muted-foreground */
   .prompt {
-    color: var(--sl-color-gray-3);
+    color: var(--base-muted-foreground);
     user-select: none;
   }
 
+  /* Figma: command text = foreground */
   .cmd-text {
-    color: var(--sl-color-white);
+    color: var(--base-foreground);
     flex: 1;
+    letter-spacing: -1px;
   }
 
+  /* Figma: Ghost icon button = 36x36, p spacing-1(4), radius full(9999) */
   .copy-btn {
     background: transparent;
     border: none;
-    color: var(--sl-color-gray-3);
+    color: var(--base-muted-foreground);
     cursor: pointer;
-    padding: 4px;
-    border-radius: 4px;
+    width: 36px;
+    height: 36px;
+    padding: var(--spacing-1);
+    border-radius: var(--radius-full);
     transition: all 0.15s ease;
     display: flex;
     align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
   }
 
   .copy-btn:hover {
-    color: var(--sl-color-white);
+    color: var(--base-foreground);
     background: rgba(255, 255, 255, 0.06);
   }
 
@@ -321,70 +462,62 @@ const aiLinks = [
   .copy-btn.copied .copy-icon { display: none; }
   .copy-btn.copied .check-icon { display: block; color: #28c840; }
 
-  .install-actions {
-    display: flex;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .install-actions .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    border-radius: 8px;
-    font-weight: 500;
-    text-decoration: none;
-    transition: all 0.15s ease;
-  }
-
-  .install-actions .btn-github {
-    background: var(--sl-color-gray-5);
-    color: var(--sl-color-gray-1);
-    border: 1px solid var(--sl-color-gray-4);
-  }
-
-  .install-actions .btn-github:hover {
-    background: var(--sl-color-gray-4);
-    color: var(--sl-color-white);
-    border-color: var(--sl-color-gray-3);
-  }
-
-  .install-actions .btn-docs {
-    background: transparent;
-    color: var(--sl-color-gray-2);
-    border: 1px solid transparent;
-  }
-
-  .install-actions .btn-docs:hover {
-    color: var(--sl-color-white);
-  }
-
-  /* Desktop */
-  @media (min-width: 768px) {
-    .install-block { gap: 3rem; }
-    .install-header { gap: 1rem; }
-    .install-heading { font-size: 2.5rem; }
-    .install-tagline { font-size: 1.3rem; }
-    .install-title { font-size: 1.35rem; }
-    .open-with { gap: 0.6rem; }
-    .open-with-label { font-size: 1.1rem; }
-    .open-with-links { gap: 0.4rem; }
-    .ai-icon { width: 38px; height: 38px; }
-    .command { font-size: 1.15rem; }
-    .install-actions .btn { font-size: 1.05rem; padding: 0.6rem 1.4rem; }
-  }
-
-  /* Mobile */
+  /* ── Mobile ── */
+  /* Figma: Mobile 390px — hero stacks vertically, heading 60px/1, buttons keep 60px height flex-1, 24px side padding */
   @media (max-width: 767px) {
-    .desktop-only { display: none !important; }
-    .install-block { gap: 1.5rem; }
-    .install-header { gap: 0.75rem; }
-    .install-heading { font-size: 1.55rem; white-space: nowrap; }
-    .install-tagline { font-size: 0.8rem; white-space: nowrap; }
-    .open-with { gap: 0.5rem; margin-bottom: 1.5rem; }
-    .open-with-label { font-size: 0.9rem; }
-    .open-with-links { gap: 0.5rem; }
-    .ai-icon { width: 36px; height: 36px; }
+    /* Mobile: stop 100vw breakout, respect content-panel padding */
+    .install-section {
+      width: auto;
+      margin-left: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .install-block {
+      flex-direction: column;
+      gap: var(--spacing-6);
+      padding: 0;
+    }
+
+    .install-left {
+      padding-top: var(--spacing-4);
+      height: auto;
+    }
+
+    /* Figma Mobile: SDK section needs vertical padding so circle bg is fully visible */
+    .install-right {
+      padding: var(--spacing-20) 0;
+      height: auto;
+      align-items: center;
+      width: 100%;
+    }
+
+    /* Figma: Mobile H1 = responsive size, bold, leading-none */
+    .install-heading {
+      font-size: clamp(40px, 12vw, 60px);
+      line-height: 1;
+      overflow-wrap: break-word;
+    }
+
+    /* Figma: Mobile buttons = same 60px height, flex-1 each, gap spacing-4(16) */
+    .install-actions {
+      gap: var(--spacing-4);
+    }
+
+    .install-actions .btn {
+      flex: 1;
+      padding: var(--spacing-5) var(--spacing-5);
+      white-space: nowrap;
+    }
+
+    .terminal {
+      width: 100%;
+      height: auto;
+    }
+
+    .command {
+      font-size: var(--text-sm-size);
+      line-height: var(--text-sm-lh);
+    }
   }
 </style>

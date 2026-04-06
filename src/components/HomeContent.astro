@@ -1,0 +1,339 @@
+---
+import InstallBlock from "./InstallBlock.astro";
+import TextCard from "./TextCard.astro";
+import ImageCard from "./ImageCard.astro";
+
+// Pubky lock icon used in card titles
+const pubkyIcon = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none"><path d="M12 2C9.24 2 7 4.24 7 7v4H5v11h14V11h-2V7c0-2.76-2.24-5-5-5zm0 2c1.65 0 3 1.35 3 3v4H9V7c0-1.65 1.35-3 3-3z" fill="currentColor"/></svg>';
+
+// Icon file paths — all exported from Figma as SVGs
+const icons = {
+  // Quick Start
+  timer: '/images/icons/timer.svg',
+  codeXml: '/images/icons/code-xml.svg',
+  file: '/images/icons/file.svg',
+  circleHelp: '/images/icons/circle-help.svg',
+  // Key Concepts
+  fingerprint: '/images/icons/fingerprint.svg',
+  shieldOff: '/images/icons/shield-off.svg',
+  arrowLeftRight: '/images/icons/arrow-left-right.svg',
+  lineChart: '/images/icons/line-chart.svg',
+  // Community
+  pubkyBrand: '/images/icons/pubky-brand.svg',
+  send: '/images/icons/telegram.svg',
+  github: '/images/icons/github.svg',
+  contributing: '/images/icons/line-chart-community.svg',
+};
+---
+
+<InstallBlock />
+
+<div class="home-content not-content">
+  <!-- Quick Start -->
+  <section class="home-section">
+    <h2 class="home-section-title">Quick Start</h2>
+    <div class="home-section-box">
+    <div class="card-grid card-grid-4">
+      <TextCard
+        title="TL;DR"
+        description="30-second overview of the entire ecosystem"
+        href="/tldr/"
+        icon={icons.timer}
+      />
+      <TextCard
+        title="Getting Started"
+        description="Complete guide for users and developers"
+        href="/getting-started/"
+        icon={icons.codeXml}
+      />
+      <TextCard
+        title="Glossary"
+        description="Quick reference for key terms"
+        href="/glossary/"
+        icon={icons.file}
+      />
+      <TextCard
+        title="FAQ"
+        description="63+ questions answered across key topics and features"
+        href="/faq/"
+        icon={icons.circleHelp}
+      />
+    </div>
+    </div>
+  </section>
+
+  <!-- For Users -->
+  <section class="home-section">
+    <h2 class="home-section-title">For Users</h2>
+    <div class="card-grid card-grid-3">
+      <ImageCard
+        title="Pubky"
+        titleIcon={pubkyIcon}
+        description="Try the decentralized social media application."
+        image="/images/cards/pubky.png"
+        links={[{ label: "View App", href: "https://pubky.app", external: true }]}
+      />
+      <ImageCard
+        title="Pubky Ring"
+        titleIcon={pubkyIcon}
+        description="Your keychain for the Pubky ecosystem."
+        image="/images/cards/pubky-ring.png"
+        links={[
+          { label: "Go to Website", href: "https://pubkyring.app/", external: true },
+          { label: "Learn More", href: "/explore/technologies/pubky-ring/" },
+        ]}
+      />
+      <ImageCard
+        title="Pubky Explorer"
+        description="Browse public data stored on homeservers."
+        image="/images/cards/pubky-explorer.png"
+        links={[
+          { label: "Go to Website", href: "https://explorer.pubky.app", external: true },
+          { label: "Learn More", href: "/explore/technologies/pubky-explorer/" },
+        ]}
+      />
+    </div>
+  </section>
+
+  <!-- For Developers -->
+  <section class="home-section">
+    <h2 class="home-section-title">For Developers</h2>
+    <div class="card-grid card-grid-3">
+      <ImageCard
+        title="Pubky Core"
+        titleIcon={pubkyIcon}
+        description="Open protocol & infrastructure for censorship-resistant apps."
+        image="/images/cards/pubky-core.png"
+        tags={[
+          { label: "SDK", href: "/explore/pubkycore/sdk/" },
+          { label: "API", href: "/explore/pubkycore/api/" },
+          { label: "Homeserver", href: "/explore/pubkycore/homeserver/" },
+        ]}
+      />
+      <ImageCard
+        title="Developer Tools"
+        description=""
+        image="/images/cards/developer-tools.png"
+        tags={[
+          { label: "Docker Stack", href: "/explore/technologies/pubky-docker/" },
+          { label: "CLI", href: "/explore/technologies/pubky-cli/" },
+          { label: "Explorer", href: "/explore/technologies/pubky-explorer/" },
+          { label: "PKDNS", href: "/explore/technologies/pkdns/" },
+        ]}
+      />
+      <ImageCard
+        title="Pubky Apps"
+        titleIcon={pubkyIcon}
+        description="Build on the social layer."
+        image="/images/cards/pubky-apps.png"
+        tags={[
+          { label: "Architecture", href: "/explore/pubky-apps/app-architectures/introduction/" },
+          { label: "Indexing", href: "/explore/pubky-apps/indexing-and-aggregation/introduction/" },
+          { label: "Reference App", href: "/explore/pubky-apps/reference-app/introduction/" },
+        ]}
+      />
+    </div>
+  </section>
+
+  <!-- Key Concepts -->
+  <section class="home-section">
+    <h2 class="home-section-title">Key Concepts</h2>
+    <div class="card-grid card-grid-4">
+      <TextCard
+        title="PKARR"
+        description="Public key addressable resource records for decentralized identity."
+        href="/explore/pubkycore/pkarr/introduction/"
+        icon={icons.fingerprint}
+      />
+      <TextCard
+        title="Censorship Resistance"
+        description="Why centralized platforms fail and how Pubky solves it."
+        href="/explore/concepts/censorship/"
+        icon={icons.shieldOff}
+      />
+      <TextCard
+        title="Credible Exit"
+        description="Freedom to switch providers without losing data."
+        href="/explore/concepts/credible-exit/"
+        icon={icons.arrowLeftRight}
+      />
+      <TextCard
+        title="Semantic Social Graph"
+        description="Tagged relationships and user-controlled filtering."
+        href="/explore/concepts/semantic-social-graph/"
+        icon={icons.lineChart}
+      />
+    </div>
+  </section>
+
+  <!-- Community -->
+  <section class="home-section">
+    <h2 class="home-section-title">Community</h2>
+    <div class="card-grid card-grid-4">
+      <TextCard
+        title="Join Pubky.app"
+        description="Try the decentralized social media app."
+        href="https://pubky.app"
+        icon={icons.pubkyBrand}
+      />
+      <TextCard
+        title="Telegram"
+        description="Join the community chat."
+        href="https://t.me/pubkycore"
+        icon={icons.send}
+      />
+      <TextCard
+        title="Github"
+        description="Source code and repositories."
+        href="https://github.com/pubky"
+        icon={icons.github}
+      />
+      <TextCard
+        title="Contributing"
+        description="How to contribute to Pubky"
+        href="/contributing/"
+        icon={icons.contributing}
+      />
+    </div>
+  </section>
+
+  <!-- Figma: Brand endorsement — gap 10px, two linked elements -->
+  <div class="home-footer">
+    <div class="home-footer-brand">
+      <a href="https://synonym.to" target="_blank" rel="noopener noreferrer" class="home-footer-link">
+        <img src="/images/synonym-logo.svg" alt="Synonym" height="24" />
+      </a>
+      <a href="https://tether.io" target="_blank" rel="noopener noreferrer" class="home-footer-link">
+        <img src="/images/tether-company.svg" alt="a tether. company" height="16" />
+      </a>
+    </div>
+  </div>
+</div>
+
+<style is:global>
+  .home-content {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-16);
+    padding-bottom: var(--spacing-10);
+    /* Break out of starlight container */
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    box-sizing: border-box;
+  }
+
+  /* Figma: 1280px container with 40px padding = 1200px content area (same as header/hero) */
+  .home-section {
+    max-width: 1280px;
+    padding: 0 var(--spacing-10);
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  /* Figma: Quick Start box = bg alpha/white 4.5%, radius rounded-lg(12), p spacing-8(32) */
+  .home-section-box {
+    background: var(--alpha-white-5);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-8);
+  }
+
+  /* Figma: H1 = text-6xl bold — section titles use text-4xl(36/1) bold */
+  .home-section-title {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--base-foreground);
+    margin: 0 0 var(--spacing-8) 0;
+  }
+
+  .card-grid {
+    display: grid;
+    gap: var(--spacing-6);
+  }
+
+  .card-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .card-grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .home-footer {
+    max-width: 1280px;
+    padding: var(--spacing-4) var(--spacing-10) 0;
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  /* Figma: Brand endorsement = flex, gap 10px, items-center */
+  .home-footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .home-footer-link {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    transition: opacity 0.15s ease;
+  }
+
+  .home-footer-link:hover {
+    opacity: 0.7;
+  }
+
+  .home-footer-link img {
+    height: auto;
+    width: auto;
+  }
+
+  /* Figma: BG / Triangle — x:73 y:2201 w:1370 h:1134 in 1280x2982 frame.
+     Positioned behind Key Concepts + Community sections, centered-right. */
+  .home-content::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-567px);
+    width: 1370px;
+    height: 1134px;
+    background-image: url("/images/bg-triangle.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  /* Figma: Mobile 390px — container px 24, single-column cards, box keeps 32px padding & 12px radius, section titles stay 36px */
+  @media (max-width: 767px) {
+    /* Figma Mobile: section gap = 80px (spacing-20) — stay within parent padding on mobile */
+    .home-content {
+      width: auto;
+      margin-left: 0;
+      padding: 0 0 var(--spacing-8);
+      gap: var(--spacing-20);
+    }
+
+    .home-section {
+      padding: 0;
+    }
+
+    /* Figma Mobile: Quick Start box — no distinct background, same as page bg */
+    .home-section-box {
+      background: transparent;
+      padding: 0;
+      border-radius: 0;
+    }
+
+    .card-grid-3,
+    .card-grid-4 {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

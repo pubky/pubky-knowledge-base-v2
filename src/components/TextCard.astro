@@ -1,0 +1,100 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  href: string;
+  icon?: string;
+  external?: boolean;
+}
+
+const { title, description, href, icon, external } = Astro.props;
+const isExternal = external ?? href.startsWith('http');
+---
+
+<a href={href} class="text-card not-content" {...isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {}}>
+  {icon && (
+    <div class="text-card-icon-wrapper">
+      <img src={icon} alt="" aria-hidden="true" class="text-card-icon" />
+    </div>
+  )}
+  <h3 class="text-card-title">{title}</h3>
+  <p class="text-card-description">{description}</p>
+  <!-- Figma: ArrowRight icon, right-aligned at bottom -->
+  <div class="text-card-arrow">
+    <img src="/images/icons/arrow-right.svg" alt="" aria-hidden="true" width="20" height="20" />
+  </div>
+</a>
+
+<style is:global>
+  /* Figma: Card = flex-col, gap spacing-2(8), p spacing-5(20), bg black, border 1px base/border, radius rounded-lg(12) */
+  .text-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+    padding: var(--spacing-5);
+    background: var(--base-background);
+    border: 1px solid var(--base-border);
+    border-radius: var(--radius-lg);
+    text-decoration: none;
+    transition: background 0.2s ease, border-color 0.2s ease;
+  }
+
+  .text-card:hover {
+    background: var(--base-card);
+    border-color: var(--base-muted-foreground);
+  }
+
+  /* Figma: Icon wrapper = 44x44 ghost button, p spacing-1(4), radius full, transparent bg */
+  .text-card-icon-wrapper {
+    display: flex;
+    align-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-full);
+    flex-shrink: 0;
+  }
+
+  /* Figma: Icon = 24x24, white color, maintain aspect ratio for non-square SVGs */
+  .text-card-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+  }
+
+  /* Figma: H4 = text-xl(20/28) bold, foreground */
+  .text-card-title {
+    margin: 0;
+    font-size: var(--text-xl-size);
+    font-weight: 700;
+    line-height: var(--text-xl-lh);
+    color: var(--base-foreground);
+  }
+
+  /* Figma: P = text-base(16/24) medium, muted-foreground */
+  .text-card-description {
+    margin: 0;
+    font-size: var(--text-base-size);
+    font-weight: 500;
+    line-height: var(--text-base-lh);
+    color: var(--base-muted-foreground);
+    flex: 1;
+  }
+
+  /* Figma: ArrowRight icon = 20x20, right-aligned, pr spacing-2(8) */
+  .text-card-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: var(--spacing-2);
+  }
+
+  .text-card-arrow img {
+    opacity: 0;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .text-card:hover .text-card-arrow img {
+    opacity: 1;
+    transform: translateX(4px);
+  }
+</style>

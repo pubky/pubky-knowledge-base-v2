@@ -21,17 +21,74 @@
 	--sl-color-bg-nav: var(--sl-color-black);
 	--sl-color-bg-sidebar: var(--sl-color-black);
 	--sl-color-hairline-shade: var(--sl-color-gray-5);
+
+	/* ── Design tokens from Figma ── */
+
+	/* Spacing */
+	--spacing-1: 4px;
+	--spacing-2: 8px;
+	--spacing-3: 12px;
+	--spacing-4: 16px;
+	--spacing-5: 20px;
+	--spacing-6: 24px;
+	--spacing-8: 32px;
+	--spacing-10: 40px;
+	--spacing-12: 48px;
+	--spacing-16: 64px;
+	--spacing-20: 80px;
+
+	/* Border radius */
+	--radius-sm: 6px;
+	--radius-md: 8px;
+	--radius-lg: 12px;
+	--radius-xl: 16px;
+	--radius-full: 9999px;
+
+	/* Typography sizes (font-size / line-height) */
+	--text-xs-size: 12px;
+	--text-xs-lh: 16px;
+	--text-sm-size: 14px;
+	--text-sm-lh: 20px;
+	--text-base-size: 16px;
+	--text-base-lh: 24px;
+	--text-lg-size: 18px;
+	--text-lg-lh: 28px;
+	--text-xl-size: 20px;
+	--text-xl-lh: 28px;
+	--text-2xl-size: 24px;
+	--text-2xl-lh: 32px;
+	--text-6xl-size: 72px;
+	--text-6xl-lh: 72px;
+
+	/* Semantic colors */
+	--base-background: #05050a;
+	--base-foreground: #ffffff;
+	--base-card: #1d1d20;
+	--base-border: #303034;
+	--base-muted: #303034;
+	--base-muted-foreground: #89898f;
+	--base-secondary: #303034;
+	--base-secondary-foreground: #d4d4db;
+	--alpha-white-16: rgba(255, 255, 255, 0.16);
+	--alpha-white-5: rgba(255, 255, 255, 0.045);
+
+	/* Shadows */
+	--shadow-xs: 0 1px 2px rgba(5, 5, 10, 0.2);
+	--shadow-sm: 0 1px 3px rgba(5, 5, 10, 0.25), 0 1px 2px rgba(5, 5, 10, 0.25);
+}
+
+/* Prevent horizontal scroll from 100vw breakout pattern */
+html {
+	overflow-x: hidden;
 }
 
 /* ── Card hover effects ── */
 .card {
-	transition: transform 0.2s ease, box-shadow 0.2s ease,
-		border-color 0.2s ease;
+	transition: box-shadow 0.2s ease, border-color 0.2s ease;
 	border: 1px solid var(--sl-color-gray-5);
 }
 
 .card:hover {
-	transform: translateY(-2px);
 	border-color: var(--sl-color-gray-3);
 	box-shadow: 0 4px 24px rgba(255, 255, 255, 0.04),
 		0 0 0 1px rgba(255, 255, 255, 0.06);
@@ -39,14 +96,91 @@
 
 /* LinkCard hover */
 .sl-link-card {
-	transition: transform 0.2s ease, box-shadow 0.2s ease,
+	transition: box-shadow 0.2s ease,
 		border-color 0.2s ease;
 }
 
 .sl-link-card:hover {
-	transform: translateY(-2px);
 	border-color: var(--sl-color-gray-3);
 	box-shadow: 0 4px 24px rgba(255, 255, 255, 0.04),
 		0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+
+/* ── Header overrides ── */
+
+/* Figma: Header wrapper = Header-Gradient, sticky top-0 (node 32262:74061) */
+header.header {
+	background: linear-gradient(180deg, var(--base-background) 50%, rgba(5, 5, 10, 0.00) 100%);
+	border-bottom: none;
+	padding: 0;
+	position: sticky;
+	top: 0;
+	z-index: 10;
+}
+
+/* Figma: Search = 400px wide within 688px wrapper, pill shape, border 1px base/border,
+   radius full(9999), px spacing-6(24), py spacing-3(12), gap spacing-3(12), backdrop-blur */
+site-search button[data-open-modal] {
+	width: 400px !important;
+	border: 1px solid var(--base-border) !important;
+	border-radius: var(--radius-full) !important;
+	padding: var(--spacing-3) var(--spacing-6) !important;
+	gap: var(--spacing-3) !important;
+	background: linear-gradient(
+		90deg,
+		rgba(255, 255, 255, 0.05) 0%,
+		rgba(255, 255, 255, 0.02) 100%
+	) !important;
+	-webkit-backdrop-filter: blur(20px);
+	backdrop-filter: blur(20px);
+	font-size: var(--text-base-size) !important;
+	font-weight: 500 !important;
+	line-height: var(--text-base-lh) !important;
+	color: var(--base-muted-foreground) !important;
+}
+
+/* Figma: Search icon = 16x16 */
+site-search button[data-open-modal] svg {
+	width: 16px !important;
+	height: 16px !important;
+}
+
+/* Figma: Hide keyboard shortcut hint to match design */
+site-search button[data-open-modal] kbd {
+	display: none !important;
+}
+
+/* Figma Mobile: Search shows only icon (no pill, no text) */
+@media (max-width: 767px) {
+	site-search button[data-open-modal] {
+		width: auto !important;
+		border: none !important;
+		padding: var(--spacing-2) !important;
+		background: transparent !important;
+		-webkit-backdrop-filter: none;
+		backdrop-filter: none;
+	}
+
+	/* Hide "Search" text on mobile */
+	site-search button[data-open-modal] span {
+		display: none !important;
+	}
+
+	/* Figma Mobile: Search icon = 24x24 */
+	site-search button[data-open-modal] svg {
+		width: 24px !important;
+		height: 24px !important;
+	}
+}
+
+/* ── Focus styles for keyboard navigation (WCAG 2.1 AA) ── */
+:focus-visible {
+	outline: 2px solid var(--base-foreground);
+	outline-offset: 2px;
+}
+
+/* Hide Starlight footer on splash/homepage */
+[data-has-hero] footer {
+	display: none;
 }
 
