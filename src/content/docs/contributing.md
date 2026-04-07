@@ -4,6 +4,10 @@ title: "Contributing to Pubky"
 
 Thank you for your interest in contributing to Pubky! This guide will help you get started.
 
+:::caution[AI-Assisted Contributions]
+We welcome contributions made with the help of AI tools, but you are fully responsible for what you submit. You must understand, review, and be able to explain every change in your PR. Unreviewed AI-generated submissions — bulk changes, hallucinated references, or PRs the author cannot explain — will be closed without review.
+:::
+
 ---
 
 ## Ways to Contribute
@@ -52,7 +56,7 @@ Improve quality through:
 For small fixes (typos, links, formatting):
 
 1. **Fork the repository**: [github.com/pubky/pubky-knowledge-base](https://github.com/pubky/pubky-knowledge-base)
-2. **Make your changes**: Edit markdown files directly
+2. **Make your changes**: Edit markdown files in `src/content/docs/`
 3. **Submit a pull request**: Include a clear description
 
 ### Larger Contributions
@@ -60,27 +64,27 @@ For small fixes (typos, links, formatting):
 For new pages or significant changes:
 
 1. **Discuss first**: Open an issue to discuss your plans
-2. **Follow the structure**: Match existing page organization
-3. **Use proper linking**: Use wiki-links `Page Name` for internal links
-4. **Add to index**: Update `index.md` if adding new major pages
-5. **Test locally**: Build with Quartz to verify
+2. **Follow the structure**: Match existing page organization under `src/content/docs/`
+3. **Use standard markdown links**: `[Link text](/path/to/page/)` for internal links, `[text](url)` for external
+4. **Register in sidebar**: If adding a new top-level page, add it to the `sidebar` array in `astro.config.mjs`
+5. **Test locally**: Build with Starlight to verify
 
 **Build locally:**
 ```bash
-cd pubky-knowledge-base/quartz
+git clone https://github.com/pubky/pubky-knowledge-base
+cd pubky-knowledge-base
 npm install
-npm run docs
-# Visit http://localhost:8080
+npm run dev
+# Visit http://localhost:4321
 ```
 
 ### Documentation Style Guide
 
 **Markdown Conventions:**
-- Use `# Title` for page titles (H1, only one per page)
+- Each page needs a frontmatter block with at least a `title` field
 - Use `## Section` for major sections (H2)
 - Use `### Subsection` for subsections (H3)
-- Use wiki-links for internal references: `Page Name`
-- Use standard markdown links for external URLs: `[text](url)`
+- Use standard markdown links for both internal and external references
 
 **Code Blocks:**
 ```javascript
@@ -90,12 +94,26 @@ const example = "like this";
 
 **Linking:**
 ```markdown
-<!-- Internal (wiki-link) -->
+<!-- Internal -->
 [Pubky Core](/explore/pubkycore/introduction/)
-[Pubky Core Overview](/explore/pubkycore/introduction/)
 
 <!-- External -->
-[Official Docs](https://pubky.github.io/pubky-core/)
+[Official Docs](https://docs.pubky.org/)
+```
+
+**Admonitions:**
+```markdown
+:::note
+Informational callout.
+:::
+
+:::tip
+Helpful suggestion.
+:::
+
+:::caution
+Important warning.
+:::
 ```
 
 **Images:**
@@ -173,8 +191,7 @@ cargo build
 cargo test
 
 # Run homeserver locally
-cd pubky-homeserver
-cargo run
+cargo run --bin pubky-homeserver
 
 # Format code
 cargo fmt
@@ -184,8 +201,7 @@ cargo clippy
 ```
 
 **Requirements:**
-- Rust 1.75+
-- OpenSSL development libraries
+- Rust 1.89+
 
 ### Pubky Ring (React Native)
 
@@ -195,24 +211,25 @@ git clone https://github.com/pubky/pubky-ring
 cd pubky-ring
 
 # Install dependencies
-npm install
+yarn install
 cd ios && pod install && cd ..
 
 # Run on iOS
-npm run ios
+yarn ios
 
 # Run on Android
-npm run android
+yarn android
 
 # Run tests
-npm test
+yarn test
 
 # Lint
-npm run lint
+yarn lint
 ```
 
 **Requirements:**
-- Node.js 18+
+- Node.js >= 22.11.0
+- Yarn 1.x
 - React Native environment (Xcode for iOS, Android Studio for Android)
 
 ### Pubky Nexus (Rust)
@@ -223,25 +240,34 @@ git clone https://github.com/pubky/pubky-nexus
 cd pubky-nexus
 
 # Start dependencies (Neo4j, Redis, PostgreSQL)
-docker compose up -d neo4j redis postgres
+cd docker && cp .env-sample .env && docker compose up -d && cd ..
 
 # Build
 cargo build
 
+# Run all services
+cargo run -p nexusd
+
+# Run API only
+cargo run -p nexusd -- api
+
+# Run watcher only
+cargo run -p nexusd -- watcher
+
 # Run migrations
-cargo run --bin migrator
+cargo run -p nexusd -- db migration run
 
-# Run server
-cargo run --bin server
-
-# Run tests
-cargo test
+# Load test data and run tests (requires cargo-nextest)
+cargo run -p nexusd -- db mock
+cargo nextest run -p nexus-common --no-fail-fast
+cargo nextest run -p nexus-webapi --no-fail-fast
+cargo nextest run -p nexus-watcher --no-fail-fast
 ```
 
 **Requirements:**
-- Rust 1.75+
+- Rust
 - Docker for databases
-- PostgreSQL, Neo4j, Redis
+- cargo-nextest (`cargo install cargo-nextest`)
 
 ### Pubky CLI (Rust)
 
@@ -409,8 +435,8 @@ Ready to contribute? Here's your checklist:
 
 **For Documentation:**
 - [ ] Fork pubky-knowledge-base repository
-- [ ] Make your changes
-- [ ] Test locally with Quartz
+- [ ] Make your changes in `src/content/docs/`
+- [ ] Test locally with Starlight (`npm run dev`)
 - [ ] Submit pull request
 
 **For Code:**
