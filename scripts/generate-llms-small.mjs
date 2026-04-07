@@ -7,6 +7,7 @@ import { join, relative, extname } from 'path';
 const SRC = 'src/content/docs';
 const DEST = 'dist/llms-small.txt';
 const SKIP = new Set(['index.mdx']);
+const INLINE = new Set(['resources.md']);
 const SITE_URL = (process.env.SITE_URL || 'https://docs.pubky.org').replace(/\/+$/, '');
 
 function walkDir(dir) {
@@ -97,7 +98,10 @@ for (const file of files) {
 	const description = extractDescription(content);
 	const url = `${SITE_URL}/${slug}.md`;
 
-	if (description) {
+	if (INLINE.has(rel)) {
+		const body = content.replace(/^---[\s\S]*?---\n*/, '');
+		lines.push(`\n# ${title}\n\n${body.trim()}`);
+	} else if (description) {
 		lines.push(`- [${title}](${url}): ${description}`);
 	} else {
 		lines.push(`- [${title}](${url})`);
