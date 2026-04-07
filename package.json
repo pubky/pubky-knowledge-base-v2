@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build && node scripts/copy-md-sources.mjs",
+    "build": "astro build && node scripts/copy-md-sources.mjs && node scripts/generate-llms-small.mjs",
     "preview": "astro preview",
     "astro": "astro"
   },
