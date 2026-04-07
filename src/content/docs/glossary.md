@@ -67,7 +67,7 @@ The Distributed Hash Table used by BitTorrent, with 10+ million nodes globally. 
 ## N
 
 **[Nexus](/explore/pubky-apps/indexing-and-aggregation/pubky-nexus/)** (Pubky Nexus)
-Production-grade indexing and aggregation service for Pubky App. Provides high-performance social graph API, search, and real-time notifications.
+Production-grade indexing and aggregation service for [pubky.app](/explore/pubky-apps/reference-app/pubky-app/). Provides high-performance social graph API, search, and real-time notifications.
 
 **[Noise](/explore/technologies/pubky-noise/)** (Pubky Noise)
 Noise Protocol implementation for encrypted peer-to-peer communication in the Pubky ecosystem (work in progress).
@@ -87,11 +87,14 @@ DNS server that resolves public-key domains by fetching PKARR records from the M
 The public half of a cryptographic key pair. In Pubky, this serves as your permanent, self-sovereign identity (often called a "pubky").
 
 **Pubky**
-1. The decentralized web protocol and ecosystem
+1. The decentralized web protocol and ecosystem, formally known as [Pubky Core](/explore/pubkycore/introduction/)
 2. A user's public-key identity (e.g., "my pubky is z4e8s...")
 
-**[Pubky App](/explore/pubky-apps/introduction/)**
-Social media application demonstrating Pubky Core capabilities. Live at [pubky.app](https://pubky.app).
+**Pubky app**
+Any application built on [Pubky Core](/explore/pubkycore/introduction/). A Pubky app uses the Pubky [SDK](/explore/pubkycore/sdk/) and [Homeservers](/explore/pubkycore/homeserver/) for authentication and data storage. See [Pubky Apps overview](/explore/pubky-apps/introduction/).
+
+**[pubky.app](/explore/pubky-apps/reference-app/pubky-app/)**
+The reference implementation of a Pubky app — a decentralized social media application built by Synonym, live at [pubky.app](https://pubky.app). It demonstrates how to build social applications on the Pubky protocol using [Nexus](/explore/pubky-apps/indexing-and-aggregation/pubky-nexus/) for indexing and the [pubky-app-specs](/explore/pubky-apps/app-specs/) data model.
 
 **[Pubky CLI](/explore/technologies/pubky-cli/)**
 Command-line tool for interacting with Pubky Homeservers, providing user operations, admin functions, and testing utilities.
@@ -108,8 +111,8 @@ Web-based file browser for exploring public data on Pubky Homeservers. Available
 **[Pubky Ring](/explore/technologies/pubky-ring/)**
 Mobile key manager app (iOS/Android) for securely managing pubkys, authorizing applications, and handling sessions.
 
-**pubky-app-specs**
-Formal data model specifications for Pubky App, defining structures for users, posts, tags, and other social features. Ensures interoperability between different client implementations.
+**[pubky-app-specs](/explore/pubky-apps/app-specs/)**
+Formal data model specifications for [pubky.app](/explore/pubky-apps/reference-app/pubky-app/), defining structures for users, posts, tags, and other social features. Any Pubky app that follows these specs can interoperate with pubky.app and its ecosystem.
 
 ## R
 
