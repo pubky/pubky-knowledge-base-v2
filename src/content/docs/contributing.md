@@ -191,8 +191,7 @@ cargo build
 cargo test
 
 # Run homeserver locally
-cd pubky-homeserver
-cargo run
+cargo run --bin pubky-homeserver
 
 # Format code
 cargo fmt
@@ -202,8 +201,7 @@ cargo clippy
 ```
 
 **Requirements:**
-- Rust 1.75+
-- OpenSSL development libraries
+- Rust 1.89+
 
 ### Pubky Ring (React Native)
 
@@ -213,24 +211,25 @@ git clone https://github.com/pubky/pubky-ring
 cd pubky-ring
 
 # Install dependencies
-npm install
+yarn install
 cd ios && pod install && cd ..
 
 # Run on iOS
-npm run ios
+yarn ios
 
 # Run on Android
-npm run android
+yarn android
 
 # Run tests
-npm test
+yarn test
 
 # Lint
-npm run lint
+yarn lint
 ```
 
 **Requirements:**
-- Node.js 18+
+- Node.js >= 22.11.0
+- Yarn 1.x
 - React Native environment (Xcode for iOS, Android Studio for Android)
 
 ### Pubky Nexus (Rust)
@@ -241,25 +240,34 @@ git clone https://github.com/pubky/pubky-nexus
 cd pubky-nexus
 
 # Start dependencies (Neo4j, Redis, PostgreSQL)
-docker compose up -d neo4j redis postgres
+cd docker && cp .env-sample .env && docker compose up -d && cd ..
 
 # Build
 cargo build
 
+# Run all services
+cargo run -p nexusd
+
+# Run API only
+cargo run -p nexusd -- api
+
+# Run watcher only
+cargo run -p nexusd -- watcher
+
 # Run migrations
-cargo run --bin migrator
+cargo run -p nexusd -- db migration run
 
-# Run server
-cargo run --bin server
-
-# Run tests
-cargo test
+# Load test data and run tests (requires cargo-nextest)
+cargo run -p nexusd -- db mock
+cargo nextest run -p nexus-common --no-fail-fast
+cargo nextest run -p nexus-webapi --no-fail-fast
+cargo nextest run -p nexus-watcher --no-fail-fast
 ```
 
 **Requirements:**
-- Rust 1.75+
+- Rust
 - Docker for databases
-- PostgreSQL, Neo4j, Redis
+- cargo-nextest (`cargo install cargo-nextest`)
 
 ### Pubky CLI (Rust)
 
