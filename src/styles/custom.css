@@ -121,62 +121,62 @@ header.header {
 /* Figma: Search = 400px wide within 688px wrapper, pill shape, border 1px base/border,
    radius full(9999), px spacing-6(24), py spacing-3(12), gap spacing-3(12), backdrop-blur */
 site-search button[data-open-modal] {
-	width: 400px !important;
-	border: 1px solid var(--base-border) !important;
-	border-radius: var(--radius-full) !important;
-	padding: var(--spacing-3) var(--spacing-6) !important;
-	gap: var(--spacing-3) !important;
+	width: 400px;
+	border: 1px solid var(--base-border);
+	border-radius: var(--radius-full);
+	padding: var(--spacing-3) var(--spacing-6);
+	gap: var(--spacing-3);
 	background: linear-gradient(
 		90deg,
 		rgba(255, 255, 255, 0.05) 0%,
 		rgba(255, 255, 255, 0.02) 100%
-	) !important;
+	);
 	-webkit-backdrop-filter: blur(20px);
 	backdrop-filter: blur(20px);
-	font-size: var(--text-base-size) !important;
-	font-weight: 500 !important;
-	line-height: var(--text-base-lh) !important;
-	color: var(--base-muted-foreground) !important;
+	font-size: var(--text-base-size);
+	font-weight: 500;
+	line-height: var(--text-base-lh);
+	color: var(--base-muted-foreground);
 }
 
 /* Figma: Search icon on the right, text takes remaining space */
 site-search button[data-open-modal] svg {
-	width: 16px !important;
-	height: 16px !important;
-	order: 1 !important;
+	width: 16px;
+	height: 16px;
+	order: 1;
 }
 
 /* Figma: Search text = flex-1, left-aligned, text-ellipsis */
 site-search button[data-open-modal] span {
-	flex: 1 !important;
-	text-align: left !important;
+	flex: 1;
+	text-align: left;
 }
 
 /* Figma: Hide keyboard shortcut hint to match design */
 site-search button[data-open-modal] kbd {
-	display: none !important;
+	display: none;
 }
 
 /* Figma Mobile: Search shows only icon (no pill, no text) */
 @media (max-width: 767px) {
 	site-search button[data-open-modal] {
-		width: auto !important;
-		border: none !important;
-		padding: var(--spacing-2) !important;
-		background: transparent !important;
+		width: auto;
+		border: none;
+		padding: var(--spacing-2) 0 var(--spacing-2) var(--spacing-2);
+		background: transparent;
 		-webkit-backdrop-filter: none;
 		backdrop-filter: none;
 	}
 
 	/* Hide "Search" text on mobile */
 	site-search button[data-open-modal] span {
-		display: none !important;
+		display: none;
 	}
 
 	/* Figma Mobile: Search icon = 24x24 */
 	site-search button[data-open-modal] svg {
-		width: 24px !important;
-		height: 24px !important;
+		width: 24px;
+		height: 24px;
 	}
 }
 
