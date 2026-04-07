@@ -70,12 +70,26 @@ All under [github.com/pubky](https://github.com/pubky):
 
 ## Package Registries
 
-- [crates.io/crates/pubky](https://crates.io/crates/pubky) — Rust SDK
-- [npmjs.com/package/@synonymdev/pubky](https://www.npmjs.com/package/@synonymdev/pubky) — JavaScript/TypeScript SDK
-- [npmjs.com/package/@synonymdev/react-native-pubky](https://www.npmjs.com/package/@synonymdev/react-native-pubky) — React Native SDK
+### Crates (Rust)
+
+- [pubky](https://crates.io/crates/pubky) — Pubky Rust SDK
+- [pkarr](https://crates.io/crates/pkarr) — Public Key Addressable Resource Records
+- [pubky-app-specs](https://crates.io/crates/pubky-app-specs) — Shared data models and validation for Pubky apps
+- [mainline](https://crates.io/crates/mainline) — BitTorrent Mainline DHT implementation
+
+### npm (JavaScript/TypeScript)
+
+- [@synonymdev/pubky](https://www.npmjs.com/package/@synonymdev/pubky) — Pubky JavaScript/TypeScript SDK
+- [@synonymdev/pkarr](https://www.npmjs.com/package/@synonymdev/pkarr) — Pkarr JavaScript/TypeScript SDK
+- [pubky-app-specs](https://www.npmjs.com/package/pubky-app-specs) — Shared data models and validation for Pubky apps
+
+### React Native
+
+- [@synonymdev/react-native-pubky](https://www.npmjs.com/package/@synonymdev/react-native-pubky) — React Native SDK
 
 ## Community Channels
 
+- [Pubky on pubky.app](https://pubky.app/profile/ihaqcthsdbk751sxctk849bdr7yz7a934qen5gmpcbwcur49i97y) — Official Pubky profile
 - [Telegram: pubkycore](https://t.me/pubkycore) — Community chat
 - [Discord](https://discord.gg/DxTBJXvJxn) — Developer community
 - [X/Twitter: @getpubky](https://x.com/getpubky) — Official updates
