@@ -52,7 +52,7 @@ Improve quality through:
 For small fixes (typos, links, formatting):
 
 1. **Fork the repository**: [github.com/pubky/pubky-knowledge-base](https://github.com/pubky/pubky-knowledge-base)
-2. **Make your changes**: Edit markdown files directly
+2. **Make your changes**: Edit markdown files in `src/content/docs/`
 3. **Submit a pull request**: Include a clear description
 
 ### Larger Contributions
@@ -60,27 +60,27 @@ For small fixes (typos, links, formatting):
 For new pages or significant changes:
 
 1. **Discuss first**: Open an issue to discuss your plans
-2. **Follow the structure**: Match existing page organization
-3. **Use proper linking**: Use wiki-links `Page Name` for internal links
-4. **Add to index**: Update `index.md` if adding new major pages
-5. **Test locally**: Build with Quartz to verify
+2. **Follow the structure**: Match existing page organization under `src/content/docs/`
+3. **Use standard markdown links**: `[Link text](/path/to/page/)` for internal links, `[text](url)` for external
+4. **Register in sidebar**: If adding a new top-level page, add it to the `sidebar` array in `astro.config.mjs`
+5. **Test locally**: Build with Starlight to verify
 
 **Build locally:**
 ```bash
-cd pubky-knowledge-base/quartz
+git clone https://github.com/pubky/pubky-knowledge-base
+cd pubky-knowledge-base
 npm install
-npm run docs
-# Visit http://localhost:8080
+npm run dev
+# Visit http://localhost:4321
 ```
 
 ### Documentation Style Guide
 
 **Markdown Conventions:**
-- Use `# Title` for page titles (H1, only one per page)
+- Each page needs a frontmatter block with at least a `title` field
 - Use `## Section` for major sections (H2)
 - Use `### Subsection` for subsections (H3)
-- Use wiki-links for internal references: `Page Name`
-- Use standard markdown links for external URLs: `[text](url)`
+- Use standard markdown links for both internal and external references
 
 **Code Blocks:**
 ```javascript
@@ -90,12 +90,11 @@ const example = "like this";
 
 **Linking:**
 ```markdown
-<!-- Internal (wiki-link) -->
+<!-- Internal -->
 [Pubky Core](/explore/pubkycore/introduction/)
-[Pubky Core Overview](/explore/pubkycore/introduction/)
 
 <!-- External -->
-[Official Docs](https://pubky.github.io/pubky-core/)
+[Official Docs](https://docs.pubky.org/)
 ```
 
 **Images:**
@@ -409,8 +408,8 @@ Ready to contribute? Here's your checklist:
 
 **For Documentation:**
 - [ ] Fork pubky-knowledge-base repository
-- [ ] Make your changes
-- [ ] Test locally with Quartz
+- [ ] Make your changes in `src/content/docs/`
+- [ ] Test locally with Starlight (`npm run dev`)
 - [ ] Submit pull request
 
 **For Code:**
