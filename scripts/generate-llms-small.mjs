@@ -23,24 +23,29 @@ function walkDir(dir) {
 	return files;
 }
 
+function stripFrontmatter(content) {
+	return content.replace(/^---[\s\S]*?---\n*/, '');
+}
+
 function extractTitle(content) {
-	const match = content.match(/^title:\s*"?(.+?)"?\s*$/m);
+	const fm = content.match(/^---([\s\S]*?)---/);
+	if (!fm) return null;
+	const match = fm[1].match(/^title:\s*"?(.+?)"?\s*$/m);
 	return match ? match[1] : null;
 }
 
 function extractDescription(content) {
-	// Check for description in frontmatter
-	const fmMatch = content.match(/^description:\s*"?(.+?)"?\s*$/m);
-	if (fmMatch) return fmMatch[1];
+	const fm = content.match(/^---([\s\S]*?)---/);
+	if (fm) {
+		const desc = fm[1].match(/^description:\s*"?(.+?)"?\s*$/m);
+		if (desc) return desc[1];
+	}
 
-	// Strip frontmatter
-	const body = content.replace(/^---[\s\S]*?---\n*/, '');
-
+	const body = stripFrontmatter(content);
 	for (const line of body.split('\n')) {
 		const trimmed = line.trim();
 		if (
 			!trimmed ||
-			trimmed === '---' ||
 			trimmed.startsWith('![') ||
 			trimmed.startsWith('#') ||
 			trimmed.startsWith('>') ||
@@ -49,18 +54,16 @@ function extractDescription(content) {
 			trimmed.startsWith('```') ||
 			trimmed.startsWith('import ') ||
 			trimmed.startsWith('- ') ||
-			trimmed.startsWith('* ') ||
-			/^-{3,}$/.test(trimmed)
+			trimmed.startsWith('* ')
 		) {
 			continue;
 		}
-		// Strip markdown formatting but keep text
 		const cleaned = trimmed
-			.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1') // links
-			.replace(/\*\*(.+?)\*\*/g, '$1') // bold
-			.replace(/\*(.+?)\*/g, '$1') // italic
-			.replace(/`(.+?)`/g, '$1'); // inline code
-		// First sentence (must be at least 20 chars to avoid false matches like "Q1.")
+			.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+			.replace(/\*\*(.+?)\*\*/g, '$1')
+			.replace(/\*(.+?)\*/g, '$1')
+			.replace(/`(.+?)`/g, '$1');
+		// Must be at least 20 chars to avoid false matches like "Q1."
 		const sentence = cleaned.match(/^(.{20,}?[.!?])\s/);
 		if (sentence) return sentence[1];
 		if (cleaned.length >= 20) {
@@ -70,11 +73,10 @@ function extractDescription(content) {
 	return '';
 }
 
-const files = walkDir(SRC).sort((a, b) => {
-	const ra = relative(SRC, a);
-	const rb = relative(SRC, b);
-	return ra.localeCompare(rb);
-});
+const entries = walkDir(SRC)
+	.map((file) => ({ file, rel: relative(SRC, file) }))
+	.filter(({ rel }) => !SKIP.has(rel))
+	.sort((a, b) => a.rel.localeCompare(b.rel));
 
 const lines = [
 	'# Pubky Documentation',
@@ -89,24 +91,20 @@ const lines = [
 	'',
 ];
 
-for (const file of files) {
-	const rel = relative(SRC, file);
-	if (SKIP.has(rel)) continue;
-	const slug = rel.replace(/\.(md|mdx)$/, '');
+for (const { file, rel } of entries) {
 	const content = readFileSync(file, 'utf-8');
+	const slug = rel.replace(/\.(md|mdx)$/, '');
 	const title = extractTitle(content) || slug;
-	const description = extractDescription(content);
-	const url = `${SITE_URL}/${slug}.md`;
 
 	if (INLINE.has(rel)) {
-		const body = content.replace(/^---[\s\S]*?---\n*/, '');
-		lines.push(`\n# ${title}\n\n${body.trim()}`);
-	} else if (description) {
-		lines.push(`- [${title}](${url}): ${description}`);
+		lines.push(`\n# ${title}\n\n${stripFrontmatter(content).trim()}`);
 	} else {
-		lines.push(`- [${title}](${url})`);
+		const description = extractDescription(content);
+		const url = `${SITE_URL}/${slug}.md`;
+		const entry = description ? `- [${title}](${url}): ${description}` : `- [${title}](${url})`;
+		lines.push(entry);
 	}
 }
 
 writeFileSync(DEST, lines.join('\n') + '\n');
-console.log(`Generated ${DEST} with ${files.length} page links`);
+console.log(`Generated ${DEST} with ${entries.length} page links`);
