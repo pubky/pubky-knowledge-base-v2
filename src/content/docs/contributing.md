@@ -101,6 +101,21 @@ const example = "like this";
 [Official Docs](https://docs.pubky.org/)
 ```
 
+**Admonitions:**
+```markdown
+:::note
+Informational callout.
+:::
+
+:::tip
+Helpful suggestion.
+:::
+
+:::caution
+Important warning.
+:::
+```
+
 **Images:**
 ```markdown
 <!-- Always include descriptive alt text -->
