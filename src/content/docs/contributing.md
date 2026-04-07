@@ -4,6 +4,10 @@ title: "Contributing to Pubky"
 
 Thank you for your interest in contributing to Pubky! This guide will help you get started.
 
+:::caution[AI-Assisted Contributions]
+We welcome contributions made with the help of AI tools, but you are fully responsible for what you submit. You must understand, review, and be able to explain every change in your PR. Unreviewed AI-generated submissions — bulk changes, hallucinated references, or PRs the author cannot explain — will be closed without review.
+:::
+
 ---
 
 ## Ways to Contribute
