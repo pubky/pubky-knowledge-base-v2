@@ -139,10 +139,17 @@ site-search button[data-open-modal] {
 	color: var(--base-muted-foreground) !important;
 }
 
-/* Figma: Search icon = 16x16 */
+/* Figma: Search icon on the right, text takes remaining space */
 site-search button[data-open-modal] svg {
 	width: 16px !important;
 	height: 16px !important;
+	order: 1 !important;
+}
+
+/* Figma: Search text = flex-1, left-aligned, text-ellipsis */
+site-search button[data-open-modal] span {
+	flex: 1 !important;
+	text-align: left !important;
 }
 
 /* Figma: Hide keyboard shortcut hint to match design */
@@ -182,5 +189,10 @@ site-search button[data-open-modal] kbd {
 /* Hide Starlight footer on splash/homepage */
 [data-has-hero] footer {
 	display: none;
+}
+
+/* Figma Mobile: homepage horizontal padding = spacing/6 (24px), override Starlight's default 1rem (16px) */
+[data-has-hero] {
+	--sl-content-pad-x: var(--spacing-6);
 }
 

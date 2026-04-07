@@ -47,27 +47,35 @@ const { title, titleIcon, description, image, tags = [], links = [] } = Astro.pr
 </div>
 
 <style is:global>
+  /* Figma: Pubky / Cards / Image (node 32394:120859) */
   .image-card {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    padding: 1.25rem;
-    background: var(--sl-color-black);
-    border: 1px solid var(--sl-color-gray-5);
-    border-radius: 12px;
-    transition: border-color 0.2s ease;
+    /* Figma: gap = spacing/4 (16px) */
+    gap: var(--spacing-4);
+    /* Figma: padding = spacing/5 (20px) */
+    padding: var(--spacing-5);
+    background: var(--base-background);
+    /* Figma: border = 1px base/border */
+    border: 1px solid var(--base-border);
+    /* Figma: border-radius = rounded-lg (12px) */
+    border-radius: var(--radius-lg);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
     overflow: hidden;
   }
 
   .image-card:hover {
-    border-color: var(--sl-color-gray-4);
+    border-color: var(--sl-color-gray-3);
+    box-shadow: 0 4px 24px rgba(255, 255, 255, 0.04),
+      0 0 0 1px rgba(255, 255, 255, 0.06);
   }
 
+  /* Figma: Thumbnail = black bg, rounded-lg, aspect 352/187 */
   .image-card-thumbnail {
-    border-radius: 12px;
+    border-radius: var(--radius-lg);
     overflow: hidden;
     aspect-ratio: 352 / 187;
-    background: var(--sl-color-black);
+    background: var(--base-background);
     flex-shrink: 0;
   }
 
@@ -81,52 +89,65 @@ const { title, titleIcon, description, image, tags = [], links = [] } = Astro.pr
   .image-card-content {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    /* Figma: gap = spacing/2 (8px) */
+    gap: var(--spacing-2);
     flex: 1;
   }
 
+  /* Figma: Logos flex row, gap spacing/2, items-center */
   .image-card-title {
     margin: 0;
-    font-size: 1.1rem;
+    font-size: var(--text-lg-size);
     font-weight: 600;
-    color: var(--sl-color-white);
+    color: var(--base-foreground);
     display: flex;
     align-items: center;
-    gap: 0.4rem;
+    gap: var(--spacing-2);
   }
 
   .image-card-title-icon {
     display: inline-flex;
-    color: var(--sl-color-white);
+    color: var(--base-foreground);
     flex-shrink: 0;
   }
 
+  /* Figma: Typography / P = text-base (16px), line-height 24px, muted-foreground, medium */
   .image-card-description {
     margin: 0;
-    font-size: 0.9rem;
-    color: var(--sl-color-gray-3);
-    line-height: 1.5;
+    font-size: var(--text-base-size);
+    line-height: var(--text-base-lh);
+    color: var(--base-muted-foreground);
+    font-weight: 500;
+    flex: 1;
+    min-height: 1px;
   }
 
   .image-card-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    /* Figma: gap = 8px */
+    gap: var(--spacing-2);
     margin-top: auto;
   }
 
+  /* Figma: tag pill = h-40, rounded-full, text-sm bold, shadow-xs */
   .image-card-tag {
     display: inline-flex;
     align-items: center;
-    padding: 0.35rem 1rem;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--sl-color-gray-5);
-    border-radius: 999px;
-    color: var(--sl-color-white);
-    font-size: 0.8rem;
-    font-weight: 500;
+    justify-content: center;
+    /* Figma: h = 40px, px = spacing/4 (16px), py = 10px */
+    height: 40px;
+    padding: 0 var(--spacing-4);
+    background: var(--alpha-white-5);
+    border: 1px solid var(--base-border);
+    border-radius: var(--radius-full);
+    color: var(--base-foreground);
+    font-size: var(--text-sm-size);
+    line-height: var(--text-sm-lh);
+    font-weight: 700;
     text-decoration: none;
-    transition: all 0.15s ease;
+    box-shadow: var(--shadow-xs);
+    transition: background 0.15s ease, border-color 0.15s ease;
   }
 
   .image-card-tag:hover {
@@ -134,29 +155,48 @@ const { title, titleIcon, description, image, tags = [], links = [] } = Astro.pr
     border-color: var(--sl-color-gray-4);
   }
 
+  /* Figma: Flex row, flex-wrap, gap 8px */
   .image-card-links {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: var(--spacing-2);
     margin-top: auto;
   }
 
+  /* Figma: Button outline variant = h-40, rounded-full, text-sm bold, shadow-xs */
   .image-card-link {
     display: inline-flex;
     align-items: center;
-    padding: 0.35rem 1rem;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--sl-color-gray-5);
-    border-radius: 999px;
-    color: var(--sl-color-white);
-    font-size: 0.8rem;
-    font-weight: 500;
+    justify-content: center;
+    /* Figma: h = 40px, px = spacing/4 (16px) */
+    height: 40px;
+    padding: 0 var(--spacing-4);
+    background: var(--alpha-white-5);
+    border: 1px solid var(--base-border);
+    border-radius: var(--radius-full);
+    color: var(--base-foreground);
+    font-size: var(--text-sm-size);
+    line-height: var(--text-sm-lh);
+    font-weight: 700;
     text-decoration: none;
-    transition: all 0.15s ease;
+    box-shadow: var(--shadow-xs);
+    transition: background 0.15s ease, border-color 0.15s ease;
   }
 
   .image-card-link:hover {
     background: rgba(255, 255, 255, 0.1);
     border-color: var(--sl-color-gray-4);
+  }
+
+  /* Figma: Button secondary variant = bg base/secondary, color secondary-foreground, no border */
+  .image-card-link:not(:first-child) {
+    background: var(--base-secondary);
+    border-color: transparent;
+    color: var(--base-secondary-foreground);
+  }
+
+  .image-card-link:not(:first-child):hover {
+    background: #3a3a3f;
+    border-color: transparent;
   }
 </style>
