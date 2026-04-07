@@ -112,7 +112,6 @@ const icons = {
       />
       <ImageCard
         title="Developer Tools"
-        description=""
         image="/images/cards/developer-tools.png"
         tags={[
           { label: "Docker Stack", href: "/explore/technologies/pubky-docker/" },
@@ -200,10 +199,10 @@ const icons = {
   <!-- Figma: Brand endorsement — gap 10px, two linked elements -->
   <div class="home-footer">
     <div class="home-footer-brand">
-      <a href="https://synonym.to" target="_blank" rel="noopener noreferrer" class="home-footer-link">
+      <a href="https://synonym.to" target="_blank" rel="noopener noreferrer" class="home-footer-link" aria-label="Synonym (opens in new tab)">
         <img src="/images/synonym-logo.svg" alt="Synonym" height="24" />
       </a>
-      <a href="https://tether.io" target="_blank" rel="noopener noreferrer" class="home-footer-link">
+      <a href="https://tether.io" target="_blank" rel="noopener noreferrer" class="home-footer-link" aria-label="Tether (opens in new tab)">
         <img src="/images/tether-company.svg" alt="a tether. company" height="16" />
       </a>
     </div>
@@ -241,7 +240,7 @@ const icons = {
 
   /* Figma: H1 = text-6xl bold — section titles use text-4xl(36/1) bold */
   .home-section-title {
-    font-size: 36px;
+    font-size: var(--text-4xl-size);
     font-weight: 700;
     line-height: 1;
     color: var(--base-foreground);
@@ -268,13 +267,15 @@ const icons = {
     width: 100%;
   }
 
-  /* Figma: Brand endorsement = flex, gap 10px, items-center */
+  /* Figma: Brand endorsement = flex, gap 10px, items-center.
+     10px is hardcoded — doesn't fit the 4px spacing scale */
   .home-footer-brand {
     display: flex;
     align-items: center;
     gap: 10px;
   }
 
+  /* Not in Figma — added for smooth hover feedback */
   .home-footer-link {
     display: inline-flex;
     align-items: center;
@@ -309,8 +310,9 @@ const icons = {
     z-index: -1;
   }
 
-  /* Figma: Mobile 390px — container px 24, single-column cards, box keeps 32px padding & 12px radius, section titles stay 36px */
-  @media (max-width: 767px) {
+  /* Figma: Mobile 390px — container px 24, single-column cards, box keeps 32px padding & 12px radius, section titles stay 36px.
+     Breakpoint raised to 1050px to match header/install-section mobile switch */
+  @media (max-width: 1049px) {
     /* Figma Mobile: section gap = 80px (spacing-20) — stay within parent padding on mobile */
     .home-content {
       width: auto;

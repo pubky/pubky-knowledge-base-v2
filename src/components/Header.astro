@@ -55,8 +55,8 @@ const shouldRenderSearch =
 
   /* Figma: Search Bar wrapper = 688px wide, search itself 400px left-aligned inside */
   .navbar-search {
-    width: 688px;
-    flex-shrink: 0;
+    flex: 1;
+    max-width: 688px;
   }
 
   /* Figma: Icons container = flex-1, gap spacing-6(24), h 40px, items-center, justify-end */
@@ -69,8 +69,9 @@ const shouldRenderSearch =
     height: 40px;
   }
 
-  /* Figma: Mobile header = 80px tall, px 24, logo 172×36, search icon only (37px), no social icons */
-  @media (max-width: 767px) {
+  /* Figma: Mobile header = 80px tall, px 24, logo 172×36, search icon only (37px), no social icons.
+     Breakpoint raised to 1050px — social icons get clipped at narrower widths */
+  @media (max-width: 1049px) {
     .navbar {
       padding: var(--spacing-5) var(--spacing-6);
       gap: var(--spacing-4);

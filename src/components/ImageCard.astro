@@ -2,7 +2,7 @@
 interface Props {
   title: string;
   titleIcon?: string;
-  description: string;
+  description?: string;
   image: string;
   tags?: { label: string; href: string }[];
   links?: { label: string; href: string; external?: boolean }[];
@@ -20,7 +20,7 @@ const { title, titleIcon, description, image, tags = [], links = [] } = Astro.pr
       {titleIcon && <span class="image-card-title-icon" set:html={titleIcon} />}
       {title}
     </h3>
-    <p class="image-card-description">{description}</p>
+    {description && <p class="image-card-description">{description}</p>}
     {tags.length > 0 && (
       <div class="image-card-tags">
         {tags.map((tag) => (
@@ -66,8 +66,7 @@ const { title, titleIcon, description, image, tags = [], links = [] } = Astro.pr
 
   .image-card:hover {
     border-color: var(--sl-color-gray-3);
-    box-shadow: 0 4px 24px rgba(255, 255, 255, 0.04),
-      0 0 0 1px rgba(255, 255, 255, 0.06);
+    box-shadow: var(--shadow-card-hover);
   }
 
   /* Figma: Thumbnail = black bg, rounded-lg, aspect 352/187 */
@@ -130,40 +129,8 @@ const { title, titleIcon, description, image, tags = [], links = [] } = Astro.pr
     margin-top: auto;
   }
 
-  /* Figma: tag pill = h-40, rounded-full, text-sm bold, shadow-xs */
-  .image-card-tag {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    /* Figma: h = 40px, px = spacing/4 (16px), py = 10px */
-    height: 40px;
-    padding: 0 var(--spacing-4);
-    background: var(--alpha-white-5);
-    border: 1px solid var(--base-border);
-    border-radius: var(--radius-full);
-    color: var(--base-foreground);
-    font-size: var(--text-sm-size);
-    line-height: var(--text-sm-lh);
-    font-weight: 700;
-    text-decoration: none;
-    box-shadow: var(--shadow-xs);
-    transition: background 0.15s ease, border-color 0.15s ease;
-  }
-
-  .image-card-tag:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: var(--sl-color-gray-4);
-  }
-
-  /* Figma: Flex row, flex-wrap, gap 8px */
-  .image-card-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--spacing-2);
-    margin-top: auto;
-  }
-
-  /* Figma: Button outline variant = h-40, rounded-full, text-sm bold, shadow-xs */
+  /* Figma: Shared pill button = h-40, rounded-full, text-sm bold, shadow-xs */
+  .image-card-tag,
   .image-card-link {
     display: inline-flex;
     align-items: center;
@@ -183,9 +150,18 @@ const { title, titleIcon, description, image, tags = [], links = [] } = Astro.pr
     transition: background 0.15s ease, border-color 0.15s ease;
   }
 
+  .image-card-tag:hover,
   .image-card-link:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--alpha-white-10);
     border-color: var(--sl-color-gray-4);
+  }
+
+  /* Figma: Flex row, flex-wrap, gap 8px */
+  .image-card-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-2);
+    margin-top: auto;
   }
 
   /* Figma: Button secondary variant = bg base/secondary, color secondary-foreground, no border */
@@ -196,7 +172,7 @@ const { title, titleIcon, description, image, tags = [], links = [] } = Astro.pr
   }
 
   .image-card-link:not(:first-child):hover {
-    background: #3a3a3f;
+    background: var(--base-secondary-hover);
     border-color: transparent;
   }
 </style>

@@ -152,7 +152,8 @@ const aiLinks = [
     width: 100%;
   }
 
-  /* Figma: Left col = flex-1, flex-col, gap spacing-6(24), pt spacing-10(40), h 500 */
+  /* Figma: Left col = flex-1, flex-col, gap spacing-6(24), pt spacing-10(40), h 500.
+     500px is hardcoded — one-off Figma layout dimension, no spacing token */
   .install-left {
     flex: 1;
     display: flex;
@@ -209,7 +210,7 @@ const aiLinks = [
     font-weight: 700;
     line-height: var(--text-sm-lh);
     text-decoration: none;
-    transition: all 0.15s ease;
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
     box-shadow: var(--shadow-xs);
   }
 
@@ -221,7 +222,7 @@ const aiLinks = [
   }
 
   .install-actions .btn-github:hover {
-    background: #3a3a3f;
+    background: var(--base-secondary-hover);
     color: var(--base-foreground);
   }
 
@@ -233,7 +234,7 @@ const aiLinks = [
   }
 
   .install-actions .btn-docs:hover {
-    background: rgba(255, 255, 255, 0.24);
+    background: rgba(255, 255, 255, 0.24); /* Figma: no exact token — brighter than alpha-white-16 */
   }
 
   /* ── Open with row ── */
@@ -295,7 +296,8 @@ const aiLinks = [
   .ai-icon[data-icon="grok"] { background-image: url("/images/ai-icons/grok.png"); background-color: white; }
 
   /* ── Right column ── */
-  /* Figma: flex-1, flex-col, gap spacing-6(24), items center, centered vertically, bg image */
+  /* Figma: flex-1, flex-col, gap spacing-6(24), items center, centered vertically, bg image.
+     500px height matches install-left — one-off layout dimension */
   .install-right {
     flex: 1;
     display: flex;
@@ -333,7 +335,8 @@ const aiLinks = [
     flex-direction: column;
   }
 
-  /* Figma: Dots bar = px spacing-4(16), py 8, bg base/card(#1d1d20), gap 11 */
+  /* Figma: Dots bar = px spacing-4(16), py 8, bg base/card(#1d1d20), gap 11.
+     11px is hardcoded — Figma-specific value, doesn't fit 4px spacing scale */
   .terminal-bar {
     display: flex;
     align-items: center;
@@ -342,7 +345,7 @@ const aiLinks = [
     background: var(--base-card);
   }
 
-  /* Figma: dots = 9px */
+  /* Figma: dots = 9px, gap 11px (same oddball spacing as terminal-bar) */
   .dots {
     display: flex;
     gap: 11px;
@@ -463,8 +466,9 @@ const aiLinks = [
   .copy-btn.copied .check-icon { display: block; color: #28c840; }
 
   /* ── Mobile ── */
-  /* Figma: Mobile 390px — hero stacks vertically, heading 60px/1, buttons keep 60px height flex-1, 24px side padding */
-  @media (max-width: 767px) {
+  /* Figma: Mobile 390px — hero stacks vertically, heading 60px/1, buttons keep 60px height flex-1, 24px side padding.
+     Breakpoint raised to 1050px — at 768px the two columns are too cramped */
+  @media (max-width: 1049px) {
     /* Mobile: stop 100vw breakout, respect content-panel padding */
     .install-section {
       width: auto;
@@ -484,10 +488,12 @@ const aiLinks = [
       height: auto;
     }
 
-    /* Figma Mobile: SDK section needs vertical padding so circle bg is fully visible */
+    /* Figma Mobile: SDK section needs vertical padding so circle bg is fully visible.
+       min-height prevents the bg from being cropped in the stacked layout */
     .install-right {
       padding: var(--spacing-20) 0;
       height: auto;
+      min-height: 500px;
       align-items: center;
       width: 100%;
     }

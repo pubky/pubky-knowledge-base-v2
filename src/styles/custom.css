@@ -57,6 +57,8 @@
 	--text-xl-lh: 28px;
 	--text-2xl-size: 24px;
 	--text-2xl-lh: 32px;
+	--text-4xl-size: 36px;
+	--text-4xl-lh: 40px;
 	--text-6xl-size: 72px;
 	--text-6xl-lh: 72px;
 
@@ -70,11 +72,15 @@
 	--base-secondary: #303034;
 	--base-secondary-foreground: #d4d4db;
 	--alpha-white-16: rgba(255, 255, 255, 0.16);
+	--alpha-white-10: rgba(255, 255, 255, 0.1);
 	--alpha-white-5: rgba(255, 255, 255, 0.045);
+	--base-secondary-hover: #3a3a3f;
 
 	/* Shadows */
 	--shadow-xs: 0 1px 2px rgba(5, 5, 10, 0.2);
 	--shadow-sm: 0 1px 3px rgba(5, 5, 10, 0.25), 0 1px 2px rgba(5, 5, 10, 0.25);
+	--shadow-card-hover: 0 4px 24px rgba(255, 255, 255, 0.04),
+		0 0 0 1px rgba(255, 255, 255, 0.06);
 }
 
 /* Prevent horizontal scroll from 100vw breakout pattern */
@@ -82,19 +88,7 @@ html {
 	overflow-x: hidden;
 }
 
-/* ── Card hover effects ── */
-.card {
-	transition: box-shadow 0.2s ease, border-color 0.2s ease;
-	border: 1px solid var(--sl-color-gray-5);
-}
-
-.card:hover {
-	border-color: var(--sl-color-gray-3);
-	box-shadow: 0 4px 24px rgba(255, 255, 255, 0.04),
-		0 0 0 1px rgba(255, 255, 255, 0.06);
-}
-
-/* LinkCard hover */
+/* ── LinkCard hover effects ── */
 .sl-link-card {
 	transition: box-shadow 0.2s ease,
 		border-color 0.2s ease;
@@ -102,8 +96,7 @@ html {
 
 .sl-link-card:hover {
 	border-color: var(--sl-color-gray-3);
-	box-shadow: 0 4px 24px rgba(255, 255, 255, 0.04),
-		0 0 0 1px rgba(255, 255, 255, 0.06);
+	box-shadow: var(--shadow-card-hover);
 }
 
 /* ── Header overrides ── */
@@ -157,8 +150,9 @@ site-search button[data-open-modal] kbd {
 	display: none;
 }
 
-/* Figma Mobile: Search shows only icon (no pill, no text) */
-@media (max-width: 767px) {
+/* Figma Mobile: Search shows only icon (no pill, no text).
+   Breakpoint raised to 1050px to match header/install-section mobile switch */
+@media (max-width: 1049px) {
 	site-search button[data-open-modal] {
 		width: auto;
 		border: none;

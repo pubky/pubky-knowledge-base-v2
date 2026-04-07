@@ -20,7 +20,7 @@ const iconFiles: Record<string, string> = {
 {links.length > 0 && (
   <>
     {links.map(({ label, href, icon }) => (
-      <a {href} rel="me" target="_blank" class="sl-flex social-icon-link">
+      <a {href} rel="me noopener noreferrer" target="_blank" class="sl-flex social-icon-link" aria-label={`${label} (opens in new tab)`}>
         <span class="sr-only">{label}</span>
         <img
           src={iconFiles[icon] || iconFiles.github}
