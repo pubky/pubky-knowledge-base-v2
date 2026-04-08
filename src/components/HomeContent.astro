@@ -352,10 +352,8 @@ const icons = {
     z-index: -1;
   }
 
-  /* Figma: Mobile 390px — container px 24, single-column cards, box keeps 32px padding & 12px radius, section titles stay 36px.
-     Breakpoint raised to 1050px to match header/install-section mobile switch */
+  /* 1049px breakpoint — container layout switches to match header/install-section mobile */
   @media (max-width: 1049px) {
-    /* Figma Mobile: section gap = 80px (spacing-20) — stay within parent padding on mobile */
     .home-content {
       width: auto;
       margin-left: 0;
@@ -367,15 +365,21 @@ const icons = {
       padding: 0;
     }
 
-    /* Figma Mobile: Quick Start box — no distinct background, same as page bg */
     .home-section-box {
       padding: 0;
       border-radius: 0;
     }
 
+    .image-card-sections {
+      padding: 0;
+    }
+  }
+
+  /* 767px breakpoint — card grids collapse to 2 columns */
+  @media (max-width: 767px) {
     .card-grid-3,
     .card-grid-4 {
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(2, 1fr);
     }
 
     .image-card-sections {
@@ -385,6 +389,14 @@ const icons = {
     /* Hide glow on mobile */
     .home-content::before {
       display: none;
+    }
+  }
+
+  /* 639px breakpoint — card grids collapse to single column */
+  @media (max-width: 639px) {
+    .card-grid-3,
+    .card-grid-4 {
+      grid-template-columns: 1fr;
     }
   }
 </style>
