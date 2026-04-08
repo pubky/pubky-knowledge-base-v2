@@ -45,10 +45,19 @@ const aiLinks = [
       <span class="open-with-label">Open with:</span>
       <div class="open-with-links">
         {aiLinks.map((link) => (
-          <a href={link.url} target="_blank" rel="noopener noreferrer" class="open-with-btn" aria-label={`Open with ${link.name} (opens in new tab)`}>
+          <a href={link.url} target="_blank" rel="noopener noreferrer" class="open-with-btn" aria-label={`Open with ${link.name} (opens in new tab)`} data-tooltip={link.name}>
             <span class="ai-icon" data-icon={link.icon} aria-hidden="true"></span>
           </a>
         ))}
+        <button class="open-with-btn copy-prompt-btn" aria-label="Copy prompt to clipboard" data-tooltip="Copy prompt" data-prompt={aiPrompt}>
+          <svg class="copy-prompt-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+          <svg class="copy-prompt-check" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#28c840" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+        </button>
       </div>
     </div>
   </div>
@@ -110,6 +119,21 @@ const aiLinks = [
         tab.classList.add('active');
         tab.setAttribute('aria-selected', 'true');
         block.querySelector(`.command[data-index="${index}"]`)?.classList.add('active');
+      });
+    });
+
+    block.querySelectorAll('.copy-prompt-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const prompt = btn.getAttribute('data-prompt') || '';
+        navigator.clipboard.writeText(prompt);
+        btn.classList.add('copied');
+        btn.setAttribute('data-tooltip', 'Copied!');
+        btn.setAttribute('aria-label', 'Copied!');
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.setAttribute('data-tooltip', 'Copy prompt');
+          btn.setAttribute('aria-label', 'Copy prompt to clipboard');
+        }, 1500);
       });
     });
 
@@ -273,9 +297,55 @@ const aiLinks = [
     margin: -6px;
   }
 
-  .open-with-btn:hover {
+  .open-with-btn:hover > .ai-icon {
     opacity: 0.75;
   }
+
+  /* ── Tooltip ── */
+  .open-with-btn[data-tooltip] {
+    position: relative;
+  }
+
+  .open-with-btn[data-tooltip]::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 4px 8px;
+    background: var(--base-card);
+    color: var(--base-foreground);
+    font-size: var(--text-xs-size);
+    line-height: var(--text-xs-lh);
+    font-weight: 500;
+    border-radius: var(--radius-sm);
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+    border: 1px solid var(--base-border);
+  }
+
+  .open-with-btn[data-tooltip]:hover::after {
+    opacity: 1;
+  }
+
+  /* ── Copy prompt button ── */
+  .copy-prompt-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--base-muted-foreground);
+  }
+
+  .copy-prompt-btn:hover {
+    color: var(--base-foreground);
+    opacity: 1;
+  }
+
+  .copy-prompt-btn .copy-prompt-check { display: none; }
+  .copy-prompt-btn.copied .copy-prompt-icon { display: none; }
+  .copy-prompt-btn.copied .copy-prompt-check { display: block; }
 
   /* Figma: Logos = 32x32, border-radius rounded-sm(6) */
   .ai-icon {
