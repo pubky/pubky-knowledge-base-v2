@@ -88,8 +88,9 @@ const { title, titleIcon, description, image, tags = [], links = [] } = Astro.pr
   .image-card-content {
     display: flex;
     flex-direction: column;
-    /* Figma: gap = spacing/2 (8px) */
-    gap: var(--spacing-2);
+    justify-content: space-between;
+    /* Figma: gap = spacing/4 (16px) */
+    gap: var(--spacing-4);
     flex: 1;
   }
 
@@ -119,6 +120,8 @@ const { title, titleIcon, description, image, tags = [], links = [] } = Astro.pr
     font-weight: 500;
     flex: 1;
     min-height: 1px;
+    display: flex;
+    align-items: center;
   }
 
   .image-card-tags {
@@ -126,7 +129,6 @@ const { title, titleIcon, description, image, tags = [], links = [] } = Astro.pr
     flex-wrap: wrap;
     /* Figma: gap = 8px */
     gap: var(--spacing-2);
-    margin-top: auto;
   }
 
   /* Figma: Shared pill button = h-40, rounded-full, text-sm bold, shadow-xs */
@@ -161,7 +163,6 @@ const { title, titleIcon, description, image, tags = [], links = [] } = Astro.pr
     display: flex;
     flex-wrap: wrap;
     gap: var(--spacing-2);
-    margin-top: auto;
   }
 
   /* Figma: Button secondary variant = bg base/secondary, color secondary-foreground, no border */
