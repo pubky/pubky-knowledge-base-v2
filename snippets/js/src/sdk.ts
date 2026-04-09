@@ -66,7 +66,7 @@ async function snippet_list() {
 async function snippet_public_read() {
   // --8<-- [start:js_public_read]
   const text = await pubky.publicStorage.getText(
-    `${userPk}/pub/myapp/profile` as Address,
+    `pubky://${userPk}/pub/myapp/profile` as Address,
   );
   // --8<-- [end:js_public_read]
 }
@@ -86,6 +86,49 @@ async function snippet_events() {
     // event.contentHash: base64 string (PUT only) or undefined
   }
   // --8<-- [end:js_events]
+}
+
+async function snippet_check_resource() {
+  // --8<-- [start:js_check_resource]
+  // Check if a resource exists (lightweight HEAD request)
+  const exists = await session.storage.exists("/pub/myapp/profile");
+
+  // Get resource metadata without downloading the body
+  const stats = await session.storage.stats("/pub/myapp/profile");
+  if (stats) {
+    console.log("Size:", stats.contentLength);
+    console.log("Type:", stats.contentType);
+    console.log("ETag:", stats.etag);
+  }
+
+  // Also available on public storage
+  const publicExists = await pubky.publicStorage.exists(
+    `pubky://${userPk}/pub/myapp/profile` as Address,
+  );
+  // --8<-- [end:js_check_resource]
+}
+
+async function snippet_signin_blocking() {
+  // --8<-- [start:js_signin_blocking]
+  const signer = pubky.signer(keypair);
+
+  // Fast: PKDNS refresh happens in the background
+  const session = await signer.signin();
+
+  // Blocking: waits for PKDNS to be discoverable (~3-5s)
+  // Use this when you need the user's homeserver to be resolvable immediately
+  const sessionBlocking = await signer.signinBlocking();
+  // --8<-- [end:js_signin_blocking]
+}
+
+async function snippet_session_persistence() {
+  // --8<-- [start:js_session_persistence]
+  // Export session as a portable string (e.g. save to storage before shutdown)
+  const exported = session.export();
+
+  // On restart, restore without re-authenticating
+  const restored = await Session.restore(exported);
+  // --8<-- [end:js_session_persistence]
 }
 
 async function snippet_error_handling() {

@@ -52,9 +52,10 @@ async fn snippet_put() -> anyhow::Result<()> {
     let session = pubky.signer(Keypair::random()).signin().await?;
     let profile = serde_json::json!({"name": "Alice"});
     // --8<-- [start:put]
+    // Requires the "json" feature on the pubky crate
     session
         .storage()
-        .put("/pub/myapp/profile", serde_json::to_string(&profile)?)
+        .put_json("/pub/myapp/profile", &profile)
         .await?;
     // --8<-- [end:put]
     Ok(())
@@ -65,8 +66,8 @@ async fn snippet_get() -> anyhow::Result<()> {
     let pubky = Pubky::new()?;
     let session = pubky.signer(Keypair::random()).signin().await?;
     // --8<-- [start:get]
-    let resp = session.storage().get("/pub/myapp/profile").await?;
-    let text = resp.text().await?;
+    // Requires the "json" feature on the pubky crate
+    let profile: serde_json::Value = session.storage().get_json("/pub/myapp/profile").await?;
     // --8<-- [end:get]
     Ok(())
 }
@@ -102,13 +103,14 @@ async fn snippet_list() -> anyhow::Result<()> {
 }
 
 async fn snippet_public_read() -> anyhow::Result<()> {
-    use pubky::Pubky;
+    use pubky::{Pubky, PublicKey};
     let pubky = Pubky::new()?;
     let user_public_key = "o1gg96ewuojmopcjbz8895478wdtxtzzuxnfjjz8o8e77csa1ngo";
     // --8<-- [start:public_read]
+    let user = PublicKey::try_from(user_public_key).unwrap();
     let resp = pubky
         .public_storage()
-        .get(format!("{}/pub/myapp/profile", user_public_key))
+        .get((&user, "/pub/myapp/profile"))
         .await?;
     let text = resp.text().await?;
     // --8<-- [end:public_read]
@@ -133,7 +135,7 @@ async fn snippet_auth_flow() -> anyhow::Result<()> {
 // so it lives in its own module.
 mod social_feed {
     // --8<-- [start:social_feed]
-    use pubky::{Keypair, Pubky, PubkyResource, PubkySession};
+    use pubky::{Keypair, Pubky, PubkyResource, PubkySession, PublicKey};
     use serde::{Deserialize, Serialize};
 
     #[derive(Serialize, Deserialize)]
@@ -147,19 +149,15 @@ mod social_feed {
         let post_id = post.timestamp.to_string();
         let path = format!("/pub/social/posts/{}", post_id);
 
-        session
-            .storage()
-            .put(&path, serde_json::to_string(post)?)
-            .await?;
+        // Requires the "json" feature on the pubky crate
+        session.storage().put_json(&path, post).await?;
         Ok(())
     }
 
-    async fn get_feed(pubky: &Pubky, public_key: &str) -> anyhow::Result<Vec<Post>> {
-        let path = format!("{}/pub/social/posts/", public_key);
-
+    async fn get_feed(pubky: &Pubky, public_key: &PublicKey) -> anyhow::Result<Vec<Post>> {
         let entries: Vec<PubkyResource> = pubky
             .public_storage()
-            .list(path)?
+            .list((public_key, "/pub/social/posts/"))?
             .limit(50)
             .reverse(true)
             .send()
@@ -167,8 +165,8 @@ mod social_feed {
 
         let mut posts = Vec::new();
         for entry in entries {
-            let resp = pubky.public_storage().get(entry.to_string()).await?;
-            let post: Post = serde_json::from_slice(&resp.bytes().await?)?;
+            // Requires the "json" feature on the pubky crate
+            let post: Post = pubky.public_storage().get_json(&entry).await?;
             posts.push(post);
         }
 
@@ -271,13 +269,75 @@ async fn snippet_error_handling() -> anyhow::Result<()> {
     let pubky = Pubky::new()?;
     let session = pubky.signer(Keypair::random()).signin().await?;
     // --8<-- [start:error_handling]
-    use pubky::Error;
+    use pubky::{Error, errors::RequestError};
 
     match session.storage().get("/pub/myapp/data").await {
         Ok(resp) => println!("Retrieved: {}", resp.text().await?),
-        Err(e) => eprintln!("Error: {}", e),
+        Err(Error::Request(RequestError::Server { status, message })) => {
+            eprintln!("Server error {status}: {message}");
+        }
+        Err(Error::Authentication(e)) => eprintln!("Auth failed: {e}"),
+        Err(e) => eprintln!("Error: {e}"),
     }
     // --8<-- [end:error_handling]
+    Ok(())
+}
+
+async fn snippet_check_resource() -> anyhow::Result<()> {
+    use pubky::{Keypair, Pubky, PublicKey};
+    let pubky = Pubky::new()?;
+    let session = pubky.signer(Keypair::random()).signin().await?;
+    let user_public_key = "o1gg96ewuojmopcjbz8895478wdtxtzzuxnfjjz8o8e77csa1ngo";
+    // --8<-- [start:check_resource]
+    // Check if a resource exists (lightweight HEAD request)
+    let exists = session.storage().exists("/pub/myapp/profile").await?;
+
+    // Get resource metadata without downloading the body
+    if let Some(stats) = session.storage().stats("/pub/myapp/profile").await? {
+        println!("Size: {:?}", stats.content_length);
+        println!("Type: {:?}", stats.content_type);
+        println!("ETag: {:?}", stats.etag);
+    }
+
+    // Also available on public storage
+    let user = PublicKey::try_from(user_public_key).unwrap();
+    let public_exists = pubky
+        .public_storage()
+        .exists((&user, "/pub/myapp/profile"))
+        .await?;
+    // --8<-- [end:check_resource]
+    Ok(())
+}
+
+async fn snippet_signin_blocking() -> anyhow::Result<()> {
+    // --8<-- [start:signin_blocking]
+    use pubky::{Keypair, Pubky};
+
+    let pubky = Pubky::new()?;
+    let signer = pubky.signer(Keypair::random());
+
+    // Fast: PKDNS refresh happens in the background
+    let session = signer.signin().await?;
+
+    // Blocking: waits for PKDNS to be discoverable (~3-5s)
+    // Use this when you need the user's homeserver to be resolvable immediately
+    let session = signer.signin_blocking().await?;
+    // --8<-- [end:signin_blocking]
+    Ok(())
+}
+
+async fn snippet_session_persistence() -> anyhow::Result<()> {
+    use pubky::{Keypair, Pubky};
+    let pubky = Pubky::new()?;
+    let session = pubky.signer(Keypair::random()).signin().await?;
+    // --8<-- [start:session_persistence]
+    // Export session as a portable string (e.g. save to disk before shutdown)
+    let token = session.export_secret();
+
+    // On restart, restore without re-authenticating.
+    // Pass the existing client to reuse its connection pool.
+    let restored = pubky::PubkySession::import_secret(&token, Some(pubky.client().clone())).await?;
+    // --8<-- [end:session_persistence]
     Ok(())
 }
 

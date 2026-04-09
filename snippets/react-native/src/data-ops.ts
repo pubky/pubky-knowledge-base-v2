@@ -6,7 +6,7 @@ import { put, get, list, deleteFile } from "@synonymdev/react-native-pubky";
 // Write data
 const putRes = await put(
   "pubky://z4e8s17cou9qmuwen8p1556jzhf1wktmzo6ijsfnri9c4hnrdfty/pub/profile.json",
-  { data: JSON.stringify({ name: "Alice", bio: "Builder" }) },
+  { name: "Alice", bio: "Builder" },
   secretKey,
 );
 
