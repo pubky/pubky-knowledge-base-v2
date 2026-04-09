@@ -331,11 +331,12 @@ async fn snippet_session_persistence() -> anyhow::Result<()> {
     let pubky = Pubky::new()?;
     let session = pubky.signer(Keypair::random()).signin().await?;
     // --8<-- [start:session_persistence]
-    // Export session as a portable string
+    // Export session as a portable string (e.g. save to disk before shutdown)
     let token = session.export_secret();
 
-    // Later, restore without re-authenticating (None = use default client)
-    let restored = pubky::PubkySession::import_secret(&token, None).await?;
+    // On restart, restore without re-authenticating.
+    // Pass the existing client to reuse its connection pool.
+    let restored = pubky::PubkySession::import_secret(&token, Some(pubky.client().clone())).await?;
     // --8<-- [end:session_persistence]
     Ok(())
 }

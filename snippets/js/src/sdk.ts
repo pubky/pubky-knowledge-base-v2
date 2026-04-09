@@ -123,10 +123,10 @@ async function snippet_signin_blocking() {
 
 async function snippet_session_persistence() {
   // --8<-- [start:js_session_persistence]
-  // Export session as a portable string
+  // Export session as a portable string (e.g. save to storage before shutdown)
   const exported = session.export();
 
-  // Later, restore without re-authenticating
+  // On restart, restore without re-authenticating
   const restored = await Session.restore(exported);
   // --8<-- [end:js_session_persistence]
 }

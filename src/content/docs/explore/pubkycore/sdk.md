@@ -389,7 +389,7 @@ Sessions are created via the `Signer` and provide scoped storage access:
 
 ### Session Persistence
 
-Export a session to a string and restore it later without re-authenticating:
+Export a session to a portable string (e.g. save to disk) so it survives process restarts. On restart, call `import_secret` to restore the session without repeating the full auth flow. If available, pass an existing client to reuse its connection pool instead of creating a new one:
 
 **Rust:**
 ```rust snippet="snippets/rust/src/lib.rs:session_persistence"
