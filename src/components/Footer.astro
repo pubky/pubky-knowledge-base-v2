@@ -1,0 +1,120 @@
+---
+import EditLink from 'virtual:starlight/components/EditLink';
+import LastUpdated from 'virtual:starlight/components/LastUpdated';
+import Pagination from 'virtual:starlight/components/Pagination';
+
+const pathname = Astro.url.pathname.replace(/\/$/, '');
+const mdUrl = pathname ? `${pathname}.md` : null;
+---
+
+<footer class="sl-flex">
+	<div class="meta sl-flex">
+		<EditLink />
+		<LastUpdated />
+	</div>
+	<Pagination />
+
+	{mdUrl && (
+		<div class="ai-friendly">
+			<span class="ai-friendly-label">AI-friendly version:</span>
+			<a
+				class="ai-friendly-action"
+				href={mdUrl}
+				target="_blank"
+				rel="noopener"
+				aria-label="View AI-friendly version (opens in new tab)"
+			>
+				view
+			</a>
+			<span class="ai-friendly-sep" aria-hidden="true">&middot;</span>
+			<button
+				class="ai-friendly-action ai-friendly-copy"
+				data-md-url={mdUrl}
+				aria-label="Copy link to AI-friendly version"
+			>
+				copy link
+			</button>
+		</div>
+	)}
+</footer>
+
+<script>
+	document.addEventListener('click', (e) => {
+		const btn = (e.target as HTMLElement).closest('.ai-friendly-copy') as HTMLElement | null;
+		if (!btn) return;
+
+		const mdPath = btn.dataset.mdUrl;
+		if (!mdPath) return;
+
+		const fullUrl = new URL(mdPath, window.location.origin).href;
+		navigator.clipboard.writeText(fullUrl).then(() => {
+			const original = btn.textContent;
+			btn.textContent = 'copied!';
+			btn.setAttribute('aria-label', 'Link copied');
+			setTimeout(() => {
+				btn.textContent = original;
+				btn.setAttribute('aria-label', 'Copy link to AI-friendly version');
+			}, 1500);
+		}).catch(() => {
+			btn.textContent = 'failed';
+			setTimeout(() => {
+				btn.textContent = 'copy link';
+			}, 1500);
+		});
+	});
+</script>
+
+<style>
+	@layer starlight.core {
+		footer {
+			flex-direction: column;
+			gap: 1.5rem;
+		}
+		.meta {
+			gap: 0.75rem 3rem;
+			justify-content: space-between;
+			flex-wrap: wrap;
+			margin-top: 3rem;
+			font-size: var(--sl-text-sm);
+			color: var(--sl-color-gray-3);
+		}
+		.meta > :global(p:only-child) {
+			margin-inline-start: auto;
+		}
+	}
+
+	.ai-friendly {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: var(--spacing-2);
+		margin: 0.5rem auto 1rem;
+		font-size: var(--text-sm-size);
+		line-height: var(--text-sm-lh);
+	}
+
+	.ai-friendly-label {
+		color: var(--sl-color-gray-2);
+	}
+
+	.ai-friendly-sep {
+		color: var(--sl-color-gray-3);
+	}
+
+	.ai-friendly-action {
+		color: var(--sl-color-gray-2);
+		background: none;
+		border: none;
+		padding: 0;
+		font: inherit;
+		cursor: pointer;
+		text-decoration: underline;
+		text-decoration-color: var(--sl-color-gray-4);
+		text-underline-offset: 3px;
+		transition: color 0.2s ease, text-decoration-color 0.2s ease;
+	}
+	.ai-friendly-action:hover {
+		color: var(--sl-color-white);
+		text-decoration-color: var(--sl-color-white);
+	}
+</style>

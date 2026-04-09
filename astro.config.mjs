@@ -77,6 +77,7 @@ export default defineConfig({
 				SocialIcons: './src/components/SocialIcons.astro',
 				Hero: './src/components/HeroOverride.astro',
 				Header: './src/components/Header.astro',
+				Footer: './src/components/Footer.astro',
 			},
 			social: [
 				{ icon: 'github', label: 'GitHub', href: 'https://github.com/pubky' },
