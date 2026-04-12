@@ -20,6 +20,16 @@ export default defineConfig({
 				alt: 'Pubky',
 			},
 			favicon: '/favicon.svg',
+			head: [
+				{
+					tag: 'script',
+					attrs: {
+						defer: true,
+						'data-domain': 'docs.pubky.org',
+						src: 'https://_analytics.synonym.to/js/script.js',
+					},
+				},
+			],
 			plugins: [
 				starlightClientMermaid(),
 				starlightLlmsTxt({
