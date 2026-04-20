@@ -99,7 +99,7 @@ Local DHT relay for public key-addressable resource records. Enables domain reso
 
 **Configuration**: `pkarr.config.toml`
 
-### 2. Pubky Homeserver (Ports 6287-6288, 15411-15412)
+### 2. Pubky Homeserver (Ports 6286-6288, 15411-15412)
 Local instance of a Pubky Homeserver with PostgreSQL backend.
 
 **Configuration**: `homeserver.config.toml`
