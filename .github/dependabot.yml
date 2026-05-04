@@ -1,0 +1,30 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/snippets/js"
+    schedule:
+      interval: "daily"
+    labels: ["dependencies"]
+    commit-message:
+      prefix: "deps"
+      prefix-development: "deps-dev"
+      include: "scope"
+
+  - package-ecosystem: "npm"
+    directory: "/snippets/react-native"
+    schedule:
+      interval: "daily"
+    labels: ["dependencies"]
+    commit-message:
+      prefix: "deps"
+      prefix-development: "deps-dev"
+      include: "scope"
+
+  - package-ecosystem: "cargo"
+    directory: "/snippets/rust"
+    schedule:
+      interval: "daily"
+    labels: ["dependencies"]
+    commit-message:
+      prefix: "deps"
+      include: "scope"
