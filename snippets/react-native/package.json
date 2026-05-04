@@ -11,7 +11,7 @@
     "eslint": "^10.1.0",
     "prettier": "^3.8.1",
     "react": "^19.0.0",
-    "react-native": "^0.78.0",
+    "react-native": "^0.85.2",
     "typescript": "^5.8.0",
     "typescript-eslint": "^8.58.0"
   }
