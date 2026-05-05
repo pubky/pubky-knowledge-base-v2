@@ -138,8 +138,36 @@ async function snippet_error_handling() {
     console.log("Retrieved:", text);
   } catch (e) {
     const error = e as import("@synonymdev/pubky").PubkyError;
-    // error.name: "RequestError", "AuthenticationError", "ValidationError", etc.
-    console.error(`${error.name}: ${error.message}`);
+    switch (error.name) {
+      case "RequestError":
+        console.error("Network or server error:", error.message);
+        break;
+      case "InvalidInput":
+        console.error("Invalid input:", error.message);
+        break;
+      case "AuthenticationError":
+        console.error("Authentication failed:", error.message);
+        break;
+      case "PkarrError":
+        console.error("PKARR resolution failed:", error.message);
+        break;
+      case "ClientStateError":
+        console.error("Client state error:", error.message);
+        break;
+      case "InternalError":
+        console.error("Internal SDK error:", error.message);
+        break;
+      // --8<-- [skip:start]
+      default: {
+        // Build-time check: tsc rejects this assignment if the SDK adds
+        // a new PubkyErrorName variant — `error.name` would no longer
+        // narrow to `never` here. The throw is a runtime safety net,
+        // not the check itself.
+        const exhaustive: never = error.name;
+        throw new Error(`Unhandled error: ${exhaustive}`, { cause: e });
+      }
+      // --8<-- [skip:end]
+    }
   }
   // --8<-- [end:js_error_handling]
 }
