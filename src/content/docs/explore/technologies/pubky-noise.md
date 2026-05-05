@@ -237,7 +237,7 @@ Pubky Noise is a **communication layer** for Pubky:
 
 ## Links
 
-- **Repository (WIP)**: [https://github.com/BitcoinErrorLog/pubky-noise](https://github.com/BitcoinErrorLog/pubky-noise)
+- **Repository**: [github.com/pubky/pubky-noise](https://github.com/pubky/pubky-noise) (WIP)
 - **Noise Protocol Framework**: [https://noiseprotocol.org/](https://noiseprotocol.org/)
 
 ## Related Documentation

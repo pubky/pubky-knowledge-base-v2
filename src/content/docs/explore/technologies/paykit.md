@@ -144,8 +144,8 @@ Paykit is designed as a **layer 2 protocol** on top of Pubky Core:
 
 ## Resources
 
-- **Repository (WIP Fork)**: [github.com/BitcoinErrorLog/paykit-rs](https://github.com/BitcoinErrorLog/paykit-rs)
-- **Documentation**: [paykit-rs/docs/](https://github.com/BitcoinErrorLog/paykit-rs/tree/main/docs) (In development)
+- **Repository**: [github.com/pubky/paykit-rs](https://github.com/pubky/paykit-rs) (WIP)
+- **Additional Documentation**: [paykit-rs/docs/](https://github.com/BitcoinErrorLog/paykit-rs/tree/main/docs) — informal drafts in a downstream working fork; not authoritative
 - **Protocol Spec**: [PAYKIT_PROTOCOL_V0.md](https://github.com/BitcoinErrorLog/paykit-rs/blob/main/docs/PAYKIT_PROTOCOL_V0.md) (Draft)
 - **Bitkit iOS (WIP Testing)**: [github.com/BitcoinErrorLog/bitkit-ios](https://github.com/BitcoinErrorLog/bitkit-ios)
 - **Bitkit Android (WIP Testing)**: [github.com/BitcoinErrorLog/bitkit-android](https://github.com/BitcoinErrorLog/bitkit-android)

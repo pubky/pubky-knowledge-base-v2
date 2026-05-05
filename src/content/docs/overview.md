@@ -110,15 +110,15 @@ Understand the fundamental ideas behind Pubky:
 ⚠️ **[Paykit](/explore/technologies/paykit/)** is a payment protocol (work in progress) built on Pubky for payment discovery and coordination. Not production-ready.
 
 - [Paykit Overview](/explore/technologies/paykit/) - Current state and architecture (WIP)
-- [Fork Repository (WIP)](https://github.com/BitcoinErrorLog/paykit-rs) - BitcoinErrorLog fork
-- [Complete Documentation](https://github.com/BitcoinErrorLog/paykit-rs/tree/main/docs) - Repository docs (work in progress)
+- [Repository](https://github.com/pubky/paykit-rs) - WIP
+- [Additional Documentation](https://github.com/BitcoinErrorLog/paykit-rs/tree/main/docs) - Informal drafts in a downstream working fork; not authoritative
 
 ## Work in Progress: Encrypted Communication
 
 ⚠️ **[Pubky Noise](/explore/technologies/pubky-noise/)** is a Noise Protocol implementation (work in progress) for encrypted peer-to-peer communication in the Pubky ecosystem. Not production-ready.
 
-- [Pubky Noise Overview](/explore/technologies/pubky-noise/) - Encrypted channels for private communication (WIP)
-- [Repository (WIP)](https://github.com/BitcoinErrorLog/pubky-noise) - BitcoinErrorLog fork
+- [Pubky Noise](/explore/technologies/pubky-noise/) - Encrypted communication for Pubky (WIP)
+- [Repository](https://github.com/pubky/pubky-noise) - WIP
 
 ## Community & Support
 
