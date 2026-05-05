@@ -181,6 +181,12 @@ site-search button[data-open-modal] kbd {
 	outline-offset: 2px;
 }
 
+/* Shrink FAQ per-question headings */
+.faq h3 {
+	font-size: var(--text-xl-size);
+	line-height: var(--text-xl-lh);
+}
+
 /* Hide Starlight footer on splash/homepage */
 [data-has-hero] footer {
 	display: none;
