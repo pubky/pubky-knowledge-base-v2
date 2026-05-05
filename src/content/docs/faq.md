@@ -97,140 +97,140 @@ Yes, via `.onion` endpoints, but it's not yet tested officially.
 
 ## Identity, Keys & Security
 
-**Q25. How are keys managed?**  
+**Q26. How are keys managed?**  
 With [Pubky Ring](/explore/technologies/pubky-ring/), the identity manager app for Pubky. Pubky Ring is a native mobile app (iOS/Android) that securely manages your pubkys (public keys), handles device sessions, publishes identity via PKARR, and authorizes apps—all without accounts or passwords.
 
-**Q26. Does Pubky support key rotation?**  
+**Q27. Does Pubky support key rotation?**  
 Not yet standardized, possible manually via PKARR fallback logic.
 
-**Q27. What if my key is lost or hacked?**  
+**Q28. What if my key is lost or hacked?**  
 Migrate to a new key, update PKARR, and alert your graph.
 
-**Q28. Can I use the same seed as Nostr?**  
+**Q29. Can I use the same seed as Nostr?**  
 Yes, but most users prefer separate secrets due to risk.
 
-**Q29. How does identity trust work?**  
+**Q30. How does identity trust work?**  
 No global authority, trust is built through social graph, tags, and interaction.
 
 ---
 
 ## Publishing, Privacy & Moderation
 
-**Q30. How do I publish content?**  
+**Q31. How do I publish content?**  
 Host it on a Homeserver and link it in your PKARR.
 
-**Q31. Is Pubky suitable for private sharing?**  
+**Q32. Is Pubky suitable for private sharing?**  
 Not yet. All current use assumes public content.
 
-**Q32. Where does moderation happen?**  
+**Q33. Where does moderation happen?**  
 At the Homeserver and indexer level (e.g., [Pubky Nexus](/explore/pubky-apps/indexing-and-aggregation/pubky-nexus/)).
 
-**Q33. What is Pubky Nexus?**  
+**Q34. What is Pubky Nexus?**  
 [Pubky Nexus](/explore/pubky-apps/indexing-and-aggregation/pubky-nexus/) is the production indexing and aggregation service that powers Pubky App. It transforms data from multiple Homeservers into a high-performance social graph API with sub-millisecond response times, enabling features like feeds, search, recommendations, and real-time notifications. [Explore the live API](https://nexus.pubky.app/swagger-ui/).
 
-**Q34. Can I run my own Nexus instance?**  
+**Q35. Can I run my own Nexus instance?**  
 Yes! Nexus is open source and can be self-hosted. This allows organizations to run custom instances with their own content filtering policies, moderation rules, and Homeserver selections. See the [Pubky Nexus](/explore/pubky-apps/indexing-and-aggregation/pubky-nexus/) documentation for deployment details.
 
-**Q35. How does Pubky resist spam?**  
+**Q36. How does Pubky resist spam?**  
 Via CAPTCHAs, rate-limits, invites, and graph distance rules.
 
-**Q36. How does Paykit fit in?**
+**Q37. How does Paykit fit in?**
 Paykit is a **payment protocol (work in progress)** built on Pubky that aims to enable payment discovery and coordination across multiple methods (Bitcoin, Lightning, etc.). See [Client Features](/explore/pubky-apps/reference-app/introduction/) for the full feature list.
 
 ⚠️ **Note**: Paykit is NOT production-ready and the protocol is subject to significant changes.
 
-**Q37. Is Paykit ready for use?**  
+**Q38. Is Paykit ready for use?**  
 No. Paykit is currently a work in progress under active development. The protocol specification, security model, and implementation are all subject to breaking changes. Do not use it for production applications.
 
-**Q38. What payment methods will Paykit support?**  
+**Q39. What payment methods will Paykit support?**  
 The initial focus is on Bitcoin on-chain and Lightning Network. The protocol is designed to be extensible to other methods (Liquid, Fedimint, ecash, etc.), but these are not yet implemented or specified.
 
-**Q39. Where is Paykit being tested?**  
+**Q40. Where is Paykit being tested?**  
 Paykit is being integrated into Bitkit (iOS and Android) to validate the protocol design and identify issues before stabilization. These integrations serve as testbeds, not production features.
 
-**Q40. When will Paykit be production-ready?**  
+**Q41. When will Paykit be production-ready?**  
 There is no set timeline. Significant work remains on protocol stabilization, security auditing, cross-platform testing, and interoperability validation before Paykit can be recommended for production use.
 
-**Q41. Can Pubky do everything Nostr can?**  
+**Q42. Can Pubky do everything Nostr can?**  
 Yes, and more. Pubky includes DHT-based discovery and semantic tagging.
 
 ---
 
 ## Interoperability, Ecosystem & Onboarding
 
-**Q42. Pubky vs IPFS**  
+**Q43. Pubky vs IPFS**  
 Pubky is identity-first and mutable; IPFS is content-first and immutable.
 
-**Q43. Pubky vs Nostr**  
+**Q44. Pubky vs Nostr**  
 Pubky uses Homeservers and PKARR for hosting; Nostr uses relays. Pubky has semantic discovery.
 
-**Q44. Pubky vs Bluesky**  
+**Q45. Pubky vs Bluesky**  
 Pubky is key-native and decentralized. Bluesky relies on DID directories and centralized servers.
 
-**Q45. Pubky vs Farcaster**  
+**Q46. Pubky vs Farcaster**  
 Pubky = key-owned + off-chain. Farcaster = chain-anchored + relay-dependent.
 
-**Q46. Will Pubky integrate with other protocols?**  
+**Q47. Will Pubky integrate with other protocols?**  
 Bridges are possible, but not currently in development.
 
-**Q47. Are there mobile apps?**  
+**Q48. Are there mobile apps?**  
 Yes! 
 - **[Pubky Ring](/explore/technologies/pubky-ring/)**: Native mobile app (iOS/Android) - Your keychain for the Pubky ecosystem. Manages identities, authorizes apps, and handles sessions. Self-custodial with no accounts required.
 - **[Pubky.app](https://pubky.app)**: Progressive Web App (PWA) - Social publishing application
 - More apps welcome from the community!
 
-**Q48. What is Pubky Ring?**  
+**Q49. What is Pubky Ring?**  
 [Pubky Ring](/explore/technologies/pubky-ring/) is the key manager app for the Pubky ecosystem. It's a native mobile app (iOS/Android) that securely manages your pubkys (public keys), authorizes applications, manages sessions, and handles key derivation—all self-custodially with no accounts, passwords, or tracking. Think of it as your keychain for decentralized identity.
 
-**Q49. How do users join Pubky App?**  
+**Q50. How do users join Pubky App?**  
 Homeservers can implement signup verification to prevent spam while preserving privacy. [Homegate](/explore/technologies/homegate/) is an open-source service that provides two verification methods: SMS codes (rate-limited per phone number) and Lightning Network payments. Homeserver operators can use Homegate, implement custom verification, or allow open signups. See [Homegate](/explore/technologies/homegate/) for deployment and integration details.
 
-**Q50. Indexer vs Homeserver?**  
+**Q51. Indexer vs Homeserver?**  
 - Homeserver = stores user data  
 - Indexer = enables search/feeds across Homeservers
 
-**Q51. How do I ensure my app is compatible with Pubky App?**  
+**Q52. How do I ensure my app is compatible with Pubky App?**  
 Follow the [pubky-app-specs](https://github.com/pubky/pubky-app-specs) data model specification. This defines the structure and validation rules for users, posts, tags, bookmarks, follows, and feeds. The spec is available as an [npm package](https://www.npmjs.com/package/pubky-app-specs) (JavaScript/TypeScript) and Rust crates. Note: Currently v0.4.0 in rapid development; v1 will mark the first stable, long-term support version.
 
-**Q52. What's the status of Pubky App development?**
+**Q53. What's the status of Pubky App development?**
 The Pubky App client ([pubky.app](https://pubky.app)) is live and under active development at [github.com/pubky/pubky-app](https://github.com/pubky/pubky-app). Developers building compatible clients should use [pubky-app-specs](https://www.npmjs.com/package/pubky-app-specs) (or the [Rust crate](https://crates.io/crates/pubky-app-specs)) as the authoritative specification.
 
-**Q53. Can I contribute to Pubky App?**
+**Q54. Can I contribute to Pubky App?**
 Yes! The [pubky-app repository](https://github.com/pubky/pubky-app) is under active development and welcomes contributions. If you want to build a compatible social client, use the [pubky-app-specs](https://www.npmjs.com/package/pubky-app-specs) specification as your foundation.
 
 ---
 
 ## Operations, Resilience & Scale
 
-**Q54. How do I migrate providers?**  
+**Q55. How do I migrate providers?**  
 Add mirror → update PKARR → let caches sync → retire old host.
 
-**Q55. What if Synonym disappears?**  
+**Q56. What if Synonym disappears?**  
 Nothing breaks. Your key, data, and graph are yours.
 
-**Q56. What if my ISP censors my Homeserver?**  
+**Q57. What if my ISP censors my Homeserver?**  
 Switch hosts, use Tor/VPN, republish PKARR.
 
-**Q57. How often does PKARR update?**
+**Q58. How often does PKARR update?**
 Periodically, every few hours is typical. See [republishing research](https://github.com/pubky/pkarr-churn/blob/main/results-node_decay.md) for details.
 
-**Q58. What if I spam the DHT?**  
+**Q59. What if I spam the DHT?**  
 You'll be rate-limited. Publish sensibly.
 
-**Q59. Does DHT scale globally?**  
+**Q60. Does DHT scale globally?**  
 Yes. Mainline DHT already does, Pubky's usage is lightweight.
 
-**Q60. Why do some say Nostr needs a DHT?**  
+**Q61. Why do some say Nostr needs a DHT?**  
 Because relay-only networks don't scale easily without coordination.
 
-**Q61. What about private data in Pubky?**  
+**Q62. What about private data in Pubky?**  
 Short-term: [Pubky Noise](/explore/technologies/pubky-noise/)-based encrypted channels for private peer-to-peer communication.  
 Long-term: Cryptree-style systems and further R&D.
 
-**Q62. What is Pubky Noise?**  
+**Q63. What is Pubky Noise?**  
 Pubky Noise is a Noise Protocol implementation that provides encrypted communication channels for the Pubky ecosystem. It uses the IK handshake pattern for mutual authentication and forward secrecy. Currently used by [Paykit](/explore/technologies/paykit/) for private payment negotiation, it can also support other applications requiring secure peer-to-peer communication. Work in progress - not production-ready yet.
 
-**Q63. How does Pubky Noise differ from the Noise Protocol?**  
+**Q64. How does Pubky Noise differ from the Noise Protocol?**  
 Pubky Noise is a specific implementation of the Noise Protocol Framework adapted for the Pubky ecosystem. It integrates with Pubky's Ed25519 identity system, derives X25519 encryption keys automatically, and publishes endpoints to Homeserver directories for peer discovery. It provides platform-specific bindings (iOS, Android, Web, CLI) and handles session management.
 
 ---
