@@ -11,6 +11,12 @@
  *   // --8<-- [start:anchor_name]
  *   // --8<-- [end:anchor_name]
  * and injects it as the code block's content.
+ *
+ * Lines between
+ *   // --8<-- [skip:start]
+ *   // --8<-- [skip:end]
+ * are stripped from the rendered snippet (useful for verification-only
+ * code that should compile but not appear in the docs).
  */
 
 import { readFileSync } from 'node:fs';
@@ -64,7 +70,22 @@ function walk(node) {
           );
         }
 
-        node.value = dedent(lines.slice(startIdx + 1, endIdx).join('\n')).trimEnd();
+        const sliced = lines.slice(startIdx + 1, endIdx);
+        const filtered = [];
+        let skipping = false;
+        for (const line of sliced) {
+          if (line.includes('[skip:start]')) {
+            skipping = true;
+            continue;
+          }
+          if (line.includes('[skip:end]')) {
+            skipping = false;
+            continue;
+          }
+          if (!skipping) filtered.push(line);
+        }
+
+        node.value = dedent(filtered.join('\n')).trimEnd();
       } else {
         node.value = content.trim();
       }
