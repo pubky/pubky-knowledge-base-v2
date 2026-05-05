@@ -276,8 +276,11 @@ async fn snippet_error_handling() -> anyhow::Result<()> {
         Err(Error::Request(RequestError::Server { status, message })) => {
             eprintln!("Server error {status}: {message}");
         }
+        Err(Error::Request(e)) => eprintln!("Request failed: {e}"),
+        Err(Error::Pkarr(e)) => eprintln!("PKARR error: {e}"),
+        Err(Error::Parse(e)) => eprintln!("URL parse error: {e}"),
         Err(Error::Authentication(e)) => eprintln!("Auth failed: {e}"),
-        Err(e) => eprintln!("Error: {e}"),
+        Err(Error::Build(e)) => eprintln!("Client build failed: {e}"),
     }
     // --8<-- [end:error_handling]
     Ok(())
