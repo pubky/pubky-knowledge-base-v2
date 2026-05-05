@@ -99,7 +99,7 @@ Local DHT relay for public key-addressable resource records. Enables domain reso
 
 **Configuration**: `pkarr.config.toml`
 
-### 2. Pubky Homeserver (Ports 6287-6288, 15411-15412)
+### 2. Pubky Homeserver (Ports 6286-6288, 15411-15412)
 Local instance of a Pubky Homeserver with PostgreSQL backend.
 
 **Configuration**: `homeserver.config.toml`
@@ -134,31 +134,13 @@ Next.js-based social media frontend configured to use the local stack.
 
 ### Environment Variables
 
-The `.env` file controls key configuration:
+Configuration is managed through a `.env` file. Copy the sample and adjust as needed:
 
 ```bash
-# Network Selection
-NETWORK=testnet  # or mainnet
-
-# Image Tags (when using public images)
-REGISTRY=synonymsoft
-PUBKY_APP_TAG=latest
-PUBKY_NEXUS_TAG=latest
-HOMESERVER_TAG=latest
-PKARR_TAG=latest
-
-# Database
-POSTGRES_USER=homeserver
-POSTGRES_PASSWORD=homeserver
-POSTGRES_DB=homeserver
-
-# Frontend Configuration
-NEXT_PUBLIC_HOMESERVER=8pinxxgqs41n4aididenw5apqp1urfmzdztr8jt4abrkdn435ewo
-NEXT_PUBLIC_NEXUS=http://localhost:8080
-NEXT_PUBLIC_TESTNET=true
-HTTP_RELAY=http://localhost:15412/inbox/
-NEXT_PUBLIC_PKARR_RELAYS=["https://pkarr.pubky.app","https://pkarr.pubky.org"]
+cp .env-sample .env
 ```
+
+See [`.env-sample`](https://github.com/pubky/pubky-docker/blob/main/.env-sample) in the repository for all available variables and their defaults.
 
 ### Network Configuration
 

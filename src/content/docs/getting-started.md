@@ -109,26 +109,9 @@ cd ios && pod install  # iOS only
 
 ### Step 2: Run Local Development Stack
 
-Use **[Pubky Docker](/explore/technologies/pubky-docker/)** to run the complete Pubky ecosystem locally:
+**[Pubky Docker](/explore/technologies/pubky-docker/)** provides a one-command local setup of the full Pubky Social stack (PKARR relay, Homeserver, Nexus, and the App frontend).
 
-```bash
-# Clone the repository
-git clone https://github.com/pubky/pubky-docker
-cd pubky-docker
-
-# Configure environment (testnet recommended for development)
-cp .env.example .env
-# Edit .env to set ENVIRONMENT=testnet
-
-# Start the stack
-docker compose up -d
-```
-
-This gives you:
-- PKARR relay (port 6881)
-- Homeserver with PostgreSQL (port 4173)
-- Pubky Nexus with Neo4j & Redis (port 8000)
-- Pubky App frontend (port 5173)
+See the [Pubky Docker documentation](/explore/technologies/pubky-docker/) for setup instructions, port mappings, and configuration options.
 
 **Alternative**: Run just a Homeserver:
 ```bash
