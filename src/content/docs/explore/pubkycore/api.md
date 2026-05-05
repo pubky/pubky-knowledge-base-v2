@@ -355,8 +355,6 @@ Get user information.
 }
 ```
 
-See [Admin API](/explore/pubkycore/homeserver/#admin-api) for complete admin documentation.
-
 ## Metrics Endpoint
 
 Prometheus-compatible metrics for monitoring.
