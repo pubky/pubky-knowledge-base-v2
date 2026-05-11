@@ -130,7 +130,7 @@ flowchart LR
 - **User Choice**: Pick any Homeserver or run your own
 - **Data Ownership**: You control your data
 - **Portability**: Switch Homeservers without losing data
-- **Persistence Backends**: Files, LMDB, PostgreSQL, or SQL
+- **Persistence Backends**: Files for user data; PostgreSQL for the homeserver's internal metadata (users, quotas, events — not exposed through the API)
 
 **API Operations:**
 - `PUT /pub/app/path` - Store data

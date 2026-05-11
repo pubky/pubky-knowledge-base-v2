@@ -15,7 +15,7 @@ When operating a public Homeserver, spam prevention is critical. Homegate acts a
 
 ### Use Case
 
-Homegate solves the problem expressed in [FAQ#Q37](/faq/#q37): "How do users join Pubky App? Via invite codes from Homeservers. Prevents spam while preserving privacy."
+Homegate solves the problem expressed in [FAQ#Q50](/faq/#q50): "How do users join Pubky App? Via invite codes from Homeservers. Prevents spam while preserving privacy."
 
 While the FAQ mentions "invite codes," Homegate implements a more sophisticated system using:
 1. **SMS verification**: Send a code to a phone number, verify ownership
@@ -609,6 +609,6 @@ Potential improvements for Homegate:
 
 - [Homeserver](/explore/pubkycore/homeserver/) - Pubky Homeserver documentation
 - [Pubky Core](/explore/pubkycore/introduction/) - Core protocol and SDK
-- [FAQ#Q37](/faq/#q37) - How users join Pubky App
+- [FAQ#Q50](/faq/#q50) - How users join Pubky App
 - [Censorship](/explore/concepts/censorship/) - Censorship resistance principles
 

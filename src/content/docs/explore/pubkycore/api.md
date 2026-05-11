@@ -322,40 +322,117 @@ Check whether a signup token is valid, used, or unknown.
 
 **Rate Limiting:** This endpoint is rate-limited to 10 requests per IP per minute by default.
 
-## Admin Endpoints
+## Admin API
 
-Homeserver administrators can access management endpoints:
+Each Homeserver runs a separate admin HTTP server on its own socket (default `127.0.0.1:6288`), isolated from the public Pubky API. It is the only surface for operator tasks — minting signup tokens, suspending abusive users, adjusting per-user quotas, deleting entries, and inspecting health. The admin listener is plain HTTP, so keep it on `localhost` or a trusted network and front it with a reverse proxy if it ever needs to leave the host. See [Homeserver](/explore/pubkycore/homeserver/) for the operator-facing overview.
 
-### GET /admin/stats
+### Authentication
 
-Get server statistics.
+A shared admin password gates every protected route:
 
-**Response:**
+- JSON endpoints expect `X-Admin-Password: <password>`
+- The WebDAV mount at `/dav/*` uses HTTP Basic auth (`admin:<password>`), so browsers receive a standard `WWW-Authenticate` prompt
+
+The password lives at `[admin].admin_password` in `config.toml`. The sample config ships with `"admin"` for local development — replace it before exposing the port.
+
+Endpoints with a `{public_key}` path parameter return `400 Bad Request` if the value is not a valid z32-encoded public key.
+
+### GET / — Liveness Probe
+
+Returns the literal string `"Homeserver - Admin Endpoint"`. Unauthenticated; useful for basic reachability checks against the admin listener.
+
+### GET /info — Server Overview
+
+Returns the user count, the disabled-user count, total disk usage in MB, signup-code stats, the homeserver public key, the advertised PKARR pubky address and ICANN domain, and the running version.
+
+**Response (200 OK):**
 ```json
 {
-  "users": 1000,
-  "total_storage": 1073741824,
-  "requests_per_minute": 150,
-  "uptime_seconds": 86400
-}
-```
-
-### GET /admin/users/:public_key
-
-Get user information.
-
-**Response:**
-```json
-{
+  "num_users": 1842,
+  "num_disabled_users": 3,
+  "total_disk_used_mb": 28471,
+  "num_signup_codes": 250,
+  "num_unused_signup_codes": 47,
   "public_key": "8pinxxgqs41n4aididenw5apqp1urfmzdztr8jt4abrkdn435ewo",
-  "storage_used": 10485760,
-  "storage_quota": 104857600,
-  "created_at": 1704000000,
-  "last_activity": 1704067200
+  "pkarr_pubky_address": null,
+  "pkarr_icann_domain": "homeserver.example.com",
+  "version": "0.7.0"
 }
 ```
 
-See [Admin API](/explore/pubkycore/homeserver/#admin-api) for complete admin documentation.
+`pkarr_pubky_address` and `pkarr_icann_domain` are nullable — they reflect the server's PKARR and ICANN configuration and may be absent.
+
+### Signup Tokens
+
+Mint signup tokens for gated homeservers — see [Homegate](/explore/technologies/homegate/) for the redemption flow.
+
+**`GET /generate_signup_token`** mints a token using system-default quotas. Returns the token string in the response body.
+
+**`POST /generate_signup_token`** mints a token with explicit per-user quota overrides:
+
+```http
+POST /generate_signup_token
+X-Admin-Password: <password>
+Content-Type: application/json
+
+{
+  "storage_quota_mb": 1024,
+  "rate_read": "200mb/m"
+}
+```
+
+Each field accepts a value, `"unlimited"`, or `null` to use the system default. Absent fields fall back to system defaults. Invalid rate strings return `422 Unprocessable Entity`.
+
+### User Suspension
+
+`POST /users/{public_key}/disable` — flip a per-user `disabled` flag. Subsequent reads and writes against that user's data fail until re-enabled.
+
+`POST /users/{public_key}/enable` — reverse the disable.
+
+Both return `200 OK` on success, `404 Not Found` for unknown users.
+
+### Per-User Quotas
+
+`GET /users/{public_key}/quota` returns both the effective quota (per-user overrides merged with system defaults from `[default_quotas]` and `[storage].default_quota_mb`) and the raw overrides:
+
+```json
+{
+  "effective": {
+    "storage_quota_mb": 500,
+    "rate_read": "10mb/s",
+    "rate_write": "5mb/s"
+  },
+  "overrides": {
+    "storage_quota_mb": 500
+  }
+}
+```
+
+`PATCH /users/{public_key}/quota` updates per-user storage and bandwidth fields. Each field follows the same semantics:
+
+- absent → keep existing override
+- `null` → reset to Default (use system default)
+- `"unlimited"` → no limit
+- value (`1024`, `"100mb/m"`) → explicit override
+
+### Entry Deletion
+
+`DELETE /webdav/{public_key}/pub/...` removes a single entry by path and emits a normal `DEL` event so subscribers stay in sync.
+
+The full `/dav/*` mount additionally exposes PROPFIND, GET, PUT, and DELETE across all user data for ops-driven inspection or bulk cleanup. It uses HTTP Basic auth (`admin:<password>`).
+
+### Tooling
+
+The [Pubky CLI](/explore/technologies/pubky-cli/) wraps these endpoints under `pubky-cli admin …` (`info`, `generate-token`, `user disable`, `user enable`, `user delete`) and reads the password from `PUBKY_ADMIN_PASSWORD`.
+
+### Configuration
+
+```toml
+[admin]
+enabled = true
+listen_socket = "127.0.0.1:6288"
+admin_password = "change-me"
+```
 
 ## Metrics Endpoint
 

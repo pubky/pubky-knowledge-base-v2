@@ -349,5 +349,5 @@ Potential improvements for Pubky Explorer:
 - [Pubky Core SDK](/explore/pubkycore/sdk/) - How data access works
 - [Pubky Core API](/explore/pubkycore/api/) - Homeserver HTTP API
 - [PKARR](/explore/pubkycore/pkarr/introduction/) - Public key resolution
-- [FAQ#Q14a](/faq/#q14a) - FAQ entry about exploring data
+- [FAQ#Q17](/faq/#q17) - FAQ entry about exploring data
 
