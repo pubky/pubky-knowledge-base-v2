@@ -17,7 +17,7 @@ const aiLinks = [
   { name: "Claude", url: `https://claude.ai/new?q=${encodeURIComponent(aiPrompt)}`, icon: "claude" },
   { name: "ChatGPT", url: `https://chat.openai.com/?q=${encodeURIComponent(aiPrompt)}`, icon: "chatgpt" },
   { name: "Cursor", url: `https://cursor.com/link/prompt?text=${encodeURIComponent(aiPrompt)}`, icon: "cursor" },
-  { name: "Gemini", url: `https://gemini.google.com/prompt?text=${encodeURIComponent(aiPrompt)}`, icon: "gemini" },
+  { name: "Gemini", url: "https://gemini.google.com/", icon: "gemini", tooltip: "Gemini: Autofill unsupported. Copy-paste manually." },
   { name: "Grok", url: `https://x.com/i/grok?text=${encodeURIComponent(aiPrompt)}`, icon: "grok" },
 ];
 ---
@@ -35,11 +35,11 @@ const aiLinks = [
         <img class="btn-icon" src="/images/icons/github.svg" width="16" height="16" alt="" aria-hidden="true" />
         <span>GitHub</span>
       </a>
-      <a href="https://docs.pubky.org" class="btn btn-secondary" target="_blank" rel="noopener noreferrer" aria-label="Human Docs (opens in new tab)">
+      <a href="/overview/" class="btn btn-secondary" aria-label="Human Docs">
         <img class="btn-icon" src="/images/user.svg" width="16" height="16" alt="" aria-hidden="true" />
         <span>Human Docs</span>
       </a>
-      <a href="https://github.com/pubky/pubky-ai-kit/" class="btn btn-ai-kit" target="_blank" rel="noopener noreferrer" aria-label="AI Kit (opens in new tab)">
+      <a href="https://github.com/pubky/pubky-ai-kit/blob/main/pubky-dev-context.md" class="btn btn-ai-kit" target="_blank" rel="noopener noreferrer" aria-label="AI Kit (opens in new tab)">
         <img class="btn-icon" src="/images/icons/file.svg" width="16" height="16" alt="" aria-hidden="true" />
         <span>AI Kit</span>
       </a>
@@ -49,7 +49,7 @@ const aiLinks = [
       <span class="open-with-label">Open with:</span>
       <div class="open-with-links">
         {aiLinks.map((link) => (
-          <a href={link.url} target="_blank" rel="noopener noreferrer" class="open-with-btn" aria-label={`Open with ${link.name} (opens in new tab)`} data-tooltip={link.name}>
+          <a href={link.url} target="_blank" rel="noopener noreferrer" class="open-with-btn" aria-label={`Open with ${link.name} (opens in new tab)`} data-tooltip={link.tooltip ?? link.name}>
             <span class="ai-icon" data-icon={link.icon} aria-hidden="true"></span>
           </a>
         ))}

@@ -100,7 +100,6 @@ const demos = [
     description:
       "PKDNS uses BitTorrent’s DHT—no registrars, no central control. Addresses come from your key. Think IPFS, but simpler.\nQuick setup via Pi-hole or Docker in under 10 minutes.",
     actions: [
-      { label: "Live Demo", href: "https://www.noregistry.com/", variant: "secondary" as const },
       { label: "Read More", href: "https://www.noregistry.com/", variant: "outline" as const },
     ],
   },
@@ -129,7 +128,7 @@ const demos = [
       },
       {
         label: "Read More",
-        href: "https://github.com/synonymdev/mypubky",
+        href: "https://github.com/SeverinAlexB/pubky-passport-prague26",
         variant: "outline" as const,
       },
     ],
@@ -313,17 +312,6 @@ const icons = {
         <DemoCard title={demo.title} description={demo.description} actions={demo.actions} />
       ))}
     </div>
-    <div class="demos-footer">
-      <a
-        href="https://github.com/pubky/pubky-core"
-        class="demos-show-more"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Show more (opens in new tab)"
-      >
-        Show more
-      </a>
-    </div>
   </section>
 
   <!-- Figma: Join our Community (node 34690:85373) — two-column 50/50 with 48px gap.
@@ -500,8 +488,7 @@ const icons = {
   }
 
   /* Figma: Demos (node 34702:87731) — Frame 48095428 = flex-col gap spacing-6(24)
-     between title row and subtitle, then spacing-10(40) before the tiles grid,
-     and the Show more flex centered below. */
+     between title row and subtitle, then spacing-10(40) before the tiles grid. */
   .demos {
     display: flex;
     flex-direction: column;
@@ -533,38 +520,6 @@ const icons = {
   /* Figma: Tiles = flex-wrap with gap 24px; 4 columns at 1280 (282px each) */
   .demos-grid {
     grid-auto-rows: 1fr;
-  }
-
-  /* Figma: Show more wrapper = flex-col items-center */
-  .demos-footer {
-    display: flex;
-    justify-content: center;
-  }
-
-  /* Figma: Outline lg button — h60, px spacing-8(32), py spacing-5(20),
-     bg alpha-white-5, border 1px base/border, radius-full, text-sm bold */
-  .demos-show-more {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--spacing-2);
-    height: 60px;
-    padding: var(--spacing-5) var(--spacing-8);
-    background: var(--alpha-white-5);
-    border: 1px solid var(--base-border);
-    border-radius: var(--radius-full);
-    box-shadow: var(--shadow-xs);
-    color: var(--base-foreground);
-    font-size: var(--text-sm-size);
-    line-height: var(--text-sm-lh);
-    font-weight: 700;
-    text-decoration: none;
-    transition: background 0.15s ease, border-color 0.15s ease;
-  }
-
-  .demos-show-more:hover {
-    background: var(--alpha-white-10);
-    border-color: var(--sl-color-gray-3);
   }
 
   /* Figma: Community (node 34690:85373) — 2-col grid, gap spacing-12(48px). Grid (vs flex)
