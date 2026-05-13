@@ -1,0 +1,162 @@
+---
+interface Action {
+  label: string;
+  href: string;
+  variant?: "secondary" | "outline";
+}
+
+interface Props {
+  title: string;
+  description: string;
+  actions: Action[];
+}
+
+const { title, description, actions } = Astro.props;
+---
+
+<div class="demo-card not-content">
+  <div class="demo-card-copy">
+    <h3 class="demo-card-title">{title}</h3>
+    <p class="demo-card-description">{description}</p>
+  </div>
+  <div class="demo-card-actions">
+    {actions.map((action) => (
+      <a
+        href={action.href}
+        class:list={["demo-card-btn", `demo-card-btn-${action.variant ?? "secondary"}`]}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`${action.label} (opens in new tab)`}
+      >
+        {action.label}
+      </a>
+    ))}
+  </div>
+</div>
+
+<style is:global>
+  /* Figma: Demo Cards (node 34784:60645) — 325h floor, p spacing-8(32),
+     bg base/card, border 1px base/border, radius rounded-lg(12), justify-between
+     so the actions row pins to the bottom of the card. min-height (not fixed
+     height) lets long-description cards (Bitkit Usage Proofs, Invite a Friend)
+     grow instead of overflowing the 32px bottom padding; .demos-grid's
+     grid-auto-rows: 1fr equalizes the row to the tallest card. */
+  .demo-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* spacing-6(24) is a floor between Copy and Actions — justify-between
+       only distributes leftover space inside 325px, so once content fills
+       the card naturally the two rows would collide (Invite a Friend). */
+    gap: var(--spacing-6);
+    min-height: 325px;
+    padding: var(--spacing-8);
+    background: var(--base-card);
+    border: 1px solid var(--base-border);
+    border-radius: var(--radius-lg);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    box-sizing: border-box;
+  }
+
+  /* Figma instance has no separate hover variant, so the hover border thickness
+     is a project decision: 2px on hover for a visibly stronger ring (existing 1px
+     looked too subtle against the dark card bg). Inset box-shadow widens the
+     border visually without shifting card content. */
+  .demo-card:hover {
+    border-color: var(--sl-color-gray-3);
+    box-shadow:
+      inset 0 0 0 1px var(--sl-color-gray-3),
+      var(--shadow-card-hover);
+  }
+
+  /* Figma: Copy = flex-col, gap spacing-6(24) */
+  .demo-card-copy {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-6);
+  }
+
+  /* Figma: Website/h4 = Inter Tight SemiBold 35/44, tracking -0.3px.
+     35px / 44px / -0.3px are hardcoded — Website/h4 typography, off our text scale.
+     Inter Tight is narrower than Inter so the description wraps as designed in Figma. */
+  .demo-card-title {
+    margin: 0;
+    font-family: "Inter Tight", "Inter", system-ui, sans-serif;
+    font-size: 35px;
+    line-height: 44px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+    color: var(--base-foreground);
+  }
+
+  /* Figma: Website/Body S = Inter Tight Regular 15/23.
+     15px / 23px are hardcoded — Website/Body S typography, off our text scale */
+  .demo-card-description {
+    margin: 0;
+    font-family: "Inter Tight", "Inter", system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 23px;
+    font-weight: 400;
+    color: var(--base-foreground);
+    white-space: pre-line; /* Honor "\n" line breaks in description data (Figma renders them) */
+  }
+
+  /* Figma: Flex row, gap spacing-2(8) */
+  .demo-card-actions {
+    display: flex;
+    gap: var(--spacing-2);
+  }
+
+  /* Figma: when two buttons share the row, each takes flex:1 with min-width 0
+     so they collapse evenly; a single button stays at content width (shrink-0) */
+  .demo-card-actions:has(.demo-card-btn:nth-child(2)) .demo-card-btn {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  /* Figma: Pill button = h-40, rounded-full, text-sm bold, shadow-xs,
+     px spacing-4(16), py spacing-2-5(10), gap spacing-2(8), whitespace-nowrap */
+  .demo-card-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-2);
+    height: 40px;
+    padding: var(--spacing-2-5) var(--spacing-4);
+    border-radius: var(--radius-full);
+    font-size: var(--text-sm-size);
+    line-height: var(--text-sm-lh);
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+    box-shadow: var(--shadow-xs);
+    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+    border: 1px solid transparent;
+  }
+
+  /* Figma: Secondary — bg base/secondary, color secondary-foreground, no border */
+  .demo-card-btn-secondary {
+    background: var(--base-secondary);
+    color: var(--base-secondary-foreground);
+  }
+
+  .demo-card-btn-secondary:hover {
+    background: var(--base-secondary-hover);
+    color: var(--base-foreground);
+  }
+
+  /* Figma: Outline — bg alpha-white-5, border 1px base/border, color foreground */
+  .demo-card-btn-outline {
+    background: var(--alpha-white-5);
+    border-color: var(--base-border);
+    color: var(--base-foreground);
+  }
+
+  /* Figma: Outline hover (node 979:19830) — bg rgba(255,255,255,0.08),
+     text base/accent-foreground (#eeeef6), border stays 1px base/border.
+     0.08 / #eeeef6 are hardcoded — Figma hover tokens, off our alpha/color scale */
+  .demo-card-btn-outline:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: #eeeef6;
+  }
+</style>

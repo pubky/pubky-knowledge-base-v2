@@ -1,6 +1,7 @@
 ---
 interface Props {
   title: string;
+  titleSuffix?: string;
   titleIcon?: string;
   description?: string;
   image: string;
@@ -8,7 +9,7 @@ interface Props {
   links?: { label: string; href: string; external?: boolean }[];
 }
 
-const { title, titleIcon, description, image, tags = [], links = [] } = Astro.props;
+const { title, titleSuffix, titleIcon, description, image, tags = [], links = [] } = Astro.props;
 ---
 
 <div class="image-card">
@@ -18,7 +19,9 @@ const { title, titleIcon, description, image, tags = [], links = [] } = Astro.pr
   <div class="image-card-content">
     <h3 class="image-card-title">
       {titleIcon && <span class="image-card-title-icon" set:html={titleIcon} />}
-      {title}
+      <span class="image-card-title-text">
+        {title}{titleSuffix && <> <span class="image-card-title-suffix">{titleSuffix}</span></>}
+      </span>
     </h3>
     {description && <p class="image-card-description">{description}</p>}
     {tags.length > 0 && (
@@ -85,20 +88,20 @@ const { title, titleIcon, description, image, tags = [], links = [] } = Astro.pr
     display: block;
   }
 
+  /* Figma: flex-col, gap spacing/4 (16px), items-start — items stack from the top with
+     a fixed gap; any extra card height stays empty at the bottom (no space-between). */
   .image-card-content {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    /* Figma: gap = spacing/4 (16px) */
     gap: var(--spacing-4);
-    flex: 1;
   }
 
-  /* Figma: Logos flex row, gap spacing/2, items-center */
+  /* Figma: Typography / H4 = Inter Tight Bold, text-xl(20/28), foreground */
   .image-card-title {
     margin: 0;
-    font-size: var(--text-lg-size);
-    font-weight: 600;
+    font-size: var(--text-xl-size);
+    line-height: var(--text-xl-lh);
+    font-weight: 700;
     color: var(--base-foreground);
     display: flex;
     align-items: center;
@@ -111,6 +114,11 @@ const { title, titleIcon, description, image, tags = [], links = [] } = Astro.pr
     flex-shrink: 0;
   }
 
+  /* Figma: "Ring" word mark in Pubky Ring logo renders thinner than the bold "Pubky" */
+  .image-card-title-suffix {
+    font-weight: 400;
+  }
+
   /* Figma: Typography / P = text-base (16px), line-height 24px, muted-foreground, medium */
   .image-card-description {
     margin: 0;
@@ -118,10 +126,6 @@ const { title, titleIcon, description, image, tags = [], links = [] } = Astro.pr
     line-height: var(--text-base-lh);
     color: var(--base-muted-foreground);
     font-weight: 500;
-    flex: 1;
-    min-height: 1px;
-    display: flex;
-    align-items: center;
   }
 
   .image-card-tags {

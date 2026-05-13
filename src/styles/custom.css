@@ -1,5 +1,8 @@
 /* Inter font */
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+/* Inter Tight — Figma Website/h4 + Website/Body S typography (Demo cards),
+   plus Light(300) for the install-section H5 tagline */
+@import url("https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;600;700&display=swap");
 
 /* Pubky brand dark theme */
 :root {
@@ -58,8 +61,12 @@
 	--text-xl-lh: 28px;
 	--text-2xl-size: 24px;
 	--text-2xl-lh: 32px;
+	--text-3xl-size: 30px;
+	--text-3xl-lh: 36px;
 	--text-4xl-size: 36px;
 	--text-4xl-lh: 40px;
+	--text-5xl-size: 48px;
+	--text-5xl-lh: 48px;
 	--text-6xl-size: 72px;
 	--text-6xl-lh: 72px;
 
@@ -84,8 +91,13 @@
 		0 0 0 1px rgba(255, 255, 255, 0.06);
 }
 
-/* Prevent horizontal scroll from 100vw breakout pattern */
-html {
+/* Prevent horizontal scroll from 100vw breakout pattern (.install-section,
+   .home-content) and the .install-section::before bg pattern that overhangs
+   ~70px past viewport on mobile. Apply on BOTH html and body — on iOS Safari,
+   setting it only on <html> doesn't always clip descendant overflow. Safe
+   because the header is `position: fixed` (no sticky context to break). */
+html,
+body {
 	overflow-x: hidden;
 }
 
@@ -102,18 +114,37 @@ html {
 
 /* ── Header overrides ── */
 
-/* Figma: Header wrapper = Header-Gradient, sticky top-0 (node 32262:74061) */
+/* Match --sl-nav-height to the actual header height so Starlight's
+   `.main-frame { padding-top: var(--sl-nav-height) }` clears the fixed header.
+   Desktop: 24 (py) + 36 (logo) + 24 = 84px. Mobile: 20 + 36 + 20 = 76px. */
+:root {
+	--sl-nav-height: 76px;
+}
+@media (min-width: 1050px) {
+	:root {
+		--sl-nav-height: 84px;
+	}
+}
+
+/* Figma: Header wrapper = Header-Gradient, pinned top-0 (node 32262:74061).
+   Use `fixed` (Starlight's default) rather than `sticky` — `fixed` pins to the
+   viewport regardless of overflow/scroll-context on ancestors, so it works
+   reliably on mobile Safari where sticky is brittle. */
 header.header {
 	background: linear-gradient(180deg, var(--base-background) 50%, rgba(5, 5, 10, 0.00) 100%);
 	border-bottom: none;
 	padding: 0;
-	position: sticky;
+	position: fixed;
 	top: 0;
+	inset-inline-start: 0;
+	width: 100%;
 	z-index: 10;
 }
 
 /* Figma: Search = 400px wide within 688px wrapper, pill shape, border 1px base/border,
-   radius full(9999), px spacing-6(24), py spacing-3(12), gap spacing-3(12), backdrop-blur */
+   radius full(9999), px spacing-6(24), py spacing-3(12), gap spacing-3(12),
+   backdrop-blur(2xl/40), bg = vertical gradient transparent → ~6% white as rendered
+   in the Pubky/Search asset (Figma node 34690:85386) */
 site-search button[data-open-modal] {
 	width: 400px;
 	border: 1px solid var(--base-border);
@@ -121,12 +152,12 @@ site-search button[data-open-modal] {
 	padding: var(--spacing-3) var(--spacing-6);
 	gap: var(--spacing-3);
 	background: linear-gradient(
-		90deg,
-		rgba(255, 255, 255, 0.05) 0%,
-		rgba(255, 255, 255, 0.02) 100%
+		180deg,
+		rgba(255, 255, 255, 0) 0%,
+		rgba(255, 255, 255, 0.06) 100%
 	);
-	-webkit-backdrop-filter: blur(20px);
-	backdrop-filter: blur(20px);
+	-webkit-backdrop-filter: blur(40px);
+	backdrop-filter: blur(40px);
 	font-size: var(--text-base-size);
 	font-weight: 500;
 	line-height: var(--text-base-lh);

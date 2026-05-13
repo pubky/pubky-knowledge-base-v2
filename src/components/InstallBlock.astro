@@ -26,18 +26,22 @@ const aiLinks = [
   <div class="install-block">
   <div class="install-left not-content">
     <div class="install-header">
-      <h1 class="install-heading">Build For User Sovereignty</h1>
+      <h1 class="install-heading">Build for User Sovereignty</h1>
       <p class="install-tagline">Open protocol for key-based, censorship-resistant apps</p>
     </div>
 
     <div class="install-actions">
-      <a href="https://github.com/pubky/pubky-core" class="btn btn-github" target="_blank" rel="noopener noreferrer" aria-label="View on GitHub (opens in new tab)">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"></path></svg>
-        <span>View on GitHub</span>
+      <a href="https://github.com/pubky/pubky-core" class="btn btn-secondary" target="_blank" rel="noopener noreferrer" aria-label="View on GitHub (opens in new tab)">
+        <img class="btn-icon" src="/images/icons/github.svg" width="16" height="16" alt="" aria-hidden="true" />
+        <span>GitHub</span>
       </a>
-      <a href="/explore/pubkycore/sdk/" class="btn btn-docs">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
-        <span>SDK Docs</span>
+      <a href="https://docs.pubky.org" class="btn btn-secondary" target="_blank" rel="noopener noreferrer" aria-label="Human Docs (opens in new tab)">
+        <img class="btn-icon" src="/images/user.svg" width="16" height="16" alt="" aria-hidden="true" />
+        <span>Human Docs</span>
+      </a>
+      <a href="https://github.com/pubky/pubky-ai-kit/" class="btn btn-ai-kit" target="_blank" rel="noopener noreferrer" aria-label="AI Kit (opens in new tab)">
+        <img class="btn-icon" src="/images/icons/file.svg" width="16" height="16" alt="" aria-hidden="true" />
+        <span>AI Kit</span>
       </a>
     </div>
 
@@ -61,7 +65,6 @@ const aiLinks = [
   </div>
 
   <div class="install-right not-content">
-    <p class="install-title">PUBKY SDK</p>
     <div class="terminal not-content">
       <div class="terminal-bar">
         <div class="dots">
@@ -159,6 +162,28 @@ const aiLinks = [
     padding: var(--spacing-10) 0;
   }
 
+  /* Figma: Bg / Triangles (node 34690:86566) — 868x770 instance positioned at x=571
+     in the 1280 frame, so its right edge sits 159px PAST the content right edge.
+     Anchored relative to the centered content edge so it shifts right with viewport
+     width. Height fills the section (top:0 + bottom:0) and width derives from the
+     868:770 aspect ratio, which keeps the full triangle pattern visible at any
+     desktop section height instead of clipping the bottom.
+     159 is hardcoded — Figma right-overflow distance, no spacing token. */
+  .install-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: calc(50% - 640px - 159px);
+    aspect-ratio: 868 / 770;
+    background-image: url("/images/bg-square.png");
+    background-size: contain;
+    background-position: right top;
+    background-repeat: no-repeat;
+    pointer-events: none;
+    z-index: 0;
+  }
+
   /* ── Two-column layout ── */
   /* Figma: Top Hero = flex row, 1280px container with 40px padding = 1200px content */
   .install-block {
@@ -191,18 +216,21 @@ const aiLinks = [
     gap: var(--spacing-4);
   }
 
-  /* Figma: H1 = text-6xl (72px/72px) bold, foreground white */
+  /* Figma: H1 (node 34690:85314) = Inter Tight Bold, text-6xl (72px/72px), foreground white */
   .install-heading {
     margin: 0;
+    font-family: "Inter Tight", "Inter", system-ui, sans-serif;
     font-size: var(--text-6xl-size);
     font-weight: 700;
     line-height: var(--text-6xl-lh);
     color: var(--base-foreground);
   }
 
-  /* Figma: H5 = text-xl (20px/28px) light, muted-foreground */
+  /* Figma: H5 (node 34690:85316) = Inter Tight Light(300), text-xl (20px/28px),
+     muted-foreground */
   .install-tagline {
     margin: 0;
+    font-family: "Inter Tight", "Inter", system-ui, sans-serif;
     font-size: var(--text-xl-size);
     font-weight: 300;
     line-height: var(--text-xl-lh);
@@ -234,29 +262,35 @@ const aiLinks = [
     text-decoration: none;
     transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
     box-shadow: var(--shadow-xs);
-  }
-
-  /* Figma: Secondary variant — bg base/secondary(#303034), text base/secondary-foreground(#d4d4db) */
-  .install-actions .btn-github {
-    background: var(--base-secondary);
-    color: var(--base-secondary-foreground);
     border: none;
   }
 
-  .install-actions .btn-github:hover {
+  .install-actions .btn-icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+
+  /* Figma: Secondary variant — bg base/secondary(#303034), text base/secondary-foreground(#d4d4db) */
+  .install-actions .btn-secondary {
+    background: var(--base-secondary);
+    color: var(--base-secondary-foreground);
+  }
+
+  .install-actions .btn-secondary:hover {
     background: var(--base-secondary-hover);
     color: var(--base-foreground);
   }
 
-  /* Figma: Default variant — bg alpha/white-16, border 1px base/foreground, text base/foreground */
-  .install-actions .btn-docs {
+  /* Figma: AI Kit variant — bg alpha/white-16, text base/secondary-foreground(#d4d4db) */
+  .install-actions .btn-ai-kit {
     background: var(--alpha-white-16);
-    color: var(--base-foreground);
-    border: 1px solid var(--base-foreground);
+    color: var(--base-secondary-foreground);
   }
 
-  .install-actions .btn-docs:hover {
-    background: rgba(255, 255, 255, 0.24); /* Figma: no exact token — brighter than alpha-white-16 */
+  .install-actions .btn-ai-kit:hover {
+    background: rgba(255, 255, 255, 0.24); /* Not in Figma — brighter than alpha-white-16 for hover feedback */
+    color: var(--base-foreground);
   }
 
   /* ── Open with row ── */
@@ -270,9 +304,10 @@ const aiLinks = [
     justify-content: center;
   }
 
-  /* Figma: P = text-base(16/24) medium, foreground */
+  /* Figma: P (node 34690:85321) = Inter Tight Medium, text-base(16/24), foreground */
   .open-with-label {
     color: var(--base-foreground);
+    font-family: "Inter Tight", "Inter", system-ui, sans-serif;
     font-size: var(--text-base-size);
     font-weight: 500;
     line-height: var(--text-base-lh);
@@ -386,8 +421,9 @@ const aiLinks = [
   .ai-icon[data-icon="grok"] { background-image: url("/images/ai-icons/grok.png"); background-color: white; }
 
   /* ── Right column ── */
-  /* Figma: flex-1, flex-col, gap spacing-6(24), items center, centered vertically, bg image.
-     500px height matches install-left — one-off layout dimension */
+  /* Figma: flex-1, flex-col, gap spacing-6(24), items center, centered vertically.
+     500px height matches install-left — one-off layout dimension.
+     Background pattern lives on .install-section::before, not here. */
   .install-right {
     flex: 1;
     display: flex;
@@ -396,20 +432,6 @@ const aiLinks = [
     justify-content: center;
     gap: var(--spacing-6);
     height: 500px;
-    background-image: url("/images/bg-pubky-sdk.png");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
-
-  /* Figma: H3 = text-2xl(24/32) bold, foreground, center */
-  .install-title {
-    margin: 0;
-    font-size: var(--text-2xl-size);
-    font-weight: 700;
-    line-height: var(--text-2xl-lh);
-    color: var(--base-foreground);
-    text-align: center;
   }
 
   /* ── Terminal ── */
@@ -559,18 +581,28 @@ const aiLinks = [
   /* Figma: Mobile 390px — hero stacks vertically, heading 60px/1, buttons keep 60px height flex-1, 24px side padding.
      Breakpoint raised to 1050px — at 768px the two columns are too cramped */
   @media (max-width: 1049px) {
-    /* Mobile: stop 100vw breakout, respect content-panel padding */
+    /* Figma Mobile: install-section spans full viewport width so the Bg / Triangles
+       pattern sits flush at viewport edges. Use an explicit negative content
+       padding (matches the home-content breakout below — see AGENTS.md invariant)
+       so the layouts stay symmetric. overflow: visible lets the bg extend past
+       the section bottom into the gap above Quick Start; html { overflow-x: hidden }
+       still clips the 70px horizontal overhang. */
     .install-section {
-      width: auto;
-      margin-left: 0;
+      width: 100vw;
+      margin-left: calc(var(--sl-content-pad-x) * -1);
+      margin-bottom: var(--spacing-20);
       padding: 0;
-      overflow: hidden;
+      overflow: visible;
     }
 
+    /* Figma Mobile: Top Hero flex-col gap-12(48) between the AI block (left col)
+       and the SDK block. install-block re-adds spacing-6 (24px) horizontal
+       padding so hero content stays within the 342px content width aligned
+       with the home sections below (which inherit the same Starlight padding). */
     .install-block {
       flex-direction: column;
-      gap: var(--spacing-6);
-      padding: 0;
+      gap: var(--spacing-12);
+      padding: 0 var(--spacing-6);
     }
 
     .install-left {
@@ -578,14 +610,31 @@ const aiLinks = [
       height: auto;
     }
 
-    /* Figma Mobile: SDK section needs vertical padding so circle bg is fully visible.
-       min-height prevents the bg from being cropped in the stacked layout */
+    /* Figma Mobile (node 34784:60725): the SDK block has py-4(16), and its
+       Content frame contains an empty Typography/H3 placeholder (32px) plus
+       gap-6(24) above the terminal. We don't render the H3, so absorb its
+       space into padding-top: 16 + 32 + 24 = 72px. */
     .install-right {
-      padding: var(--spacing-20) 0;
+      padding: calc(var(--spacing-4) + var(--spacing-8) + var(--spacing-6)) 0
+        var(--spacing-4);
       height: auto;
-      min-height: 500px;
       align-items: center;
       width: 100%;
+    }
+
+    /* Figma Mobile (node 34784:61327): Bg / Triangles at x=0, y=608, 460x407 in
+       the 390x844 viewport. The pattern's bottom (y=1015) sits 127px past the
+       Top Hero bottom (y=888), which we replicate via bottom: -127px — the bottom
+       127px of the pattern overflows past .install-section and is clipped by
+       overflow:hidden, leaving the top 280px visible. This also keeps the bg's
+       top edge below the AI section so it doesn't overlap the Prompt button. */
+    .install-section::before {
+      top: auto;
+      bottom: -127px;
+      left: 0;
+      right: auto;
+      width: 460px;
+      height: 407px;
     }
 
     /* Figma: Mobile H1 = responsive size, bold, leading-none */
@@ -595,15 +644,22 @@ const aiLinks = [
       overflow-wrap: break-word;
     }
 
-    /* Figma: Mobile buttons = same 60px height, flex-1 each, gap spacing-4(16) */
+    /* Figma Mobile: Buttons stack as 2-up grid for GitHub+Human Docs, then AI Kit full-width.
+       Row gap spacing-6(24), column gap spacing-6(24) */
     .install-actions {
-      gap: var(--spacing-4);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-6);
     }
 
     .install-actions .btn {
-      flex: 1;
-      padding: var(--spacing-5) var(--spacing-5);
+      padding: var(--spacing-5) var(--spacing-4);
       white-space: nowrap;
+    }
+
+    /* Figma: AI Kit spans both columns on mobile */
+    .install-actions .btn-ai-kit {
+      grid-column: 1 / -1;
     }
 
     .terminal {
