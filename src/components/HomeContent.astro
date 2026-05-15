@@ -4,55 +4,26 @@ import TextCard from "./TextCard.astro";
 import ImageCard from "./ImageCard.astro";
 import DemoCard from "./DemoCard.astro";
 
-// Figma: Demos (node 34702:87731) — Hackathon projects, 12 cards
+// Figma: Demos (node 34702:87731) — Hackathon projects, 11 cards
 const demos = [
+  {
+    title: "mypubky",
+    description:
+      "A useful and clean public pubky profile card people can use anywhere for discovery, shareability (link in bio), brand presence, and aquisition.",
+    actions: [
+      { label: "Live Demo", href: "https://mypubky.com/", variant: "secondary" as const },
+      {
+        label: "Read More",
+        href: "https://github.com/pubky/mypubky",
+        variant: "outline" as const,
+      },
+    ],
+  },
   {
     title: "Payky",
     description:
       "A linktree like page for payments, based on PayKit, where the user can connect using Pubky Ring and add their payment details (crypto, fiat etc.) and share a link to the page with anyone.",
     actions: [{ label: "Live Demo", href: "https://payky.app/", variant: "secondary" as const }],
-  },
-  {
-    title: "bitkit-cli launch",
-    description:
-      "A CLI for BTC/LN wallet operations—extending Bitkit’s core features to AI agents and power users.",
-    actions: [{ label: "Live Demo", href: "https://bitkit.run/", variant: "secondary" as const }],
-  },
-  {
-    title: "SoundVault",
-    description:
-      "A Pubky feature that makes your music library portable and yours—shareable across apps, powering recommendations, and rewarding you when it drives sales.",
-    actions: [
-      {
-        label: "Read More",
-        href: "https://github.com/pubky/pubky-app/tree/2026-hackathon-music-library",
-        variant: "outline" as const,
-      },
-    ],
-  },
-  {
-    title: "Bitkit Usage Proofs",
-    description:
-      "Bitkit usage proofs: a tiny, opt-in system that converts real wallet actions into shareable, Pubky-linked proof-of-usage artifacts.",
-    actions: [
-      {
-        label: "Read More",
-        href: "https://github.com/synonymdev/bitkit-android/tree/hackathon/bitkit-badges",
-        variant: "outline" as const,
-      },
-    ],
-  },
-  {
-    title: "We call it control",
-    description:
-      "“We call it control” is a short campaign video using real data to expose censorship and drive users to Pubky.",
-    actions: [
-      {
-        label: "Read More",
-        href: "https://drive.google.com/drive/folders/1EWExQ7vKwvgMDPuPkIMXeXlYqYe3t9UZ",
-        variant: "outline" as const,
-      },
-    ],
   },
   {
     title: "ABC",
@@ -66,52 +37,20 @@ const demos = [
       },
       {
         label: "Read More",
-        href: "https://github.com/ok300/abc-prague-hugo",
+        href: "https://github.com/aintnostressin/abc-team-hackathon-prague",
         variant: "outline" as const,
       },
     ],
   },
   {
-    title: "Bitcoin Depression",
+    title: "Mapky",
     description:
-      "A simple personality quiz platform that routes users to either bitkit or pubky and thorws a shareable results to drive virality",
+      "A Pubky-powered social layer for OpenStreetMap with place reviews, posts, routes, collections, and geo-captures stored as user-owned data.",
     actions: [
+      { label: "Live Demo", href: "https://mapky.app/", variant: "secondary" as const },
       {
         label: "Read More",
-        href: "http://www.bitcoindepression.com/",
-        variant: "outline" as const,
-      },
-    ],
-  },
-  {
-    title: "Invite a Friend",
-    description:
-      "“Invite a friend” with a clean share link. Limit: 2/week per user, with basic tracking to prevent spam. Invited accounts can be auto-tagged as “human” or “vouched for.”",
-    actions: [
-      {
-        label: "Read More",
-        href: "https://github.com/pubky/pubky-app/tree/catch-21/hackathon",
-        variant: "outline" as const,
-      },
-    ],
-  },
-  {
-    title: "No Registry",
-    description:
-      "PKDNS uses BitTorrent’s DHT—no registrars, no central control. Addresses come from your key. Think IPFS, but simpler.\nQuick setup via Pi-hole or Docker in under 10 minutes.",
-    actions: [
-      { label: "Read More", href: "https://www.noregistry.com/", variant: "outline" as const },
-    ],
-  },
-  {
-    title: "mypubky",
-    description:
-      "A useful and clean public pubky profile card people can use anywhere for discovery, shareability (link in bio), brand presence, and aquisition.",
-    actions: [
-      { label: "Live Demo", href: "https://mypubky.com/", variant: "secondary" as const },
-      {
-        label: "Read More",
-        href: "https://github.com/synonymdev/mypubky",
+        href: "https://github.com/gillohner/mapky-app",
         variant: "outline" as const,
       },
     ],
@@ -131,6 +70,68 @@ const demos = [
         href: "https://github.com/SeverinAlexB/pubky-passport-prague26",
         variant: "outline" as const,
       },
+    ],
+  },
+  {
+    title: "Explorer",
+    description: "A file explorer that allows you to navigate data stored on your Homeserver.",
+    actions: [
+      { label: "Live Demo", href: "https://explorer.pubky.app/", variant: "secondary" as const },
+      {
+        label: "Read More",
+        href: "https://github.com/pubky/pubky-explorer",
+        variant: "outline" as const,
+      },
+    ],
+  },
+  {
+    title: "Eventky",
+    description:
+      "A decentralized social calendar and event management platform built on Pubky, using existing calendar standards for event discovery and scheduling.",
+    actions: [
+      { label: "Live Demo", href: "https://eventky.app/", variant: "secondary" as const },
+      {
+        label: "Read More",
+        href: "https://github.com/gillohner/eventky",
+        variant: "outline" as const,
+      },
+    ],
+  },
+  {
+    title: "PKDNS",
+    description: "A DNS server providing self-sovereign and censorship-resistant domain names.",
+    actions: [
+      { label: "Live Demo", href: "https://pkdns.net/", variant: "secondary" as const },
+      {
+        label: "Read More",
+        href: "https://github.com/pubky/pkdns",
+        variant: "outline" as const,
+      },
+    ],
+  },
+  {
+    title: "PubkyLab",
+    description:
+      "An interactive web-based playground for testing and experimenting with the Pubky SDK.",
+    actions: [
+      {
+        label: "Live Demo",
+        href: "https://jvsena42.github.io/pubky-lab/",
+        variant: "secondary" as const,
+      },
+      {
+        label: "Read More",
+        href: "https://github.com/jvsena42/pubky-lab",
+        variant: "outline" as const,
+      },
+    ],
+  },
+  {
+    title: "No Registry",
+    description:
+      "PKDNS uses BitTorrent’s DHT—no registrars, no central control. Addresses come from your key. Think IPFS, but simpler.\nQuick setup via Pi-hole or Docker in under 10 minutes.",
+    actions: [
+      { label: "Read More", href: "https://www.noregistry.com/", variant: "outline" as const },
     ],
   },
   {
