@@ -9,7 +9,7 @@ const demos = [
   {
     title: "mypubky",
     description:
-      "A useful and clean public pubky profile card people can use anywhere for discovery, shareability (link in bio), brand presence, and aquisition.",
+      "A shareable identity card that brings your Pubky identifier, avatar, bio, links, posts, profile tags, and Paykit-powered donation options into one visual page.",
     actions: [
       { label: "Live Demo", href: "https://mypubky.com/", variant: "secondary" as const },
       {
@@ -22,13 +22,13 @@ const demos = [
   {
     title: "Payky",
     description:
-      "A linktree like page for payments, based on PayKit, where the user can connect using Pubky Ring and add their payment details (crypto, fiat etc.) and share a link to the page with anyone.",
+      "A linktree like page for payments, based on Paykit, where the user can connect using Pubky Ring and add their payment details (crypto, fiat etc.) and share a link to the page with anyone.",
     actions: [{ label: "Live Demo", href: "https://payky.app/", variant: "secondary" as const }],
   },
   {
     title: "ABC",
     description:
-      "Drop-In Pubky Comment Widget for Blogs\n\nSimple embeddable script that allows blogs to add Pubky-based comments.",
+      "Drop-In Pubky Comment Widget for Blogs\n\nSimple embeddable script that lets any website add Pubky-based comments.",
     actions: [
       {
         label: "Live Demo",
@@ -45,7 +45,7 @@ const demos = [
   {
     title: "Mapky",
     description:
-      "A Pubky-powered social layer for OpenStreetMap with place reviews, posts, routes, collections, and geo-captures stored as user-owned data.",
+      "A social layer for OpenStreetMap with place reviews, posts, routes, collections, and geo-captures stored as user-owned data.",
     actions: [
       { label: "Live Demo", href: "https://mapky.app/", variant: "secondary" as const },
       {
@@ -56,9 +56,9 @@ const demos = [
     ],
   },
   {
-    title: "Pubky Passport",
+    title: "Passport",
     description:
-      "Secure Google login for Pubky with non-custodial keys in Google Drive—simplifying onboarding, sybil checks, and backups.",
+      "Pubky Passport uses Google login to create or access an encrypted Pubky key in Google Drive, where neither Google nor the Pubky Passport server can decrypt it alone.",
     actions: [
       {
         label: "Live Demo",
@@ -87,7 +87,7 @@ const demos = [
   {
     title: "Eventky",
     description:
-      "A decentralized social calendar and event management platform built on Pubky, using existing calendar standards for event discovery and scheduling.",
+      "A social calendar and event management app using existing calendar standards, with event data stored on each user’s homeserver.",
     actions: [
       { label: "Live Demo", href: "https://eventky.app/", variant: "secondary" as const },
       {
@@ -99,7 +99,8 @@ const demos = [
   },
   {
     title: "PKDNS",
-    description: "A DNS server providing self-sovereign and censorship-resistant domain names.",
+    description:
+      "A DNS server providing self-sovereign and censorship-resistant domain names based on PKARR.",
     actions: [
       { label: "Live Demo", href: "https://pkdns.net/", variant: "secondary" as const },
       {
@@ -128,8 +129,7 @@ const demos = [
   },
   {
     title: "No Registry",
-    description:
-      "PKDNS uses BitTorrent’s DHT—no registrars, no central control. Addresses come from your key. Think IPFS, but simpler.\nQuick setup via Pi-hole or Docker in under 10 minutes.",
+    description: "Self-host PKDNS in under 10 minutes with a simple Pi-hole or Docker setup.",
     actions: [
       { label: "Read More", href: "https://www.noregistry.com/", variant: "outline" as const },
     ],
@@ -137,7 +137,7 @@ const demos = [
   {
     title: "Echo",
     description:
-      "Echo is a modern flashcard app with fast storage and seamless cross-device sync—powered by Pubky, completely free.",
+      "A modern mobile flashcard app where your decks live on your homeserver and sync across devices.",
     actions: [
       {
         label: "Read More",
