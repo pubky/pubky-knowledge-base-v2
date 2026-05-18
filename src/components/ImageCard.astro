@@ -8,12 +8,16 @@ interface Props {
   links?: { label: string; href: string; external?: boolean }[];
 }
 
+import { withBase } from '../utils/base-path';
+
 const { title, titleIcon, description, image, tags = [], links = [] } = Astro.props;
+const imageSrc = withBase(image);
+const hrefFor = (href: string, external = href.startsWith('http')) => external ? href : withBase(href);
 ---
 
 <div class="image-card">
   <div class="image-card-thumbnail">
-    <img src={image} alt={title} loading="lazy" />
+    <img src={imageSrc} alt={title} loading="lazy" />
   </div>
   <div class="image-card-content">
     <h3 class="image-card-title">
@@ -24,7 +28,7 @@ const { title, titleIcon, description, image, tags = [], links = [] } = Astro.pr
     {tags.length > 0 && (
       <div class="image-card-tags">
         {tags.map((tag) => (
-          <a href={tag.href} class="image-card-tag">{tag.label}</a>
+          <a href={hrefFor(tag.href)} class="image-card-tag">{tag.label}</a>
         ))}
       </div>
     )}
@@ -32,7 +36,7 @@ const { title, titleIcon, description, image, tags = [], links = [] } = Astro.pr
       <div class="image-card-links">
         {links.map((link) => (
           <a
-            href={link.href}
+            href={hrefFor(link.href, link.external)}
             class="image-card-link"
             target={link.external ? "_blank" : undefined}
             rel={link.external ? "noopener noreferrer" : undefined}

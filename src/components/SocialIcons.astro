@@ -5,15 +5,16 @@
  * Order: GitHub, YouTube, X, Telegram — matching Figma header layout.
  */
 import config from 'virtual:starlight/user-config';
+import { withBase } from '../utils/base-path';
 
 const links = config.social || [];
 
 /* Map Starlight icon names to Figma-exported SVG paths */
 const iconFiles: Record<string, string> = {
-  github: '/images/icons/github.svg',
-  youtube: '/images/icons/youtube.svg',
-  'x.com': '/images/icons/x.svg',
-  telegram: '/images/icons/telegram.svg',
+  github: withBase('/images/icons/github.svg'),
+  youtube: withBase('/images/icons/youtube.svg'),
+  'x.com': withBase('/images/icons/x.svg'),
+  telegram: withBase('/images/icons/telegram.svg'),
 };
 ---
 
