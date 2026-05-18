@@ -2,9 +2,9 @@
 import EditLink from 'virtual:starlight/components/EditLink';
 import LastUpdated from 'virtual:starlight/components/LastUpdated';
 import Pagination from 'virtual:starlight/components/Pagination';
+import { docsMarkdownPath } from '../utils/base-path';
 
-const pathname = Astro.url.pathname.replace(/\/$/, '');
-const mdUrl = pathname ? `${pathname}.md` : null;
+const mdUrl = docsMarkdownPath(Astro.url.pathname);
 ---
 
 <footer class="sl-flex">

@@ -3,6 +3,7 @@ import InstallBlock from "./InstallBlock.astro";
 import TextCard from "./TextCard.astro";
 import ImageCard from "./ImageCard.astro";
 import DemoCard from "./DemoCard.astro";
+import { withBase } from "../utils/base-path";
 
 // Figma: Demos (node 34702:87731) — Hackathon projects, 11 cards
 const demos = [
@@ -149,8 +150,8 @@ const demos = [
 ];
 
 // Figma: pubky.app icon = green brand mark, Pubky Ring/Core/Apps icon = white brand mark
-const pubkyBrandGreen = '<img src="/images/icons/pubky-brand.svg" height="22" alt="" />';
-const pubkyBrandWhite = '<img src="/images/icons/pubky-brand-white.svg" height="22" alt="" />';
+const pubkyBrandGreen = `<img src="${withBase('/images/icons/pubky-brand.svg')}" height="22" alt="" />`;
+const pubkyBrandWhite = `<img src="${withBase('/images/icons/pubky-brand-white.svg')}" height="22" alt="" />`;
 
 // Icon file paths — all exported from Figma as SVGs
 const icons = {
@@ -332,7 +333,7 @@ const icons = {
           <span class="community-link-tail">
             <span class="community-link-desc">Try the decentralized social media app.</span>
             <span class="community-link-arrow" aria-hidden="true">
-              <img src="/images/icons/arrow-right.svg" alt="" width="20" height="20" />
+              <img src={withBase('/images/icons/arrow-right.svg')} alt="" width="20" height="20" />
             </span>
           </span>
         </a>
@@ -343,7 +344,7 @@ const icons = {
           <span class="community-link-tail">
             <span class="community-link-desc">Join the community chat.</span>
             <span class="community-link-arrow" aria-hidden="true">
-              <img src="/images/icons/arrow-right.svg" alt="" width="20" height="20" />
+              <img src={withBase('/images/icons/arrow-right.svg')} alt="" width="20" height="20" />
             </span>
           </span>
         </a>
@@ -354,18 +355,18 @@ const icons = {
           <span class="community-link-tail">
             <span class="community-link-desc">Source code and repositories.</span>
             <span class="community-link-arrow" aria-hidden="true">
-              <img src="/images/icons/arrow-right.svg" alt="" width="20" height="20" />
+              <img src={withBase('/images/icons/arrow-right.svg')} alt="" width="20" height="20" />
             </span>
           </span>
         </a>
       </li>
       <li>
-        <a href="/contributing/" class="community-link">
+        <a href={withBase('/contributing/')} class="community-link">
           <span class="community-link-title">Contributing</span>
           <span class="community-link-tail">
             <span class="community-link-desc">How to contribute to Pubky.</span>
             <span class="community-link-arrow" aria-hidden="true">
-              <img src="/images/icons/arrow-right.svg" alt="" width="20" height="20" />
+              <img src={withBase('/images/icons/arrow-right.svg')} alt="" width="20" height="20" />
             </span>
           </span>
         </a>
@@ -377,10 +378,10 @@ const icons = {
   <div class="home-footer">
     <div class="home-footer-brand">
       <a href="https://synonym.to" target="_blank" rel="noopener noreferrer" class="home-footer-link" aria-label="Synonym (opens in new tab)">
-        <img src="/images/synonym-logo.svg" alt="Synonym" height="24" />
+        <img src={withBase('/images/synonym-logo.svg')} alt="Synonym" height="24" />
       </a>
       <a href="https://tether.io" target="_blank" rel="noopener noreferrer" class="home-footer-link" aria-label="Tether (opens in new tab)">
-        <img src="/images/tether-company.svg" alt="a tether. company" height="16" />
+        <img src={withBase('/images/tether-company.svg')} alt="a tether. company" height="16" />
       </a>
     </div>
   </div>

@@ -7,21 +7,26 @@ interface Props {
   external?: boolean;
 }
 
+import { withBase } from '../utils/base-path';
+
 const { title, description, href, icon, external } = Astro.props;
 const isExternal = external ?? href.startsWith('http');
+const cardHref = isExternal ? href : withBase(href);
+const iconSrc = icon ? withBase(icon) : undefined;
+const arrowIcon = withBase('/images/icons/arrow-right.svg');
 ---
 
-<a href={href} class="text-card not-content" {...isExternal ? { target: "_blank", rel: "noopener noreferrer", "aria-label": `${title} (opens in new tab)` } : {}}>
+<a href={cardHref} class="text-card not-content" {...isExternal ? { target: "_blank", rel: "noopener noreferrer", "aria-label": `${title} (opens in new tab)` } : {}}>
   {icon && (
     <div class="text-card-icon-wrapper">
-      <img src={icon} alt="" aria-hidden="true" class="text-card-icon" />
+      <img src={iconSrc} alt="" aria-hidden="true" class="text-card-icon" />
     </div>
   )}
   <h3 class="text-card-title">{title}</h3>
   <p class="text-card-description">{description}</p>
   <!-- Figma: ArrowRight icon, right-aligned at bottom -->
   <div class="text-card-arrow">
-    <img src="/images/icons/arrow-right.svg" alt="" aria-hidden="true" width="20" height="20" />
+    <img src={arrowIcon} alt="" aria-hidden="true" width="20" height="20" />
   </div>
 </a>
 

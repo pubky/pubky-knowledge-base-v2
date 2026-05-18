@@ -1,4 +1,6 @@
 ---
+import { withBase } from '../utils/base-path';
+
 const commands = [
   { label: "npm", command: "npm install @synonymdev/pubky" },
   { label: "RN", command: "npm install @synonymdev/react-native-pubky" },
@@ -20,9 +22,12 @@ const aiLinks = [
   { name: "Gemini", url: "https://gemini.google.com/", icon: "gemini", tooltip: "Gemini: Autofill unsupported. Copy-paste manually." },
   { name: "Grok", url: `https://x.com/i/grok?text=${encodeURIComponent(aiPrompt)}`, icon: "grok" },
 ];
+
+const iconUrl = (icon: string) => `--ai-icon-url: url("${withBase(`/images/ai-icons/${icon}.png`)}")`;
+const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-square.png')}")`;
 ---
 
-<div class="install-section">
+<div class="install-section" style={installSectionBg}>
   <div class="install-block">
   <div class="install-left not-content">
     <div class="install-header">
@@ -32,15 +37,15 @@ const aiLinks = [
 
     <div class="install-actions">
       <a href="https://github.com/pubky/pubky-core" class="btn btn-secondary" target="_blank" rel="noopener noreferrer" aria-label="View on GitHub (opens in new tab)">
-        <img class="btn-icon" src="/images/icons/github.svg" width="16" height="16" alt="" aria-hidden="true" />
+        <img class="btn-icon" src={withBase('/images/icons/github.svg')} width="16" height="16" alt="" aria-hidden="true" />
         <span>GitHub</span>
       </a>
-      <a href="/overview/" class="btn btn-secondary" aria-label="Human Docs">
-        <img class="btn-icon" src="/images/user.svg" width="16" height="16" alt="" aria-hidden="true" />
+      <a href={withBase('/overview/')} class="btn btn-secondary" aria-label="Human Docs">
+        <img class="btn-icon" src={withBase('/images/user.svg')} width="16" height="16" alt="" aria-hidden="true" />
         <span>Human Docs</span>
       </a>
       <a href="https://github.com/pubky/pubky-ai-kit/blob/main/pubky-dev-context.md" class="btn btn-ai-kit" target="_blank" rel="noopener noreferrer" aria-label="AI Kit (opens in new tab)">
-        <img class="btn-icon" src="/images/icons/file.svg" width="16" height="16" alt="" aria-hidden="true" />
+        <img class="btn-icon" src={withBase('/images/icons/file.svg')} width="16" height="16" alt="" aria-hidden="true" />
         <span>AI Kit</span>
       </a>
     </div>
@@ -50,12 +55,12 @@ const aiLinks = [
       <div class="open-with-links">
         {aiLinks.map((link) => (
           <a href={link.url} target="_blank" rel="noopener noreferrer" class="open-with-btn" aria-label={`Open with ${link.name} (opens in new tab)`} data-tooltip={link.tooltip ?? link.name}>
-            <span class="ai-icon" data-icon={link.icon} aria-hidden="true"></span>
+            <span class="ai-icon" data-icon={link.icon} aria-hidden="true" style={iconUrl(link.icon)}></span>
           </a>
         ))}
         <button class="copy-prompt-btn" aria-label="Copy prompt to clipboard" data-tooltip="Copy prompt" data-prompt={aiPrompt}>
           <span class="copy-prompt-label">Prompt</span>
-          <img class="copy-prompt-icon" src="/images/icons/line-copy.svg" width="16" height="16" alt="" aria-hidden="true" />
+          <img class="copy-prompt-icon" src={withBase('/images/icons/line-copy.svg')} width="16" height="16" alt="" aria-hidden="true" />
           <svg class="copy-prompt-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#28c840" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <polyline points="20 6 9 17 4 12"></polyline>
           </svg>
@@ -176,7 +181,7 @@ const aiLinks = [
     bottom: 0;
     right: calc(50% - 640px - 159px);
     aspect-ratio: 868 / 770;
-    background-image: url("/images/bg-square.png");
+    background-image: var(--install-section-bg);
     background-size: contain;
     background-position: right top;
     background-repeat: no-repeat;
@@ -413,12 +418,9 @@ const aiLinks = [
     border-radius: var(--radius-sm);
   }
 
-  .ai-icon[data-icon="claude"] { background-image: url("/images/ai-icons/claude.png"); }
-  .ai-icon[data-icon="chatgpt"] { background-image: url("/images/ai-icons/chatgpt.png"); }
-  .ai-icon[data-icon="cursor"] { background-image: url("/images/ai-icons/cursor.png"); }
-  .ai-icon[data-icon="gemini"] { background-image: url("/images/ai-icons/gemini.png"); }
+  .ai-icon { background-image: var(--ai-icon-url); }
   /* Figma: Grok logo has white background unlike others which have it baked into the image */
-  .ai-icon[data-icon="grok"] { background-image: url("/images/ai-icons/grok.png"); background-color: white; }
+  .ai-icon[data-icon="grok"] { background-color: white; }
 
   /* ── Right column ── */
   /* Figma: flex-1, flex-col, gap spacing-6(24), items center, centered vertically.
