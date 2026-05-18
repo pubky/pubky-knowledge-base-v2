@@ -1,8 +1,6 @@
-/* Inter font */
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
-/* Inter Tight — Figma Website/h4 + Website/Body S typography (Demo cards),
-   plus Light(300) for the install-section H5 tagline */
-@import url("https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;600;700&display=swap");
+/* Inter (base) + Inter Tight (Figma Website/h4 + Website/Body S for Demo cards;
+   Light 300 for install-section H5 tagline) — merged into one request. */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@300;400;600;700&display=swap");
 
 /* Pubky brand dark theme */
 :root {
