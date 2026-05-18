@@ -2,10 +2,12 @@
 import InstallBlock from "./InstallBlock.astro";
 import TextCard from "./TextCard.astro";
 import ImageCard from "./ImageCard.astro";
+import { withBase } from "../utils/base-path";
 
 // Figma: pubky.app icon = green brand mark, Pubky Ring/Core/Apps icon = white brand mark
-const pubkyBrandGreen = '<img src="/images/icons/pubky-brand.svg" height="22" alt="" />';
-const pubkyBrandWhite = '<img src="/images/icons/pubky-brand-white.svg" height="22" alt="" />';
+const pubkyBrandGreen = `<img src="${withBase('/images/icons/pubky-brand.svg')}" height="22" alt="" />`;
+const pubkyBrandWhite = `<img src="${withBase('/images/icons/pubky-brand-white.svg')}" height="22" alt="" />`;
+const homeBgTriangle = `--home-bg-triangle: url("${withBase('/images/bg-triangle.png')}")`;
 
 // Icon file paths — all exported from Figma as SVGs
 const icons = {
@@ -29,7 +31,7 @@ const icons = {
 
 <InstallBlock />
 
-<div class="home-content not-content">
+<div class="home-content not-content" style={homeBgTriangle}>
   <!-- Quick Start -->
   <section class="home-section">
     <h2 class="home-section-title">Quick Start</h2>
@@ -201,10 +203,10 @@ const icons = {
   <div class="home-footer">
     <div class="home-footer-brand">
       <a href="https://synonym.to" target="_blank" rel="noopener noreferrer" class="home-footer-link" aria-label="Synonym (opens in new tab)">
-        <img src="/images/synonym-logo.svg" alt="Synonym" height="24" />
+        <img src={withBase('/images/synonym-logo.svg')} alt="Synonym" height="24" />
       </a>
       <a href="https://tether.io" target="_blank" rel="noopener noreferrer" class="home-footer-link" aria-label="Tether (opens in new tab)">
-        <img src="/images/tether-company.svg" alt="a tether. company" height="16" />
+        <img src={withBase('/images/tether-company.svg')} alt="a tether. company" height="16" />
       </a>
     </div>
   </div>
@@ -344,7 +346,7 @@ const icons = {
     transform: translateX(-567px);
     width: 1370px;
     height: 1134px;
-    background-image: url("/images/bg-triangle.png");
+    background-image: var(--home-bg-triangle);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;

@@ -10,14 +10,15 @@
 import config from 'virtual:starlight/user-config';
 import Search from 'virtual:starlight/components/Search';
 import SocialIcons from 'virtual:starlight/components/SocialIcons';
+import { withBase } from '../utils/base-path';
 
 const shouldRenderSearch =
   config.pagefind || config.components.Search !== '@astrojs/starlight/components/Search.astro';
 ---
 
 <div class="navbar not-content">
-  <a href="/" class="navbar-logo">
-    <img src="/images/pubky-core-logo.svg" alt="Pubky Core" width="172" height="36" />
+  <a href={withBase('/')} class="navbar-logo">
+    <img src={withBase('/images/pubky-core-logo.svg')} alt="Pubky Core" width="172" height="36" />
   </a>
   <div class="navbar-search">
     {shouldRenderSearch && <Search />}

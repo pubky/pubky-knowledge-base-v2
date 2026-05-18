@@ -3,6 +3,7 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import starlightClientMermaid from '@pasqal-io/starlight-client-mermaid';
 import starlightLlmsTxt from 'starlight-llms-txt';
+import rehypeBasePath from './plugins/rehype-base-path.mjs';
 import remarkSnippet from './plugins/remark-snippet.mjs';
 
 // https://astro.build/config
@@ -11,6 +12,7 @@ export default defineConfig({
 	base: process.env.BASE_PATH || '/',
 	markdown: {
 		remarkPlugins: [remarkSnippet],
+		rehypePlugins: [[rehypeBasePath, { base: process.env.BASE_PATH || '/' }]],
 	},
 	integrations: [
 		starlight({
