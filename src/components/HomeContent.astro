@@ -2,12 +2,156 @@
 import InstallBlock from "./InstallBlock.astro";
 import TextCard from "./TextCard.astro";
 import ImageCard from "./ImageCard.astro";
+import DemoCard from "./DemoCard.astro";
 import { withBase } from "../utils/base-path";
+
+// Figma: Demos (node 34702:87731) — Hackathon projects, 11 cards
+const demos = [
+  {
+    title: "mypubky",
+    description:
+      "A shareable identity card that brings your Pubky identifier, avatar, bio, links, posts, profile tags, and Paykit-powered donation options into one visual page.",
+    actions: [
+      { label: "Live Demo", href: "https://mypubky.com/", variant: "secondary" as const },
+      {
+        label: "Read More",
+        href: "https://github.com/pubky/mypubky",
+        variant: "outline" as const,
+      },
+    ],
+  },
+  {
+    title: "Payky",
+    description:
+      "A linktree like page for payments, based on Paykit, where the user can connect using Pubky Ring and add their payment details (crypto, fiat etc.) and share a link to the page with anyone.",
+    actions: [{ label: "Live Demo", href: "https://payky.app/", variant: "secondary" as const }],
+  },
+  {
+    title: "ABC",
+    description:
+      "Drop-In Pubky Comment Widget for Blogs\n\nSimple embeddable script that lets any website add Pubky-based comments.",
+    actions: [
+      {
+        label: "Live Demo",
+        href: "https://ok300.github.io/abc-prague-hugo/posts/abc-launch/",
+        variant: "secondary" as const,
+      },
+      {
+        label: "Read More",
+        href: "https://github.com/aintnostressin/abc-team-hackathon-prague",
+        variant: "outline" as const,
+      },
+    ],
+  },
+  {
+    title: "Mapky",
+    description:
+      "A social layer for OpenStreetMap with place reviews, posts, routes, collections, and geo-captures stored as user-owned data.",
+    actions: [
+      { label: "Live Demo", href: "https://mapky.app/", variant: "secondary" as const },
+      {
+        label: "Read More",
+        href: "https://github.com/gillohner/mapky-app",
+        variant: "outline" as const,
+      },
+    ],
+  },
+  {
+    title: "Passport",
+    description:
+      "Pubky Passport uses Google login to create or access an encrypted Pubky key in Google Drive, where neither Google nor the Pubky Passport server can decrypt it alone.",
+    actions: [
+      {
+        label: "Live Demo",
+        href: "https://passport.buhlerlabs.com",
+        variant: "secondary" as const,
+      },
+      {
+        label: "Read More",
+        href: "https://github.com/SeverinAlexB/pubky-passport-prague26",
+        variant: "outline" as const,
+      },
+    ],
+  },
+  {
+    title: "Explorer",
+    description: "A file explorer that allows you to navigate data stored on your Homeserver.",
+    actions: [
+      { label: "Live Demo", href: "https://explorer.pubky.app/", variant: "secondary" as const },
+      {
+        label: "Read More",
+        href: "https://github.com/pubky/pubky-explorer",
+        variant: "outline" as const,
+      },
+    ],
+  },
+  {
+    title: "Eventky",
+    description:
+      "A social calendar and event management app using existing calendar standards, with event data stored on each user’s homeserver.",
+    actions: [
+      { label: "Live Demo", href: "https://eventky.app/", variant: "secondary" as const },
+      {
+        label: "Read More",
+        href: "https://github.com/gillohner/eventky",
+        variant: "outline" as const,
+      },
+    ],
+  },
+  {
+    title: "PKDNS",
+    description:
+      "A DNS server providing self-sovereign and censorship-resistant domain names based on PKARR.",
+    actions: [
+      { label: "Live Demo", href: "https://pkdns.net/", variant: "secondary" as const },
+      {
+        label: "Read More",
+        href: "https://github.com/pubky/pkdns",
+        variant: "outline" as const,
+      },
+    ],
+  },
+  {
+    title: "PubkyLab",
+    description:
+      "An interactive web-based playground for testing and experimenting with the Pubky SDK.",
+    actions: [
+      {
+        label: "Live Demo",
+        href: "https://jvsena42.github.io/pubky-lab/",
+        variant: "secondary" as const,
+      },
+      {
+        label: "Read More",
+        href: "https://github.com/jvsena42/pubky-lab",
+        variant: "outline" as const,
+      },
+    ],
+  },
+  {
+    title: "No Registry",
+    description: "Self-host PKDNS in under 10 minutes with a simple Pi-hole or Docker setup.",
+    actions: [
+      { label: "Read More", href: "https://www.noregistry.com/", variant: "outline" as const },
+    ],
+  },
+  {
+    title: "Echo",
+    description:
+      "A modern mobile flashcard app where your decks live on your homeserver and sync across devices.",
+    actions: [
+      {
+        label: "Read More",
+        href: "https://github.com/jvsena42/echo",
+        variant: "outline" as const,
+      },
+    ],
+  },
+];
 
 // Figma: pubky.app icon = green brand mark, Pubky Ring/Core/Apps icon = white brand mark
 const pubkyBrandGreen = `<img src="${withBase('/images/icons/pubky-brand.svg')}" height="22" alt="" />`;
 const pubkyBrandWhite = `<img src="${withBase('/images/icons/pubky-brand-white.svg')}" height="22" alt="" />`;
-const homeBgTriangle = `--home-bg-triangle: url("${withBase('/images/bg-triangle.png')}")`;
 
 // Icon file paths — all exported from Figma as SVGs
 const icons = {
@@ -21,20 +165,15 @@ const icons = {
   shieldOff: '/images/icons/shield-off.svg',
   arrowLeftRight: '/images/icons/arrow-left-right.svg',
   lineChart: '/images/icons/line-chart.svg',
-  // Community
-  pubkyBrand: '/images/icons/pubky-brand.svg',
-  send: '/images/icons/telegram.svg',
-  github: '/images/icons/github.svg',
-  contributing: '/images/icons/line-chart-community.svg',
 };
 ---
 
 <InstallBlock />
 
-<div class="home-content not-content" style={homeBgTriangle}>
+<div class="home-content not-content">
   <!-- Quick Start -->
   <section class="home-section">
-    <h2 class="home-section-title">Quick Start</h2>
+    <h2 class="home-section-title home-section-title-sm">Quick Start</h2>
     <div class="home-section-box">
     <div class="card-grid card-grid-4">
       <TextCard
@@ -71,28 +210,26 @@ const icons = {
       <h2 class="home-section-title">For Users</h2>
       <div class="card-grid card-grid-3">
         <ImageCard
-          title="pubky.app"
+          title="Pubky"
           titleIcon={pubkyBrandGreen}
-          description="Try the decentralized social media application."
           image="/images/cards/pubky.png"
-          links={[{ label: "View App", href: "https://pubky.app", external: true }]}
+          links={[{ label: "Join pubky.app", href: "https://pubky.app", external: true }]}
         />
         <ImageCard
-          title="Pubky Ring"
+          title="Pubky"
+          titleSuffix="Ring"
           titleIcon={pubkyBrandWhite}
-          description="Your keychain for the Pubky ecosystem."
           image="/images/cards/pubky-ring.png"
           links={[
-            { label: "Go to Website", href: "https://pubkyring.app/", external: true },
+            { label: "Website", href: "https://pubkyring.app/", external: true },
             { label: "Learn More", href: "/explore/technologies/pubky-ring/" },
           ]}
         />
         <ImageCard
           title="Pubky Explorer"
-          description="Browse public data stored on homeservers."
           image="/images/cards/pubky-explorer.png"
           links={[
-            { label: "Go to Website", href: "https://explorer.pubky.app", external: true },
+            { label: "Explore", href: "https://explorer.pubky.app", external: true },
             { label: "Learn More", href: "/explore/technologies/pubky-explorer/" },
           ]}
         />
@@ -105,7 +242,6 @@ const icons = {
         <ImageCard
           title="Pubky Core"
           titleIcon={pubkyBrandWhite}
-          description="Open protocol & infrastructure for censorship-resistant apps."
           image="/images/cards/pubky-core.png"
           tags={[
             { label: "SDK", href: "/explore/pubkycore/sdk/" },
@@ -125,7 +261,6 @@ const icons = {
         />
         <ImageCard
           title="Pubky Apps"
-          description="Build on the social layer."
           image="/images/cards/pubky-apps.png"
           tags={[
             { label: "Architecture", href: "/explore/pubky-apps/app-architectures/introduction/" },
@@ -138,7 +273,7 @@ const icons = {
   </div>
 
   <!-- Key Concepts -->
-  <section class="home-section">
+  <section class="home-section key-concepts">
     <h2 class="home-section-title">Key Concepts</h2>
     <div class="card-grid card-grid-4">
       <TextCard
@@ -168,35 +303,75 @@ const icons = {
     </div>
   </section>
 
-  <!-- Community -->
-  <section class="home-section">
-    <h2 class="home-section-title">Community</h2>
-    <div class="card-grid card-grid-4">
-      <TextCard
-        title="Join pubky.app"
-        description="Try the decentralized social media app."
-        href="https://pubky.app"
-        icon={icons.pubkyBrand}
-      />
-      <TextCard
-        title="Telegram"
-        description="Join the community chat."
-        href="https://t.me/pubkycore"
-        icon={icons.send}
-      />
-      <TextCard
-        title="Github"
-        description="Source code and repositories."
-        href="https://github.com/pubky"
-        icon={icons.github}
-      />
-      <TextCard
-        title="Contributing"
-        description="How to contribute to Pubky"
-        href="/contributing/"
-        icon={icons.contributing}
-      />
+  <!-- Demos — Figma node 34702:87731 -->
+  <section class="home-section demos">
+    <div class="demos-header">
+      <h2 class="home-section-title">Demos</h2>
+      <p class="demos-subtitle">Try some proof of concepts built on Pubky Core. What will you create?</p>
     </div>
+    <div class="card-grid card-grid-4 demos-grid">
+      {demos.map((demo) => (
+        <DemoCard title={demo.title} description={demo.description} actions={demo.actions} />
+      ))}
+    </div>
+  </section>
+
+  <!-- Figma: Join our Community (node 34690:85373) — two-column 50/50 with 48px gap.
+       Left column = centered title + arrow line. Right column = 4 link rows separated by hairlines. -->
+  <section class="home-section community-section">
+    <div class="community-title-col">
+      <h2 class="community-title">Join our Community</h2>
+      {/* Figma: 304px arrow line below title (Vector 21 in node 34690:87121) */}
+      <svg class="community-title-arrow" width="304" height="22" viewBox="0 0 304 22" fill="none" aria-hidden="true">
+        <path d="M0 11H302M302 11L292 1M302 11L292 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </div>
+    <ul class="community-links">
+      <li>
+        <a href="https://pubky.app" target="_blank" rel="noopener noreferrer" class="community-link" aria-label="Join Pubky.app (opens in new tab)">
+          <span class="community-link-title">Join Pubky.app</span>
+          <span class="community-link-tail">
+            <span class="community-link-desc">Try the decentralized social media app.</span>
+            <span class="community-link-arrow" aria-hidden="true">
+              <img src={withBase('/images/icons/arrow-right.svg')} alt="" width="20" height="20" />
+            </span>
+          </span>
+        </a>
+      </li>
+      <li>
+        <a href="https://t.me/pubkycore" target="_blank" rel="noopener noreferrer" class="community-link" aria-label="Telegram (opens in new tab)">
+          <span class="community-link-title">Telegram</span>
+          <span class="community-link-tail">
+            <span class="community-link-desc">Join the community chat.</span>
+            <span class="community-link-arrow" aria-hidden="true">
+              <img src={withBase('/images/icons/arrow-right.svg')} alt="" width="20" height="20" />
+            </span>
+          </span>
+        </a>
+      </li>
+      <li>
+        <a href="https://github.com/pubky" target="_blank" rel="noopener noreferrer" class="community-link" aria-label="GitHub (opens in new tab)">
+          <span class="community-link-title">GitHub</span>
+          <span class="community-link-tail">
+            <span class="community-link-desc">Source code and repositories.</span>
+            <span class="community-link-arrow" aria-hidden="true">
+              <img src={withBase('/images/icons/arrow-right.svg')} alt="" width="20" height="20" />
+            </span>
+          </span>
+        </a>
+      </li>
+      <li>
+        <a href={withBase('/contributing/')} class="community-link">
+          <span class="community-link-title">Contributing</span>
+          <span class="community-link-tail">
+            <span class="community-link-desc">How to contribute to Pubky.</span>
+            <span class="community-link-arrow" aria-hidden="true">
+              <img src={withBase('/images/icons/arrow-right.svg')} alt="" width="20" height="20" />
+            </span>
+          </span>
+        </a>
+      </li>
+    </ul>
   </section>
 
   <!-- Figma: Brand endorsement — gap 10px, two linked elements -->
@@ -240,19 +415,27 @@ const icons = {
     border-radius: var(--radius-lg);
   }
 
-  /* Figma: H1 = text-6xl bold — section titles use text-4xl(36/1) bold */
+  /* Figma: section H1 = Inter Tight Bold, text-5xl (48/48). Quick Start is the
+     only exception at text-4xl (36/1) — apply .home-section-title-sm there. */
   .home-section-title {
-    font-size: var(--text-4xl-size);
+    font-family: "Inter Tight", "Inter", system-ui, sans-serif;
+    font-size: var(--text-5xl-size);
     font-weight: 700;
-    line-height: 1;
+    line-height: var(--text-5xl-lh);
     color: var(--base-foreground);
     margin: 0 0 var(--spacing-8) 0;
   }
 
-  /* Wrapper for Users + Developers — equal-height rows so cards match across sections */
+  .home-section-title-sm {
+    font-size: var(--text-4xl-size);
+    line-height: 1;
+  }
+
+  /* Wrapper for Users + Developers — vertical stack with the same gap as other sections.
+     Sections size to their own content; cards within each row still equalize via grid. */
   .image-card-sections {
-    display: grid;
-    grid-auto-rows: 1fr;
+    display: flex;
+    flex-direction: column;
     gap: var(--spacing-16);
     max-width: 1280px;
     padding: 0 var(--spacing-10);
@@ -260,17 +443,10 @@ const icons = {
     width: 100%;
   }
 
-  /* Sections inside the wrapper stretch to fill; remove duplicate padding/max-width */
+  /* Sections inside the wrapper inherit spacing from the wrapper */
   .image-card-sections .home-section {
-    display: flex;
-    flex-direction: column;
     max-width: none;
     padding: 0;
-  }
-
-  /* Card grid fills remaining space after the section title */
-  .image-card-sections .card-grid {
-    flex: 1;
   }
 
   .card-grid {
@@ -284,6 +460,195 @@ const icons = {
 
   .card-grid-4 {
     grid-template-columns: repeat(4, 1fr);
+  }
+
+  /* Figma: Key Concepts (node 34690:87147) — section title centered, sized text-5xl
+     (48/48 bold) unlike other section titles which are text-4xl(36). Cards rendered
+     as transparent text blocks with no card background or border (Pubky / Text block). */
+  .key-concepts .home-section-title {
+    font-size: var(--text-5xl-size);
+    line-height: var(--text-5xl-lh);
+    text-align: center;
+  }
+
+  .key-concepts .text-card {
+    background: transparent;
+    border-color: transparent;
+  }
+
+  .key-concepts .text-card:hover {
+    background: transparent;
+    border-color: transparent;
+  }
+
+  /* Figma: Pubky / Text block arrow row (node 34702:87308) is items-start with no
+     justify-end — the arrow sits at the left edge of the row, not the right like the
+     default TextCard. */
+  .key-concepts .text-card-arrow {
+    justify-content: flex-start;
+    padding-right: 0;
+  }
+
+  /* Figma: Demos (node 34702:87731) — Frame 48095428 = flex-col gap spacing-6(24)
+     between title row and subtitle, then spacing-10(40) before the tiles grid. */
+  .demos {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-10);
+  }
+
+  .demos-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-6);
+  }
+
+  .demos-header .home-section-title {
+    margin: 0;
+  }
+
+  /* Figma: Website/h4 = Inter Tight SemiBold 35/44, tracking -0.3px, alpha-white 50%.
+     35px / 44px / -0.3px are hardcoded — Website/h4 typography, off our text scale */
+  .demos-subtitle {
+    margin: 0;
+    font-family: "Inter Tight", "Inter", system-ui, sans-serif;
+    font-size: 35px;
+    line-height: 44px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  /* Figma: Tiles = flex-wrap with gap 24px; 4 columns at 1280 (282px each) */
+  .demos-grid {
+    grid-auto-rows: 1fr;
+  }
+
+  /* Figma: Community (node 34690:85373) — 2-col grid, gap spacing-12(48px). Grid (vs flex)
+     guarantees the two columns are exactly equal width regardless of the title col's px-12
+     padding (a flex:1 basis:0 + padding combo widens the padded column by ~48px). */
+  .community-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: var(--spacing-12);
+  }
+
+  /* Figma: Title col (node 34690:85374) — flex-col, gap spacing-6(24), px spacing-12(48), centered */
+  .community-title-col {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-6);
+    padding: 0 var(--spacing-12);
+    min-width: 0;
+  }
+
+  /* Figma: Community title = Inter Tight Bold text-5xl(48/48), same tier as Key Concepts. */
+  .community-title {
+    margin: 0;
+    font-family: "Inter Tight", "Inter", system-ui, sans-serif;
+    font-size: var(--text-5xl-size);
+    line-height: var(--text-5xl-lh);
+    font-weight: 700;
+    color: var(--base-foreground);
+    text-align: center;
+  }
+
+  .community-title-arrow {
+    color: var(--base-foreground);
+    flex-shrink: 0;
+  }
+
+  /* Figma: Frame 2 (node 34690:87065) — flex-col gap spacing-5(20), 4 link rows
+     with 1px hairline separators between them. */
+  .community-links {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-5);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    min-width: 0;
+  }
+
+  .community-links li {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-5);
+  }
+
+  .community-links li + li::before {
+    content: "";
+    display: block;
+    height: 1px;
+    background: var(--base-border);
+  }
+
+  /* Figma: Social media link row — flex, gap spacing-4(16), items-center.
+     Title H2 (text-3xl 30/36 bold), description text-base muted, arrow button right-aligned. */
+  .community-link {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-4);
+    text-decoration: none;
+    color: inherit;
+    transition: opacity 0.15s ease;
+  }
+
+  .community-link-title {
+    font-size: var(--text-3xl-size);
+    line-height: var(--text-3xl-lh);
+    font-weight: 700;
+    color: var(--base-foreground);
+    white-space: nowrap;
+    /* Figma: title row has pb spacing-2(8) inside an items-center flex —
+       reproduces the visual baseline shift between 30px title and 16px description */
+    padding-bottom: var(--spacing-2);
+  }
+
+  /* Figma: Flex wrapper (description + ghost button) sits 16px after the title with
+     0 gap inside, so the arrow appears immediately after the description on hover. */
+  .community-link-tail {
+    display: inline-flex;
+    align-items: center;
+    min-width: 0;
+  }
+
+  .community-link-desc {
+    font-size: var(--text-base-size);
+    line-height: var(--text-base-lh);
+    font-weight: 500;
+    color: var(--base-muted-foreground);
+    white-space: nowrap;
+  }
+
+  /* Figma: Ghost icon button (Variant=Ghost, State=Default, Size=icon, node 46:195)
+     — 36x36, p spacing-1(4), radius full, transparent bg. Sits right after description. */
+  .community-link-arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    padding: var(--spacing-1);
+    border-radius: var(--radius-full);
+    flex-shrink: 0;
+  }
+
+  /* Figma default state shows no arrow — icon fades in on row hover only,
+     no background change on the pill. */
+  .community-link-arrow img {
+    width: 20px;
+    height: 20px;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+  }
+
+  .community-link:hover .community-link-arrow img {
+    opacity: 1;
   }
 
   .home-footer {
@@ -318,42 +683,6 @@ const icons = {
     width: auto;
   }
 
-  /* Figma: Glow — 468px circle, opacity 0.4, Gaussian blur stdDeviation 400.
-     Always left-aligned: glow center pinned near left viewport edge. */
-  .home-content::before {
-    content: "";
-    position: absolute;
-    left: -450px;
-    top: 63%;
-    transform: translateY(-50%);
-    width: 468px;
-    height: 468px;
-    border-radius: 50%;
-    background: white;
-    opacity: 0.4;
-    filter: blur(400px);
-    pointer-events: none;
-    z-index: -1;
-  }
-
-  /* Figma: BG / Triangle — x:73 y:2201 w:1370 h:1134 in 1280x2982 frame.
-     Positioned behind Key Concepts + Community sections, centered-right. */
-  .home-content::after {
-    content: "";
-    position: absolute;
-    bottom: -340px;
-    left: 50%;
-    transform: translateX(-567px);
-    width: 1370px;
-    height: 1134px;
-    background-image: var(--home-bg-triangle);
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    pointer-events: none;
-    z-index: -1;
-  }
-
   /* 1049px breakpoint — container layout switches to match header/install-section mobile */
   @media (max-width: 1049px) {
     .home-content {
@@ -375,6 +704,14 @@ const icons = {
     .image-card-sections {
       padding: 0;
     }
+
+    /* Figma Mobile (node 34784:60772) — Brand endorsement at x=24 inside the
+       390-wide viewport. Drop the desktop 40px gutter and 16px top padding so
+       it inherits Starlight's --sl-content-pad-x (24px) and sits exactly
+       spacing-20(80px) below Community via the .home-content flex gap. */
+    .home-footer {
+      padding: 0;
+    }
   }
 
   /* 767px breakpoint — card grids collapse to 2 columns */
@@ -388,8 +725,38 @@ const icons = {
       display: contents;
     }
 
-    /* Hide glow on mobile */
-    .home-content::before {
+    /* Figma Mobile (nodes 34784:60742, 34784:60749) — For Users and For Developers
+       titles match Quick Start at text-4xl(36/1) on mobile, even though they're
+       text-5xl(48/48) on desktop. */
+    .image-card-sections .home-section-title {
+      font-size: var(--text-4xl-size);
+      line-height: 1;
+    }
+
+    /* Figma Mobile (node 34793:62482) — Community switches from desktop 2-col grid
+       to single column: title block above, link list below. Override display,
+       grid-template-columns AND align-items together (per AGENTS.md invariants —
+       leaving desktop align-items: center on a switched flex-column makes
+       children content-sized instead of stretched). */
+    .community-section {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: var(--spacing-12);
+    }
+
+    /* Figma Mobile: title block (node 34793:62483) = h-296 px-8(32) — fixed
+       height keeps space above/below the wrapped 2-line H1; 32px horizontal
+       padding constrains the H1 to 278px wide (Figma) so "Join our Community"
+       wraps to 2 lines. */
+    .community-title-col {
+      min-height: 296px;
+      padding: 0 var(--spacing-8);
+    }
+
+    /* Figma Mobile: link rows show title only (description + arrow hidden). */
+    .community-link-desc,
+    .community-link-arrow {
       display: none;
     }
   }
