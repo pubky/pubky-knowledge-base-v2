@@ -1,21 +1,33 @@
-declare const pubky: any;
-declare const signer: any;
-declare const session: any;
+import {
+  Client,
+  Pubky,
+  PublicKey,
+  type Path,
+  type PubkyError,
+  type Session,
+  type Signer,
+} from "@synonymdev/pubky";
+
+declare const signer: Signer;
+declare const session: Session;
+declare const homeserverPk: PublicKey;
 declare const data: string;
-declare const publicKey: string;
 
 async function snippet_publish_pkdns_record() {
   // --8<-- [start:js_publish_pkdns_record]
-  await pubky.publishPkarrRecord();
+  await signer.pkdns.publishHomeserverForce(homeserverPk);
   // --8<-- [end:js_publish_pkdns_record]
 }
 
 function snippet_republish_pkdns_record() {
   // --8<-- [start:js_republish_pkdns_record]
-  // Automatic republishing
-  setInterval(async () => {
-    await pubky.publishPkarrRecord();
-  }, 2 * 60 * 60 * 1000); // Every 2 hours
+  // Periodically check whether the record is stale before republishing
+  setInterval(
+    async () => {
+      await signer.pkdns.publishHomeserverIfStale(homeserverPk);
+    },
+    2 * 60 * 60 * 1000,
+  ); // Every 2 hours
   // --8<-- [end:js_republish_pkdns_record]
 }
 
@@ -42,66 +54,92 @@ function snippet_direct_homeserver_url() {
 
 async function snippet_valid_storage_path() {
   // --8<-- [start:js_valid_storage_path]
-  // ✅ Correct
-  await session.storage.putText('/pub/myapp/data.json', data);
+  await session.storage.putText("/pub/myapp/data.json", data);
 
-  // ❌ Wrong — path must start with /pub/
-  await session.storage.putText('data.json', data);
-  await session.storage.putText('/myapp/data.json', data);
+  // Invalid paths:
+  // - "data.json"
+  // - "/myapp/data.json"
   // --8<-- [end:js_valid_storage_path]
 }
 
+function typecheck_invalid_storage_paths() {
+  // These intentionally stay outside the rendered docs. They verify that
+  // TypeScript still rejects the invalid paths described above.
+  // @ts-expect-error Path must start with /pub/.
+  void session.storage.putText("data.json", data);
+  // @ts-expect-error Path must start with /pub/.
+  void session.storage.putText("/myapp/data.json", data);
+}
+
+function statusCodeOf(error: unknown): number | undefined {
+  const data = (error as PubkyError).data;
+  if (typeof data !== "object" || data === null || !("statusCode" in data)) {
+    return undefined;
+  }
+
+  return (data as { statusCode?: number }).statusCode;
+}
+
 // --8<-- [start:js_put_with_retry]
-async function putWithRetry(session, path, data, retries = 3) {
+async function putWithRetry(
+  session: Session,
+  path: Path,
+  data: string,
+  retries = 3,
+): Promise<void> {
   for (let i = 0; i < retries; i++) {
     try {
       return await session.storage.putText(path, data);
-    } catch (e) {
-      if (e.status === 429) { // Too Many Requests
-        await new Promise(r => setTimeout(r, 1000 * (i + 1)));
-      } else throw e;
+    } catch (error) {
+      if (statusCodeOf(error) === 429) {
+        await new Promise((resolve) => setTimeout(resolve, 1000 * (i + 1)));
+        continue;
+      }
+      throw error;
     }
   }
+
+  throw new Error("PUT failed after retrying rate limits");
 }
 // --8<-- [end:js_put_with_retry]
 
-// --8<-- [start:js_put_with_retry_api]
-async function putWithRetryApi(session, path, data, retries = 3) {
-    for (let i = 0; i < retries; i++) {
-        try {
-            return await session.storage.putText(path, data);
-        } catch (error) {
-            if (error.status === 429) { // Too Many Requests
-                await new Promise(r => setTimeout(r, 1000 * (i + 1)));
-                continue;
-            }
-            throw error;
-        }
-    }
-}
-// --8<-- [end:js_put_with_retry_api]
-
 function snippet_pkarr_relay_config() {
   // --8<-- [start:js_pkarr_relay_config]
-  const config = {
-    pkarrRelay: 'https://pkarr.pubky.org'
-  };
+  const client = new Client({
+    pkarr: {
+      relays: ["https://pkarr.pubky.org"],
+    },
+  });
+
+  const pubky = Pubky.withClient(client);
   // --8<-- [end:js_pkarr_relay_config]
 }
 
-function snippet_cache_homeserver_lookup() {
-  // --8<-- [start:js_cache_homeserver_lookup]
-  const cache = new Map();
-  if (cache.has(publicKey)) {
-    return cache.get(publicKey);
+const homeserverCache = new Map<string, PublicKey>();
+
+// --8<-- [start:js_cache_homeserver_lookup]
+async function getCachedHomeserver(
+  pubky: Pubky,
+  userPublicKey: string,
+): Promise<PublicKey | undefined> {
+  const cached = homeserverCache.get(userPublicKey);
+  if (cached) return cached;
+
+  const user = PublicKey.from(userPublicKey);
+  const homeserver = await pubky.getHomeserverOf(user);
+
+  if (homeserver) {
+    homeserverCache.set(userPublicKey, homeserver);
   }
-  // --8<-- [end:js_cache_homeserver_lookup]
+
+  return homeserver;
 }
+// --8<-- [end:js_cache_homeserver_lookup]
 
 function snippet_enable_debug_logging() {
   // --8<-- [start:js_enable_debug_logging]
   // Enable verbose logging
-  localStorage.setItem('pubky:debug', 'true');
+  localStorage.setItem("pubky:debug", "true");
 
   // Check network requests
   // Open DevTools → Network tab → Filter: pubky

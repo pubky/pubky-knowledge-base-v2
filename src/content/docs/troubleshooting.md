@@ -10,22 +10,25 @@ Common issues and solutions when working with Pubky.
 
 ### PKARR Record Not Resolving
 
-**Symptom**: Public-key domain doesn't resolve, apps can't find Homeserver
+**Symptom**: A user public key does not resolve, so apps cannot find that user's Homeserver.
+
+A user's PKARR record is published under the user's own public key. The record contains a `_pubky` pointer whose target is the Homeserver public key. So `signer.pkdns.publishHomeserverForce(homeserverPk)` signs and publishes the record for `signer.publicKey`; `homeserverPk` is the value stored in that record, not the DHT key being published.
 
 **Common Causes:**
 
-1. **Record Not Published**
+1. **User Record Not Published or Points to the Wrong Homeserver**
    ```bash
-   # Verify record exists on DHT
-   curl "https://pkarr.pubky.org/<your-public-key>"
+   # Verify the user's record exists on the DHT
+   curl -fsI https://pkarr.pubky.app/<your-public-key> >/dev/null && echo "on DHT" || echo "NOT on DHT"
    ```
-   **Solution**: Ensure you've published your PKARR record:
+
+   **Solution**: Explicitly publish the user's `_pubky` Homeserver pointer. Signup normally does this for you; use force publish when setting the pointer manually, repairing a wrong or missing pointer, or migrating to a different Homeserver. Force publish means "write this pointer now", even if the existing record is still fresh:
    ```javascript snippet="snippets/js/src/troubleshooting.ts:js_publish_pkdns_record"
    ```
 
 2. **Record Expired (TTL)**
-   - PKARR records on DHT expire after several hours
-   - **Solution**: Republish regularly (recommended: every 2 hours)
+   - PKARR records need periodic refresh to stay easy to discover
+   - **Solution**: Use stale-aware publishing for routine maintenance. It checks the existing record age first and no-ops while the record is fresh, then republishes once the SDK considers it stale (default: older than 1 hour). Pass `homeserverPk` when you need missing records to be recreated; omitting it can only reuse a Homeserver target found in the existing record.
    ```javascript snippet="snippets/js/src/troubleshooting.ts:js_republish_pkdns_record"
    ```
 
@@ -286,7 +289,7 @@ docker compose logs neo4j
    ```javascript snippet="snippets/js/src/troubleshooting.ts:js_pkarr_relay_config"
    ```
 
-2. **Cache aggressively**: Store resolved Homeserver URLs:
+2. **Cache aggressively**: Store resolved Homeserver public keys:
    ```javascript snippet="snippets/js/src/troubleshooting.ts:js_cache_homeserver_lookup"
    ```
 

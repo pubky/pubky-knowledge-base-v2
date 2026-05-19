@@ -523,7 +523,7 @@ PUT /pub/myapp/all_posts  (large JSON array)
 
 ### Handle Rate Limits
 
-```javascript snippet="snippets/js/src/troubleshooting.ts:js_put_with_retry_api"
+```javascript snippet="snippets/js/src/troubleshooting.ts:js_put_with_retry"
 ```
 
 ## Resources
