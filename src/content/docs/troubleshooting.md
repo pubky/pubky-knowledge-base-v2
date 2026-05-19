@@ -20,18 +20,13 @@ Common issues and solutions when working with Pubky.
    curl "https://pkarr.pubky.org/<your-public-key>"
    ```
    **Solution**: Ensure you've published your PKARR record:
-   ```javascript
-   await pubky.publishPkarrRecord();
+   ```javascript snippet="snippets/js/src/troubleshooting.ts:js_publish_pkdns_record"
    ```
 
 2. **Record Expired (TTL)**
    - PKARR records on DHT expire after several hours
    - **Solution**: Republish regularly (recommended: every 2 hours)
-   ```javascript
-   // Automatic republishing
-   setInterval(async () => {
-     await pubky.publishPkarrRecord();
-   }, 2 * 60 * 60 * 1000); // Every 2 hours
+   ```javascript snippet="snippets/js/src/troubleshooting.ts:js_republish_pkdns_record"
    ```
 
 3. **DHT Propagation Delay**
@@ -95,9 +90,7 @@ pubky-cli tools verify-pkarr <public-key>
 4. **PKDNS Resolution Failure**
    - Browser can't resolve public-key domain
    - **Solution**: Use PKDNS-enabled resolver or DoH:
-   ```javascript
-   // In browser, use full HTTPS URL
-   const url = `https://your-homeserver.com/pub/...`;
+   ```javascript snippet="snippets/js/src/troubleshooting.ts:js_direct_homeserver_url"
    ```
 
 **Test Connection:**
@@ -133,8 +126,7 @@ See [Authentication](/explore/pubkycore/authentication/) for how Pubky authentic
 3. **Session Expired**
    - Sessions have TTL (typically 24 hours)
    - **Solution**: Sign in again:
-   ```javascript
-   const session = await signer.signin();
+   ```javascript snippet="snippets/js/src/troubleshooting.ts:js_reauth"
    ```
 
 4. **Clock Skew**
@@ -150,10 +142,7 @@ See [Authentication](/explore/pubkycore/authentication/) for how Pubky authentic
 
 **Debug Authentication:**
 
-```javascript
-// Force re-authentication
-await session.signout();
-const newSession = await signer.signin();
+```javascript snippet="snippets/js/src/troubleshooting.ts:js_force_reauth"
 ```
 
 ---
@@ -245,13 +234,7 @@ docker compose logs neo4j
 1. **Invalid Path**
    - Path must start with `/pub/` for public data
    - **Solution**: Use correct path format:
-   ```javascript
-   // ✅ Correct
-   await session.storage.putText('/pub/myapp/data.json', data);
-
-   // ❌ Wrong — path must start with /pub/
-   await session.storage.putText('data.json', data);
-   await session.storage.putText('/myapp/data.json', data);
+   ```javascript snippet="snippets/js/src/troubleshooting.ts:js_valid_storage_path"
    ```
 
 2. **Data Too Large**
@@ -261,18 +244,7 @@ docker compose logs neo4j
 3. **Rate Limiting**
    - Too many requests in short time
    - **Solution**: Implement backoff:
-   ```javascript
-   async function putWithRetry(session, path, data, retries = 3) {
-     for (let i = 0; i < retries; i++) {
-       try {
-         return await session.storage.putText(path, data);
-       } catch (e) {
-         if (e.status === 429) { // Too Many Requests
-           await new Promise(r => setTimeout(r, 1000 * (i + 1)));
-         } else throw e;
-       }
-     }
-   }
+   ```javascript snippet="snippets/js/src/troubleshooting.ts:js_put_with_retry"
    ```
 
 4. **Insufficient Permissions**
@@ -311,18 +283,11 @@ docker compose logs neo4j
 
 **Solutions**:
 1. **Use PKARR relay**: Faster than direct DHT:
-   ```javascript
-   const config = {
-     pkarrRelay: 'https://pkarr.pubky.org'
-   };
+   ```javascript snippet="snippets/js/src/troubleshooting.ts:js_pkarr_relay_config"
    ```
 
 2. **Cache aggressively**: Store resolved Homeserver URLs:
-   ```javascript
-   const cache = new Map();
-   if (cache.has(publicKey)) {
-     return cache.get(publicKey);
-   }
+   ```javascript snippet="snippets/js/src/troubleshooting.ts:js_cache_homeserver_lookup"
    ```
 
 3. **Use local PKDNS**: Run your own PKDNS server for faster resolution
@@ -423,12 +388,7 @@ Data should be stored successfully
 ### Useful Debugging Tools
 
 **Browser DevTools:**
-```javascript
-// Enable verbose logging
-localStorage.setItem('pubky:debug', 'true');
-
-// Check network requests
-// Open DevTools → Network tab → Filter: pubky
+```javascript snippet="snippets/js/src/troubleshooting.ts:js_enable_debug_logging"
 ```
 
 **Command Line:**
@@ -467,4 +427,3 @@ PUBKY_ADMIN_PASSWORD=admin pubky-cli admin info
 - **[SDK Documentation](/explore/pubkycore/sdk/)**: Detailed API docs
 - **[PKDNS](/explore/technologies/pkdns/)**: DNS resolution details
 - **[Homeserver](/explore/pubkycore/homeserver/)**: Homeserver administration
-

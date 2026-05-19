@@ -2,6 +2,12 @@
   "name": "pubky-doc-snippets-js",
   "private": true,
   "type": "module",
+  "scripts": {
+    "check": "npm run typecheck && npm run lint && npm run format:check",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src/",
+    "format:check": "prettier --check src/"
+  },
   "dependencies": {
     "@synonymdev/pubky": "0.8.0"
   },
