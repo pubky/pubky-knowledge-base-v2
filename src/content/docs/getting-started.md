@@ -113,11 +113,11 @@ cd ios && pod install  # iOS only
 
 See the [Pubky Docker documentation](/explore/technologies/pubky-docker/) for setup instructions, port mappings, and configuration options.
 
-**Alternative**: Run just a Homeserver:
+**Alternative**: Run just a Homeserver. Start PostgreSQL and configure `database_url` first; see the [Homeserver documentation](/explore/pubkycore/homeserver/) for details:
 ```bash
 git clone https://github.com/pubky/pubky-core
 cd pubky-core/pubky-homeserver
-cargo run
+cargo run -- --data-dir=~/.pubky
 ```
 
 ### Step 3: Build Your First App

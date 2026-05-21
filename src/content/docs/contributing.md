@@ -190,7 +190,7 @@ cargo build
 # Run tests
 cargo test
 
-# Run homeserver locally
+# Run homeserver locally (requires PostgreSQL and database_url in config)
 cargo run --bin pubky-homeserver
 
 # Format code

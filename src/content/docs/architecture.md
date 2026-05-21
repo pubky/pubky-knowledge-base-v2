@@ -110,7 +110,7 @@ sequenceDiagram
 
 ### Storage Layer
 
-**[Homeservers](/explore/pubkycore/homeserver/)** store user data in a key-value format over HTTP/HTTPS.
+**[Homeservers](/explore/pubkycore/homeserver/)** store user data as files addressed by paths over HTTP/HTTPS.
 
 **Architecture:**
 
@@ -119,11 +119,11 @@ flowchart LR
     User1[User 1] --> HS1[Homeserver A]
     User2[User 2] --> HS1
     User3[User 3] --> HS2[Homeserver B]
-    User4[User 4] --> HS3[Homeserver C]
     
-    HS1 --> DB1[(PostgreSQL)]
-    HS2 --> DB2[(LMDB)]
-    HS3 --> DB3[(Files)]
+    HS1 --> FS1[(User files)]
+    HS1 --> PG1[(PostgreSQL metadata)]
+    HS2 --> FS2[(User files)]
+    HS2 --> PG2[(PostgreSQL metadata)]
 ```
 
 **Key Properties:**

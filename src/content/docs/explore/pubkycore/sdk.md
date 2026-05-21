@@ -340,8 +340,8 @@ For development, run a local Homeserver:
 git clone https://github.com/pubky/pubky-core
 cd pubky-core
 
-# Run testnet
-cargo run --bin pubky-testnet
+# Run testnet with embedded PostgreSQL
+cargo run -p pubky-testnet --features embedded-postgres
 ```
 
 Then connect your app to `http://localhost:15411`.

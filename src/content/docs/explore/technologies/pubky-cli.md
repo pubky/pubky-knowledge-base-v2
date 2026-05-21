@@ -213,7 +213,7 @@ echo "User onboarded successfully!"
 
 Test Homeserver functionality without building custom clients:
 ```bash
-# Start local homeserver
+# Start local homeserver (requires PostgreSQL and database_url in config)
 cargo run -p pubky-homeserver -- --data-dir ~/.pubky
 
 # Test with CLI
