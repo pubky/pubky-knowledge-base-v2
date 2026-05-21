@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "@synonymdev/pubky": "0.7.0"
+    "@synonymdev/pubky": "0.8.0"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
