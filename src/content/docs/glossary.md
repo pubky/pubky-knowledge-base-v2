@@ -102,6 +102,11 @@ Command-line tool for interacting with Pubky Homeservers, providing user operati
 **[Pubky Core](/explore/pubkycore/introduction/)**
 The foundational protocol, Homeserver implementation, and SDK for building decentralized applications on Pubky.
 
+<a id="pubkytls"></a>
+
+**PubkyTLS**
+Pubky's TLS transport for Homeserver connections addressed by public key. It uses TLS with Raw Public Keys (RFC 7250), so the server public key is verified directly instead of through an X.509 certificate authority chain.
+
 **[Pubky Docker](/explore/technologies/pubky-docker/)**
 Docker Compose orchestration for running the complete Pubky Social stack locally with one command.
 

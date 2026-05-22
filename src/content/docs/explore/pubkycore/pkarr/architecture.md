@@ -37,6 +37,8 @@ The `_pubky` SVCB record points to a user's [Homeserver](/explore/pubkycore/home
 _pubky.<public-key> SVCB 1 homeserver.example.com port=443
 ```
 
+A PKARR record can advertise both a direct [PubkyTLS](/glossary/#pubkytls) endpoint and an ICANN endpoint. SDK clients running outside the browser (for example Rust CLI/server apps or native mobile apps using the SDK bindings) prefer the direct endpoint when it is reachable and fall back to the ICANN endpoint automatically; browsers use the ICANN-compatible path.
+
 ## Caching
 
 - **InMemoryCache**: LRU cache for lightweight deployments
