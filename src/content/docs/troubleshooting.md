@@ -369,7 +369,7 @@ When reporting bugs, include:
 ```markdown
 ## Environment
 - OS: macOS 14.2
-- SDK: @synonymdev/pubky@0.7.0
+- SDK: @synonymdev/pubky@0.8.0
 - Browser: Chrome 120
 
 ## Steps to Reproduce
@@ -390,8 +390,13 @@ Data should be stored successfully
 
 ### Useful Debugging Tools
 
-**Browser DevTools:**
+**Set Log Level:**
 ```javascript snippet="snippets/js/src/troubleshooting.ts:js_enable_debug_logging"
+```
+
+**Browser DevTools:**
+```text
+Open DevTools → Network tab → Filter: pubky
 ```
 
 **Command Line:**

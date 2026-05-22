@@ -2,6 +2,7 @@ import {
   Client,
   Pubky,
   PublicKey,
+  setLogLevel,
   type Path,
   type PubkyError,
   type Session,
@@ -138,10 +139,8 @@ async function getCachedHomeserver(
 
 function snippet_enable_debug_logging() {
   // --8<-- [start:js_enable_debug_logging]
-  // Enable verbose logging
-  localStorage.setItem("pubky:debug", "true");
+  // Call once at application startup, before creating Pubky or Client instances.
+  setLogLevel("debug");
 
-  // Check network requests
-  // Open DevTools → Network tab → Filter: pubky
   // --8<-- [end:js_enable_debug_logging]
 }
