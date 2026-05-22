@@ -2,6 +2,7 @@ import {
   Pubky,
   Keypair,
   PublicKey,
+  AuthFlowKind,
   type Address,
   Session,
   EventStreamBuilder,
@@ -129,6 +130,22 @@ async function snippet_session_persistence() {
   // On restart, restore without re-authenticating
   const restored = await Session.restore(exported);
   // --8<-- [end:js_session_persistence]
+}
+
+async function snippet_auth_flow_resume() {
+  // --8<-- [start:js_auth_flow_resume]
+  const flow = pubky.startAuthFlow("/pub/myapp/:rw", AuthFlowKind.signin());
+
+  // Store only for the short relay TTL; authorizationUrl contains a secret.
+  sessionStorage.setItem("pubky-auth-url", flow.authorizationUrl);
+
+  // After a refresh, reconnect to the same relay channel.
+  const saved = sessionStorage.getItem("pubky-auth-url");
+  const resumed = saved ? pubky.resumeAuthFlow(saved) : flow;
+
+  const session = await resumed.awaitApproval();
+  sessionStorage.removeItem("pubky-auth-url");
+  // --8<-- [end:js_auth_flow_resume]
 }
 
 async function snippet_error_handling() {

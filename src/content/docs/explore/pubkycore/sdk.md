@@ -235,6 +235,20 @@ Pubky Core supports OAuth-style authorization for third-party apps via the `pubk
 
 See [Authentication](/explore/pubkycore/authentication/) for the full authentication flow.
 
+### Resuming an Auth Flow
+
+Resuming is mainly for in-progress auth requests where the app loses the original flow object before the user approves, such as a page refresh, route reload, tab recovery, or native app restart. Save the original `authorizationUrl` when the flow starts, then pass it back to the SDK to reconnect to the same relay inbox instead of asking the user to scan a new request.
+
+This only works while the relay channel is still within its retention window. Store the URL only in short-lived storage such as `sessionStorage`; it contains the `client_secret`, so delete it after approval or when the flow is abandoned.
+
+**Rust:**
+```rust snippet="snippets/rust/src/lib.rs:auth_flow_resume"
+```
+
+**JavaScript:**
+```javascript snippet="snippets/js/src/sdk.ts:js_auth_flow_resume"
+```
+
 ## React Native Usage
 
 The React Native SDK (`@synonymdev/react-native-pubky`) provides the same API as the JavaScript SDK with mobile-optimized bindings built using UniFFI.
