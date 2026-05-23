@@ -45,30 +45,14 @@ jobs:
         working-directory: snippets/js
         run: npm install
 
-      - name: Type-check (vanilla JS)
+      - name: Validate snippets (vanilla JS)
         working-directory: snippets/js
-        run: npx tsc --noEmit
-
-      - name: Lint (vanilla JS)
-        working-directory: snippets/js
-        run: npx eslint src/
-
-      - name: Format (vanilla JS)
-        working-directory: snippets/js
-        run: npx prettier --check src/
+        run: npm run check
 
       - name: Install (React Native)
         working-directory: snippets/react-native
         run: npm install --legacy-peer-deps
 
-      - name: Type-check (React Native)
+      - name: Validate snippets (React Native)
         working-directory: snippets/react-native
-        run: npx tsc --noEmit
-
-      - name: Lint (React Native)
-        working-directory: snippets/react-native
-        run: npx eslint src/
-
-      - name: Format (React Native)
-        working-directory: snippets/react-native
-        run: npx prettier --check src/
+        run: npm run check

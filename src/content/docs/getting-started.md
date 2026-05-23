@@ -162,10 +162,7 @@ If building a social app, leverage [Pubky Nexus](/explore/pubky-apps/indexing-an
 - User recommendations
 - Notifications
 
-```javascript
-// Query Nexus API
-const response = await fetch('https://nexus.pubky.app/v0/feeds/global');
-const posts = await response.json();
+```javascript snippet="snippets/js/src/quick-start-getting-started.ts:js_nexus_global_feed"
 ```
 
 📊 [Nexus API Docs](https://nexus.pubky.app/swagger-ui/)
@@ -274,4 +271,3 @@ A: Several models work: Homeserver hosting, indexing services (like Nexus), prem
 ---
 
 **Ready to build the decentralized web? Start with the [SDK](/explore/pubkycore/sdk/)!**
-

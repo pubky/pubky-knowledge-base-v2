@@ -2,6 +2,12 @@
   "name": "pubky-doc-snippets-react-native",
   "private": true,
   "type": "module",
+  "scripts": {
+    "check": "npm run typecheck && npm run lint && npm run format:check",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src/",
+    "format:check": "prettier --check src/"
+  },
   "dependencies": {
     "@synonymdev/react-native-pubky": "0.11.3"
   },

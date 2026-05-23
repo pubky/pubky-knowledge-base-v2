@@ -523,20 +523,7 @@ PUT /pub/myapp/all_posts  (large JSON array)
 
 ### Handle Rate Limits
 
-```javascript
-async function putWithRetry(session, path, data, retries = 3) {
-    for (let i = 0; i < retries; i++) {
-        try {
-            return await session.storage.putText(path, data);
-        } catch (error) {
-            if (error.status === 429) { // Too Many Requests
-                await new Promise(r => setTimeout(r, 1000 * (i + 1)));
-                continue;
-            }
-            throw error;
-        }
-    }
-}
+```javascript snippet="snippets/js/src/troubleshooting.ts:js_put_with_retry"
 ```
 
 ## Resources
@@ -550,4 +537,3 @@ async function putWithRetry(session, path, data, retries = 3) {
 ---
 
 **The Pubky Core API provides a simple, RESTful interface for decentralized data storage.**
-
