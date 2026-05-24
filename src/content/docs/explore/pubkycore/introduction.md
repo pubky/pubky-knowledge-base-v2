@@ -59,7 +59,7 @@ Self-issued public keys that function as sovereign, publicly addressable domains
 Users grant apps scoped access to their data on the [Homeserver](/explore/pubkycore/homeserver/). Authentication is decentralized - users control their own cryptographic keys with no central identity providers.
 
 ### [Credible Exit](/explore/concepts/credible-exit/)
-Pubky Core's distributed architecture provides user autonomy through credible exit between interchangeable components. Users can switch Homeservers, applications, or identity managers without losing their data or social graph.
+Pubky Core's distributed architecture provides user autonomy through credible exit between interchangeable components. Users can switch Homeservers, applications, or identity managers without losing their identity or data. [Pubky Backup](/explore/technologies/pubky-backup/) helps preserve local copies of published data while automated restore and mirroring mature.
 
 ## Key Features
 
@@ -275,6 +275,7 @@ For [Synonym](https://synonym.to/) as lead of this project, the goal is to:
 ## Related Technologies
 
 - **[Pubky Ring](/explore/technologies/pubky-ring/)**: Identity manager app
+- **[Pubky Backup](/explore/technologies/pubky-backup/)**: Desktop backup for published Homeserver data
 - **[Paykit](/explore/technologies/paykit/)**: Payment protocol (WIP)
 - **[Pubky Noise](/explore/technologies/pubky-noise/)**: Encrypted communication (WIP)
 - **[Pubky App](/explore/pubky-apps/introduction/)**: Social media application

@@ -30,6 +30,7 @@ flowchart TB
     subgraph Apps[Application Layer]
         PubkyApp[Pubky App]
         Nexus[Pubky Nexus]
+        Backup[Pubky Backup]
         Custom[Custom Apps]
     end
     
@@ -40,6 +41,7 @@ flowchart TB
     PKARR --> HS1
     HS1 --> Nexus
     HS2 --> Nexus
+    HS1 --> Backup
     Nexus --> PubkyApp
     Custom --> HS1
 ```
@@ -240,6 +242,14 @@ sequenceDiagram
 - Search and discovery
 - High-performance API
 
+### Pubky Backup
+
+**[Pubky Backup](/explore/technologies/pubky-backup/)** provides:
+- Local copies of public `/pub/...` Homeserver data
+- Multi-pubky background sync
+- Point-in-time zip snapshots
+- A practical data-portability path while Homeserver mirroring is still planned
+
 ### PKDNS
 
 **[PKDNS](/explore/technologies/pkdns/)** enables:
@@ -269,6 +279,7 @@ sequenceDiagram
 - **[Pubky Docker](/explore/technologies/pubky-docker/)**: Full stack in one command
 - **[Pubky CLI](/explore/technologies/pubky-cli/)**: Command-line Homeserver management
 - **[Pubky Explorer](/explore/technologies/pubky-explorer/)**: Web-based data browser
+- **[Pubky Backup](/explore/technologies/pubky-backup/)**: Desktop backup and snapshot tool for published Homeserver data
 
 ### Work in Progress
 

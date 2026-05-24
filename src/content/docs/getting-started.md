@@ -6,13 +6,14 @@ title: "Getting Started"
 This guide helps you try Pubky **as a user**; if you want to build on Pubky, start with the [Developer Guide](/explore/pubkycore/getting-started/).
 :::
 
-Welcome to Pubky! You’ll create your identity, sign in to pubky.app, and inspect the data you publish.
+Welcome to Pubky! You’ll create your identity, sign in to pubky.app, and inspect and back up the data you publish.
 
 ```mermaid
 flowchart LR
     Ring[Download Pubky Ring] --> Identity[Create Identity]
     Identity --> App[Try Pubky Apps]
     App --> Data[Explore Your Data]
+    Data --> Backup[Back Up Published Data]
 ```
 
 ## Step 1: Download Pubky Ring
@@ -77,6 +78,17 @@ Example paths:
 - `pubky://your-key/pub/pubky.app/profile.json` - Your profile
 - `pubky://your-key/pub/pubky.app/posts/` - Your posts directory
 
+## Step 5: Back Up Your Published Data
+
+Install **[Pubky Backup](/explore/technologies/pubky-backup/)** to keep local copies of the public `/pub/...` data stored on your Homeserver.
+
+1. Download Pubky Backup from [github.com/pubky/pubky-backup](https://github.com/pubky/pubky-backup/releases).
+2. Add your pubky public key.
+3. Let the app sync in the background.
+4. Create snapshots before migrating Homeservers or making major changes.
+
+Pubky Backup does not replace your recovery phrase. The recovery phrase protects your identity key; Pubky Backup protects a local copy of your published data.
+
 ## Next Steps
 
 - **Join the community**: [Telegram](https://t.me/pubkycore)
@@ -104,3 +116,4 @@ Your public app data is stored on a Homeserver, which is linked to your pubky th
 - **[Glossary](/glossary/)**: Quick term reference
 - **[Pubky Ring](/explore/technologies/pubky-ring/)**: Key manager overview
 - **[Pubky Explorer](/explore/technologies/pubky-explorer/)**: Data browser overview
+- **[Pubky Backup](/explore/technologies/pubky-backup/)**: Desktop backup for published Homeserver data
