@@ -8,7 +8,7 @@ Homeservers are meant to represent a primary place to retrieve data from a speci
 
 ## Architecture
 
-The Homeserver implementation consists of several components: the main HTTP API server (supporting both ICANN HTTP and Pubky TLS), an admin server, a Prometheus metrics server, and republishers that keep user and server keys alive on the DHT.
+The Homeserver implementation consists of several components: the main HTTP API server (supporting both ICANN HTTP and [PubkyTLS](/glossary/#pubkytls)), an admin server, a Prometheus metrics server, and republishers that keep user and server keys alive on the DHT.
 
 See the [repository](https://github.com/pubky/pubky-core/tree/main/pubky-homeserver) for API details and configuration.
 
@@ -26,9 +26,11 @@ Homeservers expose event streams for clients to sync data changes:
 
 ## Transport Security
 
-Homeservers expose two endpoints: a PubkyTLS endpoint (TLS with Raw Public Keys, RFC 7250) and an ICANN HTTP endpoint intended to sit behind a reverse proxy with standard X.509 TLS.
+Homeservers expose two endpoint types: a [PubkyTLS](/glossary/#pubkytls) direct endpoint (TLS with Raw Public Keys, RFC 7250) and an ICANN endpoint intended to sit behind a reverse proxy with standard X.509 TLS.
 
-Native Pubky clients connect via PubkyTLS; browsers and legacy clients connect via the ICANN domain. See [Transport Security](/explore/pubkycore/security-model/#transport-security) for details.
+SDK clients running outside the browser (for example Rust CLI/server apps or native mobile apps using the SDK bindings) prefer the [PubkyTLS](/glossary/#pubkytls) direct endpoint. When the PKARR record also advertises an ICANN endpoint and the direct endpoint is unreachable, SDK clients automatically use the ICANN endpoint instead. Browsers and legacy clients use the ICANN endpoint from the start. See [Transport Security](/explore/pubkycore/security-model/#transport-security) for details.
+
+This is useful for Homeservers whose direct [PubkyTLS](/glossary/#pubkytls) socket is not reachable from every network, for example behind NAT or a tunnel, while their ICANN domain remains reachable through conventional HTTPS infrastructure.
 
 ## User Data Control and Credible Exit
 
