@@ -172,8 +172,10 @@ const icons = {
 
 <div class="home-content not-content">
   <!-- Quick Start -->
-  <section class="home-section">
-    <h2 class="home-section-title home-section-title-sm">Quick Start</h2>
+  <section id="quick-start" class="home-section">
+    <h2 class="home-section-title home-section-title-sm">
+      <a class="home-section-title-link" href="#quick-start">Quick Start</a>
+    </h2>
     <div class="home-section-box">
     <div class="card-grid card-grid-4">
       <TextCard
@@ -206,8 +208,10 @@ const icons = {
 
   <!-- For Users + For Developers — wrapped to equalize card heights across both sections -->
   <div class="image-card-sections">
-    <section class="home-section">
-      <h2 class="home-section-title">For Users</h2>
+    <section id="for-users" class="home-section">
+      <h2 class="home-section-title">
+        <a class="home-section-title-link" href="#for-users">For Users</a>
+      </h2>
       <div class="card-grid card-grid-3">
         <ImageCard
           title="Pubky"
@@ -236,8 +240,10 @@ const icons = {
       </div>
     </section>
 
-    <section class="home-section">
-      <h2 class="home-section-title">For Developers</h2>
+    <section id="for-developers" class="home-section">
+      <h2 class="home-section-title">
+        <a class="home-section-title-link" href="#for-developers">For Developers</a>
+      </h2>
       <div class="card-grid card-grid-3">
         <ImageCard
           title="Pubky Core"
@@ -273,8 +279,10 @@ const icons = {
   </div>
 
   <!-- Key Concepts -->
-  <section class="home-section key-concepts">
-    <h2 class="home-section-title">Key Concepts</h2>
+  <section id="key-concepts" class="home-section key-concepts">
+    <h2 class="home-section-title">
+      <a class="home-section-title-link" href="#key-concepts">Key Concepts</a>
+    </h2>
     <div class="card-grid card-grid-4">
       <TextCard
         title="PKARR"
@@ -304,9 +312,11 @@ const icons = {
   </section>
 
   <!-- Demos — Figma node 34702:87731 -->
-  <section class="home-section demos">
+  <section id="demos" class="home-section demos">
     <div class="demos-header">
-      <h2 class="home-section-title">Demos</h2>
+      <h2 class="home-section-title">
+        <a class="home-section-title-link" href="#demos">Demos</a>
+      </h2>
       <p class="demos-subtitle">Try some proof of concepts built on Pubky Core. What will you create?</p>
     </div>
     <div class="card-grid card-grid-4 demos-grid">
@@ -318,9 +328,11 @@ const icons = {
 
   <!-- Figma: Join our Community (node 34690:85373) — two-column 50/50 with 48px gap.
        Left column = centered title + arrow line. Right column = 4 link rows separated by hairlines. -->
-  <section class="home-section community-section">
+  <section id="community" class="home-section community-section">
     <div class="community-title-col">
-      <h2 class="community-title">Join our Community</h2>
+      <h2 class="community-title">
+        <a class="home-section-title-link" href="#community">Join our Community</a>
+      </h2>
       {/* Figma: 304px arrow line below title (Vector 21 in node 34690:87121) */}
       <svg class="community-title-arrow" width="304" height="22" viewBox="0 0 304 22" fill="none" aria-hidden="true">
         <path d="M0 11H302M302 11L292 1M302 11L292 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -408,6 +420,7 @@ const icons = {
     padding: 0 var(--spacing-10);
     box-sizing: border-box;
     width: 100%;
+    scroll-margin-top: calc(var(--sl-nav-height) - var(--spacing-6));
   }
 
   /* Figma: Quick Start box = bg alpha/white 4.5%, radius rounded-lg(12), p spacing-8(32) */
@@ -429,6 +442,12 @@ const icons = {
   .home-section-title-sm {
     font-size: var(--text-4xl-size);
     line-height: 1;
+  }
+
+  .home-section-title-link {
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
   }
 
   /* Wrapper for Users + Developers — vertical stack with the same gap as other sections.
