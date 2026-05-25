@@ -131,6 +131,24 @@ async fn snippet_auth_flow() -> anyhow::Result<()> {
     Ok(())
 }
 
+async fn snippet_auth_flow_resume() -> anyhow::Result<()> {
+    // --8<-- [start:auth_flow_resume]
+    use pubky::{AuthFlowKind, Capabilities, Pubky};
+
+    let pubky = Pubky::new()?;
+    let caps = Capabilities::default();
+    let flow = pubky.start_auth_flow(&caps, AuthFlowKind::signin())?;
+
+    // Persist only for the short relay TTL; the URL contains a client secret.
+    let authorization_url = flow.authorization_url().to_string();
+
+    // After restart or refresh, reconnect to the same relay channel.
+    let resumed = pubky.resume_auth_flow(&authorization_url)?;
+    let session = resumed.await_approval().await?;
+    // --8<-- [end:auth_flow_resume]
+    Ok(())
+}
+
 // The social feed example defines structs and functions at the top level,
 // so it lives in its own module.
 mod social_feed {

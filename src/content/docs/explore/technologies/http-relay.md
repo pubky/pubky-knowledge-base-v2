@@ -32,6 +32,8 @@ The `/inbox` endpoint persists messages server-side for up to 5 minutes. The pro
 
 The relay only ever sees encrypted blobs — it cannot capture valid auth tokens.
 
+SDK clients can resume an in-progress auth flow after a page refresh or app restart by saving the original `authorizationUrl` and passing it to `resumeAuthFlow` / `resume_auth_flow`. The URL contains the relay URL and `client_secret`, so the SDK can rebuild the same inbox channel and continue polling. If Ring already posted the encrypted token while the app was away, `/inbox` can still return it as long as the channel is within its retention window. Delete the URL once the flow completes because it contains the `client_secret`.
+
 See the [pubky-core GitHub docs](https://github.com/pubky/pubky-core/blob/main/docs/AUTH.md) for the full protocol spec and [Authentication](/explore/pubkycore/authentication/) for an overview.
 
 ### Migration from /link to /inbox
