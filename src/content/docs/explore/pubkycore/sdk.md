@@ -104,7 +104,11 @@ Every user is identified by an Ed25519 public key:
 The SDK uses [PKARR](/explore/pubkycore/pkarr/introduction/) to discover where a user's data is hosted:
 1. Query [Mainline DHT](/explore/technologies/mainline-dht/) for public key
 2. Retrieve PKARR record with Homeserver URL
-3. Connect to Homeserver via HTTPS
+3. Connect to the Homeserver via HTTPS or PubkyTLS
+
+### Transport Selection
+
+Use SDK methods for ordinary storage and event operations instead of constructing Homeserver URLs yourself. For signed-in storage, pass the path, such as `/pub/myapp/profile`; the session supplies the user. For public reads or event subscriptions, pass the user's public key plus the path or event filter. The SDK turns that into the right HTTP request: it resolves the user's PKARR record, chooses PubkyTLS or standard HTTPS for the runtime, attaches session cookies when needed, and adds `pubky-host` when an HTTPS Homeserver endpoint needs the target public key. Choose endpoints or set `pubky-host` yourself only when you intentionally use the raw Homeserver HTTP API.
 
 ### Storage Paths
 

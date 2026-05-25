@@ -14,6 +14,8 @@ https://homeserver.example.com
 
 Homeserver URLs are discovered via [PKARR](/explore/pubkycore/pkarr/introduction/) records published to the [Mainline DHT](/explore/technologies/mainline-dht/).
 
+When you build with the [SDK](/explore/pubkycore/sdk/), it handles PKARR lookup, transport selection, session cookies, and the `pubky-host` header for HTTPS Homeserver requests. Use the raw HTTP API directly only when you are writing low-level integrations or server components that intentionally bypass the SDK helpers.
+
 ## Authentication
 
 See [Authentication](/explore/pubkycore/authentication/) for conceptual overview.

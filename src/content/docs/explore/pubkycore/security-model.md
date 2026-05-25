@@ -195,6 +195,8 @@ For connections to Pubky hosts (addresses like `_pubky.<z32>`), the [SDK](/explo
 - **Native (Rust)**: Full PubkyTLS support with raw public key verification
 - **WASM/Browser**: Uses standard HTTPS fallback (browsers don't support raw public key TLS)
 
+For Pubky resources, pass the Pubky URL or resource to the SDK and let it build the request. The SDK resolves PKARR, chooses PubkyTLS or standard HTTPS for the runtime, and adds `pubky-host` when an HTTPS Homeserver endpoint needs the target public key. Only set that header or choose endpoints yourself when deliberately using the raw Homeserver HTTP API.
+
 **ICANN hosts** (regular domains) continue to use standard X.509 TLS with CA verification.
 
 ## Authentication Security
