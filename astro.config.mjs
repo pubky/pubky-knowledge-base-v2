@@ -27,7 +27,7 @@ export default defineConfig({
 					tag: 'script',
 					attrs: {
 						defer: true,
-						'data-domain': 'docs.pubky.org',
+						'data-domain': 'pubky.org',
 						src: 'https://_analytics.synonym.to/js/script.outbound-links.js',
 					},
 				},
