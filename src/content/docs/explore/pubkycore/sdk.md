@@ -353,7 +353,7 @@ cargo run -p pubky-testnet
 
 Then connect your app to `http://localhost:15411`.
 
-For Rust integration tests that create an ephemeral testnet in-process, use `pubky-testnet` with the `docker-postgres` feature and `.with_docker_postgres()`. That v0.9.0 helper uses Docker via `testcontainers` instead of the old embedded PostgreSQL binary download path.
+For Rust integration tests that create an ephemeral testnet in-process, use `pubky-testnet` with the `docker-postgres` feature and `.with_docker_postgres()`. That v0.9.0 helper requires Docker to be installed and running on the host; it uses Docker via `testcontainers` instead of the old embedded PostgreSQL binary download path.
 
 **JavaScript:**
 ```javascript snippet="snippets/js/src/testnet-client.ts:js_testnet_client"

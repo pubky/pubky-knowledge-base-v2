@@ -181,7 +181,7 @@ Supported shells: `bash`, `zsh`, `fish`, `powershell`, `elvish`
 cargo test
 
 # Integration tests use pubky-testnet internally.
-# With Pubky Core v0.9+, make sure Docker is running if the suite uses
+# With Pubky Core v0.9+, make sure Docker is installed and running if the suite uses
 # the docker-postgres feature, or set TEST_PUBKY_CONNECTION_STRING
 # for an external PostgreSQL instance.
 ```

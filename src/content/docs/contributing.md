@@ -190,8 +190,12 @@ cargo build
 # Run tests
 cargo test
 
-# Run homeserver locally (requires PostgreSQL and database_url in config)
+# Run standalone homeserver locally (requires PostgreSQL and database_url in config)
 cargo run --bin pubky-homeserver
+
+# For Rust tests that use EphemeralTestnet, pubky-testnet can manage
+# PostgreSQL in Docker with the docker-postgres feature.
+# Docker must be installed and running on the host.
 
 # Format code
 cargo fmt
@@ -464,4 +468,3 @@ Ready to contribute? Here's your checklist:
 ---
 
 **Thank you for contributing to Pubky! Together we're building a decentralized, censorship-resistant web. 🚀**
-

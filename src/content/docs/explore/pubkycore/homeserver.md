@@ -71,7 +71,3 @@ For programmatic use:
 
 ```rust snippet="snippets/rust/src/lib.rs:testnet_docker_postgres"
 ```
-
-In v0.9.0 this helper delegates to `testcontainers_modules::postgres::Postgres::default()`. Pubky does not build a custom PostgreSQL image for it; Docker pulls the official Docker Hub `postgres:11-alpine` image selected by `testcontainers-modules` 0.15.0.
-
-The old `embedded-postgres` feature flag and `with_embedded_postgres()` API remain as deprecated aliases, but new code should use `docker-postgres` and `with_docker_postgres()`.
