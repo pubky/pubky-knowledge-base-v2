@@ -180,7 +180,10 @@ Supported shells: `bash`, `zsh`, `fish`, `powershell`, `elvish`
 # Run all tests (includes integration tests)
 cargo test
 
-# Test uses pubky-testnet internally - no external setup needed
+# Integration tests use pubky-testnet internally.
+# With Pubky Core v0.9+, make sure Docker is running if the suite uses
+# the docker-postgres feature, or set TEST_PUBKY_CONNECTION_STRING
+# for an external PostgreSQL instance.
 ```
 
 ### Example Workflow
@@ -320,4 +323,3 @@ pubky-cli user signup $HOMESERVER_PK ./recovery
 - [Pubky Homeservers](/explore/pubkycore/homeserver/) - Homeserver deployment and configuration
 - [Pubky Docker](/explore/technologies/pubky-docker/) - Full stack Docker environment
 - [Pubky Core API](/explore/pubkycore/api/) - HTTP API specification
-

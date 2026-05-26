@@ -52,21 +52,26 @@ For local development and testing, start PostgreSQL and configure `database_url`
 cargo run -p pubky-homeserver
 ```
 
-To spin up an ephemeral testnet:
+To spin up the fixed-port local testnet, make sure PostgreSQL is available at the default test URL (`postgres://postgres:postgres@localhost:5432/postgres?pubky-test=true`), then run:
 
 ```bash
 cargo run -p pubky-testnet
 ```
 
-### Embedded Postgres
+### Docker-Managed Postgres
 
-The testnet can start embedded Postgres via the `embedded-postgres` feature flag. This keeps local test environments self-contained without requiring an external database:
+Since v0.9.0, `pubky-testnet` can start PostgreSQL in Docker via the `docker-postgres` feature flag. This keeps local test environments self-contained without installing a separate database, but Docker must be running on the host.
 
-```bash
-cargo run -p pubky-testnet --features embedded-postgres
+```toml
+[dev-dependencies]
+pubky-testnet = { version = "0.9", features = ["docker-postgres"] }
 ```
 
-The examples use embedded Postgres by default. For programmatic use:
+For programmatic use:
 
-```rust snippet="snippets/rust/src/lib.rs:testnet_embedded"
+```rust snippet="snippets/rust/src/lib.rs:testnet_docker_postgres"
 ```
+
+In v0.9.0 this helper delegates to `testcontainers_modules::postgres::Postgres::default()`. Pubky does not build a custom PostgreSQL image for it; Docker pulls the official Docker Hub `postgres:11-alpine` image selected by `testcontainers-modules` 0.15.0.
+
+The old `embedded-postgres` feature flag and `with_embedded_postgres()` API remain as deprecated aliases, but new code should use `docker-postgres` and `with_docker_postgres()`.

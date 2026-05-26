@@ -130,7 +130,7 @@ flowchart LR
 - **User Choice**: Pick any Homeserver or run your own
 - **Data Ownership**: You control your data
 - **Portability**: Switch Homeservers without losing data
-- **Persistence Backends**: Files for user data; PostgreSQL for the homeserver's internal metadata (users, quotas, events — not exposed through the API)
+- **Storage layout**: Files for user data; PostgreSQL for the homeserver's internal metadata (users, quotas, events — not exposed through the API)
 
 **API Operations:**
 - `PUT /pub/app/path` - Store data
@@ -402,4 +402,3 @@ Users → Enterprise Homeserver + Custom Aggregator + Private Nexus → Internal
 - **[API Reference](/explore/pubkycore/api/)**: HTTP API specification
 - **[Comparisons](/comparisons/)**: How Pubky differs from alternatives
 - **[FAQ](/faq/)**: Frequently asked questions
-

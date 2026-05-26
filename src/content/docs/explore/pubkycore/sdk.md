@@ -333,18 +333,27 @@ The repository includes comprehensive examples:
 
 ### Local Testnet
 
-For development, run a local Homeserver:
+For browser or JavaScript development, run the fixed-port local testnet:
 
 ```bash
 # Clone repository
 git clone https://github.com/pubky/pubky-core
 cd pubky-core
 
-# Run testnet with embedded PostgreSQL
-cargo run -p pubky-testnet --features embedded-postgres
+# Start PostgreSQL for the static testnet if you do not already have it running
+docker run --rm --name pubky-postgres \
+  -e POSTGRES_USER=postgres \
+  -e POSTGRES_PASSWORD=postgres \
+  -p 127.0.0.1:5432:5432 \
+  -d postgres:18-alpine
+
+# Run the static testnet; it expects PostgreSQL on localhost:5432
+cargo run -p pubky-testnet
 ```
 
 Then connect your app to `http://localhost:15411`.
+
+For Rust integration tests that create an ephemeral testnet in-process, use `pubky-testnet` with the `docker-postgres` feature and `.with_docker_postgres()`. That v0.9.0 helper uses Docker via `testcontainers` instead of the old embedded PostgreSQL binary download path.
 
 **JavaScript:**
 ```javascript snippet="snippets/js/src/testnet-client.ts:js_testnet_client"

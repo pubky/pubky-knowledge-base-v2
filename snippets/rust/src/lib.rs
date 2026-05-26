@@ -367,14 +367,14 @@ async fn snippet_session_persistence() -> anyhow::Result<()> {
 // =============================================================================
 
 #[cfg(feature = "testnet")]
-async fn snippet_testnet_embedded() -> anyhow::Result<()> {
-    // --8<-- [start:testnet_embedded]
-    use pubky_testnet::EphemeralTestnetBuilder;
+async fn snippet_testnet_docker_postgres() -> anyhow::Result<()> {
+    // --8<-- [start:testnet_docker_postgres]
+    use pubky_testnet::EphemeralTestnet;
 
-    let testnet = EphemeralTestnetBuilder::new()
-        .with_embedded_postgres()
+    let _testnet = EphemeralTestnet::builder()
+        .with_docker_postgres()
         .build()
         .await?;
-    // --8<-- [end:testnet_embedded]
+    // --8<-- [end:testnet_docker_postgres]
     Ok(())
 }

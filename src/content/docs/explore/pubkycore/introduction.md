@@ -33,7 +33,7 @@ The open protocol that defines:
 
 ### 2. Homeserver Implementation
 A production-ready server application that:
-- Hosts user data in key-value stores
+- Hosts user data as path-addressed files
 - Provides RESTful HTTP API
 - Handles authentication and sessions
 - Publishes to [PKARR](/explore/pubkycore/pkarr/introduction/) for discovery
@@ -118,7 +118,7 @@ PKARR Record (Mainline DHT)
     ↓ Points to
 Homeserver Location
     ↓ Stores
-User Data (Key-Value)
+User Data (Path-Addressed Files)
     ↓ Accessed by
 Applications (via SDK)
 ```
