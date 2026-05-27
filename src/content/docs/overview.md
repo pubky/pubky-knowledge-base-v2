@@ -107,11 +107,11 @@ Understand the fundamental ideas behind Pubky:
 
 ## Work in Progress: Payment Protocol
 
-⚠️ **[Paykit](/explore/technologies/paykit/)** is a payment protocol (work in progress) built on Pubky for payment discovery and coordination. Not production-ready.
+⚠️ **[Paykit](/explore/technologies/paykit/)** is a work-in-progress payment protocol built on Pubky for payment discovery and coordination. Not production-ready.
 
-- [Paykit Overview](/explore/technologies/paykit/) - Current state and architecture (WIP)
-- [Repository](https://github.com/pubky/paykit-rs) - WIP
-- [Additional Documentation](https://github.com/BitcoinErrorLog/paykit-rs/tree/main/docs) - Informal drafts in a downstream working fork; not authoritative
+- [Paykit Overview](/explore/technologies/paykit/) - Current state and architecture
+- [Repository](https://github.com/pubky/paykit-rs) - Project status and docs
+- [Payment Endpoint Identifier Spec](https://github.com/pubky/paykit-rs/blob/master/specs/payment-endpoint-identifier.md) - Identifier convention
 
 ## Work in Progress: Encrypted Communication
 

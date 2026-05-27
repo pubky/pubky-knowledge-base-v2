@@ -211,19 +211,17 @@ Via CAPTCHAs, rate-limits, invites, and graph distance rules.
 <a id="q37"></a>
 ### Q37. How does Paykit fit in?
 
-Paykit is a **payment protocol (work in progress)** built on Pubky that aims to enable payment discovery and coordination across multiple methods (Bitcoin, Lightning, etc.). See [Client Features](/explore/pubky-apps/reference-app/introduction/) for the full feature list.
-
-⚠️ **Note**: Paykit is NOT production-ready and the protocol is subject to significant changes.
+Paykit adds payment method discovery and coordination to Pubky identities. See [Paykit](/explore/technologies/paykit/) for the full overview.
 
 <a id="q38"></a>
 ### Q38. Is Paykit ready for use?
 
-No. Paykit is currently a work in progress under active development. The protocol specification, security model, and implementation are all subject to breaking changes. Do not use it for production applications.
+No. Paykit is still a work in progress and not for production use. See [Paykit](/explore/technologies/paykit/) and the [Paykit repository](https://github.com/pubky/paykit-rs) for project status and docs.
 
 <a id="q39"></a>
 ### Q39. What payment methods will Paykit support?
 
-The initial focus is on Bitcoin on-chain and Lightning Network. The protocol is designed to be extensible to other methods (Liquid, Fedimint, ecash, etc.), but these are not yet implemented or specified.
+Paykit helps apps discover the payment details a payee publishes, but actual rail support depends on the integrating wallet or payment application. The initial examples focus on Bitcoin on-chain and Lightning, while the endpoint identifier format is designed to support other payment methods over time. See the [payment endpoint identifier spec](https://github.com/pubky/paykit-rs/blob/master/specs/payment-endpoint-identifier.md).
 
 <a id="q40"></a>
 ### Q40. Where is Paykit being tested?
@@ -233,7 +231,7 @@ Paykit is being integrated into Bitkit (iOS and Android) to validate the protoco
 <a id="q41"></a>
 ### Q41. When will Paykit be production-ready?
 
-There is no set timeline. Significant work remains on protocol stabilization, security auditing, cross-platform testing, and interoperability validation before Paykit can be recommended for production use.
+There is no set timeline. Protocol stabilization, security auditing, cross-platform testing, and interoperability validation still need more work.
 
 <a id="q42"></a>
 ### Q42. Can Pubky do everything Nostr can?

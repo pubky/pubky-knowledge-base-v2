@@ -170,9 +170,10 @@ If building a social app, leverage [Pubky Nexus](/explore/pubky-apps/indexing-an
 **Add Payments (WIP):**
 
 [Paykit](/explore/technologies/paykit/) protocol (work in progress) will enable:
-- Payment discovery via public keys
-- Bitcoin/Lightning integration
-- Subscriptions and monetization
+- Payment discovery via Pubky public keys
+- Public or private payment details for Bitcoin onchain, Lightning, and other rails
+- Encrypted receipt access for payers
+- Future subscriptions and monetization workflows
 
 **Add Encryption (WIP):**
 
