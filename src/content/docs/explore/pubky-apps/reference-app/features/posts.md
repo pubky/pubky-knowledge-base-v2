@@ -2,13 +2,37 @@
 title: "posts"
 ---
 
-In Pubky client, a **post** is a message that a user publishes on the platform. Posts are the core content and they can contain a variety of information, including:
+In pubky.app, a **post** is content that a user publishes under `/pub/pubky.app/posts/:post_id` on their homeserver. Posts are defined by [pubky-app-specs](/explore/pubky-apps/app-specs/) and indexed by [Nexus](/explore/pubky-apps/indexing-and-aggregation/pubky-nexus/) for feeds, replies, search, tags, and notifications.
 
-1. **Text**: There is not text limitation of plain text, which can include words, phrases, sentences, or even just a single character.
-2. **Media**: Post can include various types of media, such as images and videos.
-3. **[Tags](/explore/pubky-apps/reference-app/features/tags/)**: It is a keyword or phrase preceded by the "__#__" symbol, which help categorize and make post discoverable by topic.
-4. **Mentions**: References to other Pubky users, denoted by the "pk" keyword which notify them of the post.
-5. **Links**: URLs to external websites, articles, or other online content.
-6. **Emojis**: Small images or icons used to convey emotions or add tone to the tweet.
+## Post Types
 
-Users also can re-post and reply to posts
+`pubky-app-specs` defines these post kinds:
+
+1. **Short text**: Plain text content up to 2,000 Unicode scalar values.
+2. **Long text**: Long-form content up to 50,000 Unicode scalar values.
+3. **Image, video, link, and file posts**: Posts that use the regular post fields plus optional attachments.
+4. **Collection posts**: Ordered lists of existing Pubky App post URIs.
+
+Posts can also participate in social interactions:
+
+1. **Replies**: A post can reference a parent post URI.
+2. **Reposts/embeds**: A post can embed another post or resource by kind and URI.
+3. **Attachments**: Non-Collection posts can attach up to 4 `pubky`, `http`, or `https` URLs.
+4. **[Tags](/explore/pubky-apps/reference-app/features/tags/)**: Any user can tag a post to make it discoverable by topic or meaning.
+5. **Mentions and links**: Clients can render user references and external URLs from post content.
+
+## Collections
+
+A Collection post has `kind = "collection"` and stores a JSON envelope in `content`:
+
+```json
+{
+  "name": "Reading list",
+  "description": "Posts to revisit",
+  "items": [
+    "pubky://operrr8wsbpr3ue9d4qj41ge1kcc6r7fdiy6o3ugjrrhi4y77rdo/pub/pubky.app/posts/0034A0X7NJ52A"
+  ]
+}
+```
+
+Collection items must be canonical Pubky App post URIs. Collection posts cannot have a parent, embed, or regular `post.attachments`; the curated post URIs belong in the envelope's `items` list.

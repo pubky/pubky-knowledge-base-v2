@@ -294,9 +294,9 @@ Homeservers can implement signup verification to prevent spam while preserving p
 - Indexer = enables search/feeds across Homeservers
 
 <a id="q52"></a>
-### Q52. How do I ensure my app is compatible with Pubky App?
+### Q52. How do I ensure my app is compatible with pubky.app?
 
-Follow the [pubky-app-specs](https://github.com/pubky/pubky-app-specs) data model specification. This defines the structure and validation rules for users, posts, tags, bookmarks, follows, and feeds. The spec is available as an [npm package](https://www.npmjs.com/package/pubky-app-specs) (JavaScript/TypeScript) and Rust crates. Note: Currently v0.4.0 in rapid development; v1 will mark the first stable, long-term support version.
+Follow the [pubky-app-specs](https://github.com/pubky/pubky-app-specs) data model specification. This defines the structure and validation rules for users, posts, Collection posts, blobs/files, tags, bookmarks, follows, mutes, feeds, and read-state records. The spec is available as an [npm package](https://www.npmjs.com/package/pubky-app-specs) (JavaScript/TypeScript) and a [Rust crate](https://crates.io/crates/pubky-app-specs).
 
 <a id="q53"></a>
 ### Q53. What's the status of Pubky App development?

@@ -112,7 +112,7 @@ Explore the full API specification, test queries, and view response schemas dire
 ### Key Endpoint Categories
 
 - **User endpoints**: Profile data, follower/following relationships, user search
-- **Post endpoints**: Post creation/retrieval, replies, mentions, bookmarks
+- **Post endpoints**: Post creation/retrieval, Collection posts, replies, mentions, bookmarks
 - **Feed endpoints**: Timeline generation, filtered streams, personalized feeds
 - **Tag endpoints**: Tag-based discovery, trending tags, tag streams
 - **Search endpoints**: Full-text search across users and content
@@ -291,7 +291,7 @@ All contributions should include tests and benchmarks where applicable.
 
 If you're building a social client application to consume the Nexus API:
 
-- **Data Model Specification**: Use [pubky-app-specs](https://www.npmjs.com/package/pubky-app-specs) as your authoritative reference for data structures and validation rules
+- **Data Model Specification**: Use [pubky-app-specs](https://www.npmjs.com/package/pubky-app-specs) as your authoritative reference for data structures and validation rules, including Collection posts
 - **Web App**: [pubky.app](/explore/pubky-apps/reference-app/pubky-app/) ([github.com/pubky/pubky-app](https://github.com/pubky/pubky-app)) — the production reference implementation
 - **API Exploration**: Use the [Swagger UI](https://nexus.pubky.app/swagger-ui/) to explore available endpoints and test queries
 
@@ -302,4 +302,3 @@ If you're building a social client application to consume the Nexus API:
 - [Web Servers](/explore/pubky-apps/indexing-and-aggregation/web-server/) - API serving layer
 - [Custom Backend Architecture](/explore/pubky-apps/app-architectures/custom-backend/) - Overall architecture pattern
 - [Homeservers](/explore/pubkycore/homeserver/) - Data source and storage layer
-
