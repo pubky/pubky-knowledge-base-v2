@@ -280,7 +280,7 @@ Yes!
 <a id="q49"></a>
 ### Q49. What is Pubky Ring?
 
-[Pubky Ring](/explore/technologies/pubky-ring/) is the key manager app for the Pubky ecosystem. It's a native mobile app (iOS/Android) that securely manages your pubkys (public keys), authorizes applications, manages sessions, and handles key derivation—all self-custodially with no accounts, passwords, or tracking. Think of it as your keychain for decentralized identity.
+[Pubky Ring](/explore/technologies/pubky-ring/) is the key manager app for the Pubky ecosystem. It's a native mobile app (iOS/Android) that securely manages your pubkys (public keys), authorizes applications, manages sessions, and handles import or migration flows, all self-custodially with no accounts, passwords, or tracking. Think of it as your keychain for decentralized identity.
 
 <a id="q50"></a>
 ### Q50. How do users join Pubky App?
