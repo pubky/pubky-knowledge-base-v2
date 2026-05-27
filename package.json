@@ -11,7 +11,7 @@
     "check:snippets": "npm run check:snippets:js && npm run check:snippets:react-native && npm run check:snippets:rust",
     "check:snippets:js": "npm --prefix snippets/js run check",
     "check:snippets:react-native": "npm --prefix snippets/react-native run check",
-    "check:snippets:rust": "cargo clippy --manifest-path snippets/rust/Cargo.toml -- -D warnings && cargo fmt --manifest-path snippets/rust/Cargo.toml --check"
+    "check:snippets:rust": "cargo clippy --manifest-path snippets/rust/Cargo.toml --all-features -- -D warnings && cargo fmt --manifest-path snippets/rust/Cargo.toml --check"
   },
   "dependencies": {
     "@astrojs/starlight": "^0.37.6",
