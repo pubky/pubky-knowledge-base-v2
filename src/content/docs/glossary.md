@@ -70,7 +70,7 @@ The Distributed Hash Table used by BitTorrent, with 10+ million nodes globally. 
 Production-grade indexing and aggregation service for [pubky.app](/explore/pubky-apps/reference-app/pubky-app/). Provides high-performance social graph API, search, and real-time notifications.
 
 **[Noise](/explore/technologies/pubky-noise/)** (Pubky Noise)
-Noise Protocol implementation for encrypted peer-to-peer communication in the Pubky ecosystem (work in progress).
+Noise Protocol implementation for encrypted application messages over Pubky Homeservers (work in progress).
 
 ## P
 

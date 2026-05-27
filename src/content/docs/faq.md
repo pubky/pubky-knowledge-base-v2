@@ -356,12 +356,12 @@ Long-term: Cryptree-style systems and further R&D.
 <a id="q63"></a>
 ### Q63. What is Pubky Noise?
 
-Pubky Noise is a Noise Protocol implementation that provides encrypted communication channels for the Pubky ecosystem. It uses the IK handshake pattern for mutual authentication and forward secrecy. Currently used by [Paykit](/explore/technologies/paykit/) for private payment negotiation, it can also support other applications requiring secure peer-to-peer communication. Work in progress - not production-ready yet.
+Pubky Noise is a Noise Protocol implementation for encrypted application messages over Pubky Homeservers. It lets applications exchange private messages without requiring direct peer-to-peer sockets. Work in progress - not production-ready yet.
 
 <a id="q64"></a>
 ### Q64. How does Pubky Noise differ from the Noise Protocol?
 
-Pubky Noise is a specific implementation of the Noise Protocol Framework adapted for the Pubky ecosystem. It integrates with Pubky's Ed25519 identity system, derives X25519 encryption keys automatically, and publishes endpoints to Homeserver directories for peer discovery. It provides platform-specific bindings (iOS, Android, Web, CLI) and handles session management.
+Pubky Noise adapts the Noise Protocol Framework to Pubky's Homeserver-based storage model. The maintained implementation details are in the [pubky-noise repository](https://github.com/pubky/pubky-noise).
 
 ---
 
