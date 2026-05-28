@@ -371,7 +371,7 @@ Share practical examples:
 
 ### Building Clients
 
-Building a Pubky App-compatible client?
+Building a pubky.app-compatible client?
 
 1. **Use pubky-app-specs**: [npm package](https://www.npmjs.com/package/pubky-app-specs) or [Rust crate](https://crates.io/crates/pubky-app-specs)
 2. **Follow the spec**: Ensure interoperability
