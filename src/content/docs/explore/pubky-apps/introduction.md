@@ -10,13 +10,13 @@ title: "Introduction"
 
 Pubky App is a decentralized social media application built on [Pubky Core](/explore/pubkycore/introduction/). It serves as a working reference implementation demonstrating how to build social applications on the Pubky protocol.
 
-The data models and validation rules are formally specified in the [pubky-app-specs](https://github.com/pubky/pubky-app-specs) repository, which defines structures for users, posts, tags, bookmarks, follows, and feeds. This specification ensures interoperability between different Pubky App implementations.
+The data models and validation rules are formally specified in the [pubky-app-specs](https://github.com/pubky/pubky-app-specs) repository, which defines structures for users, posts, tags, bookmarks, follows, mutes, and feeds. This specification ensures interoperability between different Pubky App implementations.
 
 ### Live Application & Development Status
 
 - **Live Demo**: [https://pubky.app](https://pubky.app) - Production instance currently operational
-- **Repository**: [github.com/pubky/pubky-app](https://github.com/pubky/pubky-app) — Reference implementation and source code
-- **Build Compatible Clients**: Use [pubky-app-specs](https://www.npmjs.com/package/pubky-app-specs) as the authoritative specification
+- **Repository**: [github.com/pubky/pubky-app](https://github.com/pubky/pubky-app) - Reference implementation and source code
+- **Build Compatible Clients**: Use [pubky-app-specs](https://www.npmjs.com/package/pubky-app-specs) as the authoritative specification.
 
 ## Key aspects
 

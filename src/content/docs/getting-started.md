@@ -141,7 +141,7 @@ Learn from working examples:
 
 **Social App (Pubky App Specs):**
 - [pubky-app-specs](https://github.com/pubky/pubky-app-specs) - Data models for social features
-- [npm: pubky-app-specs](https://www.npmjs.com/package/pubky-app-specs) - Validation schemas
+- [npm: pubky-app-specs](https://www.npmjs.com/package/pubky-app-specs) / [crates.io: pubky-app-specs](https://crates.io/crates/pubky-app-specs) - Validation schemas and helper APIs
 
 **CLI Tool:**
 - [Pubky CLI](/explore/technologies/pubky-cli/) - Reference implementation for user/admin operations

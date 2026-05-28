@@ -371,9 +371,9 @@ Share practical examples:
 
 ### Building Clients
 
-Building a Pubky App-compatible client?
+Building a pubky.app-compatible client?
 
-1. **Use pubky-app-specs**: [npm package](https://www.npmjs.com/package/pubky-app-specs)
+1. **Use pubky-app-specs**: [npm package](https://www.npmjs.com/package/pubky-app-specs) or [Rust crate](https://crates.io/crates/pubky-app-specs)
 2. **Follow the spec**: Ensure interoperability
 3. **Test against Nexus**: Use [nexus.pubky.app](https://nexus.pubky.app/swagger-ui/)
 4. **Share your work**: Let the community know!
@@ -464,4 +464,3 @@ Ready to contribute? Here's your checklist:
 ---
 
 **Thank you for contributing to Pubky! Together we're building a decentralized, censorship-resistant web. 🚀**
-

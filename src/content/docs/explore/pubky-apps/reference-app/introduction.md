@@ -17,7 +17,7 @@ The Pubky client is the user-facing application for interacting with the Pubky s
 The web client is live at [pubky.app](https://pubky.app).
 
 **For Developers**:
-- **Building Compatible Clients**: Use [pubky-app-specs](https://www.npmjs.com/package/pubky-app-specs) as the authoritative data model specification
+- **Building Compatible Clients**: Use [pubky-app-specs](https://www.npmjs.com/package/pubky-app-specs) as the authoritative data model specification.
 - **Contributing**: Contributions welcome at [github.com/pubky/pubky-app](https://github.com/pubky/pubky-app)
 
 Using the library analogy, the Pubky Client is like a personalized research assistant who takes the prepared documents from the librarian ([backend](/explore/pubky-apps/indexing-and-aggregation/introduction/)) and creates a customized report just for you. This report is designed to be easy to read and understand, with all the relevant information presented in a clear and concise manner.
@@ -40,4 +40,3 @@ Using the library analogy, the Pubky Client is like a personalized research assi
 Future Pubky app versions may leverage Paykit once it reaches production readiness to enable peer-to-peer data markets, creator monetization, and value exchange throughout the ecosystem.
 
 - Communities facilitate moderation and discovery around shared interests.
-

@@ -2,13 +2,15 @@
 title: "posts"
 ---
 
-In Pubky client, a **post** is a message that a user publishes on the platform. Posts are the core content and they can contain a variety of information, including:
+In pubky.app, a **post** is content that a user publishes under `/pub/pubky.app/posts/:post_id` on their homeserver. Posts are defined by [pubky-app-specs](/explore/pubky-apps/app-specs/) and indexed by [Nexus](/explore/pubky-apps/indexing-and-aggregation/pubky-nexus/) for feeds, replies, search, tags, and notifications.
 
-1. **Text**: There is not text limitation of plain text, which can include words, phrases, sentences, or even just a single character.
-2. **Media**: Post can include various types of media, such as images and videos.
-3. **[Tags](/explore/pubky-apps/reference-app/features/tags/)**: It is a keyword or phrase preceded by the "__#__" symbol, which help categorize and make post discoverable by topic.
-4. **Mentions**: References to other Pubky users, denoted by the "pk" keyword which notify them of the post.
-5. **Links**: URLs to external websites, articles, or other online content.
-6. **Emojis**: Small images or icons used to convey emotions or add tone to the tweet.
+## Post Types
 
-Users also can re-post and reply to posts
+`pubky-app-specs` is the canonical source for post kinds, fields, limits, and validation rules. See the [`PubkyAppPost` section of the `pubky-app-specs` README](https://github.com/pubky/pubky-app-specs#pubkyapppost).
+
+Posts can also participate in social interactions:
+
+1. **Replies**: A post can reference a parent post URI.
+2. **Reposts/embeds**: A post can embed another post or resource by kind and URI.
+3. **[Tags](/explore/pubky-apps/reference-app/features/tags/)**: Any user can tag a post to make it discoverable by topic or meaning.
+4. **Mentions and links**: Clients can render user references and external URLs from post content.

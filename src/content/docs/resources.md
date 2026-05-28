@@ -31,7 +31,7 @@ All under [github.com/pubky](https://github.com/pubky):
 - [pubky-app](https://github.com/pubky/pubky-app) — Pubky social media application
 - [pubky-ring](https://github.com/pubky/pubky-ring) — Mobile key manager app
 - [pubky-nexus](https://github.com/pubky/pubky-nexus) — Aggregator and indexer for pubky.app
-- [pubky-app-specs](https://github.com/pubky/pubky-app-specs) — Shared data models and validation for apps interoperable with pubky.app
+- [pubky-app-specs](https://github.com/pubky/pubky-app-specs) - Shared data models and validation for apps interoperable with pubky.app
 - [pkarr](https://github.com/pubky/pkarr) — Public Key Addressable Resource Records (sovereign TLDs)
 - [mainline](https://github.com/pubky/mainline) — BitTorrent Mainline DHT implementation in Rust
 - [react-native-pubky](https://github.com/pubky/react-native-pubky) — React Native bindings
@@ -74,14 +74,14 @@ All under [github.com/pubky](https://github.com/pubky):
 
 - [pubky](https://crates.io/crates/pubky) — Pubky Rust SDK
 - [pkarr](https://crates.io/crates/pkarr) — Public Key Addressable Resource Records
-- [pubky-app-specs](https://crates.io/crates/pubky-app-specs) — Shared data models and validation for Pubky apps
+- [pubky-app-specs](https://crates.io/crates/pubky-app-specs) - Shared data models and validation for Pubky apps
 - [mainline](https://crates.io/crates/mainline) — BitTorrent Mainline DHT implementation
 
 ### npm (JavaScript/TypeScript)
 
 - [@synonymdev/pubky](https://www.npmjs.com/package/@synonymdev/pubky) — Pubky JavaScript/TypeScript SDK
 - [@synonymdev/pkarr](https://www.npmjs.com/package/@synonymdev/pkarr) — Pkarr JavaScript/TypeScript SDK
-- [pubky-app-specs](https://www.npmjs.com/package/pubky-app-specs) — Shared data models and validation for Pubky apps
+- [pubky-app-specs](https://www.npmjs.com/package/pubky-app-specs) - Shared data models and validation for Pubky apps
 
 ### React Native
 

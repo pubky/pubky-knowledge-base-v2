@@ -302,4 +302,3 @@ If you're building a social client application to consume the Nexus API:
 - [Web Servers](/explore/pubky-apps/indexing-and-aggregation/web-server/) - API serving layer
 - [Custom Backend Architecture](/explore/pubky-apps/app-architectures/custom-backend/) - Overall architecture pattern
 - [Homeservers](/explore/pubkycore/homeserver/) - Data source and storage layer
-

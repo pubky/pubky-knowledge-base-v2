@@ -157,4 +157,3 @@ Traditional model where trust propagates through social connections. Pubky exten
 - **[FAQ](/faq/)**: Frequently asked questions
 - **[Comparisons](/comparisons/)**: How Pubky compares to alternatives
 - **[Vision](/the-vision-of-pubky/)**: Why we're building Pubky
-

@@ -300,7 +300,7 @@ The React Native SDK (`@synonymdev/react-native-pubky`) provides the same API as
 ```javascript snippet="snippets/js/src/profile-storage.ts:js_profile_storage"
 ```
 
-**Note**: This example follows the [pubky-app-specs](https://github.com/pubky/pubky-app-specs) data model specification for interoperability with Pubky App ecosystem.
+**Note**: This example follows the [pubky-app-specs](https://github.com/pubky/pubky-app-specs) data model specification for interoperability with the pubky.app ecosystem.
 
 ### Social Feed Application
 
