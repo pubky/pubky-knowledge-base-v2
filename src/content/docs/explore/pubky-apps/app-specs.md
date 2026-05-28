@@ -28,7 +28,7 @@ All data is stored under `/pub/pubky.app/` on the user's homeserver. Key models 
 - **PubkyAppFeed** - Saved feed configuration
 - **PubkyAppLastRead** - Notification/read-state marker
 
-See the [repository](https://github.com/pubky/pubky-app-specs) for the full schema reference, ID generation rules, validation constraints, and TypeScript/Rust APIs.
+See the [`pubky-app-specs` README](https://github.com/pubky/pubky-app-specs) for the current schema reference, ID generation rules, validation constraints, and TypeScript/Rust APIs.
 
 ## Compatibility Contract
 
@@ -79,28 +79,6 @@ Collection validation rules:
 - Each item must be exactly a Pubky App post URI with a 52-character Pubky ID and a 13-character Crockford post ID.
 - The full Collection envelope is limited to 40,000 Unicode scalar values.
 - `parent`, `embed`, and non-empty `post.attachments` are rejected for Collection posts.
-
-## Validation Limits
-
-The package exposes a canonical validation-limits bundle so apps can keep UI validation aligned with indexer validation. Character limits are counted with Rust `chars().count()`, not byte length. Important limits include:
-
-| Area | Limit |
-| ---- | ----- |
-| Blob/file size | Greater than 0 bytes and up to 104,857,600 bytes (100 MB in the spec) |
-| User name | 3-50 characters |
-| Bio | 160 characters |
-| Profile image URL | 300 characters |
-| Profile links | 5 links, with title up to 100 characters and URL up to 300 characters |
-| Status | 50 characters |
-| Short/image/video/link/file post content | 2,000 characters |
-| Long post content | 50,000 characters |
-| Post attachments | 4 URLs, each up to 200 characters |
-| Tag label | 1-20 characters; no comma, colon, or whitespace |
-| Feed tags | 5 tags |
-| Collection content | 40,000 characters |
-| Collection name | 1-100 characters |
-| Collection description | 500 characters |
-| Collection items | 100 canonical Pubky App post URIs |
 
 ## Role in Ecosystem
 
