@@ -29,7 +29,7 @@ The application follows a local-first architecture where writes commit to local 
 ## Key Features
 
 - **Social feeds** (home, hot/trending, search) via [Nexus](/explore/pubky-apps/indexing-and-aggregation/pubky-nexus/)
-- **Profiles, posts, Collection posts, bookmarks, notifications**
+- **Profiles, posts, bookmarks, notifications**
 - **QR Code Authentication** via [Pubky Ring](/explore/technologies/pubky-ring/)
 - **Offline support** — PWA with service worker caching and local-first writes
 
