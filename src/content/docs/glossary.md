@@ -117,7 +117,7 @@ Web-based file browser for exploring public data on Pubky Homeservers. Available
 Mobile key manager app (iOS/Android) for securely managing pubkys, authorizing applications, and handling sessions.
 
 **[pubky-app-specs](/explore/pubky-apps/app-specs/)**
-Formal data model specifications for [pubky.app](/explore/pubky-apps/reference-app/pubky-app/), defining structures for users, posts, Collection posts, blobs/files, tags, bookmarks, follows, mutes, feeds, and other social features. Any Pubky app that follows these specs can interoperate with pubky.app and its ecosystem.
+Formal data model specifications for [pubky.app](/explore/pubky-apps/reference-app/pubky-app/), defining structures for users, posts, tags, and other social features. Any Pubky app that follows these specs can interoperate with pubky.app and its ecosystem.
 
 ## R
 

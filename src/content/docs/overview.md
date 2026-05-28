@@ -84,7 +84,7 @@ Learn more about the overall vision here: [The Vision of Pubky](/the-vision-of-p
 
 - **Live Application**: [https://pubky.app](https://pubky.app) - Production PWA currently operational
 - **Web Client**: [pubky.app](/explore/pubky-apps/reference-app/pubky-app/) ([github.com/pubky/pubky-app](https://github.com/pubky/pubky-app))
-- **Data Model Specification**: [App Specs](/explore/pubky-apps/app-specs/) ([pubky-app-specs](https://github.com/pubky/pubky-app-specs)) - Formal schema definitions for interoperability, including Collection posts
+- **Data Model Specification**: [App Specs](/explore/pubky-apps/app-specs/) ([pubky-app-specs](https://github.com/pubky/pubky-app-specs)) - Formal schema definitions for interoperability
 
 ### Backend Infrastructure
 

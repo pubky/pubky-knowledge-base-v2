@@ -140,7 +140,7 @@ cargo run
 Learn from working examples:
 
 **Social App (Pubky App Specs):**
-- [pubky-app-specs](https://github.com/pubky/pubky-app-specs) - Data models for social features, including Collection posts
+- [pubky-app-specs](https://github.com/pubky/pubky-app-specs) - Data models for social features
 - [npm: pubky-app-specs](https://www.npmjs.com/package/pubky-app-specs) - Validation schemas and helper APIs
 
 **CLI Tool:**
