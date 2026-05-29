@@ -110,7 +110,7 @@ sequenceDiagram
 
 ### Storage Layer
 
-**[Homeservers](/explore/pubkycore/homeserver/)** store user data as path-addressed files over a simple HTTP API, similar to WebDAV.
+**[Homeservers](/explore/pubkycore/homeserver/)** store user data in a filesystem over a simple HTTP API, similar to WebDAV.
 
 **Architecture:**
 
