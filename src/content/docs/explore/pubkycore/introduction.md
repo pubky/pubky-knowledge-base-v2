@@ -82,7 +82,7 @@ Pubky Core's distributed architecture provides user autonomy through credible ex
 - **Docker support**: Easy deployment and testing
 
 ### Production-Ready
-- **PostgreSQL-backed metadata**: Homeservers store user files separately while PostgreSQL tracks users, quotas, sessions, and events
+- **Persistent file storage**: Homeservers let apps create, read, update, delete, and list path-addressed files under `/pub/` through a simple HTTP API.
 - **Rate limiting**: Built-in DDoS protection
 - **Metrics and monitoring**: Prometheus-compatible metrics
 - **Admin API**: Server management and diagnostics
