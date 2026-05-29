@@ -30,7 +30,7 @@ In **Pubky**, Credible Exit is not just an idea—it's built into the architectu
 
 - **Decentralized Identity**: With Pubky, your identity is not tied to any one server. You use self-issued public keys that are recognized across the network. This means you can change where your data is hosted without losing your identity or connections.
 
-- **Data Portability**: [Pubky Backup](/explore/technologies/pubky-backup/) is a desktop tool for keeping snapshots of a user's data on the Homeserver. Re-uploading those files to a new Homeserver is still a manual workflow today, while seamless restore and Homeserver mirroring are planned features.
+- **Data Portability**: [Pubky Backup](/explore/technologies/pubky-backup/) is a desktop tool that stores local snapshots of a user's published Homeserver data. Re-uploading those local files to a new Homeserver is still a manual workflow today, while seamless restore and Homeserver mirroring are planned features.
 
 > _NOTE_: During Pubky's initial bootstrapping phase, credible exit may not be fully practical until more Homeserver providers and migration tools mature. [Synonym](https://synonym.to/) is building tools to make it easy for businesses and users to self-host, and Pubky Backup reduces one important exit cost by keeping a local data copy.
 

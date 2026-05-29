@@ -261,7 +261,7 @@ Even with all planned improvements, some trust remains:
 - Loss of mnemonic = permanent loss of that identity (by design, no recovery)
 - Review capability requests carefully before approving in [Pubky Ring](/explore/technologies/pubky-ring/)
 - Use [Pubky Backup](/explore/technologies/pubky-backup/) to maintain local copies and snapshots of your data on the Homeserver you're using.
-- Homeserver mirroring is not yet available — backups are currently your practical data-portability path
+- Homeserver mirroring is not yet available — backups are currently your credible exit path
 
 ### For App Developers
 
@@ -287,8 +287,8 @@ This section shows how [credible exit](/explore/concepts/credible-exit/) works i
 | Phase | What Happens | User Action |
 |-------|--------------|-------------|
 | Immediate | Data becomes temporarily inaccessible | Wait for recovery or decide to migrate |
-| If prolonged | Use [Pubky Backup](/explore/technologies/pubky-backup/) as the source copy for migration | Sign up on a new Homeserver |
-| Recovery | Re-upload backed-up data with Pubky tooling, update [PKARR](/explore/pubkycore/pkarr/introduction/) record | External links resolve to the new location after caches update |
+| If prolonged | Use your local [Pubky Backup](/explore/technologies/pubky-backup/) copy as migration input | Sign up on a new Homeserver |
+| Recovery | Re-upload backed-up data once migration tooling supports the needed workflow, then update [PKARR](/explore/pubkycore/pkarr/introduction/) record | External links resolve to the new location after caches update |
 
 Your identity (keypair in Ring) is unaffected. The homeserver going down is an inconvenience, not a catastrophe.
 

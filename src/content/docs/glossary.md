@@ -92,7 +92,7 @@ Any application built on [Pubky Core](/explore/pubkycore/introduction/). A Pubky
 The reference implementation of a Pubky app — a decentralized social media application built by Synonym, live at [pubky.app](https://pubky.app). It demonstrates how to build social applications on the Pubky protocol using [Nexus](/explore/pubky-apps/indexing-and-aggregation/pubky-nexus/) for indexing and the [pubky-app-specs](/explore/pubky-apps/app-specs/) data model.
 
 **[Pubky Backup](/explore/technologies/pubky-backup/)**
-Desktop app that keeps local copies and snapshots of public `/pub/...` data from Pubky Homeservers. It supports data portability, but does not back up identity keys or provide one-click restore.
+Desktop app for keeping local copies of published Homeserver data. Current app details are in the [Pubky Backup README](https://github.com/pubky/pubky-backup/blob/main/README.md).
 
 **[Pubky CLI](/explore/technologies/pubky-cli/)**
 Command-line tool for interacting with Pubky Homeservers, providing user operations, admin functions, and testing utilities.

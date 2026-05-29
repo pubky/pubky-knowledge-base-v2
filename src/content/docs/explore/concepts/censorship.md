@@ -22,7 +22,7 @@ In **Pubky**, the approach is not to eliminate censorship entirely—because som
 
 - **Decentralized Identity**: In Pubky, user identities are not dependent on any single server. By using **self-issued public keys**, users maintain their identity even if they change hosting providers. This prevents identity loss when moving away from a server that engages in censorship.
 
-- **Data Portability and Redundancy**: Pubky makes user data portable by storing it in simple Homeserver paths and by supporting local copies through [Pubky Backup](/explore/technologies/pubky-backup/). Users can keep their published data outside the control of a single Homeserver. Full Homeserver mirroring and seamless failover are still planned work.
+- **Data Portability and Redundancy**: Pubky makes user data portable by storing it in simple Homeserver paths and by supporting local copies through [Pubky Backup](/explore/technologies/pubky-backup/). Full Homeserver mirroring and seamless failover are still planned work.
 
 ## Important Aspects of Censorship Resistance
 

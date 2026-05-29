@@ -244,11 +244,7 @@ sequenceDiagram
 
 ### Pubky Backup
 
-**[Pubky Backup](/explore/technologies/pubky-backup/)** provides:
-- Local copies of public `/pub/...` Homeserver data
-- Multi-pubky background sync
-- Point-in-time zip snapshots
-- A practical data-portability path while Homeserver mirroring is still planned
+**[Pubky Backup](/explore/technologies/pubky-backup/)** is a desktop app for backing up published Homeserver data locally. Use the [Pubky Backup README](https://github.com/pubky/pubky-backup/blob/main/README.md) for install and feature details, and the [pubky-backup-core README](https://github.com/pubky/pubky-backup/blob/main/src-tauri/pubky-backup-core/README.md) for sync, storage, and API architecture.
 
 ### PKDNS
 

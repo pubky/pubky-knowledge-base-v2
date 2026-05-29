@@ -118,7 +118,7 @@ Use the SDK libraries ([@synonymdev/pubky](https://www.npmjs.com/package/@synony
 <a id="q20"></a>
 ### Q20. How is redundancy handled?
 
-Today, users should keep local copies of published data with [Pubky Backup](/explore/technologies/pubky-backup/). Homeserver mirroring and automatic failover are planned but not yet implemented, so practical redundancy currently means backups, self-hosting options, and the ability to repoint your identity with PKARR.
+Today, users should keep local copies of published data with [Pubky Backup](/explore/technologies/pubky-backup/). Homeserver mirroring and automatic failover are planned but not yet implemented, so practical redundancy currently means backups, self-hosting options, and the ability to repoint your identity with PKARR. PKARR records are distributed through the [Mainline DHT](/explore/technologies/mainline-dht/) and periodically republished to stay available.
 
 <a id="q21"></a>
 ### Q21. Does it support load balancing?

@@ -82,10 +82,7 @@ Example paths:
 
 Install **[Pubky Backup](/explore/technologies/pubky-backup/)** to keep local copies of the public `/pub/...` data stored on your Homeserver.
 
-1. Download Pubky Backup from [github.com/pubky/pubky-backup](https://github.com/pubky/pubky-backup/releases).
-2. Add your pubky public key.
-3. Let the app sync in the background.
-4. Create snapshots before migrating Homeservers or making major changes.
+Use the maintained [Pubky Backup README](https://github.com/pubky/pubky-backup/blob/main/README.md) and [release builds](https://github.com/pubky/pubky-backup/releases) for current download and install instructions.
 
 Pubky Backup does not replace your recovery phrase. The recovery phrase protects your identity key; Pubky Backup protects a local copy of your published data.
 
