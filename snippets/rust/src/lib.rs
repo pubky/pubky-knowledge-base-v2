@@ -361,20 +361,3 @@ async fn snippet_session_persistence() -> anyhow::Result<()> {
     // --8<-- [end:session_persistence]
     Ok(())
 }
-
-// =============================================================================
-// Snippets from: src/content/docs/explore/pubkycore/homeserver.md
-// =============================================================================
-
-#[cfg(feature = "testnet")]
-async fn snippet_testnet_docker_postgres() -> anyhow::Result<()> {
-    // --8<-- [start:testnet_docker_postgres]
-    use pubky_testnet::EphemeralTestnet;
-
-    let _testnet = EphemeralTestnet::builder()
-        .with_docker_postgres()
-        .build()
-        .await?;
-    // --8<-- [end:testnet_docker_postgres]
-    Ok(())
-}

@@ -193,16 +193,15 @@ cargo test
 # Run standalone homeserver locally (requires PostgreSQL and database_url in config)
 cargo run --bin pubky-homeserver
 
-# For Rust tests that use EphemeralTestnet, pubky-testnet can manage
-# PostgreSQL in Docker with the docker-postgres feature.
-# Docker must be installed and running on the host.
-
 # Format code
 cargo fmt
 
 # Lint
 cargo clippy
 ```
+
+For local `pubky-testnet` setup, including Docker-managed or external PostgreSQL, follow the
+[Pubky Testnet README](https://github.com/pubky/pubky-core/blob/main/pubky-testnet/README.md).
 
 **Requirements:**
 - Rust 1.89+

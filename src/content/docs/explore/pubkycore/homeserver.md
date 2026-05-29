@@ -52,22 +52,6 @@ For local development and testing, start PostgreSQL and configure `database_url`
 cargo run -p pubky-homeserver
 ```
 
-To spin up the fixed-port local testnet, make sure PostgreSQL is available at the default test URL (`postgres://postgres:postgres@localhost:5432/postgres?pubky-test=true`), then run:
-
-```bash
-cargo run -p pubky-testnet
-```
-
-### Docker-Managed Postgres
-
-Since v0.9.0, `pubky-testnet` can start PostgreSQL in Docker via the `docker-postgres` feature flag. This keeps local test environments self-contained without installing a separate database, but Docker must be running on the host.
-
-```toml
-[dev-dependencies]
-pubky-testnet = { version = "0.9", features = ["docker-postgres"] }
-```
-
-For programmatic use:
-
-```rust snippet="snippets/rust/src/lib.rs:testnet_docker_postgres"
-```
+For the fixed-port local testnet, Docker-managed PostgreSQL, external PostgreSQL, and in-process
+testnet usage, follow the
+[Pubky Testnet README](https://github.com/pubky/pubky-core/blob/main/pubky-testnet/README.md).

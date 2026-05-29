@@ -174,17 +174,14 @@ Supported shells: `bash`, `zsh`, `fish`, `powershell`, `elvish`
 
 ## Testing & CI
 
-### Local Testing
-
 ```bash
 # Run all tests (includes integration tests)
 cargo test
-
-# Integration tests use pubky-testnet internally.
-# With Pubky Core v0.9+, make sure Docker is installed and running if the suite uses
-# the docker-postgres feature, or set TEST_PUBKY_CONNECTION_STRING
-# for an external PostgreSQL instance.
 ```
+
+If integration tests require `pubky-testnet`, follow the
+[Pubky Testnet README](https://github.com/pubky/pubky-core/blob/main/pubky-testnet/README.md)
+for local database setup.
 
 ### Example Workflow
 
