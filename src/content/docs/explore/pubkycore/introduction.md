@@ -258,7 +258,6 @@ For [Synonym](https://synonym.to/) as lead of this project, the goal is to:
 - ✅ JavaScript/WASM bindings stable
 - ✅ Authentication system complete
 - ✅ Event streaming SDK (SSE-based, single and multi-user)
-- ✅ User file storage on Homeservers, with PostgreSQL-backed metadata
 
 **Active Development:**
 - 🚧 Mobile native bindings (iOS/Android)
