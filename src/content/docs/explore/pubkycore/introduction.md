@@ -33,7 +33,7 @@ The open protocol that defines:
 
 ### 2. Homeserver Implementation
 A production-ready server application that:
-- Hosts user data as path-addressed files
+- Hosts user data in a filesystem
 - Provides RESTful HTTP API
 - Handles authentication and sessions
 - Publishes to [PKARR](/explore/pubkycore/pkarr/introduction/) for discovery
@@ -82,7 +82,7 @@ Pubky Core's distributed architecture provides user autonomy through credible ex
 - **Docker support**: Easy deployment and testing
 
 ### Production-Ready
-- **Persistent file storage**: Homeservers let apps create, read, update, delete, and list path-addressed files under `/pub/` through a simple HTTP API.
+- **Persistent file storage**: Homeservers let apps create, read, update, delete, and list files in a filesystem under `/pub/` through a simple HTTP API.
 - **Rate limiting**: Built-in DDoS protection
 - **Metrics and monitoring**: Prometheus-compatible metrics
 - **Admin API**: Server management and diagnostics
@@ -118,7 +118,7 @@ PKARR Record (Mainline DHT)
     ↓ Points to
 Homeserver Location
     ↓ Stores
-User Data (Path-Addressed Files)
+User Data (Filesystem)
     ↓ Accessed by
 Applications (via SDK)
 ```
