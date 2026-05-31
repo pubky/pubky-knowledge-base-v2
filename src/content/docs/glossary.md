@@ -39,7 +39,7 @@ Protocol for encrypting DNS queries using HTTPS, preventing surveillance and tam
 ## H
 
 **[Homeserver](/explore/pubkycore/homeserver/)**
-A web server that stores user data in a key-value format. Users can run their own or choose any provider. Data is stored per public key and accessed via HTTP/HTTPS.
+A web server that stores user data in a filesystem over a simple HTTP API. Internally, PostgreSQL tracks metadata such as users, quotas, sessions, and events. Users can run their own or choose any provider. Data is stored per public key and accessed via HTTP/HTTPS.
 
 **[Homegate](/explore/technologies/homegate/)**
 A signup verification service for Homeservers, providing SMS and Lightning Network payment verification to prevent spam while preserving privacy.

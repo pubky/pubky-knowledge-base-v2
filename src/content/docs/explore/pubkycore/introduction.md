@@ -33,11 +33,11 @@ The open protocol that defines:
 
 ### 2. Homeserver Implementation
 A production-ready server application that:
-- Hosts user data in key-value stores
+- Hosts user data in a filesystem
 - Provides RESTful HTTP API
 - Handles authentication and sessions
 - Publishes to [PKARR](/explore/pubkycore/pkarr/introduction/) for discovery
-- Supports multiple persistence backends (Files, LMDB, SQL)
+- Stores user files separately from PostgreSQL-backed homeserver metadata
 - Includes admin and metrics endpoints
 
 ### 3. SDK (Software Development Kit)
@@ -82,7 +82,7 @@ Pubky Core's distributed architecture provides user autonomy through credible ex
 - **Docker support**: Easy deployment and testing
 
 ### Production-Ready
-- **Multiple persistence backends**: Choose between Files, LMDB, or SQL
+- **Persistent file storage**: Homeservers let apps create, read, update, delete, and list files in a filesystem under `/pub/` through a simple HTTP API.
 - **Rate limiting**: Built-in DDoS protection
 - **Metrics and monitoring**: Prometheus-compatible metrics
 - **Admin API**: Server management and diagnostics
@@ -118,7 +118,7 @@ PKARR Record (Mainline DHT)
     ↓ Points to
 Homeserver Location
     ↓ Stores
-User Data (Key-Value)
+User Data (Filesystem)
     ↓ Accessed by
 Applications (via SDK)
 ```
@@ -147,10 +147,11 @@ See [SDK Documentation](/explore/pubkycore/sdk/) for complete guides.
 ### Run Local Homeserver
 
 **Using Cargo:**
+Start PostgreSQL and configure `database_url` before running a standalone Homeserver:
 ```bash
 git clone https://github.com/pubky/pubky-core
 cd pubky-core/pubky-homeserver
-cargo run
+cargo run -- --data-dir=~/.pubky
 ```
 
 **Using Docker:**
@@ -257,7 +258,6 @@ For [Synonym](https://synonym.to/) as lead of this project, the goal is to:
 - ✅ JavaScript/WASM bindings stable
 - ✅ Authentication system complete
 - ✅ Event streaming SDK (SSE-based, single and multi-user)
-- ✅ Multiple persistence backends
 
 **Active Development:**
 - 🚧 Mobile native bindings (iOS/Android)

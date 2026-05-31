@@ -333,18 +333,12 @@ The repository includes comprehensive examples:
 
 ### Local Testnet
 
-For development, run a local Homeserver:
+For browser or JavaScript development, use the fixed-port local testnet from Pubky Core. The
+[Pubky Testnet README](https://github.com/pubky/pubky-core/blob/main/pubky-testnet/README.md)
+keeps the current setup steps for Docker-managed PostgreSQL, external PostgreSQL, and in-process
+Rust testnets.
 
-```bash
-# Clone repository
-git clone https://github.com/pubky/pubky-core
-cd pubky-core
-
-# Run testnet
-cargo run --bin pubky-testnet
-```
-
-Then connect your app to `http://localhost:15411`.
+After it is running, connect your app to `http://localhost:15411`.
 
 **JavaScript:**
 ```javascript snippet="snippets/js/src/testnet-client.ts:js_testnet_client"

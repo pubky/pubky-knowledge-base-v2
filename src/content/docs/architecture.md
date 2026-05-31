@@ -110,7 +110,7 @@ sequenceDiagram
 
 ### Storage Layer
 
-**[Homeservers](/explore/pubkycore/homeserver/)** store user data in a key-value format over HTTP/HTTPS.
+**[Homeservers](/explore/pubkycore/homeserver/)** store user data in a filesystem over a simple HTTP API, similar to WebDAV.
 
 **Architecture:**
 
@@ -119,18 +119,18 @@ flowchart LR
     User1[User 1] --> HS1[Homeserver A]
     User2[User 2] --> HS1
     User3[User 3] --> HS2[Homeserver B]
-    User4[User 4] --> HS3[Homeserver C]
     
-    HS1 --> DB1[(PostgreSQL)]
-    HS2 --> DB2[(LMDB)]
-    HS3 --> DB3[(Files)]
+    HS1 --> FS1[(User files)]
+    HS1 --> PG1[(PostgreSQL metadata)]
+    HS2 --> FS2[(User files)]
+    HS2 --> PG2[(PostgreSQL metadata)]
 ```
 
 **Key Properties:**
 - **User Choice**: Pick any Homeserver or run your own
 - **Data Ownership**: You control your data
 - **Portability**: Switch Homeservers without losing data
-- **Persistence Backends**: Files for user data; PostgreSQL for the homeserver's internal metadata (users, quotas, events — not exposed through the API)
+- **Storage layout**: Files for user data; PostgreSQL for the homeserver's internal metadata (users, quotas, events — not exposed through the API)
 
 **API Operations:**
 - `PUT /pub/app/path` - Store data
@@ -402,4 +402,3 @@ Users → Enterprise Homeserver + Custom Aggregator + Private Nexus → Internal
 - **[API Reference](/explore/pubkycore/api/)**: HTTP API specification
 - **[Comparisons](/comparisons/)**: How Pubky differs from alternatives
 - **[FAQ](/faq/)**: Frequently asked questions
-

@@ -174,14 +174,14 @@ Supported shells: `bash`, `zsh`, `fish`, `powershell`, `elvish`
 
 ## Testing & CI
 
-### Local Testing
-
 ```bash
 # Run all tests (includes integration tests)
 cargo test
-
-# Test uses pubky-testnet internally - no external setup needed
 ```
+
+If integration tests require `pubky-testnet`, follow the
+[Pubky Testnet README](https://github.com/pubky/pubky-core/blob/main/pubky-testnet/README.md)
+for local database setup.
 
 ### Example Workflow
 
@@ -213,7 +213,7 @@ echo "User onboarded successfully!"
 
 Test Homeserver functionality without building custom clients:
 ```bash
-# Start local homeserver
+# Start local homeserver (requires PostgreSQL and database_url in config)
 cargo run -p pubky-homeserver -- --data-dir ~/.pubky
 
 # Test with CLI
@@ -320,4 +320,3 @@ pubky-cli user signup $HOMESERVER_PK ./recovery
 - [Pubky Homeservers](/explore/pubkycore/homeserver/) - Homeserver deployment and configuration
 - [Pubky Docker](/explore/technologies/pubky-docker/) - Full stack Docker environment
 - [Pubky Core API](/explore/pubkycore/api/) - HTTP API specification
-

@@ -358,7 +358,7 @@ Returns the user count, the disabled-user count, total disk usage in MB, signup-
   "public_key": "8pinxxgqs41n4aididenw5apqp1urfmzdztr8jt4abrkdn435ewo",
   "pkarr_pubky_address": null,
   "pkarr_icann_domain": "homeserver.example.com",
-  "version": "0.7.0"
+  "version": "0.9.0"
 }
 ```
 

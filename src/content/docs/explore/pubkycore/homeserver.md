@@ -46,27 +46,12 @@ See [Security Model](/explore/pubkycore/security-model/) for the full trust anal
 
 > **Note:** Production deployment guides are not yet available. Easy deployment packages (Umbrel, apt, docker, start9) are under development.
 
-For local development and testing:
+For local development and testing, start PostgreSQL and configure `database_url`, then run:
 
 ```bash
 cargo run -p pubky-homeserver
 ```
 
-To spin up an ephemeral testnet:
-
-```bash
-cargo run -p pubky-testnet
-```
-
-### Embedded Postgres
-
-Since v0.7.0, the testnet supports an optional embedded Postgres mode via the `embedded-postgres` feature flag. This allows fully self-contained test environments without requiring an external database:
-
-```bash
-cargo run -p pubky-testnet --features embedded-postgres
-```
-
-The examples use embedded Postgres by default. For programmatic use:
-
-```rust snippet="snippets/rust/src/lib.rs:testnet_embedded"
-```
+For the fixed-port local testnet, Docker-managed PostgreSQL, external PostgreSQL, and in-process
+testnet usage, follow the
+[Pubky Testnet README](https://github.com/pubky/pubky-core/blob/main/pubky-testnet/README.md).

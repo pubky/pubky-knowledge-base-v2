@@ -190,7 +190,7 @@ cargo build
 # Run tests
 cargo test
 
-# Run homeserver locally
+# Run standalone homeserver locally (requires PostgreSQL and database_url in config)
 cargo run --bin pubky-homeserver
 
 # Format code
@@ -199,6 +199,9 @@ cargo fmt
 # Lint
 cargo clippy
 ```
+
+For local `pubky-testnet` setup, including Docker-managed or external PostgreSQL, follow the
+[Pubky Testnet README](https://github.com/pubky/pubky-core/blob/main/pubky-testnet/README.md).
 
 **Requirements:**
 - Rust 1.89+
