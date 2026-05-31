@@ -1,10 +1,10 @@
 # Pubky Knowledge Base
 
-[![Documentation Status](https://img.shields.io/badge/docs-live-success)](https://docs.pubky.org/)
+[![Documentation Status](https://img.shields.io/badge/docs-live-success)](https://pubky.org/)
 
 Welcome to the Pubky Knowledge Base.
 
-### [Access the Pubky Knowledge Base](https://docs.pubky.org/)
+### [Access the Pubky Knowledge Base](https://pubky.org/)
 
 This site documents Pubky's vision, architecture, key concepts, and practical guides for Pubky Core and pubky.app.
 
@@ -39,12 +39,12 @@ Run commands from the project root:
 
 ## AI-Readable Docs
 
-AI agents and humans can read the docs as plain Markdown from:
+AI tools can reference the docs through these plain Markdown endpoints:
 
-- `https://docs.pubky.org/llms.txt`
-- `https://docs.pubky.org/llms-full.txt`
-- `https://docs.pubky.org/llms-small.txt`
+- [https://pubky.org/llms.txt](https://pubky.org/llms.txt)
+- [https://pubky.org/llms-full.txt](https://pubky.org/llms-full.txt)
+- [https://pubky.org/llms-small.txt](https://pubky.org/llms-small.txt)
 
-`llms-small.txt` links to per-page Markdown files. You can also open them directly by adding `.md` to a docs path, for example `https://docs.pubky.org/getting-started.md` or `https://docs.pubky.org/explore/pubkycore/sdk.md`.
+[llms-small.txt](https://pubky.org/llms-small.txt) links to per-page Markdown files. You can also open them directly by adding `.md` to a docs path, for example [pubky.org/getting-started.md](https://pubky.org/getting-started.md) or [pubky.org/explore/pubkycore/sdk.md](https://pubky.org/explore/pubkycore/sdk.md).
 
 Locally, `npm run build` generates the same files in `dist/`.
