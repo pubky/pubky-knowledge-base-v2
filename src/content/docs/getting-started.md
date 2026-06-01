@@ -173,7 +173,7 @@ If building a social app, leverage [Pubky Nexus](/explore/pubky-apps/indexing-an
 - Payment discovery via Pubky public keys
 - Public or private payment details for Bitcoin onchain, Lightning, and other rails
 - Encrypted receipt access for payers
-- Future subscriptions and monetization workflows
+- Subscriptions and payment request workflows
 
 **Add Encryption (WIP):**
 
