@@ -26,6 +26,6 @@ Using the library analogy, the Pubky Client is like a personalized research assi
 
 - Pubky client uses the open [Pubky Core](/explore/pubkycore/introduction/) for nearly all features, allowing users to avoid censorship by choosing self-hosting or alternate hosts without losing followers or integrity. 
 
-Future pubky.app versions may leverage [Paykit](/explore/technologies/paykit/) once it reaches production readiness to support peer-to-peer data markets, creator monetization, and value exchange throughout the ecosystem.
+Future pubky.app versions may leverage [Paykit](/explore/technologies/paykit/) once infrastructure reaches production readiness to support creator monetization.
 
 - Communities facilitate moderation and discovery around shared interests.
