@@ -38,8 +38,6 @@ Paykit helps apps discover the payment details a payee publishes, but actual pay
 
 Paykit does not move funds, custody keys, choose a payment rail, or implement wallet logic. Payment method selection, payment execution and key management remain the responsibility of the integrating wallet, payment processor, or application.
 
-Paykit also does not manage subscriptions, auto-pay, or other payment automation yet.
-
 ## Current Status
 
 The current implementation includes public payment lists, private payment envelopes, encrypted links, and encrypted receipt access. [Bitkit](https://bitkit.to/) integrations on iOS and Android are used as protocol testbeds before stabilization.
