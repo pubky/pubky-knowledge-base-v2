@@ -75,7 +75,7 @@ Noise Protocol implementation for encrypted peer-to-peer communication in the Pu
 ## P
 
 **[Paykit](/explore/technologies/paykit/)**
-Payment protocol built on Pubky for payment discovery and coordination across Bitcoin, Lightning, and other methods (work in progress).
+Payment protocol built on Pubky for payment discovery and coordination across multiple payment methods, including Bitcoin on-chain and Lightning (work in progress).
 
 **[PKARR](/explore/pubkycore/pkarr/introduction/)** (Public Key Addressable Resource Records)
 Self-issued, signed DNS-like records published to the Mainline DHT. Each record is tied to a public key and contains information like Homeserver locations.

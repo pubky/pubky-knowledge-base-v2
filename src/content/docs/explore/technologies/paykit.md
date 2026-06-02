@@ -6,151 +6,62 @@ title: "Paykit: Decentralized Payment Protocol (Work in Progress)"
 
 ## Overview
 
-Paykit is a payment protocol (work in progress) built on Pubky that aims to enable payment discovery, negotiation, and coordination across multiple payment methods (Bitcoin onchain, Lightning Network, and potentially others).
+Paykit is a payment protocol built on Pubky for payment discovery and coordination across multiple payment methods, including Bitcoin on-chain and Lightning. Apps can start from a Pubky public key, discover public payment details, privately share payment details over encrypted channels, and let payers retrieve encrypted receipts.
 
 ## Core Concept
 
-Paykit abstracts payment complexity behind a single, static **Pubky public key**. Your public key becomes a universal payment identifier - recipients would discover your available payment methods by querying your [Homeserver](/explore/pubkycore/homeserver/)'s public directory at `/pub/paykit.app/v0/`.
+Paykit uses a payee's Pubky public key as the stable starting point for payment discovery. Instead of asking for an address or invoice out of band, an app can look up the published payment details on a [Homeserver](/explore/pubkycore/homeserver/) under `/pub/paykit/v0/{payment_endpoint_identifier}`.
 
-This enables applications where users pay directly to profiles, offering an intuitive experience when multiple payment methods are possible.
+This enables applications where users can pay directly to profiles while still letting the integrating wallet or payment processor decide which payment rail to use.
 
-## Proposed Architecture (Under Development)
+## How Paykit Works
 
-### Three-Layer System
+Paykit uses Pubky Homeservers for payment data and [Pubky Noise](/explore/technologies/pubky-noise/) for private Paykit messages.
 
-1. **Public Directory Layer** (`paykit-lib`)
-   - Publish payment methods to Pubky Homeservers
-   - Discover methods from other users' public keys
-   - Public read access for discovery
+### Public Payment Details
 
-2. **Interactive Payment Layer** (`paykit-interactive`)
-   - Encrypted channels using **[Pubky Noise](/explore/technologies/pubky-noise/)** for private negotiation
-   - Receipt exchange and payment coordination
-   - End-to-end encrypted communication
+Payees publish payment details to their Homeserver. Anyone who knows the payee's Pubky public key can discover those public details.
 
-3. **Subscription & Automation Layer** (`paykit-subscriptions`)
-   - Recurring payment agreements with cryptographic signatures
-   - Auto-pay rules with spending limits
-   - Payment request system with expiration
+### Private Payment Coordination
 
-## Key Features (In Development)
+When a payment should not rely on public payment details, a payee can share a private payment list with a specific counterparty over an encrypted channel. Private payment details are exchanged as Private Payment Envelopes.
 
-### Payment Method Discovery
-Query any Pubky identity to discover their available payment methods (onchain, Lightning, or custom).
+### Encrypted Receipts
 
-### Encrypted Payment Negotiation
-Private channels for payment coordination using **[Pubky Noise](/explore/technologies/pubky-noise/)**, a Noise Protocol (IK pattern) implementation built for the Pubky ecosystem. This avoids revealing payment details publicly.
+Paykit receipts are encrypted before storage. The payee stores the encrypted receipt on their Homeserver and sends the payer the access details needed to retrieve and decrypt it.
 
-**Pubky Noise** provides:
-- End-to-end encrypted communication channels
-- Three-step IK handshake for secure connections
-- WebSocket and TCP transport support
-- Integration with Pubky identity system
+## Payment Methods
 
-### Subscriptions & Recurring Payments
-- Cryptographically signed subscription agreements
-- Flexible billing frequencies (daily, weekly, monthly, yearly)
-- Auto-pay with configurable spending limits
-- Replay protection via nonce tracking
+Paykit helps apps discover the payment details a payee publishes, but actual payment method support depends on the integrating wallet or payment application. The initial examples focus on Bitcoin on-chain and Lightning, while the endpoint identifier format is designed to support other payment methods over time. See the [Paykit Payment Endpoint Identifier Specification](https://github.com/pubky/paykit-rs/blob/master/specs/payment-endpoint-identifier.md).
 
-### Security Model (Evolving)
-**Sealed Blob v1 Encryption**: Sensitive data on public Pubky paths is encrypted:
-- Payment requests encrypted to recipient's Noise public key
-- Subscription proposals/agreements encrypted per-party
-- X25519 ECDH + HKDF-SHA256 + ChaCha20-Poly1305
-- Prerequisite: Noise endpoint published at `/pub/paykit.app/v0/noise`
+## What Paykit Does Not Do
 
-See **[Pubky Noise](/explore/technologies/pubky-noise/)** for details on the encrypted channel implementation.
+Paykit does not move funds, custody keys, choose a payment rail, or implement wallet logic. Payment method selection, payment execution and key management remain the responsibility of the integrating wallet, payment processor, or application.
 
-## Current Implementation Status
+## Current Status
 
-**Current Version**: 1.0.1 (Work in Progress)
-- 🚧 Core library under development
-- 🚧 Interactive protocol (WIP)
-- 🚧 Subscription system (WIP)
-- 🚧 Security model evolving
-- 🚧 Protocol specification in flux
-- 🚧 Integration testing in Bitkit (iOS/Android)
+The current implementation includes public payment lists, private payment envelopes, encrypted links, and encrypted receipt access. [Bitkit](https://bitkit.to/) integrations on iOS and Android are used as protocol testbeds before stabilization.
 
-### Demo Applications
-- **CLI**: Command-line reference implementation (WIP)
-- **Web**: WebAssembly browser demo
-- **iOS Demo**: SwiftUI prototype with Keychain storage
-- **Android Demo**: Jetpack Compose prototype
+## Potential Use Cases
 
-### Testing Integrations
-- **Bitkit iOS**: Protocol testing integration (~80 files)
-- **Bitkit Android**: Protocol testing integration (~97 files)
-- **[Pubky Ring](/explore/technologies/pubky-ring/)**: Identity and key management integration
+### Direct Profile Payments
 
-## Potential Use Cases (Future)
+Pay directly to profiles using Pubky identity without asking for an address or invoice out of band.
 
-### Direct Peer Payments
-Pay directly to profiles using Pubky identity without requesting addresses or invoices.
+### Creator Monetization
 
-### Content Monetization
-- Paywalls for content
-- Tip jars for creators
-- Micropayments for API access
+Use public or private payment details for tips, paid content, or creator support.
 
-### Subscription Services
-- Magazine subscriptions
-- SaaS billing
-- Recurring donations
+### Commerce
 
-### E-Commerce
-- Online store checkouts
-- Marketplace payments
-- Service bookings
-
-## Technical Details (Subject to Change)
-
-### Storage Paths
-- Payment methods: `/pub/paykit.app/v0/{methodId}` (public)
-- Noise endpoint: `/pub/paykit.app/v0/noise` (public)
-- Payment requests: `/pub/paykit.app/v0/requests/{id}` (encrypted)
-- Subscriptions: `/pub/paykit.app/v0/subscriptions/*` (encrypted)
-
-### Supported Payment Methods (Planned)
-- **onchain**: Bitcoin on-chain addresses
-- **lightning**: BOLT11 invoices, LNURL-pay, Lightning addresses
-- **Custom**: Extensible to other methods (under consideration)
-
-### Key Management
-- **Ed25519**: Identity signing and verification
-- **X25519**: Noise Protocol key exchange
-- Derived from same seed via HKDF ([Pubky Ring](/explore/technologies/pubky-ring/) integration)
-
-## Relationship to Pubky Core
-
-Paykit is designed as a **layer 2 protocol** on top of Pubky Core:
-- Uses Pubky Homeservers for storage
-- Leverages Pubky's public-key identity system
-- Integrates with Pubky's DHT-based discovery
-- Extends Pubky with payment-specific functionality
-
-## Development Status & Roadmap
-
-- ⏳ Protocol specification stabilization
-- ⏳ Security audit and hardening
-- ⏳ Cross-platform testing and validation
-- ⏳ Production deployment planning
-- ⏳ Interoperability testing
-- ⏳ Performance optimization
+Applications could use Paykit discovery around store checkouts, service bookings, or marketplace payments while keeping actual payment execution in the wallet or payment processor.
 
 ## Related Research
 
 **Atomicity Protocol** - Peer-to-peer mutual credit system research exploring trust-based payment routing using Pubky's [Semantic Social Graph](/explore/concepts/semantic-social-graph/). Designed as settlement infrastructure for credit issuance and transfer across economic scales from peer-to-peer to institutional banking. Currently in research phase.
 
-## Resources
+## References
 
-- **Repository**: [github.com/pubky/paykit-rs](https://github.com/pubky/paykit-rs) (WIP)
-- **Additional Documentation**: [paykit-rs/docs/](https://github.com/BitcoinErrorLog/paykit-rs/tree/main/docs) — informal drafts in a downstream working fork; not authoritative
-- **Protocol Spec**: [PAYKIT_PROTOCOL_V0.md](https://github.com/BitcoinErrorLog/paykit-rs/blob/main/docs/PAYKIT_PROTOCOL_V0.md) (Draft)
-- **Bitkit iOS (WIP Testing)**: [github.com/BitcoinErrorLog/bitkit-ios](https://github.com/BitcoinErrorLog/bitkit-ios)
-- **Bitkit Android (WIP Testing)**: [github.com/BitcoinErrorLog/bitkit-android](https://github.com/BitcoinErrorLog/bitkit-android)
-- **[Pubky Ring](/explore/technologies/pubky-ring/) (Identity Manager)**: See dedicated page for identity and key management
-
----
-
-**⚠️ Important**: Do not use Paykit for production applications. The protocol is a work in progress and subject to breaking changes.
+- **Repository and protocol overview**: [github.com/pubky/paykit-rs](https://github.com/pubky/paykit-rs)
+- **Library usage and API details**: [paykit-lib README](https://github.com/pubky/paykit-rs/blob/master/paykit-lib/README.md)
+- **Paykit Payment Endpoint Identifier Specification**: [payment-endpoint-identifier.md](https://github.com/pubky/paykit-rs/blob/master/specs/payment-endpoint-identifier.md)
