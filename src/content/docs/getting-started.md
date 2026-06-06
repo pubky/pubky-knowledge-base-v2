@@ -177,10 +177,7 @@ If building a social app, leverage [Pubky Nexus](/explore/pubky-apps/indexing-an
 
 **Add Encryption (WIP):**
 
-[Pubky Noise](/explore/technologies/pubky-noise/) (work in progress) provides:
-- Encrypted peer-to-peer channels
-- Private messaging
-- Secure data sharing
+[Pubky Noise](/explore/technologies/pubky-noise/) (work in progress) provides encrypted application-message transport over Pubky Homeservers. Use the [pubky-noise repository](https://github.com/pubky/pubky-noise) for current implementation details.
 
 ### Step 6: Deploy to Production
 
