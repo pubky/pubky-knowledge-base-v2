@@ -4,7 +4,9 @@ title: "HTTP Relay"
 
 HTTP relay service for forwarding encrypted AuthTokens during Pubky [authentication](/explore/pubkycore/authentication/) flows.
 
-- **GitHub**: [`pubky/pubky-http-relay`](https://github.com/pubky/pubky-http-relay)
+- **GitHub**: [`pubky/http-relay`](https://github.com/pubky/http-relay)
+- **Crate**: [`http-relay`](https://crates.io/crates/http-relay)
+- **Releases**: [GitHub Releases](https://github.com/pubky/http-relay/releases)
 - **Default endpoint**: `https://httprelay.pubky.app/inbox`
 - **License**: MIT
 - **Language**: Rust
