@@ -17,7 +17,8 @@ Learn more about the overall vision here: [The Vision of Pubky](/the-vision-of-p
 ## Quick Start
 
 - **[TLDR](/tldr/)**: 30-second overview of the entire ecosystem
-- **[Getting Started](/getting-started/)**: Complete guide for users and developers
+- **[Getting Started](/getting-started/)**: User guide to Pubky identity, pubky.app, and your data
+- **[Developer Guide](/explore/pubkycore/getting-started/)**: First steps for building on Pubky
 - **[Glossary](/glossary/)**: Quick reference for key terms
 - **[Comparisons](/comparisons/)**: How Pubky compares to other protocols
 - **[Frequently Asked Questions (FAQ)](/faq/)**: 63+ questions answered
@@ -44,6 +45,7 @@ Learn more about the overall vision here: [The Vision of Pubky](/the-vision-of-p
 ### Core Documentation
 
 - [Pubky Core Overview](/explore/pubkycore/introduction/) - Protocol, Homeserver, and SDK
+- [Developer Guide](/explore/pubkycore/getting-started/) - First steps for building on Pubky
 - [SDK Documentation](/explore/pubkycore/sdk/) - Client libraries (Rust, JavaScript, iOS, Android)
 - [API Reference](/explore/pubkycore/api/) - RESTful HTTP API specification
 - [Architecture Overview](/architecture/) - System design and data flow
@@ -122,7 +124,8 @@ Understand the fundamental ideas behind Pubky:
 
 ## Community & Support
 
-- **[Getting Started](/getting-started/)** - Complete onboarding guide
+- **[Getting Started](/getting-started/)** - User onboarding guide
+- **[Developer Guide](/explore/pubkycore/getting-started/)** - Developer onboarding guide
 - **[FAQ](/faq/)** - Frequently asked questions
 - **[Troubleshooting](/troubleshooting/)** - Common issues and solutions
 - **[Contributing](/contributing/)** - How to contribute to Pubky
@@ -131,4 +134,4 @@ Understand the fundamental ideas behind Pubky:
 
 ---
 
-**Ready to get started? Check out the [Getting Started](/getting-started/) guide or dive into [Pubky Core](/explore/pubkycore/introduction/)!**
+**Ready to get started? Use the [user guide](/getting-started/) or the [developer guide](/explore/pubkycore/getting-started/).**

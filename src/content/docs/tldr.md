@@ -49,7 +49,7 @@ flowchart LR
 ## Get Started
 
 - **Users**: Download [Pubky Ring](/explore/technologies/pubky-ring/) → Try [pubky.app](https://pubky.app)
-- **Developers**: Check [Getting Started Guide](/getting-started/) → Install [SDK](/explore/pubkycore/sdk/)
+- **Developers**: Check the [Developer Guide](/explore/pubkycore/getting-started/) → Install [SDK](/explore/pubkycore/sdk/)
 
 ## Learn More
 

@@ -122,6 +122,7 @@ export default defineConfig({
 					label: 'Pubky Core',
 					items: [
 						{ label: 'Introduction', slug: 'explore/pubkycore/introduction' },
+						{ label: 'Developer Guide', slug: 'explore/pubkycore/getting-started' },
 						{ label: 'ELI5', slug: 'explore/pubkycore/eli5' },
 						{ label: 'Authentication', slug: 'explore/pubkycore/authentication' },
 						{ label: 'Homeserver', slug: 'explore/pubkycore/homeserver' },
