@@ -52,19 +52,23 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
 
     <div class="open-with">
       <span class="open-with-label">Open with:</span>
-      <div class="open-with-links">
-        {aiLinks.map((link) => (
-          <a href={link.url} target="_blank" rel="noopener noreferrer" class="open-with-btn" aria-label={`Open with ${link.name} (opens in new tab)`} data-tooltip={link.tooltip ?? link.name}>
-            <span class="ai-icon" data-icon={link.icon} aria-hidden="true" style={iconUrl(link.icon)}></span>
-          </a>
-        ))}
-        <button class="copy-prompt-btn" aria-label="Copy prompt to clipboard" data-tooltip="Copy prompt" data-prompt={aiPrompt}>
-          <span class="copy-prompt-label">Prompt</span>
-          <img class="copy-prompt-icon" src={withBase('/images/icons/line-copy.svg')} width="16" height="16" alt="" aria-hidden="true" />
-          <svg class="copy-prompt-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#28c840" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <polyline points="20 6 9 17 4 12"></polyline>
-          </svg>
-        </button>
+      <div class="open-with-row">
+        <div class="open-with-links">
+          {aiLinks.map((link) => (
+            <a href={link.url} target="_blank" rel="noopener noreferrer" class="open-with-btn" aria-label={`Open with ${link.name} (opens in new tab)`} data-tooltip={link.tooltip ?? link.name}>
+              <span class="ai-icon" data-icon={link.icon} aria-hidden="true" style={iconUrl(link.icon)}></span>
+            </a>
+          ))}
+          <button class="copy-prompt-btn" aria-label="Copy prompt to clipboard" data-tooltip="Copy prompt" data-prompt={aiPrompt}>
+            <span class="copy-prompt-label">Prompt</span>
+            <img class="copy-prompt-icon" src={withBase('/images/icons/line-copy.svg')} width="16" height="16" alt="" aria-hidden="true" />
+            <svg class="copy-prompt-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#28c840" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </button>
+        </div>
+        {/* Arrow-Animation */}
+        <img class="open-with-arrow" src={withBase('/images/icons/arrow-dashed-left.svg')} width="82" height="22" alt="" aria-hidden="true" />
       </div>
     </div>
   </div>
@@ -318,10 +322,55 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
     line-height: var(--text-base-lh);
   }
 
-  /* Figma: Row = flex, gap spacing-3(12) */
+  /* Buttons box + highlight arrow. gap 21px = no spacing token fits. */
+  .open-with-row {
+    display: flex;
+    align-items: center;
+    gap: 21px;
+    align-self: flex-start;
+  }
+
+  /* Bordered box wrapping the AI buttons. Border pulses white via highlight below. */
   .open-with-links {
     display: flex;
-    gap: var(--spacing-3);
+    align-items: center;
+    gap: var(--spacing-4);
+    padding: var(--spacing-4) var(--spacing-6);
+    background: var(--base-background);
+    border: 1px solid var(--base-card);
+    border-radius: var(--radius-lg);
+  }
+
+  /* Highlight arrow. 82x22 = exact SVG vector size. */
+  .open-with-arrow {
+    width: 82px;
+    height: 22px;
+    flex-shrink: 0;
+  }
+
+  /* ~5s loop: idle dark, fade border white + slide arrow in, hold, fade back. */
+  @media (prefers-reduced-motion: no-preference) {
+    .open-with-links {
+      animation: ai-box-highlight 5s ease-in-out infinite;
+    }
+
+    .open-with-arrow {
+      animation: ai-arrow-flash 5s ease-in-out infinite;
+    }
+  }
+
+  @keyframes ai-box-highlight {
+    0%, 28% { border-color: var(--base-card); }
+    36%, 60% { border-color: var(--base-foreground); }
+    68%, 100% { border-color: var(--base-card); }
+  }
+
+  /* Arrow slides in from right as it fades in, resets while invisible. */
+  @keyframes ai-arrow-flash {
+    0%, 28% { opacity: 0; transform: translateX(24px); }
+    36%, 60% { opacity: 1; transform: translateX(0); }
+    68% { opacity: 0; transform: translateX(0); }
+    100% { opacity: 0; transform: translateX(24px); }
   }
 
   .open-with-btn {
@@ -407,11 +456,11 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
   .copy-prompt-btn.copied .copy-prompt-icon { display: none; }
   .copy-prompt-btn.copied .copy-prompt-check { display: block; }
 
-  /* Figma: Logos = 32x32, border-radius rounded-sm(6) */
+  /* Figma: Logos = 40x40, border-radius rounded-sm(6) */
   .ai-icon {
     display: inline-block;
-    width: 32px;
-    height: 32px;
+    width: 40px;
+    height: 40px;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -662,6 +711,21 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
     /* Figma: AI Kit spans both columns on mobile */
     .install-actions .btn-ai-kit {
       grid-column: 1 / -1;
+    }
+
+    /* Mobile: 32x32 icons, tighter box, no arrow — fit one row. */
+    .ai-icon {
+      width: 32px;
+      height: 32px;
+    }
+
+    .open-with-links {
+      gap: var(--spacing-2);
+      padding: var(--spacing-3) var(--spacing-4);
+    }
+
+    .open-with-arrow {
+      display: none;
     }
 
     .terminal {
