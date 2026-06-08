@@ -348,29 +348,45 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
     flex-shrink: 0;
   }
 
-  /* ~5s loop: idle dark, fade border white + slide arrow in, hold, fade back. */
+  /* Box highlight + arrow share ONE timeline via this 0→1 driver, animated on the
+     always-present .open-with-row. Two separate animations would desync because the
+     arrow is display:none on mobile — crossing the breakpoint resets only its clock.
+     A single animated property on a never-hidden parent keeps both in lockstep. */
+  @property --ai-flash {
+    syntax: "<number>";
+    initial-value: 0;
+    inherits: true;
+  }
+  /* Separate slide driver so the arrow fades out IN PLACE (slide held at 0 through
+     the fade) and only resets to the offset once invisible. */
+  @property --ai-slide {
+    syntax: "<number>";
+    initial-value: 0;
+    inherits: true;
+  }
+
+  /* ~5s loop: idle dark, fade border white + slide arrow in, hold, fade out in place. */
   @media (prefers-reduced-motion: no-preference) {
+    .open-with-row {
+      animation: ai-flash 5s ease-in-out infinite;
+    }
+
     .open-with-links {
-      animation: ai-box-highlight 5s ease-in-out infinite;
+      border-color: color-mix(in srgb, var(--base-card), var(--base-foreground) calc(var(--ai-flash) * 100%));
     }
 
+    /* Both tied to the same animation so the arrow always tracks the box. */
     .open-with-arrow {
-      animation: ai-arrow-flash 5s ease-in-out infinite;
+      opacity: var(--ai-flash);
+      transform: translateX(calc(var(--ai-slide) * 24px));
     }
   }
 
-  @keyframes ai-box-highlight {
-    0%, 28% { border-color: var(--base-card); }
-    36%, 60% { border-color: var(--base-foreground); }
-    68%, 100% { border-color: var(--base-card); }
-  }
-
-  /* Arrow slides in from right as it fades in, resets while invisible. */
-  @keyframes ai-arrow-flash {
-    0%, 28% { opacity: 0; transform: translateX(24px); }
-    36%, 60% { opacity: 1; transform: translateX(0); }
-    68% { opacity: 0; transform: translateX(0); }
-    100% { opacity: 0; transform: translateX(24px); }
+  @keyframes ai-flash {
+    0%, 28%  { --ai-flash: 0; --ai-slide: 1; }
+    36%, 60% { --ai-flash: 1; --ai-slide: 0; }
+    68%      { --ai-flash: 0; --ai-slide: 0; } /* faded out at final position */
+    100%     { --ai-flash: 0; --ai-slide: 1; } /* reset offset while invisible */
   }
 
   .open-with-btn {
