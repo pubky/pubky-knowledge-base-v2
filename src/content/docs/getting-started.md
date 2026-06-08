@@ -11,7 +11,7 @@ Welcome to Pubky! You’ll create your identity, sign in to pubky.app, and inspe
 ```mermaid
 flowchart LR
     Ring[Download Pubky Ring] --> Identity[Create Identity]
-    Identity --> App[Try pubky.app]
+    Identity --> App[Try Pubky Apps]
     App --> Data[Explore Your Data]
 ```
 
@@ -24,14 +24,16 @@ flowchart LR
 
 [Official Website](https://pubkyring.app/) · [Official Repository](https://github.com/pubky/pubky-ring)
 
-## Step 2: Create Your Pubky Profile
+## Step 2: Create Your Pubky Identity And Profile
 
 1. Visit **[pubky.app](https://pubky.app)**.
 2. Click "Join now".
-3. Enter your invite code if you have one. If not, depending on where you are located, you may be able to use SMS verification and/or Bitcoin payment verification. These checks help Homeserver operators prevent signup spam. They are not meant to invade your privacy or charge you for using the Homeserver. Other signup methods are in development.
+3. Enter your invite code if you have one. If not, depending on where you are located, you may be able to use SMS verification and/or Bitcoin payment verification. These checks help Homeserver operators prevent signup spam. They are *not* meant to invade your privacy or charge you for using the Homeserver. Other signup methods are in development.
 4. Scan the QR code with your smartphone and open the link with Pubky Ring. The QR code contains your invite code.
 5. Authorize pubky.app in Pubky Ring to write to `/pub/pubky.app` on your Homeserver. Homeservers only allow an app to write to the paths you approve. As of today, everything under `/pub/` is public by default, so read access does not require authorization.
 6. Create your Pubky profile.
+7. **Save your recovery phrase securely** - this is your master backup.
+8. Your public key (pubky) is now your permanent identity!
 
 Your pubky looks like this:
 
@@ -43,7 +45,7 @@ z4e8s17cou9qmuwen8p1556jzhf1wktmzo6ijsfnri9c4hnrdfty
 
 Once your profile is created, use **[pubky.app](https://pubky.app)** as a decentralized social media app built on Pubky.
 
-1. Start posting, following, and exploring.
+1. Start posting, following, tagging, and exploring.
 2. Reopen pubky.app later and sign in with the same Pubky Ring identity.
 
 What makes it different:
@@ -94,7 +96,7 @@ Yes. Users can choose a public Homeserver provider. Running your own is optional
 
 **Where is my data stored?**
 
-Your public app data is stored on a Homeserver under paths associated with your pubky. You can change your Homeserver in Pubky Ring, and Pubky Explorer lets you inspect those paths directly.
+Your public app data is stored on a Homeserver, which is linked to your pubky through [PKARR](/explore/pubkycore/pkarr/introduction/). You can change your Homeserver in Pubky Ring, and [Pubky Explorer](https://explorer.pubky.app) lets you inspect what is currently stored there.
 
 ## Resources
 
