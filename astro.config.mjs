@@ -31,6 +31,13 @@ export default defineConfig({
 						src: 'https://_analytics.synonym.to/js/script.outbound-links.js',
 					},
 				},
+				// Open Graph card metadata. The og:image itself is emitted per-page by
+				// the custom Head component (src/components/Head.astro) — default card
+				// for the homepage, generated per-page card elsewhere. All cards are 1200x630.
+				{ tag: 'meta', attrs: { property: 'og:image:width', content: '1200' } },
+				{ tag: 'meta', attrs: { property: 'og:image:height', content: '630' } },
+				// Starlight leaves og:site_name empty because the site title is blank (logo only).
+				{ tag: 'meta', attrs: { property: 'og:site_name', content: 'Pubky' } },
 			],
 			plugins: [
 				starlightClientMermaid(),
@@ -84,6 +91,7 @@ export default defineConfig({
 			tableOfContents: false,
 			customCss: ['./src/styles/custom.css'],
 			components: {
+				Head: './src/components/Head.astro',
 				ThemeProvider: './src/components/ThemeProvider.astro',
 				ThemeSelect: './src/components/ThemeSelect.astro',
 				SocialIcons: './src/components/SocialIcons.astro',
