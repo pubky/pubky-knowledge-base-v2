@@ -37,6 +37,23 @@ Run commands from the project root:
 | `npm run preview` | Preview the production build locally |
 | `npm run astro ...` | Run Astro CLI commands |
 
+## Social Cards (Open Graph)
+
+Shared links render a 1200×630 preview card. The homepage uses the static
+default card; every other page gets one generated at build time from a single
+template, with the page's frontmatter `title` composited in as the subtitle
+(clamped to 3 lines). Generation lives in `src/lib/og.ts` and the
+`src/pages/og/[...slug].png.ts` endpoint; per-page `og:image` tags are emitted
+by `src/components/Head.astro`.
+
+- **Update the card design**: replace `src/assets/og/og-card-template.png`
+  (headline + logo + pattern, no subtitle) and `public/images/og-default.png`
+  (the homepage card), then rebuild.
+- **Preview locally**: `og:image` is an absolute URL, so the previewed page
+  must match the build's `site`. Build with the preview origin, e.g.
+  `SITE_URL=http://localhost:4321 npm run build && npm run preview`, otherwise
+  the tags point at production and the image won't load locally.
+
 ## AI-Readable Docs
 
 AI tools can reference the docs through these plain Markdown endpoints:
