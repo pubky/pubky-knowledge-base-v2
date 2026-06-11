@@ -69,6 +69,7 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
         </div>
         {/* Arrow-Animation */}
         <img class="open-with-arrow" src={withBase('/images/icons/arrow-dashed-left.svg')} width="82" height="22" alt="" aria-hidden="true" />
+        <span class="open-with-llm" aria-hidden="true">LLM Support</span>
       </div>
     </div>
   </div>
@@ -348,6 +349,17 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
     flex-shrink: 0;
   }
 
+  /* Label right of the arrow. Names what the highlight points at.
+     Inter Tight Medium, text-base(16/24), white. */
+  .open-with-llm {
+    flex-shrink: 0;
+    font-size: var(--text-base-size);
+    line-height: var(--text-base-lh);
+    font-weight: 500;
+    color: var(--base-foreground);
+    white-space: nowrap;
+  }
+
   /* Box highlight + arrow share ONE timeline via this 0→1 driver, animated on the
      always-present .open-with-row. Two separate animations would desync because the
      arrow is display:none on mobile — crossing the breakpoint resets only its clock.
@@ -379,6 +391,11 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
     .open-with-arrow {
       opacity: var(--ai-flash);
       transform: translateX(calc(var(--ai-slide) * 24px));
+    }
+
+    /* Label fades in with the arrow; held in place (no slide). */
+    .open-with-llm {
+      opacity: var(--ai-flash);
     }
   }
 
@@ -740,7 +757,8 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
       padding: var(--spacing-3) var(--spacing-4);
     }
 
-    .open-with-arrow {
+    .open-with-arrow,
+    .open-with-llm {
       display: none;
     }
 
