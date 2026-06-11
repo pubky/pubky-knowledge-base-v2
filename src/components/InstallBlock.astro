@@ -52,19 +52,24 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
 
     <div class="open-with">
       <span class="open-with-label">Open with:</span>
-      <div class="open-with-links">
-        {aiLinks.map((link) => (
-          <a href={link.url} target="_blank" rel="noopener noreferrer" class="open-with-btn" aria-label={`Open with ${link.name} (opens in new tab)`} data-tooltip={link.tooltip ?? link.name}>
-            <span class="ai-icon" data-icon={link.icon} aria-hidden="true" style={iconUrl(link.icon)}></span>
-          </a>
-        ))}
-        <button class="copy-prompt-btn" aria-label="Copy prompt to clipboard" data-tooltip="Copy prompt" data-prompt={aiPrompt}>
-          <span class="copy-prompt-label">Prompt</span>
-          <img class="copy-prompt-icon" src={withBase('/images/icons/line-copy.svg')} width="16" height="16" alt="" aria-hidden="true" />
-          <svg class="copy-prompt-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#28c840" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <polyline points="20 6 9 17 4 12"></polyline>
-          </svg>
-        </button>
+      <div class="open-with-row">
+        <div class="open-with-links">
+          {aiLinks.map((link) => (
+            <a href={link.url} target="_blank" rel="noopener noreferrer" class="open-with-btn" aria-label={`Open with ${link.name} (opens in new tab)`} data-tooltip={link.tooltip ?? link.name}>
+              <span class="ai-icon" data-icon={link.icon} aria-hidden="true" style={iconUrl(link.icon)}></span>
+            </a>
+          ))}
+          <button class="copy-prompt-btn" aria-label="Copy prompt to clipboard" data-tooltip="Copy prompt" data-prompt={aiPrompt}>
+            <span class="copy-prompt-label">Prompt</span>
+            <img class="copy-prompt-icon" src={withBase('/images/icons/line-copy.svg')} width="16" height="16" alt="" aria-hidden="true" />
+            <svg class="copy-prompt-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#28c840" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </button>
+        </div>
+        {/* Arrow-Animation */}
+        <img class="open-with-arrow" src={withBase('/images/icons/arrow-dashed-left.svg')} width="82" height="22" alt="" aria-hidden="true" />
+        <span class="open-with-llm" aria-hidden="true">LLM Support</span>
       </div>
     </div>
   </div>
@@ -318,10 +323,87 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
     line-height: var(--text-base-lh);
   }
 
-  /* Figma: Row = flex, gap spacing-3(12) */
+  /* Buttons box + highlight arrow. gap 21px = no spacing token fits. */
+  .open-with-row {
+    display: flex;
+    align-items: center;
+    gap: 21px;
+    align-self: flex-start;
+  }
+
+  /* Bordered box wrapping the AI buttons. Border pulses white via highlight below. */
   .open-with-links {
     display: flex;
-    gap: var(--spacing-3);
+    align-items: center;
+    gap: var(--spacing-4);
+    padding: var(--spacing-4) var(--spacing-6);
+    background: var(--base-background);
+    border: 1px solid var(--base-card);
+    border-radius: var(--radius-lg);
+  }
+
+  /* Highlight arrow. 82x22 = exact SVG vector size. */
+  .open-with-arrow {
+    width: 82px;
+    height: 22px;
+    flex-shrink: 0;
+  }
+
+  /* Label right of the arrow. Names what the highlight points at.
+     Inter Tight Medium, text-base(16/24), white. */
+  .open-with-llm {
+    flex-shrink: 0;
+    font-size: var(--text-base-size);
+    line-height: var(--text-base-lh);
+    font-weight: 500;
+    color: var(--base-foreground);
+    white-space: nowrap;
+  }
+
+  /* Box highlight + arrow share ONE timeline via this 0→1 driver, animated on the
+     always-present .open-with-row. Two separate animations would desync because the
+     arrow is display:none on mobile — crossing the breakpoint resets only its clock.
+     A single animated property on a never-hidden parent keeps both in lockstep. */
+  @property --ai-flash {
+    syntax: "<number>";
+    initial-value: 0;
+    inherits: true;
+  }
+  /* Separate slide driver so the arrow fades out IN PLACE (slide held at 0 through
+     the fade) and only resets to the offset once invisible. */
+  @property --ai-slide {
+    syntax: "<number>";
+    initial-value: 0;
+    inherits: true;
+  }
+
+  /* ~5s loop: idle dark, fade border white + slide arrow in, hold, fade out in place. */
+  @media (prefers-reduced-motion: no-preference) {
+    .open-with-row {
+      animation: ai-flash 5s ease-in-out infinite;
+    }
+
+    .open-with-links {
+      border-color: color-mix(in srgb, var(--base-card), var(--base-foreground) calc(var(--ai-flash) * 100%));
+    }
+
+    /* Both tied to the same animation so the arrow always tracks the box. */
+    .open-with-arrow {
+      opacity: var(--ai-flash);
+      transform: translateX(calc(var(--ai-slide) * 24px));
+    }
+
+    /* Label fades in with the arrow; held in place (no slide). */
+    .open-with-llm {
+      opacity: var(--ai-flash);
+    }
+  }
+
+  @keyframes ai-flash {
+    0%, 28%  { --ai-flash: 0; --ai-slide: 1; }
+    36%, 60% { --ai-flash: 1; --ai-slide: 0; }
+    68%      { --ai-flash: 0; --ai-slide: 0; } /* faded out at final position */
+    100%     { --ai-flash: 0; --ai-slide: 1; } /* reset offset while invisible */
   }
 
   .open-with-btn {
@@ -407,11 +489,11 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
   .copy-prompt-btn.copied .copy-prompt-icon { display: none; }
   .copy-prompt-btn.copied .copy-prompt-check { display: block; }
 
-  /* Figma: Logos = 32x32, border-radius rounded-sm(6) */
+  /* Figma: Logos = 40x40, border-radius rounded-sm(6) */
   .ai-icon {
     display: inline-block;
-    width: 32px;
-    height: 32px;
+    width: 40px;
+    height: 40px;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -662,6 +744,22 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
     /* Figma: AI Kit spans both columns on mobile */
     .install-actions .btn-ai-kit {
       grid-column: 1 / -1;
+    }
+
+    /* Mobile: 32x32 icons, tighter box, no arrow — fit one row. */
+    .ai-icon {
+      width: 32px;
+      height: 32px;
+    }
+
+    .open-with-links {
+      gap: var(--spacing-2);
+      padding: var(--spacing-3) var(--spacing-4);
+    }
+
+    .open-with-arrow,
+    .open-with-llm {
+      display: none;
     }
 
     .terminal {
