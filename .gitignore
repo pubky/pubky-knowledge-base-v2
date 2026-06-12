@@ -22,7 +22,6 @@ pnpm-debug.log*
 
 # Rust build artifacts
 snippets/rust/target/
-snippets/rust/Cargo.lock
 
 # JS/TS snippet artifacts
 snippets/js/node_modules/
