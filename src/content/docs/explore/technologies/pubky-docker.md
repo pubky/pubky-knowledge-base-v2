@@ -2,18 +2,18 @@
 title: "Pubky Docker"
 ---
 
-**Pubky Docker** is a Docker Compose orchestration that provides a one-click local development environment for running the complete Pubky Social (App) stack. It's designed for developers who want to experiment with the full Pubky ecosystem or test components in an isolated environment.
+**[Pubky Docker](https://github.com/pubky/pubky-docker)** is a Docker Compose orchestration that provides a one-click local development environment for running the complete Pubky Social (App) stack. It's designed for developers who want to experiment with the full Pubky ecosystem or test components in an isolated environment.
 
 ## Overview
 
 Pubky Docker orchestrates the following components:
 
-1. **PKARR Relay** - DHT relay for public key-addressable records
-2. **Pubky Homeserver** - Decentralized data storage instance
-3. **Pubky Nexus** - Social media indexer and aggregator
-4. **Pubky App** - Social media client frontend
+1. **[Pubky Homeserver](https://github.com/pubky/pubky-core/tree/main/pubky-homeserver)** - Decentralized data storage instance
+2. **[Pubky Nexus](https://github.com/pubky/pubky-nexus)** - Social media indexer and aggregator
+3. **[Homegate](https://github.com/pubky/homegate)** - Signup verification service for preventing automated signup spam
+4. **[pubky.app](https://github.com/pubky/pubky-app)** - Social media client frontend
 
-The orchestration includes all necessary supporting infrastructure (PostgreSQL, Neo4j, Redis) and is configurable for both testnet and mainnet environments.
+Third-party infrastructure images (Postgres, Neo4j, Redis, Redis Insight, WireMock) are pulled from their public registries.
 
 ## When to Use Pubky Docker
 
@@ -57,50 +57,12 @@ cp .env-sample .env
 docker compose up -d
 ```
 
-### Building From Source
-
-If you need to modify components or build custom versions:
-
-1. Clone all required repositories at the same directory level:
-```bash
-# Create a workspace directory
-mkdir pubky-workspace && cd pubky-workspace
-
-# Clone all repositories
-git clone https://github.com/pubky/pubky-docker.git
-git clone https://github.com/pubky/pkarr.git
-git clone https://github.com/pubky/pubky-core.git
-git clone https://github.com/pubky/pubky-nexus.git
-git clone https://github.com/pubky/pubky-app.git
-```
-
-2. Configure and start:
-```bash
-cd pubky-docker
-cp .env-sample .env
-# Edit .env as needed
-docker compose up
-```
-
-The directory structure must be:
-```
-pubky-workspace/
-├── pubky-docker/
-├── pkarr/
-├── pubky-core/
-├── pubky-nexus/
-└── pubky-app/
-```
+For source builds, see [Local Setup From Source](https://github.com/pubky/pubky-docker#local-setup-from-source) in the Pubky Docker README.
 
 ## Stack Components
 
-### 1. PKARR Relay (Port 6882)
-Local DHT relay for public key-addressable resource records. Enables domain resolution for Pubky identities.
-
-**Configuration**: `pkarr.config.toml`
-
-### 2. Pubky Homeserver (Ports 6286-6288, 15411-15412)
-Local instance of a Pubky Homeserver with PostgreSQL backend.
+### 1. Pubky Homeserver
+Local instance of [Pubky Homeserver](https://github.com/pubky/pubky-core/tree/main/pubky-homeserver) with PostgreSQL backend.
 
 **Configuration**: `homeserver.config.toml`
 
@@ -112,23 +74,30 @@ Local instance of a Pubky Homeserver with PostgreSQL backend.
 - `6288`: Metrics
 - `15411-15412`: HTTP relay
 
-### 3. Pubky Nexus (Ports 8080-8081)
-Social media indexer and aggregator with graph database and search capabilities.
+### 2. Pubky Nexus
+[Pubky Nexus](https://github.com/pubky/pubky-nexus) indexer and aggregator with graph database and search capabilities.
 
 **Configuration**: `pubky-nexus-config-{testnet|mainnet}.toml`
 
 **Dependencies**:
 - Neo4j graph database (Ports 7474, 7687)
-- Redis search index (Ports 6379, 8001)
+- Redis search index (Port 6379)
 
 **Endpoints**:
 - `8080`: Main API
 - `8081`: Admin/metrics
 
-### 4. Pubky App (Port 4200)
-Next.js-based social media frontend configured to use the local stack.
+### 3. Homegate
+[Homegate](https://github.com/pubky/homegate) signup verification service configured for local development.
 
-**Access**: http://localhost:4200
+**Configuration**: `homegate.config.toml`
+
+**Access**: http://localhost:6300
+
+### 4. pubky.app
+[pubky.app](https://github.com/pubky/pubky-app) social media frontend configured to use the local stack.
+
+**Access**: http://localhost:3000
 
 ## Configuration
 
@@ -148,13 +117,14 @@ The stack uses a custom Docker bridge network (`172.18.0.0/16`) with static IPs:
 
 | Service | IP | External Ports |
 |---------|------|---------------|
-| PKARR | 172.18.0.2 | 6882 |
 | Nexus | 172.18.0.3 | 8080, 8081 |
 | Homeserver | 172.18.0.4 | 6286-6288, 15411-15412 |
 | Neo4j | 172.18.0.5 | 7474, 7687 |
-| Redis | 172.18.0.6 | 6379, 8001 |
-| Client | 172.18.0.7 | 4200 |
+| Redis | 172.18.0.6 | 6379 |
+| Redis Insight | 172.18.0.7 | 5540 |
+| pubky.app | 172.18.0.8 | 3000 |
 | Postgres | 172.18.0.9 | 5432 |
+| Homegate | 172.18.0.10 | 6300 |
 
 ## Usage Examples
 
@@ -213,17 +183,17 @@ docker compose up -d nexusd
 ### Testing Frontend Changes
 
 1. Modify code in `../pubky-app/`
-2. Rebuild client:
+2. Rebuild pubky.app:
 ```bash
-docker compose build client
-docker compose up -d client
+docker compose build pubky-app
+docker compose up -d pubky-app
 ```
 
 ### Access Monitoring Tools
 
 - **Neo4j Browser**: http://localhost:7474
-- **Redis Insight**: http://localhost:8001
-- **Pubky App**: http://localhost:4200
+- **Redis Insight**: http://localhost:5540
+- **pubky.app**: http://localhost:3000
 
 ## Data Persistence
 
@@ -231,8 +201,8 @@ All data is stored in the `.storage/` directory:
 
 ```
 .storage/
-├── pkarr/          # PKARR relay cache
 ├── postgres/       # Homeserver database
+├── homegate/       # Homegate data
 ├── neo4j/          # Nexus graph data
 ├── redis/          # Nexus search index
 └── static/         # Nexus static files
@@ -247,7 +217,7 @@ This directory is gitignored. To reset your environment, simply delete it.
 Check if ports are already in use:
 ```bash
 # Check port availability
-lsof -i :4200 -i :6882 -i :8080
+lsof -i :3000 -i :6287 -i :8080 -i :6300
 ```
 
 ### Database Connection Errors
@@ -284,29 +254,37 @@ docker compose up -d nexusd
 The Pubky Docker stack demonstrates the full architecture of a Pubky Social application:
 
 ```
-┌─────────────────────────────────────────────────────┐
-│                   Browser                           │
-│              (localhost:4200)                       │
-└────────────────────┬────────────────────────────────┘
-                     │
-┌────────────────────▼────────────────────────────────┐
-│                Pubky App (Client)                   │
-│            Next.js Frontend                         │
-└────────────┬──────────────────────┬─────────────────┘
-             │                      │
-    ┌────────▼─────────┐   ┌────────▼──────────┐
-    │  Pubky Nexus     │   │ Pubky Homeserver  │
-    │  (Social API)    │   │  (User Storage)   │
-    │  - Neo4j Graph   │   │  - PostgreSQL     │
-    │  - Redis Search  │   │  - File Storage   │
-    └────────┬─────────┘   └────────┬──────────┘
-             │                      │
-             └──────────┬───────────┘
-                        │
-                 ┌──────▼───────┐
-                 │ PKARR Relay  │
-                 │ (DHT/DNS)    │
-                 └──────────────┘
+┌───────────────────────────────────────────────────────────────┐
+│                           Browser                             │
+│                      (localhost:3000)                         │
+└───────────────────────────────┬───────────────────────────────┘
+                                │
+┌───────────────────────────────▼───────────────────────────────┐
+│                    Docker Compose stack                       │
+│                                                               │
+│  ┌─────────────────────────────────────────────────────────┐  │
+│  │                  pubky.app (Client)                     │  │
+│  │                  Next.js Frontend                       │  │
+│  └────────────┬──────────────────────┬─────────────────────┘  │
+│               │                      │                        │
+│      ┌────────▼─────────┐   ┌────────▼──────────┐             │
+│      │  Pubky Nexus     │   │ Pubky Homeserver  │             │
+│      │  (Social API)    │   │  (User Storage)   │             │
+│      │  - Neo4j Graph   │   │  - PostgreSQL     │             │
+│      │  - Redis Search  │   │  - File Storage   │             │
+│      └──────────────────┘   └────────┬──────────┘             │
+│                                      │                        │
+│                               ┌──────▼───────┐                │
+│                               │   Homegate   │                │
+│                               │  (Signup)    │                │
+│                               └──────────────┘                │
+└───────────────────────────────┬───────────────────────────────┘
+                                │
+                                ▼
+┌───────────────────────────────────────────────────────────────┐
+│              Synonym-hosted PKARR Relay                       │
+│              used by the configured stack                     │
+└───────────────────────────────────────────────────────────────┘
 ```
 
 ## Links
@@ -317,9 +295,8 @@ The Pubky Docker stack demonstrates the full architecture of a Pubky Social appl
 
 ## Related Documentation
 
-- [Pubky Core](/explore/pubky-core/introduction) - Core protocol and SDK
-- [Pubky Nexus](/explore/pubky-app/backend/pubky-nexus) - Social media indexer
-- [Pubky App](/explore/pubky-app/introduction) - Frontend application
-- [Pubky Homeservers](/explore/pubky-core/homeservers) - Homeserver architecture
-- [PKARR](/explore/pubky-core/pkarr/0-introduction) - Public key addressable records
-
+- [Pubky Core](/explore/pubkycore/introduction/) - Core protocol and SDK
+- [Pubky Nexus](/explore/pubky-apps/indexing-and-aggregation/pubky-nexus/) - Social media indexer
+- [Homegate](/explore/technologies/homegate/) - Signup verification service
+- [pubky.app](/explore/pubky-apps/introduction/) - Frontend application
+- [Pubky Homeservers](/explore/pubkycore/homeserver/) - Homeserver architecture
