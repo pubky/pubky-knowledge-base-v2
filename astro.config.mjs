@@ -16,10 +16,11 @@ export default defineConfig({
 	},
 	integrations: [
 		starlight({
-			title: '',
+			title: 'Pubky',
 			logo: {
 				src: './src/assets/pubky-logo.webp',
 				alt: 'Pubky',
+				replacesTitle: true,
 			},
 			favicon: '/favicon.svg',
 			head: [
@@ -84,6 +85,7 @@ export default defineConfig({
 			tableOfContents: false,
 			customCss: ['./src/styles/custom.css'],
 			components: {
+				Head: './src/components/Head.astro',
 				ThemeProvider: './src/components/ThemeProvider.astro',
 				ThemeSelect: './src/components/ThemeSelect.astro',
 				SocialIcons: './src/components/SocialIcons.astro',

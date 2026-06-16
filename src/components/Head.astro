@@ -1,0 +1,8 @@
+---
+const { head, siteTitle, entry } = Astro.locals.starlightRoute;
+const title = `${siteTitle} | ${entry.data.title}`;
+const remainingHead = head.filter(({ tag }) => tag !== 'title');
+---
+
+<title>{title}</title>
+{remainingHead.map(({ tag: Tag, attrs, content }) => <Tag {...attrs} set:html={content} />)}
