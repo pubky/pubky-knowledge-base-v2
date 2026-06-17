@@ -16,10 +16,11 @@ export default defineConfig({
 	},
 	integrations: [
 		starlight({
-			title: '',
+			title: 'Pubky',
 			logo: {
 				src: './src/assets/pubky-logo.webp',
 				alt: 'Pubky',
+				replacesTitle: true,
 			},
 			favicon: '/favicon.svg',
 			head: [
@@ -36,8 +37,6 @@ export default defineConfig({
 				// for the homepage, generated per-page card elsewhere. All cards are 1200x630.
 				{ tag: 'meta', attrs: { property: 'og:image:width', content: '1200' } },
 				{ tag: 'meta', attrs: { property: 'og:image:height', content: '630' } },
-				// Starlight leaves og:site_name empty because the site title is blank (logo only).
-				{ tag: 'meta', attrs: { property: 'og:site_name', content: 'Pubky' } },
 			],
 			plugins: [
 				starlightClientMermaid(),
