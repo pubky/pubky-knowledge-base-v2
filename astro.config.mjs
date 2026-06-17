@@ -57,7 +57,6 @@ export default defineConfig({
 						'the-vision-of-pubky',
 						'glossary',
 						'tldr',
-						'explore/technologies/jeb-pubky-ai-bot',
 						'explore/technologies/https',
 						'explore/technologies/key-pair',
 						'explore/technologies/dht',

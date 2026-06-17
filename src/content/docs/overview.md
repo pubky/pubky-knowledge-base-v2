@@ -76,7 +76,6 @@ Learn more about the overall vision here: [The Vision of Pubky](/the-vision-of-p
 - **[Pubky Explorer](/explore/technologies/pubky-explorer/)** - Web-based file browser for Homeserver data ([explorer.pubky.app](https://explorer.pubky.app))
 - **[Pubky CLI](/explore/technologies/pubky-cli/)** - Command-line tool for Homeserver management and testing
 - **PKDNS Digger** - Web-based DNS record lookup tool for PKARR domains ([github.com/pubky/pkdns-digger](https://github.com/pubky/pkdns-digger))
-- **[Jeb AI Bot](/explore/technologies/jeb-pubky-ai-bot/)** - AI-powered bot for summaries and fact-checking on Pubky social network
 
 ## Pubky App: Social Application
 

@@ -49,11 +49,6 @@ A signup verification service for Homeservers, providing SMS and Lightning Netwo
 **Indexer**
 See **Aggregator**. A service that crawls and indexes data from Homeservers to provide search and discovery features.
 
-## J
-
-**[Jeb](/explore/technologies/jeb-pubky-ai-bot/)**
-AI-powered bot for the Pubky social network, providing post summaries and fact-checking capabilities using LLMs and web search.
-
 ## K
 
 **[Key Pair](/explore/technologies/key-pair/)**
