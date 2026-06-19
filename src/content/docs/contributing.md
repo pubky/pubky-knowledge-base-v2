@@ -208,32 +208,7 @@ For local `pubky-testnet` setup, including Docker-managed or external PostgreSQL
 
 ### Pubky Ring (React Native)
 
-```bash
-# Clone
-git clone https://github.com/pubky/pubky-ring
-cd pubky-ring
-
-# Install dependencies
-yarn install
-cd ios && pod install && cd ..
-
-# Run on iOS
-yarn ios
-
-# Run on Android
-yarn android
-
-# Run tests
-yarn test
-
-# Lint
-yarn lint
-```
-
-**Requirements:**
-- Node.js >= 22.11.0
-- Yarn 1.x
-- React Native environment (Xcode for iOS, Android Studio for Android)
+Use the maintained [Pubky Ring README](https://github.com/pubky/pubky-ring/blob/main/README.md) for current requirements, setup commands, test commands, and release verification.
 
 ### Pubky Nexus (Rust)
 
