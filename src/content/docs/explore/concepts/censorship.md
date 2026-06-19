@@ -22,18 +22,18 @@ In **Pubky**, the approach is not to eliminate censorship entirely—because som
 
 - **Decentralized Identity**: In Pubky, user identities are not dependent on any single server. By using **self-issued public keys**, users maintain their identity even if they change hosting providers. This prevents identity loss when moving away from a server that engages in censorship.
 
-- **Data Portability and Redundancy**: Pubky ensures that user data can be exported and re-imported across servers without any loss. Users can also use multiple servers for redundancy, minimizing the risk of any single point of failure or censorship cutting them off from their data.
+- **Data Portability and Redundancy**: Pubky makes user data portable by storing it in simple Homeserver paths and by supporting local copies through [Pubky Backup](/explore/technologies/pubky-backup/). Full Homeserver mirroring and seamless failover are still planned work.
 
 ## Important Aspects of Censorship Resistance
 
 - **Data Control**: Users should always have access to and control over their data, even if one hosting provider chooses to censor it. Pubky’s approach empowers users by ensuring they are not dependent on any one server.
 - **Migration and Interoperability**: The ability to migrate data, identities, and connections between different [Homeservers](/explore/pubkycore/homeserver/) helps users remain resilient against censorship. Interoperable systems mean that even if one provider blocks content, another can provide access.
-- **Local Copies and Self-Hosting**: Users can keep local copies of their data, and Pubky encourages self-hosting, giving users more control over what happens to their information and ensuring their content is not subjected to centralized oversight.
+- **Local Copies and Self-Hosting**: Users can keep local copies of their published data with [Pubky Backup](/explore/technologies/pubky-backup/), and independent Homeserver operation gives users more control over where their information lives.
 
 ## Challenges and Considerations
 
 - **Legal Compliance**: Censorship is often tied to legal requirements that hosting providers must comply with. Even decentralized systems will face challenges related to legal jurisdictions, and Pubky is designed to navigate but not entirely eliminate these legal issues.
 - **Content Moderation**: Some forms of moderation are necessary—whether it's to filter out spam or harmful content. Pubky facilitates **user-controlled moderation**, where individuals or groups decide what they want to see, rather than a centralized authority imposing a one-size-fits-all policy.
-- **Redundancy Limitations**: While Pubky's redundancy and migration features provide resilience, they depend on the presence of multiple [Homeservers](/explore/pubkycore/homeserver/) options. During the early phases, users may face limited availability of alternative servers.
+- **Redundancy Limitations**: [Pubky Backup](/explore/technologies/pubky-backup/) improves user-controlled data availability, but it is local backup rather than automatic server failover. Practical migration still depends on available [Homeservers](/explore/pubkycore/homeserver/) and tooling to re-upload data.
 
 Censorship on the web is inevitable, but that doesn't mean users have to be powerless. With Pubky, you have the ability to choose your hosting, migrate your data, and maintain your identity—all key tools for resisting censorship. Pubky's design assumes censorship will happen and provides the mechanisms needed to overcome it. This empowers users with true control, ensuring that no single entity can unilaterally suppress their voice. The future of the web lies in resilient, user-first systems that put individuals back in control of their online presence.

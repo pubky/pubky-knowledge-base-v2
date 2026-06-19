@@ -118,7 +118,7 @@ Use the SDK libraries ([@synonymdev/pubky](https://www.npmjs.com/package/@synony
 <a id="q20"></a>
 ### Q20. How is redundancy handled?
 
-Use mirrors in PKARR. Clients pick healthy ones.
+Today, users should keep local copies of published data with [Pubky Backup](/explore/technologies/pubky-backup/). Homeserver mirroring and automatic failover are planned but not yet implemented, so practical redundancy currently means backups, self-hosting options, and the ability to repoint your identity with PKARR. PKARR records are distributed through the [Mainline DHT](/explore/technologies/mainline-dht/) and periodically republished to stay available.
 
 <a id="q21"></a>
 ### Q21. Does it support load balancing?
@@ -313,12 +313,12 @@ Yes! The [pubky-app repository](https://github.com/pubky/pubky-app) is under act
 <a id="q55"></a>
 ### Q55. How do I migrate providers?
 
-Add mirror → update PKARR → let caches sync → retire old host.
+Keep a current local copy with [Pubky Backup](/explore/technologies/pubky-backup/), sign up on the new Homeserver, re-upload your data with Pubky tooling such as the SDK or [Pubky CLI](/explore/technologies/pubky-cli/), update your PKARR record, let caches refresh, then retire the old host.
 
 <a id="q56"></a>
 ### Q56. What if Synonym disappears?
 
-Nothing breaks. Your key, data, and graph are yours.
+Your key remains yours because it is self-custodied, and your data remains portable if you have local backups or another Homeserver copy. Keep [Pubky Backup](/explore/technologies/pubky-backup/) running for published data you care about.
 
 <a id="q57"></a>
 ### Q57. What if my ISP censors my Homeserver?

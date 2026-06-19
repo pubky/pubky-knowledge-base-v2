@@ -37,8 +37,8 @@ This is useful for Homeservers whose direct [PubkyTLS](/glossary/#pubkytls) sock
 - The current network is being bootstrapped by Synonym's first Homeserver — over time, more independent Homeserver operators and Pubky applications are needed for the network to fully decentralize
 - Anyone can run their own Homeserver and set their own terms
 - Homeserver operators can use [Homegate](/explore/technologies/homegate/) for signup verification, implementing SMS or Lightning Network verification to prevent spam while preserving user privacy
-- For true [credible exit](/explore/concepts/credible-exit/), users should maintain local backups via [Pubky Backup](/explore/technologies/pubky-backup/). Homeserver mirroring is planned but not yet implemented
-- Users can migrate to a new Homeserver at any time by moving their data and updating their [PKARR](/explore/pubkycore/pkarr/introduction/) record
+- For practical [credible exit](/explore/concepts/credible-exit/), users should maintain local copies and snapshots with [Pubky Backup](/explore/technologies/pubky-backup/). Homeserver mirroring is planned but not yet implemented
+- Users can migrate to a new Homeserver by signing up there, re-uploading their data, and updating their own [PKARR](/explore/pubkycore/pkarr/introduction/) record
 
 See [Security Model](/explore/pubkycore/security-model/) for the full trust analysis and failure recovery scenarios.
 

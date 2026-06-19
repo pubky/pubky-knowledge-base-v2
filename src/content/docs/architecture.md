@@ -30,6 +30,7 @@ flowchart TB
     subgraph Apps[Application Layer]
         PubkyApp[Pubky App]
         Nexus[Pubky Nexus]
+        Backup[Pubky Backup]
         Custom[Custom Apps]
     end
     
@@ -40,6 +41,7 @@ flowchart TB
     PKARR --> HS1
     HS1 --> Nexus
     HS2 --> Nexus
+    HS1 --> Backup
     Nexus --> PubkyApp
     Custom --> HS1
 ```
@@ -240,6 +242,10 @@ sequenceDiagram
 - Search and discovery
 - High-performance API
 
+### Pubky Backup
+
+**[Pubky Backup](/explore/technologies/pubky-backup/)** is a desktop app for backing up published Homeserver data locally. Use the [Pubky Backup README](https://github.com/pubky/pubky-backup/blob/main/README.md) for install and feature details, and the [pubky-backup-core README](https://github.com/pubky/pubky-backup/blob/main/src-tauri/pubky-backup-core/README.md) for sync, storage, and API architecture.
+
 ### PKDNS
 
 **[PKDNS](/explore/technologies/pkdns/)** enables:
@@ -269,6 +275,7 @@ sequenceDiagram
 - **[Pubky Docker](/explore/technologies/pubky-docker/)**: Full stack in one command
 - **[Pubky CLI](/explore/technologies/pubky-cli/)**: Command-line Homeserver management
 - **[Pubky Explorer](/explore/technologies/pubky-explorer/)**: Web-based data browser
+- **[Pubky Backup](/explore/technologies/pubky-backup/)**: Desktop backup and snapshot tool for published Homeserver data
 
 ### Work in Progress
 

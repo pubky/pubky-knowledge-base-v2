@@ -2,43 +2,21 @@
 title: "Pubky Backup"
 ---
 
-Desktop backup application for Pubky users to maintain local copies of all their published data from their [homeserver](/explore/pubkycore/homeserver/).
+**Pubky Backup** is the desktop backup app for maintaining a local copy of published Homeserver data.
 
-> **Note:** This tool is under active development. Behaviour and features may change.
+- **Repository**: [github.com/pubky/pubky-backup](https://github.com/pubky/pubky-backup)
+- **Downloads and install notes**: [Pubky Backup README](https://github.com/pubky/pubky-backup/blob/main/README.md)
+- **Core architecture and API**: [pubky-backup-core README](https://github.com/pubky/pubky-backup/blob/main/src-tauri/pubky-backup-core/README.md)
 
-- **GitHub**: https://github.com/pubky/pubky-backup
-- **Platforms**: Linux, macOS, Windows
-
-A lightweight background process that continually keeps a Pubky user's local backup in-sync with their published data. Runs in the system tray and automatically polls for changes.
+Pubky Backup targets published `/pub/...` data from [Homeservers](/explore/pubkycore/homeserver/). It complements [Pubky Ring](/explore/technologies/pubky-ring/): Ring protects identity keys while Backup protects a local copy of published data.
 
 ## Role in Credible Exit
 
-Pubky Backup enables [credible exit](/explore/concepts/credible-exit/) by giving users a local copy of their data. With a backup, users can:
+Pubky Backup makes credible exit more practical by reducing the risk that a Homeserver outage, policy change, or shutdown leaves a user without a copy of their published data. With a current backup, a user can inspect their own data, preserve a point-in-time snapshot, and prepare a migration to another Homeserver.
 
-1. **Migrate**: Sign up with a new homeserver and restore their data
-2. **Verify**: Compare local backup against homeserver to detect tampering
-3. **Recover**: Restore data if homeserver becomes unavailable
+Pubky Backup backs up published data and supports snapshots. There is no dedicated tool yet for re-uploading backed-up data to a new Homeserver, but it can be done manually with Pubky tooling such as the SDK. Homeserver mirroring and seamless failover are planned separately.
 
-See [Security Model](/explore/pubkycore/security-model/) for the full trust model and recovery scenarios.
-## Core Features
+## Limitations
 
-- **Continuous Sync**: Polls the homeserver every 30 seconds for new events
-- **Local Backup**: Stores all published data (`/pub/` resources) to a local directory
-- **Snapshot Creation**: Timestamped ZIP archives for point-in-time recovery
-- **Multi-Pubky Support**: Backup multiple pubky keys, each in its own directory
-- **System Tray**: Background operation with sync status indicator
-- **Force Sync**: Manual trigger for immediate sync
-
-## How It Works
-
-1. User enters their pubky (app validates format)
-2. Uses [PKDNS](/explore/technologies/pkdns/) to discover the homeserver
-3. Fetches events from the homeserver's `/events/` endpoint with cursor-based pagination
-4. Processes PUT events (download data) and DELETE events (remove local files)
-5. Polls every 30 seconds, persisting cursor for restart continuity
-
-## Tech Stack
-
-Built with Rust (Tauri backend) and TypeScript (Vite frontend). Uses the `pubky` crate for homeserver communication and OpenDAL for filesystem abstraction.
-
-See the [repository](https://github.com/pubky/pubky-backup) for build instructions, storage layout, and API reference.
+- Published data backup is separate from identity key backup. Keep your [Pubky Ring](/explore/technologies/pubky-ring/) recovery phrase secure.
+- Local backup improves availability and portability, but it is not Homeserver mirroring or automatic failover.

@@ -35,6 +35,7 @@ flowchart LR
 | **[Pubky Ring](/explore/technologies/pubky-ring/)** | Mobile key manager (iOS/Android) | ✅ Production |
 | **[Pubky App](/explore/pubky-apps/introduction/)** | Social media demo ([pubky.app](https://pubky.app)) | ✅ Live (MVP) |
 | **[Pubky Nexus](/explore/pubky-apps/indexing-and-aggregation/pubky-nexus/)** | Social indexing service | ✅ Production |
+| **[Pubky Backup](/explore/technologies/pubky-backup/)** | Local backup for published Homeserver data | ✅ Released |
 | **[Paykit](/explore/technologies/paykit/)** | Payment protocol | ⚠️ WIP |
 | **[Pubky Noise](/explore/technologies/pubky-noise/)** | Encrypted communication | ⚠️ WIP |
 

@@ -30,6 +30,7 @@ All under [github.com/pubky](https://github.com/pubky):
 - [pubky-core](https://github.com/pubky/pubky-core) — Collection of the components that make up the Pubky protocol
 - [pubky-app](https://github.com/pubky/pubky-app) — Pubky social media application
 - [pubky-ring](https://github.com/pubky/pubky-ring) — Mobile key manager app
+- [pubky-backup](https://github.com/pubky/pubky-backup) — Desktop app for local backups of published Homeserver data
 - [pubky-nexus](https://github.com/pubky/pubky-nexus) — Aggregator and indexer for pubky.app
 - [pubky-app-specs](https://github.com/pubky/pubky-app-specs) - Shared data models and validation for apps interoperable with pubky.app
 - [pkarr](https://github.com/pubky/pkarr) — Public Key Addressable Resource Records (sovereign TLDs)

@@ -11,7 +11,7 @@ Pubky Core aims to minimize trust requirements while remaining practical. The ke
 This is achieved through:
 - Cryptographic identity (keypairs) that users fully control
 - Identity based routing. Knowing identity is enough to locate data
-- Data portability via [Pubky Backup](/explore/technologies/pubky-backup/) (homeserver mirroring planned but not yet implemented)
+- Local data portability via [Pubky Backup](/explore/technologies/pubky-backup/) for public `/pub/...` data (Homeserver mirroring planned but not yet implemented)
 - Optional data signing to detect tampering (planned for apps that need it)
 - End-to-end encryption for encrypted data (planned; homeserver cannot read)
 
@@ -21,7 +21,7 @@ The Pubky security model accepts that some trust is unavoidable in practical sys
 
 1. **Choose Wisely**: Users select their homeserver operator. This is an explicit trust decision, similar to choosing a bank or email provider. Users CAN run their own homeservers if they don't trust anyone.
 
-2. **Don't Trust Fully**: Mirroring and backups allow users to restore data after detecting misbehavior. If your primary homeserver modifies data or acts maliciously, your mirrors will show discrepancies. Data replication / backup is a first step for maintaining data availability.
+2. **Don't Trust Fully**: Local backups preserve a copy of published data and reduce dependence on a single Homeserver. Future mirroring can make discrepancies between servers easier to detect; today's backups are mainly a first step for maintaining data availability and portability.
 
 3. **[Credible Exit](/explore/concepts/credible-exit/)**: The key guarantee is that users can always leave. A misbehaving homeserver cannot hold your identity hostage because:
    - Your keypair never leaves your device. [Pubky Ring](/explore/technologies/pubky-ring/) is the reference key manager implementation
@@ -84,7 +84,7 @@ The security model considers three primary threat actors:
 **Note on signing**: Data signing will be optional. Not every use case needs cryptographic verification, and signing adds overhead. Apps can choose whether to sign data based on their trust requirements.
 
 **Mitigation:**
-Users maintain local backups via [Pubky Backup](/explore/technologies/pubky-backup/), ensuring data portability even if the homeserver refuses to cooperate. Homeserver mirroring (slave servers) is planned but not yet implemented.
+Users maintain local backups via [Pubky Backup](/explore/technologies/pubky-backup/), preserving public `/pub/...` data even if the Homeserver refuses to cooperate or becomes unavailable. The current backup app does not provide automatic restore or cryptographic tamper detection; re-uploading data to a new Homeserver is still manual. Homeserver mirroring is planned but not yet implemented.
 
 ### Network Attackers
 
@@ -177,7 +177,7 @@ Planned primary-backup architecture where slave homeservers would stay in sync w
 - Users could switch to backup if primary misbehaves
 - [Censorship](/explore/concepts/censorship/) would become detectable and escapable, reducing the incentive to attempt it
 
-**Current Status**: This feature is a concept only — implementation has not started. Currently, users should use [Pubky Backup](/explore/technologies/pubky-backup/) to maintain local copies of their data.
+**Current Status**: This feature is a concept only — implementation has not started. Currently, users should use [Pubky Backup](/explore/technologies/pubky-backup/) to maintain local copies and snapshots of public `/pub/...` data.
 
 ## Transport Security
 
@@ -260,7 +260,7 @@ Even with all planned improvements, some trust remains:
 - Keep your 12-word recovery phrase secure and backed up (each pubky has its own phrase)
 - Loss of mnemonic = permanent loss of that identity (by design, no recovery)
 - Review capability requests carefully before approving in [Pubky Ring](/explore/technologies/pubky-ring/)
-- Use [Pubky Backup](/explore/technologies/pubky-backup/) to maintain local copies of your data
+- Use [Pubky Backup](/explore/technologies/pubky-backup/) to maintain local copies and snapshots of your data on the Homeserver you're using.
 - Homeserver mirroring is not yet available — backups are currently your credible exit path
 
 ### For App Developers
@@ -287,8 +287,8 @@ This section shows how [credible exit](/explore/concepts/credible-exit/) works i
 | Phase | What Happens | User Action |
 |-------|--------------|-------------|
 | Immediate | Data becomes temporarily inaccessible | Wait for recovery or decide to migrate |
-| If prolonged | Use [Pubky Backup](/explore/technologies/pubky-backup/) to restore from local backup | Sign up on a new homeserver |
-| Recovery | Re-upload data, update [PKARR](/explore/pubkycore/pkarr/introduction/) record | External links automatically resolve to new location |
+| If prolonged | Use your local [Pubky Backup](/explore/technologies/pubky-backup/) copy as migration input | Sign up on a new Homeserver |
+| Recovery | Re-upload backed-up data once migration tooling supports the needed workflow, then update [PKARR](/explore/pubkycore/pkarr/introduction/) record | External links resolve to the new location after caches update |
 
 Your identity (keypair in Ring) is unaffected. The homeserver going down is an inconvenience, not a catastrophe.
 
@@ -329,6 +329,6 @@ Mnemonic leakage is catastrophic for that identity. The system doesn't try to re
 Across all failure scenarios, the same pattern applies:
 
 1. **Identity survives** — Your keypair is separate from any infrastructure
-2. **Data can be recovered** — Via backups or (planned) mirroring
+2. **Data can be recovered** — If you kept backups, or later via planned mirroring
 3. **Exit is always possible** — [PKARR](/explore/pubkycore/pkarr/introduction/) lets you point your identity elsewhere
 4. **Damage is contained** — One failure doesn't cascade to your entire digital life

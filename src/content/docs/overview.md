@@ -30,6 +30,7 @@ Learn more about the overall vision here: [The Vision of Pubky](/the-vision-of-p
 1. **[Pubky Ring](/explore/technologies/pubky-ring/)** - Download the mobile key manager app (iOS/Android)
 2. **[Pubky.app](https://pubky.app)** - Try the social media application
 3. **[Pubky Explorer](/explore/technologies/pubky-explorer/)** - Browse your data at [explorer.pubky.app](https://explorer.pubky.app)
+4. **[Pubky Backup](/explore/technologies/pubky-backup/)** - Keep local copies of your published Homeserver data
 
 ### Identity Management
 
@@ -74,6 +75,7 @@ Learn more about the overall vision here: [The Vision of Pubky](/the-vision-of-p
 
 - **[Pubky Docker](/explore/technologies/pubky-docker/)** - One-click Docker stack for running the complete Pubky Social environment locally
 - **[Pubky Explorer](/explore/technologies/pubky-explorer/)** - Web-based file browser for Homeserver data ([explorer.pubky.app](https://explorer.pubky.app))
+- **[Pubky Backup](/explore/technologies/pubky-backup/)** - Desktop app for local `/pub/...` data backups and snapshots
 - **[Pubky CLI](/explore/technologies/pubky-cli/)** - Command-line tool for Homeserver management and testing
 - **PKDNS Digger** - Web-based DNS record lookup tool for PKARR domains ([github.com/pubky/pkdns-digger](https://github.com/pubky/pkdns-digger))
 
