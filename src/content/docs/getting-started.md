@@ -80,9 +80,9 @@ Example paths:
 
 ## Step 5: Back Up Your Published Data
 
-Install **[Pubky Backup](/explore/technologies/pubky-backup/)** to keep local copies of the public `/pub/...` data stored on your Homeserver.
+Install **[Pubky Backup](/explore/technologies/pubky-backup/)** to keep local copies of your data and preserve your data sovereignty.
 
-Use the maintained [Pubky Backup README](https://github.com/pubky/pubky-backup/blob/main/README.md) and [release builds](https://github.com/pubky/pubky-backup/releases) for current download and install instructions.
+Use [Pubky Backup README](https://github.com/pubky/pubky-backup/blob/main/README.md) and [release builds](https://github.com/pubky/pubky-backup/releases) for download and install instructions.
 
 Pubky Backup does not replace your recovery phrase. The recovery phrase protects your identity key; Pubky Backup protects a local copy of your published data.
 
