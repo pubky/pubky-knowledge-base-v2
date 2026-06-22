@@ -14,6 +14,7 @@ A curated directory of websites, applications, repositories, packages, and commu
 - [docs.pubky.org](https://docs.pubky.org/) — Official documentation
 - [pkdns.net](https://pkdns.net/) — PKDNS public resolver
 - [pubkyring.app](https://pubkyring.app/) — Pubky Ring key manager
+- [DeepWiki: pubky-core](https://deepwiki.com/pubky/pubky-core) — AI-generated wiki
 
 ## Live Applications
 
