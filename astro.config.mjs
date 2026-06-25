@@ -9,6 +9,12 @@ import remarkSnippet from './plugins/remark-snippet.mjs';
 // https://astro.build/config
 export default defineConfig({
 	site: process.env.SITE_URL || 'https://docs.pubky.org',
+	redirects: {
+		'/docs': {
+			status: 301,
+			destination: '/',
+		},
+	},
 	base: process.env.BASE_PATH || '/',
 	markdown: {
 		remarkPlugins: [remarkSnippet],
