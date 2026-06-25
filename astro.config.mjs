@@ -8,7 +8,7 @@ import remarkSnippet from './plugins/remark-snippet.mjs';
 
 // https://astro.build/config
 export default defineConfig({
-	site: process.env.SITE_URL || 'https://docs.pubky.org',
+	site: process.env.SITE_URL || 'https://pubky.org',
 	redirects: {
 		'/docs': {
 			status: 301,

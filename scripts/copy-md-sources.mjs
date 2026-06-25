@@ -13,7 +13,7 @@ const SRC = 'src/content/docs';
 const DEST = 'dist';
 const SKIP = new Set(['index.mdx']);
 const ALLOWED_EXT = new Set(['.md', '.mdx']);
-const SITE_URL = (process.env.SITE_URL || 'https://docs.pubky.org').replace(/\/+$/, '');
+const SITE_URL = (process.env.SITE_URL || 'https://pubky.org').replace(/\/+$/, '');
 
 function processFile(srcPath, destPath) {
   const content = readFileSync(srcPath, 'utf-8');
@@ -68,8 +68,8 @@ function transformMarkdown(content) {
   content = content.replace(/!\[[^\]]*\]\([^)]*\)/g, '');
 
   // Rewrite internal links to absolute URLs with .md extension
-  // [text](/path/) → [text](https://docs.pubky.org/path.md)
-  // [text](/path/#section) → [text](https://docs.pubky.org/path.md#section)
+  // [text](/path/) → [text](https://pubky.org/path.md)
+  // [text](/path/#section) → [text](https://pubky.org/path.md#section)
   content = content.replace(/\]\(\/([^)#]+)(#[^)]+)?\)/g, (match, path, fragment) => {
     // Don't transform paths that already have a file extension
     if (/\.\w+$/.test(path)) return match;

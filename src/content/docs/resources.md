@@ -8,10 +8,9 @@ A curated directory of websites, applications, repositories, packages, and commu
 
 ## Websites
 
-- [pubky.org](https://pubky.org/) — Official Pubky website
+- [pubky.org](https://pubky.org/) — Official Pubky documentation
 - [pubky.tech](https://pubky.tech/) — Awesome list: Ecosystem directory
 - [synonym.to](https://synonym.to/) — Synonym (company behind Pubky)
-- [docs.pubky.org](https://docs.pubky.org/) — Official documentation
 - [pkdns.net](https://pkdns.net/) — PKDNS public resolver
 - [pubkyring.app](https://pubkyring.app/) — Pubky Ring key manager
 - [DeepWiki: pubky-core](https://deepwiki.com/pubky/pubky-core) — AI-generated wiki, can answer codebase questions for Pubky Core
