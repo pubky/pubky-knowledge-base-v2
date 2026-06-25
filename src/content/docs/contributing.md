@@ -98,7 +98,7 @@ const example = "like this";
 [Pubky Core](/explore/pubkycore/introduction/)
 
 <!-- External -->
-[Official Docs](https://docs.pubky.org/)
+[Official Docs](https://pubky.org/)
 ```
 
 **Admonitions:**

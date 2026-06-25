@@ -8,7 +8,7 @@ const SRC = 'src/content/docs';
 const DEST = 'dist/llms-small.txt';
 const SKIP = new Set(['index.mdx']);
 const INLINE = new Set(['resources.md']);
-const SITE_URL = (process.env.SITE_URL || 'https://docs.pubky.org').replace(/\/+$/, '');
+const SITE_URL = (process.env.SITE_URL || 'https://pubky.org').replace(/\/+$/, '');
 
 function walkDir(dir) {
 	const files = [];
