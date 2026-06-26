@@ -13,6 +13,7 @@ A curated directory of websites, applications, repositories, packages, and commu
 - [synonym.to](https://synonym.to/) — Synonym (company behind Pubky)
 - [pkdns.net](https://pkdns.net/) — PKDNS public resolver
 - [pubkyring.app](https://pubkyring.app/) — Pubky Ring key manager
+- [stats.pubky.app](https://stats.pubky.app/) — Pubky metrics dashboard
 
 ## AI Resources
 
@@ -22,6 +23,9 @@ A curated directory of websites, applications, repositories, packages, and commu
 ## Live Applications
 
 - [pubky.app](https://pubky.app/) — Decentralized social media app
+- [mypubky.com](https://mypubky.com/) — Shareable bio page for your profile, links, posts, and payment options
+- [payky.app](https://payky.app/) — Payment profile for sharing payment details in one link
+- [mapky.app](https://mapky.app/) — Social map with user-owned location-based data
 - [explorer.pubky.app](https://explorer.pubky.app/) — Pubky data explorer
 - [pubky.observer](https://pubky.observer/) — Pubky data explorer
 - [eventky.app](https://eventky.app/) — Event management on Pubky
