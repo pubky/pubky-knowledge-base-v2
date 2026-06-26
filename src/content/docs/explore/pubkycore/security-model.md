@@ -197,7 +197,7 @@ For connections to public-key Homeserver addresses (for example `https://_pubky.
 
 For Pubky resources, pass the Pubky URL or resource to the SDK and let it build the request. The SDK resolves PKARR, chooses PubkyTLS or standard HTTPS for the runtime, and adds `pubky-host` when an HTTPS Homeserver endpoint needs the target public key. During ICANN fallback, the HTTPS request goes to the ICANN domain, so `pubky-host: <public-key>` tells the Homeserver which user namespace the request is for. Only set that header or choose endpoints yourself when deliberately using the raw Homeserver HTTP API.
 
-**ICANN hosts** (regular domains) continue to use standard X.509 TLS with CA verification.
+**ICANN hosts** (regular domains) use standard HTTPS certificate checks: the certificate must chain to a trusted root and match the requested hostname. On native SDK targets, [PubkyTLS](/glossary/#pubkytls) verifies public-key Homeserver connections directly against the public key from PKARR.
 
 ## Authentication Security
 

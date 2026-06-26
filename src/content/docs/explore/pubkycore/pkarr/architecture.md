@@ -31,13 +31,21 @@ See the [PKARR repository](https://github.com/pubky/pkarr) for the full format s
 
 A, AAAA, CNAME, TXT, HTTPS/SVCB (RFC 9460).
 
-The `_pubky` SVCB record points to a user's [Homeserver](/explore/pubkycore/homeserver/), enabling discovery, migration, and failover:
+Pubky discovery usually uses two PKARR records:
+- The user's record publishes `_pubky` as an HTTPS/SVCB alias to the [Homeserver](/explore/pubkycore/homeserver/) public key.
+- The Homeserver's record advertises the actual endpoints, often both a direct [PubkyTLS](/glossary/#pubkytls) endpoint and an ICANN endpoint.
 
 ```
-_pubky.<public-key> SVCB 1 homeserver.example.com port=443
+# User packet, signed by the user key and queried as _pubky.<user-public-key>
+_pubky HTTPS 0 <homeserver-public-key>
+
+# Homeserver packet, signed by the Homeserver key
+. HTTPS 1 . port=6287
+. A 203.0.113.10
+. HTTPS 10 homeserver.example.com port=443
 ```
 
-A PKARR record can advertise both a direct [PubkyTLS](/glossary/#pubkytls) endpoint and an ICANN endpoint. SDK clients running outside the browser (for example Rust CLI/server apps or native mobile apps using the SDK bindings) prefer the direct endpoint when it is reachable and fall back to the ICANN endpoint automatically; browsers use the ICANN-compatible path.
+SDK clients resolve the full `_pubky.<user-public-key>` name so the alias reaches the Homeserver endpoint records. Native SDK clients prefer the direct endpoint when it is reachable and fall back to the ICANN endpoint automatically; browsers use the ICANN-compatible path. During ICANN fallback, the request is sent to the ICANN domain with the user public key preserved in the `pubky-host` header.
 
 ## Caching
 
