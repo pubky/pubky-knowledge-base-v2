@@ -13,9 +13,11 @@ A curated directory of websites, applications, repositories, packages, and commu
 - [synonym.to](https://synonym.to/) — Synonym (company behind Pubky)
 - [pkdns.net](https://pkdns.net/) — PKDNS public resolver
 - [pubkyring.app](https://pubkyring.app/) — Pubky Ring key manager
+
+## AI Resources
+
 - Context7 resources to keep LLMs up to date: [pubky.org `llms.txt`](https://context7.com/llmstxt/pubky_llms_txt), [Pubky Core repo](https://context7.com/pubky/pubky-core), [Pubky Nexus repo](https://context7.com/pubky/pubky-nexus), [PKARR repo](https://context7.com/pubky/pkarr), [PKDNS repo](https://context7.com/pubky/pkdns), [pubky-app-specs repo](https://context7.com/pubky/pubky-app-specs), [Paykit repo](https://context7.com/pubky/paykit-rs), [HTTP Relay repo](https://context7.com/pubky/http-relay), [Pubky Docker repo](https://context7.com/pubky/pubky-docker), [Mainline repo](https://context7.com/pubky/mainline), and [Pubky Noise repo](https://context7.com/pubky/pubky-noise)
-- [DeepWiki: pubky-core](https://deepwiki.com/pubky/pubky-core) — AI-generated wiki, can answer codebase questions for Pubky Core
-- [DeepWiki: pubky-nexus](https://deepwiki.com/pubky/pubky-nexus) — AI-generated wiki, can answer codebase questions for Pubky Nexus
+- DeepWiki (AI-generated codebase wikis with LLM chat): [pubky-core](https://deepwiki.com/pubky/pubky-core) and [pubky-nexus](https://deepwiki.com/pubky/pubky-nexus)
 
 ## Live Applications
 
