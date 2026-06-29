@@ -185,6 +185,8 @@ Run `npm run dev` again and open the page. You should now see the data displayed
 
 :::tip[First app complete]
 Nice. Your first Pubky app works.
+
+To keep going, explore the [Pubky JavaScript examples](https://github.com/pubky/pubky-core/tree/main/examples/javascript) for extra building blocks.
 :::
 
 #### Full version
