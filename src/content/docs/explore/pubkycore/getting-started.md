@@ -56,7 +56,8 @@ With `.env` set to the default `NETWORK=testnet`, these ports are exposed:
 | `6287` | Homeserver [PubkyTLS](/glossary/#pubkytls) | Direct Pubky TLS endpoint for SDK and native clients. |
 | `6288` | Homeserver admin HTTP | Local admin endpoint exposed by Pubky Docker. |
 
-#### Optional: Build from source
+<details>
+<summary><strong>Optional: Build from source</strong></summary>
 
 For most app development, the public Docker images are enough. Build from source if you need exact control over which Pubky component versions run locally, or if you want to modify the stack itself.
 
@@ -74,6 +75,8 @@ The script pulls the required repositories, lets you choose Git refs for each co
 
 See the [Pubky Docker source setup instructions](https://github.com/pubky/pubky-docker#local-setup-from-source) for more details.
 
+</details>
+
 ### Step 2: Initialize a Project with the SDK
 
 With the Homeserver running, initialize a small TypeScript app and install the [Pubky SDK](/explore/pubkycore/sdk/):
@@ -86,7 +89,8 @@ npm install @synonymdev/pubky
 
 NPM package: [@synonymdev/pubky](https://www.npmjs.com/package/@synonymdev/pubky)
 
-#### Other tools and platforms
+<details>
+<summary><strong>Other tools and platforms</strong></summary>
 
 If you are using another language, package manager, or framework, install the SDK like this. Dedicated guides for these will follow.
 
@@ -107,6 +111,8 @@ cd ios && pod install  # iOS only
 ```
 
 **iOS/Android Native**: See [SDK Documentation](/explore/pubkycore/sdk/) for UniFFI bindings via `pubky-core-ffi`.
+
+</details>
 
 ### Step 3: Build Your First App
 
