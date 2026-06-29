@@ -56,6 +56,10 @@ With `.env` set to the default `NETWORK=testnet`, these ports are exposed:
 | `6287` | Homeserver [PubkyTLS](/glossary/#pubkytls) | Direct Pubky TLS endpoint for SDK and native clients. |
 | `6288` | Homeserver admin HTTP | Local admin endpoint exposed by Pubky Docker. |
 
+:::note[Pubky CLI]
+For manual user and Homeserver operations while developing locally, you can use [Pubky CLI](/explore/technologies/pubky-cli/).
+:::
+
 <details>
 <summary><strong>Optional: Build from source</strong></summary>
 
@@ -240,24 +244,20 @@ const data = await session.storage.getJson(path);
 document.body.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
 ```
 
-### Step 4: Explore Example Apps
+### Step 4: Add Social Features
 
-Learn from working examples:
+:::note[Guide coming soon]
+For now, this section collects references. A dedicated guide will follow.
+:::
+
+**Learn from working examples:**
+- [mypubky.com](https://mypubky.com/) ([source](https://github.com/pubky/mypubky))
+- [eventky.app](https://eventky.app/) ([source](https://github.com/gillohner/eventky))
+- [mapky.app](https://mapky.app/) ([source](https://github.com/gillohner/mapky-app))
 
 **Social App (Pubky App Specs):**
-- [pubky-app-specs](https://github.com/pubky/pubky-app-specs) - Data models for social features
-- [npm: pubky-app-specs](https://www.npmjs.com/package/pubky-app-specs) / [crates.io: pubky-app-specs](https://crates.io/crates/pubky-app-specs) - Validation schemas and helper APIs
-
-**CLI Tool:**
-- [Pubky CLI](/explore/technologies/pubky-cli/) - Reference implementation for user/admin operations
-- [Source](https://github.com/pubky/pubky-cli)
-
-**Simple Examples:**
-- [pubky-core/examples](https://github.com/pubky/pubky-core/tree/main/examples) - Rust examples
-- Authentication flows
-- Data storage patterns
-
-### Step 5: Integrate Advanced Features
+- [pubky-app-specs](https://github.com/pubky/pubky-app-specs) - Data models for social features and interoperability with [pubky.app](/explore/pubky-apps/reference-app/pubky-app/)
+- [npm: pubky-app-specs](https://www.npmjs.com/package/pubky-app-specs) / [crates.io: pubky-app-specs](https://crates.io/crates/pubky-app-specs)
 
 **Use Pubky Nexus for Social Features:**
 
@@ -287,7 +287,7 @@ If building a social app, leverage [Pubky Nexus](/explore/pubky-apps/indexing-an
 - Private messaging
 - Secure data sharing
 
-### Step 6: Deploy to Production
+### Step 5: Deploy to Production
 
 **Deploy a Homeserver:**
 
@@ -320,7 +320,7 @@ Run a [PKDNS](/explore/technologies/pkdns/) server for your users:
 ### Guides Coming Next
 
 - **Login with Pubky Ring**: Keep user keys out of the browser app and sign in through Pubky Auth. Apps request scoped capabilities, and users approve them in a dedicated signer such as [Pubky Ring](/explore/technologies/pubky-ring/).
-- **Deploy beyond local testnet**: Move from the local development stack to a production setup that uses the [Mainline DHT](/explore/technologies/mainline-dht/) and makes your app accessible on the internet.
+- **Update Step 5: Deploy to Production**: Replace the current outline with a complete production guide for using the [Mainline DHT](/explore/technologies/mainline-dht/), signing in with [Pubky Ring](/explore/technologies/pubky-ring/), and making your app accessible on the internet.
 - **Other languages and platforms**: Build the same hello-world app with Rust, React Native, and native mobile tooling.
 - **Run the Homeserver natively**: Start the local testnet without Docker Compose and configure local signup.
 - **Build social Pubky apps**: Use the larger Pubky Docker stack with indexers, aggregators, and [pubky.app](/explore/pubky-apps/reference-app/pubky-app/)-compatible data flows.
@@ -369,16 +369,7 @@ A: Several models work: Homeserver hosting, indexing services (like Nexus), prem
 - **[Rust Docs](https://docs.rs/pubky)**: Rust crate documentation
 - **[Official Docs](https://pubky.github.io/pubky-core/)**: Protocol specification
 
-### Tools
-- **[Pubky Docker](/explore/technologies/pubky-docker/)**: Local development stack
-- **[Pubky CLI](/explore/technologies/pubky-cli/)**: Command-line interface
-- **[Pubky Explorer](/explore/technologies/pubky-explorer/)**: Data browser
-
 ### Community
 - **Telegram**: [t.me/pubkycore](https://t.me/pubkycore)
 - **GitHub**: [github.com/pubky](https://github.com/pubky)
 - **Live App**: [pubky.app](https://pubky.app)
-
----
-
-**Ready to build the decentralized web? Start with the [SDK](/explore/pubkycore/sdk/)!**
