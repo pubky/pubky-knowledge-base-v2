@@ -17,6 +17,9 @@
  *   // --8<-- [skip:end]
  * are stripped from the rendered snippet (useful for verification-only
  * code that should compile but not appear in the docs).
+ *
+ * Snippet marker lines inside a rendered snippet are also stripped, which
+ * allows nested anchors for rendering smaller sections of one checked file.
  */
 
 import { readFileSync } from 'node:fs';
@@ -40,6 +43,38 @@ function dedent(text) {
   return lines.map((l) => (l.length >= indent ? l.slice(indent) : l)).join('\n');
 }
 
+function extractSnippet(content, filePath, anchor) {
+  const startTag = `[start:${anchor}]`;
+  const endTag = `[end:${anchor}]`;
+  const lines = content.split('\n');
+  const startIdx = lines.findIndex((l) => l.includes(startTag));
+  const endIdx = lines.findIndex((l) => l.includes(endTag));
+
+  if (startIdx === -1 || endIdx === -1) {
+    throw new Error(`remark-snippet: anchor "${anchor}" not found in ${filePath}`);
+  }
+
+  const sliced = lines.slice(startIdx + 1, endIdx);
+  const filtered = [];
+  let skipping = false;
+  for (const line of sliced) {
+    if (line.includes('[skip:start]')) {
+      skipping = true;
+      continue;
+    }
+    if (line.includes('[skip:end]')) {
+      skipping = false;
+      continue;
+    }
+    if (line.includes('--8<--')) {
+      continue;
+    }
+    if (!skipping) filtered.push(line);
+  }
+
+  return dedent(filtered.join('\n')).trimEnd();
+}
+
 function walk(node) {
   if (node.type === 'code' && node.meta) {
     const match = node.meta.match(/snippet="([^"]+)"/);
@@ -58,34 +93,7 @@ function walk(node) {
       }
 
       if (anchor) {
-        const startTag = `[start:${anchor}]`;
-        const endTag = `[end:${anchor}]`;
-        const lines = content.split('\n');
-        const startIdx = lines.findIndex((l) => l.includes(startTag));
-        const endIdx = lines.findIndex((l) => l.includes(endTag));
-
-        if (startIdx === -1 || endIdx === -1) {
-          throw new Error(
-            `remark-snippet: anchor "${anchor}" not found in ${filePath}`
-          );
-        }
-
-        const sliced = lines.slice(startIdx + 1, endIdx);
-        const filtered = [];
-        let skipping = false;
-        for (const line of sliced) {
-          if (line.includes('[skip:start]')) {
-            skipping = true;
-            continue;
-          }
-          if (line.includes('[skip:end]')) {
-            skipping = false;
-            continue;
-          }
-          if (!skipping) filtered.push(line);
-        }
-
-        node.value = dedent(filtered.join('\n')).trimEnd();
+        node.value = extractSnippet(content, filePath, anchor);
       } else {
         node.value = content.trim();
       }

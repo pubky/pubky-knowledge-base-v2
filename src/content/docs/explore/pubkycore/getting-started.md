@@ -126,17 +126,7 @@ If you prefer to skip the step-by-step walkthrough, jump to the [full version](#
 
 #### 3.1 Import the SDK and enable info logs
 
-```js
-import { Keypair, Pubky, PublicKey, setLogLevel } from "@synonymdev/pubky";
-
-try {
-  setLogLevel("info");
-} catch (error) {
-  console.warn(
-    "Pubky log level must be set only once, before creating the client.",
-    error,
-  );
-}
+```js snippet="snippets/js/src/getting-started.ts:js_getting_started_imports"
 ```
 
 This loads the Pubky SDK and sends info logs to the browser console.
@@ -145,29 +135,21 @@ To see the logs in your browser console, make sure you have the right log level 
 
 #### 3.2 Connect to the local testnet
 
-```js
-const pubky = Pubky.testnet();
+```js snippet="snippets/js/src/getting-started.ts:js_getting_started_testnet"
 ```
 
 This tells the SDK to use the local testnet services started by Pubky Docker instead of the production Pubky network.
 
 #### 3.3 Create a new user identity
 
-```js
-const keypair = Keypair.random();
-const signer = pubky.signer(keypair);
+```js snippet="snippets/js/src/getting-started.ts:js_getting_started_identity"
 ```
 
 This creates a demo user identity for the hello-world app. The signer uses it to perform identity actions such as signup and signin.
 
 #### 3.4 Sign up on the local Homeserver
 
-```js
-const homeserver = PublicKey.from(
-  "pubky8pinxxgqs41n4aididenw5apqp1urfmzdztr8jt4abrkdn435ewo",
-);
-
-await signer.signup(homeserver, null);
+```js snippet="snippets/js/src/getting-started.ts:js_getting_started_signup"
 ```
 
 This creates an account on the local Homeserver and publishes the user's Homeserver mapping (PKARR). Because local signup is set to `open`, we pass `null` instead of a signup token.
@@ -178,28 +160,23 @@ Run `npm run dev` and open the printed URL in your browser. Look at the logs in 
 During first signup, the browser console may show a `404` for a request to `http://localhost:15411/<user-public-key>`. That can be normal: the SDK checks whether the new user's PKARR record exists before publishing it. If signup continues, you can ignore that `404`.
 :::
 
-#### 3.5 Sign in as this app
+#### 3.5 Sign in
 
-```js
-const session = await signer.signin("hello-world.app");
+```js snippet="snippets/js/src/getting-started.ts:js_getting_started_signin"
 ```
 
-This creates a Homeserver session for the hello-world app. The client ID, `hello-world.app`, is the app identity for this session.
+This creates a Homeserver session for the demo user.
 
 #### 3.6 Write to Homeserver storage
 
-```js
-const path = "/pub/hello-world/data.json";
-await session.storage.putJson(path, { message: "Hello Pubkyverse!" });
+```js snippet="snippets/js/src/getting-started.ts:js_getting_started_write"
 ```
 
 This writes a simple JSON file onto the signed-in user's Homeserver public storage.
 
 #### 3.7 Read the JSON back
 
-```js
-const data = await session.storage.getJson(path);
-document.body.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+```js snippet="snippets/js/src/getting-started.ts:js_getting_started_read"
 ```
 
 This fetches the same JSON file from Homeserver storage and renders it on the page, proving that signup, signin, write, and read all worked.
@@ -212,36 +189,7 @@ Nice. Your first Pubky app works.
 
 #### Full version
 
-```js
-import { Keypair, Pubky, PublicKey, setLogLevel } from "@synonymdev/pubky";
-
-try {
-  setLogLevel("info");
-} catch (error) {
-  console.warn(
-    "Pubky log level must be set only once, before creating the client.",
-    error,
-  );
-}
-
-const pubky = Pubky.testnet();
-
-const keypair = Keypair.random();
-const signer = pubky.signer(keypair);
-
-const homeserver = PublicKey.from(
-  "pubky8pinxxgqs41n4aididenw5apqp1urfmzdztr8jt4abrkdn435ewo",
-);
-
-await signer.signup(homeserver, null);
-
-const session = await signer.signin("hello-world.app");
-
-const path = "/pub/hello-world/data.json";
-await session.storage.putJson(path, { message: "Hello Pubkyverse!" });
-
-const data = await session.storage.getJson(path);
-document.body.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+```js snippet="snippets/js/src/getting-started.ts:js_getting_started_full"
 ```
 
 ### Step 4: Add Social Features
