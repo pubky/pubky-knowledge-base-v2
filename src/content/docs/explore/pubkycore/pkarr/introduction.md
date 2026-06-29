@@ -27,6 +27,6 @@ For more technical details on PKARR's architecture and how it works, refer to th
 
 ## Getting Started
 
-[To start using PKARR](2.Getting%20Started%20with%20Pkarr.md), you can visit the [web app demo](https://pkdns.net) or explore the Rust examples provided in [PKARR repository](https://github.com/pubky/pkarr).
+[To start using PKARR](/explore/pubkycore/pkarr/getting-started/), you can visit the [web app demo](https://pkdns.net) or explore the Rust examples provided in [PKARR repository](https://github.com/pubky/pkarr).
 
 To access public-key domains from your browser, use [PKDNS](/explore/technologies/pkdns/), a DNS server that resolves PKARR records. You can use public [PKDNS](/explore/technologies/pkdns/) instances or run your own server—see the [PKDNS](/explore/technologies/pkdns/) documentation for setup instructions.
