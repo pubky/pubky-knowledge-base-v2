@@ -74,20 +74,30 @@ The script pulls the required repositories, lets you choose Git refs for each co
 
 See the [Pubky Docker source setup instructions](https://github.com/pubky/pubky-docker#local-setup-from-source) for more details.
 
-### Step 2: Install the SDK
+### Step 2: Initialize a Project with the SDK
 
-Choose your platform and install the [Pubky SDK](/explore/pubkycore/sdk/):
+With the Homeserver running, initialize a small TypeScript app and install the [Pubky SDK](/explore/pubkycore/sdk/):
 
-**Rust:**
 ```bash
-cargo add pubky
+npm create vite@latest pubky-hello-world -- --template vanilla-ts
+cd pubky-hello-world
+npm install @synonymdev/pubky
 ```
 
-**JavaScript/TypeScript (Web & Node.js):**
+NPM package: [@synonymdev/pubky](https://www.npmjs.com/package/@synonymdev/pubky)
+
+#### Other tools and platforms
+
+If you are using another language, package manager, or framework, install the SDK like this. Dedicated guides for these will follow.
+
+**Yarn:**
 ```bash
-npm install @synonymdev/pubky
-# or
 yarn add @synonymdev/pubky
+```
+
+**Rust ([docs](https://docs.rs/pubky)):**
+```bash
+cargo add pubky
 ```
 
 **React Native:**
@@ -97,11 +107,6 @@ cd ios && pod install  # iOS only
 ```
 
 **iOS/Android Native**: See [SDK Documentation](/explore/pubkycore/sdk/) for UniFFI bindings via `pubky-core-ffi`.
-
-**Resources:**
-- [Rust API Docs](https://docs.rs/pubky)
-- [NPM Package](https://www.npmjs.com/package/@synonymdev/pubky)
-- [Official Docs](https://pubky.github.io/pubky-core/)
 
 ### Step 3: Build Your First App
 
