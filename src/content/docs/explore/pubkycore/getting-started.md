@@ -26,7 +26,7 @@ cd pubky-docker
 cp .env-sample .env
 ```
 
-In `homeserver.config.toml`, set local signup mode to `open`. Local setups do not need the token-based spam protection used by public Homeservers.
+In `homeserver.config.toml` set local signup mode to `open`. This is as opposed to requiring a signup token to signup - local setups do not need the token-based spam protection used by public Homeservers.
 
 ```toml
 signup_mode = "open"
