@@ -2,8 +2,6 @@
 title: "Developer Guide"
 ---
 
-Build on Pubky if you want your users to control their identities and publish data to a Homeserver they choose, rather than to a data server dictated by and tied to whichever app they use. Pubky’s architecture preserves their freedom to move between apps and Homeservers.
-
 ```mermaid
 flowchart LR
     Stack[Run Local Stack] --> SDK[Install SDK]
