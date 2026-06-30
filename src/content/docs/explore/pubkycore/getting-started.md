@@ -84,7 +84,7 @@ See the [Pubky Docker source setup instructions](https://github.com/pubky/pubky-
 With the Homeserver running, initialize a small TypeScript app and install the [Pubky SDK](/explore/pubkycore/sdk/):
 
 ```bash
-npm create vite@latest pubky-hello-world -- --template vanilla-ts
+npm create vite@latest pubky-hello-world -- --template vanilla-ts --no-immediate
 cd pubky-hello-world
 npm install @synonymdev/pubky
 ```
