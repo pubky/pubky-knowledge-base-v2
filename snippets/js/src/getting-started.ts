@@ -1,4 +1,3 @@
-// --8<-- [start:js_getting_started_full]
 // --8<-- [start:js_getting_started_imports]
 import { Keypair, Pubky, PublicKey, setLogLevel } from "@synonymdev/pubky";
 
@@ -40,6 +39,9 @@ await session.storage.putJson(path, { message: "Hello Pubkyverse!" });
 
 // --8<-- [start:js_getting_started_read]
 const data = await session.storage.getJson(path);
-document.body.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+document.querySelector<HTMLDivElement>("#app")!.textContent = JSON.stringify(
+  data,
+  null,
+  2,
+);
 // --8<-- [end:js_getting_started_read]
-// --8<-- [end:js_getting_started_full]
