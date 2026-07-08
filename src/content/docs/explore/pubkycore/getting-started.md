@@ -22,7 +22,9 @@ To follow along, you will need [Docker](https://docs.docker.com/get-started/get-
 A native, non-Docker guide that covers running the same local testnet natively will follow.
 :::
 
-We'll use [Pubky Docker](/explore/technologies/pubky-docker/) for the local development environment:
+In order to build our App we'll need to setup a local homeserver and testnet - we'll use [Pubky Docker](/explore/technologies/pubky-docker/) to spin up a local development environment.
+
+Note: [Pubky Docker](/explore/technologies/pubky-docker/)  can run a full [pubky.app](/explore/pubky-apps/reference-app/pubky-app/)-compatible social stack too, but we will keep this setup minimal.
 
 ```bash
 git clone https://github.com/pubky/pubky-docker.git && cd pubky-docker && cp .env-sample .env
