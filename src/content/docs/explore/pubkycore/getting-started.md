@@ -10,7 +10,11 @@ flowchart LR
     Features --> Deploy[Deploy to Production]
 ```
 
-Prerequisites: [Docker](https://docs.docker.com/get-started/get-docker/) and [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm/).
+This guide walks you through building a first Pubky app against a local development stack. You will start a local Homeserver with Pubky Docker, create a Vite app, install the Pubky SDK, and connect your app to the local testnet.
+
+By the end, you will have created a demo identity, signed up and signed in on the local Homeserver, written a JSON file to Pubky storage, and read it back in the browser. After that, you will also get to know the templates you can use to bootstrap your own Pubky app.
+
+To follow along, you will need [Docker](https://docs.docker.com/get-started/get-docker/) and [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm/).
 
 ### Step 1: Set Up Pubky Docker
 
@@ -36,7 +40,7 @@ For this first app, you only need the [Homeserver](/explore/pubkycore/homeserver
 docker compose up homeserver -d
 ```
 
-You now have a local Pubky testnet: the DHT is local, PKARR records resolve to local endpoints, the HTTP relay runs locally, and your testnet Homeserver's pubky is always `8pinxxgqs41n4aididenw5apqp1urfmzdztr8jt4abrkdn435ewo`.
+You now have a local Pubky testnet ready for app development. An isolated DHT is running, the HTTP relay is local, and the Homeserver publishes its PKARR identity to the local DHT. This means local clients can discover your Homeserver the same way they would on the public network, but everything stays on your machine. Your testnet Homeserver's pubky is always `8pinxxgqs41n4aididenw5apqp1urfmzdztr8jt4abrkdn435ewo`.
 
 :::note[Testnet state is ephemeral]
 When the Docker containers are restarted, files stored on the Homeserver, user PKARR records in the local DHT, and HTTP relay auth state are reset. The testnet Homeserver has a stable, predefined pubky, so your app can keep connecting to the same Homeserver address.
