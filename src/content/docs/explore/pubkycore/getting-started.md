@@ -2,32 +2,116 @@
 title: "Developer Guide"
 ---
 
-Build on Pubky if you want your users to control their identities and publish data to a Homeserver they choose, rather than to a data server dictated by and tied to whichever app they use. Pubky’s architecture preserves their freedom to move between apps and Homeservers.
-
 ```mermaid
 flowchart LR
-    SDK[Install SDK] --> Stack[Run Local Stack]
-    Stack --> App[Build Your App]
+    Stack[Run Local Stack] --> SDK[Install SDK]
+    SDK --> App[Build Your App]
     App --> Features[Add Social Features]
     Features --> Deploy[Deploy to Production]
 ```
 
-## For Developers: Build on Pubky
+This guide walks you through building a first Pubky app against a local development stack. You will start a local Homeserver with Pubky Docker, create a Vite app, install the Pubky SDK, and connect your app to the local testnet.
 
-### Step 1: Install the SDK
+By the end, you will have created a demo identity, signed up and signed in on the local Homeserver, written a JSON file to Pubky storage, and read it back in the browser. After that, you will also get to know the templates you can use to bootstrap your own Pubky app.
 
-Choose your platform and install the [Pubky SDK](/explore/pubkycore/sdk/):
+To follow along, you will need [Docker](https://docs.docker.com/get-started/get-docker/) and [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm/).
 
-**Rust:**
+### Step 1: Set Up Pubky Docker
+
+:::note[Native setup coming soon]
+A native, non-Docker guide that covers running the same local testnet natively will follow.
+:::
+
+In order to build our App we'll need to setup a local homeserver and testnet - we'll use [Pubky Docker](/explore/technologies/pubky-docker/) to spin up a local development environment.
+
+Note: [Pubky Docker](/explore/technologies/pubky-docker/)  can run a full [pubky.app](/explore/pubky-apps/reference-app/pubky-app/)-compatible social stack too, but we will keep this setup minimal.
+
 ```bash
-cargo add pubky
+git clone https://github.com/pubky/pubky-docker.git && cd pubky-docker && cp .env-sample .env
 ```
 
-**JavaScript/TypeScript (Web & Node.js):**
+In `homeserver.config.toml` set `signup_mode` to `open`. This is as opposed to requiring a signup token to signup - local setups do not need the token-based spam protection used by public Homeservers.
+
+From the `pubky-docker` directory, run:
+
 ```bash
-npm install @synonymdev/pubky
-# or
+sed -i 's/^signup_mode = "token_required"/signup_mode = "open"/' homeserver.config.toml
+```
+
+Run the homeserver and tesnet via Docker compose:
+
+```bash
+docker compose up homeserver -d
+```
+
+You now have a local Pubky testnet ready for app development. An isolated DHT is running, the HTTP relay is local, and the Homeserver publishes its PKARR identity to the local DHT. This means local clients can discover your Homeserver the same way they would on the public network, but everything stays on your machine. Your testnet Homeserver's pubky is always `8pinxxgqs41n4aididenw5apqp1urfmzdztr8jt4abrkdn435ewo`.
+
+:::note[Testnet state is ephemeral]
+When the Docker containers are restarted the files stored on the Homeserver and user PKARR records in the local DHT are reset. The testnet Homeserver does however have a stable, predefined pubky.
+:::
+
+With `.env` set to the default `NETWORK=testnet`, these ports are exposed:
+
+| Port | Service | Purpose |
+| --- | --- | --- |
+| `15411` | [PKARR](/explore/pubkycore/pkarr/introduction/) relay | Used by the Pubky SDK to publish and resolve testnet PKARR records over HTTP, instead of using the [Mainline DHT](/explore/technologies/mainline-dht/). |
+| `15412` | [HTTP relay](/explore/technologies/http-relay/) | Runs the local relay used by Pubky authentication flows. |
+| `6286` | Homeserver ICANN HTTP | Clear-text HTTP endpoint used for browser and localhost fallback. |
+| `6287` | Homeserver [PubkyTLS](/glossary/#pubkytls) | Direct Pubky TLS endpoint for SDK and native clients. |
+| `6288` | Homeserver admin HTTP | Local admin endpoint exposed by Pubky Docker. |
+
+:::note[Pubky CLI]
+For manual user and Homeserver operations while developing locally, you can use [Pubky CLI](https://github.com/pubky/pubky-core/tree/main/examples/javascript).
+:::
+
+<details>
+<summary><strong>Optional: Build from source</strong></summary>
+
+For most app development, the public Docker images are enough. Build from source if you need exact control over which Pubky component versions run locally, or if you want to modify the stack itself.
+
+To build from source, you need the Pubky component repositories. The easiest path is to let the helper script clone and prepare them for you:
+
+```bash
+./pubky-docker-cli.sh
+```
+
+The script pulls the required repositories, lets you choose Git refs for each component, builds the images, and starts the stack. To inspect which component versions are running in your containers, use:
+
+```bash
+./list-component-versions.sh
+```
+
+See the [Pubky Docker source setup instructions](https://github.com/pubky/pubky-docker#local-setup-from-source) for more details.
+
+</details>
+
+### Step 2: Initialize Project with the SDK
+
+What follows is a step-by-step guide to building your first Pubky app. If you prefer to start from a ready-made project, jump to the [basic Pubky app template](#basic-pubky-app-template).
+
+With the Homeserver running, clone this empty Vite template and install the [Pubky SDK](/explore/pubkycore/sdk/):
+
+```bash
+npx tiged pubky/pubky-app-templates/vite-starter pubky-hello-world
+cd pubky-hello-world
+npm install && npm install @synonymdev/pubky
+```
+
+NPM package: [@synonymdev/pubky](https://www.npmjs.com/package/@synonymdev/pubky)
+
+<details>
+<summary><strong>Other tools and platforms</strong></summary>
+
+If you are using another language, package manager, or framework, install the SDK like this. Dedicated guides for these will follow.
+
+**Yarn:**
+```bash
 yarn add @synonymdev/pubky
+```
+
+**Rust ([docs](https://docs.rs/pubky)):**
+```bash
+cargo add pubky
 ```
 
 **React Native:**
@@ -38,57 +122,126 @@ cd ios && pod install  # iOS only
 
 **iOS/Android Native**: See [SDK Documentation](/explore/pubkycore/sdk/) for UniFFI bindings via `pubky-core-ffi`.
 
-📚 **Resources:**
-- [Rust API Docs](https://docs.rs/pubky)
-- [NPM Package](https://www.npmjs.com/package/@synonymdev/pubky)
-- [Official Docs](https://pubky.github.io/pubky-core/)
-
-### Step 2: Run Local Development Stack
-
-**[Pubky Docker](/explore/technologies/pubky-docker/)** provides a one-command local setup of the full Pubky Social stack (PKARR relay, Homeserver, Nexus, and the App frontend).
-
-See the [Pubky Docker documentation](/explore/technologies/pubky-docker/) for setup instructions, port mappings, and configuration options.
-
-**Alternative**: Run just a Homeserver. Start PostgreSQL and configure `database_url` first; see the [Homeserver documentation](/explore/pubkycore/homeserver/) for details:
-```bash
-git clone https://github.com/pubky/pubky-core
-cd pubky-core/pubky-homeserver
-cargo run -- --data-dir=~/.pubky
-```
+</details>
 
 ### Step 3: Build Your First App
 
-**Quick Example (JavaScript):**
+Open `src/main.ts` and replace the `document.querySelector('#app')!.textContent = 'Vite Starter'` line with the snippets below.
 
-```javascript snippet="snippets/js/src/quick-start-getting-started.ts:js_getting_started_quick_example"
+#### 3.1 Import the SDK and enable info logs
+
+```js snippet="snippets/js/src/getting-started.ts:js_getting_started_imports"
 ```
 
-**Key concepts:**
-- Data is stored per public key on Homeservers
-- Path structure: `/pub/app-name/path` for public data
-- All operations use standard HTTP/HTTPS
-- Authentication via cryptographic signatures
+This loads the Pubky SDK and sends info logs to the browser console.
 
-📖 **Full SDK guide**: [SDK Documentation](/explore/pubkycore/sdk/)
+To see the logs in your browser console, make sure you have the right log level filtering configured in your browser as well.
 
-### Step 4: Explore Example Apps
+#### 3.2 Connect to the local testnet
 
-Learn from working examples:
+```js snippet="snippets/js/src/getting-started.ts:js_getting_started_testnet"
+```
+
+This tells the SDK to use the local testnet services started by Pubky Docker instead of the production Pubky network.
+
+#### 3.3 Create a new user identity
+
+```js snippet="snippets/js/src/getting-started.ts:js_getting_started_identity"
+```
+
+This creates a demo user identity for the hello-world app. The signer uses it to perform identity actions such as signup and signin.
+
+#### 3.4 Sign up on the local Homeserver
+
+```js snippet="snippets/js/src/getting-started.ts:js_getting_started_signup"
+```
+
+This creates an account on the local Homeserver and publishes the user's Homeserver mapping (PKARR). Because local signup is set to `open`, we pass `null` instead of a signup token.
+
+Run `npm run dev` and open the printed URL in your browser. Look at the logs in your browser console. You should see that the signup request succeeded and that you successfully published your Homeserver configuration (= PKARR).
+
+:::note[404 during signup]
+During first signup, the browser console may show a `404` for a request to `http://localhost:15411/<user-public-key>`. That can be normal: the SDK checks whether the new user's PKARR record exists before publishing it. If signup continues, you can ignore that `404`.
+:::
+
+#### 3.5 Sign in
+
+```js snippet="snippets/js/src/getting-started.ts:js_getting_started_signin"
+```
+
+This creates a Homeserver session for the demo user.
+
+#### 3.6 Write to Homeserver storage
+
+```js snippet="snippets/js/src/getting-started.ts:js_getting_started_write"
+```
+
+This writes a simple JSON file onto the signed-in user's Homeserver public storage.
+
+#### 3.7 Read the JSON back
+
+```js snippet="snippets/js/src/getting-started.ts:js_getting_started_read"
+```
+
+This fetches the same JSON file from Homeserver storage and renders it in the template's `#app` element, proving that signup, signin, write, and read all worked.
+
+Run `npm run dev` again and open the page. You should now see the data displayed there.
+
+:::tip[First app complete]
+Nice. Your first Pubky app works.
+:::
+
+#### Basic Pubky app template
+
+As a next step, try this template as a fuller starting point for a fresh Pubky app.
+
+It includes a working browser app with local testnet configuration, identity creation, Homeserver signup and signin, and a Pubky auth flow. Treat it as a set of building blocks: copy the pieces your app needs, adapt the auth and storage flows, and replace the sample UI with your own experience.
+
+```bash
+npx tiged pubky/pubky-app-templates/basic-pubky-app my-pubky-app
+cd my-pubky-app
+npm install && VITE_PUBKY_TESTNET=true npm run dev
+```
+
+##### Homeserver auth
+
+The basic app has two login paths. The right-side **New identity** panel is mainly a development shortcut that creates a keypair inside the app, signs up, and signs in all at once. The left-side **Sign in with Pubky Ring** panel is the more realistic flow: the app asks for authorization, while key management and Homeserver signup happen in a separate signer app.
+
+For local development, you can use the [Pubky signer app template](https://github.com/pubky/pubky-app-templates/tree/main/pubky-signer-app) as a browser-based stand-in for Pubky Ring:
+
+Keep `my-pubky-app` running. In a second terminal, start `pubky-signer-app` as a separate app that runs at the same time. The two apps have different jobs: `my-pubky-app` is the regular Pubky app you are building, while `pubky-signer-app` is a local key manager and signer, like Pubky Ring, that owns the identity and approves auth requests.
+
+```bash
+npx tiged pubky/pubky-app-templates/pubky-signer-app pubky-signer-app
+cd pubky-signer-app
+npm install && npm run dev
+```
+
+With the local testnet and both apps running, open the signer app first:
+
+1. In the signer app's **Identity** tab, click **Create new identity**.
+2. In section **Homeserver** on the right, leave the local testnet Homeserver selected and click **Sign up**.
+3. Open `my-pubky-app` and use the left-side **Sign in with Pubky Ring** panel.
+4. Click **Copy link** in the Pubky app template.
+5. Go back to the signer app, switch to the **Auth** page, paste the link into **Pubky auth link**, and click **Approve request**.
+6. Switch back to the Pubky app template. It polls the pending auth flow and signs in automatically once the signer approves.
+
+That flow is the security best practice: it keeps the user's key material out of the application being tested. The Pubky app template receives a session after authorization, but the identity and Homeserver setup remain with the signer.
+
+### Step 4: Add Social Features
+
+:::note[Guide coming soon]
+For now, this section collects references. A dedicated guide will follow.
+:::
+
+**Learn from working examples:**
+- [mypubky.com](https://mypubky.com/) ([source](https://github.com/pubky/mypubky))
+- [eventky.app](https://eventky.app/) ([source](https://github.com/gillohner/eventky))
+- [mapky.app](https://mapky.app/) ([source](https://github.com/gillohner/mapky-app))
 
 **Social App (Pubky App Specs):**
-- [pubky-app-specs](https://github.com/pubky/pubky-app-specs) - Data models for social features
-- [npm: pubky-app-specs](https://www.npmjs.com/package/pubky-app-specs) / [crates.io: pubky-app-specs](https://crates.io/crates/pubky-app-specs) - Validation schemas and helper APIs
-
-**CLI Tool:**
-- [Pubky CLI](/explore/technologies/pubky-cli/) - Reference implementation for user/admin operations
-- [Source](https://github.com/pubky/pubky-cli)
-
-**Simple Examples:**
-- [pubky-core/examples](https://github.com/pubky/pubky-core/tree/main/examples) - Rust examples
-- Authentication flows
-- Data storage patterns
-
-### Step 5: Integrate Advanced Features
+- [pubky-app-specs](https://github.com/pubky/pubky-app-specs) - Data models for social features and interoperability with [pubky.app](/explore/pubky-apps/reference-app/pubky-app/)
+- [npm: pubky-app-specs](https://www.npmjs.com/package/pubky-app-specs) / [crates.io: pubky-app-specs](https://crates.io/crates/pubky-app-specs)
 
 **Use Pubky Nexus for Social Features:**
 
@@ -118,7 +271,7 @@ If building a social app, leverage [Pubky Nexus](/explore/pubky-apps/indexing-an
 - Private messaging
 - Secure data sharing
 
-### Step 6: Deploy to Production
+### Step 5: Deploy to Production
 
 **Deploy a Homeserver:**
 
@@ -126,8 +279,7 @@ If building a social app, leverage [Pubky Nexus](/explore/pubky-apps/indexing-an
 2. Configure HTTPS (required)
 3. Deploy Homeserver:
    ```bash
-   docker build --build-arg TARGETARCH=x86_64 -t pubky:core .
-   docker run --network=host -it pubky:core
+   docker build --build-arg TARGETARCH=x86_64 -t pubky:core . && docker run --network=host -it pubky:core
    ```
 4. Publish Homeserver location to PKARR
 5. Configure rate limiting and moderation
@@ -147,6 +299,14 @@ Run a [PKDNS](/explore/technologies/pkdns/) server for your users:
 - Resolves public-key domains
 - Supports traditional DNS
 - DoH/DoT encryption
+
+### Guides Coming Next
+
+- **Production Pubky Ring auth**: Replace the local signer template with the production Pubky Ring mobile flow, public relay configuration, and internet-accessible app URLs.
+- **Update Step 5: Deploy to Production**: Replace the current outline with a complete production guide for using the [Mainline DHT](/explore/technologies/mainline-dht/), signing in with [Pubky Ring](/explore/technologies/pubky-ring/), and making your app accessible on the internet.
+- **Other languages and platforms**: Build the same hello-world app with Rust, React Native, and native mobile tooling.
+- **Run the Homeserver natively**: Start the local testnet without Docker Compose and configure local signup.
+- **Build social Pubky apps**: Use the larger Pubky Docker stack with indexers, aggregators, and [pubky.app](/explore/pubky-apps/reference-app/pubky-app/)-compatible data flows.
 
 ### Next Steps
 
@@ -192,16 +352,7 @@ A: Several models work: Homeserver hosting, indexing services (like Nexus), prem
 - **[Rust Docs](https://docs.rs/pubky)**: Rust crate documentation
 - **[Official Docs](https://pubky.github.io/pubky-core/)**: Protocol specification
 
-### Tools
-- **[Pubky Docker](/explore/technologies/pubky-docker/)**: Local development stack
-- **[Pubky CLI](/explore/technologies/pubky-cli/)**: Command-line interface
-- **[Pubky Explorer](/explore/technologies/pubky-explorer/)**: Data browser
-
 ### Community
 - **Telegram**: [t.me/pubkycore](https://t.me/pubkycore)
 - **GitHub**: [github.com/pubky](https://github.com/pubky)
 - **Live App**: [pubky.app](https://pubky.app)
-
----
-
-**Ready to build the decentralized web? Start with the [SDK](/explore/pubkycore/sdk/)!**
