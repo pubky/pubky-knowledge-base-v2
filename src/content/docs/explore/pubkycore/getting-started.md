@@ -199,6 +199,30 @@ npm install
 VITE_PUBKY_TESTNET=true npm run dev
 ```
 
+##### Homeserver auth
+
+The basic app has two login paths. The right-side **New identity** panel is mainly a development shortcut that creates a keypair inside the app, signs up, and signs in all at once. The left-side **Sign in with Pubky Ring** panel is the more realistic flow: the app asks for authorization, while key management and Homeserver signup happen in a separate signer app.
+
+For local development, you can use the [Pubky signer app template](https://github.com/pubky/pubky-app-templates/tree/main/pubky-signer-app) as a browser-based stand-in for Pubky Ring:
+
+```bash
+npx tiged pubky/pubky-app-templates/pubky-signer-app pubky-signer-app
+cd pubky-signer-app
+npm install
+npm run dev
+```
+
+With the local testnet still running, open the signer app first:
+
+1. In the signer app's **Identity** tab, click **Create new identity**.
+2. In **Homeserver**, leave the local testnet Homeserver selected and click **Sign up**.
+3. Open the Pubky app template and use the left-side **Sign in with Pubky Ring** panel.
+4. Click **Copy link** in the Pubky app template.
+5. Go back to the signer app, switch to the **Auth** page, paste the link into **Pubky auth link**, and click **Approve request**.
+6. Switch back to the Pubky app template. It polls the pending auth flow and signs in automatically once the signer approves.
+
+That flow is the security best practice: it keeps the user's key material out of the application being tested. The Pubky app template receives a session after authorization, but the identity and Homeserver setup remain with the signer.
+
 ### Step 4: Add Social Features
 
 :::note[Guide coming soon]
@@ -274,7 +298,7 @@ Run a [PKDNS](/explore/technologies/pkdns/) server for your users:
 
 ### Guides Coming Next
 
-- **Login with Pubky Ring**: Keep user keys out of the browser app and sign in through Pubky Auth. Apps request scoped capabilities, and users approve them in a dedicated signer such as [Pubky Ring](/explore/technologies/pubky-ring/).
+- **Production Pubky Ring auth**: Replace the local signer template with the production Pubky Ring mobile flow, public relay configuration, and internet-accessible app URLs.
 - **Update Step 5: Deploy to Production**: Replace the current outline with a complete production guide for using the [Mainline DHT](/explore/technologies/mainline-dht/), signing in with [Pubky Ring](/explore/technologies/pubky-ring/), and making your app accessible on the internet.
 - **Other languages and platforms**: Build the same hello-world app with Rust, React Native, and native mobile tooling.
 - **Run the Homeserver natively**: Start the local testnet without Docker Compose and configure local signup.
