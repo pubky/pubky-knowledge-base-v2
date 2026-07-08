@@ -220,7 +220,7 @@ npm install && npm run dev
 With the local testnet and both apps running, open the signer app first:
 
 1. In the signer app's **Identity** tab, click **Create new identity**.
-2. In **Homeserver**, leave the local testnet Homeserver selected and click **Sign up**.
+2. In section **Homeserver** on the right, leave the local testnet Homeserver selected and click **Sign up**.
 3. Open `my-pubky-app` and use the left-side **Sign in with Pubky Ring** panel.
 4. Click **Copy link** in the Pubky app template.
 5. Go back to the signer app, switch to the **Auth** page, paste the link into **Pubky auth link**, and click **Approve request**.
