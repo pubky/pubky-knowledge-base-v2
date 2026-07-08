@@ -30,10 +30,12 @@ Note: [Pubky Docker](/explore/technologies/pubky-docker/)  can run a full [pubky
 git clone https://github.com/pubky/pubky-docker.git && cd pubky-docker && cp .env-sample .env
 ```
 
-In `homeserver.config.toml` set local signup mode to `open`. This is as opposed to requiring a signup token to signup - local setups do not need the token-based spam protection used by public Homeservers.
+In `homeserver.config.toml` set `signup_mode` to `open`. This is as opposed to requiring a signup token to signup - local setups do not need the token-based spam protection used by public Homeservers.
 
-```toml
-signup_mode = "open"
+From the `pubky-docker` directory, run:
+
+```bash
+sed -i 's/^signup_mode = "token_required"/signup_mode = "open"/' homeserver.config.toml
 ```
 
 Run the homeserver and tesnet via Docker compose:
