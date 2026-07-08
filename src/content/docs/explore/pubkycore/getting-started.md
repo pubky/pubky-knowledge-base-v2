@@ -10,7 +10,7 @@ flowchart LR
     Features --> Deploy[Deploy to Production]
 ```
 
-Prerequisites: Docker and npm.
+Prerequisites: [Docker](https://docs.docker.com/get-started/get-docker/) and [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm/).
 
 ### Step 1: Set Up Pubky Docker
 
