@@ -195,7 +195,9 @@ To keep going, explore the [Pubky JavaScript examples](https://github.com/pubky/
 
 #### Basic Pubky app template
 
-As a next step, try this template as a fuller starting point for a fresh Pubky app:
+As a next step, try this template as a fuller starting point for a fresh Pubky app.
+
+It includes a working browser app with local testnet configuration, identity creation, Homeserver signup and signin, and a Pubky auth flow. Treat it as a set of building blocks: copy the pieces your app needs, adapt the auth and storage flows, and replace the sample UI with your own experience.
 
 ```bash
 npx tiged pubky/pubky-app-templates/basic-pubky-app my-pubky-app
