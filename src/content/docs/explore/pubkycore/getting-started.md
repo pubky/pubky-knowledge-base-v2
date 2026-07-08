@@ -59,7 +59,7 @@ With `.env` set to the default `NETWORK=testnet`, these ports are exposed:
 | `6288` | Homeserver admin HTTP | Local admin endpoint exposed by Pubky Docker. |
 
 :::note[Pubky CLI]
-For manual user and Homeserver operations while developing locally, you can use [Pubky CLI](/explore/technologies/pubky-cli/).
+For manual user and Homeserver operations while developing locally, you can use [Pubky CLI](https://github.com/pubky/pubky-core/tree/main/examples/javascript).
 :::
 
 <details>
