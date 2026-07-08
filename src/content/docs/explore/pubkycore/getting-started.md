@@ -45,7 +45,7 @@ docker compose up homeserver -d
 You now have a local Pubky testnet ready for app development. An isolated DHT is running, the HTTP relay is local, and the Homeserver publishes its PKARR identity to the local DHT. This means local clients can discover your Homeserver the same way they would on the public network, but everything stays on your machine. Your testnet Homeserver's pubky is always `8pinxxgqs41n4aididenw5apqp1urfmzdztr8jt4abrkdn435ewo`.
 
 :::note[Testnet state is ephemeral]
-When the Docker containers are restarted, files stored on the Homeserver, user PKARR records in the local DHT, and HTTP relay auth state are reset. The testnet Homeserver has a stable, predefined pubky, so your app can keep connecting to the same Homeserver address.
+When the Docker containers are restarted the files stored on the Homeserver and user PKARR records in the local DHT are reset. The testnet Homeserver does however have a stable, predefined pubky.
 :::
 
 With `.env` set to the default `NETWORK=testnet`, these ports are exposed:
