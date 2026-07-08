@@ -21,9 +21,7 @@ A native, non-Docker guide that covers running the same local testnet natively w
 We'll use [Pubky Docker](/explore/technologies/pubky-docker/) for the local development environment:
 
 ```bash
-git clone https://github.com/pubky/pubky-docker.git
-cd pubky-docker
-cp .env-sample .env
+git clone https://github.com/pubky/pubky-docker.git && cd pubky-docker && cp .env-sample .env
 ```
 
 In `homeserver.config.toml` set local signup mode to `open`. This is as opposed to requiring a signup token to signup - local setups do not need the token-based spam protection used by public Homeservers.
@@ -88,8 +86,7 @@ With the Homeserver running, clone this empty Vite template and install the [Pub
 ```bash
 npx tiged pubky/pubky-app-templates/vite-starter pubky-hello-world
 cd pubky-hello-world
-npm install
-npm install @synonymdev/pubky
+npm install && npm install @synonymdev/pubky
 ```
 
 NPM package: [@synonymdev/pubky](https://www.npmjs.com/package/@synonymdev/pubky)
@@ -195,8 +192,7 @@ As a next step, try this template as a fuller starting point for a fresh Pubky a
 ```bash
 npx tiged pubky/pubky-app-templates/basic-pubky-app my-pubky-app
 cd my-pubky-app
-npm install
-VITE_PUBKY_TESTNET=true npm run dev
+npm install && VITE_PUBKY_TESTNET=true npm run dev
 ```
 
 ##### Homeserver auth
@@ -208,8 +204,7 @@ For local development, you can use the [Pubky signer app template](https://githu
 ```bash
 npx tiged pubky/pubky-app-templates/pubky-signer-app pubky-signer-app
 cd pubky-signer-app
-npm install
-npm run dev
+npm install && npm run dev
 ```
 
 With the local testnet still running, open the signer app first:
@@ -274,8 +269,7 @@ If building a social app, leverage [Pubky Nexus](/explore/pubky-apps/indexing-an
 2. Configure HTTPS (required)
 3. Deploy Homeserver:
    ```bash
-   docker build --build-arg TARGETARCH=x86_64 -t pubky:core .
-   docker run --network=host -it pubky:core
+   docker build --build-arg TARGETARCH=x86_64 -t pubky:core . && docker run --network=host -it pubky:core
    ```
 4. Publish Homeserver location to PKARR
 5. Configure rate limiting and moderation
