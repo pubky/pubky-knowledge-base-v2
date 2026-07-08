@@ -36,7 +36,7 @@ In `homeserver.config.toml` set local signup mode to `open`. This is as opposed 
 signup_mode = "open"
 ```
 
-For this first app, you only need the [Homeserver](/explore/pubkycore/homeserver/) (its db container starts automatically). Pubky Docker can run a full [pubky.app](/explore/pubky-apps/reference-app/pubky-app/)-compatible social stack too, but we will keep this setup minimal:
+Run the homeserver and tesnet via Docker compose:
 
 ```bash
 docker compose up homeserver -d
