@@ -81,6 +81,8 @@ See the [Pubky Docker source setup instructions](https://github.com/pubky/pubky-
 
 ### Step 2: Initialize Project with the SDK
 
+What follows is a step-by-step guide to building your first Pubky app. If you prefer to start from a ready-made project, jump to the [basic Pubky app template](#basic-pubky-app-template).
+
 With the Homeserver running, clone this empty Vite template and install the [Pubky SDK](/explore/pubkycore/sdk/):
 
 ```bash
@@ -118,8 +120,6 @@ cd ios && pod install  # iOS only
 </details>
 
 ### Step 3: Build Your First App
-
-If you do not want to go step by step, jump to the [basic Pubky app template](#basic-pubky-app-template).
 
 Open `src/main.ts` and replace the `document.querySelector('#app')!.textContent = 'Vite Starter'` line with the snippets below.
 
