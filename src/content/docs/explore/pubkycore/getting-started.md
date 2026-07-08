@@ -211,17 +211,19 @@ The basic app has two login paths. The right-side **New identity** panel is main
 
 For local development, you can use the [Pubky signer app template](https://github.com/pubky/pubky-app-templates/tree/main/pubky-signer-app) as a browser-based stand-in for Pubky Ring:
 
+Keep `my-pubky-app` running. In a second terminal, start `pubky-signer-app` as a separate app that runs at the same time. The two apps have different jobs: `my-pubky-app` is the regular Pubky app you are building, while `pubky-signer-app` is a local key manager and signer, like Pubky Ring, that owns the identity and approves auth requests.
+
 ```bash
 npx tiged pubky/pubky-app-templates/pubky-signer-app pubky-signer-app
 cd pubky-signer-app
 npm install && npm run dev
 ```
 
-With the local testnet still running, open the signer app first:
+With the local testnet and both apps running, open the signer app first:
 
 1. In the signer app's **Identity** tab, click **Create new identity**.
 2. In **Homeserver**, leave the local testnet Homeserver selected and click **Sign up**.
-3. Open the Pubky app template and use the left-side **Sign in with Pubky Ring** panel.
+3. Open `my-pubky-app` and use the left-side **Sign in with Pubky Ring** panel.
 4. Click **Copy link** in the Pubky app template.
 5. Go back to the signer app, switch to the **Auth** page, paste the link into **Pubky auth link**, and click **Approve request**.
 6. Switch back to the Pubky app template. It polls the pending auth flow and signs in automatically once the signer approves.
