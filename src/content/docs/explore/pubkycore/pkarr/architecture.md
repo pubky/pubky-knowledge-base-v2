@@ -27,9 +27,9 @@ See the [PKARR repository](https://github.com/pubky/pkarr) for the full format s
 2. **Republishing**: Homeservers and relays republish records for their users to [keep them available](https://github.com/pubky/pkarr-churn/blob/main/results-node_decay.md) on the [Mainline DHT](/explore/technologies/mainline-dht/). Records degrade over hours to days without republishing, so hourly republishing is recommended.
 3. **Querying**: Clients query the [Mainline DHT](/explore/technologies/mainline-dht/) for [PKARR](/explore/pubkycore/pkarr/introduction/) using the SHA1 hash of the public key, either directly or through a relay.
 
-## Supported DNS Record Types
+## Common DNS Record Types
 
-A, AAAA, CNAME, TXT, HTTPS/SVCB (RFC 9460).
+PKARR packets contain standard DNS resource records. The Rust [`SignedPacketBuilder`](https://docs.rs/pkarr/latest/pkarr/types/struct.SignedPacketBuilder.html) provides helpers for `A`, `AAAA`, `CNAME`, `TXT`, and `HTTPS`/`SVCB` (RFC 9460), while its generic record methods support additional DNS record types.
 
 Pubky discovery usually uses two PKARR records:
 - The user's record publishes `_pubky` as an HTTPS/SVCB alias to the [Homeserver](/explore/pubkycore/homeserver/) public key.
