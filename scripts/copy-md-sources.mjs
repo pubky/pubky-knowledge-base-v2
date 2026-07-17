@@ -4,10 +4,16 @@
 //   - Images removed (no value for text-based AI consumption)
 //   - Astro/Starlight components and imports stripped
 //   - Presentational frontmatter fields removed
-//   - Fenced code blocks are preserved untouched
+//   - Snippet-backed code blocks expanded from their checked source files
+//   - Other fenced code blocks preserved untouched
 
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, statSync } from 'fs';
 import { join, dirname, relative, extname } from 'path';
+import {
+  getSnippetReference,
+  loadSnippet,
+  stripSnippetReference,
+} from '../plugins/snippet-loader.mjs';
 
 const SRC = 'src/content/docs';
 const DEST = 'dist';
@@ -18,43 +24,97 @@ const SITE_URL = (process.env.SITE_URL || 'https://pubky.org').replace(/\/+$/, '
 function processFile(srcPath, destPath) {
   const content = readFileSync(srcPath, 'utf-8');
 
-  let result = transformOutsideCodeBlocks(content);
+  let result = transformDocument(content);
   result = cleanFrontmatter(result);
 
   mkdirSync(dirname(destPath), { recursive: true });
   writeFileSync(destPath, result);
 }
 
-// Splits content on fenced code block boundaries and only applies transforms
-// to segments outside code blocks. Code blocks are passed through unchanged.
-function transformOutsideCodeBlocks(content) {
+// Applies text transforms outside fenced blocks and materializes snippet-backed
+// blocks. The fence indentation is preserved for blocks nested inside lists.
+function transformDocument(content) {
   const lines = content.split('\n');
-  const segments = [];
-  let current = [];
-  let inCode = false;
+  const output = [];
+  let outside = [];
 
-  for (const line of lines) {
-    if (/^```/.test(line)) {
-      if (!inCode) {
-        segments.push(transformMarkdown(current.join('\n')));
-        current = [line];
-        inCode = true;
-      } else {
-        current.push(line);
-        segments.push(current.join('\n'));
-        current = [];
-        inCode = false;
-      }
-    } else {
-      current.push(line);
+  const flushOutside = () => {
+    if (outside.length === 0) return;
+    output.push(transformMarkdown(outside.join('\n')));
+    outside = [];
+  };
+
+  for (let index = 0; index < lines.length; index++) {
+    const opening = parseOpeningFence(lines[index]);
+    if (!opening) {
+      outside.push(lines[index]);
+      continue;
+    }
+
+    flushOutside();
+
+    const closingIndex = findClosingFence(lines, index + 1, opening.marker);
+    if (closingIndex === -1) {
+      // Preserve an unclosed block as-is instead of transforming its contents.
+      output.push(lines.slice(index).join('\n'));
+      index = lines.length;
+      break;
+    }
+
+    const reference = getSnippetReference(opening.info);
+    if (!reference) {
+      output.push(lines.slice(index, closingIndex + 1).join('\n'));
+      index = closingIndex;
+      continue;
+    }
+
+    const snippet = loadSnippet(reference);
+    const marker = safeFenceMarker(opening.marker, snippet);
+    const info = stripSnippetReference(opening.info);
+    const closingIndent = lines[closingIndex].match(/^[ \t]*/)[0];
+    const snippetLines = snippet.split('\n').map((line) => `${opening.indent}${line}`);
+
+    output.push(`${opening.indent}${marker}${info}`, ...snippetLines, `${closingIndent}${marker}`);
+    index = closingIndex;
+  }
+
+  flushOutside();
+  return output.join('\n');
+}
+
+function parseOpeningFence(line) {
+  const match = line.match(/^([ \t]*)(`{3,}|~{3,})(.*)$/);
+  if (!match) return null;
+  return { indent: match[1], marker: match[2], info: match[3] };
+}
+
+function findClosingFence(lines, startIndex, openingMarker) {
+  for (let index = startIndex; index < lines.length; index++) {
+    const match = lines[index].match(/^[ \t]*(`{3,}|~{3,})[ \t]*$/);
+    if (
+      match &&
+      match[1][0] === openingMarker[0] &&
+      match[1].length >= openingMarker.length
+    ) {
+      return index;
     }
   }
-  // Flush remaining (treat unclosed code block as code to be safe)
-  if (current.length) {
-    segments.push(inCode ? current.join('\n') : transformMarkdown(current.join('\n')));
+  return -1;
+}
+
+// Ensure snippet content cannot accidentally terminate its own Markdown fence.
+function safeFenceMarker(openingMarker, snippet) {
+  const markerCharacter = openingMarker[0];
+  let markerLength = openingMarker.length;
+
+  for (const line of snippet.split('\n')) {
+    const match = line.match(/^[ \t]{0,3}(`+|~+)[ \t]*$/);
+    if (match?.[1][0] === markerCharacter) {
+      markerLength = Math.max(markerLength, match[1].length + 1);
+    }
   }
 
-  return segments.join('\n');
+  return markerCharacter.repeat(markerLength);
 }
 
 function transformMarkdown(content) {
