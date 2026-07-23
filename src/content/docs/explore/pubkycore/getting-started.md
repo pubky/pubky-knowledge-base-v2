@@ -205,26 +205,17 @@ npm install && VITE_PUBKY_TESTNET=true npm run dev
 
 ##### Homeserver auth
 
-The basic app has two login paths. The right-side **New identity** panel is mainly a development shortcut that creates a keypair inside the app, signs up, and signs in all at once. The left-side **Sign in with Pubky Ring** panel is the more realistic flow: the app asks for authorization, while key management and Homeserver signup happen in a separate signer app.
+The basic app has two login paths. The right-side **New identity** panel is mainly a development shortcut that creates a keypair inside the app, signs up, and signs in all at once. The left-side **Sign in with Pubky Ring** panel is the more realistic flow: the app asks for authorization, while key management and Homeserver signup happen in a separate identity manager.
 
-For local development, you can use the [Pubky signer app template](https://github.com/pubky/pubky-app-templates/tree/main/pubky-signer-app) as a browser-based stand-in for Pubky Ring:
+For local development, you can use the [Pubky Ring Simulator](https://pubky.github.io/pubky-ring-simulator/) as a browser-based stand-in for Pubky Ring.
 
-Keep `my-pubky-app` running. In a second terminal, start `pubky-signer-app` as a separate app that runs at the same time. The two apps have different jobs: `my-pubky-app` is the regular Pubky app you are building, while `pubky-signer-app` is a local key manager and signer, like Pubky Ring, that owns the identity and approves auth requests.
+The simulator is preconfigured to connect to your local testnet on `localhost`. Because the hosted version accesses services running on your device, your browser may ask whether `pubky.github.io` can access apps and services on your device or devices on your local network. Choose **Allow** to continue. If you prefer not to grant this permission, clone the simulator and follow its [development instructions](https://github.com/pubky/pubky-ring-simulator#development) to run it locally.
 
-```bash
-npx tiged pubky/pubky-app-templates/pubky-signer-app pubky-signer-app
-cd pubky-signer-app
-npm install && npm run dev
-```
-
-With the local testnet and both apps running, open the signer app first:
-
-1. In the signer app's **Identity** tab, click **Create new identity**.
-2. In section **Homeserver** on the right, leave the local testnet Homeserver selected and click **Sign up**.
-3. Open `my-pubky-app` and use the left-side **Sign in with Pubky Ring** panel.
-4. Click **Copy link** in the Pubky app template.
-5. Go back to the signer app, switch to the **Auth** page, paste the link into **Pubky auth link**, and click **Approve request**.
-6. Switch back to the Pubky app template. It polls the pending auth flow and signs in automatically once the signer approves.
+1. In `my-pubky-app`, use the left-side **Sign in with Pubky Ring** panel and click **Copy link**.
+2. In the simulator, select **Shortcut** mode and paste the link into **Auth link**.
+3. The simulator creates an identity, signs it up on your local Homeserver, then approves the request automatically.
+4. Switch back to `my-pubky-app`. It polls the pending auth flow and signs in automatically once the simulator approves.
+5. To test sign-in with different identities, use the Pubky Ring Simulator in **Regular** mode. It simulates Pubky Ring's identity management, letting you create and select an identity before authorizing a request.
 
 That flow is the security best practice: it keeps the user's key material out of the application being tested. The Pubky app template receives a session after authorization, but the identity and Homeserver setup remain with the signer.
 
