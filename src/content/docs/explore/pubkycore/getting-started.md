@@ -203,7 +203,7 @@ cd my-pubky-app
 npm install
 ```
 
-Set a stable app ID in `src/config.ts`; it determines the storage path and capabilities.
+Set a stable app ID in `src/config.ts`; it determines the storage path.
 
 ```bash
 VITE_PUBKY_TESTNET=true npm run dev
@@ -277,9 +277,9 @@ If building a social app, leverage [Pubky Nexus](/explore/pubky-apps/indexing-an
 - Private messaging
 - Secure data sharing
 
-### Step 5: Deploy to Production
+### Step 5: Connect to the Production Pubky Network
 
-To move your app from the local testnet to production, replace the client from Step 3.2:
+To connect your app to the production Pubky network, replace the client from Step 3.2:
 
 ```diff
 - const pubky = Pubky.testnet();
@@ -301,18 +301,6 @@ PKARR relays are separate from the [HTTP relay](/explore/technologies/http-relay
 ```
 
 The basic template maps [`VITE_PUBKY_HTTP_RELAY`](https://github.com/pubky/pubky-app-templates/blob/main/basic-pubky-app/src/config.ts) to the same SDK option.
-
-Once configured for mainnet, build and deploy the app using your [usual Vite workflow](https://vite.dev/guide/static-deploy.html).
-
-#### Deploy the basic Pubky app template
-
-Build for production:
-
-```bash
-VITE_PUBKY_TESTNET=false npm run build
-```
-
-Then deploy `dist/` the same way.
 
 ### Guides Coming Next
 
