@@ -316,7 +316,6 @@ Then deploy `dist/` the same way.
 
 ### Guides Coming Next
 
-- **Production Pubky Ring auth**: Replace the local signer template with the production Pubky Ring mobile flow, public relay configuration, and internet-accessible app URLs.
 - **Other languages and platforms**: Build the same hello-world app with Rust, React Native, and native mobile tooling.
 - **Run the Homeserver natively**: Start the local testnet without Docker Compose and configure local signup.
 - **Build social Pubky apps**: Use the larger Pubky Docker stack with indexers, aggregators, and [pubky.app](/explore/pubky-apps/reference-app/pubky-app/)-compatible data flows.
