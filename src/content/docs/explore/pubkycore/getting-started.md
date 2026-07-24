@@ -7,7 +7,7 @@ flowchart LR
     Stack[Run Local Stack] --> SDK[Install SDK]
     SDK --> App[Build Your App]
     App --> Features[Add Social Features]
-    Features --> Deploy[Deploy to Production]
+    Features --> Production[Production Setup]
 ```
 
 This guide walks you through building a first Pubky app against a local development stack. You will start a local Homeserver with Pubky Docker, create a Vite app, install the Pubky SDK, and connect your app to the local testnet.
@@ -277,7 +277,7 @@ If building a social app, leverage [Pubky Nexus](/explore/pubky-apps/indexing-an
 - Private messaging
 - Secure data sharing
 
-### Step 5: Connect to the Production Pubky Network
+### Step 5: Production Setup
 
 To connect your app to the production Pubky network, replace the client from Step 3.2:
 
@@ -290,6 +290,9 @@ To connect your app to the production Pubky network, replace the client from Ste
 
 Steps 3.3–3.5 use development-only identity and Homeserver shortcuts. For production, use [Pubky Ring](/explore/technologies/pubky-ring/); the [basic Pubky app template](#basic-pubky-app-template) already implements that flow.
 
+<details>
+<summary><strong>Optional: Configure custom relays</strong></summary>
+
 Browsers cannot query the UDP-based Mainline DHT directly, so the SDK uses HTTPS gateways called **PKARR relays**. See the [current default relay list](https://github.com/pubky/pkarr/blob/main/pkarr/src/lib.rs). To use custom PKARR relays:
 
 ```javascript snippet="snippets/js/src/troubleshooting.ts:js_pkarr_relay_config"
@@ -301,6 +304,14 @@ PKARR relays are separate from the [HTTP relay](/explore/technologies/http-relay
 ```
 
 The basic template maps [`VITE_PUBKY_HTTP_RELAY`](https://github.com/pubky/pubky-app-templates/blob/main/basic-pubky-app/src/config.ts) to the same SDK option.
+
+</details>
+
+#### Test the Setup
+
+1. Start the production-configured app and authenticate through Pubky Ring with your production identity.
+2. Use the app to create some sample data.
+3. Enter your pubky in [Pubky Explorer](https://explorer.pubky.app) and verify the files created by the app.
 
 ### Guides Coming Next
 
