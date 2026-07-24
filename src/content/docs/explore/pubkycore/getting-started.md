@@ -286,7 +286,7 @@ To connect your app to the production Pubky network, replace the client from Ste
 + const pubky = new Pubky();
 ```
 
-`new Pubky()` stops using the local endpoints. The app instead resolves real [PKARR](/explore/pubkycore/pkarr/introduction/) records from the [Mainline DHT](/explore/technologies/mainline-dht/) (through PKARR relays), connects to the Homeserver resolved from each user's PKARR record, and uses a public [HTTP relay](/explore/technologies/http-relay/) for authentication.
+`new Pubky()` stops using the local endpoints. The app instead resolves [PKARR](/explore/pubkycore/pkarr/introduction/) records from the [Mainline DHT](/explore/technologies/mainline-dht/), connects to the Homeserver resolved from each user's PKARR record, and uses a public [HTTP relay](/explore/technologies/http-relay/) for authentication.
 
 Steps 3.3–3.5 use development-only identity and Homeserver shortcuts. For production, use [Pubky Ring](/explore/technologies/pubky-ring/); the [basic Pubky app template](#basic-pubky-app-template) already implements that flow.
 
