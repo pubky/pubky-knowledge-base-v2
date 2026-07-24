@@ -7,7 +7,7 @@ flowchart LR
     Stack[Run Local Stack] --> SDK[Install SDK]
     SDK --> App[Build Your App]
     App --> Features[Add Social Features]
-    Features --> Deploy[Deploy to Production]
+    Features --> Production[Production Setup]
 ```
 
 This guide walks you through building a first Pubky app against a local development stack. You will start a local Homeserver with Pubky Docker, create a Vite app, install the Pubky SDK, and connect your app to the local testnet.
@@ -200,7 +200,13 @@ It includes a working browser app with local testnet configuration, identity cre
 ```bash
 npx tiged pubky/pubky-app-templates/basic-pubky-app my-pubky-app
 cd my-pubky-app
-npm install && VITE_PUBKY_TESTNET=true npm run dev
+npm install
+```
+
+Set a stable app ID in `src/config.ts`; it determines the storage path.
+
+```bash
+VITE_PUBKY_TESTNET=true npm run dev
 ```
 
 ##### Homeserver auth
@@ -262,39 +268,44 @@ If building a social app, leverage [Pubky Nexus](/explore/pubky-apps/indexing-an
 - Private messaging
 - Secure data sharing
 
-### Step 5: Deploy to Production
+### Step 5: Production Setup
 
-**Deploy a Homeserver:**
+To connect your app to the production Pubky network, replace the client from Step 3.2:
 
-1. Set up a server (VPS, cloud, or self-hosted)
-2. Configure HTTPS (required)
-3. Deploy Homeserver:
-   ```bash
-   docker build --build-arg TARGETARCH=x86_64 -t pubky:core . && docker run --network=host -it pubky:core
-   ```
-4. Publish Homeserver location to PKARR
-5. Configure rate limiting and moderation
+```diff
+- const pubky = Pubky.testnet();
++ const pubky = new Pubky();
+```
 
-📘 **Guide**: [Homeserver Documentation](/explore/pubkycore/homeserver/)
+`new Pubky()` stops using the local endpoints. The app instead resolves [PKARR](/explore/pubkycore/pkarr/introduction/) records from the [Mainline DHT](/explore/technologies/mainline-dht/), connects to the Homeserver resolved from each user's PKARR record, and uses a public [HTTP relay](/explore/technologies/http-relay/) for authentication.
 
-**Signup Verification:**
+Steps 3.3–3.5 use development-only identity and Homeserver shortcuts. For production, use [Pubky Ring](/explore/technologies/pubky-ring/); the [basic Pubky app template](#basic-pubky-app-template) already implements that flow.
 
-Use [Homegate](/explore/technologies/homegate/) to prevent spam:
-- SMS verification (rate-limited per phone)
-- Lightning payment verification
-- Open-source and self-hostable
+<details>
+<summary><strong>Optional: Configure custom relays</strong></summary>
 
-**DNS Resolution:**
+Browsers cannot query the UDP-based Mainline DHT directly, so the SDK uses HTTPS gateways called **PKARR relays**. See the [current default relay list](https://github.com/pubky/pkarr/blob/main/pkarr/src/lib.rs). To use custom PKARR relays:
 
-Run a [PKDNS](/explore/technologies/pkdns/) server for your users:
-- Resolves public-key domains
-- Supports traditional DNS
-- DoH/DoT encryption
+```javascript snippet="snippets/js/src/troubleshooting.ts:js_pkarr_relay_config"
+```
+
+PKARR relays are separate from the [HTTP relay](/explore/technologies/http-relay/) that transfers encrypted Pubky Ring authentication messages. To use a custom HTTP relay with the SDK:
+
+```javascript snippet="snippets/js/src/sdk.ts:js_custom_auth_relay"
+```
+
+The basic template maps [`VITE_PUBKY_HTTP_RELAY`](https://github.com/pubky/pubky-app-templates/blob/main/basic-pubky-app/src/config.ts) to the same SDK option.
+
+</details>
+
+#### Test the Setup
+
+1. Start the production-configured app and authenticate through Pubky Ring with your production identity.
+2. Use the app to create some sample data.
+3. Enter your pubky in [Pubky Explorer](https://explorer.pubky.app) and verify the files created by the app.
 
 ### Guides Coming Next
 
-- **Production Pubky Ring auth**: Replace the local signer template with the production Pubky Ring mobile flow, public relay configuration, and internet-accessible app URLs.
-- **Update Step 5: Deploy to Production**: Replace the current outline with a complete production guide for using the [Mainline DHT](/explore/technologies/mainline-dht/), signing in with [Pubky Ring](/explore/technologies/pubky-ring/), and making your app accessible on the internet.
 - **Other languages and platforms**: Build the same hello-world app with Rust, React Native, and native mobile tooling.
 - **Run the Homeserver natively**: Start the local testnet without Docker Compose and configure local signup.
 - **Build social Pubky apps**: Use the larger Pubky Docker stack with indexers, aggregators, and [pubky.app](/explore/pubky-apps/reference-app/pubky-app/)-compatible data flows.

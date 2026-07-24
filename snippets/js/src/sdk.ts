@@ -148,6 +148,17 @@ async function snippet_auth_flow_resume() {
   // --8<-- [end:js_auth_flow_resume]
 }
 
+function snippet_custom_auth_relay() {
+  // --8<-- [start:js_custom_auth_relay]
+  const relay = "https://httprelay.example.com/inbox/";
+  const flow = pubky.startAuthFlow(
+    "/pub/myapp/:rw",
+    AuthFlowKind.signin(),
+    relay,
+  );
+  // --8<-- [end:js_custom_auth_relay]
+}
+
 async function snippet_error_handling() {
   // --8<-- [start:js_error_handling]
   try {
