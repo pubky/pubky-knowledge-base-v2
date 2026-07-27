@@ -213,9 +213,9 @@ VITE_PUBKY_TESTNET=true npm run dev
 
 The basic app has two login paths. The right-side **New identity** panel is mainly a development shortcut that creates a keypair inside the app, signs up, and signs in all at once. The left-side **Sign in with Pubky Ring** panel is the more realistic flow: the app asks for authorization, while key management and Homeserver signup happen in a separate identity manager.
 
-For local development, you can use the [Pubky Ring Simulator](https://pubky.github.io/pubky-ring-simulator/) as a browser-based stand-in for Pubky Ring.
+For local development, you can use the [Pubky Ring Simulator](https://simulator.pubkyring.app/) as a browser-based stand-in for Pubky Ring.
 
-The simulator is preconfigured to connect to your local testnet on `localhost`. Because the hosted version accesses services running on your device, your browser may ask whether `pubky.github.io` can access apps and services on your device or devices on your local network. Choose **Allow** to continue. If you prefer not to grant this permission, clone the simulator and follow its [development instructions](https://github.com/pubky/pubky-ring-simulator#development) to run it locally.
+The simulator is preconfigured to connect to your local testnet on `localhost`. Because the hosted version accesses services running on your device, your browser may ask whether `simulator.pubkyring.app` can access apps and services on your device or devices on your local network. Choose **Allow** to continue. If you prefer not to grant this permission, clone the simulator and follow its [development instructions](https://github.com/pubky/pubky-ring-simulator#development) to run it locally.
 
 1. In `my-pubky-app`, use the left-side **Sign in with Pubky Ring** panel and click **Copy link**.
 2. In the simulator, select **Shortcut** mode and paste the link into **Auth link**.
