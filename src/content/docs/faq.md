@@ -111,9 +111,9 @@ Use [Pubky Explorer](/explore/technologies/pubky-explorer/) ([explorer.pubky.app
 Use [Pubky Docker](/explore/technologies/pubky-docker/), a Docker Compose orchestration that runs the entire Pubky Social stack with one command. It includes PKARR relay, Homeserver (with PostgreSQL), Pubky Nexus (with Neo4j and Redis), and the Pubky App frontend—all preconfigured and ready to use. Clone the repository, configure `.env` for testnet or mainnet, and run `docker compose up -d`. Perfect for testing integrations, developing custom frontends, or learning how all components interact. See [Pubky Docker](/explore/technologies/pubky-docker/) for setup instructions.
 
 <a id="q19"></a>
-### Q19. When should I use Pubky Docker vs SDK libraries?
+### Q19. How do Pubky Docker and the SDK libraries work together?
 
-Use the SDK libraries ([@synonymdev/pubky](https://www.npmjs.com/package/@synonymdev/pubky) for JavaScript, [pubky](https://crates.io/crates/pubky) for Rust) when building applications that interact with Pubky. Only use [Pubky Docker](/explore/technologies/pubky-docker/) if you need to run the full stack locally to experiment with Pubky Nexus, test custom social frontends, debug cross-component issues, or learn the complete architecture. For most app development, the SDK libraries connected to public infrastructure are simpler and faster.
+Applications use the [Pubky SDK](/explore/pubkycore/sdk/) to interact with Pubky services. [Pubky Docker](/explore/technologies/pubky-docker/) can provide those services locally for development and testing.
 
 <a id="q20"></a>
 ### Q20. How is redundancy handled?

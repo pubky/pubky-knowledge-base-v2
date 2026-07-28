@@ -64,26 +64,7 @@ With `.env` set to the default `NETWORK=testnet`, these ports are exposed:
 For manual user and Homeserver operations while developing locally, you can use [Pubky CLI](https://github.com/pubky/pubky-core/tree/main/examples/javascript).
 :::
 
-<details>
-<summary><strong>Optional: Build from source</strong></summary>
-
-For most app development, the public Docker images are enough. Build from source if you need exact control over which Pubky component versions run locally, or if you want to modify the stack itself.
-
-To build from source, you need the Pubky component repositories. The easiest path is to let the helper script clone and prepare them for you:
-
-```bash
-./pubky-docker-cli.sh
-```
-
-The script pulls the required repositories, lets you choose Git refs for each component, builds the images, and starts the stack. To inspect which component versions are running in your containers, use:
-
-```bash
-./list-component-versions.sh
-```
-
-See the [Pubky Docker source setup instructions](https://github.com/pubky/pubky-docker#local-setup-from-source) for more details.
-
-</details>
+For source builds, see [Optional: Build from source](/explore/technologies/pubky-docker/#build-from-source).
 
 ### Step 2: Initialize Project with the SDK
 
