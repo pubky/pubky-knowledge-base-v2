@@ -58,13 +58,13 @@ flowchart TB
 
 Build from source when you need to run specific component revisions or test changes to the stack.
 
-To build from source, you need the Pubky component repositories. The easiest path is to let the helper script clone and prepare them for you:
+Run [`pubky-docker-cli.sh`](https://github.com/pubky/pubky-docker/blob/main/pubky-docker-cli.sh) from the root of a cloned [Pubky Docker repository](https://github.com/pubky/pubky-docker):
 
 ```bash
 ./pubky-docker-cli.sh
 ```
 
-The script pulls the required repositories, lets you choose Git refs for each component, builds the images, and starts the stack. To inspect which component versions are running in your containers, use:
+The script pulls the required repositories, lets you choose Git refs, builds the images, and starts the stack. To inspect the running versions, use [`list-component-versions.sh`](https://github.com/pubky/pubky-docker/blob/main/list-component-versions.sh) from the same directory:
 
 ```bash
 ./list-component-versions.sh
