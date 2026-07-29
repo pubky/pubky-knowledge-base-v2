@@ -293,12 +293,12 @@ The basic template maps [`VITE_PUBKY_HTTP_RELAY`](https://github.com/pubky/pubky
 
 ### Next Steps
 
-- **Read the docs**: [Pubky Core Overview](/explore/pubkycore/introduction/)
-- **Study the architecture**: [Architecture Overview](/architecture/)
-- **Join the community**: [Telegram](https://t.me/pubkycore)
-- **Check the FAQ**: [FAQ](/faq/)
-- **Review comparisons**: [Comparisons](/comparisons/) with other protocols
-- **Troubleshooting**: [Troubleshooting](/troubleshooting/) guide
+- **Explore SDK examples:** See the [Pubky Core examples](https://github.com/pubky/pubky-core/tree/main/examples) for runnable workflows.
+- **Browse practical snippets:** See the [Pubky SDK guide](/explore/pubkycore/sdk/) for storage, authentication, events, sessions, and testing.
+- **Choose an app architecture:** Compare [client-only, aggregator, and custom-backend designs](/explore/pubky-apps/app-architectures/introduction/).
+- **Security model:** Review the [security considerations for app developers](/explore/pubkycore/security-model/#for-app-developers).
+
+Need help? See [Troubleshooting](/troubleshooting/) or ask in [Telegram](https://t.me/pubkycore).
 
 ---
 
