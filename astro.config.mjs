@@ -137,7 +137,13 @@ export default defineConfig({
 						{ label: 'Developer Guide', slug: 'explore/pubkycore/getting-started' },
 						{ label: 'ELI5', slug: 'explore/pubkycore/eli5' },
 						{ label: 'Authentication', slug: 'explore/pubkycore/authentication' },
-						{ label: 'Homeserver', slug: 'explore/pubkycore/homeserver' },
+						{
+							label: 'Homeserver',
+							items: [
+								{ label: 'Overview', slug: 'explore/pubkycore/homeserver' },
+								{ label: 'Umbrel Setup', slug: 'explore/pubkycore/homeserver-umbrel' },
+							],
+						},
 						{ label: 'API', slug: 'explore/pubkycore/api' },
 						{ label: 'SDK', slug: 'explore/pubkycore/sdk' },
 						{ label: 'Security Model', slug: 'explore/pubkycore/security-model' },
