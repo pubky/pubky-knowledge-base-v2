@@ -123,45 +123,6 @@ User Data (Filesystem)
 Applications (via SDK)
 ```
 
-## Getting Started
-
-### For Developers
-
-**Install SDK:**
-```bash
-# Rust
-cargo add pubky
-
-# JavaScript
-npm install @synonymdev/pubky
-
-# See mobile bindings in SDK documentation
-```
-
-**Quick Example (JavaScript):**
-```javascript snippet="snippets/js/src/quick-start-intro.ts:js_intro_quick_example"
-```
-
-See [SDK Documentation](/explore/pubkycore/sdk/) for complete guides.
-
-### Run Local Homeserver
-
-**Using Cargo:**
-Start PostgreSQL and configure `database_url` before running a standalone Homeserver:
-```bash
-git clone https://github.com/pubky/pubky-core
-cd pubky-core/pubky-homeserver
-cargo run -- --data-dir=~/.pubky
-```
-
-**Using Docker:**
-```bash
-docker build --build-arg TARGETARCH=x86_64 -t pubky:core .
-docker run --network=host -it pubky:core
-```
-
-See [Homeserver Documentation](/explore/pubkycore/homeserver/) for configuration and deployment.
-
 ## Use Cases
 
 ### Social Applications
