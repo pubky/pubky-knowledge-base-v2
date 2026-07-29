@@ -18,8 +18,8 @@ To follow along, you will need [Docker](https://docs.docker.com/get-started/get-
 
 ### Step 1: Set Up Pubky Docker
 
-:::note[Native setup coming soon]
-A native, non-Docker guide that covers running the same local testnet natively will follow.
+:::note[Prefer a native setup?]
+If you do not want to use Docker, see the [native Pubky testnet setup](https://github.com/pubky/pubky-core/blob/main/pubky-testnet/README.md).
 :::
 
 In order to build our App we'll need to setup a local homeserver and testnet - we'll use [Pubky Docker](/explore/technologies/pubky-docker/) to spin up a local development environment.
