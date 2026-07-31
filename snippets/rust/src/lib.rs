@@ -24,7 +24,9 @@ async fn snippet_quick_example() -> anyhow::Result<()> {
     // Sign up and sign in
     let signer = pubky.signer(keypair);
     signer.signup(&homeserver, signup_token.as_deref()).await?;
-    let session = signer.signin(ClientId::new("myapp.example").unwrap()).await?;
+    let session = signer
+        .signin(ClientId::new("myapp.example").unwrap())
+        .await?;
 
     // Write data (requires the "json" feature)
     let profile = serde_json::json!({"name": "Alice", "bio": "Building on Pubky!"});
