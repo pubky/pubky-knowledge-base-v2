@@ -272,7 +272,7 @@ Browsers cannot query the UDP-based Mainline DHT directly, so the SDK uses HTTPS
 
 PKARR relays are separate from the [HTTP relay](/explore/technologies/http-relay/) that transfers encrypted Pubky Ring authentication messages. To use a custom HTTP relay with the SDK:
 
-```javascript snippet="snippets/js/src/sdk.ts:js_custom_auth_relay"
+```javascript snippet="snippets/js/src/getting-started.ts:js_custom_auth_relay"
 ```
 
 The basic template maps [`VITE_PUBKY_HTTP_RELAY`](https://github.com/pubky/pubky-app-templates/blob/main/basic-pubky-app/src/config.ts) to the same SDK option.

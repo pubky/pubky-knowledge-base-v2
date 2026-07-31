@@ -65,6 +65,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "async-trait"
+version = "0.1.91"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ae36dc4177970ef04fde5178d3e2429882def40e57a451f919c098f72baa6cec"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn 3.0.2",
+]
+
+[[package]]
 name = "atomic-polyfill"
 version = "1.0.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1653,10 +1664,11 @@ checksum = "33cb294fe86a74cbcf50d4445b37da762029549ebeea341421c7c70370f86cac"
 
 [[package]]
 name = "pubky"
-version = "0.9.3"
+version = "0.10.0-alpha.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3dabfa82f58ad04e2b65fcecc02ca953dec608533dfa820b03ee174b2593e8af"
+checksum = "39e1103df5321c5ab5ddb988375e7669643520df9759af3a96592f3bdbc0edf6"
 dependencies = [
+ "async-trait",
  "base64",
  "cookie",
  "eventsource-stream",
@@ -1670,6 +1682,7 @@ dependencies = [
  "reqwest",
  "rustls",
  "serde",
+ "serde_json",
  "thiserror",
  "tokio",
  "tracing",
@@ -1681,22 +1694,21 @@ dependencies = [
 
 [[package]]
 name = "pubky-common"
-version = "0.9.3"
+version = "0.10.0-alpha.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a7115f4177712ffb1d261e93a9a4992ef12da80c4b70decb1395bf8ac919c24c"
+checksum = "a790970a0d6713e5b8278063c6fb9bc0f9ceb663307d05479c89d75cca33ee07"
 dependencies = [
  "argon2",
- "base32",
+ "base64",
  "blake3",
  "crypto_secretbox",
  "ed25519-dalek",
- "js-sys",
- "once_cell",
  "pkarr",
  "postcard",
  "pubky-timestamp",
  "rand 0.10.1",
  "serde",
+ "serde_json",
  "thiserror",
  "url",
 ]

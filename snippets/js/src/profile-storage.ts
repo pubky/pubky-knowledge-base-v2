@@ -11,7 +11,9 @@ async function storeProfile() {
   const signer = pubky.signer(keypair);
 
   // Sign up at a homeserver (null token for open/testnet homeservers)
-  const session = await signer.signup(homeserverPk, signupToken);
+  await signer.signup(homeserverPk, signupToken);
+  // Sign in to get a session
+  const session = await signer.signin("myapp.example");
   console.log(`Public Key: ${signer.publicKey.z32()}`);
 
   // Store profile (following pubky-app-specs format)

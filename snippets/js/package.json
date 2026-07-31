@@ -9,7 +9,7 @@
     "format:check": "prettier --check src/"
   },
   "dependencies": {
-    "@synonymdev/pubky": "0.9.3"
+    "@synonymdev/pubky": "0.10.0-alpha.0"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

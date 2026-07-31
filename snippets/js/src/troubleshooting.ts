@@ -34,7 +34,7 @@ function snippet_republish_pkdns_record() {
 
 async function snippet_reauth() {
   // --8<-- [start:js_reauth]
-  const session = await signer.signin();
+  const session = await signer.signin("myapp.example");
   // --8<-- [end:js_reauth]
 }
 
@@ -42,7 +42,7 @@ async function snippet_force_reauth() {
   // --8<-- [start:js_force_reauth]
   // Force re-authentication
   await session.signout();
-  const newSession = await signer.signin();
+  const newSession = await signer.signin("myapp.example");
   // --8<-- [end:js_force_reauth]
 }
 

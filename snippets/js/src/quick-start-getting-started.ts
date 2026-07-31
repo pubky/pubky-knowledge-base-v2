@@ -10,7 +10,8 @@ const pubky = new Pubky();
 const signer = pubky.signer(Keypair.random());
 
 // Sign up (pass signup token for gated homeservers, null for open/testnet)
-const session = await signer.signup(homeserverPk, null);
+await signer.signup(homeserverPk, null);
+const session = await signer.signin("myapp.example");
 console.log("Your pubky:", signer.publicKey.z32());
 
 // Store data
