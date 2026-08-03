@@ -196,7 +196,7 @@ VITE_PUBKY_TESTNET=true npm run dev
 
 ##### Homeserver auth
 
-The basic app has two login paths. The right-side **New identity** panel is mainly a development shortcut that creates a keypair inside the app, signs up, and signs in all at once. The left-side **Sign in with Pubky Ring** panel is the more realistic flow: the app asks for authorization, while key management and Homeserver signup happen in a separate identity manager.
+The basic app offers two login paths. The right-side **New identity** panel is a development shortcut: it creates a keypair inside the app, signs up with the Homeserver, and signs in. The left-side **Sign in with Pubky Ring** panel shows the recommended authentication flow: the app initiates sign-in, while responsibility for key management and Homeserver signup remains with components outside the app.
 
 For local development, you can use the [Pubky Ring Simulator](https://simulator.pubkyring.app/) as a browser-based stand-in for Pubky Ring.
 
