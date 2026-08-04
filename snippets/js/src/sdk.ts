@@ -1,16 +1,12 @@
-import { Pubky, Keypair, PublicKey, AuthFlowKind } from "@synonymdev/pubky";
+import { Pubky, Keypair, AuthFlowKind } from "@synonymdev/pubky";
 
 // --8<-- [start:js_quick_example]
 // Initialize
 const pubky = new Pubky();
 const keypair = Keypair.random();
-const homeserver = PublicKey.from(
-  "8pinxxgqs41n4aididenw5apqp1urfmzdztr8jt4abrkdn435ewo",
-);
 
-// Sign up and sign in
+// Sign in (user already has an account on a homeserver)
 const signer = pubky.signer(keypair);
-await signer.signup(homeserver, null); // pass a token for gated homeservers
 const session = await signer.signin("myapp.example");
 
 // Write data

@@ -11,19 +11,15 @@
 // =============================================================================
 
 async fn snippet_quick_example() -> anyhow::Result<()> {
-    let signup_token: Option<String> = None;
     // --8<-- [start:rust_quick_example]
-    use pubky::{ClientId, Keypair, Pubky, PublicKey};
+    use pubky::{ClientId, Keypair, Pubky};
 
     // Initialize
     let pubky = Pubky::new()?;
     let keypair = Keypair::random();
-    let homeserver =
-        PublicKey::try_from("8pinxxgqs41n4aididenw5apqp1urfmzdztr8jt4abrkdn435ewo").unwrap();
 
-    // Sign up and sign in
+    // Sign in (user already has an account on a homeserver)
     let signer = pubky.signer(keypair);
-    signer.signup(&homeserver, signup_token.as_deref()).await?;
     let session = signer
         .signin(ClientId::new("myapp.example").unwrap())
         .await?;
