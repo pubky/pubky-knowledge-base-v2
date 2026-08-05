@@ -2,6 +2,10 @@
 title: "Pubky SDK: Client Libraries for Decentralized Applications"
 ---
 
+:::note
+The SDK is now at **v0.10**. If you're upgrading from an earlier version, see the [v0.10 Migration Guide](https://github.com/pubky/pubky-core/tree/main/docs/v0.10-migration).
+:::
+
 The Pubky SDK provides client libraries for building applications on [Pubky Core](/explore/pubkycore/introduction). It handles the hard parts (key-based auth, homeserver discovery, transport) so you can focus on your app logic using familiar HTTP-style operations.
 
 New to Pubky? Start with the [Introduction](/explore/pubkycore/introduction) for background on identities, homeservers, and storage paths. For a hands-on walkthrough, see the [Developer Guide](/explore/pubkycore/getting-started/).
