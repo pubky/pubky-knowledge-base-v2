@@ -14,6 +14,62 @@ export default defineConfig({
 			status: 301,
 			destination: '/',
 		},
+		'/explore/pubkycore/introduction/': {
+			status: 301,
+			destination: '/explore/pubky-protocol/introduction/',
+		},
+		'/explore/pubkycore/getting-started/': {
+			status: 301,
+			destination: '/explore/pubky-protocol/getting-started/',
+		},
+		'/explore/pubkycore/eli5/': {
+			status: 301,
+			destination: '/explore/pubky-protocol/eli5/',
+		},
+		'/explore/pubkycore/authentication/': {
+			status: 301,
+			destination: '/explore/pubky-protocol/authentication/',
+		},
+		'/explore/pubkycore/homeserver/': {
+			status: 301,
+			destination: '/explore/pubky-protocol/homeserver/',
+		},
+		'/explore/pubkycore/api/': {
+			status: 301,
+			destination: '/explore/pubky-protocol/api/',
+		},
+		'/explore/pubkycore/sdk/': {
+			status: 301,
+			destination: '/explore/pubky-protocol/sdk/',
+		},
+		'/explore/pubkycore/security-model/': {
+			status: 301,
+			destination: '/explore/pubky-protocol/security-model/',
+		},
+		'/explore/pubkycore/pkarr/introduction/': {
+			status: 301,
+			destination: '/explore/pubky-protocol/pkarr/introduction/',
+		},
+		'/explore/pubkycore/pkarr/why-pkarr/': {
+			status: 301,
+			destination: '/explore/pubky-protocol/pkarr/why-pkarr/',
+		},
+		'/explore/pubkycore/pkarr/getting-started/': {
+			status: 301,
+			destination: '/explore/pubky-protocol/pkarr/getting-started/',
+		},
+		'/explore/pubkycore/pkarr/expectations/': {
+			status: 301,
+			destination: '/explore/pubky-protocol/pkarr/expectations/',
+		},
+		'/explore/pubkycore/pkarr/architecture/': {
+			status: 301,
+			destination: '/explore/pubky-protocol/pkarr/architecture/',
+		},
+		'/explore/pubkycore/pkarr/eli5/': {
+			status: 301,
+			destination: '/explore/pubky-protocol/pkarr/eli5/',
+		},
 	},
 	base: process.env.BASE_PATH || '/',
 	markdown: {
