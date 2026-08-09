@@ -68,7 +68,7 @@ For source builds, see [Optional: Build from source](/explore/technologies/pubky
 
 ### Step 2: Initialize Project with the SDK
 
-What follows is a step-by-step guide to building your first Pubky app. If you prefer to start from a ready-made project, jump to the [basic Pubky app template](#basic-pubky-app-template).
+What follows is a step-by-step guide to building your first Pubky app. If you prefer to start from a ready-made project, jump to the [basic Pubky app template](#38-basic-pubky-app-template).
 
 :::note[Reference docs]
 For full API details see the reference documenation for [JavaScript](https://pubky.github.io/pubky-core/js-sdk-typedoc/) and [Rust](https://docs.rs/pubky).
@@ -143,6 +143,10 @@ This creates a demo user identity for the hello-world app. The signer uses it to
 
 This creates an account on the local Homeserver and publishes the user's Homeserver mapping (PKARR). Because local signup is set to `open`, we pass `null` instead of a signup token.
 
+:::note[Homeserver signup]
+This guide performs Homeserver signup inside the app because it is the shortest path to a working local example. In a real-world flow, however, Homeserver signup is not the responsibility of a Pubky app. Assume users already have an account on a Homeserver. If not, direct them to a separate signup flow, such as [the onboarding on pubky.app](https://pubky.app/onboarding/human), instead of implementing it in the app. The template in Step 3.8 follows this pattern.
+:::
+
 Run `npm run dev` and open the printed URL in your browser. Look at the logs in your browser console. You should see that the signup request succeeded and that you successfully published your Homeserver configuration (= PKARR).
 
 :::note[404 during signup]
@@ -176,7 +180,7 @@ Run `npm run dev` again and open the page. You should now see the data displayed
 Nice. Your first Pubky app works.
 :::
 
-#### Basic Pubky app template
+#### 3.8 Basic Pubky app template
 
 As a next step, try this template as a fuller starting point for a fresh Pubky app.
 
@@ -264,7 +268,7 @@ To connect your app to the production Pubky network, replace the client from Ste
 
 `new Pubky()` stops using the local endpoints. The app instead resolves [PKARR](/explore/pubkycore/pkarr/introduction/) records from the [Mainline DHT](/explore/technologies/mainline-dht/), connects to the Homeserver resolved from each user's PKARR record, and uses a public [HTTP relay](/explore/technologies/http-relay/) for authentication.
 
-Steps 3.3–3.5 use development-only identity and Homeserver shortcuts. For production, use [Pubky Ring](/explore/technologies/pubky-ring/); the [basic Pubky app template](#basic-pubky-app-template) already implements that flow.
+Steps 3.3–3.5 use development-only identity and Homeserver shortcuts. For production, use [Pubky Ring](/explore/technologies/pubky-ring/); the [basic Pubky app template](#38-basic-pubky-app-template) already implements that flow.
 
 <details>
 <summary><strong>Optional: Configure custom relays</strong></summary>
