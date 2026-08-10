@@ -14,7 +14,6 @@ async fn snippet_quick_example() -> anyhow::Result<()> {
     // --8<-- [start:rust_quick_example]
     use pubky::{ClientId, Keypair, Pubky};
 
-    // Initialize
     let pubky = Pubky::new()?;
     let keypair = Keypair::random();
 

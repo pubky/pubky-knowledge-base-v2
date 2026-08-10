@@ -32,7 +32,7 @@ All platforms share a consistent API surface. The React Native SDK uses mobile-o
 
 The SDK is organized around a small set of actors that mirror the developer workflow:
 
-1. **Pubky** — Your entry point. Create one at startup and share it across your app. It holds the HTTP client, connection pool, and provides access to everything else.
+1. **Pubky** — Your top-level client. Create one at startup and share it across your app. It manages the HTTP client, connection pool, and homeserver resolution via PKARR. It then hands off authenticated work to signers and sessions.
 
 2. **PubkySigner** — Holds a private key and proves identity. Use it to sign up for a homeserver, sign in, or approve auth requests from other apps.
 
