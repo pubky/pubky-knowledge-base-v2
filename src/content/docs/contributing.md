@@ -12,7 +12,11 @@ We welcome contributions made with the help of AI tools, but you are fully respo
 
 ## Ways to Contribute
 
-### 1. Documentation
+### 1. Security
+
+If you are a security researcher or believe you have found a vulnerability in Pubky software, follow the [Pubky Security Policy](https://github.com/pubky/.github/blob/main/SECURITY.md) to report it privately instead of opening a public issue.
+
+### 2. Documentation
 
 Help improve this knowledge base:
 - Fix typos and errors
@@ -21,7 +25,7 @@ Help improve this knowledge base:
 - Add examples and tutorials
 - Translate to other languages
 
-### 2. Code Contributions
+### 3. Code Contributions
 
 Contribute to Pubky projects:
 - **[Pubky Core](/explore/pubkycore/introduction/)**: Protocol and Homeserver
@@ -31,7 +35,7 @@ Contribute to Pubky projects:
 - **[Pubky CLI](/explore/technologies/pubky-cli/)**: Command-line tool
 - **[PKDNS](/explore/technologies/pkdns/)**, **[Homegate](/explore/technologies/homegate/)**, **[Pubky Docker](/explore/technologies/pubky-docker/)**: Infrastructure tools
 
-### 3. Community Support
+### 4. Community Support
 
 Help others in the community:
 - Answer questions on Telegram
@@ -39,7 +43,7 @@ Help others in the community:
 - Share your projects and experiences
 - Write blog posts and tutorials
 
-### 4. Testing & Bug Reports
+### 5. Testing & Bug Reports
 
 Improve quality through:
 - Testing beta features
