@@ -8,8 +8,9 @@
     "build": "astro build && node scripts/copy-md-sources.mjs && node scripts/generate-llms-small.mjs && node scripts/check-generated-markdown.mjs",
     "preview": "astro preview",
     "astro": "astro",
-    "check:snippets": "npm run check:snippets:js && npm run check:snippets:react-native && npm run check:snippets:rust",
+    "check:snippets": "npm run check:snippets:references && npm run check:snippets:js && npm run check:snippets:react-native && npm run check:snippets:rust",
     "check:generated-markdown": "node scripts/check-generated-markdown.mjs",
+    "check:snippets:references": "node --test scripts/check-unused-snippets.test.mjs && node scripts/check-unused-snippets.mjs",
     "check:snippets:js": "npm --prefix snippets/js run check",
     "check:snippets:react-native": "npm --prefix snippets/react-native run check",
     "check:snippets:rust": "cargo clippy --manifest-path snippets/rust/Cargo.toml --all-features -- -D warnings && cargo fmt --manifest-path snippets/rust/Cargo.toml --check"
