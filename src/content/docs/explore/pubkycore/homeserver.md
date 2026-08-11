@@ -44,7 +44,7 @@ See [Security Model](/explore/pubkycore/security-model/) for the full trust anal
 
 ## Running a Homeserver
 
-> **Note:** Production deployment guides are not yet available. Easy deployment packages (Umbrel, apt, docker, start9) are under development.
+For a packaged self-hosting setup with a web dashboard, follow [Self-host a Homeserver on Umbrel](/explore/pubkycore/homeserver-umbrel/).
 
 For local development and testing, start PostgreSQL and configure `database_url`, then run:
 
