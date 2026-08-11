@@ -6,7 +6,7 @@ title: "Pubky CLI"
 
 ## Overview
 
-Pubky CLI wraps the official [Pubky SDK](/explore/pubkycore/sdk/) and provides:
+Pubky CLI wraps the official [Pubky SDK](/explore/pubky-protocol/sdk/) and provides:
 - **User Operations**: Signup, signin, data management, session handling
 - **Admin Operations**: User management, server stats, invite token generation
 - **Testing Tools**: Integration with `pubky-testnet` for local development
@@ -180,7 +180,7 @@ cargo test
 ```
 
 If integration tests require `pubky-testnet`, follow the
-[Pubky Testnet README](https://github.com/pubky/pubky-core/blob/main/pubky-testnet/README.md)
+[Pubky Testnet README](https://github.com/pubky/pubky-homeserver/blob/main/pubky-testnet/README.md)
 for local database setup.
 
 ### Example Workflow
@@ -316,7 +316,7 @@ pubky-cli user signup $HOMESERVER_PK ./recovery
 
 ## Related Documentation
 
-- [Pubky SDK](/explore/pubkycore/sdk/) - Client libraries for all platforms
-- [Pubky Homeservers](/explore/pubkycore/homeserver/) - Homeserver deployment and configuration
+- [Pubky SDK](/explore/pubky-protocol/sdk/) - Client libraries for all platforms
+- [Pubky Homeservers](/explore/pubky-protocol/homeserver/) - Homeserver deployment and configuration
 - [Pubky Docker](/explore/technologies/pubky-docker/) - Full stack Docker environment
-- [Pubky Core API](/explore/pubkycore/api/) - HTTP API specification
+- [Pubky Homeserver API](/explore/pubky-protocol/api/) - HTTP API specification

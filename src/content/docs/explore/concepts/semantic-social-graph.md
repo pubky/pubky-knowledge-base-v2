@@ -16,7 +16,7 @@ Rich Interactions: Users can engage in more meaningful ways, as the network unde
 
 ### Semantic Graphs in Pubky App
 
-The Pubky App is a user-friendly platform that showcases the capabilities of Pubky Core and PKARR.
+The Pubky App is a user-friendly platform that showcases the capabilities of the Pubky Protocol.
 
 **Social Tagging:** Users can tag posts, files, links, and even peers with meaningful labels. This enriches the semantic content of the network.
 Customizable Feeds: By utilizing tags and weighted relationships, users control what appears in their feeds, ensuring content relevance.

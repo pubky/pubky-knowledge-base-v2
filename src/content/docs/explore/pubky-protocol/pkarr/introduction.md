@@ -23,10 +23,10 @@ The core idea is to streamline the process of publishing and resolving resource 
 3. **Fallback for Existing Applications**: Applications unaware of PKARR can make normal [DNS](/explore/technologies/dns/) Queries over [HTTPS](/explore/technologies/https/) (DoH) to PKARR servers, ensuring accessibility.
 4. **Caching and Republishing**: Both clients and PKARR servers cache records extensively to improve scalability. The [DHT](/explore/technologies/dht/) drops records after a few hours, necessitating periodic republishing to keep records alive.
 
-For more technical details on PKARR's architecture and how it works, refer to the [architecture](/explore/pubkycore/pkarr/architecture/) note.
+For more technical details on PKARR's architecture and how it works, refer to the [architecture](/explore/pubky-protocol/pkarr/architecture/) note.
 
 ## Getting Started
 
-[To start using PKARR](/explore/pubkycore/pkarr/getting-started/), you can visit the [web app demo](https://pkdns.net) or explore the Rust examples provided in [PKARR repository](https://github.com/pubky/pkarr).
+[To start using PKARR](/explore/pubky-protocol/pkarr/getting-started/), you can visit the [web app demo](https://pkdns.net) or explore the Rust examples provided in [PKARR repository](https://github.com/pubky/pkarr).
 
 To access public-key domains from your browser, use [PKDNS](/explore/technologies/pkdns/), a DNS server that resolves PKARR records. You can use public [PKDNS](/explore/technologies/pkdns/) instances or run your own server—see the [PKDNS](/explore/technologies/pkdns/) documentation for setup instructions.

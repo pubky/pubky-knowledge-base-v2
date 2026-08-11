@@ -110,7 +110,7 @@ curl $(pkdns resolve <public-key>)/
 
 ## SDK Authentication Problems
 
-See [Authentication](/explore/pubkycore/authentication/) for how Pubky authentication works.
+See [Authentication](/explore/pubky-protocol/authentication/) for how Pubky authentication works.
 
 ### "Invalid Signature" or "Authentication Failed"
 
@@ -282,7 +282,7 @@ See the [Pubky Docker README](https://github.com/pubky/pubky-docker#readme) for 
 ### Community Support
 
 - **Telegram**: [t.me/pubkycore](https://t.me/pubkycore)
-- **GitHub Issues**: [github.com/pubky/pubky-core/issues](https://github.com/pubky/pubky-core/issues)
+- **GitHub Issues**: [github.com/pubky/pubky-homeserver/issues](https://github.com/pubky/pubky-homeserver/issues)
 - **Documentation**: [Knowledge Base](/)
 
 ### Reporting Bugs
@@ -362,6 +362,6 @@ PUBKY_ADMIN_PASSWORD=admin pubky-cli admin info
 
 - **[Getting Started](/getting-started/)**: Setup guides
 - **[FAQ](/faq/)**: Frequently asked questions
-- **[SDK Documentation](/explore/pubkycore/sdk/)**: Detailed API docs
+- **[SDK Documentation](/explore/pubky-protocol/sdk/)**: Detailed API docs
 - **[PKDNS](/explore/technologies/pkdns/)**: DNS resolution details
-- **[Homeserver](/explore/pubkycore/homeserver/)**: Homeserver administration
+- **[Homeserver](/explore/pubky-protocol/homeserver/)**: Homeserver administration

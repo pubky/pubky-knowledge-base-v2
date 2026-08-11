@@ -26,7 +26,7 @@ Both types work the same way: the tagger, the label, and the target (user or pos
 
 ## How Tags Work
 
-1. A user creates a tag by choosing a label and a target (a user profile or a post). The tag is stored on the tagger's own [Homeserver](/explore/pubkycore/homeserver/) as a `PubkyAppTag` record containing the target URI, the label text, and a timestamp.
+1. A user creates a tag by choosing a label and a target (a user profile or a post). The tag is stored on the tagger's own [Homeserver](/explore/pubky-protocol/homeserver/) as a `PubkyAppTag` record containing the target URI, the label text, and a timestamp.
 2. The [indexer](/explore/pubky-apps/indexing-and-aggregation/indexer/) (Nexus watcher) detects the new tag event from the Homeserver and indexes it into the social graph.
 3. The tag is recorded as a **TAGGED** relationship in the graph database, connecting the tagger to the target with the label as metadata.
 4. Multiple caches and indexes are updated in parallel: tag counts on the target, tagger lists per label, engagement scores, trending tag rankings, and the tag [search](/explore/pubky-apps/reference-app/features/search/) index.

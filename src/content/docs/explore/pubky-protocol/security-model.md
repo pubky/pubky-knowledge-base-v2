@@ -2,11 +2,11 @@
 title: "Security Model"
 ---
 
-This document describes the security model, threat landscape, and trust assumptions in the Pubky Core platform. Understanding these is essential for both operators and application developers building on the platform.
+This document describes the security model, threat landscape, and trust assumptions in the Pubky Protocol. Understanding these is essential for both operators and application developers building on the platform.
 
 ## Design Philosophy
 
-Pubky Core aims to minimize trust requirements while remaining practical. The key principle is: **users should have a credible exit from misbehaving actors** without losing their identity or data.
+The Pubky Protocol aims to minimize trust requirements while remaining practical. The key principle is: **users should have a credible exit from misbehaving actors** without losing their identity or data.
 
 This is achieved through:
 - Cryptographic identity (keypairs) that users fully control
@@ -26,7 +26,7 @@ The Pubky security model accepts that some trust is unavoidable in practical sys
 3. **[Credible Exit](/explore/concepts/credible-exit/)**: The key guarantee is that users can always leave. A misbehaving homeserver cannot hold your identity hostage because:
    - Your keypair never leaves your device. [Pubky Ring](/explore/technologies/pubky-ring/) is the reference key manager implementation
    - Your data can be backed up and migrated
-   - [PKARR](/explore/pubkycore/pkarr/introduction/) lets you point your identity to a new homeserver immediately
+   - [PKARR](/explore/pubky-protocol/pkarr/introduction/) lets you point your identity to a new homeserver immediately
 
 ### The Detection Problem
 
@@ -55,7 +55,7 @@ This model minimizes the attack surface: even a compromised app cannot steal you
 
 ### PKARR as Source of Truth
 
-[PKARR](/explore/pubkycore/pkarr/introduction/) DNS records are the authoritative source for identity resolution:
+[PKARR](/explore/pubky-protocol/pkarr/introduction/) DNS records are the authoritative source for identity resolution:
 
 - When you update your PKARR record to point to a new homeserver, the old one loses authority immediately
 - Clients that properly resolve PKARR will always find your current homeserver
@@ -118,7 +118,7 @@ These are intentional design decisions, not oversights:
 | Capability enforcement | Yes | Homeserver trusted to honor the capabilities Ring authorized |
 | Session revocation | Yes | Homeserver trusted to delete sessions when Ring requests |
 | Key custody | No | Ring is sole key holder; no homeserver recovery path |
-| Identity resolution | No | [PKARR](/explore/pubkycore/pkarr/introduction/) is authoritative; homeserver cannot claim false identity |
+| Identity resolution | No | [PKARR](/explore/pubky-protocol/pkarr/introduction/) is authoritative; homeserver cannot claim false identity |
 | Data authenticity | Yes (for now) | Planned: data signing will remove this trust requirement |
 
 **Why trust the homeserver for sessions?**
@@ -142,7 +142,7 @@ The alternative would require Ring to be involved in every operation, which conf
 
 ### Data Signing (Optional Feature, Planned 2026)
 
-The [SDK](/explore/pubkycore/sdk/) will optionally sign data on behalf of the user before storing it on the homeserver. Readers can verify the signature against the user's public key.
+The [SDK](/explore/pubky-protocol/sdk/) will optionally sign data on behalf of the user before storing it on the homeserver. Readers can verify the signature against the user's public key.
 
 **After implementation:**
 - Homeserver cannot modify signed data without detection
@@ -183,7 +183,7 @@ Planned primary-backup architecture where slave homeservers would stay in sync w
 
 ### PubkyTLS (RFC 7250 Raw Public Keys)
 
-For connections to public-key Homeserver addresses (for example `https://_pubky.<z32>/...`), the [SDK](/explore/pubkycore/sdk/) uses **[PubkyTLS](/glossary/#pubkytls)**. It is TLS with Raw Public Keys as defined in RFC 7250, which removes the need for Certificate Authority chains when connecting to these addresses.
+For connections to public-key Homeserver addresses (for example `https://_pubky.<z32>/...`), the [SDK](/explore/pubky-protocol/sdk/) uses **[PubkyTLS](/glossary/#pubkytls)**. It is TLS with Raw Public Keys as defined in RFC 7250, which removes the need for Certificate Authority chains when connecting to these addresses.
 
 **How it works:**
 - The server's public key is known in advance (it's part of the URL/address)
@@ -288,7 +288,7 @@ This section shows how [credible exit](/explore/concepts/credible-exit/) works i
 |-------|--------------|-------------|
 | Immediate | Data becomes temporarily inaccessible | Wait for recovery or decide to migrate |
 | If prolonged | Use your local [Pubky Backup](/explore/technologies/pubky-backup/) copy as migration input | Sign up on a new Homeserver |
-| Recovery | Re-upload backed-up data once migration tooling supports the needed workflow, then update [PKARR](/explore/pubkycore/pkarr/introduction/) record | External links resolve to the new location after caches update |
+| Recovery | Re-upload backed-up data once migration tooling supports the needed workflow, then update [PKARR](/explore/pubky-protocol/pkarr/introduction/) record | External links resolve to the new location after caches update |
 
 Your identity (keypair in Ring) is unaffected. The homeserver going down is an inconvenience, not a catastrophe.
 
@@ -330,5 +330,5 @@ Across all failure scenarios, the same pattern applies:
 
 1. **Identity survives** — Your keypair is separate from any infrastructure
 2. **Data can be recovered** — If you kept backups, or later via planned mirroring
-3. **Exit is always possible** — [PKARR](/explore/pubkycore/pkarr/introduction/) lets you point your identity elsewhere
+3. **Exit is always possible** — [PKARR](/explore/pubky-protocol/pkarr/introduction/) lets you point your identity elsewhere
 4. **Damage is contained** — One failure doesn't cascade to your entire digital life

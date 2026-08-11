@@ -12,7 +12,7 @@ For current setup instructions, configuration, and development workflows, see th
 
 ## Testnet Architecture
 
-The following simplified diagram shows the default local testnet topology. The DHT, [PKARR relay](/explore/pubkycore/pkarr/architecture/), and [HTTP relay](/explore/technologies/http-relay/) run locally inside the `homeserver` service.
+The following simplified diagram shows the default local testnet topology. The DHT, [PKARR relay](/explore/pubky-protocol/pkarr/architecture/), and [HTTP relay](/explore/technologies/http-relay/) run locally inside the `homeserver` service.
 
 ```mermaid
 flowchart TB
@@ -29,8 +29,8 @@ flowchart TB
             direction TB
             Homeserver["Pubky Homeserver<br/><small>8pinxxgqs41n4aididenw5apqp<br/>1urfmzdztr8jt4abrkdn435ewo</small>"]
             Services["Local testnet services<br/>DHT · PKARR relay · HTTP relay"]
-            TestnetLabel@{ shape: text, label: "Pubky Core testnet" }
-            TestnetSpacer@{ shape: text, label: "Pubky Core testnet" }
+            TestnetLabel@{ shape: text, label: "Pubky testnet" }
+            TestnetSpacer@{ shape: text, label: "Pubky testnet" }
         end
 
         style TestnetSpacer color:transparent
@@ -79,7 +79,7 @@ See the [Pubky Docker source setup instructions](https://github.com/pubky/pubky-
 
 ## Related Documentation
 
-- [Pubky Homeserver](/explore/pubkycore/homeserver/)
+- [Pubky Homeserver](/explore/pubky-protocol/homeserver/)
 - [Pubky Nexus](/explore/pubky-apps/indexing-and-aggregation/pubky-nexus/)
 - [Homegate](/explore/technologies/homegate/)
 - [pubky.app](/explore/pubky-apps/reference-app/pubky-app/)

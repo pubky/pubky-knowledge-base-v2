@@ -8,7 +8,7 @@ title: "Pubky Backup"
 - **Downloads and install notes**: [Pubky Backup README](https://github.com/pubky/pubky-backup/blob/main/README.md)
 - **Core architecture and API**: [pubky-backup-core README](https://github.com/pubky/pubky-backup/blob/main/src-tauri/pubky-backup-core/README.md)
 
-Pubky Backup targets published `/pub/...` data from [Homeservers](/explore/pubkycore/homeserver/). It complements [Pubky Ring](/explore/technologies/pubky-ring/): Ring protects identity keys while Backup protects a local copy of published data.
+Pubky Backup targets published `/pub/...` data from [Homeservers](/explore/pubky-protocol/homeserver/). It complements [Pubky Ring](/explore/technologies/pubky-ring/): Ring protects identity keys while Backup protects a local copy of published data.
 
 ## Role in Credible Exit
 

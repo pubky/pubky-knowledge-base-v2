@@ -17,8 +17,8 @@ A curated directory of websites, applications, repositories, packages, and commu
 
 ## AI Resources
 
-- Context7 resources to keep LLMs up to date: [pubky.org `llms.txt`](https://context7.com/llmstxt/pubky_llms_txt), [Pubky Core repo](https://context7.com/pubky/pubky-core), [Pubky Nexus repo](https://context7.com/pubky/pubky-nexus), [PKARR repo](https://context7.com/pubky/pkarr), [PKDNS repo](https://context7.com/pubky/pkdns), [pubky-app-specs repo](https://context7.com/pubky/pubky-app-specs), [Paykit repo](https://context7.com/pubky/paykit-rs), [HTTP Relay repo](https://context7.com/pubky/http-relay), [Pubky Docker repo](https://context7.com/pubky/pubky-docker), [Mainline repo](https://context7.com/pubky/mainline), and [Pubky Noise repo](https://context7.com/pubky/pubky-noise)
-- DeepWiki (AI-generated codebase wikis with LLM chat): [pubky-core](https://deepwiki.com/pubky/pubky-core) and [pubky-nexus](https://deepwiki.com/pubky/pubky-nexus)
+- Context7 resources to keep LLMs up to date: [pubky.org `llms.txt`](https://context7.com/llmstxt/pubky_llms_txt), [Pubky Homeserver repo](https://context7.com/pubky/pubky-homeserver), [Pubky Nexus repo](https://context7.com/pubky/pubky-nexus), [PKARR repo](https://context7.com/pubky/pkarr), [PKDNS repo](https://context7.com/pubky/pkdns), [pubky-app-specs repo](https://context7.com/pubky/pubky-app-specs), [Paykit repo](https://context7.com/pubky/paykit-rs), [HTTP Relay repo](https://context7.com/pubky/http-relay), [Pubky Docker repo](https://context7.com/pubky/pubky-docker), [Mainline repo](https://context7.com/pubky/mainline), and [Pubky Noise repo](https://context7.com/pubky/pubky-noise)
+- DeepWiki (AI-generated codebase wikis with LLM chat): [pubky-homeserver](https://deepwiki.com/pubky/pubky-homeserver) and [pubky-nexus](https://deepwiki.com/pubky/pubky-nexus)
 
 ## Live Applications
 
@@ -35,7 +35,7 @@ A curated directory of websites, applications, repositories, packages, and commu
 
 All under [github.com/pubky](https://github.com/pubky):
 
-- [pubky-core](https://github.com/pubky/pubky-core) — Collection of the components that make up the Pubky protocol
+- [pubky-homeserver](https://github.com/pubky/pubky-homeserver) — Pubky Homeserver, SDK, and protocol implementation
 - [pubky-app](https://github.com/pubky/pubky-app) — Pubky social media application
 - [pubky-ring](https://github.com/pubky/pubky-ring) — Mobile key manager app
 - [pubky-backup](https://github.com/pubky/pubky-backup) — Desktop app for local backups of published Homeserver data
@@ -44,7 +44,7 @@ All under [github.com/pubky](https://github.com/pubky):
 - [pkarr](https://github.com/pubky/pkarr) — Public Key Addressable Resource Records (sovereign TLDs)
 - [mainline](https://github.com/pubky/mainline) — BitTorrent Mainline DHT implementation in Rust
 - [react-native-pubky](https://github.com/pubky/react-native-pubky) — React Native bindings
-- [pubky-core-ffi](https://github.com/pubky/pubky-core-ffi) — Pubky Core Mobile SDK
+- [pubky-core-ffi](https://github.com/pubky/pubky-core-ffi) — Pubky Mobile SDK
 - [pkdns](https://github.com/pubky/pkdns) — DNS server resolving pkarr self-sovereign domains
 - [paykit-rs](https://github.com/pubky/paykit-rs) — Payment toolkit
 - [http-relay](https://github.com/pubky/http-relay) — HTTP relay

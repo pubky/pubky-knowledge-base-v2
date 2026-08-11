@@ -2,7 +2,7 @@
 title: "HTTP Relay"
 ---
 
-HTTP relay service for forwarding encrypted AuthTokens during Pubky [authentication](/explore/pubkycore/authentication/) flows.
+HTTP relay service for forwarding encrypted AuthTokens during Pubky [authentication](/explore/pubky-protocol/authentication/) flows.
 
 - **GitHub**: [`pubky/http-relay`](https://github.com/pubky/http-relay)
 - **Crate**: [`http-relay`](https://crates.io/crates/http-relay)
@@ -36,7 +36,7 @@ The relay only ever sees encrypted blobs — it cannot capture valid auth tokens
 
 SDK clients can resume an in-progress auth flow after a page refresh or app restart by saving the original `authorizationUrl` and passing it to `resumeAuthFlow` / `resume_auth_flow`. The URL contains the relay URL and `client_secret`, so the SDK can rebuild the same inbox channel and continue polling. If Ring already posted the encrypted token while the app was away, `/inbox` can still return it as long as the channel is within its retention window. Delete the URL once the flow completes because it contains the `client_secret`.
 
-See the [pubky-core GitHub docs](https://github.com/pubky/pubky-core/blob/main/docs/AUTH.md) for the full protocol spec and [Authentication](/explore/pubkycore/authentication/) for an overview.
+See the [pubky-homeserver GitHub docs](https://github.com/pubky/pubky-homeserver/blob/main/docs/AUTH.md) for the full protocol spec and [Authentication](/explore/pubky-protocol/authentication/) for an overview.
 
 ### Migration from /link to /inbox
 
@@ -46,10 +46,10 @@ The previous `/link` channel used synchronous producer/consumer pairing. The new
 
 The relay is designed to be self-hostable for reduced latency, privacy, and reliability. Use the [`pubky-http-relay`](https://github.com/pubky/pubky-http-relay) crate as a dependency in your Rust project.
 
-Apps can specify a custom relay URL via the [SDK](/explore/pubkycore/sdk/).
+Apps can specify a custom relay URL via the [SDK](/explore/pubky-protocol/sdk/).
 
 ## Related Components
 
 - **[Pubky Ring](/explore/technologies/pubky-ring/)**: The authenticator that sends tokens through the relay
-- **[Pubky SDK](/explore/pubkycore/sdk/)**: Client library that subscribes to relay channels
-- **[Pubky Homeserver](/explore/pubkycore/homeserver/)**: Verifies tokens and issues sessions
+- **[Pubky SDK](/explore/pubky-protocol/sdk/)**: Client library that subscribes to relay channels
+- **[Pubky Homeserver](/explore/pubky-protocol/homeserver/)**: Verifies tokens and issues sessions

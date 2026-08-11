@@ -3,7 +3,7 @@ title: "Getting Started"
 ---
 
 :::note[Developers Guide]
-This guide helps you try Pubky **as a user**; if you want to build on Pubky, start with the [Developer Guide](/explore/pubkycore/getting-started/).
+This guide helps you try Pubky **as a user**; if you want to build on Pubky, start with the [Developer Guide](/explore/pubky-protocol/getting-started/).
 :::
 
 Welcome to Pubky! You’ll create your identity, sign in to pubky.app, and inspect and back up the data you publish.
@@ -90,7 +90,7 @@ Pubky Backup does not replace your recovery phrase. The recovery phrase protects
 
 - **Join the community**: [Telegram](https://t.me/pubkycore)
 - **Learn more**: Read the [FAQ](/faq/)
-- **Understand the tech**: Check out [ELI5: Pubky Core](/explore/pubkycore/eli5/)
+- **Understand the tech**: Check out [ELI5: Pubky Protocol](/explore/pubky-protocol/eli5/)
 - **Explore concepts**: Learn about the [Semantic Social Graph](/explore/concepts/semantic-social-graph/)
 
 ## Common First Questions
@@ -105,7 +105,7 @@ Yes. Users can choose a public Homeserver provider. Running your own is optional
 
 **Where is my data stored?**
 
-Your public app data is stored on a Homeserver, which is linked to your pubky through [PKARR](/explore/pubkycore/pkarr/introduction/). You can change your Homeserver in Pubky Ring, and [Pubky Explorer](https://explorer.pubky.app) lets you inspect what is currently stored there.
+Your public app data is stored on a Homeserver, which is linked to your pubky through [PKARR](/explore/pubky-protocol/pkarr/introduction/). You can change your Homeserver in Pubky Ring, and [Pubky Explorer](https://explorer.pubky.app) lets you inspect what is currently stored there.
 
 ## Resources
 

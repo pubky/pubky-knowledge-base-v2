@@ -14,4 +14,4 @@ To illustrate the practical applications of this architectural paradigm, conside
 2. File Synchronization Utility: Similar to the open-source [Syncthing](https://syncthing.net/) project, this type of application would facilitate direct file synchronization between the client and the Homeserver.
 3. Text Snippet Repository: A lightweight application for creating, storing, and retrieving short text fragments or code snippets as [pastebin](https://pastebin.com/)
 
-These implementations leverage the Pubky Core protocol to establish secure, efficient, and direct data exchange channels between the client and the Homeserver, while the user remains with ownership of their data.
+These implementations leverage the Pubky Protocol to establish secure, efficient, and direct data exchange channels between the client and the Homeserver, while the user remains with ownership of their data.

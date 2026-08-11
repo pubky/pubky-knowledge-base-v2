@@ -2,7 +2,7 @@
 title: "DNS over HTTPS"
 ---
 
-It is a security protocol that encrypts [DNS](/explore/technologies/dns/) queries and responses, enhancing privacy and security by preventing eavesdropping and tampering. In the context of [PKARR](/explore/pubkycore/pkarr/introduction/), DoH plays a crucial role in ensuring that [DNS](/explore/technologies/dns/) queries made to resolve public-key addresses are secure and cannot be intercepted or manipulated by third parties.
+It is a security protocol that encrypts [DNS](/explore/technologies/dns/) queries and responses, enhancing privacy and security by preventing eavesdropping and tampering. In the context of [PKARR](/explore/pubky-protocol/pkarr/introduction/), DoH plays a crucial role in ensuring that [DNS](/explore/technologies/dns/) queries made to resolve public-key addresses are secure and cannot be intercepted or manipulated by third parties.
 
 ### Key Points about DoH
 

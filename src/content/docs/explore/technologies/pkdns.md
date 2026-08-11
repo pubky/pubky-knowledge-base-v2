@@ -2,7 +2,7 @@
 title: "PKDNS: Public-Key DNS Server"
 ---
 
-**PKDNS** is a DNS server that enables self-sovereign and censorship-resistant domain names by resolving [PKARR](/explore/pubkycore/pkarr/introduction/) (Public Key Addressable Resource Records) hosted on the [Mainline DHT](/explore/technologies/mainline-dht/). It bridges the gap between traditional DNS infrastructure and public key-based domains, allowing anyone to access the decentralized web using standard DNS protocols.
+**PKDNS** is a DNS server that enables self-sovereign and censorship-resistant domain names by resolving [PKARR](/explore/pubky-protocol/pkarr/introduction/) (Public Key Addressable Resource Records) hosted on the [Mainline DHT](/explore/technologies/mainline-dht/). It bridges the gap between traditional DNS infrastructure and public key-based domains, allowing anyone to access the decentralized web using standard DNS protocols.
 
 ## Overview
 
@@ -465,9 +465,9 @@ pkdns -f 1.1.1.1:53  # Cloudflare DNS
 
 ## See Also
 
-- [PKARR](/explore/pubkycore/pkarr/introduction/) - Public Key Addressable Resource Records
+- [PKARR](/explore/pubky-protocol/pkarr/introduction/) - Public Key Addressable Resource Records
 - [Mainline DHT](/explore/technologies/mainline-dht/) - Distributed hash table powering PKDNS
 - [DNS](/explore/technologies/dns/) - Traditional Domain Name System
 - [DoH](/explore/technologies/doh/) - DNS over HTTPS protocol
-- [Pubky Core](/explore/pubkycore/introduction/) - Core protocol and infrastructure
+- [Pubky Protocol](/explore/pubky-protocol/introduction/) - Core protocol and infrastructure
 

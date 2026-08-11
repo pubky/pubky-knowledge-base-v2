@@ -10,7 +10,7 @@ Paykit is a payment protocol built on Pubky for payment discovery and coordinati
 
 ## Core Concept
 
-Paykit uses a payee's Pubky public key as the stable starting point for payment discovery. Instead of asking for an address or invoice out of band, an app can look up the published payment details on a [Homeserver](/explore/pubkycore/homeserver/) under `/pub/paykit/v0/{payment_endpoint_identifier}`.
+Paykit uses a payee's Pubky public key as the stable starting point for payment discovery. Instead of asking for an address or invoice out of band, an app can look up the published payment details on a [Homeserver](/explore/pubky-protocol/homeserver/) under `/pub/paykit/v0/{payment_endpoint_identifier}`.
 
 This enables applications where users can pay directly to profiles while still letting the integrating wallet or payment processor decide which payment rail to use.
 

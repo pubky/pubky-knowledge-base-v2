@@ -63,7 +63,7 @@ Traditional DNS has fundamental limitations:
 - **True ownership**: You control your identity and domain through cryptographic keys
 - **Privacy**: No centralized entity tracks your DNS queries
 
-PKDNS bridges the gap between traditional DNS and the decentralized web, enabling [PKARR](/explore/pubkycore/pkarr/introduction/) records to function as domains while maintaining compatibility with existing infrastructure.
+PKDNS bridges the gap between traditional DNS and the decentralized web, enabling [PKARR](/explore/pubky-protocol/pkarr/introduction/) records to function as domains while maintaining compatibility with existing infrastructure.
 
 ## Security Considerations
 
@@ -93,15 +93,15 @@ PKDNS provides superior security through:
 
 Pubky uses DNS technology in innovative ways:
 
-1. **[PKDNS](/explore/technologies/pkdns/)**: DNS server that resolves public-key domains from [PKARR](/explore/pubkycore/pkarr/introduction/) records
+1. **[PKDNS](/explore/technologies/pkdns/)**: DNS server that resolves public-key domains from [PKARR](/explore/pubky-protocol/pkarr/introduction/) records
 2. **Hybrid approach**: Supports both traditional ICANN domains and public-key domains
 3. **[DoH](/explore/technologies/doh/) integration**: Provides encrypted DNS resolution
-4. **Homeserver discovery**: PKARR records contain DNS-like entries pointing to [Homeservers](/explore/pubkycore/homeserver/)
+4. **Homeserver discovery**: PKARR records contain DNS-like entries pointing to [Homeservers](/explore/pubky-protocol/homeserver/)
 
 ## See Also
 
 - **[PKDNS](/explore/technologies/pkdns/)**: Public-key DNS implementation
-- **[PKARR](/explore/pubkycore/pkarr/introduction/)**: Public key addressable resource records
+- **[PKARR](/explore/pubky-protocol/pkarr/introduction/)**: Public key addressable resource records
 - **[Mainline DHT](/explore/technologies/mainline-dht/)**: Distributed hash table powering PKDNS
 - **[DoH](/explore/technologies/doh/)**: DNS over HTTPS for encrypted queries
 - **[HTTPS](/explore/technologies/https/)**: Secure HTTP protocol

@@ -78,7 +78,7 @@ The foundation of Pubky is cryptographic identity based on **[key pairs](/explor
 The discovery layer enables finding Homeservers and resolving identities without central servers.
 
 **Components:**
-- **[PKARR](/explore/pubkycore/pkarr/introduction/)**: Public Key Addressable Resource Records
+- **[PKARR](/explore/pubky-protocol/pkarr/introduction/)**: Public Key Addressable Resource Records
 - **[Mainline DHT](/explore/technologies/mainline-dht/)**: Distributed Hash Table (10M+ nodes)
 - **[PKDNS](/explore/technologies/pkdns/)**: DNS servers for resolving public-key domains
 
@@ -112,7 +112,7 @@ sequenceDiagram
 
 ### Storage Layer
 
-**[Homeservers](/explore/pubkycore/homeserver/)** store user data in a filesystem over a simple HTTP API, similar to WebDAV.
+**[Homeservers](/explore/pubky-protocol/homeserver/)** store user data in a filesystem over a simple HTTP API, similar to WebDAV.
 
 **Architecture:**
 
@@ -213,16 +213,16 @@ sequenceDiagram
 
 ## Component Responsibilities
 
-### Pubky Core
+### Pubky Homeserver
 
-**[Pubky Core](/explore/pubkycore/introduction/)** provides:
+**[Pubky Homeserver](/explore/pubky-protocol/introduction/)** provides:
 - Protocol specification
 - Homeserver implementation
 - SDK for all platforms
 - Authentication system
 - API standards
 
-**Repository**: [github.com/pubky/pubky-core](https://github.com/pubky/pubky-core)
+**Repository**: [github.com/pubky/pubky-homeserver](https://github.com/pubky/pubky-homeserver)
 
 ### Pubky Ring
 
@@ -288,7 +288,7 @@ sequenceDiagram
 
 ### Authentication
 
-See [Authentication](/explore/pubkycore/authentication/) for the full authentication flow.
+See [Authentication](/explore/pubky-protocol/authentication/) for the full authentication flow.
 
 ### Data Integrity
 
@@ -404,8 +404,8 @@ Users → Enterprise Homeserver + Custom Aggregator + Private Nexus → Internal
 ## See Also
 
 - **[Getting Started](/getting-started/)**: Get started with Pubky
-- **[Pubky Core Overview](/explore/pubkycore/introduction/)**: Protocol details
-- **[SDK Documentation](/explore/pubkycore/sdk/)**: Build applications
-- **[API Reference](/explore/pubkycore/api/)**: HTTP API specification
+- **[Pubky Protocol Overview](/explore/pubky-protocol/introduction/)**: Protocol details
+- **[SDK Documentation](/explore/pubky-protocol/sdk/)**: Build applications
+- **[API Reference](/explore/pubky-protocol/api/)**: HTTP API specification
 - **[Comparisons](/comparisons/)**: How Pubky differs from alternatives
 - **[FAQ](/faq/)**: Frequently asked questions

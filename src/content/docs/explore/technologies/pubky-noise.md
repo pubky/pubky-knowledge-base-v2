@@ -59,7 +59,7 @@ This three-step handshake provides:
 
 **Integration:**
 - Derives encryption keys from Pubky [Ed25519 identities](/explore/technologies/key-pair/)
-- Publishes Noise endpoints to [Homeserver](/explore/pubkycore/homeserver/) directories
+- Publishes Noise endpoints to [Homeserver](/explore/pubky-protocol/homeserver/) directories
 - Automatic peer discovery via Pubky public keys
 - Compatible with [Paykit](/explore/technologies/paykit/) payment protocol
 
@@ -194,11 +194,11 @@ This allows users to use their existing Pubky identity for encrypted communicati
 ### Transport Framing
 Messages are length-prefixed and encrypted in sequence, maintaining order and preventing replay.
 
-## Relationship to Pubky Core
+## Relationship to the Pubky Protocol
 
 Pubky Noise is a **communication layer** for Pubky:
 - Uses Pubky identity system (Ed25519 keys)
-- Publishes endpoints to [Homeservers](/explore/pubkycore/homeserver/)
+- Publishes endpoints to [Homeservers](/explore/pubky-protocol/homeserver/)
 - Integrates with Pubky discovery mechanisms
 - Enables private peer-to-peer protocols on top of public Pubky infrastructure
 

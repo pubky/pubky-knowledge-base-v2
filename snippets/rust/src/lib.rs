@@ -7,7 +7,7 @@
 )]
 
 // =============================================================================
-// Snippets from: src/content/docs/explore/pubkycore/sdk.md
+// Snippets from: src/content/docs/explore/pubky-protocol/sdk.md
 // =============================================================================
 
 async fn snippet_quick_example() -> anyhow::Result<()> {
