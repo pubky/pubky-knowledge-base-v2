@@ -6,7 +6,7 @@ Welcome to the Pubky Knowledge Base.
 
 ### [Access the Pubky Knowledge Base](https://pubky.org/)
 
-This site documents Pubky's vision, architecture, key concepts, and practical guides for Pubky Protocol and pubky.app.
+This site documents Pubky's vision, architecture, key concepts, and practical guides for the Pubky protocol and pubky.app.
 
 ## Contributing
 

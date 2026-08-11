@@ -4,11 +4,9 @@ title: "pubky.app"
 
 Web portal for the Pubky ecosystem — a publisher and social feed for the decentralized web.
 
-> **Note:** This component is NOT part of the Pubky Protocol. It is part of the Pubky social app stack (along with [Pubky Nexus](/explore/pubky-apps/indexing-and-aggregation/pubky-nexus/)).
-
 ## Overview
 
-pubky.app is a social media-like web application built on top of the [Pubky Protocol](/explore/pubky-protocol/introduction/). It serves as the flagship example of how to build applications using the Pubky [SDK](/explore/pubky-protocol/sdk/) for authentication and data storage, combined with [Nexus](/explore/pubky-apps/indexing-and-aggregation/pubky-nexus/) for data [aggregation](/explore/pubky-apps/indexing-and-aggregation/aggregator/) and [indexing](/explore/pubky-apps/indexing-and-aggregation/indexer/), turning distributed data into fast-loading feeds and a navigable social graph.
+pubky.app is a social media-like web application built on top of the [Pubky protocol](/explore/pubky-protocol/introduction/). It serves as the flagship example of how to build applications using the Pubky [SDK](/explore/pubky-protocol/sdk/) for authentication and data storage, combined with [Nexus](/explore/pubky-apps/indexing-and-aggregation/pubky-nexus/) for data [aggregation](/explore/pubky-apps/indexing-and-aggregation/aggregator/) and [indexing](/explore/pubky-apps/indexing-and-aggregation/indexer/), turning distributed data into fast-loading feeds and a navigable social graph.
 
 - **GitHub**: https://github.com/pubky/pubky-app
 - **Platform**: Web (Next.js progressive web app)

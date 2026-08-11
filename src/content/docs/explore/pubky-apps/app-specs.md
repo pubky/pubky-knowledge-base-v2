@@ -4,8 +4,6 @@ title: "App Specs"
 
 Shared data model specifications for the Pubky social app ecosystem, with [pubky.app](/explore/pubky-apps/reference-app/pubky-app/) as the reference implementation.
 
-> **Note:** This component is NOT part of the Pubky Protocol. It is part of the Pubky social app stack.
-
 ## Overview
 
 `pubky-app-specs` defines the canonical data schemas for social application data stored on Pubky [homeservers](/explore/pubky-protocol/homeserver/). It provides validation rules, serialization logic, and type definitions used by both *Pubky apps* and the [Pubky Nexus](/explore/pubky-apps/indexing-and-aggregation/pubky-nexus/) indexer to ensure interoperability with [pubky.app](/explore/pubky-apps/reference-app/pubky-app/). Note that this is *only* required for "Pubky Social apps": Pubky apps that read or write pubky.app social data, including profiles, posts and collections, follows, mutes, tags, bookmarks, and feeds. Pubky apps that do not rely on that social data should ignore `pubky-app-specs` and rely solely on their own application-specific schemas.

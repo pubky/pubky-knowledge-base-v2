@@ -82,11 +82,11 @@ DNS server that resolves public-key domains by fetching PKARR records from the M
 The public half of a cryptographic key pair. In Pubky, this serves as your permanent, self-sovereign identity (often called a "pubky").
 
 **Pubky**
-1. The decentralized web protocol and ecosystem, formally known as the [Pubky Protocol](/explore/pubky-protocol/introduction/)
+1. The decentralized web protocol and ecosystem, formally known as the [Pubky protocol](/explore/pubky-protocol/introduction/)
 2. A user's public-key identity (e.g., "my pubky is z4e8s...")
 
 **Pubky app**
-Any application built on the [Pubky Protocol](/explore/pubky-protocol/introduction/). A Pubky app uses the Pubky [SDK](/explore/pubky-protocol/sdk/) and [Homeservers](/explore/pubky-protocol/homeserver/) for authentication and data storage. See [Pubky Apps overview](/explore/pubky-apps/introduction/).
+Any application built on the [Pubky protocol](/explore/pubky-protocol/introduction/). A Pubky app uses the Pubky [SDK](/explore/pubky-protocol/sdk/) and [Homeservers](/explore/pubky-protocol/homeserver/) for authentication and data storage. See [Pubky Apps overview](/explore/pubky-apps/introduction/).
 
 **[pubky.app](/explore/pubky-apps/reference-app/pubky-app/)**
 The reference implementation of a Pubky app — a decentralized social media application built by Synonym, live at [pubky.app](https://pubky.app). It demonstrates how to build social applications on the Pubky protocol using [Nexus](/explore/pubky-apps/indexing-and-aggregation/pubky-nexus/) for indexing and the [pubky-app-specs](/explore/pubky-apps/app-specs/) data model.
@@ -98,7 +98,7 @@ Desktop app for keeping local copies of published Homeserver data. Current app d
 Command-line tool for interacting with Pubky Homeservers, providing user operations, admin functions, and testing utilities.
 
 **[Pubky Protocol](/explore/pubky-protocol/introduction/)**
-The protocol ecosystem encompassing the Homeserver implementation, SDK, and specifications for building decentralized applications on Pubky.
+The protocol encompassing the Homeserver, SDK, PKARR and specifications for building decentralized applications on Pubky.
 
 <a id="pubkytls"></a>
 

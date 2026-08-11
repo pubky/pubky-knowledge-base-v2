@@ -469,5 +469,5 @@ pkdns -f 1.1.1.1:53  # Cloudflare DNS
 - [Mainline DHT](/explore/technologies/mainline-dht/) - Distributed hash table powering PKDNS
 - [DNS](/explore/technologies/dns/) - Traditional Domain Name System
 - [DoH](/explore/technologies/doh/) - DNS over HTTPS protocol
-- [Pubky Protocol](/explore/pubky-protocol/introduction/) - Core protocol and infrastructure
+- [Pubky protocol](/explore/pubky-protocol/introduction/) - Core protocol and infrastructure
 

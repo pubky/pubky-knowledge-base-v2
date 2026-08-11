@@ -1,27 +1,27 @@
 ---
-title: "Pubky Protocol: Open Protocol for Decentralized Web Applications"
+title: "Pubky: Open Protocol for Decentralized Web Applications"
 ---
 
-![Pubky Protocol architecture diagram showing the relationship between public-key identities, PKARR records on Mainline DHT, Homeservers, and client applications](/images/pubky-homeserver.svg)
+![Pubky architecture diagram showing the relationship between public-key identities, PKARR records on Mainline DHT, Homeservers, and client applications](/images/pubky-homeserver.svg)
 
 > **An open protocol for per-public-key backends for censorship resistant web applications.**
 
 ## Overview
 
-The Pubky Protocol combines a [censorship-resistant public-key-based alternative to DNS](https://github.com/pubky/pkarr) ([PKARR](/explore/pubky-protocol/pkarr/introduction/)) with conventional, tried-and-tested web technologies. This keeps users in control of their identities and data while enabling developers to build software with the availability of web apps, without the costs of managing a central database.
+The Pubky protocol combines a [censorship-resistant public-key-based alternative to DNS](https://github.com/pubky/pkarr) ([PKARR](/explore/pubky-protocol/pkarr/introduction/)) with conventional, tried-and-tested web technologies. This keeps users in control of their identities and data while enabling developers to build software with the availability of web apps, without the costs of managing a central database.
 
 **The Core Philosophy:**
 > "The Web, long centralized, must decentralize; Long decentralized, must centralize."
 
-The Pubky Protocol provides the infrastructure for building truly decentralized applications where:
+The Pubky protocol provides the infrastructure for building truly decentralized applications where:
 - Users control their identities (public keys)
 - Users choose where their data lives ([Homeserver](/explore/pubky-protocol/homeserver/))
 - Applications remain interoperable
 - No single entity can control or censor
 
-## What is the Pubky Protocol?
+## What Pubky?
 
-The Pubky Protocol consists of three main components:
+The Pubky protocol consists of three main components:
 
 ### 1. Protocol Specification
 The open protocol that defines:
@@ -59,7 +59,7 @@ Self-issued public keys that function as sovereign, publicly addressable domains
 Users grant apps scoped access to their data on the [Homeserver](/explore/pubky-protocol/homeserver/). Authentication is decentralized - users control their own cryptographic keys with no central identity providers.
 
 ### [Credible Exit](/explore/concepts/credible-exit/)
-The Pubky Protocol's distributed architecture provides user autonomy through credible exit between interchangeable components. Users can switch Homeservers, applications, or identity managers without losing their identity or data. [Pubky Backup](/explore/technologies/pubky-backup/) helps preserve local copies of published data while automated restore and mirroring mature.
+Pubky's distributed architecture provides user autonomy through credible exit between interchangeable components. Users can switch Homeservers, applications, or identity managers without losing their identity or data. [Pubky Backup](/explore/technologies/pubky-backup/) helps preserve local copies of published data while automated restore and mirroring mature.
 
 ## Key Features
 
@@ -149,7 +149,7 @@ Applications (via SDK)
 
 ## Target Users
 
-**The Pubky Protocol is made for:**
+**Pubky is made for:**
 - Developers and builders of internet software products
 - Startups building decentralized applications
 - Open-source contributors
@@ -178,7 +178,7 @@ Applications (via SDK)
 - **Contributors Guide**: See repository
 - **License**: MIT
 
-## Why the Pubky Protocol?
+## Why Pubky?
 
 ### The Vision
 
@@ -194,37 +194,37 @@ For [Synonym](https://synonym.to/) as lead of this project, the goal is to:
 ### Technical Advantages
 
 **vs. Traditional Web Apps:**
-- User controls data location
-- No vendor lock-in
-- Censorship resistant
-- Privacy by default
+- ✅ User controls data location
+- ✅ No vendor lock-in
+- ✅ Censorship resistant
+- ✅ Privacy by default
 
 **vs. Blockchain:**
-- No transaction fees
-- Instant operations
-- Standard web tech
-- Scalable storage
+- ✅ No transaction fees
+- ✅ Instant operations
+- ✅ Standard web tech
+- ✅ Scalable storage
 
 **vs. P2P Only:**
-- Always available (Homeservers)
-- Fast access
-- Mobile-friendly
-- Familiar HTTP APIs
+- ✅ Always available (Homeservers)
+- ✅ Fast access
+- ✅ Mobile-friendly
+- ✅ Familiar HTTP APIs
 
 ## Current Status
 
 **Production Ready:**
-- Homeserver implementation stable
-- Rust SDK mature
-- JavaScript/WASM bindings stable
-- Authentication system complete
-- Event streaming SDK (SSE-based, single and multi-user)
+- ✅ Homeserver implementation stable
+- ✅ Rust SDK mature
+- ✅ JavaScript/WASM bindings stable
+- ✅ Authentication system complete
+- ✅ Event streaming SDK (SSE-based, single and multi-user)
 
 **Active Development:**
-- Mobile native bindings (iOS/Android)
-- [Paykit](/explore/technologies/paykit/) support
-- Replication and mirroring tools
-- Privacy features (encrypted data)
+- 🚧 Mobile native bindings (iOS/Android)
+- 🚧 [Paykit](/explore/technologies/paykit/) support
+- 🚧 Replication and mirroring tools
+- 🚧 Privacy features (encrypted data)
 
 **Needs Community:**
 - Mirroring and replication tools
@@ -243,4 +243,4 @@ For [Synonym](https://synonym.to/) as lead of this project, the goal is to:
 
 ---
 
-**The Pubky Protocol provides the foundation for building truly decentralized applications. Join us in creating a more open web!**
+**Pubky provides the foundation for building truly decentralized applications. Join us in creating a more open web!**

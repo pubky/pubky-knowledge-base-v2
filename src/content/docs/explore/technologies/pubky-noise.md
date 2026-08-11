@@ -198,7 +198,7 @@ Messages are length-prefixed and encrypted in sequence, maintaining order and pr
 
 Pubky Noise is a **communication layer** for Pubky:
 - Uses Pubky identity system (Ed25519 keys)
-- Publishes endpoints to [Homeservers](/explore/pubky-protocol/homeserver/)
+- Publishes endpoints to Pubky [Homeservers](/explore/pubky-protocol/homeserver/)
 - Integrates with Pubky discovery mechanisms
 - Enables private peer-to-peer protocols on top of public Pubky infrastructure
 

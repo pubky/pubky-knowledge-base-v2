@@ -31,7 +31,7 @@ flowchart LR
 
 | Component | Purpose | Status |
 |-----------|---------|--------|
-| **[Pubky Protocol](/explore/pubky-protocol/introduction/)** | Protocol, Homeserver, SDK | ✅ Production |
+| **[Pubky protocol](/explore/pubky-protocol/introduction/)** | Homeserver, PKARR, SDK | ✅ Production |
 | **[Pubky Ring](/explore/technologies/pubky-ring/)** | Mobile key manager (iOS/Android) | ✅ Production |
 | **[Pubky App](/explore/pubky-apps/introduction/)** | Social media demo ([pubky.app](https://pubky.app)) | ✅ Live (MVP) |
 | **[Pubky Nexus](/explore/pubky-apps/indexing-and-aggregation/pubky-nexus/)** | Social indexing service | ✅ Production |

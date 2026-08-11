@@ -4,7 +4,7 @@ title: "Overview"
 
 ## Welcome to the Pubky Knowledge Base
 
-This is a knowledge base for the Pubky platform, which includes [Pubky Protocol](/explore/pubky-protocol/introduction/), [PKARR](/explore/pubky-protocol/pkarr/introduction/) and [Pubky App](/explore/pubky-apps/introduction/). These documents are a work in progress, much like Pubky's protocols and applications!
+This is the Pubky knowledge base: documentation, explainers and guides on [the Pubky protocol](/explore/pubky-protocol/introduction/), [PKARR](/explore/pubky-protocol/pkarr/introduction/) and [Pubky App](/explore/pubky-apps/introduction/). These documents are a work in progress, much like Pubky's protocols and applications!
 
 ## What is Pubky?
 
@@ -39,13 +39,13 @@ Learn more about the overall vision here: [The Vision of Pubky](/the-vision-of-p
 - [Pubky Ring Overview](/explore/technologies/pubky-ring/) - Your keychain for decentralized identity
 - [Official Repository](https://github.com/pubky/pubky-ring) - React Native mobile app
 
-## For Developers: Pubky Protocol
+## For Developers: The Pubky Protocol
 
-🏗️ **[Pubky Protocol](/explore/pubky-protocol/introduction/)** is the open protocol and infrastructure for building censorship-resistant web applications.
+🏗️ **[Pubky protocol](/explore/pubky-protocol/introduction/)** is the open protocol and infrastructure for building censorship-resistant web applications.
 
 ### Core Documentation
 
-- [Pubky Protocol Overview](/explore/pubky-protocol/introduction/) - Protocol, Homeserver, and SDK
+- [Pubky Protocol Overview](/explore/pubky-protocol/introduction/) - Homeserver, PKARR and SDK
 - [Developer Guide](/explore/pubky-protocol/getting-started/) - First steps for building on Pubky
 - [SDK Documentation](/explore/pubky-protocol/sdk/) - Client libraries (Rust, JavaScript, iOS, Android)
 - [API Reference](/explore/pubky-protocol/api/) - RESTful HTTP API specification
@@ -78,9 +78,9 @@ Learn more about the overall vision here: [The Vision of Pubky](/the-vision-of-p
 - **[Pubky CLI](/explore/technologies/pubky-cli/)** - Command-line tool for Homeserver management and testing
 - **PKDNS Digger** - Web-based DNS record lookup tool for PKARR domains ([github.com/pubky/pkdns-digger](https://github.com/pubky/pkdns-digger))
 
-## Pubky App: Social Application
+## Pubky.app: Social Application
 
-**[Pubky App](/explore/pubky-apps/introduction/)** is a decentralized social media application built on the Pubky Protocol.
+**[Pubky.app](/explore/pubky-apps/introduction/)** is a decentralized social media application built on the Pubky protocol.
 
 ### Current Status
 

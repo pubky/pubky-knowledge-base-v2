@@ -2,11 +2,11 @@
 title: "Security Model"
 ---
 
-This document describes the security model, threat landscape, and trust assumptions in the Pubky Protocol. Understanding these is essential for both operators and application developers building on the platform.
+This document describes the security model, threat landscape, and trust assumptions in Pubky. Understanding these is essential for both operators and application developers building on the platform.
 
 ## Design Philosophy
 
-The Pubky Protocol aims to minimize trust requirements while remaining practical. The key principle is: **users should have a credible exit from misbehaving actors** without losing their identity or data.
+The Pubky protocol aims to minimize trust requirements while remaining practical. The key principle is: **users should have a credible exit from misbehaving actors** without losing their identity or data.
 
 This is achieved through:
 - Cryptographic identity (keypairs) that users fully control

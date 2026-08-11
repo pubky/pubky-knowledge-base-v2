@@ -14,9 +14,9 @@ Enhanced Content Curation: By understanding the semantic meaning and weights of 
 Scalability: Automated tagging and weighting mechanisms scale effortlessly, accommodating growing networks without compromising performance.
 Rich Interactions: Users can engage in more meaningful ways, as the network understands the context and nuances of each relationship.
 
-### Semantic Graphs in Pubky App
+### Semantic Graphs in Pubky.app
 
-The Pubky App is a user-friendly platform that showcases the capabilities of the Pubky Protocol.
+Pubky.app is a user-friendly platform that showcases the capabilities of the Pubky protocol.
 
 **Social Tagging:** Users can tag posts, files, links, and even peers with meaningful labels. This enriches the semantic content of the network.
 Customizable Feeds: By utilizing tags and weighted relationships, users control what appears in their feeds, ensuring content relevance.

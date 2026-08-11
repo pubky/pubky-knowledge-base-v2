@@ -28,7 +28,7 @@ Help improve this knowledge base:
 ### 3. Code Contributions
 
 Contribute to Pubky projects:
-- **[Pubky Homeserver](/explore/pubky-protocol/introduction/)**: Protocol and Homeserver
+- **[Pubky protocol](/explore/pubky-protocol/introduction/)**: Homeserver and PKARR
 - **[Pubky Ring](/explore/technologies/pubky-ring/)**: Mobile key manager
 - **[Pubky App](/explore/pubky-apps/introduction/)**: Social application ([pubky.app](https://pubky.app))
 - **[Pubky Nexus](/explore/pubky-apps/indexing-and-aggregation/pubky-nexus/)**: Indexing service
@@ -99,7 +99,7 @@ const example = "like this";
 **Linking:**
 ```markdown
 <!-- Internal -->
-[Pubky Protocol](/explore/pubky-protocol/introduction/)
+[Pubky protocol](/explore/pubky-protocol/introduction/)
 
 <!-- External -->
 [Official Docs](https://pubky.org/)
@@ -123,7 +123,7 @@ Important warning.
 **Images:**
 ```markdown
 <!-- Always include descriptive alt text -->
-![Pubky Protocol architecture diagram showing homeservers, PKARR, and DHT](/images/pubky-homeserver.svg)
+![Pubky protocol architecture diagram showing homeservers, PKARR, and DHT](/images/pubky-homeserver.svg)
 ```
 
 ---

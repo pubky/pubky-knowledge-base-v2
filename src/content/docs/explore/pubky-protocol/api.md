@@ -2,7 +2,7 @@
 title: "Pubky Homeserver API Reference"
 ---
 
-The [Pubky Protocol](/explore/pubky-protocol/introduction/) defines a RESTful HTTP API for storing and retrieving data on [Homeservers](/explore/pubky-protocol/homeserver/). This document describes the complete API specification.
+The [Pubky protocol](/explore/pubky-protocol/introduction/) defines a RESTful HTTP API for storing and retrieving data on [Homeservers](/explore/pubky-protocol/homeserver/). This document describes the complete API specification.
 
 ## Base URL
 
@@ -530,7 +530,7 @@ PUT /pub/myapp/all_posts  (large JSON array)
 
 ## Resources
 
-- **[Pubky Protocol Overview](/explore/pubky-protocol/introduction/)**: Main documentation
+- **[Pubky protocol overview](/explore/pubky-protocol/introduction/)**: Main documentation
 - **[SDK Documentation](/explore/pubky-protocol/sdk/)**: Client libraries
 - **[Homeserver Documentation](/explore/pubky-protocol/homeserver/)**: Server setup
 - **Official Docs**: [pubky.github.io/pubky-homeserver](https://pubky.github.io/pubky-homeserver/)

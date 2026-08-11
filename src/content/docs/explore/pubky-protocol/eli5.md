@@ -10,7 +10,7 @@ You Move the Castle: You pick up your castle and set it up somewhere else, like 
 You Tell Your Friends: You let your friends know the new spot so they can still come and play.
 So, what is Pubky?
 
-**The Pubky Protocol** is like you being in charge of where your stuff lives on the internet. Even if things change—like someone tries to block your stuff or you decide to move it—you have the power to:
+**The Pubky protocol** is like you being in charge of where your stuff lives on the internet. If someone tries to block your stuff, or if you decide you want to move it, you have every power to do so.
 
 **Choose Where Your Data Lives**: Just like you decide where to place your castle, Pubky lets you decide where your information is stored online.
 
@@ -34,4 +34,4 @@ So, what is Pubky?
 
 **Always Accessible**: By updating where your data is stored, your friends (or anyone) can always find and see it.
 
-So, the Pubky Protocol empowers you to manage where your data is on the internet. It ensures that even if things change—like being censored or needing to move—you can keep your data accessible and tell others where to find it. It's all about you being in control, just like deciding where to set up your favorite toy so your friends can always come and play!
+So, Pubky empowers you to manage where your data is on the internet. It ensures that even if things change—like being censored or needing to move—you can keep your data accessible and tell others where to find it. It's all about you being in control, just like deciding where to set up your favorite toy so your friends can always come and play!

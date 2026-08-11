@@ -35,12 +35,12 @@ Yes. Under the MIT license. [View on GitHub](https://github.com/pubky/)
 <a id="q5"></a>
 ### Q5. What is the Pubky Protocol?
 
-The [Pubky Protocol](/explore/pubky-protocol/introduction/) is the foundational infrastructure for Pubky - an open protocol combining censorship-resistant public-key DNS (PKARR) with conventional web technologies. It includes the protocol specification, a production-ready Homeserver implementation, and SDKs in multiple languages (Rust, JavaScript, iOS, Android).
+The [Pubky protocol](/explore/pubky-protocol/introduction/) is an open protocol combining censorship-resistant public-key DNS with conventional web technologies. It is made up of [PKARR](/explore/pubky-protocol/pkarr/introduction/), Homeserver, and SDKs in multiple languages.
 
 <a id="q6"></a>
 ### Q6. How do I start building on Pubky?
 
-Install the [Pubky SDK](/explore/pubky-protocol/sdk/) for your platform (Rust: `cargo add pubky`, JavaScript: `npm install @synonymdev/pubky`), follow the [official documentation](https://pubky.github.io/pubky-homeserver/), and explore the [examples in the repository](https://github.com/pubky/pubky-homeserver/tree/main/examples). The SDK provides client libraries for authentication, data storage, and Homeserver interaction.
+See the [developer guide](/explore/pubky-protocol/getting-started/) for an app-building walkthrough. Or, install the [Pubky SDK](/explore/pubky-protocol/sdk/) and explore the [documentation](/explore/pubky-protocol/sdk/).
 
 ---
 
