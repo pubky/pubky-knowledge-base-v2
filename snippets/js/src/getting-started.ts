@@ -29,7 +29,7 @@ await signer.signup(homeserver, null);
 // --8<-- [end:js_getting_started_signup]
 
 // --8<-- [start:js_getting_started_signin]
-const session = await signer.signin();
+const session = await signer.signin("myapp.example");
 // --8<-- [end:js_getting_started_signin]
 
 // --8<-- [start:js_getting_started_write]
@@ -45,3 +45,13 @@ document.querySelector<HTMLDivElement>("#app")!.textContent = JSON.stringify(
   2,
 );
 // --8<-- [end:js_getting_started_read]
+
+// --8<-- [start:js_custom_auth_relay]
+import { AuthFlowKind } from "@synonymdev/pubky";
+
+const relay = "https://httprelay.example.com/inbox/";
+const flow = pubky.startGrantAuthFlow("/pub/myapp/:rw", AuthFlowKind.signin(), {
+  clientId: "myapp.example",
+  relay,
+});
+// --8<-- [end:js_custom_auth_relay]
