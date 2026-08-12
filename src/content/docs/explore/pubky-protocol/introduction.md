@@ -194,37 +194,37 @@ For [Synonym](https://synonym.to/) as lead of this project, the goal is to:
 ### Technical Advantages
 
 **vs. Traditional Web Apps:**
-- ✅ User controls data location
-- ✅ No vendor lock-in
-- ✅ Censorship resistant
-- ✅ Privacy by default
+- User controls data location
+- No vendor lock-in
+- Censorship resistant
+- Privacy by default
 
 **vs. Blockchain:**
-- ✅ No transaction fees
-- ✅ Instant operations
-- ✅ Standard web tech
-- ✅ Scalable storage
+- No transaction fees
+- Instant operations
+- Standard web tech
+- Scalable storage
 
 **vs. P2P Only:**
-- ✅ Always available (Homeservers)
-- ✅ Fast access
-- ✅ Mobile-friendly
-- ✅ Familiar HTTP APIs
+- Always available (Homeservers)
+- Fast access
+- Mobile-friendly
+- Familiar HTTP APIs
 
 ## Current Status
 
 **Production Ready:**
-- ✅ Homeserver implementation stable
-- ✅ Rust SDK mature
-- ✅ JavaScript/WASM bindings stable
-- ✅ Authentication system complete
-- ✅ Event streaming SDK (SSE-based, single and multi-user)
+- Homeserver implementation stable
+- Rust SDK mature
+- JavaScript/WASM bindings stable
+- Authentication system complete
+- Event streaming SDK (SSE-based, single and multi-user)
 
 **Active Development:**
-- 🚧 Mobile native bindings (iOS/Android)
-- 🚧 [Paykit](/explore/technologies/paykit/) support
-- 🚧 Replication and mirroring tools
-- 🚧 Privacy features (encrypted data)
+- Mobile native bindings (iOS/Android)
+- [Paykit](/explore/technologies/paykit/) support
+- Replication and mirroring tools
+- Privacy features (encrypted data)
 
 **Needs Community:**
 - Mirroring and replication tools

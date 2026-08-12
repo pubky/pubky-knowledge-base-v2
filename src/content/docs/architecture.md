@@ -403,8 +403,8 @@ Users → Enterprise Homeserver + Custom Aggregator + Private Nexus → Internal
 
 ## See Also
 
-- **[Getting started with Pubky](/getting-started/)**
-- **[Pubky protocol Overview](/explore/pubky-protocol/introduction/)**
-- **[SDK documentation for building applications](/explore/pubky-protocol/sdk/)**
-- **[How Pubky differs from alternatives](/comparisons/)**
-- **[FAQ](/faq/)**
+- [Getting started with Pubky](/getting-started/)
+- [Pubky protocol Overview](/explore/pubky-protocol/introduction/)
+- [SDK documentation for building applications](/explore/pubky-protocol/sdk/)
+- [How Pubky differs from alternatives](/comparisons/)
+- [FAQ](/faq/)
