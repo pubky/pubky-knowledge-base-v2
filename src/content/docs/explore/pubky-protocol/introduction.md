@@ -8,7 +8,7 @@ title: "Pubky: Open Protocol for Decentralized Web Applications"
 
 ## Overview
 
-The Pubky protocol combines a [censorship-resistant public-key-based alternative to DNS](https://github.com/pubky/pkarr) ([PKARR](/explore/pubky-protocol/pkarr/introduction/)) with conventional, tried-and-tested web technologies. This keeps users in control of their identities and data while enabling developers to build software with the availability of web apps, without the costs of managing a central database.
+Pubky combines a [censorship-resistant public-key-based alternative to DNS](https://github.com/pubky/pkarr) ([PKARR](/explore/pubky-protocol/pkarr/introduction/)) with conventional, tried-and-tested web technologies. This keeps users in control of their identities and data while enabling developers to build software with the availability of web apps, without the costs of managing a central database.
 
 **The Core Philosophy:**
 > "The Web, long centralized, must decentralize; Long decentralized, must centralize."
@@ -18,34 +18,6 @@ The Pubky protocol provides the infrastructure for building truly decentralized 
 - Users choose where their data lives ([Homeserver](/explore/pubky-protocol/homeserver/))
 - Applications remain interoperable
 - No single entity can control or censor
-
-## What Pubky?
-
-The Pubky protocol consists of three main components:
-
-### 1. Protocol Specification
-The open protocol that defines:
-- Public key-based authentication
-- Capability-based authorization
-- Key-value storage semantics
-- Homeserver discovery via [PKARR](/explore/pubky-protocol/pkarr/introduction/)
-- RESTful API standards
-
-### 2. [Pubky Homeserver](/explore/pubky-protocol/homeserver/)
-A production-ready server application that:
-- Hosts user data in a filesystem
-- Provides RESTful HTTP API
-- Handles authentication and sessions
-- Publishes to [PKARR](/explore/pubky-protocol/pkarr/introduction/) for discovery
-- Stores user files separately from PostgreSQL-backed homeserver metadata
-- Includes admin and metrics endpoints
-
-### 3. SDK (Software Development Kit)
-Client libraries for developers:
-- **Rust**: Full-featured native SDK
-- **JavaScript/WASM**: Browser and Node.js support
-- **iOS/Android**: Native mobile bindings
-- Examples and documentation
 
 ## Core Concepts
 
