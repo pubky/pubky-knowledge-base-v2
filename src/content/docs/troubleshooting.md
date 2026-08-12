@@ -355,13 +355,3 @@ pubky-cli user get /pub/test ./recovery.file
 # Admin diagnostics
 PUBKY_ADMIN_PASSWORD=admin pubky-cli admin info
 ```
-
----
-
-## See Also
-
-- **[Getting Started](/getting-started/)**: Setup guides
-- **[FAQ](/faq/)**: Frequently asked questions
-- **[SDK Documentation](/explore/pubky-protocol/sdk/)**: Detailed API docs
-- **[PKDNS](/explore/technologies/pkdns/)**: DNS resolution details
-- **[Homeserver](/explore/pubky-protocol/homeserver/)**: Homeserver administration

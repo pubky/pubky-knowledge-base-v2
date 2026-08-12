@@ -343,11 +343,3 @@ Potential improvements for Pubky Explorer:
 - **SolidJS Documentation**: [https://solidjs.com](https://solidjs.com)
 - **Vite Documentation**: [https://vitejs.dev](https://vitejs.dev)
 
-## See Also
-
-- [Homeserver](/explore/pubky-protocol/homeserver/) - Data storage explained
-- [Pubky SDK](/explore/pubky-protocol/sdk/) - How data access works
-- [Pubky Homeserver API](/explore/pubky-protocol/api/) - Homeserver HTTP API
-- [PKARR](/explore/pubky-protocol/pkarr/introduction/) - Public key resolution
-- [FAQ#Q17](/faq/#q17) - FAQ entry about exploring data
-

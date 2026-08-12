@@ -205,14 +205,4 @@ For [Synonym](https://synonym.to/) as lead of this project, the goal is to:
 - Integration libraries
 - Documentation improvements
 
-## Related Technologies
-
-- **[Pubky Ring](/explore/technologies/pubky-ring/)**: Identity manager app
-- **[Pubky Backup](/explore/technologies/pubky-backup/)**: Desktop backup for published Homeserver data
-- **[Paykit](/explore/technologies/paykit/)**: Payment protocol (WIP)
-- **[Pubky Noise](/explore/technologies/pubky-noise/)**: Encrypted communication (WIP)
-- **[Pubky App](/explore/pubky-apps/introduction/)**: Social media application
-
----
-
 **Pubky provides the foundation for building truly decentralized applications. Join us in creating a more open web!**

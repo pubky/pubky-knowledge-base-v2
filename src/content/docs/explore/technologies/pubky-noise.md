@@ -240,8 +240,3 @@ Pubky Noise is a **communication layer** for Pubky:
 - **Repository**: [github.com/pubky/pubky-noise](https://github.com/pubky/pubky-noise) (WIP)
 - **Noise Protocol Framework**: [https://noiseprotocol.org/](https://noiseprotocol.org/)
 
-## Related Documentation
-
-- [Paykit](/explore/technologies/paykit/) - Uses Pubky Noise for payment negotiation channels
-- [Pubky Ring](/explore/technologies/pubky-ring/) - Manages Noise endpoints and sessions
-

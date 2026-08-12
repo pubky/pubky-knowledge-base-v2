@@ -463,11 +463,3 @@ pkdns -f 1.1.1.1:53  # Cloudflare DNS
 - **[pkdns-vanity](https://github.com/jphastings/pkdns-vanity)**: Generate vanity public-key domains
 - **[awesome-pubky](https://github.com/aljazceru/awesome-pubky)**: Curated list of Pubky resources
 
-## See Also
-
-- [PKARR](/explore/pubky-protocol/pkarr/introduction/) - Public Key Addressable Resource Records
-- [Mainline DHT](/explore/technologies/mainline-dht/) - Distributed hash table powering PKDNS
-- [DNS](/explore/technologies/dns/) - Traditional Domain Name System
-- [DoH](/explore/technologies/doh/) - DNS over HTTPS protocol
-- [Pubky protocol](/explore/pubky-protocol/introduction/) - Core protocol and infrastructure
-
