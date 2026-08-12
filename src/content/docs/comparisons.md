@@ -322,5 +322,5 @@ Ethereum Address → On-chain Registry → Hubs (P2P) → Apps
 - **[Getting Started](/getting-started/)**: Get started with Pubky
 - **[FAQ](/faq/)**: Frequently asked questions
 - **[Vision](/the-vision-of-pubky/)**: Why we're building Pubky
-- **[Pubky Core](/explore/pubkycore/introduction/)**: Technical overview
+- **[Pubky protocol](/explore/pubky-protocol/introduction/)**: Technical overview
 

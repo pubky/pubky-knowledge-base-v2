@@ -4,17 +4,15 @@ title: "pubky.app"
 
 Web portal for the Pubky ecosystem — a publisher and social feed for the decentralized web.
 
-> **Note:** This component is NOT part of Pubky Core. It is part of the Pubky social app stack (along with [Pubky Nexus](/explore/pubky-apps/indexing-and-aggregation/pubky-nexus/)).
-
 ## Overview
 
-pubky.app is a social media-like web application built on top of [Pubky Core](/explore/pubkycore/introduction/). It serves as the flagship example of how to build applications using the Pubky [SDK](/explore/pubkycore/sdk/) for authentication and data storage, combined with [Nexus](/explore/pubky-apps/indexing-and-aggregation/pubky-nexus/) for data [aggregation](/explore/pubky-apps/indexing-and-aggregation/aggregator/) and [indexing](/explore/pubky-apps/indexing-and-aggregation/indexer/), turning distributed data into fast-loading feeds and a navigable social graph.
+pubky.app is a social media-like web application built on top of the [Pubky protocol](/explore/pubky-protocol/introduction/). It serves as the flagship example of how to build applications using the Pubky [SDK](/explore/pubky-protocol/sdk/) for authentication and data storage, combined with [Nexus](/explore/pubky-apps/indexing-and-aggregation/pubky-nexus/) for data [aggregation](/explore/pubky-apps/indexing-and-aggregation/aggregator/) and [indexing](/explore/pubky-apps/indexing-and-aggregation/indexer/), turning distributed data into fast-loading feeds and a navigable social graph.
 
 - **GitHub**: https://github.com/pubky/pubky-app
 - **Platform**: Web (Next.js progressive web app)
 - **Status**: Active development
 
-The application follows a local-first architecture where writes commit to local IndexedDB immediately for instant UI feedback, then sync to the [homeserver](/explore/pubkycore/homeserver/) in the background.
+The application follows a local-first architecture where writes commit to local IndexedDB immediately for instant UI feedback, then sync to the [homeserver](/explore/pubky-protocol/homeserver/) in the background.
 
 ## Tech Stack
 
@@ -23,7 +21,7 @@ The application follows a local-first architecture where writes commit to local 
 - **Zustand** — Global state management
 - **Dexie** — IndexedDB wrapper for local-first persistence
 - **TanStack Query** — Data fetching with caching
-- **@synonymdev/pubky** — WASM [SDK](/explore/pubkycore/sdk/) for homeserver communication
+- **@synonymdev/pubky** — WASM [SDK](/explore/pubky-protocol/sdk/) for homeserver communication
 - **[pubky-app-specs](/explore/pubky-apps/app-specs/)** — Shared data specifications
 
 ## Key Features
@@ -47,8 +45,8 @@ The codebase is organized in layers with strict separation of concerns:
 | **Stores** | UI state via Zustand |
 
 ### Data Flow
-1. **Writes** go to [homeserver](/explore/pubkycore/homeserver/) via [SDK](/explore/pubkycore/sdk/)
-2. [Nexus](/explore/pubky-apps/indexing-and-aggregation/pubky-nexus/) polls [homeserver](/explore/pubkycore/homeserver/) for changes via the `/events/` endpoint
+1. **Writes** go to [homeserver](/explore/pubky-protocol/homeserver/) via [SDK](/explore/pubky-protocol/sdk/)
+2. [Nexus](/explore/pubky-apps/indexing-and-aggregation/pubky-nexus/) polls [homeserver](/explore/pubky-protocol/homeserver/) for changes via the `/events/` endpoint
 3. Nexus indexes and aggregates data
 4. **Reads** come from Nexus for performance
 5. Local Dexie cache provides offline access

@@ -24,7 +24,7 @@ Using the library analogy, the Pubky Client is like a personalized research assi
 
 - Users are able to take control of the data and exit the Synonym hosted services and run their own without hampering discoverability ([credible exit](/explore/concepts/credible-exit/)).
 
-- Pubky client uses the open [Pubky Core](/explore/pubkycore/introduction/) for nearly all features, allowing users to avoid censorship by choosing self-hosting or alternate hosts without losing followers or integrity. 
+- Pubky client uses the open [Pubky protocol](/explore/pubky-protocol/introduction/) for nearly all features, allowing users to avoid censorship by choosing self-hosting or alternate hosts without losing followers or integrity. 
 
 Future pubky.app versions may leverage [Paykit](/explore/technologies/paykit/) once infrastructure reaches production readiness to support creator monetization.
 

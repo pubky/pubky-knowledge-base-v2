@@ -2,7 +2,7 @@
 title: "Why PKARR?"
 ---
 
-This note explores the motivation behind [PKARR](/explore/pubkycore/pkarr/introduction/), addressing the challenges of distributed semantics, databases, and discovery.
+This note explores the motivation behind [PKARR](/explore/pubky-protocol/pkarr/introduction/), addressing the challenges of distributed semantics, databases, and discovery.
 
 In pursuit of a sovereign, distributed, and open web, we identify three challenges:
 

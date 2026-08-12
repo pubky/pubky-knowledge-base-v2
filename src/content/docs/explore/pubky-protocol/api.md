@@ -1,8 +1,8 @@
 ---
-title: "Pubky Core API Reference"
+title: "Pubky Homeserver API Reference"
 ---
 
-The [Pubky Core](/explore/pubkycore/introduction/) protocol defines a RESTful HTTP API for storing and retrieving data on [Homeservers](/explore/pubkycore/homeserver/). This document describes the complete API specification.
+The [Pubky protocol](/explore/pubky-protocol/introduction/) defines a RESTful HTTP API for storing and retrieving data on [Homeservers](/explore/pubky-protocol/homeserver/). This document describes the complete API specification.
 
 ## Base URL
 
@@ -12,13 +12,13 @@ All API endpoints are relative to the Homeserver base URL:
 https://homeserver.example.com
 ```
 
-Homeserver URLs are discovered via [PKARR](/explore/pubkycore/pkarr/introduction/) records published to the [Mainline DHT](/explore/technologies/mainline-dht/).
+Homeserver URLs are discovered via [PKARR](/explore/pubky-protocol/pkarr/introduction/) records published to the [Mainline DHT](/explore/technologies/mainline-dht/).
 
-When you build with the [SDK](/explore/pubkycore/sdk/), it handles PKARR lookup, transport selection, session cookies, and the `pubky-host` header for HTTPS Homeserver requests. Use the raw HTTP API directly only when you are writing low-level integrations or server components that intentionally bypass the SDK helpers.
+When you build with the [SDK](/explore/pubky-protocol/sdk/), it handles PKARR lookup, transport selection, session cookies, and the `pubky-host` header for HTTPS Homeserver requests. Use the raw HTTP API directly only when you are writing low-level integrations or server components that intentionally bypass the SDK helpers.
 
 ## Authentication
 
-See [Authentication](/explore/pubkycore/authentication/) for conceptual overview.
+See [Authentication](/explore/pubky-protocol/authentication/) for conceptual overview.
 
 ### Public Key Authentication
 
@@ -326,7 +326,7 @@ Check whether a signup token is valid, used, or unknown.
 
 ## Admin API
 
-Each Homeserver runs a separate admin HTTP server on its own socket (default `127.0.0.1:6288`), isolated from the public Pubky API. It is the only surface for operator tasks — minting signup tokens, suspending abusive users, adjusting per-user quotas, deleting entries, and inspecting health. The admin listener is plain HTTP, so keep it on `localhost` or a trusted network and front it with a reverse proxy if it ever needs to leave the host. See [Homeserver](/explore/pubkycore/homeserver/) for the operator-facing overview.
+Each Homeserver runs a separate admin HTTP server on its own socket (default `127.0.0.1:6288`), isolated from the public Pubky API. It is the only surface for operator tasks — minting signup tokens, suspending abusive users, adjusting per-user quotas, deleting entries, and inspecting health. The admin listener is plain HTTP, so keep it on `localhost` or a trusted network and front it with a reverse proxy if it ever needs to leave the host. See [Homeserver](/explore/pubky-protocol/homeserver/) for the operator-facing overview.
 
 ### Authentication
 
@@ -530,12 +530,12 @@ PUT /pub/myapp/all_posts  (large JSON array)
 
 ## Resources
 
-- **[Pubky Core Overview](/explore/pubkycore/introduction/)**: Main documentation
-- **[SDK Documentation](/explore/pubkycore/sdk/)**: Client libraries
-- **[Homeserver Documentation](/explore/pubkycore/homeserver/)**: Server setup
-- **Official Docs**: [pubky.github.io/pubky-core](https://pubky.github.io/pubky-core/)
-- **Repository**: [github.com/pubky/pubky-core](https://github.com/pubky/pubky-core)
+- **[Pubky protocol overview](/explore/pubky-protocol/introduction/)**: Main documentation
+- **[SDK Documentation](/explore/pubky-protocol/sdk/)**: Client libraries
+- **[Homeserver Documentation](/explore/pubky-protocol/homeserver/)**: Server setup
+- **Official Docs**: [pubky.github.io/pubky-homeserver](https://pubky.github.io/pubky-homeserver/)
+- **Repository**: [github.com/pubky/pubky-homeserver](https://github.com/pubky/pubky-homeserver)
 
 ---
 
-**The Pubky Core API provides a simple, RESTful interface for decentralized data storage.**
+**The Pubky Homeserver API provides a simple, RESTful interface for decentralized data storage.**

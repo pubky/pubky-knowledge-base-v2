@@ -1,5 +1,5 @@
 ---
-title: "Pubky Core - Frequently Asked Questions"
+title: "Pubky - Frequently Asked Questions"
 ---
 
 <div class="faq">
@@ -33,14 +33,14 @@ Slashtags was a previous Synonym project using Hypercore instead of PKDNS and Ho
 Yes. Under the MIT license. [View on GitHub](https://github.com/pubky/)
 
 <a id="q5"></a>
-### Q5. What is Pubky Core?
+### Q5. What is the Pubky Protocol?
 
-[Pubky Core](/explore/pubkycore/introduction/) is the foundational infrastructure for Pubky - an open protocol combining censorship-resistant public-key DNS (PKARR) with conventional web technologies. It includes the protocol specification, a production-ready Homeserver implementation, and SDKs in multiple languages (Rust, JavaScript, iOS, Android). See the [Pubky Core Overview](/explore/pubkycore/introduction/) for details.
+The [Pubky protocol](/explore/pubky-protocol/introduction/) is an open protocol combining censorship-resistant public-key DNS with conventional web technologies. It is made up of [PKARR](/explore/pubky-protocol/pkarr/introduction/), Homeserver, and SDKs in multiple languages.
 
 <a id="q6"></a>
 ### Q6. How do I start building on Pubky?
 
-Install the [Pubky SDK](/explore/pubkycore/sdk/) for your platform (Rust: `cargo add pubky`, JavaScript: `npm install @synonymdev/pubky`), follow the [official documentation](https://pubky.github.io/pubky-core/), and explore the [examples in the repository](https://github.com/pubky/pubky-core/tree/main/examples). The SDK provides client libraries for authentication, data storage, and Homeserver interaction.
+See the [developer guide](/explore/pubky-protocol/getting-started/) for an app-building walkthrough. Or, install the [Pubky SDK](/explore/pubky-protocol/sdk/) and explore the [documentation](/explore/pubky-protocol/sdk/).
 
 ---
 
@@ -54,7 +54,7 @@ Install the [Pubky SDK](/explore/pubkycore/sdk/) for your platform (Rust: `cargo
 <a id="q8"></a>
 ### Q8. What is PKDNS?
 
-[PKDNS](/explore/technologies/pkdns/) is a DNS server that resolves public-key domains by fetching [PKARR](/explore/pubkycore/pkarr/introduction/) records from the [Mainline DHT](/explore/technologies/mainline-dht/). It enables self-sovereign, censorship-resistant domain names while still supporting traditional ICANN domains. Anyone can run a PKDNS server or use public instances to access the decentralized web. See [PKDNS](/explore/technologies/pkdns/) for setup guides and publishing instructions.
+[PKDNS](/explore/technologies/pkdns/) is a DNS server that resolves public-key domains by fetching [PKARR](/explore/pubky-protocol/pkarr/introduction/) records from the [Mainline DHT](/explore/technologies/mainline-dht/). It enables self-sovereign, censorship-resistant domain names while still supporting traditional ICANN domains. Anyone can run a PKDNS server or use public instances to access the decentralized web. See [PKDNS](/explore/technologies/pkdns/) for setup guides and publishing instructions.
 
 <a id="q9"></a>
 ### Q9. How does Pubky compare to DNS?
@@ -113,7 +113,7 @@ Use [Pubky Docker](/explore/technologies/pubky-docker/), a Docker Compose orches
 <a id="q19"></a>
 ### Q19. How do Pubky Docker and the SDK libraries work together?
 
-Applications use the [Pubky SDK](/explore/pubkycore/sdk/) to interact with Pubky services. [Pubky Docker](/explore/technologies/pubky-docker/) can provide those services locally for development and testing.
+Applications use the [Pubky SDK](/explore/pubky-protocol/sdk/) to interact with Pubky services. [Pubky Docker](/explore/technologies/pubky-docker/) can provide those services locally for development and testing.
 
 <a id="q20"></a>
 ### Q20. How is redundancy handled?

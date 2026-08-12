@@ -2,7 +2,7 @@
 title: "Homegate: Homeserver Signup Gatekeeping Service"
 ---
 
-**Homegate** is a backend service that manages and controls signups for [Pubky Homeservers](/explore/pubkycore/homeserver/). It provides verification mechanisms to prevent spam and abuse while preserving user privacy, implementing both SMS verification and Lightning Network payment verification for Homeserver access.
+**Homegate** is a backend service that manages and controls signups for [Pubky Homeservers](/explore/pubky-protocol/homeserver/). It provides verification mechanisms to prevent spam and abuse while preserving user privacy, implementing both SMS verification and Lightning Network payment verification for Homeserver access.
 
 ## Overview
 
@@ -374,7 +374,7 @@ If lost:
 
 ## Integration with Homeservers
 
-Homegate is designed to integrate with [Pubky Homeserver](/explore/pubkycore/homeserver/) signup flows:
+Homegate is designed to integrate with [Pubky Homeserver](/explore/pubky-protocol/homeserver/) signup flows:
 
 ### Typical Integration
 
@@ -382,7 +382,7 @@ Homegate is designed to integrate with [Pubky Homeserver](/explore/pubkycore/hom
 2. **Homeserver redirects** to Homegate verification flow
 3. **User completes verification** (SMS or Lightning)
 4. **Homegate returns success** to Homeserver
-5. **Homeserver creates account** using [Pubky Core SDK](/explore/pubkycore/sdk/)
+5. **Homeserver creates account** using [Pubky SDK](/explore/pubky-protocol/sdk/)
 
 ### Verification Token Flow
 
@@ -607,8 +607,8 @@ Potential improvements for Homegate:
 
 ## See Also
 
-- [Homeserver](/explore/pubkycore/homeserver/) - Pubky Homeserver documentation
-- [Pubky Core](/explore/pubkycore/introduction/) - Core protocol and SDK
+- [Homeserver](/explore/pubky-protocol/homeserver/) - Pubky Homeserver documentation
+- [Pubky protocol](/explore/pubky-protocol/introduction/) - Core protocol and SDK
 - [FAQ#Q50](/faq/#q50) - How users join Pubky App
 - [Censorship](/explore/concepts/censorship/) - Censorship resistance principles
 

@@ -4,13 +4,13 @@ title: "Overview"
 
 ## Welcome to the Pubky Knowledge Base
 
-This is a knowledge base for the Pubky platform, which includes [Pubky Core](/explore/pubkycore/introduction/), [PKARR](/explore/pubkycore/pkarr/introduction/) and [Pubky App](/explore/pubky-apps/introduction/). These documents are a work in progress, much like Pubky's protocols and applications!
+This is the Pubky knowledge base: documentation, explainers and guides on [the Pubky protocol](/explore/pubky-protocol/introduction/), [PKARR](/explore/pubky-protocol/pkarr/introduction/) and [Pubky App](/explore/pubky-apps/introduction/). These documents are a work in progress, much like Pubky's protocols and applications!
 
 ## What is Pubky?
 
 Pubky attempts to unlock the web by realizing our vision for a key-based, self-regulating web that puts users in control.
 
-So far, Pubky does this by combining practical decentralized routing & identity ([PKARR](/explore/pubkycore/pkarr/introduction/)), with simple interoperable hosting ([Homeservers](/explore/pubkycore/homeserver/)) that allow for [censorship](/explore/concepts/censorship/) resistance and a [credible exit](/explore/concepts/credible-exit/), as well as a publishing application, Pubky App, that facilitates the creation of a [Semantic Social Graph](/explore/concepts/semantic-social-graph/), which can be used for filtering, discovery, matching and coordination.
+So far, Pubky does this by combining practical decentralized routing & identity ([PKARR](/explore/pubky-protocol/pkarr/introduction/)), with simple interoperable hosting ([Homeservers](/explore/pubky-protocol/homeserver/)) that allow for [censorship](/explore/concepts/censorship/) resistance and a [credible exit](/explore/concepts/credible-exit/), as well as a publishing application, Pubky App, that facilitates the creation of a [Semantic Social Graph](/explore/concepts/semantic-social-graph/), which can be used for filtering, discovery, matching and coordination.
 
 Learn more about the overall vision here: [The Vision of Pubky](/the-vision-of-pubky/)
 
@@ -18,7 +18,7 @@ Learn more about the overall vision here: [The Vision of Pubky](/the-vision-of-p
 
 - **[TLDR](/tldr/)**: 30-second overview of the entire ecosystem
 - **[Getting Started](/getting-started/)**: User guide to Pubky identity, pubky.app, and your data
-- **[Developer Guide](/explore/pubkycore/getting-started/)**: First steps for building on Pubky
+- **[Developer Guide](/explore/pubky-protocol/getting-started/)**: First steps for building on Pubky
 - **[Glossary](/glossary/)**: Quick reference for key terms
 - **[Comparisons](/comparisons/)**: How Pubky compares to other protocols
 - **[Frequently Asked Questions (FAQ)](/faq/)**: 63+ questions answered
@@ -39,19 +39,19 @@ Learn more about the overall vision here: [The Vision of Pubky](/the-vision-of-p
 - [Pubky Ring Overview](/explore/technologies/pubky-ring/) - Your keychain for decentralized identity
 - [Official Repository](https://github.com/pubky/pubky-ring) - React Native mobile app
 
-## For Developers: Pubky Core
+## For Developers: The Pubky Protocol
 
-🏗️ **[Pubky Core](/explore/pubkycore/introduction/)** is the open protocol and infrastructure for building censorship-resistant web applications.
+🏗️ **[Pubky protocol](/explore/pubky-protocol/introduction/)** is the open protocol and infrastructure for building censorship-resistant web applications.
 
 ### Core Documentation
 
-- [Pubky Core Overview](/explore/pubkycore/introduction/) - Protocol, Homeserver, and SDK
-- [Developer Guide](/explore/pubkycore/getting-started/) - First steps for building on Pubky
-- [SDK Documentation](/explore/pubkycore/sdk/) - Client libraries (Rust, JavaScript, iOS, Android)
-- [API Reference](/explore/pubkycore/api/) - RESTful HTTP API specification
+- [Pubky Protocol Overview](/explore/pubky-protocol/introduction/) - Homeserver, PKARR and SDK
+- [Developer Guide](/explore/pubky-protocol/getting-started/) - First steps for building on Pubky
+- [SDK Documentation](/explore/pubky-protocol/sdk/) - Client libraries (Rust, JavaScript, iOS, Android)
+- [API Reference](/explore/pubky-protocol/api/) - RESTful HTTP API specification
 - [Architecture Overview](/architecture/) - System design and data flow
-- [Homeserver Documentation](/explore/pubkycore/homeserver/) - Deploy and configure Homeservers
-- [Security Model](/explore/pubkycore/security-model/) - Threat landscape, trust assumptions, and credible exit
+- [Homeserver Documentation](/explore/pubky-protocol/homeserver/) - Deploy and configure Homeservers
+- [Security Model](/explore/pubky-protocol/security-model/) - Threat landscape, trust assumptions, and credible exit
 
 ### Infrastructure
 
@@ -64,8 +64,7 @@ Learn more about the overall vision here: [The Vision of Pubky](/the-vision-of-p
 
 ### Resources
 
-- [Official Repository](https://github.com/pubky/pubky-core) - MIT licensed
-- [Official Docs](https://pubky.github.io/pubky-core/) - Complete documentation
+- [Official Pubky Homeserver Repository](https://github.com/pubky/pubky-homeserver) - MIT licensed
 - [Rust API Docs](https://docs.rs/pubky) - Rust crate documentation
 - [NPM Package](https://www.npmjs.com/package/@synonymdev/pubky) - JavaScript/TypeScript bindings
 
@@ -79,9 +78,9 @@ Learn more about the overall vision here: [The Vision of Pubky](/the-vision-of-p
 - **[Pubky CLI](/explore/technologies/pubky-cli/)** - Command-line tool for Homeserver management and testing
 - **PKDNS Digger** - Web-based DNS record lookup tool for PKARR domains ([github.com/pubky/pkdns-digger](https://github.com/pubky/pkdns-digger))
 
-## Pubky App: Social Application
+## Pubky.app: Social Application
 
-**[Pubky App](/explore/pubky-apps/introduction/)** is a decentralized social media application built on Pubky Core.
+**[Pubky.app](/explore/pubky-apps/introduction/)** is a decentralized social media application built on the Pubky protocol.
 
 ### Current Status
 
@@ -105,7 +104,7 @@ Understand the fundamental ideas behind Pubky:
 - **[Semantic Social Graph](/explore/concepts/semantic-social-graph/)** - Tagged relationships and user-controlled filtering
 - **[Censorship Resistance](/explore/concepts/censorship/)** - Why centralized platforms fail
 - **[Credible Exit](/explore/concepts/credible-exit/)** - Freedom to switch providers without losing data
-- **[PKARR](/explore/pubkycore/pkarr/introduction/)** - Public key addressable resource records
+- **[PKARR](/explore/pubky-protocol/pkarr/introduction/)** - Public key addressable resource records
 - **[Mainline DHT](/explore/technologies/mainline-dht/)** - Distributed hash table for discovery
 
 ## Work in Progress: Payment Protocol
@@ -126,7 +125,7 @@ Understand the fundamental ideas behind Pubky:
 ## Community & Support
 
 - **[Getting Started](/getting-started/)** - User onboarding guide
-- **[Developer Guide](/explore/pubkycore/getting-started/)** - Developer onboarding guide
+- **[Developer Guide](/explore/pubky-protocol/getting-started/)** - Developer onboarding guide
 - **[FAQ](/faq/)** - Frequently asked questions
 - **[Troubleshooting](/troubleshooting/)** - Common issues and solutions
 - **[Contributing](/contributing/)** - How to contribute to Pubky
@@ -135,4 +134,4 @@ Understand the fundamental ideas behind Pubky:
 
 ---
 
-**Ready to get started? Use the [user guide](/getting-started/) or the [developer guide](/explore/pubkycore/getting-started/).**
+**Ready to get started? Use the [user guide](/getting-started/) or the [developer guide](/explore/pubky-protocol/getting-started/).**

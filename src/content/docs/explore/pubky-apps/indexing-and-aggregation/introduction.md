@@ -2,7 +2,7 @@
 title: "introduction"
 ---
 
-The Backend is responsible for collecting ([aggregators](/explore/pubky-apps/indexing-and-aggregation/aggregator/)) and organizing ([indexer](/explore/pubky-apps/indexing-and-aggregation/indexer/)) data from various sources, known as [Homeservers](/explore/pubkycore/homeserver/).
+The Backend is responsible for collecting ([aggregators](/explore/pubky-apps/indexing-and-aggregation/aggregator/)) and organizing ([indexer](/explore/pubky-apps/indexing-and-aggregation/indexer/)) data from various sources, known as [Homeservers](/explore/pubky-protocol/homeserver/).
 
 ![Pubky App backend architecture showing aggregators collecting data from Homeservers, indexers normalizing data, and web servers providing API access](/images/pubky-backend.png)
 

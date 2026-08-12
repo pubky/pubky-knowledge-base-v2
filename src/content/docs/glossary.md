@@ -9,10 +9,10 @@ Quick reference for terms used throughout the Pubky ecosystem.
 ## A
 
 **Aggregator**
-A service that collects and organizes data from multiple [Homeservers](/explore/pubkycore/homeserver/) to enable search, feeds, and discovery features. See [Aggregator](/explore/pubky-apps/indexing-and-aggregation/aggregator/).
+A service that collects and organizes data from multiple [Homeservers](/explore/pubky-protocol/homeserver/) to enable search, feeds, and discovery features. See [Aggregator](/explore/pubky-apps/indexing-and-aggregation/aggregator/).
 
 **Authentication**
-The process of proving ownership of a public key through cryptographic signatures, enabling secure access to Homeservers without passwords. See [details](/explore/pubkycore/authentication/).
+The process of proving ownership of a public key through cryptographic signatures, enabling secure access to Homeservers without passwords. See [details](/explore/pubky-protocol/authentication/).
 
 ## C
 
@@ -20,7 +20,7 @@ The process of proving ownership of a public key through cryptographic signature
 A cryptographically signed token that grants third-party applications limited access to a user's data on their Homeserver, similar to OAuth access tokens.
 
 **Censorship Resistance**
-The property of being difficult or impossible to block, censor, or control by any single authority. Pubky achieves this through decentralized [Mainline DHT](/explore/technologies/mainline-dht/) and distributed [Homeservers](/explore/pubkycore/homeserver/).
+The property of being difficult or impossible to block, censor, or control by any single authority. Pubky achieves this through decentralized [Mainline DHT](/explore/technologies/mainline-dht/) and distributed [Homeservers](/explore/pubky-protocol/homeserver/).
 
 **[Credible Exit](/explore/concepts/credible-exit/)**
 The ability to leave a service provider (Homeserver, app, etc.) without losing your data, identity, or social connections. A core principle of Pubky's architecture.
@@ -28,7 +28,7 @@ The ability to leave a service provider (Homeserver, app, etc.) without losing y
 ## D
 
 **[Distributed Hash Table (DHT)](/explore/technologies/dht/)**
-A decentralized key-value storage system distributed across many nodes. Pubky uses [Mainline DHT](/explore/technologies/mainline-dht/) for storing [PKARR](/explore/pubkycore/pkarr/introduction/) records.
+A decentralized key-value storage system distributed across many nodes. Pubky uses [Mainline DHT](/explore/technologies/mainline-dht/) for storing [PKARR](/explore/pubky-protocol/pkarr/introduction/) records.
 
 **[Domain Name System (DNS)](/explore/technologies/dns/)**
 Traditional system for translating domain names to IP addresses. [PKDNS](/explore/technologies/pkdns/) extends this to support public-key domains.
@@ -38,7 +38,7 @@ Protocol for encrypting DNS queries using HTTPS, preventing surveillance and tam
 
 ## H
 
-**[Homeserver](/explore/pubkycore/homeserver/)**
+**[Homeserver](/explore/pubky-protocol/homeserver/)**
 A web server that stores user data in a filesystem over a simple HTTP API. Internally, PostgreSQL tracks metadata such as users, quotas, sessions, and events. Users can run their own or choose any provider. Data is stored per public key and accessed via HTTP/HTTPS.
 
 **[Homegate](/explore/technologies/homegate/)**
@@ -57,7 +57,7 @@ A pair of cryptographic keys (public and private) used for identity, authenticat
 ## M
 
 **[Mainline DHT](/explore/technologies/mainline-dht/)**
-The Distributed Hash Table used by BitTorrent, with 10+ million nodes globally. Pubky uses it to store [PKARR](/explore/pubkycore/pkarr/introduction/) records, providing censorship-resistant discovery.
+The Distributed Hash Table used by BitTorrent, with 10+ million nodes globally. Pubky uses it to store [PKARR](/explore/pubky-protocol/pkarr/introduction/) records, providing censorship-resistant discovery.
 
 ## N
 
@@ -72,7 +72,7 @@ Noise Protocol implementation for encrypted peer-to-peer communication in the Pu
 **[Paykit](/explore/technologies/paykit/)**
 Payment protocol built on Pubky for payment discovery and coordination across multiple payment methods, including Bitcoin on-chain and Lightning (work in progress).
 
-**[PKARR](/explore/pubkycore/pkarr/introduction/)** (Public Key Addressable Resource Records)
+**[PKARR](/explore/pubky-protocol/pkarr/introduction/)** (Public Key Addressable Resource Records)
 Self-issued, signed DNS-like records published to the Mainline DHT. Each record is tied to a public key and contains information like Homeserver locations.
 
 **[PKDNS](/explore/technologies/pkdns/)**
@@ -82,11 +82,11 @@ DNS server that resolves public-key domains by fetching PKARR records from the M
 The public half of a cryptographic key pair. In Pubky, this serves as your permanent, self-sovereign identity (often called a "pubky").
 
 **Pubky**
-1. The decentralized web protocol and ecosystem, formally known as [Pubky Core](/explore/pubkycore/introduction/)
+1. The decentralized web protocol and ecosystem, formally known as the [Pubky protocol](/explore/pubky-protocol/introduction/)
 2. A user's public-key identity (e.g., "my pubky is z4e8s...")
 
 **Pubky app**
-Any application built on [Pubky Core](/explore/pubkycore/introduction/). A Pubky app uses the Pubky [SDK](/explore/pubkycore/sdk/) and [Homeservers](/explore/pubkycore/homeserver/) for authentication and data storage. See [Pubky Apps overview](/explore/pubky-apps/introduction/).
+Any application built on the [Pubky protocol](/explore/pubky-protocol/introduction/). A Pubky app uses the Pubky [SDK](/explore/pubky-protocol/sdk/) and [Homeservers](/explore/pubky-protocol/homeserver/) for authentication and data storage. See [Pubky Apps overview](/explore/pubky-apps/introduction/).
 
 **[pubky.app](/explore/pubky-apps/reference-app/pubky-app/)**
 The reference implementation of a Pubky app — a decentralized social media application built by Synonym, live at [pubky.app](https://pubky.app). It demonstrates how to build social applications on the Pubky protocol using [Nexus](/explore/pubky-apps/indexing-and-aggregation/pubky-nexus/) for indexing and the [pubky-app-specs](/explore/pubky-apps/app-specs/) data model.
@@ -97,8 +97,8 @@ Desktop app for keeping local copies of published Homeserver data. Current app d
 **[Pubky CLI](/explore/technologies/pubky-cli/)**
 Command-line tool for interacting with Pubky Homeservers, providing user operations, admin functions, and testing utilities.
 
-**[Pubky Core](/explore/pubkycore/introduction/)**
-The foundational protocol, Homeserver implementation, and SDK for building decentralized applications on Pubky.
+**[Pubky Protocol](/explore/pubky-protocol/introduction/)**
+The protocol encompassing the Homeserver, SDK, PKARR and specifications for building decentralized applications on Pubky.
 
 <a id="pubkytls"></a>
 
@@ -124,7 +124,7 @@ Encrypted backup of a user's private key and identity information, protected by 
 
 ## S
 
-**[SDK](/explore/pubkycore/sdk/)** (Software Development Kit)
+**[SDK](/explore/pubky-protocol/sdk/)** (Software Development Kit)
 Client libraries for building Pubky applications, available in Rust, JavaScript/WASM, and native mobile (iOS/Android).
 
 **Self-Sovereign Identity**

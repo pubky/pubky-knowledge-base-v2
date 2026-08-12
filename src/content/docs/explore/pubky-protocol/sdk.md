@@ -3,7 +3,7 @@ title: "Pubky SDK: Client Libraries for Decentralized Applications"
 ---
 
 :::note
-The SDK is now at **v0.10**. If you're upgrading from an earlier version, see the [v0.10 Migration Guide](https://github.com/pubky/pubky-core/tree/main/docs/v0.10-migration).
+The SDK is now at **v0.10**. If you're upgrading from an earlier version, see the [v0.10 Migration Guide](https://github.com/pubky/pubky-homeserver/tree/main/docs/v0.10-migration).
 :::
 
 The Pubky SDK provides client libraries for building applications on [Pubky Core](/explore/pubkycore/introduction). It handles the hard parts (key-based auth, homeserver discovery, transport) so you can focus on your app logic using familiar HTTP-style operations.
@@ -25,7 +25,7 @@ All platforms share a consistent API surface. The React Native SDK uses mobile-o
 ## API Reference
 
 - **Rust**: [docs.rs/pubky](https://docs.rs/pubky)
-- **JavaScript/TypeScript**: [TypeDoc Reference](https://pubky.github.io/pubky-core/js-sdk-typedoc/)
+- **JavaScript/TypeScript**: [TypeDoc Reference](https://pubky.github.io/pubky-homeserver/js-sdk-typedoc/)
 - **HTTP API**: [Endpoint specification](/explore/pubkycore/api/)
 
 ## How It Works
@@ -58,5 +58,5 @@ Sign in and read/write data. Account creation (signup) is generally handled outs
 
 ## Resources
 
-- **Repository**: [github.com/pubky/pubky-core](https://github.com/pubky/pubky-core)
-- **Examples**: [Full working examples](https://github.com/pubky/pubky-core/tree/main/examples) covering testnet setup, signup, auth flows, CRUD operations, and event streaming
+- **Repository**: [github.com/pubky/pubky-homeserver](https://github.com/pubky/pubky-homeserver)
+- **Examples**: [Full working examples](https://github.com/pubky/pubky-homeserver/tree/main/examples) covering testnet setup, signup, auth flows, CRUD operations, and event streaming

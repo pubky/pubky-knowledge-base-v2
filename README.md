@@ -6,7 +6,7 @@ Welcome to the Pubky Knowledge Base.
 
 ### [Access the Pubky Knowledge Base](https://pubky.org/)
 
-This site documents Pubky's vision, architecture, key concepts, and practical guides for Pubky Core and pubky.app.
+This site documents Pubky's vision, architecture, key concepts, and practical guides for the Pubky protocol and pubky.app.
 
 ## Contributing
 
@@ -21,7 +21,7 @@ For new pages or significant changes, open an issue first and follow the [Contri
 ## Related Resources
 
 - **GitHub**: [github.com/pubky](https://github.com/pubky)
-- **Pubky Core**: [github.com/pubky/pubky-core](https://github.com/pubky/pubky-core) ([examples](https://github.com/pubky/pubky-core/tree/main/examples))
+- **Pubky Homeserver**: [github.com/pubky/pubky-homeserver](https://github.com/pubky/pubky-homeserver) ([examples](https://github.com/pubky/pubky-homeserver/tree/main/examples))
 - **Telegram**: [t.me/pubkycore](https://t.me/pubkycore)
 - **Live App**: [pubky.app](https://pubky.app)
 
@@ -62,6 +62,6 @@ AI tools can reference the docs through these plain Markdown endpoints:
 - [https://pubky.org/llms-full.txt](https://pubky.org/llms-full.txt)
 - [https://pubky.org/llms-small.txt](https://pubky.org/llms-small.txt)
 
-[llms-small.txt](https://pubky.org/llms-small.txt) links to per-page Markdown files. You can also open them directly by adding `.md` to a docs path, for example [pubky.org/getting-started.md](https://pubky.org/getting-started.md) or [pubky.org/explore/pubkycore/sdk.md](https://pubky.org/explore/pubkycore/sdk.md).
+[llms-small.txt](https://pubky.org/llms-small.txt) links to per-page Markdown files. You can also open them directly by adding `.md` to a docs path, for example [pubky.org/getting-started.md](https://pubky.org/getting-started.md) or [pubky.org/explore/pubky-protocol/sdk.md](https://pubky.org/explore/pubky-protocol/sdk.md).
 
 Locally, `npm run build` generates the same files in `dist/`.

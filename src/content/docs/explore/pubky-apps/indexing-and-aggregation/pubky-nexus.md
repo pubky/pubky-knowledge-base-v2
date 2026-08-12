@@ -2,7 +2,7 @@
 title: "Pubky Nexus"
 ---
 
-**Pubky Nexus** is the production-grade indexing and aggregation service that powers Pubky App's social features. It transforms decentralized data from multiple [Homeservers](/explore/pubkycore/homeserver/) into a high-performance social graph API, enabling real-time social media experiences at scale.
+**Pubky Nexus** is the production-grade indexing and aggregation service that powers Pubky App's social features. It transforms decentralized data from multiple [Homeservers](/explore/pubky-protocol/homeserver/) into a high-performance social graph API, enabling real-time social media experiences at scale.
 
 ## Overview
 
@@ -301,4 +301,4 @@ If you're building a social client application to consume the Nexus API:
 - [Indexers](/explore/pubky-apps/indexing-and-aggregation/indexer/) - Data normalization and transformation
 - [Web Servers](/explore/pubky-apps/indexing-and-aggregation/web-server/) - API serving layer
 - [Custom Backend Architecture](/explore/pubky-apps/app-architectures/custom-backend/) - Overall architecture pattern
-- [Homeservers](/explore/pubkycore/homeserver/) - Data source and storage layer
+- [Homeservers](/explore/pubky-protocol/homeserver/) - Data source and storage layer

@@ -2,7 +2,7 @@
 title: "Pubky Moderation"
 ---
 
-Content moderation service for the Pubky ecosystem, designed to protect [homeserver](/explore/pubkycore/homeserver/) operators and users from harmful content. Monitors events from homeservers and [Nexus](/explore/pubky-apps/indexing-and-aggregation/pubky-nexus/), sends content to [Checkstep](https://www.checkstep.com/) for moderation, and enforces policy decisions.
+Content moderation service for the Pubky ecosystem, designed to protect [homeserver](/explore/pubky-protocol/homeserver/) operators and users from harmful content. Monitors events from homeservers and [Nexus](/explore/pubky-apps/indexing-and-aggregation/pubky-nexus/), sends content to [Checkstep](https://www.checkstep.com/) for moderation, and enforces policy decisions.
 
 - **Repository**: https://github.com/pubky/pubky-moderation
 - **Language**: Rust

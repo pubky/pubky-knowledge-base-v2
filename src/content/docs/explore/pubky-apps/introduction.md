@@ -2,13 +2,13 @@
 title: "Introduction"
 ---
 
-![Pubky App interface screenshot showing decentralized social media application built on Pubky Core](/images/pubky-app.png)
+![Pubky App interface screenshot showing decentralized social media application built on the Pubky protocol](/images/pubky-app.png)
 
-> Synonym will be initially hosting: [Homeserver](/explore/pubkycore/homeserver/) and [Pubky App](/explore/pubky-apps/introduction/)
+> Synonym will be initially hosting: [Homeserver](/explore/pubky-protocol/homeserver/) and [Pubky App](/explore/pubky-apps/introduction/)
 
 ## Overview
 
-Pubky App is a decentralized social media application built on [Pubky Core](/explore/pubkycore/introduction/). It serves as a working reference implementation demonstrating how to build social applications on the Pubky protocol.
+Pubky App is a decentralized social media application built on the [Pubky protocol](/explore/pubky-protocol/introduction/). It serves as a working reference implementation demonstrating how to build social applications on the Pubky protocol.
 
 The data models and validation rules are formally specified in the [pubky-app-specs](https://github.com/pubky/pubky-app-specs) repository, which defines structures for users, posts, tags, bookmarks, follows, mutes, and feeds. This specification ensures interoperability between different Pubky App implementations.
 
@@ -20,7 +20,7 @@ The data models and validation rules are formally specified in the [pubky-app-sp
 
 ## Key aspects
 
-- **Data Ownership**: Users have full autonomy over their data, hosting it on **independent [Homeservers](/explore/pubkycore/homeserver/)** that are decentralized and distributed across the network. This approach enables users to maintain **control** and **ownership** of their data, while also ensuring **data sovereignty** and **privacy**. 
+- **Data Ownership**: Users have full autonomy over their data, hosting it on **independent [Homeservers](/explore/pubky-protocol/homeserver/)** that are decentralized and distributed across the network. This approach enables users to maintain **control** and **ownership** of their data, while also ensuring **data sovereignty** and **privacy**. 
 - **Profiles**: The system employs a **decentralized data storage** approach, where **post**, **comment**, and **like** data are stored in association with **user profiles**.
 - [Aggregators](/explore/pubky-apps/indexing-and-aggregation/aggregator/) collecting social graphs
 - Feeds of followings' activities
@@ -42,7 +42,5 @@ It is the part of the Pubky App that you interact with directly. It's responsibl
 
 ## MVP Architecture
 
-The early versions of Pubky app take some shortcuts over the [Pubky Core](/explore/pubkycore/introduction/) design. The MVP app is centralized, therefore we saved time and complexity by aggregating functionality into fewer components. The main two components are the `Homeserver` and the `Indexer`
-
-- The [Homeservers](/explore/pubkycore/homeserver/) fulfils the function of `data stores`, republishing users keys to [PKARR](/explore/pubkycore/pkarr/introduction/) and it acts also as an identity-provider (Oauth-like sign-in). Users maintain a trust relationship with the Homeserver.
+- The [Homeserver](/explore/pubky-protocol/homeserver/) fulfils the function of `data stores`, republishing users keys to [PKARR](/explore/pubky-protocol/pkarr/introduction/) and it acts also as an identity-provider (Oauth-like sign-in). Users maintain a trust relationship with the Homeserver.
 - The `Indexer` fulfils the function of the [backend](/explore/pubky-apps/indexing-and-aggregation/introduction/) for the Pubky App. [Pubky Nexus](/explore/pubky-apps/indexing-and-aggregation/pubky-nexus/) is the production implementation of this indexer, providing real-time social graph aggregation, high-performance search, and a comprehensive REST API.

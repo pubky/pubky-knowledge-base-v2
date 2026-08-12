@@ -31,7 +31,7 @@ flowchart LR
 
 | Component | Purpose | Status |
 |-----------|---------|--------|
-| **[Pubky Core](/explore/pubkycore/introduction/)** | Protocol, Homeserver, SDK | ✅ Production |
+| **[Pubky protocol](/explore/pubky-protocol/introduction/)** | Homeserver, PKARR, SDK | ✅ Production |
 | **[Pubky Ring](/explore/technologies/pubky-ring/)** | Mobile key manager (iOS/Android) | ✅ Production |
 | **[Pubky App](/explore/pubky-apps/introduction/)** | Social media demo ([pubky.app](https://pubky.app)) | ✅ Live (MVP) |
 | **[Pubky Nexus](/explore/pubky-apps/indexing-and-aggregation/pubky-nexus/)** | Social indexing service | ✅ Production |
@@ -50,7 +50,7 @@ flowchart LR
 ## Get Started
 
 - **Users**: Download [Pubky Ring](/explore/technologies/pubky-ring/) → Try [pubky.app](https://pubky.app)
-- **Developers**: Check the [Developer Guide](/explore/pubkycore/getting-started/) → Install [SDK](/explore/pubkycore/sdk/)
+- **Developers**: Check the [Developer Guide](/explore/pubky-protocol/getting-started/) → Install [SDK](/explore/pubky-protocol/sdk/)
 
 ## Learn More
 

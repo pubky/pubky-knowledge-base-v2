@@ -2,13 +2,13 @@
 title: "Pubky Explorer"
 ---
 
-**Pubky Explorer** is a web-based file browser for exploring public data stored on [Pubky Homeservers](/explore/pubkycore/homeserver/). It provides an intuitive interface for navigating the decentralized file system, previewing files, and sharing direct links to specific content—all without requiring authentication or installation.
+**Pubky Explorer** is a web-based file browser for exploring public data stored on [Pubky Homeservers](/explore/pubky-protocol/homeserver/). It provides an intuitive interface for navigating the decentralized file system, previewing files, and sharing direct links to specific content—all without requiring authentication or installation.
 
 **Live Application**: [https://explorer.pubky.app](https://explorer.pubky.app)
 
 ## Overview
 
-Pubky Explorer makes it easy to browse the public data stored across the Pubky network. Unlike traditional file explorers that require local access, Pubky Explorer operates entirely in the browser, fetching data directly from Homeservers using the [Pubky SDK](/explore/pubkycore/sdk/).
+Pubky Explorer makes it easy to browse the public data stored across the Pubky network. Unlike traditional file explorers that require local access, Pubky Explorer operates entirely in the browser, fetching data directly from Homeservers using the [Pubky SDK](/explore/pubky-protocol/sdk/).
 
 ### Key Features
 
@@ -24,9 +24,9 @@ Pubky Explorer makes it easy to browse the public data stored across the Pubky n
 
 ## How It Works
 
-Pubky Explorer uses the [Pubky SDK](/explore/pubkycore/sdk/) to:
+Pubky Explorer uses the [Pubky SDK](/explore/pubky-protocol/sdk/) to:
 
-1. **Resolve Public Keys**: Convert public keys to Homeserver URLs via [PKARR](/explore/pubkycore/pkarr/introduction/)
+1. **Resolve Public Keys**: Convert public keys to Homeserver URLs via [PKARR](/explore/pubky-protocol/pkarr/introduction/)
 2. **List Directories**: Fetch directory contents from Homeservers
 3. **Fetch Files**: Retrieve individual files for preview
 4. **Display Content**: Render files appropriately based on content type
@@ -330,7 +330,7 @@ Potential improvements for Pubky Explorer:
 
 ## Related Tools
 
-- **[Pubky SDK](/explore/pubkycore/sdk/)**: Underlying data access library
+- **[Pubky SDK](/explore/pubky-protocol/sdk/)**: Underlying data access library
 - **[PKDNS](/explore/technologies/pkdns/)**: DNS resolution for public keys (used by SDK)
 - **[Pubky App](/explore/pubky-apps/introduction/)**: Social application using same data structures
 - **[pubky-app-specs](https://github.com/pubky/pubky-app-specs)**: Data model specifications
@@ -345,9 +345,9 @@ Potential improvements for Pubky Explorer:
 
 ## See Also
 
-- [Homeserver](/explore/pubkycore/homeserver/) - Data storage explained
-- [Pubky Core SDK](/explore/pubkycore/sdk/) - How data access works
-- [Pubky Core API](/explore/pubkycore/api/) - Homeserver HTTP API
-- [PKARR](/explore/pubkycore/pkarr/introduction/) - Public key resolution
+- [Homeserver](/explore/pubky-protocol/homeserver/) - Data storage explained
+- [Pubky SDK](/explore/pubky-protocol/sdk/) - How data access works
+- [Pubky Homeserver API](/explore/pubky-protocol/api/) - Homeserver HTTP API
+- [PKARR](/explore/pubky-protocol/pkarr/introduction/) - Public key resolution
 - [FAQ#Q17](/faq/#q17) - FAQ entry about exploring data
 

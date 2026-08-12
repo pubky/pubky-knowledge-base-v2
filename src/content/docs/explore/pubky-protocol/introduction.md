@@ -1,42 +1,42 @@
 ---
-title: "Pubky Core: Open Protocol for Decentralized Web Applications"
+title: "Pubky: Open Protocol for Decentralized Web Applications"
 ---
 
-![Pubky Core architecture diagram showing the relationship between public-key identities, PKARR records on Mainline DHT, Homeservers, and client applications](/images/pubky-core.svg)
+![Pubky architecture diagram showing the relationship between public-key identities, PKARR records on Mainline DHT, Homeservers, and client applications](/images/pubky-homeserver.svg)
 
 > **An open protocol for per-public-key backends for censorship resistant web applications.**
 
 ## Overview
 
-Pubky Core combines a [censorship-resistant public-key-based alternative to DNS](https://github.com/pubky/pkarr) ([PKARR](/explore/pubkycore/pkarr/introduction/)) with conventional, tried-and-tested web technologies. This keeps users in control of their identities and data while enabling developers to build software with the availability of web apps, without the costs of managing a central database.
+The Pubky protocol combines a [censorship-resistant public-key-based alternative to DNS](https://github.com/pubky/pkarr) ([PKARR](/explore/pubky-protocol/pkarr/introduction/)) with conventional, tried-and-tested web technologies. This keeps users in control of their identities and data while enabling developers to build software with the availability of web apps, without the costs of managing a central database.
 
 **The Core Philosophy:**
 > "The Web, long centralized, must decentralize; Long decentralized, must centralize."
 
-Pubky Core provides the infrastructure for building truly decentralized applications where:
+The Pubky protocol provides the infrastructure for building truly decentralized applications where:
 - Users control their identities (public keys)
-- Users choose where their data lives ([Homeserver](/explore/pubkycore/homeserver/))
+- Users choose where their data lives ([Homeserver](/explore/pubky-protocol/homeserver/))
 - Applications remain interoperable
 - No single entity can control or censor
 
-## What is Pubky Core?
+## What Pubky?
 
-Pubky Core consists of three main components:
+The Pubky protocol consists of three main components:
 
 ### 1. Protocol Specification
 The open protocol that defines:
 - Public key-based authentication
 - Capability-based authorization
 - Key-value storage semantics
-- Homeserver discovery via [PKARR](/explore/pubkycore/pkarr/introduction/)
+- Homeserver discovery via [PKARR](/explore/pubky-protocol/pkarr/introduction/)
 - RESTful API standards
 
-### 2. Homeserver Implementation
+### 2. [Pubky Homeserver](/explore/pubky-protocol/homeserver/)
 A production-ready server application that:
 - Hosts user data in a filesystem
 - Provides RESTful HTTP API
 - Handles authentication and sessions
-- Publishes to [PKARR](/explore/pubkycore/pkarr/introduction/) for discovery
+- Publishes to [PKARR](/explore/pubky-protocol/pkarr/introduction/) for discovery
 - Stores user files separately from PostgreSQL-backed homeserver metadata
 - Includes admin and metrics endpoints
 
@@ -49,17 +49,17 @@ Client libraries for developers:
 
 ## Core Concepts
 
-### [Homeserver](/explore/pubkycore/homeserver/)
-Decentralized data storage nodes that host user data. Each user can choose their Homeserver or run their own. Data is stored per public key, and users can migrate between Homeservers by updating their [PKARR](/explore/pubkycore/pkarr/introduction/) record.
+### [Homeserver](/explore/pubky-protocol/homeserver/)
+Decentralized data storage nodes that host user data. Each user can choose their Homeserver or run their own. Data is stored per public key, and users can migrate between Homeservers by updating their [PKARR](/explore/pubky-protocol/pkarr/introduction/) record.
 
-### [PKARR](/explore/pubkycore/pkarr/introduction/)
+### [PKARR](/explore/pubky-protocol/pkarr/introduction/)
 Self-issued public keys that function as sovereign, publicly addressable domains. PKARR records published to the [Mainline DHT](/explore/technologies/mainline-dht/) point to Homeserver locations, enabling decentralized discovery.
 
-### [Authentication](/explore/pubkycore/authentication/)
-Users grant apps scoped access to their data on the [Homeserver](/explore/pubkycore/homeserver/). Authentication is decentralized - users control their own cryptographic keys with no central identity providers.
+### [Authentication](/explore/pubky-protocol/authentication/)
+Users grant apps scoped access to their data on the [Homeserver](/explore/pubky-protocol/homeserver/). Authentication is decentralized - users control their own cryptographic keys with no central identity providers.
 
 ### [Credible Exit](/explore/concepts/credible-exit/)
-Pubky Core's distributed architecture provides user autonomy through credible exit between interchangeable components. Users can switch Homeservers, applications, or identity managers without losing their identity or data. [Pubky Backup](/explore/technologies/pubky-backup/) helps preserve local copies of published data while automated restore and mirroring mature.
+Pubky's distributed architecture provides user autonomy through credible exit between interchangeable components. Users can switch Homeservers, applications, or identity managers without losing their identity or data. [Pubky Backup](/explore/technologies/pubky-backup/) helps preserve local copies of published data while automated restore and mirroring mature.
 
 ## Key Features
 
@@ -149,7 +149,7 @@ Applications (via SDK)
 
 ## Target Users
 
-**Pubky Core is made for:**
+**Pubky is made for:**
 - Developers and builders of internet software products
 - Startups building decentralized applications
 - Open-source contributors
@@ -163,14 +163,14 @@ Applications (via SDK)
 ## Resources
 
 ### Documentation
-- **Official Docs**: [pubky.github.io/pubky-core](https://pubky.github.io/pubky-core/)
+- **Official Docs**: [pubky.github.io/pubky-homeserver](https://pubky.github.io/pubky-homeserver/)
 - **Rust API Docs**: [docs.rs/pubky](https://docs.rs/pubky)
-- **[SDK Guide](/explore/pubkycore/sdk/)**: Complete integration documentation
-- **[API Reference](/explore/pubkycore/api/)**: HTTP API specification
+- **[SDK Guide](/explore/pubky-protocol/sdk/)**: Complete integration documentation
+- **[API Reference](/explore/pubky-protocol/api/)**: HTTP API specification
 - **Examples**: Rust and JavaScript tutorials in repository
 
 ### Repositories
-- **Main Repository**: [github.com/pubky/pubky-core](https://github.com/pubky/pubky-core)
+- **Main Repository**: [github.com/pubky/pubky-homeserver](https://github.com/pubky/pubky-homeserver)
 - **NPM Package**: [@synonymdev/pubky](https://www.npmjs.com/package/@synonymdev/pubky)
 
 ### Community
@@ -178,11 +178,11 @@ Applications (via SDK)
 - **Contributors Guide**: See repository
 - **License**: MIT
 
-## Why Pubky Core?
+## Why Pubky?
 
 ### The Vision
 
-The reward for everyone is a more open, privacy-focused, usable, modular, and secure web. 
+The reward for everyone is a more open, privacy-focused, usable, modular, and secure web.
 
 For [Synonym](https://synonym.to/) as lead of this project, the goal is to:
 - Disrupt Big Tech as an industry
@@ -194,37 +194,37 @@ For [Synonym](https://synonym.to/) as lead of this project, the goal is to:
 ### Technical Advantages
 
 **vs. Traditional Web Apps:**
-- ✅ User controls data location
-- ✅ No vendor lock-in
-- ✅ Censorship resistant
-- ✅ Privacy by default
+- User controls data location
+- No vendor lock-in
+- Censorship resistant
+- Privacy by default
 
 **vs. Blockchain:**
-- ✅ No transaction fees
-- ✅ Instant operations
-- ✅ Standard web tech
-- ✅ Scalable storage
+- No transaction fees
+- Instant operations
+- Standard web tech
+- Scalable storage
 
 **vs. P2P Only:**
-- ✅ Always available (Homeservers)
-- ✅ Fast access
-- ✅ Mobile-friendly
-- ✅ Familiar HTTP APIs
+- Always available (Homeservers)
+- Fast access
+- Mobile-friendly
+- Familiar HTTP APIs
 
 ## Current Status
 
 **Production Ready:**
-- ✅ Homeserver implementation stable
-- ✅ Rust SDK mature
-- ✅ JavaScript/WASM bindings stable
-- ✅ Authentication system complete
-- ✅ Event streaming SDK (SSE-based, single and multi-user)
+- Homeserver implementation stable
+- Rust SDK mature
+- JavaScript/WASM bindings stable
+- Authentication system complete
+- Event streaming SDK (SSE-based, single and multi-user)
 
 **Active Development:**
-- 🚧 Mobile native bindings (iOS/Android)
-- 🚧 [Paykit](/explore/technologies/paykit/) support
-- 🚧 Replication and mirroring tools
-- 🚧 Privacy features (encrypted data)
+- Mobile native bindings (iOS/Android)
+- [Paykit](/explore/technologies/paykit/) support
+- Replication and mirroring tools
+- Privacy features (encrypted data)
 
 **Needs Community:**
 - Mirroring and replication tools
@@ -243,4 +243,4 @@ For [Synonym](https://synonym.to/) as lead of this project, the goal is to:
 
 ---
 
-**Pubky Core provides the foundation for building truly decentralized applications. Join us in creating a more open web!**
+**Pubky provides the foundation for building truly decentralized applications. Join us in creating a more open web!**

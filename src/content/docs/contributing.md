@@ -28,7 +28,7 @@ Help improve this knowledge base:
 ### 3. Code Contributions
 
 Contribute to Pubky projects:
-- **[Pubky Core](/explore/pubkycore/introduction/)**: Protocol and Homeserver
+- **[Pubky protocol](/explore/pubky-protocol/introduction/)**: Homeserver and PKARR
 - **[Pubky Ring](/explore/technologies/pubky-ring/)**: Mobile key manager
 - **[Pubky App](/explore/pubky-apps/introduction/)**: Social application ([pubky.app](https://pubky.app))
 - **[Pubky Nexus](/explore/pubky-apps/indexing-and-aggregation/pubky-nexus/)**: Indexing service
@@ -99,7 +99,7 @@ const example = "like this";
 **Linking:**
 ```markdown
 <!-- Internal -->
-[Pubky Core](/explore/pubkycore/introduction/)
+[Pubky protocol](/explore/pubky-protocol/introduction/)
 
 <!-- External -->
 [Official Docs](https://pubky.org/)
@@ -123,7 +123,7 @@ Important warning.
 **Images:**
 ```markdown
 <!-- Always include descriptive alt text -->
-![Pubky Core architecture diagram showing homeservers, PKARR, and DHT](/images/pubky-core.svg)
+![Pubky protocol architecture diagram showing homeservers, PKARR, and DHT](/images/pubky-homeserver.svg)
 ```
 
 ---
@@ -181,12 +181,12 @@ Fixes #456
 
 ## Development Setup
 
-### Pubky Core (Rust)
+### Pubky Homeserver (Rust)
 
 ```bash
 # Clone
-git clone https://github.com/pubky/pubky-core
-cd pubky-core
+git clone https://github.com/pubky/pubky-homeserver
+cd pubky-homeserver
 
 # Build
 cargo build
@@ -205,7 +205,7 @@ cargo clippy
 ```
 
 For local `pubky-testnet` setup, including Docker-managed or external PostgreSQL, follow the
-[Pubky Testnet README](https://github.com/pubky/pubky-core/blob/main/pubky-testnet/README.md).
+[Pubky Testnet README](https://github.com/pubky/pubky-homeserver/blob/main/pubky-testnet/README.md).
 
 **Requirements:**
 - Rust 1.89+
