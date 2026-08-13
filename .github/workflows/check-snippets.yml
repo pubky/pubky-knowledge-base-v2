@@ -6,6 +6,19 @@ on:
   pull_request:
 
 jobs:
+  references:
+    name: Snippet references
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Check documentation references
+        run: npm run check:snippets:references
+
   rust:
     name: Rust snippets
     runs-on: ubuntu-latest
