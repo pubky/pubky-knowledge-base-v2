@@ -90,12 +90,6 @@ npm run dev
 - Use `### Subsection` for subsections (H3)
 - Use standard markdown links for both internal and external references
 
-**Code Blocks:**
-```javascript
-// Always specify language
-const example = "like this";
-```
-
 **Linking:**
 ```markdown
 <!-- Internal -->
