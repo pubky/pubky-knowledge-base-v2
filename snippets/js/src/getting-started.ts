@@ -51,8 +51,12 @@ document.querySelector<HTMLDivElement>("#app")!.textContent = JSON.stringify(
 import { AuthFlowKind } from "@synonymdev/pubky";
 
 const relay = "https://httprelay.example.com/inbox/";
-const flow = pubky.startGrantAuthFlow("/pub/myapp/:rw", AuthFlowKind.signin(), {
-  clientId: "myapp.example",
-  relay,
-});
+const flow = await pubky.startGrantAuthFlow(
+  "/pub/myapp/:rw",
+  AuthFlowKind.signin(),
+  {
+    clientId: "myapp.example",
+    relay,
+  },
+);
 // --8<-- [end:js_custom_auth_relay]

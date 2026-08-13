@@ -37,7 +37,7 @@ Pubky's distributed architecture provides user autonomy through credible exit be
 
 ### Authentication & Authorization
 - **Public key-based authentication**: No passwords, no accounts
-- **3rd party authorization**: OAuth-style flows with capability tokens
+- **3rd party authorization**: App-specific, capability-scoped grants with proof of possession
 - **Session management**: Secure, time-limited sessions
 - **Recovery files**: Encrypted backup and recovery
 

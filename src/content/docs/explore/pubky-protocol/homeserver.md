@@ -44,9 +44,21 @@ See [Security Model](/explore/pubky-protocol/security-model/) for the full trust
 
 ## Running a Homeserver
 
-For installing, configuring, and running a Homeserver, follow the
-[Install Guide](https://github.com/pubky/pubky-homeserver/blob/main/docs/INSTALL.md). To make it
-publicly reachable see the
+Initialize the Homeserver's persistent state before its first run:
+
+```bash
+pubky-homeserver init
+
+# Use a custom data directory
+pubky-homeserver --data-dir /path/to/data init
+```
+
+The command creates any missing data directory, sample configuration, and server identity without starting the Homeserver or connecting to PostgreSQL. It preserves valid existing configuration and identity files rather than overwriting them.
+
+Restrict the data directory and configuration to the Homeserver service account, replace the default admin password, configure the database connection securely, and keep a secure backup of the generated `secret` identity file. Never publish that file; losing it makes the Homeserver identity unrecoverable.
+
+For the remaining installation and configuration steps, follow the
+[Install Guide](https://github.com/pubky/pubky-homeserver/blob/main/docs/INSTALL.md#initialise-the-data-directory). To make the Homeserver publicly reachable, follow the
 [Deployment Guide](https://github.com/pubky/pubky-homeserver/blob/main/docs/DEPLOY.md).
 
 For local development and testing with a fixed-port testnet, follow the

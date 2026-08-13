@@ -325,7 +325,7 @@ A: Currently yes for secure key management, though apps can implement their own 
 A: Not directly. Pubky uses a different architecture (Homeservers + PKARR vs relays/PDSs). See [Comparisons](/comparisons/) for details.
 
 **Q: How do I handle user authentication?**
-A: The SDK handles it automatically via signature-based auth. No passwords, OAuth, or tokens needed. See [Authentication](/explore/pubky-protocol/authentication/).
+A: The SDK handles authentication with capability-scoped grants. No passwords or OAuth needed. See [Authentication](/explore/pubky-protocol/authentication/).
 
 **Q: Can I build private apps?**
 A: Currently Pubky is optimized for public data. Private/encrypted features are coming via [Pubky Noise](/explore/technologies/pubky-noise/).
