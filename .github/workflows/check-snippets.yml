@@ -36,6 +36,9 @@ jobs:
         with:
           node-version: 22
 
+      - name: Validate snippet references
+        run: npm run check:snippet-fences
+
       - name: Install (vanilla JS)
         working-directory: snippets/js
         run: npm install

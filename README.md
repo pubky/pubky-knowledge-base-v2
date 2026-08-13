@@ -18,6 +18,17 @@ For typos, broken links, or small improvements:
 
 For new pages or significant changes, open an issue first and follow the [Contributing Guide](src/content/docs/contributing.md).
 
+### Checked code snippets
+
+JavaScript, TypeScript, and Rust examples must live in `snippets/` and be referenced from Markdown:
+
+````md
+```javascript snippet="snippets/js/src/sdk.ts:js_quick_example"
+```
+````
+
+Named sections use `// --8<-- [start:name]` and `// --8<-- [end:name]`; CI validates the complete source file.
+
 ## Related Resources
 
 - **GitHub**: [github.com/pubky](https://github.com/pubky)
