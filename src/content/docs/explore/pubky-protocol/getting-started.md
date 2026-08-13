@@ -134,7 +134,7 @@ This tells the SDK to use the local testnet services started by Pubky Docker ins
 ```js snippet="snippets/js/src/getting-started.ts:js_getting_started_identity"
 ```
 
-This creates a demo user identity for the hello-world app. The signer uses it to perform identity actions such as signup and signin.
+This creates a demo identity for the hello-world app and logs its pubky to the browser console.
 
 #### 3.4 Sign up on the local Homeserver
 
@@ -175,6 +175,12 @@ This writes a simple JSON file onto the signed-in user's Homeserver public stora
 This fetches the same JSON file from Homeserver storage and renders it in the template's `#app` element, proving that signup, signin, write, and read all worked.
 
 Run `npm run dev` again and open the page. You should now see the data displayed there.
+
+#### 3.8 Inspect Homeserver data
+
+Open the [testnet Pubky Explorer](https://explorer.pubky.app/testnet/), enter the pubky logged in Step 3.3, and browse to `/pub/hello-world/data.json`.
+
+The hosted app connects to `localhost`; allow local-network access if prompted. Alternatively, clone [Pubky Explorer](https://github.com/pubky/pubky-explorer) and run it locally.
 
 :::tip[First app complete]
 Nice. Your first Pubky app works.

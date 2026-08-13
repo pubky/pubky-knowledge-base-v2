@@ -18,6 +18,7 @@ const pubky = Pubky.testnet();
 // --8<-- [start:js_getting_started_identity]
 const keypair = Keypair.random();
 const signer = pubky.signer(keypair);
+console.log("Your pubky:", signer.publicKey.z32());
 // --8<-- [end:js_getting_started_identity]
 
 // --8<-- [start:js_getting_started_signup]
