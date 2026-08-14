@@ -1,6 +1,5 @@
 ---
 import Default from '@astrojs/starlight/components/Head.astro';
-import LanguageCodeSync from './LanguageCodeSync.astro';
 
 // Emit a per-page og:image. Every docs page gets a generated card at
 // /og/<slug>.png (page title as subtitle); the homepage falls back to the
@@ -15,4 +14,3 @@ const ogImage = new URL(ogPath, Astro.site).href;
 <Default><slot /></Default>
 <meta property="og:image" content={ogImage} />
 <meta name="twitter:image" content={ogImage} />
-<LanguageCodeSync />

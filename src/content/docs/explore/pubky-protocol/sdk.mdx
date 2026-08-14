@@ -2,6 +2,11 @@
 title: "Pubky SDK: Client Libraries for Decentralized Applications"
 ---
 
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import TabUrlSync from '../../../../components/TabUrlSync.astro';
+
+<TabUrlSync syncKey="sdk-lang" param="lang" />
+
 :::note
 The SDK is now at **v0.10**. If you're upgrading from an earlier version, see the [v0.10 Migration Guide](https://github.com/pubky/pubky-homeserver/tree/main/docs/v0.10-migration).
 :::
@@ -48,10 +53,18 @@ For event-driven apps, **EventStreamBuilder** lets you subscribe to real-time ch
 
 Sign in and read/write data. Account creation (signup) is generally handled outside of your app. See the [Developer Guide](/explore/pubkycore/getting-started/) for testnet setup where you bootstrap accounts for development.
 
-```js snippet="snippets/js/src/sdk.ts:js_quick_example" code-language="javascript"
-```
-```rust snippet="snippets/rust/src/lib.rs:rust_quick_example" code-language="rust"
-```
+<div class="terminal-tabs">
+<Tabs syncKey="sdk-lang">
+  <TabItem label="JavaScript">
+    ```js snippet="snippets/js/src/sdk.ts:js_quick_example"
+    ```
+  </TabItem>
+  <TabItem label="Rust">
+    ```rust snippet="snippets/rust/src/lib.rs:rust_quick_example"
+    ```
+  </TabItem>
+</Tabs>
+</div>
 
 ## Resources
 

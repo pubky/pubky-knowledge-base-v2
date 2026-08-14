@@ -1,0 +1,104 @@
+---
+/**
+ * Syncs Starlight `<Tabs syncKey>` selection with a URL query parameter.
+ *
+ * Usage (in .mdx):
+ *   <TabUrlSync syncKey="sdk-lang" param="lang" />
+ *
+ * - On load: reads `?lang=…` and activates the matching tab.
+ * - On tab switch: updates the URL via `history.replaceState`.
+ */
+interface Props {
+  syncKey: string;
+  param: string;
+}
+
+const { syncKey, param } = Astro.props;
+---
+
+<tab-url-sync data-sync-key={syncKey} data-param={param}></tab-url-sync>
+
+<script>
+  // One instance per syncKey — avoids duplicate listeners when multiple
+  // <TabUrlSync> elements share the same key (e.g. via layout composition).
+  const activeSyncKeys = new Set<string>();
+
+  class TabUrlSync extends HTMLElement {
+    #syncKey: string;
+    #param: string;
+
+    constructor() {
+      super();
+      this.#syncKey = this.dataset.syncKey ?? "";
+      this.#param = this.dataset.param ?? "";
+    }
+
+    connectedCallback() {
+      if (activeSyncKeys.has(this.#syncKey)) return;
+      activeSyncKeys.add(this.#syncKey);
+
+      // Defer so Starlight's <starlight-tabs> has time to upgrade and
+      // attach its own click handlers before we programmatically click.
+      requestAnimationFrame(() => this.#applyUrlSelection());
+
+      // Global listener because the target <starlight-tabs> may not exist
+      // yet at connectedCallback time (custom-element upgrade order).
+      document.addEventListener("click", this.#handleTabClick);
+    }
+
+    disconnectedCallback() {
+      activeSyncKeys.delete(this.#syncKey);
+      document.removeEventListener("click", this.#handleTabClick);
+    }
+
+    #getTabs(): HTMLElement[] {
+      const container = document.querySelector(
+        `starlight-tabs[data-sync-key="${CSS.escape(this.#syncKey)}"]`,
+      );
+      if (!container) return [];
+      return [...container.querySelectorAll<HTMLElement>('[role="tab"]')];
+    }
+
+    // Normalises a tab label to a URL-safe param value.
+    // Collisions are possible (e.g. "C Sharp" vs "c-sharp") — keep
+    // tab labels distinct after lowercasing + whitespace replacement.
+    #labelToParam(label: string): string {
+      return label.toLowerCase().replace(/\s+/g, "-");
+    }
+
+    #applyUrlSelection = (): void => {
+      const value = new URL(window.location.href).searchParams.get(this.#param);
+      if (!value) return;
+
+      const tabs = this.#getTabs();
+      const match = tabs.find(
+        (tab) => this.#labelToParam(tab.textContent?.trim() ?? "") === value,
+      );
+      if (match && match.getAttribute("aria-selected") !== "true") {
+        match.click();
+      }
+    };
+
+    #handleTabClick = (event: Event): void => {
+      const tab = (event.target as Element)?.closest?.('[role="tab"]');
+      if (!tab) return;
+
+      const container = tab.closest("starlight-tabs");
+      if (container?.dataset.syncKey !== this.#syncKey) return;
+
+      const label = tab.textContent?.trim();
+      if (!label) return;
+
+      const url = new URL(window.location.href);
+      const paramValue = this.#labelToParam(label);
+      if (url.searchParams.get(this.#param) === paramValue) return;
+
+      url.searchParams.set(this.#param, paramValue);
+      window.history.replaceState(window.history.state, "", url);
+    };
+  }
+
+  if (!customElements.get("tab-url-sync")) {
+    customElements.define("tab-url-sync", TabUrlSync);
+  }
+</script>

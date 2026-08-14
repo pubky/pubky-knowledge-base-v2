@@ -14,11 +14,6 @@ import {
   loadSnippet,
   stripSnippetReference,
 } from '../plugins/snippet-loader.mjs';
-import {
-  getCodeLanguage,
-  getCodeLanguageLabel,
-  stripCodeLanguage,
-} from '../plugins/remark-language-code-groups.mjs';
 
 const SRC = 'src/content/docs';
 const DEST = 'dist';
@@ -67,29 +62,18 @@ function transformDocument(content) {
     }
 
     const reference = getSnippetReference(opening.info);
-    const codeLanguage = getCodeLanguage(opening.info);
-    const languageLabel = codeLanguage
-      ? `${opening.indent}**${getCodeLanguageLabel(codeLanguage)}:**`
-      : null;
-
     if (!reference) {
-      const info = stripCodeLanguage(opening.info) ?? '';
-      if (languageLabel) output.push(languageLabel);
-      output.push(
-        `${opening.indent}${opening.marker}${info}`,
-        ...lines.slice(index + 1, closingIndex + 1),
-      );
+      output.push(lines.slice(index, closingIndex + 1).join('\n'));
       index = closingIndex;
       continue;
     }
 
     const snippet = loadSnippet(reference);
     const marker = safeFenceMarker(opening.marker, snippet);
-    const info = stripCodeLanguage(stripSnippetReference(opening.info)) ?? '';
+    const info = stripSnippetReference(opening.info);
     const closingIndent = lines[closingIndex].match(/^[ \t]*/)[0];
     const snippetLines = snippet.split('\n').map((line) => `${opening.indent}${line}`);
 
-    if (languageLabel) output.push(languageLabel);
     output.push(`${opening.indent}${marker}${info}`, ...snippetLines, `${closingIndent}${marker}`);
     index = closingIndex;
   }

@@ -34,7 +34,6 @@
 	--spacing-1: 4px;
 	--spacing-2: 8px;
 	--spacing-2-5: 10px; /* Figma half-step between spacing-2(8) and spacing-3(12) */
-	--spacing-window-controls: 11px;
 	--spacing-3: 12px;
 	--spacing-4: 16px;
 	--spacing-5: 20px;
@@ -46,7 +45,6 @@
 	--spacing-20: 80px;
 
 	/* Border radius */
-	--radius-none: 0;
 	--radius-sm: 6px;
 	--radius-md: 8px;
 	--radius-lg: 12px;
@@ -87,16 +85,7 @@
 	--alpha-white-16: rgba(255, 255, 255, 0.16);
 	--alpha-white-10: rgba(255, 255, 255, 0.1);
 	--alpha-white-5: rgba(255, 255, 255, 0.045);
-	--terminal-tab-hover: rgba(255, 255, 255, 0.05);
 	--base-secondary-hover: #3a3a3f;
-	--window-control-red: #ff5f57;
-	--window-control-yellow: #febc2e;
-	--window-control-green: #28c840;
-
-	/* Component dimensions */
-	--window-control-size: 9px;
-	--code-switcher-width: 200px;
-	--code-switcher-height: 48px;
 
 	/* Shadows */
 	--shadow-xs: 0 1px 2px rgba(5, 5, 10, 0.2);
@@ -226,118 +215,74 @@ site-search button[data-open-modal] kbd {
 	outline-offset: 2px;
 }
 
-/* Language code windows copy the landing install terminal's exact
-   terminal-bar, dots, tabs, and tab trigger styling. */
-.language-code-group {
-	margin-block: var(--spacing-4);
-}
-
-.language-code-terminal {
-	overflow: hidden;
+/* ── Terminal-style tabs ── */
+/* Opt-in via .terminal-tabs wrapper around Starlight <Tabs>.
+   ⚠ Couples to Starlight's internal DOM: starlight-tabs, .tablist-wrapper,
+   .tab, [role="tab"], [role="tabpanel"]. Review after Starlight upgrades. */
+.terminal-tabs starlight-tabs {
 	border: 1px solid var(--base-border);
 	border-radius: var(--radius-xl);
+	overflow: hidden;
 	background: var(--base-background);
-	display: flex;
-	flex-direction: column;
 }
 
-.language-code-group .terminal-bar {
-	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
-	gap: var(--spacing-window-controls);
-	padding: var(--spacing-2) var(--spacing-4);
+.terminal-tabs starlight-tabs .tablist-wrapper {
+	overflow: visible;
 	background: var(--base-card);
+	padding: var(--spacing-2) var(--spacing-4);
 }
 
-.language-code-group .dots {
-	display: flex;
-	gap: var(--spacing-window-controls);
-}
-
-.language-code-group .dot {
-	width: var(--window-control-size);
-	height: var(--window-control-size);
-	border-radius: var(--radius-full);
-}
-
-.language-code-group .dot-red {
-	background: var(--window-control-red);
-}
-
-.language-code-group .dot-yellow {
-	background: var(--window-control-yellow);
-}
-
-.language-code-group .dot-green {
-	background: var(--window-control-green);
-}
-
-.language-code-group .tabs {
-	display: flex;
-	align-items: center;
-	width: var(--code-switcher-width);
-	height: var(--code-switcher-height);
+.terminal-tabs starlight-tabs [role="tablist"] {
+	border-bottom: none;
+	width: fit-content;
+	max-width: 100%;
 	padding: var(--spacing-2);
 	gap: var(--spacing-2);
 	border-radius: var(--radius-md);
 }
 
-.language-code-group .tabs[data-language-count="3"] {
-	width: max-content;
-	flex-shrink: 0;
-}
-
-.language-code-group .tabs[data-language-count="3"] .tab {
-	white-space: nowrap;
-}
-
-.language-code-group .tab {
+.terminal-tabs starlight-tabs .tab {
 	flex: 1;
-	background: transparent;
-	border: none;
-	color: var(--base-secondary-foreground);
-	font-family: var(--sl-font);
+}
+
+.terminal-tabs starlight-tabs .tab > [role="tab"] {
+	justify-content: center;
+	padding: var(--spacing-2);
+	border-radius: var(--radius-md);
 	font-size: var(--text-xs-size);
 	font-weight: 700;
 	line-height: var(--text-xs-lh);
-	padding: var(--spacing-2);
-	border-radius: var(--radius-md);
-	cursor: pointer;
+	box-shadow: none;
+	color: var(--base-secondary-foreground);
 	transition: all 0.15s ease;
-	text-align: center;
 }
 
-.language-code-group .tab:hover {
+.terminal-tabs starlight-tabs .tab > [role="tab"]:hover {
 	color: var(--base-foreground);
-	background: var(--terminal-tab-hover);
+	background: rgba(255, 255, 255, 0.05);
 }
 
-.language-code-group .tab.active {
-	color: var(--base-foreground);
+.terminal-tabs starlight-tabs .tab > [role="tab"][aria-selected="true"] {
 	background: var(--base-muted);
 	box-shadow: var(--shadow-sm);
+	color: var(--base-foreground);
 }
 
-.language-code-group .command {
-	display: none;
+.terminal-tabs starlight-tabs > [role="tabpanel"] {
+	margin-top: 0;
 }
 
-.language-code-group .command.active {
-	display: block;
-}
-
-.language-code-panel > .expressive-code {
+.terminal-tabs starlight-tabs > [role="tabpanel"] .expressive-code {
 	margin: 0;
 }
 
-.language-code-panel > .expressive-code .frame {
+.terminal-tabs starlight-tabs > [role="tabpanel"] .expressive-code .frame {
 	--code-background: var(--base-background);
 }
 
-.language-code-panel > .expressive-code pre {
+.terminal-tabs starlight-tabs > [role="tabpanel"] .expressive-code pre {
 	border: none;
-	border-radius: var(--radius-none);
+	border-radius: 0;
 }
 
 /* Shrink FAQ per-question headings */

@@ -3,7 +3,6 @@ import { extname, join } from 'node:path';
 
 const DEST = 'dist';
 const UNEXPANDED_SNIPPET = /(?:^|\s)snippet="[^"]+"/;
-const UNEXPANDED_CODE_LANGUAGE = /(?:^|\s)code-language="[^"]+"/;
 
 function walkDir(dir) {
   const files = [];
@@ -18,14 +17,11 @@ function walkDir(dir) {
   return files;
 }
 
-const failures = walkDir(DEST).filter((file) => {
-  const content = readFileSync(file, 'utf-8');
-  return UNEXPANDED_SNIPPET.test(content) || UNEXPANDED_CODE_LANGUAGE.test(content);
-});
+const failures = walkDir(DEST).filter((file) => UNEXPANDED_SNIPPET.test(readFileSync(file, 'utf-8')));
 
 if (failures.length > 0) {
-  console.error(`Unexpanded generated Markdown metadata found in:\n${failures.join('\n')}`);
+  console.error(`Unexpanded snippet references found in:\n${failures.join('\n')}`);
   process.exit(1);
 }
 
-console.log('Verified generated Markdown contains no unexpanded snippet or code-language metadata');
+console.log('Verified generated Markdown contains no unexpanded snippet references');
