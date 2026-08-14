@@ -48,12 +48,9 @@ For event-driven apps, **EventStreamBuilder** lets you subscribe to real-time ch
 
 Sign in and read/write data. Account creation (signup) is generally handled outside of your app. See the [Developer Guide](/explore/pubkycore/getting-started/) for testnet setup where you bootstrap accounts for development.
 
-**Rust:**
-```rust snippet="snippets/rust/src/lib.rs:rust_quick_example"
+```js snippet="snippets/js/src/sdk.ts:js_quick_example" code-language="javascript"
 ```
-
-**JavaScript:**
-```javascript snippet="snippets/js/src/sdk.ts:js_quick_example"
+```rust snippet="snippets/rust/src/lib.rs:rust_quick_example" code-language="rust"
 ```
 
 ## Resources
