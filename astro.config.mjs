@@ -5,6 +5,7 @@ import starlightClientMermaid from '@pasqal-io/starlight-client-mermaid';
 import starlightLlmsTxt from 'starlight-llms-txt';
 import rehypeBasePath from './plugins/rehype-base-path.mjs';
 import remarkSnippet from './plugins/remark-snippet.mjs';
+import remarkLanguageCodeGroups from './plugins/remark-language-code-groups.mjs';
 
 // https://astro.build/config
 export default defineConfig({
@@ -73,7 +74,7 @@ export default defineConfig({
 	},
 	base: process.env.BASE_PATH || '/',
 	markdown: {
-		remarkPlugins: [remarkSnippet],
+		remarkPlugins: [remarkSnippet, remarkLanguageCodeGroups],
 		rehypePlugins: [[rehypeBasePath, { base: process.env.BASE_PATH || '/' }]],
 	},
 	integrations: [
