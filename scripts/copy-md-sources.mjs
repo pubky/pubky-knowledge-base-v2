@@ -23,8 +23,9 @@ const SITE_URL = (process.env.SITE_URL || 'https://pubky.org').replace(/\/+$/, '
 
 function processFile(srcPath, destPath) {
   const content = readFileSync(srcPath, 'utf-8');
+  const isMdx = extname(srcPath) === '.mdx';
 
-  let result = transformDocument(content);
+  let result = transformDocument(content, { stripIndent: isMdx });
   result = cleanFrontmatter(result);
 
   mkdirSync(dirname(destPath), { recursive: true });
@@ -33,7 +34,9 @@ function processFile(srcPath, destPath) {
 
 // Applies text transforms outside fenced blocks and materializes snippet-backed
 // blocks. The fence indentation is preserved for blocks nested inside lists.
-function transformDocument(content) {
+// When stripIndent is true (.mdx files), fence indentation from component
+// nesting is removed so the output renders as standard Markdown.
+function transformDocument(content, { stripIndent = false } = {}) {
   const lines = content.split('\n');
   const output = [];
   let outside = [];
@@ -61,9 +64,18 @@ function transformDocument(content) {
       break;
     }
 
+    const indent = stripIndent ? '' : opening.indent;
+
     const reference = getSnippetReference(opening.info);
     if (!reference) {
-      output.push(lines.slice(index, closingIndex + 1).join('\n'));
+      if (stripIndent && opening.indent) {
+        // Dedent the entire block
+        const blockLines = lines.slice(index, closingIndex + 1)
+          .map((line) => line.startsWith(opening.indent) ? line.slice(opening.indent.length) : line);
+        output.push(blockLines.join('\n'));
+      } else {
+        output.push(lines.slice(index, closingIndex + 1).join('\n'));
+      }
       index = closingIndex;
       continue;
     }
@@ -71,10 +83,9 @@ function transformDocument(content) {
     const snippet = loadSnippet(reference);
     const marker = safeFenceMarker(opening.marker, snippet);
     const info = stripSnippetReference(opening.info);
-    const closingIndent = lines[closingIndex].match(/^[ \t]*/)[0];
-    const snippetLines = snippet.split('\n').map((line) => `${opening.indent}${line}`);
+    const snippetLines = snippet.split('\n').map((line) => `${indent}${line}`);
 
-    output.push(`${opening.indent}${marker}${info}`, ...snippetLines, `${closingIndent}${marker}`);
+    output.push(`${indent}${marker}${info}`, ...snippetLines, `${indent}${marker}`);
     index = closingIndex;
   }
 
