@@ -122,7 +122,7 @@ function transformMarkdown(content) {
   content = content.replace(/^import\s+.*$/gm, '');
 
   // Strip Astro component tags (opening, closing, self-closing)
-  content = content.replace(/^\s*<\/?(Card|CardGrid|LinkCard)[^>]*\/?>\s*$/gm, '');
+  content = content.replace(/^\s*<\/?(Card|CardGrid|LinkCard|TabUrlSync|Tabs|TabItem|div)[^>]*\/?>\s*$/gm, '');
 
   // Strip markdown images: ![alt](src)
   content = content.replace(/!\[[^\]]*\]\([^)]*\)/g, '');
@@ -175,7 +175,7 @@ for (const file of files) {
   const rel = relative(SRC, file);
   if (SKIP.has(rel)) continue;
   try {
-    processFile(file, join(DEST, rel));
+    processFile(file, join(DEST, rel.replace(/\.mdx$/, '.md')));
     count++;
   } catch (err) {
     console.error(`Failed to process ${rel}: ${err.message}`);
