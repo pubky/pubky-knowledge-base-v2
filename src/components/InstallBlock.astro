@@ -1,5 +1,6 @@
 ---
 import { withBase } from '../utils/base-path';
+import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 const commands = [
   { label: "npm", command: "npm install @synonymdev/pubky" },
@@ -75,43 +76,26 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
   </div>
 
   <div class="install-right not-content">
-    <div class="terminal not-content">
-      <div class="terminal-bar">
-        <div class="dots">
-          <span class="dot dot-red"></span>
-          <span class="dot dot-yellow"></span>
-          <span class="dot dot-green"></span>
-        </div>
-        <div class="tabs" role="tablist" aria-label="Package manager">
-          {commands.map((cmd, i) => (
-            <button
-              class:list={["tab", { active: i === 0 }]}
-              data-index={i}
-              role="tab"
-              aria-selected={i === 0 ? "true" : "false"}
-            >
-              {cmd.label}
-            </button>
-          ))}
-        </div>
-      </div>
-      <div class="terminal-body">
-        {commands.map((cmd, i) => (
-          <div class:list={["command", { active: i === 0 }]} data-index={i}>
-            <span class="prompt">$</span>
-            <span class="cmd-text">{cmd.command}</span>
-            <button class="copy-btn" data-command={cmd.command} aria-label="Copy to clipboard" aria-live="polite">
-              <svg class="copy-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-              </svg>
-              <svg class="check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-            </button>
-          </div>
+    <div class="install-terminal terminal-tabs">
+      <Tabs>
+        {commands.map((cmd) => (
+          <TabItem label={cmd.label}>
+            <div class="install-command">
+              <span class="prompt">$</span>
+              <span class="cmd-text">{cmd.command}</span>
+              <button class="copy-btn" data-command={cmd.command} aria-label="Copy to clipboard" aria-live="polite">
+                <svg class="copy-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                <svg class="check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              </button>
+            </div>
+          </TabItem>
         ))}
-      </div>
+      </Tabs>
     </div>
   </div>
 </div>
@@ -119,24 +103,10 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
 
 <script>
   document.querySelectorAll('.install-block').forEach((block) => {
-    const tabs = block.querySelectorAll('.tab');
-    const commands = block.querySelectorAll('.command');
-
-    tabs.forEach((tab) => {
-      tab.addEventListener('click', () => {
-        const index = tab.getAttribute('data-index');
-        tabs.forEach((t) => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
-        commands.forEach((c) => c.classList.remove('active'));
-        tab.classList.add('active');
-        tab.setAttribute('aria-selected', 'true');
-        block.querySelector(`.command[data-index="${index}"]`)?.classList.add('active');
-      });
-    });
-
     block.querySelectorAll('.copy-prompt-btn').forEach((btn) => {
       btn.addEventListener('click', () => {
         const prompt = btn.getAttribute('data-prompt') || '';
-        navigator.clipboard.writeText(prompt);
+        navigator.clipboard.writeText(prompt).catch(() => {});
         btn.classList.add('copied');
         btn.setAttribute('data-tooltip', 'Copied!');
         btn.setAttribute('aria-label', 'Copied!');
@@ -151,7 +121,7 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
     block.querySelectorAll('.copy-btn').forEach((btn) => {
       btn.addEventListener('click', () => {
         const command = btn.getAttribute('data-command') || '';
-        navigator.clipboard.writeText(command);
+        navigator.clipboard.writeText(command).catch(() => {});
         btn.classList.add('copied');
         btn.setAttribute('aria-label', 'Copied!');
         setTimeout(() => { btn.classList.remove('copied'); btn.setAttribute('aria-label', 'Copy to clipboard'); }, 1500);
@@ -518,108 +488,25 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
     height: 500px;
   }
 
-  /* ── Terminal ── */
-  /* Figma: 500x140, border 1px base/border, radius rounded-xl(16), bg base/background, overflow clip */
-  .terminal {
+  /* ── Install terminal (Starlight Tabs) ── */
+  /* Figma: 500x140 terminal */
+  .install-terminal {
     width: 500px;
-    height: 140px;
-    border: 1px solid var(--base-border);
-    border-radius: var(--radius-xl);
-    overflow: hidden;
-    background: var(--base-background);
-    display: flex;
-    flex-direction: column;
   }
 
-  /* Figma: Dots bar = px spacing-4(16), py 8, bg base/card(#1d1d20), gap 11.
-     11px is hardcoded — Figma-specific value, doesn't fit 4px spacing scale */
-  .terminal-bar {
-    display: flex;
-    align-items: center;
-    gap: 11px;
-    padding: var(--spacing-2) var(--spacing-4);
-    background: var(--base-card);
-  }
-
-  /* Figma: dots = 9px, gap 11px (same oddball spacing as terminal-bar) */
-  .dots {
-    display: flex;
-    gap: 11px;
-  }
-
-  .dot {
-    width: 9px;
-    height: 9px;
-    border-radius: 50%;
-  }
-
-  .dot-red { background: #ff5f57; }
-  .dot-yellow { background: #febc2e; }
-  .dot-green { background: #28c840; }
-
-  /* Figma: Tabs = w 200, h 48, p spacing-2(8), gap spacing-2(8), radius rounded-md(8) */
-  .tabs {
-    display: flex;
-    align-items: center;
-    width: 200px;
-    height: 48px;
-    padding: var(--spacing-2);
-    gap: var(--spacing-2);
-    border-radius: var(--radius-md);
-  }
-
-  /* Figma: Tab trigger = flex-1, p spacing-2(8), radius rounded-md(8), text-xs(12/16) bold */
-  .tab {
-    flex: 1;
-    background: transparent;
-    border: none;
-    color: var(--base-secondary-foreground);
-    font-family: var(--sl-font);
-    font-size: var(--text-xs-size);
-    font-weight: 700;
-    line-height: var(--text-xs-lh);
-    padding: var(--spacing-2);
-    border-radius: var(--radius-md);
-    cursor: pointer;
-    transition: all 0.15s ease;
-    text-align: center;
-  }
-
-  .tab:hover {
-    color: var(--base-foreground);
-    background: rgba(255, 255, 255, 0.05);
-  }
-
-  /* Figma: Active tab = bg base/muted(#303034), text foreground, shadow sm */
-  .tab.active {
-    color: var(--base-foreground);
-    background: var(--base-muted);
-    box-shadow: var(--shadow-sm);
-  }
-
-  /* Figma: Terminal body = flex-1, p spacing-4(16), gap spacing-4(16), items center */
-  .terminal-body {
-    display: flex;
-    flex: 1;
-    align-items: center;
-    gap: var(--spacing-4);
+  .install-terminal starlight-tabs > [role="tabpanel"] {
     padding: var(--spacing-4);
   }
 
-  /* Figma: Large typography = text-lg(18/28) semibold, items-center inherited from .terminal-body */
-  .command {
-    display: none;
+  /* Figma: Large typography = text-lg(18/28) semibold */
+  .install-command {
+    display: flex;
     align-items: center;
     gap: var(--spacing-4);
     font-family: var(--sl-font);
     font-size: var(--text-lg-size);
     font-weight: 600;
     line-height: var(--text-lg-lh);
-    width: 100%;
-  }
-
-  .command.active {
-    display: flex;
   }
 
   /* Figma: $ prompt = muted-foreground */
@@ -762,12 +649,11 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
       display: none;
     }
 
-    .terminal {
+    .install-terminal {
       width: 100%;
-      height: auto;
     }
 
-    .command {
+    .install-command {
       font-size: var(--text-sm-size);
       line-height: var(--text-sm-lh);
     }

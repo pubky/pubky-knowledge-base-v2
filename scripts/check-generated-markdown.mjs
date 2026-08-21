@@ -10,7 +10,7 @@ function walkDir(dir) {
     const full = join(dir, entry);
     if (statSync(full).isDirectory()) {
       files.push(...walkDir(full));
-    } else if (extname(full) === '.md' || /^llms.*\.txt$/.test(entry)) {
+    } else if (extname(full) === '.md' || extname(full) === '.mdx' || /^llms.*\.txt$/.test(entry)) {
       files.push(full);
     }
   }

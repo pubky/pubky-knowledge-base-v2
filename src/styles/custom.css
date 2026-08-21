@@ -215,6 +215,76 @@ site-search button[data-open-modal] kbd {
 	outline-offset: 2px;
 }
 
+/* ── Terminal-style tabs ── */
+/* Opt-in via .terminal-tabs wrapper around Starlight <Tabs>.
+   ⚠ Couples to Starlight's internal DOM: starlight-tabs, .tablist-wrapper,
+   .tab, [role="tab"], [role="tabpanel"]. Review after Starlight upgrades. */
+.terminal-tabs starlight-tabs {
+	border: 1px solid var(--base-border);
+	border-radius: var(--radius-xl);
+	overflow: hidden;
+	background: var(--base-background);
+}
+
+.terminal-tabs starlight-tabs .tablist-wrapper {
+	overflow: visible;
+	background: var(--base-card);
+	padding: var(--spacing-2) var(--spacing-4);
+}
+
+.terminal-tabs starlight-tabs [role="tablist"] {
+	border-bottom: none;
+	width: fit-content;
+	max-width: 100%;
+	padding: var(--spacing-2);
+	gap: var(--spacing-2);
+	border-radius: var(--radius-md);
+}
+
+.terminal-tabs starlight-tabs .tab {
+	flex: 1;
+}
+
+.terminal-tabs starlight-tabs .tab > [role="tab"] {
+	justify-content: center;
+	padding: var(--spacing-2);
+	border-radius: var(--radius-md);
+	font-size: var(--text-xs-size);
+	font-weight: 700;
+	line-height: var(--text-xs-lh);
+	box-shadow: none;
+	color: var(--base-secondary-foreground);
+	transition: all 0.15s ease;
+}
+
+.terminal-tabs starlight-tabs .tab > [role="tab"]:hover {
+	color: var(--base-foreground);
+	background: rgba(255, 255, 255, 0.05);
+}
+
+.terminal-tabs starlight-tabs .tab > [role="tab"][aria-selected="true"] {
+	background: var(--base-muted);
+	box-shadow: var(--shadow-sm);
+	color: var(--base-foreground);
+}
+
+.terminal-tabs starlight-tabs > [role="tabpanel"] {
+	margin-top: 0;
+}
+
+.terminal-tabs starlight-tabs > [role="tabpanel"] .expressive-code {
+	margin: 0;
+}
+
+.terminal-tabs starlight-tabs > [role="tabpanel"] .expressive-code .frame {
+	--code-background: var(--base-background);
+}
+
+.terminal-tabs starlight-tabs > [role="tabpanel"] .expressive-code pre {
+	border: none;
+	border-radius: 0;
+}
+
 /* Shrink FAQ per-question headings */
 .faq h3 {
 	font-size: var(--text-xl-size);

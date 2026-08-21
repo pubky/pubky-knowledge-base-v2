@@ -2,13 +2,18 @@
 title: "Pubky SDK: Client Libraries for Decentralized Applications"
 ---
 
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import TabUrlSync from '../../../../components/TabUrlSync.astro';
+
+<TabUrlSync syncKey="sdk-lang" param="lang" />
+
 :::note
 The SDK is now at **v0.10**. If you're upgrading from an earlier version, see the [v0.10 Migration Guide](https://github.com/pubky/pubky-homeserver/tree/main/docs/v0.10-migration).
 :::
 
-The Pubky SDK provides client libraries for building applications on [Pubky Core](/explore/pubkycore/introduction). It handles the hard parts (key-based auth, homeserver discovery, transport) so you can focus on your app logic using familiar HTTP-style operations.
+The Pubky SDK provides client libraries for building applications on [Pubky Core](/explore/pubky-protocol/introduction). It handles the hard parts (key-based auth, homeserver discovery, transport) so you can focus on your app logic using familiar HTTP-style operations.
 
-New to Pubky? Start with the [Introduction](/explore/pubkycore/introduction) for background on identities, homeservers, and storage paths. For a hands-on walkthrough, see the [Developer Guide](/explore/pubkycore/getting-started/).
+New to Pubky? Start with the [Introduction](/explore/pubky-protocol/introduction) for background on identities, homeservers, and storage paths. For a hands-on walkthrough, see the [Developer Guide](/explore/pubky-protocol/getting-started/).
 
 ## Supported Platforms
 
@@ -26,7 +31,7 @@ All platforms share a consistent API surface. The React Native SDK uses mobile-o
 
 - **Rust**: [docs.rs/pubky](https://docs.rs/pubky)
 - **JavaScript/TypeScript**: [TypeDoc Reference](https://pubky.github.io/pubky-homeserver/js-sdk-typedoc/)
-- **HTTP API**: [Endpoint specification](/explore/pubkycore/api/)
+- **HTTP API**: [Endpoint specification](/explore/pubky-protocol/api/)
 
 ## How It Works
 
@@ -46,15 +51,20 @@ For event-driven apps, **EventStreamBuilder** lets you subscribe to real-time ch
 
 ## Quick Example
 
-Sign in and read/write data. Account creation (signup) is generally handled outside of your app. See the [Developer Guide](/explore/pubkycore/getting-started/) for testnet setup where you bootstrap accounts for development.
+Sign in and read/write data. Account creation (signup) is generally handled outside of your app. See the [Developer Guide](/explore/pubky-protocol/getting-started/) for testnet setup where you bootstrap accounts for development.
 
-**Rust:**
-```rust snippet="snippets/rust/src/lib.rs:rust_quick_example"
-```
-
-**JavaScript:**
-```javascript snippet="snippets/js/src/sdk.ts:js_quick_example"
-```
+<div class="terminal-tabs">
+<Tabs syncKey="sdk-lang">
+  <TabItem label="JavaScript">
+    ```js snippet="snippets/js/src/sdk.ts:js_quick_example"
+    ```
+  </TabItem>
+  <TabItem label="Rust">
+    ```rust snippet="snippets/rust/src/lib.rs:rust_quick_example"
+    ```
+  </TabItem>
+</Tabs>
+</div>
 
 ## Resources
 
