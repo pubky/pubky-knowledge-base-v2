@@ -97,11 +97,3 @@ Pubky uses DNS technology in innovative ways:
 2. **Hybrid approach**: Supports both traditional ICANN domains and public-key domains
 3. **[DoH](/explore/technologies/doh/) integration**: Provides encrypted DNS resolution
 4. **Homeserver discovery**: PKARR records contain DNS-like entries pointing to [Homeservers](/explore/pubky-protocol/homeserver/)
-
-## See Also
-
-- **[PKDNS](/explore/technologies/pkdns/)**: Public-key DNS implementation
-- **[PKARR](/explore/pubky-protocol/pkarr/introduction/)**: Public key addressable resource records
-- **[Mainline DHT](/explore/technologies/mainline-dht/)**: Distributed hash table powering PKDNS
-- **[DoH](/explore/technologies/doh/)**: DNS over HTTPS for encrypted queries
-- **[HTTPS](/explore/technologies/https/)**: Secure HTTP protocol

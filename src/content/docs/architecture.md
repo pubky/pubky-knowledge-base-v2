@@ -398,13 +398,3 @@ Users → Enterprise Homeserver + Custom Aggregator + Private Nexus → Internal
 ```
 
 **Best for**: Organizations with custom requirements
-
----
-
-## See Also
-
-- [Getting started with Pubky](/getting-started/)
-- [Pubky protocol Overview](/explore/pubky-protocol/introduction/)
-- [SDK documentation for building applications](/explore/pubky-protocol/sdk/)
-- [How Pubky differs from alternatives](/comparisons/)
-- [FAQ](/faq/)

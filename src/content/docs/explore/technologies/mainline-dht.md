@@ -73,9 +73,3 @@ From the PKARR project's perspective, Mainline DHT was chosen because:
 - **Examples**: [github.com/pubky/mainline/tree/main/examples](https://github.com/pubky/mainline/tree/main/examples)
 - **Wikipedia**: [Mainline DHT](https://en.wikipedia.org/wiki/Mainline_DHT)
 - **Kademlia Protocol**: [Wikipedia](https://en.wikipedia.org/wiki/Kademlia)
-
-## Related Documentation
-
-- [PKARR](/explore/pubky-protocol/pkarr/introduction/) - Public Key Addressable Resource Records built on Mainline DHT
-- [PKDNS](/explore/technologies/pkdns/) - DNS server that resolves public-key domains via DHT queries
-- [DHT](/explore/technologies/dht/) - General Distributed Hash Table concepts

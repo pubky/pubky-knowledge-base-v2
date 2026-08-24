@@ -47,9 +47,3 @@ The previous `/link` channel used synchronous producer/consumer pairing. The new
 The relay is designed to be self-hostable for reduced latency, privacy, and reliability. Use the [`pubky-http-relay`](https://github.com/pubky/pubky-http-relay) crate as a dependency in your Rust project.
 
 Apps can specify a custom relay URL via the [SDK](/explore/pubky-protocol/sdk/).
-
-## Related Components
-
-- **[Pubky Ring](/explore/technologies/pubky-ring/)**: The authenticator that sends tokens through the relay
-- **[Pubky SDK](/explore/pubky-protocol/sdk/)**: Client library that subscribes to relay channels
-- **[Pubky Homeserver](/explore/pubky-protocol/homeserver/)**: Verifies tokens and issues sessions

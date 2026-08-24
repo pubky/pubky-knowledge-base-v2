@@ -605,10 +605,3 @@ Potential improvements for Homegate:
 - **Prelude Documentation**: [https://docs.prelude.so/](https://docs.prelude.so/)
 - **PhoenixD Documentation**: [https://github.com/ACINQ/phoenixd](https://github.com/ACINQ/phoenixd)
 
-## See Also
-
-- [Homeserver](/explore/pubky-protocol/homeserver/) - Pubky Homeserver documentation
-- [Pubky protocol](/explore/pubky-protocol/introduction/) - Core protocol and SDK
-- [FAQ#Q50](/faq/#q50) - How users join Pubky App
-- [Censorship](/explore/concepts/censorship/) - Censorship resistance principles
-
