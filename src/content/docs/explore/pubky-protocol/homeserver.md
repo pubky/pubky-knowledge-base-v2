@@ -44,14 +44,12 @@ See [Security Model](/explore/pubky-protocol/security-model/) for the full trust
 
 ## Running a Homeserver
 
-> **Note:** Production deployment guides are not yet available. Easy deployment packages (Umbrel, apt, docker, start9) are under development.
+For installing, configuring, and running a Homeserver, follow the
+[Install Guide](https://github.com/pubky/pubky-homeserver/blob/main/docs/INSTALL.md). To make it
+publicly reachable see the
+[Deployment Guide](https://github.com/pubky/pubky-homeserver/blob/main/docs/DEPLOY.md).
 
-For local development and testing, start PostgreSQL and configure `database_url`, then run:
-
-```bash
-cargo run -p pubky-homeserver
-```
-
-For the fixed-port local testnet, Docker-managed PostgreSQL, external PostgreSQL, and in-process
-testnet usage, follow the
+For local development and testing with a fixed-port testnet, follow the
 [Pubky Testnet README](https://github.com/pubky/pubky-homeserver/blob/main/pubky-testnet/README.md).
+For a full walkthrough of setting up a local stack and building your first app, see the
+[Developer Guide](/explore/pubky-protocol/getting-started).
