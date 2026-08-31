@@ -2,38 +2,24 @@
 title: "Semantic Social Graph"
 ---
 
+A semantic social graph goes beyond simple follow/friend connections. Every relationship between users and content carries contextual meaning that captures *why* things are related, not just *that* they are. 
+
+Social activity produces this meaning naturally. When you interact with content or peers, each action signals what matters to you and why, resulting in a graph that is context-aware rather than just structural.
+
+### How It Works in Pubky
+
+Users can tag posts, files, links, and peers with meaningful labels, organize content into collections, reply, quote, and recommend. These actions build up a personal graph of weighted relationships that you can query and filter however you choose.
+
+For example, if you tag a peer as "rust-dev" and bookmark their posts about async patterns, content from peers they interact with on similar topics can surface in your view. You control how content is weighted, how many degrees of connection to explore, and which signals matter.
+
+Because the graph is yours to query, you can configure multiple lenses into it each producing a different feed tailored to a specific topic or need. One lens might focus on Rust ecosystem updates from trusted developers, another on broader industry trends from a wider circle.
+
+Because there is no central algorithm deciding what is relevant, each user's graph reflects their own interests and context. The result is a network where relevance is personal rather than popularity-driven.
+
 ![Diagram showing semantic social graph with tagged relationships, weighted connections, and user-centric personalization](/images/mermaid_charts/semantic_social_graph.svg)
 
-**Semantic Relationships:** Connections between users and content are tagged with meaningful metadata, capturing the context, relevance, and nature of each relationship.
-**Weighted Connections:** Relationships aren't just binary; they carry weights that represent their strength, trust level, or relevance, enabling more sophisticated interactions.
-**User-Centric Personalization:** Users have control over how they interact with the network, allowing them to tailor their experience based on their interests and connections.
-**Decentralization:** There's no central authority controlling the network. Users own their identities and data, promoting privacy and sovereignty.
+### Beyond Social: A Substrate for Intelligence
 
-### Why It Matters
-Enhanced Content Curation: By understanding the semantic meaning and weights of relationships, users receive content that's more relevant and engaging.
-Scalability: Automated tagging and weighting mechanisms scale effortlessly, accommodating growing networks without compromising performance.
-Rich Interactions: Users can engage in more meaningful ways, as the network understands the context and nuances of each relationship.
+A semantic social graph isn't only useful for people. Because it accumulates contextual meaning from ordinary activity, it becomes a rich layer that AI can operate over. It can surface connections between peers and topics, identify recurring community structures, or recommend content paths that no single user would have mapped out.
 
-### Semantic Graphs in Pubky.app
-
-Pubky.app is a user-friendly platform that showcases the capabilities of the Pubky protocol.
-
-**Social Tagging:** Users can tag posts, files, links, and even peers with meaningful labels. This enriches the semantic content of the network.
-Customizable Feeds: By utilizing tags and weighted relationships, users control what appears in their feeds, ensuring content relevance.
-**Peer Tagging:** Assign semantic tags to peers, influencing how their content is weighted and displayed.
-**Web of Relevance:** Move beyond the traditional web-of-trust paradigm to a network where relevance and context drive interactions.
-
-### How Pubky Applies Decentralized Networking and Social Graphing
-Pubky combines decentralized identity, semantic social tagging, and weighted relationships into a cohesive system that offers unparalleled user control and personalization.
-
-**Semantic Social Graphing**
-Weighted Distances: Relationships aren't just connections; they have weights that represent their strength or relevance to the user.
-
-**Advanced Content Curation**
-Personalized Feeds: Users define what content matters to them, and the network delivers it based on semantic relevance and weighted relationships.
-Dynamic Filtering: Adjust your view of the network in real-time by modifying tags and weights, ensuring your feed evolves with your interests.
-
-### Why It's Different
-Pubky bridges the gap between decentralized identity management and personalized content curation, something traditional models haven't achieved.
-Enhancing Privacy and Security: By eliminating centralized points of control, Pubky reduces vulnerabilities and enhances user privacy.
-Promoting Open Innovation: As an open-source project, Pubky invites developers and enthusiasts to contribute, fostering a community-driven evolution of the platform.
+For a deeper exploration of this idea, see [Social Intelligence Is Not Artificial](https://pubky.app/post/gujx6qd8ksydh1makdphd3bxu351d9b8waqka8hfg6q7hnqkxexo/0035MMN9XV790) (blog post).
