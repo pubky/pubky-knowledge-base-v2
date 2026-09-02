@@ -133,7 +133,7 @@ This creates a demo identity for the hello-world app and logs its pubky to the b
 ```js snippet="snippets/js/src/getting-started.ts:js_getting_started_signup"
 ```
 
-This creates an account on the local Homeserver and publishes the user's Homeserver mapping (PKARR). The local Homeserver accepts signup without a token, so we pass `null`.
+This creates an account on the local Homeserver and publishes the user's Homeserver mapping (PKARR). Because [local signup is set to `open`](https://github.com/pubky/pubky-docker/blob/75b1121f3e90b9b44d9416ca4f5ba87a4984e800/homeserver.config.toml#L5), we pass `null` instead of a signup token.
 
 :::note[Homeserver signup]
 This guide performs Homeserver signup inside the app because it is the shortest path to a working local example. In a real-world flow, however, Homeserver signup is not the responsibility of a Pubky app. Assume users already have an account on a Homeserver. If not, direct them to a separate signup flow, such as [the onboarding on pubky.app](https://pubky.app/onboarding/human), instead of implementing it in the app. The template in Step 3.8 follows this pattern.
