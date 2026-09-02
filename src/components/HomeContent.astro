@@ -12,10 +12,15 @@ const demos = [
     description:
       "A shareable identity card that brings your Pubky identifier, avatar, bio, links, posts, profile tags, and Paykit-powered donation options into one visual page.",
     actions: [
-      { label: "Live Demo", href: "https://mypubky.com/", variant: "secondary" as const },
+      { label: "Demo", href: "https://mypubky.com/", variant: "secondary" as const },
       {
-        label: "Read More",
+        label: "GitHub",
         href: "https://github.com/pubky/mypubky",
+        variant: "outline" as const,
+      },
+      {
+        label: "Blog",
+        href: "https://medium.com/pubky/mypubky-a-portable-link-in-bio-built-on-pubky-identity-c15169ae744a",
         variant: "outline" as const,
       },
     ],
@@ -24,7 +29,14 @@ const demos = [
     title: "Payky",
     description:
       "A linktree like page for payments, based on Paykit, where the user can connect using Pubky Ring and add their payment details (crypto, fiat etc.) and share a link to the page with anyone.",
-    actions: [{ label: "Live Demo", href: "https://payky.app/", variant: "secondary" as const }],
+    actions: [
+      { label: "Demo", href: "https://payky.app/", variant: "secondary" as const },
+      {
+        label: "Blog",
+        href: "https://medium.com/pubky/payky-a-universal-pay-page-built-on-pubky-identity-756d08a64cc4",
+        variant: "outline" as const,
+      },
+    ],
   },
   {
     title: "ABC",
@@ -32,12 +44,12 @@ const demos = [
       "Drop-In Pubky Comment Widget for Blogs\n\nSimple embeddable script that lets any website add Pubky-based comments.",
     actions: [
       {
-        label: "Live Demo",
+        label: "Demo",
         href: "https://ok300.github.io/abc-prague-hugo/posts/abc-launch/",
         variant: "secondary" as const,
       },
       {
-        label: "Read More",
+        label: "GitHub",
         href: "https://github.com/aintnostressin/abc-team-hackathon-prague",
         variant: "outline" as const,
       },
@@ -48,9 +60,9 @@ const demos = [
     description:
       "A social layer for OpenStreetMap with place reviews, posts, routes, collections, and geo-captures stored as user-owned data.",
     actions: [
-      { label: "Live Demo", href: "https://mapky.app/", variant: "secondary" as const },
+      { label: "Demo", href: "https://mapky.app/", variant: "secondary" as const },
       {
-        label: "Read More",
+        label: "GitHub",
         href: "https://github.com/gillohner/mapky-app",
         variant: "outline" as const,
       },
@@ -62,13 +74,18 @@ const demos = [
       "Pubky Passport uses Google login to create or access an encrypted Pubky key in Google Drive, where neither Google nor the Pubky Passport server can decrypt it alone.",
     actions: [
       {
-        label: "Live Demo",
+        label: "Demo",
         href: "https://passport.buhlerlabs.com",
         variant: "secondary" as const,
       },
       {
-        label: "Read More",
+        label: "GitHub",
         href: "https://github.com/SeverinAlexB/pubky-passport-prague26",
+        variant: "outline" as const,
+      },
+      {
+        label: "Blog",
+        href: "https://medium.com/pubky/pubky-passport-a-familiar-sign-in-flow-for-sovereign-identity-ee07097ba02e",
         variant: "outline" as const,
       },
     ],
@@ -77,9 +94,9 @@ const demos = [
     title: "Explorer",
     description: "A file explorer that allows you to navigate data stored on your Homeserver.",
     actions: [
-      { label: "Live Demo", href: "https://explorer.pubky.app/", variant: "secondary" as const },
+      { label: "Demo", href: "https://explorer.pubky.app/", variant: "secondary" as const },
       {
-        label: "Read More",
+        label: "GitHub",
         href: "https://github.com/pubky/pubky-explorer",
         variant: "outline" as const,
       },
@@ -90,9 +107,9 @@ const demos = [
     description:
       "A social calendar and event management app using existing calendar standards, with event data stored on each user’s homeserver.",
     actions: [
-      { label: "Live Demo", href: "https://eventky.app/", variant: "secondary" as const },
+      { label: "Demo", href: "https://eventky.app/", variant: "secondary" as const },
       {
-        label: "Read More",
+        label: "GitHub",
         href: "https://github.com/gillohner/eventky",
         variant: "outline" as const,
       },
@@ -103,9 +120,9 @@ const demos = [
     description:
       "A DNS server providing self-sovereign and censorship-resistant domain names based on PKARR.",
     actions: [
-      { label: "Live Demo", href: "https://pkdns.net/", variant: "secondary" as const },
+      { label: "Demo", href: "https://pkdns.net/", variant: "secondary" as const },
       {
-        label: "Read More",
+        label: "GitHub",
         href: "https://github.com/pubky/pkdns",
         variant: "outline" as const,
       },
@@ -117,13 +134,18 @@ const demos = [
       "An interactive web-based playground for testing and experimenting with the Pubky SDK.",
     actions: [
       {
-        label: "Live Demo",
+        label: "Demo",
         href: "https://jvsena42.github.io/pubky-lab/",
         variant: "secondary" as const,
       },
       {
-        label: "Read More",
+        label: "GitHub",
         href: "https://github.com/jvsena42/pubky-lab",
+        variant: "outline" as const,
+      },
+      {
+        label: "Blog",
+        href: "https://medium.com/pubky/pubky-lab-a-simple-playground-for-testing-pubky-sdk-calls-3294a3186607",
         variant: "outline" as const,
       },
     ],
@@ -132,7 +154,12 @@ const demos = [
     title: "No Registry",
     description: "Self-host PKDNS in under 10 minutes with a simple Pi-hole or Docker setup.",
     actions: [
-      { label: "Read More", href: "https://www.noregistry.com/", variant: "outline" as const },
+      { label: "Website", href: "https://www.noregistry.com/", variant: "outline" as const },
+      {
+        label: "Blog",
+        href: "https://medium.com/pubky/no-registry-a-marketing-push-for-pkdns-4e6d6fae58e4",
+        variant: "outline" as const,
+      },
     ],
   },
   {
@@ -146,7 +173,7 @@ const demos = [
         variant: "secondary" as const,
       },
       {
-        label: "Read More",
+        label: "GitHub",
         href: "https://github.com/jvsena42/loopky",
         variant: "outline" as const,
       },
@@ -479,12 +506,15 @@ const icons = {
     gap: var(--spacing-6);
   }
 
+  /* minmax(0, …) not 1fr: plain 1fr refuses to shrink a column below its card's
+     min-content, and .home-content's overflow: hidden then silently cuts off
+     whatever sticks out. */
   .card-grid-3 {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .card-grid-4 {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   /* Figma: Key Concepts (node 34690:87147) — section title centered, sized text-5xl
@@ -737,13 +767,21 @@ const icons = {
     .home-footer {
       padding: 0;
     }
+
+    /* Demo cards carry a 2-3 pill action row, so they need more width than the
+       other card grids — step down to 2 columns here instead of waiting for the
+       shared 767px rule. Same specificity as .card-grid-4, so it has to sit
+       before the 767/639 blocks for those to still win at narrower widths. */
+    .demos-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
   }
 
   /* 767px breakpoint — card grids collapse to 2 columns */
   @media (max-width: 767px) {
     .card-grid-3,
     .card-grid-4 {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .image-card-sections {
@@ -790,7 +828,7 @@ const icons = {
   @media (max-width: 639px) {
     .card-grid-3,
     .card-grid-4 {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
     }
   }
 </style>
