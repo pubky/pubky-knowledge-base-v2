@@ -16,7 +16,7 @@ https://homeserver.example.com
 
 Homeserver URLs are discovered via [PKARR](/explore/pubky-protocol/pkarr/introduction/) records published to the [Mainline DHT](/explore/technologies/mainline-dht/).
 
-When you build with the [SDK](/explore/pubky-protocol/sdk/), it handles PKARR lookup, transport selection, authentication, and the `pubky-host` header for HTTPS Homeserver requests. Use the raw HTTP API directly only when you are writing low-level integrations or server components that intentionally bypass the SDK helpers.
+When you build with the [SDK](/explore/pubky-protocol/sdk/), it handles PKARR lookup, transport selection, authentication, and the `pubky-host` header for HTTPS Homeserver requests. For raw requests to an ICANN HTTPS endpoint, identify the user whose storage namespace the request targets with `pubky-host: <user-z32>` or `?pubky-host=<user-z32>`. The bearer token authenticates and authorizes the request but does not identify that user. Use the raw HTTP API directly only when you are writing low-level integrations or server components that intentionally bypass the SDK helpers.
 
 ## Authentication
 
@@ -31,6 +31,7 @@ Authenticated requests use the bearer token:
 ```http
 GET /pub/myapp/data
 Authorization: Bearer <token>
+pubky-host: <user-z32>
 ```
 
 ### Grant Endpoints
@@ -71,6 +72,7 @@ Store or update data at a path.
 ```http
 PUT /:path
 Authorization: Bearer <token>
+pubky-host: <user-z32>
 Content-Type: application/octet-stream
 
 <binary data>
@@ -80,20 +82,22 @@ Content-Type: application/octet-stream
 - Normalized decoded paths must be under `/pub/`
 - Maximum normalized decoded length: 972 bytes total and 255 bytes per segment
 - Paths are UTF-8 and may contain spaces and non-ASCII characters; percent-encode them when constructing raw HTTP URLs
+- PUT targets must not end in `/`
 
 **Response:**
 ```http
 HTTP/1.1 201 Created
 ```
 
-The response has no body. The Homeserver returns `201 Created` for both new and overwritten entries.
+The response has no body. The Homeserver returns `201 Created` for new entries and exact-path overwrites.
 
 The tenant router declares a [100 MiB body limit](https://github.com/pubky/pubky-core/blob/main/pubky-homeserver/src/client_server/routes/tenants/mod.rs#L19-L33), but the streaming PUT handler does not enforce it as a hard cap. Operators must enforce request-size limits for both direct PubkyTLS and reverse-proxied traffic and configure per-user storage quotas separately.
 
 **Error Responses:**
-- `400 Bad Request`: Invalid path
+- `400 Bad Request`: Invalid path, including a target ending in `/`
 - `401 Unauthorized`: Invalid authentication
 - `403 Forbidden`: Insufficient permissions
+- `409 Conflict`: The target collides with an existing file at an ancestor or descendant path
 - `507 Insufficient Storage`: Quota exceeded
 
 ### GET - Retrieve Data
@@ -104,6 +108,7 @@ Retrieve data from a path.
 ```http
 GET /:path
 Authorization: Bearer <token>
+pubky-host: <user-z32>
 ```
 
 **Response:**
@@ -130,6 +135,7 @@ Delete data at a path.
 ```http
 DELETE /:path
 Authorization: Bearer <token>
+pubky-host: <user-z32>
 ```
 
 **Response:**
@@ -152,6 +158,7 @@ Send `GET` to a path ending in `/` to list entries under that prefix.
 ```http
 GET /pub/myapp/posts/?limit=20&reverse=true
 Authorization: Bearer <token>
+pubky-host: <user-z32>
 ```
 
 **Query Parameters:**
@@ -288,7 +295,7 @@ Check whether a signup token is valid, used, or unknown.
 
 ## Admin API
 
-Each Homeserver runs a separate admin HTTP server on its own socket (default `127.0.0.1:6288`), isolated from the public Pubky API. It is the only surface for operator tasks — minting signup tokens, suspending abusive users, adjusting per-user quotas, deleting entries, and inspecting health. The admin listener is plain HTTP, so keep it bound to `127.0.0.1` and never expose port 6288 to the internet. Use a protected tunnel to the loopback listener for remote administration. See [Homeserver](/explore/pubky-protocol/homeserver/) for the operator-facing overview.
+Each Homeserver runs a separate admin HTTP server on its own socket (default `127.0.0.1:6288`), isolated from the public Pubky API. It is the only surface for operator tasks — minting signup tokens, blocking abusive users' storage `PUT` requests, adjusting per-user quotas, deleting entries, and inspecting health. The admin listener is plain HTTP, so keep it bound to `127.0.0.1` and never expose port 6288 to the internet. Use a protected tunnel to the loopback listener for remote administration. See [Homeserver](/explore/pubky-protocol/homeserver/) for the operator-facing overview.
 
 ### Authentication
 
@@ -353,11 +360,11 @@ Each field accepts a value, `"unlimited"`, or `null` to use the system default. 
 
 `GET /events-stream` provides an admin-authenticated SSE feed. It supports user, cursor, path, ordering, limit, and live-stream filters.
 
-### User Suspension
+### User PUT Disablement
 
-`POST /users/{public_key}/disable` — flip a per-user `disabled` flag. Subsequent reads and writes against that user's data fail until re-enabled.
+`POST /users/{public_key}/disable` — set a per-user `disabled` flag. While disabled, storage `PUT` requests return `403 Forbidden`; `GET`, `DELETE`, and sign-in remain available.
 
-`POST /users/{public_key}/enable` — reverse the disable.
+`POST /users/{public_key}/enable` — clear the flag.
 
 Both return `200 OK` on success, `404 Not Found` for unknown users.
 
