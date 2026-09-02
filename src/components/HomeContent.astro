@@ -5,8 +5,25 @@ import ImageCard from "./ImageCard.astro";
 import DemoCard from "./DemoCard.astro";
 import { withBase } from "../utils/base-path";
 
-// Figma: Demos (node 34702:87731) — Hackathon projects, 11 cards
+// Figma: Demos (node 34702:87731) — 12 cards
 const demos = [
+  {
+    title: "App Template",
+    description:
+      "Copy this Pubky app template to start your own app. It includes authentication, file storage, event stream subscriptions, and mainnet and local testnet builds.",
+    actions: [
+      {
+        label: "Demo",
+        href: "https://pubky.github.io/pubky-app-templates/",
+        variant: "secondary" as const,
+      },
+      {
+        label: "GitHub",
+        href: "https://github.com/pubky/pubky-app-templates",
+        variant: "outline" as const,
+      },
+    ],
+  },
   {
     title: "mypubky",
     description:
