@@ -30,7 +30,7 @@ Note: [Pubky Docker](/explore/technologies/pubky-docker/)  can run a full [pubky
 git clone https://github.com/pubky/pubky-docker.git && cd pubky-docker && cp .env-sample .env
 ```
 
-Run the homeserver and tesnet via Docker compose:
+Run the homeserver and testnet via Docker compose:
 
 ```bash
 docker compose up homeserver -d
