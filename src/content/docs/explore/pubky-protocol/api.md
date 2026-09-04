@@ -2,7 +2,9 @@
 title: "Pubky Homeserver API Reference"
 ---
 
-The [Pubky protocol](/explore/pubky-protocol/introduction/) defines a RESTful HTTP API for storing and retrieving data on [Homeservers](/explore/pubky-protocol/homeserver/). This document describes the complete API specification.
+The [Pubky protocol](/explore/pubky-protocol/introduction/) defines a RESTful HTTP API for storing and retrieving data on [Homeservers](/explore/pubky-protocol/homeserver/). This page provides a practical overview of the raw HTTP API.
+
+The [client OpenAPI specification](https://github.com/pubky/pubky-core/blob/main/pubky-homeserver/openapi-client.yml) and [admin OpenAPI specification](https://github.com/pubky/pubky-core/blob/main/pubky-homeserver/openapi-admin.yml) are the maintained references for routes and schemas. Consult the server implementation for behavior not captured by those specifications.
 
 ## Base URL
 
@@ -14,72 +16,51 @@ https://homeserver.example.com
 
 Homeserver URLs are discovered via [PKARR](/explore/pubky-protocol/pkarr/introduction/) records published to the [Mainline DHT](/explore/technologies/mainline-dht/).
 
-When you build with the [SDK](/explore/pubky-protocol/sdk/), it handles PKARR lookup, transport selection, session cookies, and the `pubky-host` header for HTTPS Homeserver requests. Use the raw HTTP API directly only when you are writing low-level integrations or server components that intentionally bypass the SDK helpers.
+When you build with the [SDK](/explore/pubky-protocol/sdk/), it handles PKARR lookup, transport selection, authentication, and the `pubky-host` header for HTTPS Homeserver requests. For raw requests to an ICANN HTTPS endpoint, identify the user whose storage namespace the request targets with `pubky-host: <user-z32>` or `?pubky-host=<user-z32>`. The bearer token authenticates and authorizes the request but does not identify that user. Use the raw HTTP API directly only when you are writing low-level integrations or server components that intentionally bypass the SDK helpers.
 
 ## Authentication
 
 See [Authentication](/explore/pubky-protocol/authentication/) for conceptual overview.
 
-### Public Key Authentication
+### Grant Authentication
 
-All requests must be authenticated using Ed25519 signatures:
+Applications receive a user-signed grant bound to an app-specific proof-of-possession (PoP) key. The grant and a PoP proof are exchanged at `/auth/grant/session` for a short-lived bearer token. The SDK handles this exchange and refreshes bearer tokens automatically.
 
-**Headers:**
-```
-Authorization: Pubky <public_key>:<signature>:<timestamp>
-```
+Authenticated requests use the bearer token:
 
-**Signature Generation:**
-1. Create message: `METHOD:PATH:TIMESTAMP:BODY_HASH`
-2. Sign message with Ed25519 private key
-3. Encode signature as base64
-
-**Example (conceptual):**
-```
-Method: PUT
-Path: /pub/myapp/data
-Timestamp: 1704067200
-Body: {"hello":"world"}
-Body Hash: sha256(body) = abc123...
-
-Message to sign: "PUT:/pub/myapp/data:1704067200:abc123..."
-Signature: sign_ed25519(message, private_key)
-
-Authorization: Pubky 8pinxxgqs41n4aididenw5apqp1urfmzdztr8jt4abrkdn435ewo:SGVsbG8gV29ybGQ=:1704067200
-```
-
-### Session Tokens
-
-For long-lived connections, use session tokens:
-
-**Request:**
-```http
-POST /auth/session
-Authorization: Pubky <public_key>:<signature>:<timestamp>
-Content-Type: application/json
-
-{
-  "capabilities": [
-    "read:/pub/",
-    "write:/pub/myapp/"
-  ],
-  "ttl": 3600
-}
-```
-
-**Response:**
-```json
-{
-  "token": "session_abc123...",
-  "expires_at": 1704070800
-}
-```
-
-**Usage:**
 ```http
 GET /pub/myapp/data
-Authorization: Bearer session_abc123...
+Authorization: Bearer <token>
+pubky-host: <user-z32>
 ```
+
+### Grant Endpoints
+
+Both grant signup and session exchange accept a user-signed grant and a client-signed PoP proof:
+
+```json
+{
+  "grant": "<compact grant JWS>",
+  "pop": "<compact PoP JWS>"
+}
+```
+
+| Method | Path | Authentication | Success | Purpose |
+| --- | --- | --- | --- | --- |
+| `POST` | `/auth/grant/signup` | Grant and PoP request body | `204 No Content` | Create an account without creating a session |
+| `POST` | `/auth/grant/session` | Grant and PoP request body | `200 OK` | Exchange a grant for a short-lived bearer token and session metadata |
+| `GET` | `/auth/grant/session` | Grant bearer | `200 OK` | Inspect the current grant-backed session |
+| `DELETE` | `/auth/grant/session` | Optional grant bearer | `200 OK` | Idempotently revoke the current session's backing grant and every session issued from it |
+| `GET` | `/auth/grant/sessions` | Grant bearer with exact `/:rw` capability | `200 OK` | List the user's active grants |
+| `DELETE` | `/auth/grant/session/{gid}` | Grant bearer with exact `/:rw` capability | `200 OK` | Revoke an owned grant and every session issued from it |
+
+Grant signup is one-shot and sessionless. Its grant must use client ID `pubky.signup`, include the exact root capability `/:rw`, have a lifetime of at most five minutes, and include a fresh PoP proof. A grant missing the root capability is rejected with `403 Forbidden`. The `signup_token` query parameter is required when the Homeserver uses token-required signup. An application must perform a separate grant exchange after signup to obtain a bearer token.
+
+`GET /auth/grant/session` returns `homeserver`, `pubky`, `client_id`, `capabilities` (an array), `grant_id`, `token_expires_at`, `grant_expires_at`, and `created_at`. Timestamps are Unix seconds. Each bearer is a secret and appears only in the session-exchange response that minted it; do not log or publish it.
+
+`GET /auth/grant/sessions` returns only non-revoked, non-expired grants. Each item contains `grant_id`, `client_id`, `capabilities` (a comma-separated string), `issued_at`, and `expires_at`. Root-capability grant management is highly privileged and should be reserved for trusted identity or session managers, not ordinary applications. Specific revocation also verifies that the grant belongs to the authenticated user.
+
+The current-session `DELETE` route returns `200 OK` even when its bearer is missing, invalid, or already revoked, so the response does not prove that a grant was found. Functional error bodies are plain text; consult the OpenAPI specification and server implementation for route-specific errors.
 
 ## Storage Endpoints
 
@@ -90,34 +71,33 @@ Store or update data at a path.
 **Request:**
 ```http
 PUT /:path
-Authorization: Pubky <public_key>:<signature>:<timestamp>
+Authorization: Bearer <token>
+pubky-host: <user-z32>
 Content-Type: application/octet-stream
 
 <binary data>
 ```
 
 **Path Format:**
-- Must start with `/pub/` (public) or `/private/` (future)
-- Maximum length: 1024 bytes
-- Allowed characters: `a-z`, `A-Z`, `0-9`, `-`, `_`, `/`, `.`
+- Normalized decoded paths must be under `/pub/`
+- Maximum normalized decoded length: 972 bytes total and 255 bytes per segment
+- Paths are UTF-8 and may contain spaces and non-ASCII characters; percent-encode them when constructing raw HTTP URLs
+- PUT targets must not end in `/`
 
 **Response:**
 ```http
-HTTP/1.1 200 OK
-Content-Type: application/json
-
-{
-  "path": "/pub/myapp/data",
-  "size": 1234,
-  "created_at": 1704067200
-}
+HTTP/1.1 201 Created
 ```
 
+The response has no body. The Homeserver returns `201 Created` for new entries and exact-path overwrites.
+
+The tenant router declares a [100 MiB body limit](https://github.com/pubky/pubky-core/blob/main/pubky-homeserver/src/client_server/routes/tenants/mod.rs#L19-L33), but the streaming PUT handler does not enforce it as a hard cap. Operators must enforce request-size limits for both direct PubkyTLS and reverse-proxied traffic and configure per-user storage quotas separately.
+
 **Error Responses:**
-- `400 Bad Request`: Invalid path or data
+- `400 Bad Request`: Invalid path, including a target ending in `/`
 - `401 Unauthorized`: Invalid authentication
 - `403 Forbidden`: Insufficient permissions
-- `413 Payload Too Large`: Data exceeds limit (default: 10MB)
+- `409 Conflict`: The target collides with an existing file at an ancestor or descendant path
 - `507 Insufficient Storage`: Quota exceeded
 
 ### GET - Retrieve Data
@@ -127,17 +107,20 @@ Retrieve data from a path.
 **Request:**
 ```http
 GET /:path
-Authorization: Pubky <public_key>:<signature>:<timestamp>
+Authorization: Bearer <token>
+pubky-host: <user-z32>
 ```
 
 **Response:**
 ```http
 HTTP/1.1 200 OK
-Content-Type: application/octet-stream
+Content-Type: <detected media type>
 Content-Length: 1234
 
 <binary data>
 ```
+
+The response body contains the stored bytes. The Homeserver infers `Content-Type` from the content or path extension and falls back to `application/octet-stream`.
 
 **Error Responses:**
 - `401 Unauthorized`: Invalid authentication
@@ -151,64 +134,49 @@ Delete data at a path.
 **Request:**
 ```http
 DELETE /:path
-Authorization: Pubky <public_key>:<signature>:<timestamp>
+Authorization: Bearer <token>
+pubky-host: <user-z32>
 ```
 
 **Response:**
 ```http
-HTTP/1.1 200 OK
-Content-Type: application/json
-
-{
-  "path": "/pub/myapp/data",
-  "deleted_at": 1704067200
-}
+HTTP/1.1 204 No Content
 ```
+
+The response has no body.
 
 **Error Responses:**
 - `401 Unauthorized`: Invalid authentication
 - `403 Forbidden`: Insufficient permissions
 - `404 Not Found`: Path does not exist
 
-### LIST - Enumerate Data
+### GET - List Data
 
-List entries under a path prefix (with pagination).
+Send `GET` to a path ending in `/` to list entries under that prefix.
 
 **Request:**
 ```http
-GET /:path?limit=20&cursor=abc123&reverse=false
-Authorization: Pubky <public_key>:<signature>:<timestamp>
+GET /pub/myapp/posts/?limit=20&reverse=true
+Authorization: Bearer <token>
+pubky-host: <user-z32>
 ```
 
 **Query Parameters:**
-- `limit` (optional): Maximum entries to return (default: 100, max: 1000)
-- `cursor` (optional): Pagination cursor from previous response
-- `reverse` (optional): List in reverse order (newest first)
+- `limit` (optional): Maximum entries to return (default: 100; effective maximum: 1000)
+- `cursor` (optional): Exclusive path cursor. Pass the final URL from the previous page, with or without the `pubky://` scheme, URL-encoded as a query value
+- `reverse` (optional): Reverse the deterministic lexicographic path order; this is unrelated to creation or modification time
+- `shallow` (optional): When `true`, return immediate children instead of listing recursively
 
 **Response:**
 ```http
 HTTP/1.1 200 OK
-Content-Type: application/json
+Content-Type: text/plain
 
-{
-  "entries": [
-    {
-      "path": "/pub/myapp/posts/001",
-      "size": 512,
-      "created_at": 1704067200,
-      "updated_at": 1704067200
-    },
-    {
-      "path": "/pub/myapp/posts/002",
-      "size": 1024,
-      "created_at": 1704067300,
-      "updated_at": 1704067300
-    }
-  ],
-  "cursor": "next_page_cursor_xyz",
-  "has_more": true
-}
+pubky://<user-key>/pub/myapp/posts/002
+pubky://<user-key>/pub/myapp/posts/001
 ```
+
+The body contains one canonical `pubky://` URL per line, with no JSON envelope or entry metadata. To request another page, use the final returned URL as `cursor`.
 
 **Error Responses:**
 - `401 Unauthorized`: Invalid authentication
@@ -221,21 +189,22 @@ Capabilities define what operations a session can perform:
 ### Capability Syntax
 
 ```
-<operation>:<path_prefix>
+<scope>:<actions>
 ```
 
-**Operations:**
-- `read`: GET, LIST operations
-- `write`: PUT, DELETE operations
-- `*`: All operations
+**Actions:**
+- `r`: GET operations, including directory listings
+- `w`: PUT, DELETE operations
 
 **Examples:**
 ```
-read:/pub/                    # Read all public data
-write:/pub/myapp/             # Write to /pub/myapp/* only
-*:/pub/myapp/posts/           # Full access to posts
-read:/pub/social/profile      # Read specific path
+/pub/:r                       # Read all public data
+/pub/myapp/:w                 # Write below /pub/myapp/
+/pub/myapp/posts/:rw          # Read and write posts
+/pub/social/profile:r         # Read a specific public path
 ```
+
+A trailing slash defines a directory scope. Without it, the capability matches only the exact path.
 
 ### Capability Checking
 
@@ -263,7 +232,7 @@ GET /events-stream?user=<z32_pubkey>&user=<z32_pubkey>:<cursor>&limit=100&live=t
 - `limit` (optional): Maximum events before closing (1–65535). Without limit and `live=false`, all historical events are sent then the stream closes
 - `live` (optional): When `true`, delivers all historical events first, then streams new events in real-time. Cannot combine with `reverse`
 - `reverse` (optional): When `true`, delivers events newest-first then closes. Cannot combine with `live`
-- `path` (optional): Filter events by path prefix (e.g. `/pub/pubky.app/`)
+- `path` (optional, repeatable): Filter events by path. Multiple `path` values are combined; matching any one is sufficient
 
 **Response (Server-Sent Events):**
 ```http
@@ -326,7 +295,7 @@ Check whether a signup token is valid, used, or unknown.
 
 ## Admin API
 
-Each Homeserver runs a separate admin HTTP server on its own socket (default `127.0.0.1:6288`), isolated from the public Pubky API. It is the only surface for operator tasks — minting signup tokens, suspending abusive users, adjusting per-user quotas, deleting entries, and inspecting health. The admin listener is plain HTTP, so keep it on `localhost` or a trusted network and front it with a reverse proxy if it ever needs to leave the host. See [Homeserver](/explore/pubky-protocol/homeserver/) for the operator-facing overview.
+Each Homeserver runs a separate admin HTTP server on its own socket (default `127.0.0.1:6288`), isolated from the public Pubky API. It is the only surface for operator tasks — minting signup tokens, blocking abusive users' storage `PUT` requests, adjusting per-user quotas, deleting entries, and inspecting health. The admin listener is plain HTTP, so keep it bound to `127.0.0.1` and never expose port 6288 to the internet. Use a protected tunnel to the loopback listener for remote administration. See [Homeserver](/explore/pubky-protocol/homeserver/) for the operator-facing overview.
 
 ### Authentication
 
@@ -335,7 +304,7 @@ A shared admin password gates every protected route:
 - JSON endpoints expect `X-Admin-Password: <password>`
 - The WebDAV mount at `/dav/*` uses HTTP Basic auth (`admin:<password>`), so browsers receive a standard `WWW-Authenticate` prompt
 
-The password lives at `[admin].admin_password` in `config.toml`. The sample config ships with `"admin"` for local development — replace it before exposing the port.
+The password lives at `[admin].admin_password` in `config.toml`. The sample config ships with `"admin"` for local development — replace it before using the Admin API outside isolated local development.
 
 Endpoints with a `{public_key}` path parameter return `400 Bad Request` if the value is not a valid z32-encoded public key.
 
@@ -358,7 +327,7 @@ Returns the user count, the disabled-user count, total disk usage in MB, signup-
   "public_key": "8pinxxgqs41n4aididenw5apqp1urfmzdztr8jt4abrkdn435ewo",
   "pkarr_pubky_address": null,
   "pkarr_icann_domain": "homeserver.example.com",
-  "version": "0.9.3"
+  "version": "<homeserver-version>"
 }
 ```
 
@@ -385,11 +354,17 @@ Content-Type: application/json
 
 Each field accepts a value, `"unlimited"`, or `null` to use the system default. Absent fields fall back to system defaults. Invalid rate strings return `422 Unprocessable Entity`.
 
-### User Suspension
+**`GET /signup_tokens`** lists signup tokens with pagination and optional filtering by used or unused state.
 
-`POST /users/{public_key}/disable` — flip a per-user `disabled` flag. Subsequent reads and writes against that user's data fail until re-enabled.
+### Event Stream
 
-`POST /users/{public_key}/enable` — reverse the disable.
+`GET /events-stream` provides an admin-authenticated SSE feed. It supports user, cursor, path, ordering, limit, and live-stream filters.
+
+### User PUT Disablement
+
+`POST /users/{public_key}/disable` — set a per-user `disabled` flag. While disabled, storage `PUT` requests return `403 Forbidden`; `GET`, `DELETE`, and sign-in remain available.
+
+`POST /users/{public_key}/enable` — clear the flag.
 
 Both return `200 OK` on success, `404 Not Found` for unknown users.
 
@@ -438,75 +413,26 @@ admin_password = "change-me"
 
 ## Metrics Endpoint
 
-Prometheus-compatible metrics for monitoring.
+The Homeserver exposes Prometheus-compatible metrics on an optional, separate listener. It is disabled by default and binds to `127.0.0.1:6289` when enabled. The endpoint is unauthenticated, so keep it internal and never expose port 6289 to the internet.
 
 ### GET /metrics
 
-**Response:**
-```
-# HELP pubky_requests_total Total HTTP requests
-# TYPE pubky_requests_total counter
-pubky_requests_total{method="GET",status="200"} 1000
-pubky_requests_total{method="PUT",status="200"} 500
-
-# HELP pubky_storage_bytes Total storage used
-# TYPE pubky_storage_bytes gauge
-pubky_storage_bytes 1073741824
-
-# HELP pubky_active_sessions Current active sessions
-# TYPE pubky_active_sessions gauge
-pubky_active_sessions 50
-```
+Returns metrics in Prometheus text exposition format.
 
 ## Rate Limiting
 
-Homeservers implement rate limiting to prevent abuse:
-
-**Headers:**
-```http
-X-RateLimit-Limit: 100
-X-RateLimit-Remaining: 95
-X-RateLimit-Reset: 1704067260
-```
+Request-count limits can be configured by HTTP method and path. By default, only `GET /signup_tokens/*` is limited, at 10 requests per minute per IP. See the [default configuration](https://github.com/pubky/pubky-core/blob/main/pubky-homeserver/src/data_directory/config.default.toml) for details.
 
 **Rate Limit Exceeded:**
 ```http
 HTTP/1.1 429 Too Many Requests
-Retry-After: 60
 
-{
-  "error": "rate_limit_exceeded",
-  "message": "Too many requests, try again in 60 seconds"
-}
+Rate limit exceeded
 ```
-
-**Default Limits:**
-- Anonymous: 10 requests/minute
-- Authenticated: 100 requests/minute
-- Admin: Unlimited
 
 ## Error Responses
 
-All errors follow a consistent format:
-
-```json
-{
-  "error": "error_code",
-  "message": "Human-readable error message",
-  "details": {
-    "additional": "context"
-  }
-}
-```
-
-**Common Error Codes:**
-- `invalid_path`: Path format is invalid
-- `invalid_signature`: Authentication signature invalid
-- `expired_session`: Session token expired
-- `insufficient_permissions`: Operation not allowed
-- `storage_quota_exceeded`: User quota exceeded
-- `rate_limit_exceeded`: Too many requests
-- `server_error`: Internal server error
+The API does not define a universal JSON error envelope. Error bodies vary by route and many are plain text. Clients should handle HTTP status codes and consult the OpenAPI specifications for route-specific responses instead of depending on generic symbolic error codes.
 
 ## Best Practices
 
@@ -535,6 +461,8 @@ PUT /pub/myapp/all_posts  (large JSON array)
 - **[Homeserver Documentation](/explore/pubky-protocol/homeserver/)**: Server setup
 - **Official Docs**: [pubky.github.io/pubky-homeserver](https://pubky.github.io/pubky-homeserver/)
 - **Repository**: [github.com/pubky/pubky-homeserver](https://github.com/pubky/pubky-homeserver)
+- **Client OpenAPI**: [openapi-client.yml](https://github.com/pubky/pubky-homeserver/blob/main/pubky-homeserver/openapi-client.yml)
+- **Admin OpenAPI**: [openapi-admin.yml](https://github.com/pubky/pubky-homeserver/blob/main/pubky-homeserver/openapi-admin.yml)
 
 ---
 

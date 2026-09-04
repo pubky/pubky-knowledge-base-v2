@@ -58,7 +58,7 @@ Learn more about the overall vision here: [The Vision of Pubky](/the-vision-of-p
 - [Homegate](/explore/technologies/homegate/) - Signup verification service for Homeservers (SMS + Lightning)
 - [PKDNS](/explore/technologies/pkdns/) - DNS server for resolving public-key domains
 - [Pubky Nexus](/explore/pubky-apps/indexing-and-aggregation/pubky-nexus/) - Production indexing service
-- [HTTP Relay](/explore/technologies/http-relay/) - Auth token forwarding for authentication flows
+- [HTTP Relay](/explore/technologies/http-relay/) - Encrypted grant forwarding for authentication flows
 - [Pubky Backup](/explore/technologies/pubky-backup/) - Desktop backup for data portability and credible exit
 - [Pubky Moderation](/explore/technologies/pubky-moderation/) - Content moderation service
 
