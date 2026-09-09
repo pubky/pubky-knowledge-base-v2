@@ -16,8 +16,8 @@ The process of proving ownership of a public key through cryptographic signature
 
 ## C
 
-**Capability Token**
-A cryptographically signed token that grants third-party applications limited access to a user's data on their Homeserver, similar to OAuth access tokens.
+**Grant**
+A cryptographically signed authorization that gives a specific application scoped read and/or write access to a user's data. It expires and is bound to the application's proof-of-possession key.
 
 **Censorship Resistance**
 The property of being difficult or impossible to block, censor, or control by any single authority. Pubky achieves this through decentralized [Mainline DHT](/explore/technologies/mainline-dht/) and distributed [Homeservers](/explore/pubky-protocol/homeserver/).
@@ -77,6 +77,9 @@ Self-issued, signed DNS-like records published to the Mainline DHT. Each record 
 
 **[PKDNS](/explore/technologies/pkdns/)**
 DNS server that resolves public-key domains by fetching PKARR records from the Mainline DHT, bridging traditional DNS with decentralized identity.
+
+**Proof of Possession (PoP)**
+A cryptographic check that an application controls the private key bound to a grant. The application presents a signed PoP proof when exchanging the grant for a bearer token, so the grant cannot be used on its own. See [Authentication](/explore/pubky-protocol/authentication/).
 
 **Public Key**
 The public half of a cryptographic key pair. In Pubky, this serves as your permanent, self-sovereign identity (often called a "pubky").

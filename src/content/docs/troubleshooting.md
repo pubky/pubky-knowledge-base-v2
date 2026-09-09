@@ -72,12 +72,11 @@ pubky-cli tools verify-pkarr <public-key>
    ```
 
 2. **Firewall Blocking Ports**
-   - Default ports: 6287 (user API), 6288 (admin API)
-   - **Solution**: Open firewall ports:
+   - Default port: 6287 (PubkyTLS)
+   - **Solution**: Open the firewall port:
    ```bash
    # UFW example
    sudo ufw allow 6287/tcp
-   sudo ufw allow 6288/tcp
    ```
 
 3. **Homeserver Not Running**
@@ -126,8 +125,8 @@ See [Authentication](/explore/pubky-protocol/authentication/) for how Pubky auth
    - Recovery file passphrase is incorrect
    - **Solution**: Verify passphrase, use correct one
 
-3. **Session Expired**
-   - Sessions have TTL (typically 24 hours)
+3. **Grant Revoked or Expired**
+   - The SDK refreshes short-lived bearer tokens automatically, but cannot refresh a revoked or expired grant
    - **Solution**: Sign in again:
    ```javascript snippet="snippets/js/src/troubleshooting.ts:js_reauth"
    ```
@@ -260,18 +259,19 @@ See the [Pubky Docker README](https://github.com/pubky/pubky-docker#readme) for 
 
 ### "Session expired"
 
-**Causes**: Auth session TTL passed
+**Causes**: The SDK could not refresh the bearer token, or the underlying grant was revoked or expired
 
 **Solutions**:
-- Sign in again
-- Implement automatic re-authentication
+- Check connectivity to the Homeserver and retry
+- Sign in again if the grant is no longer valid
 
 ### "Permission denied"
 
 **Causes**: Trying to access/modify unauthorized data
 
 **Solutions**:
-- Check capability tokens
+- Check the session's granted capabilities
+- For directory scopes, include the trailing slash (for example, `/pub/my-app/:rw`)
 - Verify you own the data
 - Request proper permissions
 
@@ -299,7 +299,7 @@ When reporting bugs, include:
 ```markdown
 ## Environment
 - OS: macOS 14.2
-- SDK: @synonymdev/pubky@0.9.3
+- SDK: @synonymdev/pubky@0.10.0
 - Browser: Chrome 120
 
 ## Steps to Reproduce
