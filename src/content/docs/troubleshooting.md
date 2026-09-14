@@ -64,18 +64,18 @@ pubky-cli tools verify-pkarr <public-key>
 **Common Causes:**
 
 1. **HTTPS Not Configured**
-   - **Solution**: Follow the [Deployment Guide](https://github.com/pubky/pubky-homeserver/blob/main/docs/DEPLOY.md) for the transport and certificate setup appropriate to your deployment.
+   - **Solution**: Follow the [Deployment Guide](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/docs/DEPLOY.md) for the transport and certificate setup appropriate to your deployment.
 
 2. **Firewall Blocking Ports**
-   - **Solution**: Follow the network requirements in the [Deployment Guide](https://github.com/pubky/pubky-homeserver/blob/main/docs/DEPLOY.md). Keep the privileged admin interface private and protected; applications need access to the client API.
+   - **Solution**: Follow the network requirements in the [Deployment Guide](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/docs/DEPLOY.md). Keep the privileged admin interface private and protected; applications need access to the client API.
 
 3. **Homeserver Not Running**
-   - **Solution**: Use the [Install Guide](https://github.com/pubky/pubky-homeserver/blob/main/docs/INSTALL.md) to check the service and its logs.
+   - **Solution**: Use the [Install Guide](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/docs/INSTALL.md) to check the service and its logs.
 
 4. **Discovery Failure**
    - **Solution**: Use the [SDK](/explore/pubky-protocol/sdk/) to resolve Pubky resources and select the transport. Check [PKARR and discovery troubleshooting](#pkarr--discovery-issues) if the user's Homeserver cannot be found.
 
-For raw HTTP diagnostics, consult the [client OpenAPI specification](https://github.com/pubky/pubky-homeserver/blob/main/pubky-homeserver/openapi-client.yml). For privileged operator diagnostics, consult the [admin OpenAPI specification](https://github.com/pubky/pubky-homeserver/blob/main/pubky-homeserver/openapi-admin.yml).
+For raw HTTP diagnostics, consult the [client OpenAPI specification](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-homeserver/openapi-client.yml). For privileged operator diagnostics, consult the [admin OpenAPI specification](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-homeserver/openapi-admin.yml).
 
 ---
 
@@ -123,7 +123,7 @@ See [Authentication](/explore/pubky-protocol/authentication/) for how Pubky auth
 
 ## Pubky Docker Setup Issues
 
-See the [Pubky Docker README](https://github.com/pubky/pubky-docker#readme) for current setup and configuration. For unresolved problems, search or report an issue in the [Pubky Docker repository](https://github.com/pubky/pubky-docker/issues).
+See the [Pubky Docker README](https://github.com/pubky/pubky-docker/blob/main/Readme.md) for current setup and configuration. For unresolved problems, search or report an issue in the [Pubky Docker repository](https://github.com/pubky/pubky-docker/issues).
 
 ---
 
@@ -136,13 +136,13 @@ See the [Pubky Docker README](https://github.com/pubky/pubky-docker#readme) for 
 **Common Causes:**
 
 1. **Invalid Path**
-   - Check path requirements in the [client OpenAPI specification](https://github.com/pubky/pubky-homeserver/blob/main/pubky-homeserver/openapi-client.yml).
+   - Check path requirements in the [client OpenAPI specification](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-homeserver/openapi-client.yml).
    - **Solution**: Use the SDK to write to your application's storage path:
    ```javascript snippet="snippets/js/src/troubleshooting.ts:js_valid_storage_path"
    ```
 
 2. **Storage Limits**
-   - **Solution**: Check the reported error and ask the Homeserver operator about the applicable limits. Operators can consult the [admin OpenAPI specification](https://github.com/pubky/pubky-homeserver/blob/main/pubky-homeserver/openapi-admin.yml) for quota management.
+   - **Solution**: Check the reported error and ask the Homeserver operator about the applicable limits. Operators can consult the [admin OpenAPI specification](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-homeserver/openapi-admin.yml) for quota management.
 
 3. **Rate Limiting**
    - Too many requests in short time
@@ -209,7 +209,7 @@ See the [Pubky Docker README](https://github.com/pubky/pubky-docker#readme) for 
 
 ## Common Error Messages
 
-HTTP error details may be truncated by the SDK's error-body limit. See the [SDK error-body limits](https://github.com/pubky/pubky-homeserver/blob/main/pubky-sdk/README.md#error-body-limits) for configuration and diagnostics.
+HTTP error details may be truncated by the SDK's error-body limit. See the [SDK error-body limits](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-sdk/README.md#error-body-limits) for configuration and diagnostics.
 
 ### "Failed to fetch PKARR record"
 

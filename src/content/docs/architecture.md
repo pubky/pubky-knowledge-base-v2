@@ -134,7 +134,7 @@ flowchart LR
 - **Portability**: Switch Homeservers without losing data
 - **Storage layout**: Files for user data; PostgreSQL for the Homeserver's internal metadata
 
-Applications manage user files through the [SDK](/explore/pubky-protocol/sdk/). For direct HTTP integrations, use the maintained [client OpenAPI specification](https://github.com/pubky/pubky-homeserver/blob/main/pubky-homeserver/openapi-client.yml).
+Applications manage user files through the [SDK](/explore/pubky-protocol/sdk/). For direct HTTP integrations, use the maintained [client OpenAPI specification](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-homeserver/openapi-client.yml).
 
 ---
 

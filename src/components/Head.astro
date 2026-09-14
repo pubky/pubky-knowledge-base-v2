@@ -3,14 +3,23 @@ import Default from '@astrojs/starlight/components/Head.astro';
 import { docsMarkdownPath, withBase } from '../utils/base-path';
 
 // Emit a per-page og:image. Every docs page gets a generated card at
-// /og/<slug>.png (page title as subtitle); the homepage falls back to the
+// /og/<slug>.png (page title as subtitle); the homepage and 404 page use the
 // subtitle-less default card. og:site_name and image dimensions stay in the
 // site-wide head config (astro.config.mjs).
 const { id } = Astro.locals.starlightRoute;
 const isHome = id === 'index' || id === '';
-const ogPath = isHome ? '/images/og-default.png' : `/og/${id}.png`;
+const isNotFound = id === '404';
+const ogPath = isHome || isNotFound ? '/images/og-default.png' : `/og/${id}.png`;
 const ogImage = new URL(ogPath, Astro.site).href;
 const markdownPath = isHome || id === '404' ? null : docsMarkdownPath(Astro.url.pathname);
+
+if (isNotFound) {
+  // The shared 404 page has no canonical content URL.
+  Astro.locals.starlightRoute.head = Astro.locals.starlightRoute.head.filter(({ tag, attrs }) =>
+    !(tag === 'link' && attrs?.rel === 'canonical') &&
+    !(tag === 'meta' && attrs?.property === 'og:url')
+  );
+}
 ---
 
 <Default><slot /></Default>

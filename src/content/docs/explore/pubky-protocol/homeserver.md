@@ -10,14 +10,14 @@ Homeservers are meant to represent a primary place to retrieve data from a speci
 
 The Homeserver implementation consists of several components: the main HTTP API server (supporting both ICANN HTTP and [PubkyTLS](/glossary/#pubkytls)), an admin server, a Prometheus metrics server, and republishers that keep user and server keys alive on the DHT.
 
-For configuration, follow the [Install Guide](https://github.com/pubky/pubky-homeserver/blob/main/docs/INSTALL.md).
+For configuration, follow the [Install Guide](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/docs/INSTALL.md).
 
 ## HTTP API
 
 For routes, parameters, and response schemas, use the upstream specifications:
 
-- **[Client OpenAPI](https://github.com/pubky/pubky-homeserver/blob/main/pubky-homeserver/openapi-client.yml)**: Authentication, file storage, event streams, and signup-token validation.
-- **[Admin OpenAPI](https://github.com/pubky/pubky-homeserver/blob/main/pubky-homeserver/openapi-admin.yml)**: Server administration, signup tokens, user quotas, and WebDAV.
+- **[Client OpenAPI](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-homeserver/openapi-client.yml)**: Authentication, file storage, event streams, and signup-token validation.
+- **[Admin OpenAPI](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-homeserver/openapi-admin.yml)**: Server administration, signup tokens, user quotas, and WebDAV.
 
 Admin access is privileged. Keep the admin interface private and protected, and provide admin credentials only to trusted operators. Ordinary applications should use the client API through the SDK.
 
@@ -57,11 +57,11 @@ See [Security Model](/explore/pubky-protocol/security-model/) for the full trust
 ## Running a Homeserver
 
 For installing, configuring, and running a Homeserver, follow the
-[Install Guide](https://github.com/pubky/pubky-homeserver/blob/main/docs/INSTALL.md). To make it
+[Install Guide](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/docs/INSTALL.md). To make it
 publicly reachable see the
-[Deployment Guide](https://github.com/pubky/pubky-homeserver/blob/main/docs/DEPLOY.md).
+[Deployment Guide](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/docs/DEPLOY.md).
 
 For local development and testing with a fixed-port testnet, follow the
-[Pubky Testnet README](https://github.com/pubky/pubky-homeserver/blob/main/pubky-testnet/README.md).
+[Pubky Testnet README](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-testnet/README.md).
 For a full walkthrough of setting up a local stack and building your first app, see the
 [Developer Guide](/explore/pubky-protocol/getting-started).

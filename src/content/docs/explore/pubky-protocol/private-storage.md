@@ -16,6 +16,6 @@ Homeserver operators and privileged administrators can read unencrypted `/priv/`
 
 ## Documentation
 
-- [Private Storage guide](https://github.com/pubky/pubky-homeserver/blob/main/docs/PRIVATE_STORAGE.md) — Behavior, access rules, and security considerations.
-- [SDK storage guide](https://github.com/pubky/pubky-homeserver/blob/main/pubky-sdk/README.md#storage-api-session--public) — Working with storage through the SDK.
-- [Client OpenAPI specification](https://github.com/pubky/pubky-homeserver/blob/main/pubky-homeserver/openapi-client.yml) — HTTP API contracts.
+- [Private Storage guide](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/docs/PRIVATE_STORAGE.md) — Behavior, access rules, and security considerations.
+- [SDK storage guide](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-sdk/README.md#storage-api-session--public) — Working with storage through the SDK.
+- [Client OpenAPI specification](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-homeserver/openapi-client.yml) — HTTP API contracts.

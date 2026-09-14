@@ -1,0 +1,14 @@
+[
+  {
+    "url": "https://github.com/pubky/pubky-homeserver",
+    "reason": "pubky/pubky-homeserver project landing page for repository discovery."
+  },
+  {
+    "url": "https://github.com/pubky/pubky-homeserver/issues",
+    "reason": "pubky/pubky-homeserver issue tracker for current bug reports and support."
+  },
+  {
+    "url": "https://github.com/pubky/pubky-homeserver/tree/v0.10.0/docs/v0.10-migration",
+    "reason": "Historical migration guide must remain tied to the v0.10.0 release when the shared pin changes."
+  }
+]
