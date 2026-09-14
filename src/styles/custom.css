@@ -88,15 +88,7 @@
 	--base-secondary-hover: #3a3a3f;
 
 	/* AI landing experiment — extends the existing Pubky palette and type scale. */
-	--brand-lime: #c8ff00;
-	--brand-lime-hover: #d8ff4d;
-	--brand-lime-subtle: rgba(200, 255, 0, 0.07);
-	--landing-panel: #111115;
-	--landing-content-width: 1280px;
 	--landing-touch-target: 44px;
-	--landing-heading-tracking: -0.035em;
-	--landing-label-tracking: 0.1em;
-	--landing-body-measure: 42ch;
 	--landing-border-width: 1px;
 	--landing-motion: 160ms;
 	--landing-shadow: 0 16px 64px rgba(0, 0, 0, 0.28);

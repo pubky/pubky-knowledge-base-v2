@@ -1,0 +1,146 @@
+---
+import Default from '@astrojs/starlight/components/PageTitle.astro';
+import { docsMarkdownPath, withBase } from '../utils/base-path';
+
+const { id } = Astro.locals.starlightRoute;
+const markdownPath = id === '404' ? null : docsMarkdownPath(Astro.url.pathname);
+---
+
+<div class="doc-title-row not-content">
+  <Default />
+  {markdownPath && (
+    <div class="doc-title-tools" data-pagefind-ignore>
+      <div class="markdown-actions" role="group" aria-label="Markdown for this page">
+        <a href={markdownPath} target="_blank" rel="noopener noreferrer" aria-label="View Markdown for this page (opens in new tab)">
+          <img src={withBase('/images/icons/file.svg')} width="16" height="16" alt="" aria-hidden="true" />
+          Markdown
+        </a>
+        <button type="button" data-markdown-copy={markdownPath} aria-label="Copy link to this page’s Markdown" hidden>
+          <img src={withBase('/images/icons/line-copy.svg')} width="16" height="16" alt="" aria-hidden="true" />
+          <span data-copy-label>Copy link</span>
+        </button>
+      </div>
+      <p class="markdown-copy-status" role="status" aria-live="polite" aria-atomic="true"></p>
+    </div>
+  )}
+</div>
+
+<script>
+  function enhanceMarkdownActions() {
+    document.querySelectorAll<HTMLButtonElement>('[data-markdown-copy]').forEach((button) => {
+      if (button.dataset.copyReady) return;
+      const status = button.closest('.doc-title-tools')?.querySelector<HTMLElement>('[role="status"]');
+      const label = button.querySelector<HTMLElement>('[data-copy-label]');
+      const markdownPath = button.dataset.markdownCopy;
+      if (!status || !label || !markdownPath) return;
+      button.dataset.copyReady = 'true';
+      button.hidden = false;
+      let resetTimer: ReturnType<typeof setTimeout> | undefined;
+
+      button.addEventListener('click', async () => {
+        clearTimeout(resetTimer);
+        button.disabled = true;
+        label.textContent = 'Copy link';
+        button.setAttribute('aria-label', 'Copy link to this page’s Markdown');
+        status.textContent = '';
+        try {
+          await navigator.clipboard.writeText(new URL(markdownPath, window.location.origin).href);
+          label.textContent = 'Copied';
+          button.setAttribute('aria-label', 'Copied Markdown link');
+          status.textContent = 'Markdown link copied.';
+          resetTimer = setTimeout(() => {
+            label.textContent = 'Copy link';
+            button.setAttribute('aria-label', 'Copy link to this page’s Markdown');
+            status.textContent = '';
+          }, 2500);
+        } catch {
+          status.textContent = 'Couldn’t copy. Open Markdown and copy the address.';
+        } finally {
+          button.disabled = false;
+        }
+      });
+    });
+  }
+  enhanceMarkdownActions();
+  document.addEventListener('astro:page-load', enhanceMarkdownActions);
+</script>
+
+<style>
+  /* Page utilities follow the existing Pubky spacing, palette, and controls. */
+  .doc-title-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--spacing-4);
+    padding-top: var(--spacing-4);
+  }
+  .doc-title-row :global(h1) {
+    flex: 1 1 auto;
+    min-width: 0;
+    margin: 0;
+    overflow-wrap: anywhere;
+  }
+  .doc-title-tools { flex: 0 0 auto; max-width: 100%; }
+  .markdown-actions {
+    display: inline-flex;
+    align-items: stretch;
+    border: var(--landing-border-width) solid var(--base-border);
+    border-radius: var(--radius-full);
+    background: var(--alpha-white-5);
+  }
+  .markdown-actions a, .markdown-actions button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-2);
+    min-width: var(--landing-touch-target);
+    min-height: var(--landing-touch-target);
+    padding: var(--spacing-2) var(--spacing-4);
+    border: 0;
+    border-radius: var(--radius-full);
+    background: transparent;
+    color: var(--base-secondary-foreground);
+    font: inherit;
+    font-size: var(--text-sm-size);
+    line-height: var(--text-sm-lh);
+    font-weight: 500;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background var(--landing-motion) ease, color var(--landing-motion) ease;
+  }
+  .markdown-actions button {
+    border-left: var(--landing-border-width) solid var(--base-border);
+    border-start-start-radius: 0;
+    border-end-start-radius: 0;
+  }
+  .markdown-actions a:has(+ button:not([hidden])) {
+    border-start-end-radius: 0;
+    border-end-end-radius: 0;
+  }
+  .markdown-actions a:hover, .markdown-actions button:hover {
+    background: var(--base-secondary);
+    color: var(--base-foreground);
+  }
+  .markdown-actions img { flex-shrink: 0; }
+  .markdown-actions button[hidden] { display: none; }
+  .markdown-actions button:disabled { cursor: wait; }
+  .markdown-copy-status {
+    max-width: 30ch;
+    margin: 0;
+    color: var(--base-secondary-foreground);
+    font-size: var(--text-xs-size);
+    line-height: var(--text-xs-lh);
+  }
+  .markdown-copy-status:not(:empty) { margin-top: var(--spacing-2); }
+  @media (max-width: 639px) {
+    .doc-title-row { flex-direction: column; align-items: stretch; }
+    .doc-title-tools { align-self: flex-start; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .markdown-actions a, .markdown-actions button { transition: none; }
+  }
+  @media print {
+    .doc-title-tools { display: none; }
+  }
+</style>

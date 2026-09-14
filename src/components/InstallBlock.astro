@@ -1,13 +1,14 @@
 ---
 import { withBase } from '../utils/base-path';
+import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 const commands = [
-  { label: 'JavaScript', command: 'npm install @synonymdev/pubky' },
-  { label: 'React Native', command: 'npm install @synonymdev/react-native-pubky' },
-  { label: 'Rust', command: 'cargo add pubky' },
+  { label: "npm", command: "npm install @synonymdev/pubky" },
+  { label: "RN", command: "npm install @synonymdev/react-native-pubky" },
+  { label: "Rust", command: "cargo add pubky" },
 ];
 
-// The experiment intentionally points agents to the maintained production docs.
+// Keep the starter prompt tied to the maintained production documentation.
 const aiPrompt = `Help me build an app with Pubky: public-key identity and user-owned data.
 
 First ask what I want to build and which language or framework I use.
@@ -19,81 +20,103 @@ Before writing code, check my installed SDK version against its maintained upstr
 const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-square.png')}")`;
 ---
 
-<section class="install-section not-content" style={installSectionBg} aria-labelledby="landing-title">
+<div class="install-section" style={installSectionBg}>
   <div class="install-block">
-    <div class="install-left">
-      <p class="landing-eyebrow">The Pubky knowledge base</p>
-      <h1 id="landing-title" class="install-heading">Build for<br />user sovereignty.</h1>
-      <p class="install-tagline">Public-key identity. User-owned data.<br />An open protocol for apps that put people in control.</p>
-      <div class="install-actions">
-        <a href={withBase('/explore/pubky-protocol/getting-started/')} class="landing-button landing-button-primary">
-          Start building
-          <img class="landing-arrow" src={withBase('/images/icons/arrow-right.svg')} width="20" height="20" alt="" aria-hidden="true" />
-        </a>
-        <a href={withBase('/overview/')} class="landing-button landing-button-secondary">Explore the docs</a>
-      </div>
-      <a href="https://github.com/pubky" class="landing-source-link" target="_blank" rel="noopener noreferrer" aria-label="Explore Pubky on GitHub (opens in new tab)">
-        <img src={withBase('/images/icons/github.svg')} width="20" height="20" alt="" aria-hidden="true" />
-        Open source. Yours to build on.
-        <img class="landing-external-arrow" src={withBase('/images/icons/arrow-right.svg')} width="16" height="16" alt="" aria-hidden="true" />
+  <div class="install-left not-content">
+    <div class="install-header">
+      <h1 class="install-heading">Build for User Sovereignty</h1>
+      <p class="install-tagline">Open protocol for key-based, censorship-resistant apps</p>
+    </div>
+
+    <div class="install-actions">
+      <a href="https://github.com/pubky/pubky-homeserver" class="btn btn-secondary" target="_blank" rel="noopener noreferrer" aria-label="View on GitHub (opens in new tab)">
+        <img class="btn-icon" src={withBase('/images/icons/github.svg')} width="16" height="16" alt="" aria-hidden="true" />
+        <span>GitHub</span>
       </a>
+      <a href={withBase('/overview/')} class="btn btn-secondary" aria-label="Human Docs">
+        <img class="btn-icon" src={withBase('/images/user.svg')} width="16" height="16" alt="" aria-hidden="true" />
+        <span>Human Docs</span>
+      </a>
+      <details class="ai-tools">
+        <summary class="btn btn-ai-tools">
+          <img class="btn-icon" src={withBase('/images/icons/file.svg')} width="16" height="16" alt="" aria-hidden="true" />
+          <span>AI tools</span>
+          <span class="ai-tools-toggle" aria-hidden="true">+</span>
+        </summary>
+        <div class="ai-tools-panel">
+          <a href="https://github.com/pubky/agent-skills" target="_blank" rel="noopener noreferrer" aria-label="Pubky skills (opens in new tab)">
+            <strong>Pubky skills</strong>
+            <span>Agent workflows. Check the supported SDK version.</span>
+          </a>
+          <div class="ai-tools-group">
+            <strong>Context7</strong>
+            <span>Find API documentation and examples.</span>
+            <div class="ai-tools-repositories">
+              <a href="https://context7.com/pubky/pubky-homeserver" target="_blank" rel="noopener noreferrer" aria-label="Pubky Homeserver on Context7 (opens in new tab)">Homeserver</a>
+              <a href="https://context7.com/pubky/pkarr" target="_blank" rel="noopener noreferrer" aria-label="PKARR on Context7 (opens in new tab)">PKARR</a>
+            </div>
+          </div>
+          <a href="https://deepwiki.com/pubky/pubky-homeserver" target="_blank" rel="noopener noreferrer" aria-label="Pubky Homeserver on DeepWiki (opens in new tab)">
+            <strong>DeepWiki</strong>
+            <span>Explore the code with AI explanations. Check linked sources.</span>
+          </a>
+        </div>
+      </details>
     </div>
 
-    <div class="install-right">
-      <div class="starter-panel">
-        <div class="starter-panel-heading">
-          <span class="starter-mark" aria-hidden="true"><img src={withBase('/images/icons/code-xml.svg')} width="20" height="20" alt="" /></span>
-          <div>
-            <p class="landing-eyebrow">Bring your own agent</p>
-            <h2>Give your AI a place to start.</h2>
-          </div>
-        </div>
-        <p class="starter-description">Paste this into your coding assistant to start with Pubky’s docs.</p>
-        <pre class="starter-prompt" id="pubky-starter-prompt" tabindex="0" aria-label="Selectable Pubky starter prompt">{aiPrompt}</pre>
-        <div class="starter-actions">
-          <button type="button" class="landing-button starter-copy" data-copy-text={aiPrompt} data-copy-kind="prompt" data-copy-status="starter-copy-status" hidden>
-            <img src={withBase('/images/icons/line-copy.svg')} width="16" height="16" alt="" aria-hidden="true" />
-            <span data-copy-label>Copy starter prompt</span>
+    <div class="open-with">
+      <span class="open-with-label">Build with AI:</span>
+      <div class="open-with-row">
+        <div class="open-with-links">
+          <button type="button" class="copy-prompt-btn" data-copy-text={aiPrompt} data-copy-kind="prompt" data-copy-status="starter-copy-status" hidden>
+            <span class="copy-prompt-label" data-copy-label>Copy starter prompt</span>
+            <img class="copy-prompt-icon" src={withBase('/images/icons/line-copy.svg')} width="16" height="16" alt="" aria-hidden="true" />
           </button>
-          <a href="#build-with-ai" class="starter-tools-link">More AI tools <span aria-hidden="true">↓</span></a>
+          <span class="prompt-no-script">A prompt for your coding assistant</span>
         </div>
-        <p id="starter-copy-status" class="copy-status" role="status" aria-live="polite" aria-atomic="true"></p>
-        <noscript><p class="copy-fallback">Select the prompt above and copy it into your assistant.</p></noscript>
+        <img class="open-with-arrow" src={withBase('/images/icons/arrow-dashed-left.svg')} width="82" height="22" alt="" aria-hidden="true" />
+        <span class="open-with-llm" aria-hidden="true">LLM Support</span>
       </div>
+      <details class="prompt-details" id="pubky-starter-prompt">
+        <summary>Show starter prompt</summary>
+        <pre class="starter-prompt" tabindex="0" aria-label="Selectable Pubky starter prompt">{aiPrompt}</pre>
+      </details>
+      <p id="starter-copy-status" class="copy-status" role="status" aria-live="polite" aria-atomic="true"></p>
     </div>
-
-    <details class="sdk-install">
-      <summary>
-        <span class="sdk-summary-title">Install an SDK</span>
-        <span class="sdk-summary-languages">JavaScript · React Native · Rust</span>
-        <span class="sdk-expand" aria-hidden="true">+</span>
-      </summary>
-      <div class="sdk-commands">
-        {commands.map((command) => (
-          <div class="sdk-command-row">
-            <span class="sdk-language">{command.label}</span>
-            <code>{command.command}</code>
-            <button type="button" class="sdk-copy" data-copy-text={command.command} data-copy-kind="command" data-copy-status="sdk-copy-status" aria-label={`Copy ${command.label} install command`} hidden>
-              <img src={withBase('/images/icons/line-copy.svg')} width="16" height="16" alt="" aria-hidden="true" />
-              <span data-copy-label>Copy</span>
-            </button>
-          </div>
-        ))}
-        <p id="sdk-copy-status" class="copy-status" role="status" aria-live="polite" aria-atomic="true"></p>
-      </div>
-    </details>
   </div>
-</section>
+
+  <div class="install-right not-content">
+    <div class="install-terminal terminal-tabs">
+      <Tabs>
+        {commands.map((cmd) => (
+          <TabItem label={cmd.label}>
+            <div class="install-command">
+              <span class="prompt">$</span>
+              <span class="cmd-text">{cmd.command}</span>
+              <button type="button" class="copy-btn" data-copy-text={cmd.command} data-copy-kind="command" data-copy-status="sdk-copy-status" aria-label={`Copy ${cmd.label} install command`} hidden>
+                <img class="copy-icon" src={withBase('/images/icons/line-copy.svg')} width="20" height="20" alt="" aria-hidden="true" />
+              </button>
+            </div>
+          </TabItem>
+        ))}
+      </Tabs>
+      <p id="sdk-copy-status" class="copy-status" role="status" aria-live="polite" aria-atomic="true"></p>
+    </div>
+  </div>
+</div>
+</div>
 
 <script>
   function enhanceLandingCopy() {
-    document.querySelectorAll<HTMLButtonElement>('.install-section [data-copy-text]').forEach((button) => {
+    document.querySelectorAll<HTMLButtonElement>('.install-block [data-copy-text]').forEach((button) => {
       if (button.dataset.copyReady) return;
       button.dataset.copyReady = 'true';
       button.hidden = false;
+      button.closest('.open-with')?.classList.add('copy-ready');
 
       const label = button.querySelector<HTMLElement>('[data-copy-label]');
-      const originalLabel = label?.textContent ?? 'Copy';
+      const originalLabel = label?.textContent ?? '';
+      const originalAriaLabel = button.getAttribute('aria-label');
       let resetTimer: ReturnType<typeof setTimeout> | undefined;
 
       button.addEventListener('click', async () => {
@@ -105,20 +128,26 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
         status.textContent = '';
         if (label) label.textContent = originalLabel;
         button.disabled = true;
-
         try {
           await navigator.clipboard.writeText(text);
           if (label) label.textContent = 'Copied';
+          else button.setAttribute('aria-label', 'Install command copied');
           status.textContent = button.dataset.copyKind === 'prompt'
             ? 'Prompt copied. Paste it into your coding assistant.'
             : 'Install command copied.';
           resetTimer = setTimeout(() => {
             if (label) label.textContent = originalLabel;
+            if (originalAriaLabel) button.setAttribute('aria-label', originalAriaLabel);
           }, 2500);
         } catch {
-          status.textContent = button.dataset.copyKind === 'prompt'
-            ? 'Couldn’t copy. Select the prompt above and copy it manually.'
-            : 'Couldn’t copy. Select the install command and copy it manually.';
+          if (originalAriaLabel) button.setAttribute('aria-label', originalAriaLabel);
+          if (button.dataset.copyKind === 'prompt') {
+            const promptDetails = document.getElementById('pubky-starter-prompt');
+            if (promptDetails instanceof HTMLDetailsElement) promptDetails.open = true;
+            status.textContent = 'Couldn’t copy. Select the prompt shown above and copy it manually.';
+          } else {
+            status.textContent = 'Couldn’t copy. Select the install command and copy it manually.';
+          }
         } finally {
           button.disabled = false;
         }
@@ -128,301 +157,586 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
 
   enhanceLandingCopy();
   document.addEventListener('astro:page-load', enhanceLandingCopy);
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') return;
+    document.querySelectorAll<HTMLDetailsElement>('.ai-tools[open]').forEach((menu) => {
+      menu.open = false;
+      menu.querySelector('summary')?.focus();
+    });
+  });
 </script>
 
-<style>
-  /* Original landing experiment, using the existing Pubky design tokens. */
+<style is:global>
+  /* ── Install section (full-width hero wrapper) ── */
   .install-section {
     position: relative;
-    overflow: hidden;
+    overflow: visible;
     width: 100vw;
     margin-left: calc(50% - 50vw);
     box-sizing: border-box;
     background: var(--base-background);
-    padding: var(--spacing-16) 0 var(--spacing-12);
+    padding: var(--spacing-10) 0;
   }
+
+  /* Figma: Bg / Triangles (node 34690:86566) — 868x770 instance positioned at x=571
+     in the 1280 frame, so its right edge sits 159px PAST the content right edge.
+     Anchored relative to the centered content edge so it shifts right with viewport
+     width. Height fills the section (top:0 + bottom:0) and width derives from the
+     868:770 aspect ratio, which keeps the full triangle pattern visible at any
+     desktop section height instead of clipping the bottom.
+     159 is hardcoded — Figma right-overflow distance, no spacing token. */
   .install-section::before {
-    content: '';
+    content: "";
     position: absolute;
-    inset: 0;
+    top: 0;
+    bottom: 0;
+    right: calc(50% - 640px - 159px);
+    aspect-ratio: 868 / 770;
     background-image: var(--install-section-bg);
-    background-size: auto 100%;
+    background-size: contain;
     background-position: right top;
     background-repeat: no-repeat;
-    opacity: 0.35;
     pointer-events: none;
+    z-index: 0;
   }
+
+  /* ── Two-column layout ── */
+  /* Figma: Top Hero = flex row, 1280px container with 40px padding = 1200px content */
   .install-block {
     position: relative;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    align-items: center;
-    gap: var(--spacing-12);
-    max-width: var(--landing-content-width);
+    z-index: 1;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    max-width: 1280px;
     margin: 0 auto;
     padding: 0 var(--spacing-10);
     box-sizing: border-box;
     width: 100%;
   }
-  .install-left, .install-right { min-width: 0; }
-  .landing-eyebrow {
-    margin: 0 0 var(--spacing-4);
-    font-size: var(--text-xs-size);
-    line-height: var(--text-xs-lh);
-    letter-spacing: var(--landing-label-tracking);
-    text-transform: uppercase;
-    font-weight: 600;
-    color: var(--base-secondary-foreground);
+
+  /* Figma: Left col = flex-1, flex-col, gap spacing-6(24), pt spacing-10(40), h 500.
+     500px is hardcoded — one-off Figma layout dimension, no spacing token */
+  .install-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    min-height: 500px;
+    padding-top: var(--spacing-10);
   }
+
+  /* Figma: Content = flex-col, gap spacing-6(24) */
+  .install-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4);
+  }
+
+  /* Figma: H1 (node 34690:85314) = Inter Tight Bold, text-6xl (72px/72px), foreground white */
   .install-heading {
     margin: 0;
-    font-family: 'Inter Tight', var(--sl-font);
+    font-family: "Inter Tight", "Inter", system-ui, sans-serif;
     font-size: var(--text-6xl-size);
     font-weight: 700;
     line-height: var(--text-6xl-lh);
-    letter-spacing: var(--landing-heading-tracking);
     color: var(--base-foreground);
-    text-wrap: balance;
   }
+
+  /* Figma: H5 (node 34690:85316) = Inter Tight Light(300), text-xl (20px/28px),
+     muted-foreground */
   .install-tagline {
-    margin: var(--spacing-6) 0 0;
-    max-width: var(--landing-body-measure);
-    font-size: var(--text-lg-size);
-    line-height: var(--text-lg-lh);
-    color: var(--base-secondary-foreground);
+    margin: 0;
+    font-family: "Inter Tight", "Inter", system-ui, sans-serif;
+    font-size: var(--text-xl-size);
+    font-weight: 300;
+    line-height: var(--text-xl-lh);
+    color: var(--base-muted-foreground);
   }
+
+  /* ── Buttons row ── */
+  /* Figma: gap spacing-6(24) */
   .install-actions {
     display: flex;
-    gap: var(--spacing-3);
+    gap: var(--spacing-6);
     align-items: center;
     flex-wrap: wrap;
-    margin-top: var(--spacing-8);
+    margin-top: var(--spacing-6);
   }
-  .landing-button {
+
+  /* Figma: h 60, px spacing-8(32), py spacing-5(20), gap spacing-2(8), font text-sm(14/20) bold, radius full(9999), shadow xs */
+  .install-actions .btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: var(--spacing-2);
-    min-height: var(--landing-touch-target);
-    padding: var(--spacing-3) var(--spacing-5);
-    border: var(--landing-border-width) solid transparent;
+    height: 60px;
+    padding: var(--spacing-5) var(--spacing-8);
     border-radius: var(--radius-full);
-    font-family: var(--sl-font);
     font-size: var(--text-sm-size);
-    font-weight: 600;
+    font-weight: 700;
     line-height: var(--text-sm-lh);
     text-decoration: none;
-    cursor: pointer;
-    transition: background var(--landing-motion) ease, border-color var(--landing-motion) ease, color var(--landing-motion) ease;
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    box-shadow: var(--shadow-xs);
+    border: none;
   }
-  .landing-button-primary { background: var(--brand-lime); color: var(--base-background); }
-  .landing-button-primary:hover { background: var(--brand-lime-hover); }
-  .landing-arrow { filter: brightness(0); transition: transform var(--landing-motion) ease; }
-  .landing-button-primary:hover .landing-arrow { transform: translateX(var(--spacing-1)); }
-  .landing-button-secondary {
-    background: var(--alpha-white-5);
-    border-color: var(--base-border);
+
+  .install-actions .btn-icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+
+  /* Figma: Secondary variant — bg base/secondary(#303034), text base/secondary-foreground(#d4d4db) */
+  .install-actions .btn-secondary {
+    background: var(--base-secondary);
+    color: var(--base-secondary-foreground);
+  }
+
+  .install-actions .btn-secondary:hover {
+    background: var(--base-secondary-hover);
     color: var(--base-foreground);
   }
-  .landing-button-secondary:hover { background: var(--alpha-white-10); border-color: var(--base-muted-foreground); }
-  .landing-source-link {
+
+  /* Preserve the original AI Kit button variant — bg alpha/white-16, text base/secondary-foreground(#d4d4db) */
+  .install-actions .btn-ai-tools {
+    background: var(--alpha-white-16);
+    color: var(--base-secondary-foreground);
+  }
+
+  .install-actions .btn-ai-tools:hover {
+    background: var(--base-secondary-hover);
+    color: var(--base-foreground);
+  }
+
+  /* ── Open with row ── */
+  /* Figma: AI section = flex-col, gap spacing-2(8), justify center */
+  .open-with {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+    margin-top: var(--spacing-6);
+    flex: 1;
+    justify-content: center;
+  }
+
+  /* Figma: P (node 34690:85321) = Inter Tight Medium, text-base(16/24), foreground */
+  .open-with-label {
+    color: var(--base-foreground);
+    font-family: "Inter Tight", "Inter", system-ui, sans-serif;
+    font-size: var(--text-base-size);
+    font-weight: 500;
+    line-height: var(--text-base-lh);
+  }
+
+  /* Buttons box + highlight arrow. gap 21px = no spacing token fits. */
+  .open-with-row {
+    display: flex;
+    align-items: center;
+    gap: 21px;
+    align-self: flex-start;
+  }
+
+  /* Bordered box wrapping the AI buttons. Border pulses white via highlight below. */
+  .open-with-links {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-4);
+    padding: var(--spacing-4) var(--spacing-6);
+    background: var(--base-background);
+    border: 1px solid var(--base-card);
+    border-radius: var(--radius-lg);
+  }
+
+  /* Highlight arrow. 82x22 = exact SVG vector size. */
+  .open-with-arrow {
+    width: 82px;
+    height: 22px;
+    flex-shrink: 0;
+  }
+
+  /* Label right of the arrow. Names what the highlight points at.
+     Inter Tight Medium, text-base(16/24), white. */
+  .open-with-llm {
+    flex-shrink: 0;
+    font-size: var(--text-base-size);
+    line-height: var(--text-base-lh);
+    font-weight: 500;
+    color: var(--base-foreground);
+    white-space: nowrap;
+  }
+
+  /* Box highlight + arrow share ONE timeline via this 0→1 driver, animated on the
+     always-present .open-with-row. Two separate animations would desync because the
+     arrow is display:none on mobile — crossing the breakpoint resets only its clock.
+     A single animated property on a never-hidden parent keeps both in lockstep. */
+  @property --ai-flash {
+    syntax: "<number>";
+    initial-value: 0;
+    inherits: true;
+  }
+  /* Separate slide driver so the arrow fades out IN PLACE (slide held at 0 through
+     the fade) and only resets to the offset once invisible. */
+  @property --ai-slide {
+    syntax: "<number>";
+    initial-value: 0;
+    inherits: true;
+  }
+
+  /* ~5s loop: idle dark, fade border white + slide arrow in, hold, fade out in place. */
+  @media (prefers-reduced-motion: no-preference) {
+    .open-with-row {
+      animation: ai-flash 5s ease-in-out infinite;
+    }
+
+    .open-with-links {
+      border-color: color-mix(in srgb, var(--base-card), var(--base-foreground) calc(var(--ai-flash) * 100%));
+    }
+
+    /* Both tied to the same animation so the arrow always tracks the box. */
+    .open-with-arrow {
+      opacity: var(--ai-flash);
+      transform: translateX(calc(var(--ai-slide) * 24px));
+    }
+
+    /* Label fades in with the arrow; held in place (no slide). */
+    .open-with-llm {
+      opacity: var(--ai-flash);
+    }
+  }
+
+  @keyframes ai-flash {
+    0%, 28%  { --ai-flash: 0; --ai-slide: 1; }
+    36%, 60% { --ai-flash: 1; --ai-slide: 0; }
+    68%      { --ai-flash: 0; --ai-slide: 0; } /* faded out at final position */
+    100%     { --ai-flash: 0; --ai-slide: 1; } /* reset offset while invisible */
+  }
+
+  /* ── Copy prompt button ── */
+  /* Figma: bg alpha-white-5, border 1px base/border, radius full, shadow xs, px spacing-4(16), py spacing-2-5(10), gap spacing-2(8) */
+  .copy-prompt-btn {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: var(--spacing-2);
-    min-height: var(--landing-touch-target);
-    margin-top: var(--spacing-5);
+    min-height: 44px; /* WCAG: 44px minimum touch target */
+    padding: var(--spacing-2-5) var(--spacing-4);
+    background: var(--alpha-white-5);
+    border: 1px solid var(--base-border);
+    border-radius: var(--radius-full);
+    box-shadow: var(--shadow-xs);
+    cursor: pointer;
+    color: var(--base-foreground);
+    transition: background 0.15s ease, border-color 0.15s ease;
+  }
+
+  /* Not in Figma — added for hover feedback */
+  .copy-prompt-btn:hover {
+    background: var(--alpha-white-10);
+    border-color: var(--base-muted-foreground);
+  }
+
+  /* Figma: text-sm(14/20) bold, foreground */
+  .copy-prompt-label {
+    font-family: var(--sl-font);
     font-size: var(--text-sm-size);
+    font-weight: 700;
     line-height: var(--text-sm-lh);
+  }
+
+  /* ── Right column ── */
+  /* Figma: flex-1, flex-col, gap spacing-6(24), items center, centered vertically.
+     500px height matches install-left — one-off layout dimension.
+     Background pattern lives on .install-section::before, not here. */
+  .install-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-6);
+    height: 500px;
+  }
+
+  /* ── Install terminal (Starlight Tabs) ── */
+  /* Figma: 500x140 terminal */
+  .install-terminal {
+    width: 500px;
+  }
+
+  .install-terminal starlight-tabs > [role="tabpanel"] {
+    padding: var(--spacing-4);
+  }
+
+  .install-terminal starlight-tabs [role="tab"] {
+    min-width: var(--landing-touch-target);
+    min-height: var(--landing-touch-target);
+  }
+
+  /* Figma: Large typography = text-lg(18/28) semibold */
+  .install-command {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-4);
+    font-family: var(--sl-font);
+    font-size: var(--text-lg-size);
+    font-weight: 600;
+    line-height: var(--text-lg-lh);
+  }
+
+  /* Figma: $ prompt = muted-foreground */
+  .prompt {
     color: var(--base-muted-foreground);
-    text-decoration: none;
-    transition: color var(--landing-motion) ease;
+    user-select: none;
   }
-  .landing-source-link:hover, .starter-tools-link:hover { color: var(--base-foreground); }
-  .landing-external-arrow { transform: rotate(-45deg); }
-  .starter-panel {
-    padding: var(--spacing-6);
-    border: var(--landing-border-width) solid var(--base-border);
-    border-radius: var(--radius-xl);
-    background: var(--landing-panel);
-    box-shadow: var(--landing-shadow);
+
+  /* Figma: command text = foreground */
+  .cmd-text {
+    color: var(--base-foreground);
+    flex: 1;
+    letter-spacing: -1px;
   }
-  .starter-panel-heading { display: flex; gap: var(--spacing-3); align-items: center; }
-  .starter-mark {
-    display: inline-flex;
+
+  /* Figma: Ghost icon button = 36x36, p spacing-1(4), radius full(9999) */
+  .copy-btn {
+    background: transparent;
+    border: none;
+    color: var(--base-muted-foreground);
+    cursor: pointer;
+    width: var(--landing-touch-target);
+    height: var(--landing-touch-target);
+    padding: var(--spacing-1);
+    border-radius: var(--radius-full);
+    transition: all 0.15s ease;
+    display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    width: var(--landing-touch-target);
-    height: var(--landing-touch-target);
+  }
+
+  .copy-btn:hover {
+    color: var(--base-foreground);
+    background: var(--alpha-white-5);
+  }
+
+  /* Compact AI resources keep the original hero layout and button treatment. */
+  .ai-tools { position: relative; }
+  .ai-tools > summary { cursor: pointer; list-style: none; }
+  .ai-tools > summary::-webkit-details-marker { display: none; }
+  .ai-tools-toggle { transition: transform var(--landing-motion) ease; }
+  .ai-tools[open] .ai-tools-toggle { transform: rotate(45deg); }
+  .ai-tools-panel {
+    position: absolute;
+    top: calc(100% + var(--spacing-2));
+    left: 0;
+    z-index: 10;
+    width: min(calc(var(--spacing-20) * 4), calc(100vw - var(--spacing-12)));
+    box-sizing: border-box;
+    padding: var(--spacing-2);
     border: var(--landing-border-width) solid var(--base-border);
     border-radius: var(--radius-lg);
-    background: var(--brand-lime-subtle);
+    background: var(--base-card);
+    box-shadow: var(--landing-shadow);
   }
-  .starter-panel .landing-eyebrow { margin-bottom: var(--spacing-1); color: var(--brand-lime); }
-  .starter-panel h2 {
-    margin: 0;
-    font-family: 'Inter Tight', var(--sl-font);
-    font-size: var(--text-xl-size);
-    line-height: var(--text-xl-lh);
-    font-weight: 600;
+  .ai-tools-panel > a,
+  .ai-tools-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-1);
+    padding: var(--spacing-3);
+  }
+  .ai-tools-panel a {
+    min-height: var(--landing-touch-target);
+    box-sizing: border-box;
+    border-radius: var(--radius-sm);
     color: var(--base-foreground);
+    text-decoration: none;
+    transition: background var(--landing-motion) ease;
   }
-  .starter-description {
-    margin: var(--spacing-4) 0;
+  .ai-tools-panel a:hover { background: var(--alpha-white-5); }
+  .ai-tools-panel strong {
     font-size: var(--text-sm-size);
     line-height: var(--text-sm-lh);
-    color: var(--base-secondary-foreground);
+    font-weight: 600;
   }
+  .ai-tools-panel span {
+    font-size: var(--text-xs-size);
+    line-height: var(--text-xs-lh);
+    color: var(--base-muted-foreground);
+  }
+  .ai-tools-group { border-block: var(--landing-border-width) solid var(--base-border); }
+  .ai-tools-repositories { display: flex; gap: var(--spacing-2); }
+  .ai-tools-repositories a {
+    display: inline-flex;
+    align-items: center;
+    padding: 0 var(--spacing-2);
+    font-size: var(--text-sm-size);
+    line-height: var(--text-sm-lh);
+    text-decoration: underline;
+    text-underline-offset: var(--spacing-1);
+  }
+  .prompt-details { width: 100%; }
+  .prompt-details > summary {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    width: fit-content;
+    min-height: var(--landing-touch-target);
+    color: var(--base-muted-foreground);
+    cursor: pointer;
+    font-size: var(--text-sm-size);
+    line-height: var(--text-sm-lh);
+    transition: color var(--landing-motion) ease;
+  }
+  .prompt-details > summary::before { content: '+'; }
+  .prompt-details[open] > summary::before { content: '−'; }
+  .prompt-details > summary:hover { color: var(--base-foreground); }
   .starter-prompt {
     margin: 0;
     padding: var(--spacing-4);
     border: var(--landing-border-width) solid var(--base-border);
     border-radius: var(--radius-md);
     background: var(--base-background);
-    font-family: var(--sl-font-mono);
-    font-size: var(--text-xs-size);
-    line-height: var(--text-sm-lh);
     color: var(--base-secondary-foreground);
+    font-family: var(--sl-font);
+    font-size: var(--text-sm-size);
+    line-height: var(--text-sm-lh);
     white-space: pre-wrap;
     overflow-wrap: anywhere;
     user-select: text;
   }
-  .starter-actions {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--spacing-2);
-    flex-wrap: wrap;
-    margin-top: var(--spacing-4);
-  }
-  .starter-copy { background: var(--base-secondary); color: var(--base-foreground); }
-  .starter-copy:hover { background: var(--base-secondary-hover); }
-  .starter-tools-link {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--spacing-2);
-    min-height: var(--landing-touch-target);
-    padding-inline: var(--spacing-2);
-    color: var(--base-secondary-foreground);
-    font-size: var(--text-sm-size);
-    line-height: var(--text-sm-lh);
-    text-decoration: none;
-    transition: color var(--landing-motion) ease;
-  }
-  .copy-status, .copy-fallback {
-    margin: var(--spacing-2) 0 0;
-    min-height: var(--text-xs-lh);
-    color: var(--base-muted-foreground);
+  .copy-status {
+    margin: 0;
     font-size: var(--text-xs-size);
     line-height: var(--text-xs-lh);
-  }
-  .sdk-install {
-    grid-column: 1 / -1;
-    border-block: var(--landing-border-width) solid var(--base-border);
     color: var(--base-secondary-foreground);
   }
-  .sdk-install summary {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-4);
-    min-height: var(--landing-touch-target);
-    padding-block: var(--spacing-4);
-    cursor: pointer;
-    list-style: none;
-    font-size: var(--text-sm-size);
-    line-height: var(--text-sm-lh);
-    transition: color var(--landing-motion) ease;
-  }
-  .sdk-install summary::-webkit-details-marker { display: none; }
-  .sdk-install summary:hover { color: var(--base-foreground); }
-  .sdk-summary-title { font-weight: 600; color: var(--base-foreground); }
-  .sdk-summary-languages { color: var(--base-muted-foreground); }
-  .sdk-expand {
-    margin-left: auto;
-    font-size: var(--text-xl-size);
-    line-height: var(--text-xl-lh);
-    transition: transform var(--landing-motion) ease;
-  }
-  .sdk-install[open] .sdk-expand { transform: rotate(45deg); }
-  .sdk-commands { display: flex; flex-direction: column; gap: var(--spacing-2); padding-bottom: var(--spacing-4); }
-  .sdk-command-row {
-    display: grid;
-    grid-template-columns: 1fr 4fr auto;
-    align-items: center;
-    gap: var(--spacing-4);
-    padding: var(--spacing-2) var(--spacing-4);
-    border-radius: var(--radius-md);
-    background: var(--landing-panel);
-    font-size: var(--text-sm-size);
-    line-height: var(--text-sm-lh);
-  }
-  .sdk-language { font-weight: 500; }
-  .sdk-command-row code {
-    padding: 0;
-    background: transparent;
-    color: var(--base-foreground);
-    font-size: var(--text-sm-size);
-    line-height: var(--text-sm-lh);
-    overflow-wrap: anywhere;
-    user-select: text;
-  }
-  .sdk-copy {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--spacing-2);
-    min-width: var(--landing-touch-target);
-    min-height: var(--landing-touch-target);
-    padding: var(--spacing-2) var(--spacing-3);
-    background: transparent;
-    border: 0;
-    border-radius: var(--radius-sm);
-    color: var(--base-secondary-foreground);
-    font-size: var(--text-xs-size);
-    line-height: var(--text-xs-lh);
-    cursor: pointer;
-    transition: background var(--landing-motion) ease, color var(--landing-motion) ease;
-  }
-  .sdk-copy:hover { background: var(--base-secondary); color: var(--base-foreground); }
-  button[hidden] { display: none; }
-  button:disabled { cursor: wait; opacity: 0.65; }
+  .copy-status:not(:empty) { margin-top: var(--spacing-2); }
+  .install-terminal .copy-status { padding-inline: var(--spacing-4); }
+  .prompt-no-script { font-size: var(--text-sm-size); line-height: var(--text-sm-lh); }
+  .copy-ready .prompt-no-script,
+  .install-block button[hidden] { display: none; }
+  .install-block button:disabled { cursor: wait; }
 
+  /* ── Mobile ── */
+  /* Figma: Mobile 390px — hero stacks vertically, heading 60px/1, buttons keep 60px height flex-1, 24px side padding.
+     Breakpoint raised to 1050px — at 768px the two columns are too cramped */
   @media (max-width: 1049px) {
-    .install-section { padding: var(--spacing-10) 0 var(--spacing-12); }
+    /* Figma Mobile: install-section spans full viewport width so the Bg / Triangles
+       pattern sits flush at viewport edges. Use an explicit negative content
+       padding (matches the home-content breakout below — see AGENTS.md invariant)
+       so the layouts stay symmetric. overflow: visible lets the bg extend past
+       the section bottom into the gap above Quick Start; html { overflow-x: hidden }
+       still clips the 70px horizontal overhang. */
+    .install-section {
+      width: 100vw;
+      margin-left: calc(var(--sl-content-pad-x) * -1);
+      margin-bottom: var(--spacing-20);
+      padding: 0;
+      overflow: visible;
+    }
+
+    /* Figma Mobile: Top Hero flex-col gap-12(48) between the AI block (left col)
+       and the SDK block. install-block re-adds spacing-6 (24px) horizontal
+       padding so hero content stays within the 342px content width aligned
+       with the home sections below (which inherit the same Starlight padding). */
     .install-block {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr);
+      display: flex;
+      flex-direction: column;
       align-items: stretch;
-      padding-inline: var(--sl-content-pad-x);
-      gap: var(--spacing-8);
+      gap: var(--spacing-12);
+      padding: 0 var(--spacing-6);
     }
-    .install-heading { font-size: var(--text-5xl-size); line-height: var(--text-5xl-lh); }
-    .install-right { width: 100%; }
-    .starter-prompt { font-size: var(--text-sm-size); line-height: var(--text-base-lh); }
-  }
-  @media (max-width: 639px) {
-    .install-section { padding-top: var(--spacing-6); }
-    .install-tagline { font-size: var(--text-base-size); line-height: var(--text-base-lh); }
-    .install-actions { gap: var(--spacing-2); margin-top: var(--spacing-6); }
-    .install-actions .landing-button { padding-inline: var(--spacing-4); }
-    .starter-panel { padding: var(--spacing-4); }
-    .starter-mark { display: none; }
-    .starter-prompt { font-size: var(--text-xs-size); line-height: var(--text-sm-lh); padding: var(--spacing-3); }
-    .starter-actions { display: flex; flex-direction: column; align-items: stretch; }
-    .starter-tools-link { justify-content: center; }
-    .sdk-install summary {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
+
+    .install-left {
+      padding-top: var(--spacing-4);
+      min-height: 0;
+    }
+
+    /* Figma Mobile (node 34784:60725): the SDK block has py-4(16), and its
+       Content frame contains an empty Typography/H3 placeholder (32px) plus
+       gap-6(24) above the terminal. We don't render the H3, so absorb its
+       space into padding-top: 16 + 32 + 24 = 72px. */
+    .install-right {
+      padding: calc(var(--spacing-4) + var(--spacing-8) + var(--spacing-6)) 0
+        var(--spacing-4);
+      height: auto;
       align-items: center;
-      gap: var(--spacing-1) var(--spacing-4);
+      width: 100%;
     }
-    .sdk-summary-languages { grid-column: 1; font-size: var(--text-xs-size); line-height: var(--text-xs-lh); }
-    .sdk-expand { grid-column: 2; grid-row: 1 / 3; }
-    .sdk-command-row { grid-template-columns: minmax(0, 1fr) auto; gap: var(--spacing-1) var(--spacing-2); padding: var(--spacing-3); }
-    .sdk-command-row code { grid-column: 1; font-size: var(--text-xs-size); line-height: var(--text-sm-lh); }
-    .sdk-copy { grid-column: 2; grid-row: 1 / 3; }
+
+    /* Figma Mobile (node 34784:61327): Bg / Triangles at x=0, y=608, 460x407 in
+       the 390x844 viewport. The pattern's bottom (y=1015) sits 127px past the
+       Top Hero bottom (y=888), which we replicate via bottom: -127px — the bottom
+       127px of the pattern overflows past .install-section and is clipped by
+       overflow:hidden, leaving the top 280px visible. This also keeps the bg's
+       top edge below the AI section so it doesn't overlap the Prompt button. */
+    .install-section::before {
+      top: auto;
+      bottom: -127px;
+      left: 0;
+      right: auto;
+      width: 460px;
+      height: 407px;
+    }
+
+    /* Figma: Mobile H1 = responsive size, bold, leading-none */
+    .install-heading {
+      font-size: clamp(40px, 12vw, 60px);
+      line-height: 1;
+      overflow-wrap: break-word;
+    }
+
+    /* Figma Mobile: Buttons stack as 2-up grid for GitHub+Human Docs, then AI Kit full-width.
+       Row gap spacing-6(24), column gap spacing-6(24) */
+    .install-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-6);
+    }
+
+    .install-actions .btn {
+      padding: var(--spacing-5) var(--spacing-4);
+      white-space: nowrap;
+    }
+
+    /* Preserve the original full-width third action on mobile. */
+    .install-actions .ai-tools { grid-column: 1 / -1; }
+    .install-actions .btn-ai-tools { width: 100%; box-sizing: border-box; }
+    .ai-tools-panel { width: 100%; }
+
+    /* Mobile: tighter prompt box, no arrow. */
+
+    .open-with-links {
+      gap: var(--spacing-2);
+      padding: var(--spacing-3) var(--spacing-4);
+    }
+
+    .open-with-arrow,
+    .open-with-llm {
+      display: none;
+    }
+
+    .install-terminal {
+      width: 100%;
+    }
+
+    .install-command {
+      font-size: var(--text-sm-size);
+      line-height: var(--text-sm-lh);
+    }
+    .cmd-text { overflow-wrap: anywhere; }
   }
+
   @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after { transition: none !important; }
+    .install-actions .btn,
+    .ai-tools-toggle,
+    .ai-tools-panel a,
+    .prompt-details > summary,
+    .copy-prompt-btn,
+    .copy-btn,
+    .install-terminal starlight-tabs [role="tab"] { transition: none; }
   }
 </style>

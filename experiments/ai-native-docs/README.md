@@ -6,7 +6,9 @@ Source: [gcomte/pubky-knowledge-base-vibed, vibe/ai-native-docs](https://github.
 
 Live experiment: **[pubky-ai-docs-vibe.vercel.app](https://pubky-ai-docs-vibe.vercel.app/)**.
 
-The landing page introduces a portable starter prompt and distinct paths to Pubky skills, Context7 and DeepWiki. The existing documentation bodies and Markdown export pipeline are retained. Standard HTML links advertise the documentation index and each page's Markdown alternative.
+The landing page keeps the original hero heading, tagline, pill buttons, triangle backdrop and SDK terminal with npm, React Native and Rust tabs. A compact **AI tools** menu replaces the AI Kit button and links to Pubky skills, Context7 for Homeserver and PKARR, and DeepWiki. The portable starter prompt stays in the original AI launcher area, with copy and show-prompt controls.
+
+On documentation pages, **Markdown** and **Copy link** controls sit beside the title, or below it on smaller screens. They replace the former “AI-friendly version” footer row. The existing documentation bodies and Markdown export pipeline are retained. Standard HTML links advertise the documentation index and each page's Markdown alternative.
 
 This adapts the supplied `vibe-self-host` workflow to a static documentation frontend. It needs no Pubky backend, account, test key or Docker stack. The registry PR is deferred at the developer's request; [experiment.json](experiment.json) records provenance and is not a registry manifest.
 
@@ -14,14 +16,15 @@ This adapts the supplied `vibe-self-host` workflow to a static documentation fro
 
 - [Research and recommendations](research.md)
 - [Original landing, desktop](evidence/before-desktop.png)
-- [New landing, desktop](evidence/after-desktop.png)
-- [AI resources, desktop](evidence/ai-resources-desktop.png)
-- [New landing, mobile](evidence/after-mobile.png)
-- [AI resources, mobile](evidence/ai-resources-mobile.png)
+- [Updated landing, desktop](evidence/after-desktop.png)
+- [Updated landing, mobile](evidence/after-mobile.png)
+- [AI tools menu, desktop](evidence/ai-tools-desktop.png)
+- [Document title actions, desktop](evidence/doc-actions-desktop.png)
+- [Document title actions, mobile](evidence/doc-actions-mobile.png)
 - [Browser check results](evidence/browser-checks.json)
 - [Public deployment checks](evidence/public-checks.json)
 
-Validation passed: production build and generated-Markdown checks; all 26 internal homepage links; Markdown endpoints and discovery metadata; six viewport widths from 320 to 1920 pixels; touch targets and keyboard focus; clipboard success and denial; SDK command copying; and operation without JavaScript. No browser runtime errors were observed. Security review of the changed execution paths and static deployment configuration found no actionable issues.
+Validation passed: production build and generated-Markdown checks; all 22 internal homepage links; Markdown endpoints and discovery metadata; six viewport widths from 320 to 1920 pixels for the landing menu and short/long document titles; touch targets and keyboard focus; menu keyboard navigation and Escape; clipboard success and failure fallbacks; SDK tabs and command copying; and native links/disclosures without JavaScript. No browser runtime errors were observed. Security review of the changed execution paths and static deployment configuration found no actionable issues.
 
 ## Run locally
 

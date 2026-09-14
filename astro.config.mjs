@@ -163,6 +163,7 @@ export default defineConfig({
 				SocialIcons: './src/components/SocialIcons.astro',
 				Hero: './src/components/HeroOverride.astro',
 				Header: './src/components/Header.astro',
+				PageTitle: './src/components/PageTitle.astro',
 				Footer: './src/components/Footer.astro',
 			},
 			social: [

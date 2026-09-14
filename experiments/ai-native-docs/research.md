@@ -1,10 +1,12 @@
 # Pubky's AI documentation entry points
 
-Research checked **September 14, 2026**. This is a landing-page experiment; the existing documentation bodies remain unchanged.
+Research checked **September 14, 2026**. This is a documentation frontend experiment; the existing documentation bodies remain unchanged.
 
 ## Recommendation
 
-Make the landing page explain how to start building with Pubky, with or without an agent. Offer one portable starter prompt and three clearly different resources: task skills, API context through Context7, and repository explanations through DeepWiki. Keep direct Markdown and LLM indexes easy to find. Stop presenting provider logos or a large context dump as the main AI feature.
+Keep the landing page's existing design and ordinary documentation entry points. Replace the AI Kit button with a compact AI tools menu offering three clearly different resources: task skills, API context through Context7, and repository explanations through DeepWiki. Keep one portable starter prompt in the original launcher area, and put per-page Markdown access beside the document title. Stop presenting provider logos or a large context dump as the main AI feature.
+
+The implementation preserves the original hero typography, tagline, button styling, triangle backdrop and SDK terminal. The menu contains Pubky skills, separate Context7 links for Homeserver and PKARR, and Homeserver on DeepWiki. It adds no permanent AI resources section to the homepage. Documentation pages offer **Markdown** and **Copy link** beside the title, wrapping below it on smaller screens, in place of the footer controls.
 
 The biggest current gap is release accuracy. Adding more links will not fix references that teach older APIs.
 
@@ -49,7 +51,7 @@ These have demonstrated ecosystem use or established developer audiences. That i
 
 1. **Release accuracy first.** Refresh SDK and shipped-state skill references, fix obsolete resource links, and record the package version and upstream commit each reference was verified against. The Homeserver already has a [Context7 release-refresh workflow](https://github.com/pubky/pubky-homeserver/blob/main/.github/workflows/context7-sync.yml); extend that maintenance discipline to skills rather than creating parallel documentation copies.
 2. **A small integration evaluation.** Test finding the correct SDK, implementing a basic data flow, handling authentication correctly, and running a local testnet. Compare official docs alone, Context7 and the relevant skill. Record completion, incorrect APIs and retrieval failures. [Stripe's integration benchmark](https://stripe.com/blog/can-ai-agents-build-real-stripe-integrations) and [Supabase Evals](https://supabase.com/evals) are useful precedents.
-3. **Improve the existing per-page Markdown affordance.** The site already has a footer link and a copy-link button. Bring the action nearer the page title, and consider copying the page Markdown itself. Generate it from the same documentation source.
+3. **Consider copying Markdown contents.** The experiment now moves the existing Markdown link and copy-link action from the footer to the document title area. A possible later addition is copying the page Markdown itself, generated from the same documentation source.
 4. **A small agent starter map.** Maintain a short map of Pubky components and authoritative, version-aware sources. Use skills for repeatable tasks rather than duplicating the entire reference manual.
 5. **Selected skill setup once the references are verified.** Link to upstream installation instructions, then simplify setup for the useful workflows. Avoid maintaining editor-specific commands on the homepage.
 
@@ -57,4 +59,4 @@ Defer an embedded chatbot and a first-party docs MCP server. Context7 already su
 
 ## Deliberately removed from the landing
 
-The AI Kit hero button, the chat-provider logo launcher, vague “LLM Support” copy and fixed token-count promises. The starter prompt does not fetch the full documentation bundle by default. Existing documentation URLs remain intact.
+The AI Kit destination, the chat-provider logo launcher and fixed token-count promises. The starter prompt does not fetch the full documentation bundle by default. The original “LLM Support” annotation and visual treatment are retained, while the new AI tools menu gives each resource a concrete purpose. Existing documentation URLs remain intact.
