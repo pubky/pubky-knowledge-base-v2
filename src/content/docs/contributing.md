@@ -178,9 +178,9 @@ Fixes #456
 ### Pubky Homeserver (Rust)
 
 See the homeserver repo for full setup instructions:
-- [Install Guide](https://github.com/pubky/pubky-homeserver/blob/main/docs/INSTALL.md) — build from source, PostgreSQL setup, running
-- [Testnet README](https://github.com/pubky/pubky-homeserver/blob/main/pubky-testnet/README.md) — local development testnet
-- [Testing Guide](https://github.com/pubky/pubky-homeserver/blob/main/docs/TESTING.md) — running tests
+- [Install Guide](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/docs/INSTALL.md) — build from source, PostgreSQL setup, running
+- [Testnet README](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-testnet/README.md) — local development testnet
+- [Testing Guide](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/docs/TESTING.md) — running tests
 
 **Requirements:**
 - Rust 1.89+

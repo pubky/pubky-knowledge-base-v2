@@ -204,7 +204,7 @@ See [Authentication](/explore/pubky-protocol/authentication/#grant-lifecycle) fo
 
 ### Capability Scoping
 
-Capabilities follow the principle of least privilege. Apps should request only the access they need, and users can review requests in [Pubky Ring](/explore/technologies/pubky-ring/) before approval. Reserve broad account-management privileges for trusted identity or session managers. For capability syntax and enforcement rules, use the [client OpenAPI specification](https://github.com/pubky/pubky-homeserver/blob/main/pubky-homeserver/openapi-client.yml).
+Capabilities follow the principle of least privilege. Apps should request only the access they need, and users can review requests in [Pubky Ring](/explore/technologies/pubky-ring/) before approval. Reserve broad account-management privileges for trusted identity or session managers. For capability syntax and enforcement rules, use the [client OpenAPI specification](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-homeserver/openapi-client.yml).
 
 ### Relay Security
 

@@ -19,7 +19,7 @@ To follow along, you will need [Docker](https://docs.docker.com/get-started/get-
 ### Step 1: Set Up Pubky Docker
 
 :::note[Prefer a native setup?]
-If you do not want to use Docker, see the [native Pubky testnet setup](https://github.com/pubky/pubky-homeserver/blob/main/pubky-testnet/README.md).
+If you do not want to use Docker, see the [native Pubky testnet setup](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-testnet/README.md).
 :::
 
 In order to build our App we'll need to setup a local homeserver and testnet - we'll use [Pubky Docker](/explore/technologies/pubky-docker/) to spin up a local development environment.
@@ -61,7 +61,7 @@ With `.env` set to the default `NETWORK=testnet`, these ports are exposed:
 | `6288` | Homeserver admin HTTP | Local admin endpoint exposed by Pubky Docker. |
 
 :::note[Pubky CLI]
-For manual user and Homeserver operations while developing locally, you can use [Pubky CLI](https://github.com/pubky/pubky-homeserver/tree/main/examples/javascript).
+For manual user and Homeserver operations while developing locally, you can use [Pubky CLI](https://github.com/pubky/pubky-homeserver/tree/{{pinned_homeserver_release}}/examples/javascript).
 :::
 
 For source builds, see [Optional: Build from source](/explore/technologies/pubky-docker/#build-from-source).
@@ -307,7 +307,7 @@ The basic template maps [`VITE_PUBKY_HTTP_RELAY`](https://github.com/pubky/pubky
 
 ### Next Steps
 
-- **Explore SDK examples:** See the [Pubky Homeserver examples](https://github.com/pubky/pubky-homeserver/tree/main/examples) for runnable workflows.
+- **Explore SDK examples:** See the [Pubky Homeserver examples](https://github.com/pubky/pubky-homeserver/tree/{{pinned_homeserver_release}}/examples) for runnable workflows.
 - **Browse practical snippets:** See the [Pubky SDK guide](/explore/pubky-protocol/sdk/) for storage, authentication, events, sessions, and testing.
 - **Choose an app architecture:** Compare [client-only, aggregator, and custom-backend designs](/explore/pubky-apps/app-architectures/introduction/).
 - **Security model:** Review the [security considerations for app developers](/explore/pubky-protocol/security-model/#for-app-developers).
@@ -347,7 +347,7 @@ A: Several models work: Homeserver hosting, indexing services (like Nexus), prem
 - **[API Reference](/explore/pubky-protocol/api/)**: HTTP API spec
 - **[SDK Guide](/explore/pubky-protocol/sdk/)**: Client library docs
 - **[Rust Docs](https://docs.rs/pubky)**: Rust crate documentation
-- **[Official Docs](https://pubky.github.io/pubky-homeserver/)**: Protocol specification
+- **[Official Docs](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/README.md)**: Homeserver and SDK documentation
 
 ### Community
 - **Telegram**: [t.me/pubkycore](https://t.me/pubkycore)

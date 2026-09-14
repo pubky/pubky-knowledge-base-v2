@@ -8,7 +8,7 @@ import TabUrlSync from '../../../../components/TabUrlSync.astro';
 <TabUrlSync syncKey="sdk-lang" param="lang" />
 
 :::note
-For upgrades from SDK versions earlier than v0.10, see the [v0.10 Migration Guide](https://github.com/pubky/pubky-homeserver/tree/main/docs/v0.10-migration).
+For upgrades from SDK versions earlier than v0.10, see the [v0.10 Migration Guide](https://github.com/pubky/pubky-homeserver/tree/v0.10.0/docs/v0.10-migration).
 :::
 
 The Pubky SDK provides client libraries for building applications on [Pubky Core](/explore/pubky-protocol/introduction). It handles the hard parts (key-based auth, homeserver discovery, transport) so you can focus on your app logic using familiar HTTP-style operations.
@@ -49,7 +49,7 @@ The SDK is organized around a small set of actors that mirror the developer work
 
 For event-driven apps, **EventStreamBuilder** lets you subscribe to real-time changes via SSE. **Pkdns** handles discovery of users' homeservers via PKARR records. **GrantManager** provides admin-level permission management. **BrowserSessionStore** persists grant sessions in browsers.
 
-For client resource limits, see the SDK's [error-body limits](https://github.com/pubky/pubky-homeserver/blob/main/pubky-sdk/README.md#error-body-limits) and [event-stream limits](https://github.com/pubky/pubky-homeserver/blob/main/pubky-sdk/README.md#event-stream-limits).
+For client resource limits, see the SDK's [error-body limits](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-sdk/README.md#error-body-limits) and [event-stream limits](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-sdk/README.md#event-stream-limits).
 
 ## Quick Example
 
@@ -72,9 +72,9 @@ Sign in and read/write data. Account creation (signup) is generally handled outs
 
 Storage locks help applications coordinate updates to the same file on Homeservers that support WebDAV storage locks. Applications opt in through the Rust SDK's `SessionStorage` helpers; ordinary storage operations do not acquire locks automatically. The JavaScript bindings do not expose these helpers.
 
-The application manages the lock lifecycle and retries; the SDK handles requests and lock tokens. The Homeserver keeps a lock alive during a write made with it. See the [Rust storage-lock example](https://docs.rs/pubky/latest/pubky/struct.StorageLock.html#example) and [lock API](https://docs.rs/pubky/latest/pubky/struct.SessionStorage.html#method.lock) for usage and renewal behavior, and the Locking section of the [client OpenAPI specification](https://github.com/pubky/pubky-homeserver/blob/main/pubky-homeserver/openapi-client.yml) for protocol guarantees and limitations.
+The application manages the lock lifecycle and retries; the SDK handles requests and lock tokens. The Homeserver keeps a lock alive during a write made with it. See the [Rust storage-lock example](https://docs.rs/pubky/latest/pubky/struct.StorageLock.html#example) and [lock API](https://docs.rs/pubky/latest/pubky/struct.SessionStorage.html#method.lock) for usage and renewal behavior, and the Locking section of the [client OpenAPI specification](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-homeserver/openapi-client.yml) for protocol guarantees and limitations.
 
 ## Resources
 
 - **Repository**: [github.com/pubky/pubky-homeserver](https://github.com/pubky/pubky-homeserver)
-- **Examples**: [Full working examples](https://github.com/pubky/pubky-homeserver/tree/main/examples) covering testnet setup, signup, auth flows, CRUD operations, and event streaming
+- **Examples**: [Full working examples](https://github.com/pubky/pubky-homeserver/tree/{{pinned_homeserver_release}}/examples) covering testnet setup, signup, auth flows, CRUD operations, and event streaming
