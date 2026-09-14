@@ -1,0 +1,12 @@
+{
+  "version": 3,
+  "routes": [
+    {
+      "src": "/(.*)",
+      "headers": { "X-Robots-Tag": "noindex" },
+      "continue": true
+    },
+    { "handle": "filesystem" },
+    { "src": "/.*", "dest": "/404.html", "status": 404 }
+  ]
+}

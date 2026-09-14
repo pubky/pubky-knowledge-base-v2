@@ -1,0 +1,19 @@
+{
+  "id": "pubky-ai-docs",
+  "name": "Pubky docs, ready for your agent",
+  "kind": "static documentation frontend",
+  "upstream": "https://github.com/pubky/pubky-knowledge-base-v2",
+  "repo": {
+    "url": "https://github.com/gcomte/pubky-knowledge-base-vibed",
+    "branch": "vibe/ai-native-docs",
+    "baseCommit": "a38de41a438126f4d27fc9fb743546792a0aca80"
+  },
+  "requiresModifiedStack": false,
+  "hosted": {
+    "url": "https://pubky-ai-docs-vibe.vercel.app",
+    "provider": "Vercel",
+    "project": "pubky-ai-docs-vibe"
+  },
+  "registryPullRequest": null,
+  "note": "Experiment provenance, not a registry manifest. A static docs site does not connect to a Pubky stack. Registry submission is intentionally deferred."
+}

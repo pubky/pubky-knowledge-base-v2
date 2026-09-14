@@ -1,5 +1,6 @@
 ---
 import Default from '@astrojs/starlight/components/Head.astro';
+import { docsMarkdownPath, withBase } from '../utils/base-path';
 
 // Emit a per-page og:image. Every docs page gets a generated card at
 // /og/<slug>.png (page title as subtitle); the homepage falls back to the
@@ -9,8 +10,11 @@ const { id } = Astro.locals.starlightRoute;
 const isHome = id === 'index' || id === '';
 const ogPath = isHome ? '/images/og-default.png' : `/og/${id}.png`;
 const ogImage = new URL(ogPath, Astro.site).href;
+const markdownPath = isHome || id === '404' ? null : docsMarkdownPath(Astro.url.pathname);
 ---
 
 <Default><slot /></Default>
+<link rel="describedby" href={withBase('/llms.txt')} type="text/plain" title="Pubky documentation for agents" />
+{markdownPath && <link rel="alternate" href={markdownPath} type="text/markdown" title="Markdown version of this page" />}
 <meta property="og:image" content={ogImage} />
 <meta name="twitter:image" content={ogImage} />
