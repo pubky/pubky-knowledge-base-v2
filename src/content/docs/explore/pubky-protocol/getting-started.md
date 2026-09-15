@@ -159,6 +159,16 @@ This creates a Homeserver session for the demo user.
 
 This writes a simple JSON file onto the signed-in user's Homeserver public storage.
 
+:::tip[Store independent records separately]
+Store each independently edited record in its own file. For example, a posts collection can use `/pub/myapp/posts/001.json` and `/pub/myapp/posts/002.json`. A write replaces the data at one path, so this layout lets your app:
+
+- **Send smaller updates:** Upload the changed record without rewriting unchanged data.
+- **Load records as needed:** Page through the directory listing and fetch only the files needed for the current view.
+- **Reduce potential write conflicts:** Editing the same file from different processes or apps needs coordination.
+
+That said, keep fields together when you read and update them as a unit. Splitting them adds unnecessary requests.
+:::
+
 #### 3.7 Read the JSON back
 
 ```js snippet="snippets/js/src/getting-started.ts:js_getting_started_read"
@@ -336,7 +346,7 @@ A: Several models work: Homeserver hosting, indexing services (like Nexus), prem
 - **[TLDR](/tldr/)**: 30-second overview
 
 ### Technical
-- **[API Reference](/explore/pubky-protocol/api/)**: HTTP API spec
+- **[HTTP API References](/explore/pubky-protocol/homeserver/#http-api)**: Client and admin OpenAPI specifications
 - **[SDK Guide](/explore/pubky-protocol/sdk/)**: Client library docs
 - **[Rust Docs](https://docs.rs/pubky)**: Rust crate documentation
 - **[Official Docs](https://pubky.github.io/pubky-homeserver/)**: Protocol specification

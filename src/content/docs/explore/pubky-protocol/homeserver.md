@@ -12,6 +12,15 @@ The Homeserver implementation consists of several components: the main HTTP API 
 
 See the [repository](https://github.com/pubky/pubky-homeserver/tree/main/pubky-homeserver) for API details and configuration.
 
+## HTTP API
+
+For routes, parameters, and response schemas, use the maintained upstream specifications:
+
+- **[Client OpenAPI](https://github.com/pubky/pubky-homeserver/blob/main/pubky-homeserver/openapi-client.yml)**: Authentication, file storage, event streams, and signup-token validation.
+- **[Admin OpenAPI](https://github.com/pubky/pubky-homeserver/blob/main/pubky-homeserver/openapi-admin.yml)**: Server administration, signup tokens, user quotas, and WebDAV.
+
+For app development, use the [SDK](/explore/pubky-protocol/sdk/), which handles authentication, Homeserver discovery, and transport.
+
 ## Public vs Private Data
 
 Current implementations only support public, unencrypted data. Encrypted data and guarded (access-controlled) data are planned — see [Security Model](/explore/pubky-protocol/security-model/) for the trust implications.

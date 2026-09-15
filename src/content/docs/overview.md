@@ -48,7 +48,7 @@ Learn more about the overall vision here: [The Vision of Pubky](/the-vision-of-p
 - [Pubky Protocol Overview](/explore/pubky-protocol/introduction/) - Homeserver, PKARR and SDK
 - [Developer Guide](/explore/pubky-protocol/getting-started/) - First steps for building on Pubky
 - [SDK Documentation](/explore/pubky-protocol/sdk/) - Client libraries (Rust, JavaScript, iOS, Android)
-- [API Reference](/explore/pubky-protocol/api/) - RESTful HTTP API specification
+- [HTTP API References](/explore/pubky-protocol/homeserver/#http-api) - Client and admin OpenAPI specifications
 - [Architecture Overview](/architecture/) - System design and data flow
 - [Homeserver Documentation](/explore/pubky-protocol/homeserver/) - Deploy and configure Homeservers
 - [Security Model](/explore/pubky-protocol/security-model/) - Threat landscape, trust assumptions, and credible exit
