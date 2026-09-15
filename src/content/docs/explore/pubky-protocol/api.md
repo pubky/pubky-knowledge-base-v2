@@ -16,7 +16,13 @@ https://homeserver.example.com
 
 Homeserver URLs are discovered via [PKARR](/explore/pubky-protocol/pkarr/introduction/) records published to the [Mainline DHT](/explore/technologies/mainline-dht/).
 
-When you build with the [SDK](/explore/pubky-protocol/sdk/), it handles PKARR lookup, transport selection, authentication, and the `pubky-host` header for HTTPS Homeserver requests. For raw requests to an ICANN HTTPS endpoint, identify the user whose storage namespace the request targets with `pubky-host: <user-z32>` or `?pubky-host=<user-z32>`. The bearer token authenticates and authorizes the request but does not identify that user. Use the raw HTTP API directly only when you are writing low-level integrations or server components that intentionally bypass the SDK helpers.
+When you build with the [SDK](/explore/pubky-protocol/sdk/), it handles PKARR lookup, transport selection, authentication, and the `pubky-host` header for HTTPS Homeserver requests. For owner-relative raw requests to an ICANN HTTPS endpoint, identify the user whose storage namespace the request targets with `pubky-host: <user-z32>` or `?pubky-host=<user-z32>`. The bearer token authenticates and authorizes the request but does not identify that user. Use the raw HTTP API directly only when you are writing low-level integrations or server components that intentionally bypass the SDK helpers.
+
+Raw storage integrations can also identify the owner in the URL with `/storage/<user-z32>/pub/...`. Public reads need no authentication; writes still require an authorized session for that owner. See the [client OpenAPI specification](https://github.com/pubky/pubky-homeserver/blob/main/pubky-homeserver/openapi-client.yml) for path-addressed storage routes.
+
+## Homeserver Information
+
+`GET /info` exposes the Homeserver's client feature-discovery response. See the [client OpenAPI specification](https://github.com/pubky/pubky-homeserver/blob/main/pubky-homeserver/openapi-client.yml) for its schema.
 
 ## Authentication
 
@@ -79,7 +85,7 @@ Content-Type: application/octet-stream
 ```
 
 **Path Format:**
-- Normalized decoded paths must be under `/pub/`
+- Normalized decoded paths must be under `/pub/` or `/priv/`
 - Maximum normalized decoded length: 972 bytes total and 255 bytes per segment
 - Paths are UTF-8 and may contain spaces and non-ASCII characters; percent-encode them when constructing raw HTTP URLs
 - PUT targets must not end in `/`
@@ -260,7 +266,7 @@ data: cursor: 43
 
 ### GET /events/ — Paginated Event Feed
 
-Paginated feed of all events across all users on the homeserver. Intended for indexers and aggregators like [Pubky Nexus](/explore/pubky-apps/indexing-and-aggregation/pubky-nexus/).
+Paginated feed of public storage events across all users on the homeserver. Intended for indexers and aggregators like [Pubky Nexus](/explore/pubky-apps/indexing-and-aggregation/pubky-nexus/).
 
 **Request:**
 ```http
