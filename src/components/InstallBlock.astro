@@ -89,11 +89,6 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
       <p id="sdk-copy-status" class="copy-status" role="status" aria-live="polite" aria-atomic="true"></p>
     </div>
     <div class="ai-resources-wrap">
-      <span class="ai-bot" aria-hidden="true">
-        <span class="ai-bot-face">
-          <span class="ai-bot-eyes"><span></span><span></span></span>
-        </span>
-      </span>
       <section class="ai-resources" aria-label="AI resources">
         <span class="ai-resources-watermark" aria-hidden="true">AI</span>
         <a href="https://github.com/pubky/agent-skills" target="_blank" rel="noopener noreferrer" aria-label="Pubky skills (opens in new tab)">
@@ -440,8 +435,7 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
   .ai-icon[data-icon="grok"] { background-color: white; }
 
   /* ── Right column ── */
-  /* The card shares a bottom edge with the launcher; the bot has room to perch
-     between the SDK terminal and resource card without covering either. */
+  /* Keep the SDK above the resource card and align the card with the launcher. */
   .install-right {
     margin: 0;
     flex: 1;
@@ -449,7 +443,7 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
     flex-direction: column;
     align-items: center;
     justify-content: flex-end;
-    gap: var(--spacing-12);
+    gap: var(--spacing-6);
     min-width: 0;
     min-height: 500px;
   }
@@ -515,67 +509,12 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
     background: var(--alpha-white-5);
   }
 
-  /* A compact bot perches outside the clipped card, clear of foreground links. */
+  /* Match the resource card to the original SDK terminal width. */
   .ai-resources-wrap {
     position: relative;
     width: 500px;
     max-width: 100%;
   }
-  .ai-bot {
-    position: absolute;
-    z-index: 2;
-    top: calc(var(--spacing-6) * -1);
-    right: var(--spacing-6);
-    width: var(--spacing-12);
-    height: var(--spacing-8);
-    transform: rotate(-6deg);
-    transform-origin: center bottom;
-    pointer-events: none;
-    user-select: none;
-  }
-  .ai-bot::before {
-    content: '';
-    position: absolute;
-    top: calc(var(--spacing-2) * -1);
-    left: 50%;
-    width: var(--landing-border-width);
-    height: var(--spacing-2);
-    background: var(--base-muted-foreground);
-  }
-  .ai-bot::after {
-    content: '';
-    position: absolute;
-    top: calc(var(--spacing-3) * -1);
-    left: calc(50% - var(--spacing-1) / 2);
-    width: var(--spacing-1);
-    height: var(--spacing-1);
-    border-radius: var(--radius-full);
-    background: var(--base-secondary-foreground);
-  }
-  .ai-bot-face {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    box-sizing: border-box;
-    border: var(--landing-border-width) solid var(--base-muted-foreground);
-    border-radius: var(--radius-lg);
-    background: var(--base-card);
-    box-shadow: var(--shadow-xs);
-  }
-  .ai-bot-eyes {
-    display: flex;
-    gap: var(--spacing-2);
-    transform: translate(calc(var(--spacing-1) * -1), calc(var(--spacing-1) / 2));
-  }
-  .ai-bot-eyes > span {
-    width: var(--spacing-1);
-    height: var(--spacing-2);
-    border-radius: var(--radius-full);
-    background: var(--base-secondary-foreground);
-  }
-
   /* A visible resource box uses the existing terminal palette and geometry. */
   .ai-resources {
     position: relative;
@@ -589,7 +528,7 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
     border-radius: var(--radius-xl);
     background: var(--base-background);
   }
-  /* Oversized type adds a quiet technical texture behind the resource links. */
+  /* Oversized type carries the decorative mesh behind the resource links. */
   .ai-resources-watermark {
     position: absolute;
     z-index: 0;
@@ -604,6 +543,46 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
     color: var(--alpha-white-10);
     pointer-events: none;
     user-select: none;
+  }
+  /* Both net and light are clipped to the glyphs, never to the foreground copy. */
+  .ai-resources-watermark::before,
+  .ai-resources-watermark::after {
+    content: 'AI';
+    position: absolute;
+    inset: 0;
+    font: inherit;
+    letter-spacing: inherit;
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    pointer-events: none;
+  }
+  .ai-resources-watermark::before {
+    opacity: 0.8;
+    background-image:
+      repeating-linear-gradient(
+        60deg,
+        var(--alpha-white-10) 0 var(--landing-border-width),
+        transparent var(--landing-border-width) var(--spacing-3)
+      ),
+      repeating-linear-gradient(
+        -60deg,
+        var(--alpha-white-10) 0 var(--landing-border-width),
+        transparent var(--landing-border-width) var(--spacing-3)
+      );
+  }
+  .ai-resources-watermark::after {
+    background-image: linear-gradient(
+      110deg,
+      transparent 38%,
+      var(--alpha-white-5) 46%,
+      var(--alpha-white-10) 50%,
+      var(--alpha-white-5) 54%,
+      transparent 62%
+    );
+    background-size: 250% 100%;
+    background-repeat: no-repeat;
+    background-position: -50% 0;
   }
   .ai-resources > a,
   .ai-resources-group {
@@ -650,36 +629,16 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
     text-decoration: underline;
     text-underline-offset: var(--spacing-1);
   }
-  /* One four-second greeting draws attention to the card, then settles.
-     Reduced-motion users see the same final pose without any animation. */
+  /* A single 4.8-second light pass settles into a static mesh.
+     Reduced-motion users receive the static treatment from the start. */
   @media (prefers-reduced-motion: no-preference) {
-    .ai-bot {
-      animation: ai-bot-greeting calc(var(--landing-motion) * 25) ease-in-out both;
-    }
-    .ai-bot-eyes {
-      animation: ai-bot-glance calc(var(--landing-motion) * 25) ease-in-out both;
-    }
-    .ai-resources {
-      animation: ai-resource-greeting calc(var(--landing-motion) * 25) ease-in-out both;
+    .ai-resources-watermark::after {
+      animation: ai-mesh-shimmer calc(var(--landing-motion) * 30) ease-in-out both;
     }
   }
-  @keyframes ai-bot-greeting {
-    0%, 18% { transform: rotate(3deg); }
-    34%, 58% { transform: translateY(calc(var(--spacing-1) * -1)) rotate(-6deg); }
-    100% { transform: rotate(-6deg); }
-  }
-  @keyframes ai-bot-glance {
-    0%, 18% { transform: translate(0, 0); }
-    40%, 62%, 74%, 100% {
-      transform: translate(calc(var(--spacing-1) * -1), calc(var(--spacing-1) / 2)) scaleY(1);
-    }
-    68% {
-      transform: translate(calc(var(--spacing-1) * -1), calc(var(--spacing-1) / 2)) scaleY(0.15);
-    }
-  }
-  @keyframes ai-resource-greeting {
-    0%, 100% { border-color: var(--base-border); box-shadow: none; }
-    34%, 64% { border-color: var(--base-muted-foreground); box-shadow: var(--shadow-card-hover); }
+  @keyframes ai-mesh-shimmer {
+    0%, 12% { background-position: 150% 0; }
+    100% { background-position: -50% 0; }
   }
 
   .prompt-details { width: 100%; }
