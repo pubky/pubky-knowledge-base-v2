@@ -138,7 +138,9 @@ Deploy the package/container, configure HTTPS, publish in PKARR.
 <a id="q24"></a>
 ### Q24. What are the storage limits?
 
-Synonym's public Homeserver currently has: 1GB per user, 10MB per file. These are temporary limits during beta. Self-hosted Homeservers can configure their own limits.
+The default Homeserver hosted by Synonym, used by most Pubky users, provides [**1 GB of storage per user**](https://medium.com/pubky/pubky-invites-a-reputation-gated-onboarding-flow-for-new-users-2428c2e4beea).
+
+Storage limits depend on the Homeserver operator. Ask your provider about its current policy.
 
 <a id="q25"></a>
 ### Q25. Can Pubky integrate with Tor?

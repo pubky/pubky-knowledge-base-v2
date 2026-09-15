@@ -10,7 +10,7 @@ Homeservers are meant to represent a primary place to retrieve data from a speci
 
 The Homeserver implementation consists of several components: the main HTTP API server (supporting both ICANN HTTP and [PubkyTLS](/glossary/#pubkytls)), an admin server, a Prometheus metrics server, and republishers that keep user and server keys alive on the DHT.
 
-See the [repository](https://github.com/pubky/pubky-homeserver/tree/main/pubky-homeserver) for API details and configuration.
+The [client OpenAPI specification](https://github.com/pubky/pubky-homeserver/blob/main/pubky-homeserver/openapi-client.yml) defines the API used by applications. Privileged operator tasks are covered by the separate [admin OpenAPI specification](https://github.com/pubky/pubky-homeserver/blob/main/pubky-homeserver/openapi-admin.yml). For configuration, follow the [Install Guide](https://github.com/pubky/pubky-homeserver/blob/main/docs/INSTALL.md).
 
 ## Public vs Private Data
 
@@ -22,7 +22,6 @@ Homeservers expose event streams for clients to sync data changes:
 
 - `GET /events-stream` — SSE real-time stream with user and path filters. Primary event API, used by clients to subscribe to specific users on third-party homeservers without processing unwanted traffic
 - `GET /events/` — Paginated event feed for all users on the homeserver (cursor-based, 1000 events per batch)
-
 
 ## Transport Security
 
