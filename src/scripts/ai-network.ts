@@ -1,13 +1,17 @@
 /** A bounded decorative network; the existing CSS mesh remains the fallback. */
 const controllers = new Map<HTMLElement, () => void>();
 const FRAME_INTERVAL = 1000 / 20;
-const NODE_COUNT = 24;
+const NODE_COUNT = 64;
+const SWEEP_CYCLE = 12_000;
+const SWEEP_START = 1_080;
+const SWEEP_DURATION = 2_520;
+
+type Edge = { from: number; to: number; stable: boolean; phase: number };
 
 function createNetwork(root: HTMLElement): () => void {
   const watermark = root.querySelector<HTMLElement>('.ai-resources-watermark');
   const canvas = root.querySelector<HTMLCanvasElement>('.ai-network-canvas');
-  const toggle = root.querySelector<HTMLButtonElement>('[data-ai-motion-toggle]');
-  if (!watermark || !canvas || !toggle || !window.IntersectionObserver || !window.ResizeObserver) {
+  if (!watermark || !canvas || !window.IntersectionObserver || !window.ResizeObserver) {
     return () => {};
   }
 
@@ -18,14 +22,15 @@ function createNetwork(root: HTMLElement): () => void {
 
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   const events = new AbortController();
-  const nodes = Array.from({ length: NODE_COUNT }, (_, index) => ({
-    x: ((index % 4) + 0.5 + (Math.random() - 0.5) * 0.6) / 4,
-    y: (Math.floor(index / 4) + 0.5 + (Math.random() - 0.5) * 0.6) / 6,
+  const nodes = Array.from({ length: NODE_COUNT }, () => ({
+    x: 0,
+    y: 0,
     phase: Math.random() * Math.PI * 2,
   }));
+  let edges: Edge[] = [];
+  let maskPixels: ImageData['data'] | undefined;
   let disposed = false;
   let failed = false;
-  let paused = false;
   let visible = false;
   let fontsReady = false;
   let ready = false;
@@ -38,47 +43,123 @@ function createNetwork(root: HTMLElement): () => void {
   let lastDraw = 0;
   let elapsed = 0;
 
+  function insideMask(x: number, y: number): boolean {
+    if (!maskPixels || x < 0 || y < 0 || x >= width || y >= height) return false;
+    const column = Math.min(mask.width - 1, Math.floor(x * pixelRatio));
+    const row = Math.min(mask.height - 1, Math.floor(y * pixelRatio));
+    return (maskPixels[(row * mask.width + column) * 4 + 3] ?? 0) > 160;
+  }
+
+  function seedGraph() {
+    // Farthest-point sampling spreads nodes through the actual strokes of both
+    // letters, including their contours, instead of wasting nodes in empty space.
+    const candidates: Array<{ x: number; y: number; distance: number }> = [];
+    const step = Math.max(2, Math.min(width, height) / 32);
+    for (let y = step / 2; y < height && candidates.length < 4096; y += step) {
+      for (let x = step / 2; x < width && candidates.length < 4096; x += step) {
+        if (insideMask(x, y)) candidates.push({ x, y, distance: Infinity });
+      }
+    }
+    if (!candidates.length) throw new Error('The decorative glyph mask is empty.');
+    let next = 0;
+    nodes.forEach((node, index) => {
+      const point = candidates[next]!;
+      node.x = point.x / width;
+      node.y = point.y / height;
+      point.distance = -1;
+      let farthest = -1;
+      next = index % candidates.length;
+      candidates.forEach((candidate, candidateIndex) => {
+        if (candidate.distance < 0) return;
+        const distance = (point.x - candidate.x) ** 2 + (point.y - candidate.y) ** 2;
+        candidate.distance = Math.min(candidate.distance, distance);
+        if (candidate.distance > farthest) {
+          farthest = candidate.distance;
+          next = candidateIndex;
+        }
+      });
+    });
+
+    // Five candidate neighbors per node cap the graph at 320 unique edges.
+    // Two nearby connections remain as a dim backbone; the others fade/reform.
+    const connections = new Map<number, Edge>();
+    nodes.forEach((node, index) => {
+      const nearest = nodes.map((other, otherIndex) => ({
+        index: otherIndex,
+        distance: ((node.x - other.x) * width) ** 2 + ((node.y - other.y) * height) ** 2,
+      })).filter((other) => other.index !== index)
+        .sort((a, b) => a.distance - b.distance).slice(0, 5);
+      nearest.forEach((other, rank) => {
+        const from = Math.min(index, other.index);
+        const to = Math.max(index, other.index);
+        const key = from * NODE_COUNT + to;
+        const existing = connections.get(key);
+        if (existing) existing.stable ||= rank < 2;
+        else connections.set(key, {
+          from, to, stable: rank < 2, phase: nodes[from]!.phase + nodes[to]!.phase,
+        });
+      });
+    });
+    edges = [...connections.values()];
+  }
+
   function draw() {
     if (!context || !ready) return;
     const time = elapsed / 1000;
-    const points = nodes.map((node) => ({
-      x: (node.x + Math.sin(time * 0.32 + node.phase) * 0.055) * width,
-      y: (node.y + Math.cos(time * 0.25 + node.phase) * 0.045) * height,
-    }));
+    const drift = Math.min(width, height) * 0.018;
+    const points = nodes.map((node) => {
+      const anchor = { x: node.x * width, y: node.y * height };
+      let x = anchor.x + Math.sin(time * 0.45 + node.phase) * drift;
+      let y = anchor.y + Math.cos(time * 0.37 + node.phase) * drift;
+      if (!insideMask(x, y)) {
+        x = (x + anchor.x) / 2;
+        y = (y + anchor.y) / 2;
+      }
+      return insideMask(x, y) ? { x, y } : anchor;
+    });
+    const cycleTime = elapsed % SWEEP_CYCLE;
+    const sweeping = cycleTime >= SWEEP_START && cycleTime < SWEEP_START + SWEEP_DURATION;
+    const state = sweeping ? 'sweeping' : 'resting';
+    if (root.dataset.aiShimmer !== state) root.dataset.aiShimmer = state;
+    const band = Math.max(width, height) * 0.16;
+    const progress = (cycleTime - SWEEP_START) / SWEEP_DURATION;
+    const center = -band + (width + height * 0.3 + band * 2) * progress;
+    const lightAt = (x: number, y: number) => sweeping
+      ? Math.max(0, 1 - Math.abs(x + y * 0.3 - center) / band) ** 2
+      : 0;
+
     context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
     context.clearRect(0, 0, width, height);
     context.strokeStyle = ink;
     context.fillStyle = ink;
-    context.lineWidth = 0.8;
-    const reach = Math.max(width, height) * 0.34;
-
-    // At most three forward connections per node; edge phases form new paths.
-    points.forEach((point, index) => {
-      let connections = 0;
-      for (let other = index + 1; other < points.length && connections < 3; other++) {
-        const target = points[other]!;
-        const distance = Math.hypot(point.x - target.x, point.y - target.y);
-        const formation = Math.sin(time * 0.52 + index * 1.7 + other * 0.9);
-        if (distance >= reach || formation <= -0.25) continue;
-        context.globalAlpha = (1 - distance / reach) * (formation + 0.25) * 0.65;
-        context.beginPath();
-        context.moveTo(point.x, point.y);
-        context.lineTo(target.x, target.y);
-        context.stroke();
-        connections++;
-      }
+    context.lineWidth = 0.85;
+    context.lineCap = 'round';
+    edges.forEach((edge) => {
+      const from = points[edge.from]!;
+      const to = points[edge.to]!;
+      const formation = (Math.sin(time * 0.55 + edge.phase) + 1) / 2;
+      if (!edge.stable && formation < 0.2) return;
+      const glint = lightAt((from.x + to.x) / 2, (from.y + to.y) / 2);
+      context.globalAlpha = Math.min(1, (edge.stable ? 0.28 : 0.1) + formation * 0.32 + glint * 0.6);
+      context.beginPath();
+      context.moveTo(from.x, from.y);
+      context.lineTo(to.x, to.y);
+      context.stroke();
     });
     points.forEach((point, index) => {
       const pulse = (Math.sin(time * 0.8 + nodes[index]!.phase) + 1) / 2;
-      context.globalAlpha = 0.1;
+      const glint = lightAt(point.x, point.y);
+      context.globalAlpha = 0.05 + glint * 0.1;
       context.beginPath();
-      context.arc(point.x, point.y, 4 + pulse, 0, Math.PI * 2);
+      context.arc(point.x, point.y, 3, 0, Math.PI * 2);
       context.fill();
-      context.globalAlpha = 0.65 + pulse * 0.35;
+      context.globalAlpha = Math.min(1, 0.5 + pulse * 0.2 + glint * 0.5);
       context.beginPath();
-      context.arc(point.x, point.y, 1.4 + pulse * 0.6, 0, Math.PI * 2);
+      context.arc(point.x, point.y, 1.2 + glint * 0.5, 0, Math.PI * 2);
       context.fill();
     });
+    // Only strokes and points reach the visible canvas; the glyph is an alpha
+    // mask, never a painted silhouette. The shimmer only changes their light.
     context.globalAlpha = 1;
     context.globalCompositeOperation = 'destination-in';
     context.drawImage(mask, 0, 0, width, height);
@@ -110,16 +191,14 @@ function createNetwork(root: HTMLElement): () => void {
   }
 
   function sync() {
-    if (disposed || !toggle) return;
+    if (disposed) return;
     const reduced = reducedMotion.matches;
     const usable = ready && fontsReady && !failed && !reduced;
-    root.dataset.aiMotion = reduced ? 'reduced' : paused ? 'paused' : 'playing';
+    root.dataset.aiMotion = reduced ? 'reduced' : 'playing';
     if (usable) root.dataset.aiNetworkReady = 'true';
     else delete root.dataset.aiNetworkReady;
-    toggle.hidden = !usable;
-    toggle.textContent = paused ? 'Play motion' : 'Pause motion';
-    toggle.setAttribute('aria-label', `${paused ? 'Play' : 'Pause'} motion in the AI lettering`);
-    const running = usable && !paused && visible && !document.hidden;
+    if (!usable) root.dataset.aiShimmer = 'resting';
+    const running = usable && visible && !document.hidden;
     if (!running) {
       stop();
     } else if (frame === undefined) {
@@ -161,6 +240,8 @@ function createNetwork(root: HTMLElement): () => void {
         maskContext.fillText('A', 0, baseline);
         maskContext.fillText('I', maskContext.measureText('A').width + tracking, baseline);
       }
+      maskPixels = maskContext.getImageData(0, 0, mask.width, mask.height).data;
+      seedGraph();
       ready = true;
       if (visible && !document.hidden) draw();
     } catch {
@@ -170,10 +251,6 @@ function createNetwork(root: HTMLElement): () => void {
     sync();
   }
 
-  toggle.addEventListener('click', () => {
-    paused = !paused;
-    sync();
-  }, { signal: events.signal });
   reducedMotion.addEventListener('change', () => {
     resize();
     sync();
@@ -207,7 +284,9 @@ function createNetwork(root: HTMLElement): () => void {
     delete root.dataset.aiMotion;
     delete root.dataset.aiRunning;
     delete root.dataset.aiNetworkReady;
-    toggle.hidden = true;
+    delete root.dataset.aiShimmer;
+    maskPixels = undefined;
+    edges = [];
     canvas.width = canvas.height = mask.width = mask.height = 0;
   };
 }

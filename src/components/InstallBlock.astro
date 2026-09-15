@@ -107,7 +107,6 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
           <strong>DeepWiki</strong>
           <span>AI explanations of the Pubky codebase.</span>
         </a>
-        <button class="ai-motion-toggle" type="button" data-ai-motion-toggle aria-label="Pause motion in the AI lettering" hidden>Pause motion</button>
       </section>
     </div>
   </div>
@@ -543,7 +542,7 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
     font-weight: 700;
     line-height: calc(var(--text-6xl-lh) * 3.6);
     letter-spacing: calc(var(--spacing-4) * -1);
-    color: var(--alpha-white-5);
+    color: transparent;
     pointer-events: none;
     user-select: none;
   }
@@ -554,14 +553,13 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
     display: none;
     width: 100%;
     height: 100%;
-    opacity: 0.18;
+    opacity: 0.24;
     pointer-events: none;
   }
   .ai-resources[data-ai-network-ready] .ai-network-canvas { display: block; }
   .ai-resources[data-ai-network-ready] .ai-resources-watermark::before { opacity: 0; }
-  /* Both net and light are clipped to the glyphs, never to the foreground copy. */
-  .ai-resources-watermark::before,
-  .ai-resources-watermark::after {
+  /* Without canvas, only the clipped net defines the letters; there is no fill. */
+  .ai-resources-watermark::before {
     z-index: 2;
     content: 'AI';
     position: absolute;
@@ -578,27 +576,14 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
     background-image:
       repeating-linear-gradient(
         60deg,
-        var(--alpha-white-10) 0 var(--landing-border-width),
-        transparent var(--landing-border-width) var(--spacing-3)
+        var(--alpha-white-16) 0 var(--landing-border-width),
+        transparent var(--landing-border-width) var(--spacing-2)
       ),
       repeating-linear-gradient(
         -60deg,
-        var(--alpha-white-10) 0 var(--landing-border-width),
-        transparent var(--landing-border-width) var(--spacing-3)
+        var(--alpha-white-16) 0 var(--landing-border-width),
+        transparent var(--landing-border-width) var(--spacing-2)
       );
-  }
-  .ai-resources-watermark::after {
-    background-image: linear-gradient(
-      110deg,
-      transparent 38%,
-      var(--alpha-white-5) 46%,
-      var(--alpha-white-10) 50%,
-      var(--alpha-white-5) 54%,
-      transparent 62%
-    );
-    background-size: 250% 100%;
-    background-repeat: no-repeat;
-    background-position: -50% 0;
   }
   .ai-resources > a,
   .ai-resources-group {
@@ -666,46 +651,6 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
     text-decoration: underline;
     text-underline-offset: var(--spacing-1);
   }
-  .ai-motion-toggle {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-width: var(--landing-touch-target);
-    min-height: var(--landing-touch-target);
-    margin: var(--spacing-2) 0 0 auto;
-    padding: var(--spacing-2) var(--spacing-3);
-    border: var(--landing-border-width) solid var(--base-border);
-    border-radius: var(--radius-full);
-    background: var(--base-background);
-    color: var(--base-secondary-foreground);
-    font: inherit;
-    font-size: var(--text-xs-size);
-    line-height: var(--text-xs-lh);
-    cursor: pointer;
-    transition: background var(--landing-motion) ease, color var(--landing-motion) ease;
-  }
-  .ai-motion-toggle:hover { background: var(--base-card); color: var(--base-foreground); }
-  /* A brief light pass repeats every 12 seconds while the network is running.
-     The static fallback and reduced-motion treatment have no animation. */
-  @media (prefers-reduced-motion: no-preference) {
-    .ai-resources[data-ai-network-ready] .ai-resources-watermark::after {
-      animation: ai-mesh-interval calc(var(--landing-motion) * 75) linear infinite;
-      animation-play-state: paused;
-    }
-    .ai-resources[data-ai-running="true"] .ai-resources-watermark::after {
-      animation-play-state: running;
-    }
-    .ai-resources[data-ai-running="false"] .ai-resources-watermark::after {
-      animation-play-state: paused;
-    }
-  }
-  @keyframes ai-mesh-interval {
-    0%, 9% { background-position: 150% 0; }
-    30%, 100% { background-position: -50% 0; }
-  }
-
   .prompt-details { width: 100%; }
   .prompt-details > summary {
     display: flex;
@@ -865,13 +810,11 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .ai-network-canvas,
-    .ai-motion-toggle { display: none; }
+    .ai-network-canvas { display: none; }
     .install-actions .btn,
     .ai-resources a,
     .prompt-details > summary,
     .copy-prompt-btn,
-    .ai-motion-toggle,
     .open-with-btn,
     .open-with-btn[data-tooltip]::after,
     .copy-prompt-btn[data-tooltip]::after,
