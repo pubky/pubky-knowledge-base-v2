@@ -91,13 +91,14 @@ Users maintain local backups via [Pubky Backup](/explore/technologies/pubky-back
 **Threats:**
 - Man-in-the-middle attacks on unencrypted connections
 - Eavesdropping on network traffic
-- Replay attacks using captured auth tokens
+- Replay of intercepted grant-exchange requests or stolen bearer tokens
 
 **Mitigations:**
 - HTTPS for all homeserver communication
-- AuthToken timestamps with 3-minute validity window (prevents replay)
+- Grant exchanges require app-specific proof-of-possession keys and one-time nonces
+- Short-lived bearer tokens refreshed by the SDK
 - Capability scoping limits damage from compromised tokens
-- Auth tokens encrypted between authenticator and requesting app via [relay](/explore/technologies/http-relay/)
+- Grants encrypted between authenticator and requesting app via [relay](/explore/technologies/http-relay/)
 
 ### DHT Attackers
 
@@ -116,7 +117,7 @@ These are intentional design decisions, not oversights:
 |----------|--------------------| ---------|
 | Session token issuance | Yes | Practical trade-off; keeping Ring's keys isolated means homeserver must issue tokens |
 | Capability enforcement | Yes | Homeserver trusted to honor the capabilities Ring authorized |
-| Session revocation | Yes | Homeserver trusted to delete sessions when Ring requests |
+| Grant revocation | Yes | Homeserver trusted to invalidate grants and their sessions when Ring requests |
 | Key custody | No | Ring is sole key holder; no homeserver recovery path |
 | Identity resolution | No | [PKARR](/explore/pubky-protocol/pkarr/introduction/) is authoritative; homeserver cannot claim false identity |
 | Data authenticity | Yes (for now) | Planned: data signing will remove this trust requirement |
@@ -130,15 +131,13 @@ The alternative would require Ring to be involved in every operation, which conf
 
 ### Known Limitations
 
-1. **Session Cookie Collision**: Currently, all sessions share a single authentication cookie. Logging into App B overwrites App A's session. This is a critical bug being addressed via session management rework.
+1. **No Data Signing**: Data stored on homeservers is not cryptographically signed. A malicious operator could forge, alter, or delete content without readers detecting it.
 
-2. **No Data Signing**: Data stored on homeservers is not cryptographically signed. A malicious operator could forge, alter, or delete content without readers detecting it.
+2. **Cloud IP Blocking**: BitTorrent DHT nodes commonly block cloud provider IP ranges. Running pkarr/mainline clients directly in Google Cloud or AWS often fails. The solution is using relays hosted in smaller providers.
 
-3. **Cloud IP Blocking**: BitTorrent DHT nodes commonly block cloud provider IP ranges. Running pkarr/mainline clients directly in Google Cloud or AWS often fails. The solution is using relays hosted in smaller providers.
+3. **Mnemonic Fallback Security Risk**: Users without [Pubky Ring](/explore/technologies/pubky-ring/) can authenticate by entering their 12-word mnemonic directly on 3rd party apps. This is a security vulnerability — malicious apps could exfiltrate the mnemonic since users cannot verify that client-side JavaScript actually keeps the mnemonic local. The mnemonic should only ever be entered on trusted infrastructure (e.g. Ring or the user's own homeserver).
 
-4. **Mnemonic Fallback Security Risk**: Users without [Pubky Ring](/explore/technologies/pubky-ring/) can authenticate by entering their 12-word mnemonic directly on 3rd party apps. This is a security vulnerability — malicious apps could exfiltrate the mnemonic since users cannot verify that client-side JavaScript actually keeps the mnemonic local. The mnemonic should only ever be entered on trusted infrastructure (e.g. Ring or the user's own homeserver). This limitation is being addressed alongside the session management rework.
-
-## Planned Trust Improvements
+## Trust Improvements
 
 ### Data Signing (Optional Feature, Planned 2026)
 
@@ -201,19 +200,11 @@ For Pubky resources, pass the Pubky URL or resource to the SDK and let it build 
 
 ## Authentication Security
 
-### AuthToken Design
+### Grant Authentication
 
-The auth protocol uses time-limited, capability-scoped tokens:
+The authenticator signs an app-specific grant containing the client ID, approved capabilities, expiry, and the app's proof-of-possession public key. The app exchanges the grant and a PoP proof for a short-lived bearer token. The SDK refreshes the bearer without requiring the user's identity key again.
 
-```
-AuthToken = signature(64) + namespace(10) + version(1) + timestamp(8) + pubky(32) + capabilities
-```
-
-**Security Properties:**
-- **Namespace**: "PUBKY:AUTH" prevents cross-protocol replay
-- **Timestamp**: Must be within 3-minute window (prevents replay)
-- **Signature**: Ed25519 over message bytes (authenticity)
-- **Capabilities**: Scoped permissions limit damage from compromise
+Grants can be listed and revoked individually. Revoking a grant invalidates its sessions.
 
 ### Capability Scoping
 
@@ -225,11 +216,11 @@ Capabilities follow the principle of least privilege:
 /:rw                  # Root access (avoid when possible)
 ```
 
-Apps should request minimal capabilities. Users can review requests in [Pubky Ring](/explore/technologies/pubky-ring/) before approval.
+Apps should request minimal capabilities. A trailing slash defines a directory scope; without it, a capability covers only the exact path. Users can review requests in [Pubky Ring](/explore/technologies/pubky-ring/) before approval.
 
 ### Relay Security
 
-The [HTTP Relay](/explore/technologies/http-relay/) encrypts tokens between the authenticator ([Pubky Ring](/explore/technologies/pubky-ring/)) and the requesting app using a shared `client_secret`, preventing relay operators from capturing valid auth tokens. See [HTTP Relay](/explore/technologies/http-relay/) for the full flow.
+The [HTTP Relay](/explore/technologies/http-relay/) encrypts grants between the authenticator ([Pubky Ring](/explore/technologies/pubky-ring/)) and the requesting app using a shared relay secret. The grant is also bound to the app's proof-of-possession key. See [HTTP Relay](/explore/technologies/http-relay/) for the full flow.
 
 ## Trust Surface After All Improvements
 
