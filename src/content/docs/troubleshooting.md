@@ -151,7 +151,7 @@ See [Authentication](/explore/pubky-protocol/authentication/) for how Pubky auth
 
 ## Pubky Docker Setup Issues
 
-See the [Pubky Docker README](https://github.com/pubky/pubky-docker#readme) for current setup and configuration. For unresolved problems, search or report an issue in the [Pubky Docker repository](https://github.com/pubky/pubky-docker/issues).
+See the [Pubky Docker README](https://github.com/pubky/pubky-docker/blob/main/Readme.md) for current setup and configuration. For unresolved problems, search or report an issue in the [Pubky Docker repository](https://github.com/pubky/pubky-docker/issues).
 
 ---
 

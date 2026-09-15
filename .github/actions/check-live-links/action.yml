@@ -1,0 +1,23 @@
+name: Check live documentation links
+description: Install a verified Lychee release and check the built site and exports.
+runs:
+  using: composite
+  steps:
+    - name: Install Lychee 0.24.2
+      shell: bash
+      run: |
+        install_dir="$(mktemp -d "$RUNNER_TEMP/lychee.XXXXXX")"
+        curl --fail --silent --show-error --location --retry 3 \
+          --connect-timeout 10 --max-time 120 \
+          https://github.com/lycheeverse/lychee/releases/download/lychee-v0.24.2/lychee-x86_64-unknown-linux-musl.tar.gz \
+          --output "$install_dir/lychee.tar.gz"
+        cd "$install_dir"
+        echo '73657a111819a30c47c08352896796f23d64e4eb2b3ed39b6d32149241566fc5  lychee.tar.gz' | sha256sum --check
+        tar -xzf lychee.tar.gz --strip-components=1 lychee-x86_64-unknown-linux-musl/lychee
+        echo "$install_dir" >> "$GITHUB_PATH"
+    - name: Test link checking
+      shell: bash
+      run: node --test tests/check-live-links.test.mjs
+    - name: Check published links
+      shell: bash
+      run: npm run check:links

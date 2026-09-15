@@ -4,7 +4,7 @@ title: "Pubky Homeserver API Reference"
 
 The [Pubky protocol](/explore/pubky-protocol/introduction/) defines a RESTful HTTP API for storing and retrieving data on [Homeservers](/explore/pubky-protocol/homeserver/). This page provides a practical overview of the raw HTTP API.
 
-The [client OpenAPI specification](https://github.com/pubky/pubky-homeserver/blob/main/pubky-homeserver/openapi-client.yml) and [admin OpenAPI specification](https://github.com/pubky/pubky-homeserver/blob/main/pubky-homeserver/openapi-admin.yml) are the maintained references for routes and schemas. Consult the server implementation for behavior not captured by those specifications.
+The [client OpenAPI specification](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-homeserver/openapi-client.yml) and [admin OpenAPI specification](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-homeserver/openapi-admin.yml) are the maintained references for routes and schemas. Consult the server implementation for behavior not captured by those specifications.
 
 ## Base URL
 
@@ -91,7 +91,7 @@ HTTP/1.1 201 Created
 
 The response has no body. The Homeserver returns `201 Created` for new entries and exact-path overwrites.
 
-The tenant router declares a [100 MiB body limit](https://github.com/pubky/pubky-homeserver/blob/main/pubky-homeserver/src/client_server/routes/tenants/mod.rs#L19-L33), but the streaming PUT handler does not enforce it as a hard cap. Operators must enforce request-size limits for both direct PubkyTLS and reverse-proxied traffic and configure per-user storage quotas separately.
+The tenant router declares a [100 MiB body limit](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-homeserver/src/client_server/routes/tenants/mod.rs#L19-L33), but the streaming PUT handler does not enforce it as a hard cap. Operators must enforce request-size limits for both direct PubkyTLS and reverse-proxied traffic and configure per-user storage quotas separately.
 
 **Error Responses:**
 - `400 Bad Request`: Invalid path, including a target ending in `/`
@@ -273,7 +273,7 @@ Returns up to 1000 events per batch. Use the returned cursor to paginate through
 
 Homeservers that require signup tokens (via [Homegate](/explore/technologies/homegate/)) expose an endpoint to check token validity.
 
-### GET /signup_tokens/{token}
+### GET `/signup_tokens/{token}`
 
 Check whether a signup token is valid, used, or unknown.
 
@@ -421,7 +421,7 @@ Returns metrics in Prometheus text exposition format.
 
 ## Rate Limiting
 
-Request-count limits can be configured by HTTP method and path. By default, only `GET /signup_tokens/*` is limited, at 10 requests per minute per IP. See the [default configuration](https://github.com/pubky/pubky-homeserver/blob/main/pubky-homeserver/src/data_directory/config.default.toml) for details.
+Request-count limits can be configured by HTTP method and path. By default, only `GET /signup_tokens/*` is limited, at 10 requests per minute per IP. See the [default configuration](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-homeserver/src/data_directory/config.default.toml) for details.
 
 **Rate Limit Exceeded:**
 ```http
@@ -459,10 +459,10 @@ PUT /pub/myapp/all_posts  (large JSON array)
 - **[Pubky protocol overview](/explore/pubky-protocol/introduction/)**: Main documentation
 - **[SDK Documentation](/explore/pubky-protocol/sdk/)**: Client libraries
 - **[Homeserver Documentation](/explore/pubky-protocol/homeserver/)**: Server setup
-- **Official Docs**: [pubky.github.io/pubky-homeserver](https://pubky.github.io/pubky-homeserver/)
+- **Official Docs**: [Homeserver and SDK documentation](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/README.md)
 - **Repository**: [github.com/pubky/pubky-homeserver](https://github.com/pubky/pubky-homeserver)
-- **Client OpenAPI**: [openapi-client.yml](https://github.com/pubky/pubky-homeserver/blob/main/pubky-homeserver/openapi-client.yml)
-- **Admin OpenAPI**: [openapi-admin.yml](https://github.com/pubky/pubky-homeserver/blob/main/pubky-homeserver/openapi-admin.yml)
+- **Client OpenAPI**: [openapi-client.yml](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-homeserver/openapi-client.yml)
+- **Admin OpenAPI**: [openapi-admin.yml](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-homeserver/openapi-admin.yml)
 
 ---
 

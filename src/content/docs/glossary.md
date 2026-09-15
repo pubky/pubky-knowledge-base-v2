@@ -103,7 +103,7 @@ Command-line tool for interacting with Pubky Homeservers, providing user operati
 **[Pubky Protocol](/explore/pubky-protocol/introduction/)**
 The protocol encompassing the Homeserver, SDK, PKARR and specifications for building decentralized applications on Pubky.
 
-<a id="pubkytls"></a>
+<span id="pubkytls"></span>
 
 **PubkyTLS**
 Pubky's TLS transport for Homeserver connections addressed by public key. It uses TLS with Raw Public Keys (RFC 7250), so the server public key is verified directly instead of through an X.509 certificate authority chain.

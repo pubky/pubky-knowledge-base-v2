@@ -26,7 +26,7 @@ All data is stored under `/pub/pubky.app/` on the user's homeserver. Key models 
 - **PubkyAppFeed** - Saved feed configuration
 - **PubkyAppLastRead** - Notification/read-state marker
 
-See the [`pubky-app-specs` README](https://github.com/pubky/pubky-app-specs) for the current schema reference, ID generation rules, validation constraints, and TypeScript/Rust APIs, including the [`PubkyAppPost` section](https://github.com/pubky/pubky-app-specs#pubkyapppost) for current post fields, kinds, attachments, and collection envelopes.
+See the [`pubky-app-specs` README](https://github.com/pubky/pubky-app-specs) for the current schema reference, ID generation rules, validation constraints, and TypeScript/Rust APIs, including the [`PubkyAppPost` section](https://github.com/pubky/pubky-app-specs/blob/main/SPEC.md#pubkyapppost) for current post fields, kinds, attachments, and collection envelopes.
 
 ## Role in Ecosystem
 

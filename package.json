@@ -5,12 +5,15 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build && node scripts/copy-md-sources.mjs && node scripts/generate-llms-small.mjs && node scripts/check-generated-markdown.mjs && node --test tests/check-md-links.test.mjs",
+    "build": "npm run check:github-links && npm run check:release-links && astro build && node scripts/copy-md-sources.mjs && node scripts/generate-llms-small.mjs && node scripts/check-generated-markdown.mjs && node --test tests/check-md-links.test.mjs",
     "preview": "astro preview",
     "astro": "astro",
     "check:snippets": "npm run check:snippet-fences && npm run check:snippets:js && npm run check:snippets:react-native && npm run check:snippets:rust",
     "check:snippet-fences": "node --test tests/check-snippet-fences.test.mjs && node scripts/check-snippet-fences.mjs",
     "check:generated-markdown": "node scripts/check-generated-markdown.mjs",
+    "check:release-links": "node --test tests/release-links.test.mjs",
+    "check:github-links": "node --test tests/check-github-links.test.mjs && node scripts/check-github-links.mjs",
+    "check:links": "node scripts/check-live-links.mjs",
     "check:snippets:js": "npm --prefix snippets/js run check",
     "check:snippets:react-native": "npm --prefix snippets/react-native run check",
     "check:snippets:rust": "cargo clippy --manifest-path snippets/rust/Cargo.toml --all-features -- -D warnings && cargo fmt --manifest-path snippets/rust/Cargo.toml --check"
@@ -20,6 +23,7 @@
     "@fontsource/inter": "^5.2.8",
     "@pasqal-io/starlight-client-mermaid": "^0.1.0",
     "astro": "^5.6.1",
+    "mdast-util-from-markdown": "^2.0.2",
     "satori": "^0.26.0",
     "sharp": "^0.34.2",
     "starlight-llms-txt": "^0.7.0"

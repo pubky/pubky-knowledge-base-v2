@@ -1,0 +1,6 @@
+[
+  {
+    "url": "http://7fmjpcuuzf54hw18bsgi3zihzyh4awseeuq5tmojefaezjbd64cy/",
+    "reason": "This tutorial link requires a configured PKDNS resolver, which CI does not have. Keep the clickable link for readers who have completed the resolver setup."
+  }
+]

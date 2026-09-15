@@ -6,9 +6,11 @@
 //   - Presentational frontmatter fields removed
 //   - Snippet-backed code blocks expanded from their checked source files
 //   - Other fenced code blocks preserved untouched
+//   - Homeserver release placeholders resolved in links
 
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, statSync } from 'fs';
 import { join, dirname, relative, extname } from 'path';
+import { resolveReleaseLinks } from '../plugins/release-links.mjs';
 import {
   getSnippetReference,
   loadSnippet,
@@ -27,6 +29,7 @@ function processFile(srcPath, destPath) {
 
   let result = transformDocument(content, { stripIndent: isMdx });
   result = cleanFrontmatter(result);
+  result = resolveReleaseLinks(result);
 
   mkdirSync(dirname(destPath), { recursive: true });
   writeFileSync(destPath, result);

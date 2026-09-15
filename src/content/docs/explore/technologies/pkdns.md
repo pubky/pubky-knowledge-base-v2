@@ -187,7 +187,7 @@ max_entries = 10000
 ttl_seconds = 300
 ```
 
-See [sample-config.toml](https://github.com/pubky/pkdns/blob/master/server/sample-config.toml) for full options.
+See [config.sample.toml](https://github.com/pubky/pkdns/blob/master/server/config.sample.toml) for full options.
 
 ### Verification
 

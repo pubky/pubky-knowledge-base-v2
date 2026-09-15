@@ -6,7 +6,7 @@ In pubky.app, a **post** is content that a user publishes under `/pub/pubky.app/
 
 ## Post Types
 
-`pubky-app-specs` is the canonical source for post kinds, fields, limits, and validation rules. See the [`PubkyAppPost` section of the `pubky-app-specs` README](https://github.com/pubky/pubky-app-specs#pubkyapppost).
+`pubky-app-specs` is the canonical source for post kinds, fields, limits, and validation rules. See the [`PubkyAppPost` section of the `pubky-app-specs` specification](https://github.com/pubky/pubky-app-specs/blob/main/SPEC.md#pubkyapppost).
 
 Posts can also participate in social interactions:
 

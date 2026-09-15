@@ -180,7 +180,7 @@ cargo test
 ```
 
 If integration tests require `pubky-testnet`, follow the
-[Pubky Testnet README](https://github.com/pubky/pubky-homeserver/blob/main/pubky-testnet/README.md)
+[Pubky Testnet README](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-testnet/README.md)
 for local database setup.
 
 ### Example Workflow

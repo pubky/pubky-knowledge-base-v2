@@ -10,7 +10,7 @@ Homeservers are meant to represent a primary place to retrieve data from a speci
 
 The Homeserver implementation consists of several components: the main HTTP API server (supporting both ICANN HTTP and [PubkyTLS](/glossary/#pubkytls)), an admin server, a Prometheus metrics server, and republishers that keep user and server keys alive on the DHT.
 
-See the [repository](https://github.com/pubky/pubky-homeserver/tree/main/pubky-homeserver) for API details and configuration.
+See the [repository](https://github.com/pubky/pubky-homeserver/tree/{{pinned_homeserver_release}}/pubky-homeserver) for API details and configuration.
 
 ## Public vs Private Data
 
@@ -45,11 +45,11 @@ See [Security Model](/explore/pubky-protocol/security-model/) for the full trust
 ## Running a Homeserver
 
 For installing, configuring, and running a Homeserver, follow the
-[Install Guide](https://github.com/pubky/pubky-homeserver/blob/main/docs/INSTALL.md). To make it
+[Install Guide](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/docs/INSTALL.md). To make it
 publicly reachable see the
-[Deployment Guide](https://github.com/pubky/pubky-homeserver/blob/main/docs/DEPLOY.md).
+[Deployment Guide](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/docs/DEPLOY.md).
 
 For local development and testing with a fixed-port testnet, follow the
-[Pubky Testnet README](https://github.com/pubky/pubky-homeserver/blob/main/pubky-testnet/README.md).
+[Pubky Testnet README](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-testnet/README.md).
 For a full walkthrough of setting up a local stack and building your first app, see the
 [Developer Guide](/explore/pubky-protocol/getting-started).

@@ -3,6 +3,7 @@
 
 import { readFileSync, writeFileSync, readdirSync, statSync } from 'fs';
 import { join, relative, extname } from 'path';
+import { resolveReleaseLinks } from '../plugins/release-links.mjs';
 
 const SRC = 'src/content/docs';
 const DEST = 'dist/llms-small.txt';
@@ -97,7 +98,7 @@ for (const { file, rel } of entries) {
 	const title = extractTitle(content) || slug;
 
 	if (INLINE.has(rel)) {
-		lines.push(`\n# ${title}\n\n${stripFrontmatter(content).trim()}`);
+		lines.push(`\n# ${title}\n\n${resolveReleaseLinks(stripFrontmatter(content).trim())}`);
 	} else {
 		const description = extractDescription(content);
 		const url = `${SITE_URL}/${slug}.md`;

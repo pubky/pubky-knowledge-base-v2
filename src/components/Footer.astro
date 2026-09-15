@@ -4,7 +4,9 @@ import LastUpdated from 'virtual:starlight/components/LastUpdated';
 import Pagination from 'virtual:starlight/components/Pagination';
 import { docsMarkdownPath } from '../utils/base-path';
 
-const mdUrl = docsMarkdownPath(Astro.url.pathname);
+const { slug } = Astro.locals.starlightRoute.entry;
+const isNotFound = slug === '404' || slug.endsWith('/404');
+const mdUrl = isNotFound ? null : docsMarkdownPath(Astro.url.pathname);
 ---
 
 <footer class="sl-flex">

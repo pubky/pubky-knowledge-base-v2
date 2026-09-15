@@ -29,10 +29,14 @@ JavaScript, TypeScript, and Rust examples must live in `snippets/` and be refere
 
 Named sections use `// --8<-- [start:name]` and `// --8<-- [end:name]`; CI validates the complete source file.
 
+### Pinned Homeserver links
+
+Use `blob/{{pinned_homeserver_release}}/...` or `tree/{{pinned_homeserver_release}}/...` in Homeserver Markdown links. Keep [the pin](src/config/releases.mjs) aligned with the SDK; record pinning exceptions in [config/github-link-exceptions.json](config/github-link-exceptions.json). CI checks version alignment and all published links.
+
 ## Related Resources
 
 - **GitHub**: [github.com/pubky](https://github.com/pubky)
-- **Pubky Homeserver**: [github.com/pubky/pubky-homeserver](https://github.com/pubky/pubky-homeserver) ([examples](https://github.com/pubky/pubky-homeserver/tree/main/examples))
+- **Pubky Homeserver**: [github.com/pubky/pubky-homeserver](https://github.com/pubky/pubky-homeserver) ([SDK resources](https://pubky.org/explore/pubky-protocol/sdk/#resources))
 - **Telegram**: [t.me/pubkycore](https://t.me/pubkycore)
 - **Live App**: [pubky.app](https://pubky.app)
 
@@ -45,6 +49,8 @@ Run commands from the project root:
 | `npm install` | Install dependencies |
 | `npm run dev` | Start the local dev server at `localhost:4321` |
 | `npm run build` | Build the site to `dist/` and generate AI-readable docs |
+| `npm run check:github-links` | Enforce pinned Homeserver GitHub links and explicit exceptions |
+| `npm run check:links` | Check built pages, Markdown/LLM exports, and README links (requires [Lychee 0.24.2](https://github.com/lycheeverse/lychee/releases/tag/lychee-v0.24.2) and curl; [exceptions](config/live-link-exceptions.json)) |
 | `npm run preview` | Preview the production build locally |
 | `npm run astro ...` | Run Astro CLI commands |
 

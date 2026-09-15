@@ -136,7 +136,7 @@ This allows apps to:
 - Session synchronized via encrypted relay
 - Wallet receives authorization on new device
 
-See the [Bitkit + Paykit Integration Master Guide](https://github.com/BitcoinErrorLog/paykit-rs/blob/main/docs/BITKIT_PAYKIT_INTEGRATION_MASTERGUIDE.md) for detailed integration documentation.
+See the [Bitkit + Paykit Integration Master Guide](https://github.com/BitcoinErrorLog/paykit-rs/blob/main/BITKIT_PAYKIT_INTEGRATION_MASTERGUIDE.md) for detailed integration documentation.
 
 ## Technical Specifications
 
