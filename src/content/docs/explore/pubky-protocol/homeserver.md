@@ -10,7 +10,18 @@ Homeservers are meant to represent a primary place to retrieve data from a speci
 
 The Homeserver implementation consists of several components: the main HTTP API server (supporting both ICANN HTTP and [PubkyTLS](/glossary/#pubkytls)), an admin server, a Prometheus metrics server, and republishers that keep user and server keys alive on the DHT.
 
-The [client OpenAPI specification](https://github.com/pubky/pubky-homeserver/blob/main/pubky-homeserver/openapi-client.yml) defines the API used by applications. Privileged operator tasks are covered by the separate [admin OpenAPI specification](https://github.com/pubky/pubky-homeserver/blob/main/pubky-homeserver/openapi-admin.yml). For configuration, follow the [Install Guide](https://github.com/pubky/pubky-homeserver/blob/main/docs/INSTALL.md).
+For configuration, follow the [Install Guide](https://github.com/pubky/pubky-homeserver/blob/main/docs/INSTALL.md).
+
+## HTTP API
+
+For routes, parameters, and response schemas, use the upstream specifications:
+
+- **[Client OpenAPI](https://github.com/pubky/pubky-homeserver/blob/main/pubky-homeserver/openapi-client.yml)**: Authentication, file storage, event streams, and signup-token validation.
+- **[Admin OpenAPI](https://github.com/pubky/pubky-homeserver/blob/main/pubky-homeserver/openapi-admin.yml)**: Server administration, signup tokens, user quotas, and WebDAV.
+
+Admin access is privileged. Keep the admin interface private and protected, and provide admin credentials only to trusted operators. Ordinary applications should use the client API through the SDK.
+
+For app development, use the [SDK](/explore/pubky-protocol/sdk/), which handles authentication, Homeserver discovery, and transport.
 
 Homeservers also support [storage locking](/explore/pubky-protocol/sdk/#storage-locking) to help applications coordinate concurrent updates to the same file.
 

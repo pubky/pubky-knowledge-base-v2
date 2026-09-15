@@ -138,7 +138,7 @@ Applications (via SDK)
 - **Official Docs**: [pubky.github.io/pubky-homeserver](https://pubky.github.io/pubky-homeserver/)
 - **Rust API Docs**: [docs.rs/pubky](https://docs.rs/pubky)
 - **[SDK Guide](/explore/pubky-protocol/sdk/)**: Complete integration documentation
-- **[API Reference](/explore/pubky-protocol/api/)**: HTTP API specification
+- **[HTTP API References](/explore/pubky-protocol/homeserver/#http-api)**: Client and admin OpenAPI specifications
 - **Examples**: Rust and JavaScript tutorials in repository
 
 ### Repositories
