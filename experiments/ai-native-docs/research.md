@@ -6,7 +6,7 @@ Research checked **September 14, 2026**. This is a documentation frontend experi
 
 Keep the landing page's existing design and ordinary documentation entry points. Replace the AI Kit destination with a visible AI resources box offering three clearly different resources: task skills, API context through Context7, and repository explanations through DeepWiki. Show all three without requiring a click to discover them. Keep the original provider shortcuts and one portable starter prompt under **pubky.org for your LLM**, and put per-page Markdown access beside the document title. Use a small index and relevant pages as the starting context.
 
-The implementation preserves the original hero typography, tagline, button styling, triangle backdrop and SDK terminal. The AI resources box sits above the terminal and contains Pubky skills, separate Context7 links for Homeserver and PKARR, and Homeserver on DeepWiki. Documentation pages offer **Markdown** and **Copy link** beside the title, wrapping below it on smaller screens, in place of the footer controls.
+The implementation preserves the original hero typography, tagline, button styling, triangle backdrop and SDK terminal. The resource box sits below the terminal, with oversized decorative AI lettering behind the links. It contains Pubky skills, separate Context7 links for Homeserver and PKARR, and Homeserver on DeepWiki. Documentation pages offer **Markdown** and **Copy link** beside the title, wrapping below it on smaller screens, in place of the footer controls.
 
 The biggest current gap is release accuracy. Adding more links will not fix references that teach older APIs.
 

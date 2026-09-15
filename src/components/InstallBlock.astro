@@ -76,8 +76,24 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
   </div>
 
   <div class="install-right not-content">
-    <section class="ai-resources" aria-labelledby="ai-resources-heading">
-      <h2 id="ai-resources-heading">AI resources</h2>
+    <div class="install-terminal terminal-tabs">
+      <Tabs>
+        {commands.map((cmd) => (
+          <TabItem label={cmd.label}>
+            <div class="install-command">
+              <span class="prompt">$</span>
+              <span class="cmd-text">{cmd.command}</span>
+              <button type="button" class="copy-btn" data-copy-text={cmd.command} data-copy-kind="command" data-copy-status="sdk-copy-status" aria-label={`Copy ${cmd.label} install command`} hidden>
+                <img class="copy-icon" src={withBase('/images/icons/line-copy.svg')} width="20" height="20" alt="" aria-hidden="true" />
+              </button>
+            </div>
+          </TabItem>
+        ))}
+      </Tabs>
+      <p id="sdk-copy-status" class="copy-status" role="status" aria-live="polite" aria-atomic="true"></p>
+    </div>
+    <section class="ai-resources" aria-label="AI resources">
+      <span class="ai-resources-watermark" aria-hidden="true">AI</span>
       <a href="https://github.com/pubky/agent-skills" target="_blank" rel="noopener noreferrer" aria-label="Pubky skills (opens in new tab)">
         <strong>Pubky skills</strong>
         <span>Workflows for your coding agent.</span>
@@ -95,22 +111,6 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
         <span>AI explanations of the Pubky codebase.</span>
       </a>
     </section>
-    <div class="install-terminal terminal-tabs">
-      <Tabs>
-        {commands.map((cmd) => (
-          <TabItem label={cmd.label}>
-            <div class="install-command">
-              <span class="prompt">$</span>
-              <span class="cmd-text">{cmd.command}</span>
-              <button type="button" class="copy-btn" data-copy-text={cmd.command} data-copy-kind="command" data-copy-status="sdk-copy-status" aria-label={`Copy ${cmd.label} install command`} hidden>
-                <img class="copy-icon" src={withBase('/images/icons/line-copy.svg')} width="20" height="20" alt="" aria-hidden="true" />
-              </button>
-            </div>
-          </TabItem>
-        ))}
-      </Tabs>
-      <p id="sdk-copy-status" class="copy-status" role="status" aria-live="polite" aria-atomic="true"></p>
-    </div>
   </div>
 </div>
 </div>
@@ -591,6 +591,9 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
 
   /* A visible resource box uses the existing terminal palette and geometry. */
   .ai-resources {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
     width: 500px;
     max-width: 100%;
     box-sizing: border-box;
@@ -599,15 +602,26 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
     border-radius: var(--radius-xl);
     background: var(--base-background);
   }
-  .ai-resources h2 {
-    margin: 0 0 var(--spacing-2);
-    font-size: var(--text-base-size);
-    line-height: var(--text-base-lh);
-    font-weight: 600;
-    color: var(--base-foreground);
+  /* Oversized type adds a quiet technical texture behind the resource links. */
+  .ai-resources-watermark {
+    position: absolute;
+    z-index: 0;
+    top: 50%;
+    right: var(--spacing-6);
+    transform: translateY(-50%) rotate(-12deg);
+    font-family: "Inter Tight", "Inter", system-ui, sans-serif;
+    font-size: calc(var(--text-6xl-size) * 4);
+    font-weight: 700;
+    line-height: calc(var(--text-6xl-lh) * 4);
+    letter-spacing: calc(var(--spacing-4) * -1);
+    color: var(--alpha-white-5);
+    pointer-events: none;
+    user-select: none;
   }
   .ai-resources > a,
   .ai-resources-group {
+    position: relative;
+    z-index: 1;
     display: flex;
     flex-direction: column;
     gap: var(--spacing-1);
@@ -627,7 +641,8 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
     line-height: var(--text-sm-lh);
     font-weight: 600;
   }
-  .ai-resources span {
+  .ai-resources > a > span,
+  .ai-resources-group > span {
     font-size: var(--text-xs-size);
     line-height: var(--text-xs-lh);
     color: var(--base-muted-foreground);
@@ -719,7 +734,7 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
       min-height: 0;
     }
 
-    /* The AI resources are visible immediately above the original SDK terminal. */
+    /* Keep the SDK terminal and AI resources together in document order. */
     .install-right {
       padding: 0 0 var(--spacing-4);
       min-height: 0;
@@ -786,6 +801,11 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
 
     .install-terminal {
       width: 100%;
+    }
+
+    .ai-resources-watermark {
+      font-size: calc(var(--text-6xl-size) * 3);
+      line-height: calc(var(--text-6xl-lh) * 3);
     }
 
     .install-command {
