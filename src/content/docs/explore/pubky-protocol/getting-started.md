@@ -30,11 +30,19 @@ Note: [Pubky Docker](/explore/technologies/pubky-docker/)  can run a full [pubky
 git clone https://github.com/pubky/pubky-docker.git && cd pubky-docker && cp .env-sample .env
 ```
 
+Make sure your Docker engine is running. On Linux, [start the daemon](https://docs.docker.com/engine/daemon/start/); with Docker Desktop, open the app. For [Colima](https://colima.run/docs/getting-started/), run:
+
+```bash
+colima start
+```
+
 Run the homeserver and testnet via Docker compose:
 
 ```bash
 docker compose up homeserver -d
 ```
+
+Open [http://localhost:15411/](http://localhost:15411/) (PKARR relay) and [http://localhost:6288/](http://localhost:6288/) (Homeserver admin) in your browser to verify they respond.
 
 You now have a local Pubky testnet ready for app development. An isolated DHT is running, the HTTP relay is local, and the Homeserver publishes its PKARR identity to the local DHT. This means local clients can discover your Homeserver the same way they would on the public network, but everything stays on your machine. Your testnet Homeserver's pubky is always `8pinxxgqs41n4aididenw5apqp1urfmzdztr8jt4abrkdn435ewo`.
 
