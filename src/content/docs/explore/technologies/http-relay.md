@@ -2,7 +2,7 @@
 title: "HTTP Relay"
 ---
 
-HTTP relay service for forwarding encrypted AuthTokens during Pubky [authentication](/explore/pubky-protocol/authentication/) flows.
+HTTP relay service for forwarding encrypted grants during Pubky [authentication](/explore/pubky-protocol/authentication/) flows.
 
 - **GitHub**: [`pubky/http-relay`](https://github.com/pubky/http-relay)
 - **Crate**: [`http-relay`](https://crates.io/crates/http-relay)
@@ -13,34 +13,30 @@ HTTP relay service for forwarding encrypted AuthTokens during Pubky [authenticat
 
 ## Why a Relay?
 
-In the Pubky Auth flow, a third-party app needs to receive an AuthToken from the user's authenticator ([Pubky Ring](/explore/technologies/pubky-ring/)). The challenge:
+In the Pubky Auth flow, a third-party app needs to receive a grant from the user's authenticator ([Pubky Ring](/explore/technologies/pubky-ring/)). The challenge:
 - The app may be a web page with no backend
 - The authenticator is a mobile app
 - They need to exchange data without direct connectivity
 
-The relay solves this by providing a temporary rendezvous point where encrypted tokens can be deposited and retrieved.
+The relay solves this by providing a temporary rendezvous point where encrypted grants can be deposited and retrieved.
 
 ## How It Works
 
-Since v0.7.0, the relay uses the `/inbox` endpoint (replacing the previous `/link` channel):
+The relay uses the `/inbox` endpoint:
 
-1. **App generates a client secret** and starts long-polling the relay inbox channel
-2. **App shows QR code** containing `pubkyauth:///?relay=...&secret=...&caps=...`
-3. **Ring scans QR**, signs AuthToken, encrypts it with `client_secret`
-4. **Ring POSTs** encrypted blob to the relay inbox
-5. **App retrieves** the message via long-poll GET, decrypts using `client_secret`, and acknowledges via DELETE
+1. **App generates a relay secret and PoP key** and starts long-polling the relay inbox channel
+2. **App shows a QR code** containing the relay details, client ID, capabilities, and PoP public key
+3. **Ring scans the QR code**, signs the grant, and encrypts it with the relay secret
+4. **Ring POSTs** the encrypted grant to the relay inbox
+5. **App retrieves** the message via long-poll GET, decrypts it, and acknowledges via DELETE
 
 The `/inbox` endpoint persists messages server-side for up to 5 minutes. The producer can verify delivery via `/ack` and `/await` sub-endpoints.
 
-The relay only ever sees encrypted blobs — it cannot capture valid auth tokens.
+The relay only ever sees encrypted blobs — it cannot read the grant.
 
-SDK clients can resume an in-progress auth flow after a page refresh or app restart by saving the original `authorizationUrl` and passing it to `resumeAuthFlow` / `resume_auth_flow`. The URL contains the relay URL and `client_secret`, so the SDK can rebuild the same inbox channel and continue polling. If Ring already posted the encrypted token while the app was away, `/inbox` can still return it as long as the channel is within its retention window. Delete the URL once the flow completes because it contains the `client_secret`.
+SDK clients can resume an in-progress grant flow only if they save both the relay state and the matching PoP key. Delete saved flow state once the flow completes or is abandoned.
 
-See the [pubky-homeserver GitHub docs](https://github.com/pubky/pubky-homeserver/blob/main/docs/AUTH.md) for the full protocol spec and [Authentication](/explore/pubky-protocol/authentication/) for an overview.
-
-### Migration from /link to /inbox
-
-The previous `/link` channel used synchronous producer/consumer pairing. The new `/inbox` channel is more reliable and fixes connectivity issues reported by users. The SDK auto-dispatches: if a relay URL ends with `/link`, the old approach is used; otherwise the `/inbox` approach is used.
+See [Authentication](/explore/pubky-protocol/authentication/) for a conceptual overview. For implementation details, use the [Rust](https://docs.rs/pubky) or [JavaScript/TypeScript](https://pubky.github.io/pubky-homeserver/js-sdk-typedoc/) SDK reference.
 
 ## Self-Hosting
 

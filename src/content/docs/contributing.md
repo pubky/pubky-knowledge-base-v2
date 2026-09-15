@@ -177,29 +177,10 @@ Fixes #456
 
 ### Pubky Homeserver (Rust)
 
-```bash
-# Clone
-git clone https://github.com/pubky/pubky-homeserver
-cd pubky-homeserver
-
-# Build
-cargo build
-
-# Run tests
-cargo test
-
-# Run standalone homeserver locally (requires PostgreSQL and database_url in config)
-cargo run --bin pubky-homeserver
-
-# Format code
-cargo fmt
-
-# Lint
-cargo clippy
-```
-
-For local `pubky-testnet` setup, including Docker-managed or external PostgreSQL, follow the
-[Pubky Testnet README](https://github.com/pubky/pubky-homeserver/blob/main/pubky-testnet/README.md).
+See the homeserver repo for full setup instructions:
+- [Install Guide](https://github.com/pubky/pubky-homeserver/blob/main/docs/INSTALL.md) — build from source, PostgreSQL setup, running
+- [Testnet README](https://github.com/pubky/pubky-homeserver/blob/main/pubky-testnet/README.md) — local development testnet
+- [Testing Guide](https://github.com/pubky/pubky-homeserver/blob/main/docs/TESTING.md) — running tests
 
 **Requirements:**
 - Rust 1.89+

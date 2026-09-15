@@ -30,15 +30,7 @@ Note: [Pubky Docker](/explore/technologies/pubky-docker/)  can run a full [pubky
 git clone https://github.com/pubky/pubky-docker.git && cd pubky-docker && cp .env-sample .env
 ```
 
-In `homeserver.config.toml` set `signup_mode` to `open`. This is as opposed to requiring a signup token to signup - local setups do not need the token-based spam protection used by public Homeservers.
-
-From the `pubky-docker` directory, run:
-
-```bash
-sed -i 's/^signup_mode = "token_required"/signup_mode = "open"/' homeserver.config.toml
-```
-
-Run the homeserver and tesnet via Docker compose:
+Run the homeserver and testnet via Docker compose:
 
 ```bash
 docker compose up homeserver -d
@@ -141,7 +133,7 @@ This creates a demo identity for the hello-world app and logs its pubky to the b
 ```js snippet="snippets/js/src/getting-started.ts:js_getting_started_signup"
 ```
 
-This creates an account on the local Homeserver and publishes the user's Homeserver mapping (PKARR). Because local signup is set to `open`, we pass `null` instead of a signup token.
+This creates an account on the local Homeserver and publishes the user's Homeserver mapping (PKARR). Because [local signup is set to `open`](https://github.com/pubky/pubky-docker/blob/75b1121f3e90b9b44d9416ca4f5ba87a4984e800/homeserver.config.toml#L5), we pass `null` instead of a signup token.
 
 :::note[Homeserver signup]
 This guide performs Homeserver signup inside the app because it is the shortest path to a working local example. In a real-world flow, however, Homeserver signup is not the responsibility of a Pubky app. Assume users already have an account on a Homeserver. If not, direct them to a separate signup flow, such as [the onboarding on pubky.app](https://pubky.app/onboarding/human), instead of implementing it in the app. The template in Step 3.8 follows this pattern.
@@ -188,7 +180,7 @@ Nice. Your first Pubky app works.
 
 #### 3.8 Basic Pubky app template
 
-As a next step, try this template as a fuller starting point for a fresh Pubky app.
+As a next step, try [this template](https://pubky.github.io/pubky-app-templates/) as a fuller starting point for a fresh Pubky app.
 
 It includes a working browser app with local testnet configuration, identity creation, Homeserver signup and signin, and a Pubky auth flow. Treat it as a set of building blocks: copy the pieces your app needs, adapt the auth and storage flows, and replace the sample UI with your own experience.
 
@@ -325,7 +317,7 @@ A: Currently yes for secure key management, though apps can implement their own 
 A: Not directly. Pubky uses a different architecture (Homeservers + PKARR vs relays/PDSs). See [Comparisons](/comparisons/) for details.
 
 **Q: How do I handle user authentication?**
-A: The SDK handles it automatically via signature-based auth. No passwords, OAuth, or tokens needed. See [Authentication](/explore/pubky-protocol/authentication/).
+A: The SDK handles authentication with capability-scoped grants. No passwords or OAuth needed. See [Authentication](/explore/pubky-protocol/authentication/).
 
 **Q: Can I build private apps?**
 A: Currently Pubky is optimized for public data. Private/encrypted features are coming via [Pubky Noise](/explore/technologies/pubky-noise/).

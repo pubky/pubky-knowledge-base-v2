@@ -4,6 +4,8 @@ updates:
     directory: "/snippets/js"
     schedule:
       interval: "daily"
+    cooldown:
+      default-days: 7
     versioning-strategy: increase
     labels: ["dependencies"]
     commit-message:
@@ -15,6 +17,8 @@ updates:
     directory: "/snippets/react-native"
     schedule:
       interval: "daily"
+    cooldown:
+      default-days: 7
     versioning-strategy: increase
     labels: ["dependencies"]
     commit-message:
@@ -26,6 +30,8 @@ updates:
     directory: "/snippets/rust"
     schedule:
       interval: "daily"
+    cooldown:
+      default-days: 7
     versioning-strategy: increase
     labels: ["dependencies"]
     commit-message:

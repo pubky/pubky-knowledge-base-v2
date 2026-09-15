@@ -196,10 +196,12 @@ sequenceDiagram
     participant Nexus
     
     User->>Ring: Authorize App
-    Ring->>App: Grant session token
+    Ring->>App: Grant
+    App->>HS: Exchange grant + PoP proof
+    HS->>App: Bearer token
     User->>App: Create post
     App->>HS: PUT /pub/pubky.app/posts/123
-    HS->>HS: Verify signature
+    HS->>HS: Verify session
     HS->>HS: Store post data
     HS->>App: 200 OK
     Nexus->>HS: Poll /events endpoint
