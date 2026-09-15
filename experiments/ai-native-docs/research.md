@@ -4,9 +4,9 @@ Research checked **September 14, 2026**. This is a documentation frontend experi
 
 ## Recommendation
 
-Keep the landing page's existing design and ordinary documentation entry points. Replace the AI Kit button with a compact AI tools menu offering three clearly different resources: task skills, API context through Context7, and repository explanations through DeepWiki. Keep one portable starter prompt in the original launcher area, and put per-page Markdown access beside the document title. Stop presenting provider logos or a large context dump as the main AI feature.
+Keep the landing page's existing design and ordinary documentation entry points. Replace the AI Kit destination with a visible AI resources box offering three clearly different resources: task skills, API context through Context7, and repository explanations through DeepWiki. Show all three without requiring a click to discover them. Keep the original provider shortcuts and one portable starter prompt under **pubky.org for your LLM**, and put per-page Markdown access beside the document title. Use a small index and relevant pages as the starting context.
 
-The implementation preserves the original hero typography, tagline, button styling, triangle backdrop and SDK terminal. The menu contains Pubky skills, separate Context7 links for Homeserver and PKARR, and Homeserver on DeepWiki. It adds no permanent AI resources section to the homepage. Documentation pages offer **Markdown** and **Copy link** beside the title, wrapping below it on smaller screens, in place of the footer controls.
+The implementation preserves the original hero typography, tagline, button styling, triangle backdrop and SDK terminal. The AI resources box sits above the terminal and contains Pubky skills, separate Context7 links for Homeserver and PKARR, and Homeserver on DeepWiki. Documentation pages offer **Markdown** and **Copy link** beside the title, wrapping below it on smaller screens, in place of the footer controls.
 
 The biggest current gap is release accuracy. Adding more links will not fix references that teach older APIs.
 
@@ -59,4 +59,4 @@ Defer an embedded chatbot and a first-party docs MCP server. Context7 already su
 
 ## Deliberately removed from the landing
 
-The AI Kit destination, the chat-provider logo launcher and fixed token-count promises. The starter prompt does not fetch the full documentation bundle by default. The original “LLM Support” annotation and visual treatment are retained, while the new AI tools menu gives each resource a concrete purpose. Existing documentation URLs remain intact.
+The AI Kit destination and fixed token-count promises. The starter prompt does not fetch the full documentation bundle by default. The original provider icon row, “LLM Support” annotation and visual treatment are retained, while the visible AI resources box gives each resource a concrete purpose. Existing documentation URLs remain intact.

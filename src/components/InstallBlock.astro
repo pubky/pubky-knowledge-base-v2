@@ -17,6 +17,15 @@ Read https://pubky.org/llms-small.txt, then fetch only the relevant .md pages. S
 
 Before writing code, check my installed SDK version against its maintained upstream documentation. Cite the sources you use and flag anything you cannot verify.`;
 
+const aiLinks = [
+  { name: "Claude", url: `https://claude.ai/new?q=${encodeURIComponent(aiPrompt)}`, icon: "claude" },
+  { name: "ChatGPT", url: `https://chat.openai.com/?q=${encodeURIComponent(aiPrompt)}`, icon: "chatgpt" },
+  { name: "Cursor", url: `https://cursor.com/link/prompt?text=${encodeURIComponent(aiPrompt)}`, icon: "cursor" },
+  { name: "Gemini", url: "https://gemini.google.com/", icon: "gemini", tooltip: "Gemini: Autofill unsupported. Copy-paste manually." },
+  { name: "Grok", url: `https://x.com/i/grok?text=${encodeURIComponent(aiPrompt)}`, icon: "grok" },
+];
+
+const iconUrl = (icon: string) => `--ai-icon-url: url("${withBase(`/images/ai-icons/${icon}.png`)}")`;
 const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-square.png')}")`;
 ---
 
@@ -37,45 +46,26 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
         <img class="btn-icon" src={withBase('/images/user.svg')} width="16" height="16" alt="" aria-hidden="true" />
         <span>Human Docs</span>
       </a>
-      <details class="ai-tools">
-        <summary class="btn btn-ai-tools">
-          <img class="btn-icon" src={withBase('/images/icons/file.svg')} width="16" height="16" alt="" aria-hidden="true" />
-          <span>AI tools</span>
-          <span class="ai-tools-toggle" aria-hidden="true">+</span>
-        </summary>
-        <div class="ai-tools-panel">
-          <a href="https://github.com/pubky/agent-skills" target="_blank" rel="noopener noreferrer" aria-label="Pubky skills (opens in new tab)">
-            <strong>Pubky skills</strong>
-            <span>Agent workflows. Check the supported SDK version.</span>
-          </a>
-          <div class="ai-tools-group">
-            <strong>Context7</strong>
-            <span>Find API documentation and examples.</span>
-            <div class="ai-tools-repositories">
-              <a href="https://context7.com/pubky/pubky-homeserver" target="_blank" rel="noopener noreferrer" aria-label="Pubky Homeserver on Context7 (opens in new tab)">Homeserver</a>
-              <a href="https://context7.com/pubky/pkarr" target="_blank" rel="noopener noreferrer" aria-label="PKARR on Context7 (opens in new tab)">PKARR</a>
-            </div>
-          </div>
-          <a href="https://deepwiki.com/pubky/pubky-homeserver" target="_blank" rel="noopener noreferrer" aria-label="Pubky Homeserver on DeepWiki (opens in new tab)">
-            <strong>DeepWiki</strong>
-            <span>Explore the code with AI explanations. Check linked sources.</span>
-          </a>
-        </div>
-      </details>
     </div>
 
     <div class="open-with">
-      <span class="open-with-label">Build with AI:</span>
+      <span class="open-with-label">pubky.org for your LLM</span>
       <div class="open-with-row">
         <div class="open-with-links">
-          <button type="button" class="copy-prompt-btn" data-copy-text={aiPrompt} data-copy-kind="prompt" data-copy-status="starter-copy-status" hidden>
-            <span class="copy-prompt-label" data-copy-label>Copy starter prompt</span>
+          {aiLinks.map((link) => (
+            <a href={link.url} target="_blank" rel="noopener noreferrer" class="open-with-btn" aria-label={`Open with ${link.name} (opens in new tab)`} data-tooltip={link.tooltip ?? link.name}>
+              <span class="ai-icon" data-icon={link.icon} aria-hidden="true" style={iconUrl(link.icon)}></span>
+            </a>
+          ))}
+          <button type="button" class="copy-prompt-btn" aria-label="Copy prompt to clipboard" data-tooltip="Copy prompt" data-copy-text={aiPrompt} data-copy-kind="prompt" data-copy-status="starter-copy-status" hidden>
+            <span class="copy-prompt-label" data-copy-label>Prompt</span>
             <img class="copy-prompt-icon" src={withBase('/images/icons/line-copy.svg')} width="16" height="16" alt="" aria-hidden="true" />
           </button>
-          <span class="prompt-no-script">A prompt for your coding assistant</span>
         </div>
-        <img class="open-with-arrow" src={withBase('/images/icons/arrow-dashed-left.svg')} width="82" height="22" alt="" aria-hidden="true" />
-        <span class="open-with-llm" aria-hidden="true">LLM Support</span>
+        <span class="open-with-annotation" aria-hidden="true">
+          <img class="open-with-arrow" src={withBase('/images/icons/arrow-dashed-left.svg')} width="82" height="22" alt="" />
+          <span class="open-with-llm">LLM Support</span>
+        </span>
       </div>
       <details class="prompt-details" id="pubky-starter-prompt">
         <summary>Show starter prompt</summary>
@@ -86,6 +76,25 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
   </div>
 
   <div class="install-right not-content">
+    <section class="ai-resources" aria-labelledby="ai-resources-heading">
+      <h2 id="ai-resources-heading">AI resources</h2>
+      <a href="https://github.com/pubky/agent-skills" target="_blank" rel="noopener noreferrer" aria-label="Pubky skills (opens in new tab)">
+        <strong>Pubky skills</strong>
+        <span>Workflows for your coding agent.</span>
+      </a>
+      <div class="ai-resources-group">
+        <strong>Context7</strong>
+        <span>API documentation and examples.</span>
+        <div class="ai-resources-repositories">
+          <a href="https://context7.com/pubky/pubky-homeserver" target="_blank" rel="noopener noreferrer" aria-label="Pubky Homeserver on Context7 (opens in new tab)">Homeserver</a>
+          <a href="https://context7.com/pubky/pkarr" target="_blank" rel="noopener noreferrer" aria-label="PKARR on Context7 (opens in new tab)">PKARR</a>
+        </div>
+      </div>
+      <a href="https://deepwiki.com/pubky/pubky-homeserver" target="_blank" rel="noopener noreferrer" aria-label="Pubky Homeserver on DeepWiki (opens in new tab)">
+        <strong>DeepWiki</strong>
+        <span>AI explanations of the Pubky codebase.</span>
+      </a>
+    </section>
     <div class="install-terminal terminal-tabs">
       <Tabs>
         {commands.map((cmd) => (
@@ -112,7 +121,6 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
       if (button.dataset.copyReady) return;
       button.dataset.copyReady = 'true';
       button.hidden = false;
-      button.closest('.open-with')?.classList.add('copy-ready');
 
       const label = button.querySelector<HTMLElement>('[data-copy-label]');
       const originalLabel = label?.textContent ?? '';
@@ -158,13 +166,6 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
   enhanceLandingCopy();
   document.addEventListener('astro:page-load', enhanceLandingCopy);
 
-  document.addEventListener('keydown', (event) => {
-    if (event.key !== 'Escape') return;
-    document.querySelectorAll<HTMLDetailsElement>('.ai-tools[open]').forEach((menu) => {
-      menu.open = false;
-      menu.querySelector('summary')?.focus();
-    });
-  });
 </script>
 
 <style is:global>
@@ -300,17 +301,6 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
     color: var(--base-foreground);
   }
 
-  /* Preserve the original AI Kit button variant — bg alpha/white-16, text base/secondary-foreground(#d4d4db) */
-  .install-actions .btn-ai-tools {
-    background: var(--alpha-white-16);
-    color: var(--base-secondary-foreground);
-  }
-
-  .install-actions .btn-ai-tools:hover {
-    background: var(--base-secondary-hover);
-    color: var(--base-foreground);
-  }
-
   /* ── Open with row ── */
   /* Figma: AI section = flex-col, gap spacing-2(8), justify center */
   .open-with {
@@ -333,10 +323,23 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
 
   /* Buttons box + highlight arrow. gap 21px = no spacing token fits. */
   .open-with-row {
+    position: relative;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: 21px;
     align-self: flex-start;
+    max-width: 100%;
+  }
+
+  /* Keep the original annotation beside the section label, clear of the AI box. */
+  .open-with-annotation {
+    position: absolute;
+    right: 0;
+    bottom: calc(100% + var(--spacing-2));
+    display: flex;
+    align-items: center;
+    gap: 21px;
   }
 
   /* Bordered box wrapping the AI buttons. Border pulses white via highlight below. */
@@ -414,6 +417,55 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
     100%     { --ai-flash: 0; --ai-slide: 1; } /* reset offset while invisible */
   }
 
+  .open-with-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: opacity 0.15s ease;
+    /* WCAG: expand touch target to 44px minimum */
+    padding: 6px;
+    margin: -6px;
+  }
+
+  .open-with-btn:hover > .ai-icon {
+    opacity: 0.75;
+  }
+
+  /* ── Tooltip ── */
+  .open-with-btn[data-tooltip],
+  .copy-prompt-btn[data-tooltip] {
+    position: relative;
+  }
+
+  .open-with-btn[data-tooltip]::after,
+  .copy-prompt-btn[data-tooltip]::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 4px 8px;
+    background: var(--base-card);
+    color: var(--base-foreground);
+    font-size: var(--text-xs-size);
+    line-height: var(--text-xs-lh);
+    font-weight: 500;
+    border-radius: var(--radius-sm);
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+    border: 1px solid var(--base-border);
+  }
+
+  .open-with-btn[data-tooltip]:hover::after,
+  .open-with-btn[data-tooltip]:focus-visible::after,
+  .copy-prompt-btn[data-tooltip]:hover::after,
+  .copy-prompt-btn[data-tooltip]:focus-visible::after {
+    opacity: 1;
+  }
+
   /* ── Copy prompt button ── */
   /* Figma: bg alpha-white-5, border 1px base/border, radius full, shadow xs, px spacing-4(16), py spacing-2-5(10), gap spacing-2(8) */
   .copy-prompt-btn {
@@ -446,18 +498,34 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
     line-height: var(--text-sm-lh);
   }
 
+  /* Figma: Logos = 40x40, border-radius rounded-sm(6) */
+  .ai-icon {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: var(--radius-sm);
+  }
+
+  .ai-icon { background-image: var(--ai-icon-url); }
+  /* Figma: Grok logo has white background unlike others which have it baked into the image */
+  .ai-icon[data-icon="grok"] { background-color: white; }
+
   /* ── Right column ── */
-  /* Figma: flex-1, flex-col, gap spacing-6(24), items center, centered vertically.
-     500px height matches install-left — one-off layout dimension.
-     Background pattern lives on .install-section::before, not here. */
+  /* Preserve the original right-column alignment and spacing. The visible AI
+     resources and SDK terminal can expand together instead of clipping. */
   .install-right {
+    margin: 0;
     flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: var(--spacing-6);
-    height: 500px;
+    min-width: 0;
+    min-height: 500px;
   }
 
   /* ── Install terminal (Starlight Tabs) ── */
@@ -521,33 +589,31 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
     background: var(--alpha-white-5);
   }
 
-  /* Compact AI resources keep the original hero layout and button treatment. */
-  .ai-tools { position: relative; }
-  .ai-tools > summary { cursor: pointer; list-style: none; }
-  .ai-tools > summary::-webkit-details-marker { display: none; }
-  .ai-tools-toggle { transition: transform var(--landing-motion) ease; }
-  .ai-tools[open] .ai-tools-toggle { transform: rotate(45deg); }
-  .ai-tools-panel {
-    position: absolute;
-    top: calc(100% + var(--spacing-2));
-    left: 0;
-    z-index: 10;
-    width: min(calc(var(--spacing-20) * 4), calc(100vw - var(--spacing-12)));
+  /* A visible resource box uses the existing terminal palette and geometry. */
+  .ai-resources {
+    width: 500px;
+    max-width: 100%;
     box-sizing: border-box;
-    padding: var(--spacing-2);
+    padding: var(--spacing-4);
     border: var(--landing-border-width) solid var(--base-border);
-    border-radius: var(--radius-lg);
-    background: var(--base-card);
-    box-shadow: var(--landing-shadow);
+    border-radius: var(--radius-xl);
+    background: var(--base-background);
   }
-  .ai-tools-panel > a,
-  .ai-tools-group {
+  .ai-resources h2 {
+    margin: 0 0 var(--spacing-2);
+    font-size: var(--text-base-size);
+    line-height: var(--text-base-lh);
+    font-weight: 600;
+    color: var(--base-foreground);
+  }
+  .ai-resources > a,
+  .ai-resources-group {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-1);
-    padding: var(--spacing-3);
+    padding: var(--spacing-2);
   }
-  .ai-tools-panel a {
+  .ai-resources a {
     min-height: var(--landing-touch-target);
     box-sizing: border-box;
     border-radius: var(--radius-sm);
@@ -555,20 +621,20 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
     text-decoration: none;
     transition: background var(--landing-motion) ease;
   }
-  .ai-tools-panel a:hover { background: var(--alpha-white-5); }
-  .ai-tools-panel strong {
+  .ai-resources a:hover { background: var(--alpha-white-5); }
+  .ai-resources strong {
     font-size: var(--text-sm-size);
     line-height: var(--text-sm-lh);
     font-weight: 600;
   }
-  .ai-tools-panel span {
+  .ai-resources span {
     font-size: var(--text-xs-size);
     line-height: var(--text-xs-lh);
     color: var(--base-muted-foreground);
   }
-  .ai-tools-group { border-block: var(--landing-border-width) solid var(--base-border); }
-  .ai-tools-repositories { display: flex; gap: var(--spacing-2); }
-  .ai-tools-repositories a {
+  .ai-resources-group { border-block: var(--landing-border-width) solid var(--base-border); }
+  .ai-resources-repositories { display: flex; flex-wrap: wrap; gap: var(--spacing-2); }
+  .ai-resources-repositories a {
     display: inline-flex;
     align-items: center;
     padding: 0 var(--spacing-2);
@@ -615,8 +681,6 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
   }
   .copy-status:not(:empty) { margin-top: var(--spacing-2); }
   .install-terminal .copy-status { padding-inline: var(--spacing-4); }
-  .prompt-no-script { font-size: var(--text-sm-size); line-height: var(--text-sm-lh); }
-  .copy-ready .prompt-no-script,
   .install-block button[hidden] { display: none; }
   .install-block button:disabled { cursor: wait; }
 
@@ -646,7 +710,7 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
       display: flex;
       flex-direction: column;
       align-items: stretch;
-      gap: var(--spacing-12);
+      gap: var(--spacing-6);
       padding: 0 var(--spacing-6);
     }
 
@@ -655,14 +719,10 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
       min-height: 0;
     }
 
-    /* Figma Mobile (node 34784:60725): the SDK block has py-4(16), and its
-       Content frame contains an empty Typography/H3 placeholder (32px) plus
-       gap-6(24) above the terminal. We don't render the H3, so absorb its
-       space into padding-top: 16 + 32 + 24 = 72px. */
+    /* The AI resources are visible immediately above the original SDK terminal. */
     .install-right {
-      padding: calc(var(--spacing-4) + var(--spacing-8) + var(--spacing-6)) 0
-        var(--spacing-4);
-      height: auto;
+      padding: 0 0 var(--spacing-4);
+      min-height: 0;
       align-items: center;
       width: 100%;
     }
@@ -689,8 +749,7 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
       overflow-wrap: break-word;
     }
 
-    /* Figma Mobile: Buttons stack as 2-up grid for GitHub+Human Docs, then AI Kit full-width.
-       Row gap spacing-6(24), column gap spacing-6(24) */
+    /* Preserve the original two-column GitHub and Human Docs button row. */
     .install-actions {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -702,20 +761,26 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
       white-space: nowrap;
     }
 
-    /* Preserve the original full-width third action on mobile. */
-    .install-actions .ai-tools { grid-column: 1 / -1; }
-    .install-actions .btn-ai-tools { width: 100%; box-sizing: border-box; }
-    .ai-tools-panel { width: 100%; }
+    /* Restore the original mobile icons and spacing; wrap only when needed. */
+    .ai-icon {
+      width: 32px;
+      height: 32px;
+    }
 
-    /* Mobile: tighter prompt box, no arrow. */
-
+    .open-with-row { max-width: 100%; }
     .open-with-links {
+      flex-wrap: wrap;
+      max-width: 100%;
+      box-sizing: border-box;
       gap: var(--spacing-2);
       padding: var(--spacing-3) var(--spacing-4);
     }
+    .copy-prompt-btn {
+      flex-shrink: 0;
+      padding-inline: var(--spacing-3);
+    }
 
-    .open-with-arrow,
-    .open-with-llm {
+    .open-with-annotation {
       display: none;
     }
 
@@ -732,10 +797,12 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
 
   @media (prefers-reduced-motion: reduce) {
     .install-actions .btn,
-    .ai-tools-toggle,
-    .ai-tools-panel a,
+    .ai-resources a,
     .prompt-details > summary,
     .copy-prompt-btn,
+    .open-with-btn,
+    .open-with-btn[data-tooltip]::after,
+    .copy-prompt-btn[data-tooltip]::after,
     .copy-btn,
     .install-terminal starlight-tabs [role="tab"] { transition: none; }
   }
