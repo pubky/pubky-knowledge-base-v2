@@ -90,8 +90,8 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
     </div>
     <div class="ai-resources-wrap">
       <section class="ai-resources" aria-label="AI resources">
-        <span class="ai-resources-watermark" aria-hidden="true">AI</span>
-        <a href="https://github.com/pubky/agent-skills" target="_blank" rel="noopener noreferrer" aria-label="Pubky skills (opens in new tab)">
+        <span class="ai-resources-watermark" aria-hidden="true">AI<canvas class="ai-network-canvas" aria-hidden="true"></canvas></span>
+        <a class="ai-resources-primary" href="https://github.com/pubky/agent-skills" target="_blank" rel="noopener noreferrer" aria-label="Pubky skills (opens in new tab)">
           <strong>Pubky skills</strong>
           <span>Workflows for your coding agent.</span>
         </a>
@@ -107,6 +107,7 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
           <strong>DeepWiki</strong>
           <span>AI explanations of the Pubky codebase.</span>
         </a>
+        <button class="ai-motion-toggle" type="button" data-ai-motion-toggle aria-label="Pause motion in the AI lettering" hidden>Pause motion</button>
       </section>
     </div>
   </div>
@@ -114,6 +115,8 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
 </div>
 
 <script>
+  import '../scripts/ai-network';
+
   function enhanceLandingCopy() {
     document.querySelectorAll<HTMLButtonElement>('.install-block [data-copy-text]').forEach((button) => {
       if (button.dataset.copyReady) return;
@@ -540,13 +543,26 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
     font-weight: 700;
     line-height: calc(var(--text-6xl-lh) * 3.6);
     letter-spacing: calc(var(--spacing-4) * -1);
-    color: var(--alpha-white-10);
+    color: var(--alpha-white-5);
     pointer-events: none;
     user-select: none;
   }
+  .ai-network-canvas {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: none;
+    width: 100%;
+    height: 100%;
+    opacity: 0.18;
+    pointer-events: none;
+  }
+  .ai-resources[data-ai-network-ready] .ai-network-canvas { display: block; }
+  .ai-resources[data-ai-network-ready] .ai-resources-watermark::before { opacity: 0; }
   /* Both net and light are clipped to the glyphs, never to the foreground copy. */
   .ai-resources-watermark::before,
   .ai-resources-watermark::after {
+    z-index: 2;
     content: 'AI';
     position: absolute;
     inset: 0;
@@ -613,6 +629,27 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
     line-height: var(--text-xs-lh);
     color: var(--base-secondary-foreground);
   }
+  /* Skills are the primary entry point within the existing resource card. */
+  .ai-resources .ai-resources-primary {
+    gap: var(--spacing-2);
+    margin-bottom: var(--spacing-3);
+    padding: var(--spacing-4);
+    border: var(--landing-border-width) solid var(--base-border);
+    border-inline-start: var(--spacing-1) solid var(--base-secondary-foreground);
+    border-radius: var(--radius-lg);
+    background: var(--alpha-white-5);
+  }
+  .ai-resources .ai-resources-primary:hover { background: var(--base-card); }
+  .ai-resources .ai-resources-primary strong {
+    font-family: "Inter Tight", "Inter", system-ui, sans-serif;
+    font-size: var(--text-xl-size);
+    line-height: var(--text-xl-lh);
+    font-weight: 700;
+  }
+  .ai-resources .ai-resources-primary > span {
+    font-size: var(--text-sm-size);
+    line-height: var(--text-sm-lh);
+  }
   .ai-resources-title {
     display: inline-flex;
     align-items: center;
@@ -629,16 +666,44 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
     text-decoration: underline;
     text-underline-offset: var(--spacing-1);
   }
-  /* A single 4.8-second light pass settles into a static mesh.
-     Reduced-motion users receive the static treatment from the start. */
+  .ai-motion-toggle {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: var(--landing-touch-target);
+    min-height: var(--landing-touch-target);
+    margin: var(--spacing-2) 0 0 auto;
+    padding: var(--spacing-2) var(--spacing-3);
+    border: var(--landing-border-width) solid var(--base-border);
+    border-radius: var(--radius-full);
+    background: var(--base-background);
+    color: var(--base-secondary-foreground);
+    font: inherit;
+    font-size: var(--text-xs-size);
+    line-height: var(--text-xs-lh);
+    cursor: pointer;
+    transition: background var(--landing-motion) ease, color var(--landing-motion) ease;
+  }
+  .ai-motion-toggle:hover { background: var(--base-card); color: var(--base-foreground); }
+  /* A brief light pass repeats every 12 seconds while the network is running.
+     The static fallback and reduced-motion treatment have no animation. */
   @media (prefers-reduced-motion: no-preference) {
-    .ai-resources-watermark::after {
-      animation: ai-mesh-shimmer calc(var(--landing-motion) * 30) ease-in-out both;
+    .ai-resources[data-ai-network-ready] .ai-resources-watermark::after {
+      animation: ai-mesh-interval calc(var(--landing-motion) * 75) linear infinite;
+      animation-play-state: paused;
+    }
+    .ai-resources[data-ai-running="true"] .ai-resources-watermark::after {
+      animation-play-state: running;
+    }
+    .ai-resources[data-ai-running="false"] .ai-resources-watermark::after {
+      animation-play-state: paused;
     }
   }
-  @keyframes ai-mesh-shimmer {
-    0%, 12% { background-position: 150% 0; }
-    100% { background-position: -50% 0; }
+  @keyframes ai-mesh-interval {
+    0%, 9% { background-position: 150% 0; }
+    30%, 100% { background-position: -50% 0; }
   }
 
   .prompt-details { width: 100%; }
@@ -800,10 +865,13 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
   }
 
   @media (prefers-reduced-motion: reduce) {
+    .ai-network-canvas,
+    .ai-motion-toggle { display: none; }
     .install-actions .btn,
     .ai-resources a,
     .prompt-details > summary,
     .copy-prompt-btn,
+    .ai-motion-toggle,
     .open-with-btn,
     .open-with-btn[data-tooltip]::after,
     .copy-prompt-btn[data-tooltip]::after,
