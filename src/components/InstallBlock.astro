@@ -62,10 +62,6 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
             <img class="copy-prompt-icon" src={withBase('/images/icons/line-copy.svg')} width="16" height="16" alt="" aria-hidden="true" />
           </button>
         </div>
-        <span class="open-with-annotation" aria-hidden="true">
-          <img class="open-with-arrow" src={withBase('/images/icons/arrow-dashed-left.svg')} width="82" height="22" alt="" />
-          <span class="open-with-llm">LLM Support</span>
-        </span>
       </div>
       <details class="prompt-details" id="pubky-starter-prompt">
         <summary>Show starter prompt</summary>
@@ -92,25 +88,32 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
       </Tabs>
       <p id="sdk-copy-status" class="copy-status" role="status" aria-live="polite" aria-atomic="true"></p>
     </div>
-    <section class="ai-resources" aria-label="AI resources">
-      <span class="ai-resources-watermark" aria-hidden="true">AI</span>
-      <a href="https://github.com/pubky/agent-skills" target="_blank" rel="noopener noreferrer" aria-label="Pubky skills (opens in new tab)">
-        <strong>Pubky skills</strong>
-        <span>Workflows for your coding agent.</span>
-      </a>
-      <div class="ai-resources-group">
-        <strong>Context7</strong>
-        <span>API documentation and examples.</span>
-        <div class="ai-resources-repositories">
-          <a href="https://context7.com/pubky/pubky-homeserver" target="_blank" rel="noopener noreferrer" aria-label="Pubky Homeserver on Context7 (opens in new tab)">Homeserver</a>
-          <a href="https://context7.com/pubky/pkarr" target="_blank" rel="noopener noreferrer" aria-label="PKARR on Context7 (opens in new tab)">PKARR</a>
+    <div class="ai-resources-wrap">
+      <span class="ai-bot" aria-hidden="true">
+        <span class="ai-bot-face">
+          <span class="ai-bot-eyes"><span></span><span></span></span>
+        </span>
+      </span>
+      <section class="ai-resources" aria-label="AI resources">
+        <span class="ai-resources-watermark" aria-hidden="true">AI</span>
+        <a href="https://github.com/pubky/agent-skills" target="_blank" rel="noopener noreferrer" aria-label="Pubky skills (opens in new tab)">
+          <strong>Pubky skills</strong>
+          <span>Workflows for your coding agent.</span>
+        </a>
+        <div class="ai-resources-group">
+          <a class="ai-resources-title" href="https://context7.com/?q=pubky" target="_blank" rel="noopener noreferrer" aria-label="Search Pubky on Context7 (opens in new tab)"><strong>Context7</strong></a>
+          <span>API documentation and examples.</span>
+          <div class="ai-resources-repositories">
+            <a href="https://context7.com/pubky/pubky-homeserver" target="_blank" rel="noopener noreferrer" aria-label="Pubky Homeserver on Context7 (opens in new tab)">Homeserver</a>
+            <a href="https://context7.com/pubky/pkarr" target="_blank" rel="noopener noreferrer" aria-label="PKARR on Context7 (opens in new tab)">PKARR</a>
+          </div>
         </div>
-      </div>
-      <a href="https://deepwiki.com/pubky/pubky-homeserver" target="_blank" rel="noopener noreferrer" aria-label="Pubky Homeserver on DeepWiki (opens in new tab)">
-        <strong>DeepWiki</strong>
-        <span>AI explanations of the Pubky codebase.</span>
-      </a>
-    </section>
+        <a href="https://deepwiki.com/pubky/pubky-homeserver" target="_blank" rel="noopener noreferrer" aria-label="Pubky Homeserver on DeepWiki (opens in new tab)">
+          <strong>DeepWiki</strong>
+          <span>AI explanations of the Pubky codebase.</span>
+        </a>
+      </section>
+    </div>
   </div>
 </div>
 </div>
@@ -208,7 +211,7 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
     position: relative;
     z-index: 1;
     display: flex;
-    align-items: flex-start;
+    align-items: stretch;
     justify-content: space-between;
     max-width: 1280px;
     margin: 0 auto;
@@ -302,14 +305,13 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
   }
 
   /* ── Open with row ── */
-  /* Figma: AI section = flex-col, gap spacing-2(8), justify center */
+  /* Keep the launcher at the bottom of the desktop hero, opposite the AI card. */
   .open-with {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-2);
-    margin-top: var(--spacing-6);
-    flex: 1;
-    justify-content: center;
+    margin-top: auto;
+    padding-top: var(--spacing-12);
   }
 
   /* Figma: P (node 34690:85321) = Inter Tight Medium, text-base(16/24), foreground */
@@ -321,28 +323,16 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
     line-height: var(--text-base-lh);
   }
 
-  /* Buttons box + highlight arrow. gap 21px = no spacing token fits. */
+  /* Preserve the original provider row with a quiet, static border. */
   .open-with-row {
     position: relative;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 21px;
     align-self: flex-start;
     max-width: 100%;
   }
 
-  /* Keep the original annotation beside the section label, clear of the AI box. */
-  .open-with-annotation {
-    position: absolute;
-    right: 0;
-    bottom: calc(100% + var(--spacing-2));
-    display: flex;
-    align-items: center;
-    gap: 21px;
-  }
-
-  /* Bordered box wrapping the AI buttons. Border pulses white via highlight below. */
   .open-with-links {
     display: flex;
     align-items: center;
@@ -351,70 +341,6 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
     background: var(--base-background);
     border: 1px solid var(--base-card);
     border-radius: var(--radius-lg);
-  }
-
-  /* Highlight arrow. 82x22 = exact SVG vector size. */
-  .open-with-arrow {
-    width: 82px;
-    height: 22px;
-    flex-shrink: 0;
-  }
-
-  /* Label right of the arrow. Names what the highlight points at.
-     Inter Tight Medium, text-base(16/24), white. */
-  .open-with-llm {
-    flex-shrink: 0;
-    font-size: var(--text-base-size);
-    line-height: var(--text-base-lh);
-    font-weight: 500;
-    color: var(--base-foreground);
-    white-space: nowrap;
-  }
-
-  /* Box highlight + arrow share ONE timeline via this 0→1 driver, animated on the
-     always-present .open-with-row. Two separate animations would desync because the
-     arrow is display:none on mobile — crossing the breakpoint resets only its clock.
-     A single animated property on a never-hidden parent keeps both in lockstep. */
-  @property --ai-flash {
-    syntax: "<number>";
-    initial-value: 0;
-    inherits: true;
-  }
-  /* Separate slide driver so the arrow fades out IN PLACE (slide held at 0 through
-     the fade) and only resets to the offset once invisible. */
-  @property --ai-slide {
-    syntax: "<number>";
-    initial-value: 0;
-    inherits: true;
-  }
-
-  /* ~5s loop: idle dark, fade border white + slide arrow in, hold, fade out in place. */
-  @media (prefers-reduced-motion: no-preference) {
-    .open-with-row {
-      animation: ai-flash 5s ease-in-out infinite;
-    }
-
-    .open-with-links {
-      border-color: color-mix(in srgb, var(--base-card), var(--base-foreground) calc(var(--ai-flash) * 100%));
-    }
-
-    /* Both tied to the same animation so the arrow always tracks the box. */
-    .open-with-arrow {
-      opacity: var(--ai-flash);
-      transform: translateX(calc(var(--ai-slide) * 24px));
-    }
-
-    /* Label fades in with the arrow; held in place (no slide). */
-    .open-with-llm {
-      opacity: var(--ai-flash);
-    }
-  }
-
-  @keyframes ai-flash {
-    0%, 28%  { --ai-flash: 0; --ai-slide: 1; }
-    36%, 60% { --ai-flash: 1; --ai-slide: 0; }
-    68%      { --ai-flash: 0; --ai-slide: 0; } /* faded out at final position */
-    100%     { --ai-flash: 0; --ai-slide: 1; } /* reset offset while invisible */
   }
 
   .open-with-btn {
@@ -514,16 +440,16 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
   .ai-icon[data-icon="grok"] { background-color: white; }
 
   /* ── Right column ── */
-  /* Preserve the original right-column alignment and spacing. The visible AI
-     resources and SDK terminal can expand together instead of clipping. */
+  /* The card shares a bottom edge with the launcher; the bot has room to perch
+     between the SDK terminal and resource card without covering either. */
   .install-right {
     margin: 0;
     flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: var(--spacing-6);
+    justify-content: flex-end;
+    gap: var(--spacing-12);
     min-width: 0;
     min-height: 500px;
   }
@@ -589,6 +515,67 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
     background: var(--alpha-white-5);
   }
 
+  /* A compact bot perches outside the clipped card, clear of foreground links. */
+  .ai-resources-wrap {
+    position: relative;
+    width: 500px;
+    max-width: 100%;
+  }
+  .ai-bot {
+    position: absolute;
+    z-index: 2;
+    top: calc(var(--spacing-6) * -1);
+    right: var(--spacing-6);
+    width: var(--spacing-12);
+    height: var(--spacing-8);
+    transform: rotate(-6deg);
+    transform-origin: center bottom;
+    pointer-events: none;
+    user-select: none;
+  }
+  .ai-bot::before {
+    content: '';
+    position: absolute;
+    top: calc(var(--spacing-2) * -1);
+    left: 50%;
+    width: var(--landing-border-width);
+    height: var(--spacing-2);
+    background: var(--base-muted-foreground);
+  }
+  .ai-bot::after {
+    content: '';
+    position: absolute;
+    top: calc(var(--spacing-3) * -1);
+    left: calc(50% - var(--spacing-1) / 2);
+    width: var(--spacing-1);
+    height: var(--spacing-1);
+    border-radius: var(--radius-full);
+    background: var(--base-secondary-foreground);
+  }
+  .ai-bot-face {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    border: var(--landing-border-width) solid var(--base-muted-foreground);
+    border-radius: var(--radius-lg);
+    background: var(--base-card);
+    box-shadow: var(--shadow-xs);
+  }
+  .ai-bot-eyes {
+    display: flex;
+    gap: var(--spacing-2);
+    transform: translate(calc(var(--spacing-1) * -1), calc(var(--spacing-1) / 2));
+  }
+  .ai-bot-eyes > span {
+    width: var(--spacing-1);
+    height: var(--spacing-2);
+    border-radius: var(--radius-full);
+    background: var(--base-secondary-foreground);
+  }
+
   /* A visible resource box uses the existing terminal palette and geometry. */
   .ai-resources {
     position: relative;
@@ -610,11 +597,11 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
     right: var(--spacing-6);
     transform: translateY(-50%) rotate(-12deg);
     font-family: "Inter Tight", "Inter", system-ui, sans-serif;
-    font-size: calc(var(--text-6xl-size) * 4);
+    font-size: calc(var(--text-6xl-size) * 3.6);
     font-weight: 700;
-    line-height: calc(var(--text-6xl-lh) * 4);
+    line-height: calc(var(--text-6xl-lh) * 3.6);
     letter-spacing: calc(var(--spacing-4) * -1);
-    color: var(--alpha-white-5);
+    color: var(--alpha-white-10);
     pointer-events: none;
     user-select: none;
   }
@@ -645,7 +632,12 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
   .ai-resources-group > span {
     font-size: var(--text-xs-size);
     line-height: var(--text-xs-lh);
-    color: var(--base-muted-foreground);
+    color: var(--base-secondary-foreground);
+  }
+  .ai-resources-title {
+    display: inline-flex;
+    align-items: center;
+    width: fit-content;
   }
   .ai-resources-group { border-block: var(--landing-border-width) solid var(--base-border); }
   .ai-resources-repositories { display: flex; flex-wrap: wrap; gap: var(--spacing-2); }
@@ -658,6 +650,38 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
     text-decoration: underline;
     text-underline-offset: var(--spacing-1);
   }
+  /* One four-second greeting draws attention to the card, then settles.
+     Reduced-motion users see the same final pose without any animation. */
+  @media (prefers-reduced-motion: no-preference) {
+    .ai-bot {
+      animation: ai-bot-greeting calc(var(--landing-motion) * 25) ease-in-out both;
+    }
+    .ai-bot-eyes {
+      animation: ai-bot-glance calc(var(--landing-motion) * 25) ease-in-out both;
+    }
+    .ai-resources {
+      animation: ai-resource-greeting calc(var(--landing-motion) * 25) ease-in-out both;
+    }
+  }
+  @keyframes ai-bot-greeting {
+    0%, 18% { transform: rotate(3deg); }
+    34%, 58% { transform: translateY(calc(var(--spacing-1) * -1)) rotate(-6deg); }
+    100% { transform: rotate(-6deg); }
+  }
+  @keyframes ai-bot-glance {
+    0%, 18% { transform: translate(0, 0); }
+    40%, 62%, 74%, 100% {
+      transform: translate(calc(var(--spacing-1) * -1), calc(var(--spacing-1) / 2)) scaleY(1);
+    }
+    68% {
+      transform: translate(calc(var(--spacing-1) * -1), calc(var(--spacing-1) / 2)) scaleY(0.15);
+    }
+  }
+  @keyframes ai-resource-greeting {
+    0%, 100% { border-color: var(--base-border); box-shadow: none; }
+    34%, 64% { border-color: var(--base-muted-foreground); box-shadow: var(--shadow-card-hover); }
+  }
+
   .prompt-details { width: 100%; }
   .prompt-details > summary {
     display: flex;
@@ -734,6 +758,11 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
       min-height: 0;
     }
 
+    .open-with {
+      margin-top: var(--spacing-10);
+      padding-top: 0;
+    }
+
     /* Keep the SDK terminal and AI resources together in document order. */
     .install-right {
       padding: 0 0 var(--spacing-4);
@@ -795,17 +824,13 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
       padding-inline: var(--spacing-3);
     }
 
-    .open-with-annotation {
-      display: none;
-    }
-
     .install-terminal {
       width: 100%;
     }
 
     .ai-resources-watermark {
-      font-size: calc(var(--text-6xl-size) * 3);
-      line-height: calc(var(--text-6xl-lh) * 3);
+      font-size: calc(var(--text-6xl-size) * 2.7);
+      line-height: calc(var(--text-6xl-lh) * 2.7);
     }
 
     .install-command {

@@ -6,7 +6,7 @@ Research checked **September 14, 2026**. This is a documentation frontend experi
 
 Keep the landing page's existing design and ordinary documentation entry points. Replace the AI Kit destination with a visible AI resources box offering three clearly different resources: task skills, API context through Context7, and repository explanations through DeepWiki. Show all three without requiring a click to discover them. Keep the original provider shortcuts and one portable starter prompt under **pubky.org for your LLM**, and put per-page Markdown access beside the document title. Use a small index and relevant pages as the starting context.
 
-The implementation preserves the original hero typography, tagline, button styling, triangle backdrop and SDK terminal. The resource box sits below the terminal, with oversized decorative AI lettering behind the links. It contains Pubky skills, separate Context7 links for Homeserver and PKARR, and Homeserver on DeepWiki. Documentation pages offer **Markdown** and **Copy link** beside the title, wrapping below it on smaller screens, in place of the footer controls.
+The implementation preserves the original hero typography, tagline, button styling, triangle backdrop and SDK terminal. The resource box sits below the terminal, with oversized decorative AI lettering behind the links and a small animated bot drawing attention to it. It contains Pubky skills, a Context7 heading that links to its Pubky search, separate Context7 links for Homeserver and PKARR, and Homeserver on DeepWiki. Documentation pages offer **Markdown** and **Copy link** beside the title, wrapping below it on smaller screens, in place of the footer controls.
 
 The biggest current gap is release accuracy. Adding more links will not fix references that teach older APIs.
 
@@ -59,4 +59,4 @@ Defer an embedded chatbot and a first-party docs MCP server. Context7 already su
 
 ## Deliberately removed from the landing
 
-The AI Kit destination and fixed token-count promises. The starter prompt does not fetch the full documentation bundle by default. The original provider icon row, “LLM Support” annotation and visual treatment are retained, while the visible AI resources box gives each resource a concrete purpose. Existing documentation URLs remain intact.
+The AI Kit destination, fixed token-count promises, and the launcher's flashing arrow, border highlight and “LLM Support” annotation. The starter prompt does not fetch the full documentation bundle by default. The original provider icon row is retained, while the visible AI resources box gives each resource a concrete purpose and carries the new bot accent. Existing documentation URLs remain intact.

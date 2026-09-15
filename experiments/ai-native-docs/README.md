@@ -6,7 +6,7 @@ Source: [gcomte/pubky-knowledge-base-vibed, vibe/ai-native-docs](https://github.
 
 Live experiment: **[pubky-ai-docs-vibe.vercel.app](https://pubky-ai-docs-vibe.vercel.app/)**.
 
-The landing page keeps the original hero heading, tagline, pill buttons, triangle backdrop and SDK terminal with npm, React Native and Rust tabs. A visible resource box below the terminal links to Pubky skills, Context7 for Homeserver and PKARR, and DeepWiki. Large, tilted **AI** lettering sits behind the entries in place of a visible heading; the region retains an accessible name. All entries appear without opening a menu. The original Claude, ChatGPT, Cursor, Gemini and Grok icon row appears under **pubky.org for your LLM**, alongside a compact **Prompt** copy button. The portable starter prompt and show-prompt fallback remain available.
+The landing page keeps the original hero heading, tagline, pill buttons, triangle backdrop and SDK terminal with npm, React Native and Rust tabs. A visible resource box below the terminal links to Pubky skills, Context7's Pubky search and its Homeserver and PKARR indexes, and DeepWiki. Large, tilted **AI** lettering sits behind the entries in place of a visible heading; the region retains an accessible name. A small decorative bot glances toward the resources with a brief animation and stays static for reduced-motion preferences. All entries appear without opening a menu. The original Claude, ChatGPT, Cursor, Gemini and Grok icon row appears under **pubky.org for your LLM**, alongside a compact **Prompt** copy button, with more space above and no flashing arrow or border. The portable starter prompt and show-prompt fallback remain available.
 
 On documentation pages, **Markdown** and **Copy link** controls sit beside the title, or below it on smaller screens. They replace the former “AI-friendly version” footer row. The existing documentation bodies and Markdown export pipeline are retained. Standard HTML links advertise the documentation index and each page's Markdown alternative.
 
@@ -23,9 +23,10 @@ This adapts the supplied `vibe-self-host` workflow to a static documentation fro
 - [Document title actions, desktop](evidence/doc-actions-desktop.png)
 - [Document title actions, mobile](evidence/doc-actions-mobile.png)
 - [Browser check results](evidence/browser-checks.json)
+- [Bot motion and layout checks](evidence/bot-checks.json)
 - [Public deployment checks](evidence/public-checks.json)
 
-Validation passed: production build and generated-Markdown checks; all 22 internal homepage links; Markdown endpoints and discovery metadata; six viewport widths from 320 to 1920 pixels for the hero and short/long document titles; restored provider destinations, encoded prompts and icon assets; visible resource links without a disclosure; touch targets and keyboard focus; clipboard success and failure fallbacks; SDK tabs and command copying; and native links/disclosures without JavaScript. No browser runtime errors were observed. Security review of the changed execution paths found no actionable issues. The static deployment configuration is unchanged.
+Validation passed: production build and generated-Markdown checks; all 22 internal homepage links; Markdown endpoints and discovery metadata; six viewport widths from 320 to 1920 pixels for the hero and short/long document titles; restored provider destinations, encoded prompts and icon assets; visible resource links without a disclosure; touch targets and keyboard focus; clipboard success and failure fallbacks; SDK tabs and command copying; and native links/disclosures without JavaScript. Bot checks confirm a finite four-second animation, no animation with reduced motion, vertically centered lettering at 90% of its prior size, and matching desktop launcher/card bottom edges. No browser runtime errors were observed. Security review of the changed execution paths found no actionable issues. The static deployment configuration is unchanged.
 
 ## Run locally
 
