@@ -32,7 +32,7 @@ updates:
       interval: "daily"
     cooldown:
       default-days: 7
-    versioning-strategy: increase
+    versioning-strategy: auto
     labels: ["dependencies"]
     commit-message:
       prefix: "deps"
