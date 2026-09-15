@@ -96,8 +96,10 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
           <span>Workflows for your coding agent.</span>
         </a>
         <div class="ai-resources-group">
-          <a class="ai-resources-title" href="https://context7.com/?q=pubky" target="_blank" rel="noopener noreferrer" aria-label="Search Pubky on Context7 (opens in new tab)"><strong>Context7</strong></a>
-          <span>API documentation and examples.</span>
+          <a class="ai-resources-title" href="https://context7.com/?q=pubky" target="_blank" rel="noopener noreferrer" aria-label="Search Pubky on Context7 (opens in new tab)">
+            <strong>Context7</strong>
+            <span>API documentation and examples.</span>
+          </a>
           <div class="ai-resources-repositories">
             <a href="https://context7.com/pubky/pubky-homeserver" target="_blank" rel="noopener noreferrer" aria-label="Pubky Homeserver on Context7 (opens in new tab)">Homeserver</a>
             <a href="https://context7.com/pubky/pkarr" target="_blank" rel="noopener noreferrer" aria-label="PKARR on Context7 (opens in new tab)">PKARR</a>
@@ -522,8 +524,13 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
     position: relative;
     isolation: isolate;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--spacing-3);
     width: 500px;
     max-width: 100%;
+    min-height: calc(var(--text-6xl-lh) * 4.5 + var(--spacing-6));
     box-sizing: border-box;
     padding: var(--spacing-4);
     border: var(--landing-border-width) solid var(--base-border);
@@ -538,10 +545,10 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
     right: var(--spacing-6);
     transform: translateY(-50%) rotate(-12deg);
     font-family: "Inter Tight", "Inter", system-ui, sans-serif;
-    font-size: calc(var(--text-6xl-size) * 3.6);
+    font-size: calc(var(--text-6xl-size) * 4.5);
     font-weight: 700;
-    line-height: calc(var(--text-6xl-lh) * 3.6);
-    letter-spacing: calc(var(--spacing-4) * -1);
+    line-height: calc(var(--text-6xl-lh) * 4.5);
+    letter-spacing: calc(var(--spacing-2) * -1);
     color: transparent;
     pointer-events: none;
     user-select: none;
@@ -595,6 +602,7 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
     padding: var(--spacing-2);
   }
   .ai-resources a {
+    min-width: var(--landing-touch-target);
     min-height: var(--landing-touch-target);
     box-sizing: border-box;
     border-radius: var(--radius-sm);
@@ -609,26 +617,19 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
     font-weight: 600;
   }
   .ai-resources > a > span,
-  .ai-resources-group > span {
+  .ai-resources-title > span {
     font-size: var(--text-xs-size);
     line-height: var(--text-xs-lh);
     color: var(--base-secondary-foreground);
   }
-  /* Skills are the primary entry point within the existing resource card. */
+  /* A single frame and aligned copy keep Skills prominent without nested panels. */
   .ai-resources .ai-resources-primary {
     gap: var(--spacing-2);
-    margin-bottom: var(--spacing-3);
-    padding: var(--spacing-4);
-    border: var(--landing-border-width) solid var(--base-border);
-    border-inline-start: var(--spacing-1) solid var(--base-secondary-foreground);
-    border-radius: var(--radius-lg);
-    background: var(--alpha-white-5);
   }
-  .ai-resources .ai-resources-primary:hover { background: var(--base-card); }
   .ai-resources .ai-resources-primary strong {
     font-family: "Inter Tight", "Inter", system-ui, sans-serif;
-    font-size: var(--text-xl-size);
-    line-height: var(--text-xl-lh);
+    font-size: var(--text-2xl-size);
+    line-height: var(--text-2xl-lh);
     font-weight: 700;
   }
   .ai-resources .ai-resources-primary > span {
@@ -636,18 +637,19 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
     line-height: var(--text-sm-lh);
   }
   .ai-resources-title {
-    display: inline-flex;
-    align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-1);
     width: fit-content;
   }
-  .ai-resources-group { border-block: var(--landing-border-width) solid var(--base-border); }
-  .ai-resources-repositories { display: flex; flex-wrap: wrap; gap: var(--spacing-2); }
+  .ai-resources-repositories { display: flex; flex-wrap: wrap; gap: var(--spacing-4); }
   .ai-resources-repositories a {
     display: inline-flex;
-    align-items: center;
-    padding: 0 var(--spacing-2);
-    font-size: var(--text-sm-size);
-    line-height: var(--text-sm-lh);
+    align-items: flex-start;
+    padding-top: var(--spacing-1);
+    font-size: var(--text-xs-size);
+    line-height: var(--text-xs-lh);
     text-decoration: underline;
     text-underline-offset: var(--spacing-1);
   }
@@ -798,8 +800,8 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
     }
 
     .ai-resources-watermark {
-      font-size: calc(var(--text-6xl-size) * 2.7);
-      line-height: calc(var(--text-6xl-lh) * 2.7);
+      font-size: calc(var(--text-6xl-size) * 3.375);
+      line-height: calc(var(--text-6xl-lh) * 3.375);
     }
 
     .install-command {

@@ -1,7 +1,7 @@
 /** A bounded decorative network; the existing CSS mesh remains the fallback. */
 const controllers = new Map<HTMLElement, () => void>();
 const FRAME_INTERVAL = 1000 / 20;
-const NODE_COUNT = 64;
+const NODE_COUNT = 112;
 const SWEEP_CYCLE = 12_000;
 const SWEEP_START = 1_080;
 const SWEEP_DURATION = 2_520;
@@ -80,23 +80,23 @@ function createNetwork(root: HTMLElement): () => void {
       });
     });
 
-    // Five candidate neighbors per node cap the graph at 320 unique edges.
-    // Two nearby connections remain as a dim backbone; the others fade/reform.
+    // Seven candidate neighbors per node cap the graph at 784 unique edges.
+    // Four nearby connections hold the letter shapes as the others fade/reform.
     const connections = new Map<number, Edge>();
     nodes.forEach((node, index) => {
       const nearest = nodes.map((other, otherIndex) => ({
         index: otherIndex,
         distance: ((node.x - other.x) * width) ** 2 + ((node.y - other.y) * height) ** 2,
       })).filter((other) => other.index !== index)
-        .sort((a, b) => a.distance - b.distance).slice(0, 5);
+        .sort((a, b) => a.distance - b.distance).slice(0, 7);
       nearest.forEach((other, rank) => {
         const from = Math.min(index, other.index);
         const to = Math.max(index, other.index);
         const key = from * NODE_COUNT + to;
         const existing = connections.get(key);
-        if (existing) existing.stable ||= rank < 2;
+        if (existing) existing.stable ||= rank < 4;
         else connections.set(key, {
-          from, to, stable: rank < 2, phase: nodes[from]!.phase + nodes[to]!.phase,
+          from, to, stable: rank < 4, phase: nodes[from]!.phase + nodes[to]!.phase,
         });
       });
     });
@@ -105,7 +105,7 @@ function createNetwork(root: HTMLElement): () => void {
 
   function draw() {
     if (!context || !ready) return;
-    const time = elapsed / 1000;
+    const time = elapsed / 1000 * 1.35;
     const drift = Math.min(width, height) * 0.018;
     const points = nodes.map((node) => {
       const anchor = { x: node.x * width, y: node.y * height };
