@@ -14,14 +14,14 @@ See the [repository](https://github.com/pubky/pubky-homeserver/tree/main/pubky-h
 
 ## Public vs Private Data
 
-Homeservers support public `/pub/` data and access-controlled `/priv/` data. Private paths require an authorized session. Access control does not encrypt the data: the Homeserver operator can still read it. See the [upstream private-storage guide](https://github.com/pubky/pubky-homeserver/blob/main/docs/PRIVATE_STORAGE.md) for usage and [Security Model](/explore/pubky-protocol/security-model/) for the trust implications.
+Current implementations only support public, unencrypted data. Encrypted data and guarded (access-controlled) data are planned — see [Security Model](/explore/pubky-protocol/security-model/) for the trust implications.
 
 ## Event Stream
 
 Homeservers expose event streams for clients to sync data changes:
 
 - `GET /events-stream` — SSE real-time stream with user and path filters. Primary event API, used by clients to subscribe to specific users on third-party homeservers without processing unwanted traffic
-- `GET /events/` — Paginated feed of public storage events across users on the homeserver (cursor-based, 1000 events per batch)
+- `GET /events/` — Paginated event feed for all users on the homeserver (cursor-based, 1000 events per batch)
 
 
 ## Transport Security

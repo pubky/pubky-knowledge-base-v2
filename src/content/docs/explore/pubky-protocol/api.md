@@ -85,7 +85,7 @@ Content-Type: application/octet-stream
 ```
 
 **Path Format:**
-- Normalized decoded paths must be under `/pub/` or `/priv/`
+- Normalized decoded paths must be under `/pub/`
 - Maximum normalized decoded length: 972 bytes total and 255 bytes per segment
 - Paths are UTF-8 and may contain spaces and non-ASCII characters; percent-encode them when constructing raw HTTP URLs
 - PUT targets must not end in `/`
@@ -266,7 +266,7 @@ data: cursor: 43
 
 ### GET /events/ — Paginated Event Feed
 
-Paginated feed of public storage events across all users on the homeserver. Intended for indexers and aggregators like [Pubky Nexus](/explore/pubky-apps/indexing-and-aggregation/pubky-nexus/).
+Paginated feed of all events across all users on the homeserver. Intended for indexers and aggregators like [Pubky Nexus](/explore/pubky-apps/indexing-and-aggregation/pubky-nexus/).
 
 **Request:**
 ```http
