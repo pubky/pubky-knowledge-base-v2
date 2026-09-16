@@ -105,7 +105,7 @@ function createNetwork(root: HTMLElement): () => void {
 
   function draw() {
     if (!context || !ready) return;
-    const time = elapsed / 1000 * 1.35;
+    const time = elapsed / 1000 * 2.025;
     const drift = Math.min(width, height) * 0.018;
     const points = nodes.map((node) => {
       const anchor = { x: node.x * width, y: node.y * height };
