@@ -37,6 +37,7 @@ A curated directory of websites, applications, repositories, packages, and commu
 All under [github.com/pubky](https://github.com/pubky):
 
 - [pubky-homeserver](https://github.com/pubky/pubky-homeserver) — Pubky Homeserver, SDK, and protocol implementation
+- [homeserver-dashboard](https://github.com/pubky/homeserver-dashboard) — Admin dashboard for Pubky homeservers
 - [pubky-app](https://github.com/pubky/pubky-app) — Pubky social media application
 - [pubky-ring](https://github.com/pubky/pubky-ring) — Mobile key manager app
 - [pubky-backup](https://github.com/pubky/pubky-backup) — Desktop app for local backups of published Homeserver data
@@ -65,17 +66,21 @@ All under [github.com/pubky](https://github.com/pubky):
 
 ## Community Projects
 
-- [homeserver-dashboard](https://github.com/francismars/homeserver-dashboard) — Homeserver dashboard UI
-- [pubky-node](https://github.com/BitcoinErrorLog/pubky-node) — All-in-one binary to run a homeserver, DHT node, and PKARR relay and Pubky toolset
+- [Uploadky](https://uploadky.vercel.app/) — File sharing with files stored on your Pubky homeserver ([source](https://github.com/PastaGringo/uploadky))
+- [TimechainWiki](https://timechain.wiki/) — Bitcoin encyclopedia with reader annotations synced through Nostr or Pubky ([source](https://github.com/RadVladdy/timechain-wiki))
+- [Loopky](https://github.com/jvsena42/loopky) — Flashcards with spaced repetition and decks stored on Pubky ([Android releases](https://github.com/jvsena42/loopky/releases/latest))
+- [Chessky](https://chessky-ten.vercel.app/) — Correspondence chess with games stored on players' Pubky homeservers ([source](https://github.com/gcomte/chessky))
+- [Ghostly](https://ghostly.tools/) — Encrypted chat and file sharing built on PKARR ([source](https://github.com/MiguelMedeiros/ghostly))
+- [Hypercolor](https://hypercolor.app/) — Encrypted messaging client built on Pubky ([source](https://github.com/BitcoinErrorLog/hypercolor))
+- [Pubky Pulse](https://pubkypulse.com/) — Experimental app observability with SDKs and MCP access for AI agents ([source](https://github.com/Jasonvdb/pubky-pulse))
+- [No Registry](https://www.noregistry.com/) — PKDNS setup tools and guides ([source](https://github.com/thisispav/no-registry))
+- [pubky-node](https://github.com/BitcoinErrorLog/pubky-node) — Desktop app and bundled node for running a Pubky homeserver, DHT node, and PKARR relay
 - [eventky](https://github.com/gillohner/eventky/) — Event management on Pubky
-- [pak](https://github.com/aljazceru/pak) — Pubky Army Knife
-- [pubky-nextjs-template](https://github.com/PastaGringo/pubky-nextjs-template) — Next.js template for Pubky apps
-- [pubkytree](https://github.com/PastaGringo/pubkytree) — Pubky tree visualization
 - [tagky](https://github.com/PastaGringo/tagky) — Automated tagging using LLM
-- [pubky-canva](https://github.com/gillohner/pubky-canva) — Collaborative canvas on Pubky
+- [Pubky Watcher Canvas](https://eventky.app/watcher-canvas/) — Multiplayer pixel canvas demonstrating Pubky event streams ([source](https://github.com/gillohner/pubky-watcher-canvas))
 - [pubky-mint](https://github.com/ok300/pubky-mint) — RSS-like way to browse your follows' Pubky activity
 - [vanity-pubky](https://github.com/coreyphillips/vanity-pubky) — Vanity key generator
-- [pubky-private-messenger](https://github.com/coreyphillips/pubky-private-messenger) — End-to-end encrypted messaging
+- [pubky-messenger](https://github.com/coreyphillips/pubky-messenger) — Rust library for private messaging over Pubky
 - [pkdns-vanity](https://github.com/jphastings/pkdns-vanity) — PKDNS vanity key generator
 
 ## Package Registries
