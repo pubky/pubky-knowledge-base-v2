@@ -12,89 +12,69 @@ A curated directory of websites, applications, repositories, packages, and commu
 - [pubky.tech](https://pubky.tech/) — Awesome list: Ecosystem directory
 - [synonym.to](https://synonym.to/) — Synonym (company behind Pubky)
 - [pkdns.net](https://pkdns.net/) — PKDNS public resolver
-- [pubkyring.app](https://pubkyring.app/) — Pubky Ring key manager
 - [stats.pubky.app](https://stats.pubky.app/) — Pubky metrics dashboard
 
 ## AI Resources
 
-- Context7 resources to keep LLMs up to date: [pubky.org `llms.txt`](https://context7.com/llmstxt/pubky_llms_txt), [Pubky Homeserver repo](https://context7.com/pubky/pubky-core), [Pubky Nexus repo](https://context7.com/pubky/pubky-nexus), [PKARR repo](https://context7.com/pubky/pkarr), [PKDNS repo](https://context7.com/pubky/pkdns), [pubky-app-specs repo](https://context7.com/pubky/pubky-app-specs), [Paykit repo](https://context7.com/pubky/paykit-rs), [HTTP Relay repo](https://context7.com/pubky/http-relay), [Pubky Docker repo](https://context7.com/pubky/pubky-docker), [Mainline repo](https://context7.com/pubky/mainline), and [Pubky Noise repo](https://context7.com/pubky/pubky-noise)
+- Pubky documentation for LLMs: [overview](https://pubky.org/llms.txt), [page index](https://pubky.org/llms-small.txt), and [full documentation](https://pubky.org/llms-full.txt)
+- [Pubky agent skills](https://github.com/pubky/agent-skills) — Maintained skills for AI coding tools working with Pubky
+- [Nexus Scout](https://nexus-scout.pubky.app/) — Read-only query gateway for AI agents exploring the Pubky social graph ([agent guide](https://nexus-scout.pubky.app/llms.txt), [source](https://github.com/pubky/nexus-scout))
+- Context7 resources to keep LLMs up to date: [pubky.org `llms.txt`](https://context7.com/llmstxt/pubky_llms_txt), [Pubky Homeserver repo](https://context7.com/pubky/pubky-homeserver), [Pubky Nexus repo](https://context7.com/pubky/pubky-nexus), [PKARR repo](https://context7.com/pubky/pkarr), [PKDNS repo](https://context7.com/pubky/pkdns), [pubky-app-specs repo](https://context7.com/pubky/pubky-app-specs), [Pubky Docker repo](https://context7.com/pubky/pubky-docker), and [Mainline repo](https://context7.com/pubky/mainline)
 - DeepWiki (AI-generated codebase wikis with LLM chat): [pubky-homeserver](https://deepwiki.com/pubky/pubky-homeserver) and [pubky-nexus](https://deepwiki.com/pubky/pubky-nexus)
 
 ## Live Applications
 
-- [pubky.app](https://pubky.app/) — Decentralized social media app
-- [mypubky.com](https://mypubky.com/) — Shareable bio page for your profile, links, posts, and payment options
+- [pubky.app](https://pubky.app/) — Decentralized social media app ([source](https://github.com/pubky/pubky-app))
+- [mypubky.com](https://mypubky.com/) — Shareable bio page for your profile, links, posts, and payment options ([source](https://github.com/pubky/mypubky))
+- [pubkyring.app](https://pubkyring.app/) — Pubky Ring key manager ([source](https://github.com/pubky/pubky-ring))
 - [payky.app](https://payky.app/) — Payment profile for sharing payment details in one link
 - [mapky.app](https://mapky.app/) — Social map with user-owned location-based data
-- [explorer.pubky.app](https://explorer.pubky.app/) — Pubky data explorer
+- [explorer.pubky.app](https://explorer.pubky.app/) — Pubky data explorer ([local testnet instance](https://explorer.pubky.app/testnet/), [source](https://github.com/pubky/pubky-explorer))
+- [simulator.pubkyring.app](https://simulator.pubkyring.app/) — Browser tool for signing in to Pubky apps on a local testnet ([source](https://github.com/pubky/pubky-ring-simulator))
 - [pubky.observer](https://pubky.observer/) — Pubky data explorer
-- [eventky.app](https://eventky.app/) — Event management on Pubky
 - [playground.pubky.org](https://playground.pubky.org/) — Interactive demo: same user-owned data powering multiple apps with different layouts
 
 ## Core Repositories
 
 All under [github.com/pubky](https://github.com/pubky):
 
-- [pubky-homeserver](https://github.com/pubky/pubky-homeserver) — Pubky Homeserver, SDK, and protocol implementation
-- [pubky-app](https://github.com/pubky/pubky-app) — Pubky social media application
-- [pubky-ring](https://github.com/pubky/pubky-ring) — Mobile key manager app
+- [pubky-homeserver](https://github.com/pubky/pubky-homeserver) — Pubky Homeserver and protocol implementation
+- [homeserver-dashboard](https://github.com/pubky/homeserver-dashboard) — Admin dashboard for Pubky homeservers
 - [pubky-backup](https://github.com/pubky/pubky-backup) — Desktop app for local backups of published Homeserver data
 - [pubky-nexus](https://github.com/pubky/pubky-nexus) — Aggregator and indexer for pubky.app
-- [pubky-app-specs](https://github.com/pubky/pubky-app-specs) - Shared data models and validation for apps interoperable with pubky.app
-- [pkarr](https://github.com/pubky/pkarr) — Public Key Addressable Resource Records (sovereign TLDs)
-- [mainline](https://github.com/pubky/mainline) — BitTorrent Mainline DHT implementation in Rust
-- [react-native-pubky](https://github.com/pubky/react-native-pubky) — React Native bindings
+- [pubky-app-templates](https://github.com/pubky/pubky-app-templates) — Starter templates for building Pubky apps ([demos](https://pubky.github.io/pubky-app-templates/))
 - [pubky-core-ffi](https://github.com/pubky/pubky-core-ffi) — Pubky Mobile SDK
 - [pkdns](https://github.com/pubky/pkdns) — DNS server resolving pkarr self-sovereign domains
-- [paykit-rs](https://github.com/pubky/paykit-rs) — Payment toolkit
-- [http-relay](https://github.com/pubky/http-relay) — HTTP relay
-- [pkdns-publisher](https://github.com/pubky/pkdns-publisher) — PKDNS record publisher
 - [pkdns-resolver-extension](https://github.com/pubky/pkdns-resolver-extension) — Browser extension for PKDNS resolution
-- [pkdns-digger](https://github.com/pubky/pkdns-digger) — Resolvable sovereign keys tool
 - [homegate](https://github.com/pubky/homegate) — Gateway service
-- [pubky-explorer](https://github.com/pubky/pubky-explorer) — Data explorer (explorer.pubky.app)
-- [pubky-docker](https://github.com/pubky/pubky-docker) — One-click Pubky deployments
-- [workshop](https://github.com/pubky/workshop) — Live coding workshop for building JS apps with pubky-sdk
-- [pubky-crypto](https://github.com/pubky/pubky-crypto) — Minimal crypto utilities
-- [pubky-locks](https://github.com/pubky/pubky-locks) — P2P commerce
-- [pubky-ai-bot](https://github.com/pubky/pubky-ai-bot) — AI capabilities for Pubky
+- [pubky-docker](https://github.com/pubky/pubky-docker) — Local Pubky stack for development and experimentation on testnet
+- [umbrel-app-store](https://github.com/pubky/umbrel-app-store) — Install your own Pubky Homeserver on your Umbrel node
 - [pubky-cli](https://github.com/pubky/pubky-cli) — Command-line companion for interacting with Pubky homeservers
 - [atomicity](https://github.com/pubky/atomicity) — Proposal for a P2P credit system
-- [pubky-ai-kit](https://github.com/pubky/pubky-ai-kit) — Context for building with Pubky and AI
 
 ## Community Projects
 
-- [homeserver-dashboard](https://github.com/francismars/homeserver-dashboard) — Homeserver dashboard UI
-- [pubky-node](https://github.com/BitcoinErrorLog/pubky-node) — All-in-one binary to run a homeserver, DHT node, and PKARR relay and Pubky toolset
-- [eventky](https://github.com/gillohner/eventky/) — Event management on Pubky
-- [pak](https://github.com/aljazceru/pak) — Pubky Army Knife
-- [pubky-nextjs-template](https://github.com/PastaGringo/pubky-nextjs-template) — Next.js template for Pubky apps
-- [pubkytree](https://github.com/PastaGringo/pubkytree) — Pubky tree visualization
+- [Uploadky](https://uploadky.vercel.app/) — File sharing with files stored on your Pubky homeserver ([source](https://github.com/PastaGringo/uploadky))
+- [TimechainWiki](https://timechain.wiki/) — Bitcoin encyclopedia with reader annotations synced through Nostr or Pubky ([source](https://github.com/RadVladdy/timechain-wiki))
+- [Loopky](https://github.com/jvsena42/loopky) — Flashcards with spaced repetition and decks stored on Pubky ([Android releases](https://github.com/jvsena42/loopky/releases/latest))
+- [Chessky](https://chessky-ten.vercel.app/) — Multiplayer chess across homeservers, with no indexer or other backend ([source](https://github.com/gcomte/chessky))
+- [Ghostly](https://ghostly.tools/) — Encrypted chat and file sharing built on PKARR ([source](https://github.com/MiguelMedeiros/ghostly))
+- [Pubky Pulse](https://pubkypulse.com/) — Experimental app observability with SDKs and MCP access for AI agents ([source](https://github.com/Jasonvdb/pubky-pulse))
+- [eventky.app](https://eventky.app/) — Event management on Pubky ([source](https://github.com/gillohner/eventky/))
 - [tagky](https://github.com/PastaGringo/tagky) — Automated tagging using LLM
-- [pubky-canva](https://github.com/gillohner/pubky-canva) — Collaborative canvas on Pubky
+- [Pubky Watcher Canvas](https://eventky.app/watcher-canvas/) — Multiplayer pixel canvas demonstrating Pubky event streams ([source](https://github.com/gillohner/pubky-watcher-canvas))
 - [pubky-mint](https://github.com/ok300/pubky-mint) — RSS-like way to browse your follows' Pubky activity
 - [vanity-pubky](https://github.com/coreyphillips/vanity-pubky) — Vanity key generator
-- [pubky-private-messenger](https://github.com/coreyphillips/pubky-private-messenger) — End-to-end encrypted messaging
+- [pubky-messenger](https://github.com/coreyphillips/pubky-messenger) — Rust library for private messaging over Pubky
 - [pkdns-vanity](https://github.com/jphastings/pkdns-vanity) — PKDNS vanity key generator
 
 ## Package Registries
 
-### Crates (Rust)
-
-- [pubky](https://crates.io/crates/pubky) — Pubky Rust SDK
-- [pkarr](https://crates.io/crates/pkarr) — Public Key Addressable Resource Records
-- [pubky-app-specs](https://crates.io/crates/pubky-app-specs) - Shared data models and validation for Pubky apps
-- [mainline](https://crates.io/crates/mainline) — BitTorrent Mainline DHT implementation
-
-### npm (JavaScript/TypeScript)
-
-- [@synonymdev/pubky](https://www.npmjs.com/package/@synonymdev/pubky) — Pubky JavaScript/TypeScript SDK
-- [@synonymdev/pkarr](https://www.npmjs.com/package/@synonymdev/pkarr) — Pkarr JavaScript/TypeScript SDK
-- [pubky-app-specs](https://www.npmjs.com/package/pubky-app-specs) - Shared data models and validation for Pubky apps
-
-### React Native
-
-- [@synonymdev/react-native-pubky](https://www.npmjs.com/package/@synonymdev/react-native-pubky) — React Native SDK
+- Pubky SDK — [Rust crate](https://crates.io/crates/pubky) and [JavaScript/TypeScript npm package](https://www.npmjs.com/package/@synonymdev/pubky)
+- [pkarr](https://crates.io/crates/pkarr) — Public Key Addressable Resource Records ([npm](https://www.npmjs.com/package/@synonymdev/pkarr), [source](https://github.com/pubky/pkarr))
+- [pubky-app-specs](https://crates.io/crates/pubky-app-specs) - Shared data models and validation for Pubky apps ([npm](https://www.npmjs.com/package/pubky-app-specs), [source](https://github.com/pubky/pubky-app-specs))
+- [mainline](https://crates.io/crates/mainline) — BitTorrent Mainline DHT implementation ([source](https://github.com/pubky/mainline))
+- [@synonymdev/react-native-pubky](https://www.npmjs.com/package/@synonymdev/react-native-pubky) — React Native SDK ([source](https://github.com/pubky/react-native-pubky))
 
 ## Community Channels
 
@@ -107,15 +87,15 @@ All under [github.com/pubky](https://github.com/pubky):
 
 ## Videos & Talks
 
+- [Introducing Pubky Collections](https://www.youtube.com/watch?v=RLcYgW8rg-Y) (08/10/2026) — Save, organize, and share Pubky posts
+- [Payky: One Link, Every Way to Pay You](https://www.youtube.com/watch?v=qrYJCxmD8e8) (06/16/2026) — Create and share a payment profile using Pubky Ring
+- [MyPubky: Your Link-in-Bio, Without the Lock-In](https://www.youtube.com/watch?v=PUXGgTyrY20) (06/09/2026) — Build a portable profile with links and payment options
+- [Why the Internet Is Broken by Design and How Pubky Changes the Model](https://www.youtube.com/watch?v=3cUTp9jKMX8) (03/03/2026) — Introduction to key-based identity and portable data
 - [Pubky Introduction — BTC Prague 2025](https://www.youtube.com/watch?v=hPxLz4VQpKk) (08/01/2025) — Introduction to Pubky
 - [The Atomic Economy](https://www.youtube.com/watch?v=X3ogGRuv7qY) (08/29/2025) — The Atomic Economy talk
 - [Pubky Community Call #3](https://www.youtube.com/watch?v=1eMYq-WJiNg) (02/17/2026) — Community call
 - [PKDNS Explainer](https://youtu.be/GJHMlyKUoWY) (10/26/2024) — How PKDNS works
 - [Pubky Explorer Explainer](https://youtu.be/qESmEhDNl4E) (10/27/2024) — Using the Pubky Explorer
-- [Pubky Notes Explainer](https://youtu.be/dXsFe3jmtHE) (10/28/2024) — Note-taking with Pubky
-- [Pubky Password Manager](https://www.youtube.com/watch?v=5uUt2HHlawE) (10/31/2024) — Password management demo
-- [Pubky Arcade](https://www.youtube.com/watch?v=hUzN68mNfP4) (10/29/2024) — Gaming on Pubky
-- [Pubky AI Social Bot](https://www.youtube.com/watch?v=cbOPwbqOKHQ) (11/01/2024) — AI integration demo
 - [Nuh @ Thank God for Nostr podcast](https://fountain.fm/episode/HXQpcOdQU9Tnxa9BQO2v) (11/19/2024) — Podcast interview
 
 ## Philosophical Foundations
@@ -125,7 +105,9 @@ Essays, talks, and resources exploring the vision, principles, and philosophy be
 ### Essays & Manifestos
 
 - [The Age of Social Intelligence](https://pubky.app/post/gujx6qd8ksydh1makdphd3bxu351d9b8waqka8hfg6q7hnqkxexo/0034WADK62XRG) (03/29/2026) — Why social intelligence is the missing layer as AI scales, and the Semantic Social Graph as open cognitive infrastructure
+- [Nostr vs Pubky: The Basics](https://pubky.app/post/gujx6qd8ksydh1makdphd3bxu351d9b8waqka8hfg6q7hnqkxexo/0034M0VM2ETV0) — John Carvalho compares the protocols' approaches to identity, discovery, and data ownership
 - [How to Fix Spam, Bots, and AI Slop on the World Wide Web](https://howtofixtheweb.com) (03/16/2026) — The Semantic Social Graph as the real algorithm to replace centralized feed curation
+- [Opening Pubky](https://medium.com/pubky/opening-pubky-4bdca7dc4c77) (01/30/2026) — The public launch, portable identity, and building apps around user-owned data
 - [Building Blocks for the Atomic Economy](https://medium.com/pubky/building-blocks-for-the-atomic-economy-aeeba8ccde8e) (10/17/2025) — How each technical primitive maps to a philosophical principle of sovereignty
 - [The Atomic Economy: Reclaiming Society from the Inside Out](https://medium.com/pubky/the-atomic-economy-reclaiming-society-from-the-inside-out-574504dfe326) (04/24/2025) — Extending Bitcoin's revolution into identity, trust, and coordination
 - [Corporate vs. Community-Led Open Source Development](https://medium.com/pubky/corporate-vs-community-led-open-source-development-491a03da58e6) (11/07/2024) — Cathedral vs. Bazaar: why effective freedom tools require intentional design
@@ -135,6 +117,7 @@ Essays, talks, and resources exploring the vision, principles, and philosophy be
 
 ### Bitcoin & Trust Philosophy
 
+- [You Cannot Store "Lifetime"](https://pubky.app/post/gujx6qd8ksydh1makdphd3bxu351d9b8waqka8hfg6q7hnqkxexo/0035JX1KFXSRG) — Subjective value, reputation, and the limits of money as a store of value
 - [How to Think About Data on Bitcoin](https://bitcoinerrorlog.medium.com/how-to-think-about-data-on-bitcoin-a5a80442ef68) (05/01/2025) — Blockspace as a free market, and why social data doesn't belong on-chain
 - [Fiat Will Never Die, Long Live Bitcoin](https://bitcoinerrorlog.substack.com/p/fiat-will-never-die-long-live-bitcoin) (02/10/2021) — Units of trust vs. units of work: a nuanced framework for money and credit
 - [Who secures Bitcoin?](https://medium.com/bitcoinerrorlog/who-secures-bitcoin-95b19bbcda3c) (10/26/2019) — Individual nodes as the ultimate guarantors of consensus, not miners or developers
