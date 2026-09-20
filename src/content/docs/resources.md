@@ -8,10 +8,8 @@ A curated directory of websites, applications, repositories, packages, and commu
 
 ## Websites
 
-- [pubky.org](https://pubky.org/) — Official Pubky documentation
 - [pubky.tech](https://pubky.tech/) — Awesome list: Ecosystem directory
 - [synonym.to](https://synonym.to/) — Synonym (company behind Pubky)
-- [pkdns.net](https://pkdns.net/) — PKDNS public resolver
 - [stats.pubky.app](https://stats.pubky.app/) — Pubky metrics dashboard
 
 ## AI Resources
@@ -19,11 +17,10 @@ A curated directory of websites, applications, repositories, packages, and commu
 - Pubky documentation for LLMs: [overview](https://pubky.org/llms.txt), [page index](https://pubky.org/llms-small.txt), and [full documentation](https://pubky.org/llms-full.txt)
 - [Pubky agent skills](https://github.com/pubky/agent-skills) — Maintained skills for AI coding tools working with Pubky
 - [Nexus Scout](https://nexus-scout.pubky.app/) — Read-only query gateway for AI agents exploring the Pubky social graph ([agent guide](https://nexus-scout.pubky.app/llms.txt), [source](https://github.com/pubky/nexus-scout))
-- Context7 resources to keep LLMs up to date: [pubky.org `llms.txt`](https://context7.com/llmstxt/pubky_llms_txt), [Pubky Homeserver repo](https://context7.com/pubky/pubky-homeserver), [Pubky Nexus repo](https://context7.com/pubky/pubky-nexus), [PKARR repo](https://context7.com/pubky/pkarr), [PKDNS repo](https://context7.com/pubky/pkdns), [pubky-app-specs repo](https://context7.com/pubky/pubky-app-specs), [Pubky Docker repo](https://context7.com/pubky/pubky-docker), and [Mainline repo](https://context7.com/pubky/mainline)
-- DeepWiki (AI-generated codebase wikis with LLM chat): [pubky-homeserver](https://deepwiki.com/pubky/pubky-homeserver) and [pubky-nexus](https://deepwiki.com/pubky/pubky-nexus)
 
 ## Live Applications
 
+- [pkdns.net](https://pkdns.net/) — PKARR record explorer ([source](https://github.com/pubky/pkdns-digger))
 - [pubky.app](https://pubky.app/) — Decentralized social media app ([source](https://github.com/pubky/pubky-app))
 - [mypubky.com](https://mypubky.com/) — Shareable bio page for your profile, links, posts, and payment options ([source](https://github.com/pubky/mypubky))
 - [pubkyring.app](https://pubkyring.app/) — Pubky Ring key manager ([source](https://github.com/pubky/pubky-ring))
@@ -39,7 +36,7 @@ A curated directory of websites, applications, repositories, packages, and commu
 
 All under [github.com/pubky](https://github.com/pubky):
 
-- [pubky-homeserver](https://github.com/pubky/pubky-homeserver) — Pubky Homeserver and protocol implementation
+- [pubky-homeserver](https://github.com/pubky/pubky-homeserver) — Pubky Homeserver and protocol implementation ([Rust crate](https://crates.io/crates/pubky), [JavaScript/TypeScript npm package](https://www.npmjs.com/package/@synonymdev/pubky))
 - [homeserver-dashboard](https://github.com/pubky/homeserver-dashboard) — Admin dashboard for Pubky homeservers
 - [pubky-backup](https://github.com/pubky/pubky-backup) — Desktop app for local backups of published Homeserver data
 - [pubky-nexus](https://github.com/pubky/pubky-nexus) — Aggregator and indexer for pubky.app
@@ -50,8 +47,6 @@ All under [github.com/pubky](https://github.com/pubky):
 - [homegate](https://github.com/pubky/homegate) — Gateway service
 - [pubky-docker](https://github.com/pubky/pubky-docker) — Local Pubky stack for development and experimentation on testnet
 - [umbrel-app-store](https://github.com/pubky/umbrel-app-store) — Install your own Pubky Homeserver on your Umbrel node
-- [pubky-cli](https://github.com/pubky/pubky-cli) — Command-line companion for interacting with Pubky homeservers
-- [atomicity](https://github.com/pubky/atomicity) — Proposal for a P2P credit system
 
 ## Community Projects
 
@@ -71,7 +66,6 @@ All under [github.com/pubky](https://github.com/pubky):
 
 ## Package Registries
 
-- Pubky SDK — [Rust crate](https://crates.io/crates/pubky) and [JavaScript/TypeScript npm package](https://www.npmjs.com/package/@synonymdev/pubky)
 - [pkarr](https://crates.io/crates/pkarr) — Public Key Addressable Resource Records ([npm](https://www.npmjs.com/package/@synonymdev/pkarr), [source](https://github.com/pubky/pkarr))
 - [pubky-app-specs](https://crates.io/crates/pubky-app-specs) - Shared data models and validation for Pubky apps ([npm](https://www.npmjs.com/package/pubky-app-specs), [source](https://github.com/pubky/pubky-app-specs))
 - [mainline](https://crates.io/crates/mainline) — BitTorrent Mainline DHT implementation ([source](https://github.com/pubky/mainline))
@@ -105,6 +99,7 @@ Essays, talks, and resources exploring the vision, principles, and philosophy be
 
 ### Essays & Manifestos
 
+- [atomicity](https://github.com/pubky/atomicity) — Proposal for a P2P credit system
 - [The Age of Social Intelligence](https://pubky.app/post/gujx6qd8ksydh1makdphd3bxu351d9b8waqka8hfg6q7hnqkxexo/0034WADK62XRG) (03/29/2026) — Why social intelligence is the missing layer as AI scales, and the Semantic Social Graph as open cognitive infrastructure
 - [Nostr vs Pubky: The Basics](https://pubky.app/post/gujx6qd8ksydh1makdphd3bxu351d9b8waqka8hfg6q7hnqkxexo/0034M0VM2ETV0) — John Carvalho compares the protocols' approaches to identity, discovery, and data ownership
 - [How to Fix Spam, Bots, and AI Slop on the World Wide Web](https://howtofixtheweb.com) (03/16/2026) — The Semantic Social Graph as the real algorithm to replace centralized feed curation
@@ -116,20 +111,6 @@ Essays, talks, and resources exploring the vision, principles, and philosophy be
 - [Introducing Pubky: Rebooting the Web with User Sovereignty at the Core](https://medium.com/@synonym_to/pubky-launch-260f36ba8fe3) (10/25/2024) — Synonym's official launch statement on digital autonomy and open-source sovereignty
 - [Welcome to the Atomic Economy](https://bitcoinerrorlog.substack.com/p/welcome-to-the-atomic-economy) (12/04/2021) — Early articulation of the Atomic Economy vision: webs of trust replacing centralized gatekeepers
 
-### Bitcoin & Trust Philosophy
-
-- [You Cannot Store "Lifetime"](https://pubky.app/post/gujx6qd8ksydh1makdphd3bxu351d9b8waqka8hfg6q7hnqkxexo/0035JX1KFXSRG) — Subjective value, reputation, and the limits of money as a store of value
-- [How to Think About Data on Bitcoin](https://bitcoinerrorlog.medium.com/how-to-think-about-data-on-bitcoin-a5a80442ef68) (05/01/2025) — Blockspace as a free market, and why social data doesn't belong on-chain
-- [Fiat Will Never Die, Long Live Bitcoin](https://bitcoinerrorlog.substack.com/p/fiat-will-never-die-long-live-bitcoin) (02/10/2021) — Units of trust vs. units of work: a nuanced framework for money and credit
-- [Who secures Bitcoin?](https://medium.com/bitcoinerrorlog/who-secures-bitcoin-95b19bbcda3c) (10/26/2019) — Individual nodes as the ultimate guarantors of consensus, not miners or developers
-
 ### Talks & Interviews
 
 - [The Next Web — Bitcoin Audible Chat 124](https://bitcoin-audible.castos.com/episodes/chat-124-the-next-web-with-john-carvalho) (01/15/2025) — Deep dive into Pubky's philosophy, credible exit, and pragmatic decentralization
-- [Defending Bitcoin — HackerNoon](https://hackernoon.com/defending-bitcoin-with-john-carvalho-17f549b5e059) (01/21/2019) — Origin story: defending decentralization at the protocol level, the thread that leads to Pubky
-- [AMA — Stacker News](https://stacker.news/items/17771) (04/03/2022) — Extended Q&A revealing first-principles thinking: "Primitives are all that matter"
-
-### Third-Party Analysis
-
-- [What is Pubky? — Bitfinex Blog](https://blog.bitfinex.com/education/what-is-pubky/) (08/01/2025) — Accessible overview of Pubky's philosophical and technical foundations
-- [Synonym Launches Architecture For A Self-Sovereign Economy — Bitcoin Magazine](https://bitcoinmagazine.com/business/synonym-launches-architecture-for-self-sovereign-economy-around-bitcoin) (11/16/2021) — Synonym's founding announcement: replacing the legacy economy with self-sovereign alternatives
