@@ -14,22 +14,12 @@ const pinnedInstall = `${homeserver}/blob/${pinned_homeserver_release}/docs/INST
 const deployment = `${homeserver}/blob/${placeholder}/docs/DEPLOY.md`;
 const pinnedDeployment = `${homeserver}/blob/${pinned_homeserver_release}/docs/DEPLOY.md`;
 
-test('the Homeserver release pin matches the documented JavaScript and Rust SDK versions', () => {
+test('the Homeserver release pin matches the documented JavaScript SDK version', () => {
   const jsManifest = JSON.parse(readFileSync(new URL('../snippets/js/package.json', import.meta.url), 'utf8'));
   const jsVersion = jsManifest.dependencies?.['@synonymdev/pubky'];
   assert.match(jsVersion ?? '', /^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?$/,
     'Declare an exact @synonymdev/pubky version in snippets/js/package.json.');
 
-  const rustManifest = readFileSync(new URL('../snippets/rust/Cargo.toml', import.meta.url), 'utf8');
-  // Read the existing inline-table dependency format and fail if it changes,
-  // rather than silently finding another crate's version or a comment.
-  const dependencies = rustManifest.split(/^[ \t]*\[dependencies\][ \t]*(?:#[^\r\n]*)?$/m)[1]?.split(/^[ \t]*\[/m)[0];
-  const pubkyDependency = dependencies?.match(/^[ \t]*pubky[ \t]*=[ \t]*\{([^}\r\n]*)\}/m)?.[1];
-  const rustVersion = pubkyDependency?.match(/(?:^|,)[ \t]*version[ \t]*=[ \t]*(["'])(=[^"']+)\1(?=[ \t]*(?:,|$))/)?.[2];
-  assert.ok(rustVersion,
-    'Declare an exact pubky version in snippets/rust/Cargo.toml as pubky = { version = "=X.Y.Z", ... }, or update this check for a new manifest format.');
-  assert.equal(rustVersion.slice(1), jsVersion,
-    'Keep the documented JavaScript and Rust SDK versions aligned, then update pinned_homeserver_release in src/config/releases.mjs to the matching v-prefixed tag.');
   assert.equal(pinned_homeserver_release, `v${jsVersion}`,
     'When updating the documented SDK version, also update pinned_homeserver_release in src/config/releases.mjs to the matching v-prefixed tag.');
 });

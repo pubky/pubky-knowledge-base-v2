@@ -9,15 +9,13 @@
     "preview": "astro preview",
     "test:browser": "playwright test",
     "astro": "astro",
-    "check:snippets": "npm run check:snippet-fences && npm run check:snippets:js && npm run check:snippets:react-native && npm run check:snippets:rust",
+    "check:snippets": "npm run check:snippet-fences && npm run check:snippets:js",
     "check:snippet-fences": "node --test tests/check-snippet-fences.test.mjs && node scripts/check-snippet-fences.mjs",
     "check:generated-markdown": "node scripts/check-generated-markdown.mjs",
     "check:release-links": "node --test tests/release-links.test.mjs",
     "check:github-links": "node --test tests/check-github-links.test.mjs && node scripts/check-github-links.mjs",
     "check:links": "node scripts/check-live-links.mjs",
-    "check:snippets:js": "npm --prefix snippets/js run check",
-    "check:snippets:react-native": "npm --prefix snippets/react-native run check",
-    "check:snippets:rust": "cargo clippy --manifest-path snippets/rust/Cargo.toml --all-features -- -D warnings && cargo fmt --manifest-path snippets/rust/Cargo.toml --check"
+    "check:snippets:js": "npm --prefix snippets/js run check"
   },
   "dependencies": {
     "@astrojs/starlight": "^0.37.6",

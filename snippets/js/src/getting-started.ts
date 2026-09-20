@@ -1,3 +1,5 @@
+import { Client } from "@synonymdev/pubky";
+
 // --8<-- [start:js_getting_started_imports]
 import { Keypair, Pubky, PublicKey, setLogLevel } from "@synonymdev/pubky";
 
@@ -60,3 +62,24 @@ const flow = await pubky.startGrantAuthFlow(
   },
 );
 // --8<-- [end:js_custom_auth_relay]
+
+function snippet_pkarr_relay_config() {
+  // --8<-- [start:js_pkarr_relay_config]
+  const client = new Client({
+    pkarr: {
+      relays: ["https://pkarr.pubky.org"],
+    },
+  });
+
+  const pubky = Pubky.withClient(client);
+  // --8<-- [end:js_pkarr_relay_config]
+}
+
+async function snippet_nexus_global_feed() {
+  // --8<-- [start:js_nexus_global_feed]
+  const response = await fetch(
+    "https://nexus.pubky.app/v0/stream/posts?limit=10",
+  );
+  const posts = await response.json();
+  // --8<-- [end:js_nexus_global_feed]
+}

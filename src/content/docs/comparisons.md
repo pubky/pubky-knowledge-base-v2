@@ -2,315 +2,60 @@
 title: "How Pubky Compares to Other Protocols"
 ---
 
-Understanding how Pubky differs from other decentralized and federated protocols.
-
----
-
-## Quick Comparison Table
-
-| Feature | Pubky | Nostr | Bluesky | Farcaster | IPFS |
-|---------|-------|-------|---------|-----------|------|
-| **Identity Model** | Self-sovereign keys (Ed25519) | Self-sovereign keys (Schnorr) | DIDs + handles | Ethereum addresses | Content-addressed |
-| **Storage** | Homeservers (HTTP) | Relays (WebSocket) | Personal Data Servers | Hubs (P2P) | IPFS nodes (DHT) |
-| **Discovery** | Mainline DHT (10M+ nodes) | Relay lists | DID directory (centralized) | On-chain registry | IPFS DHT |
-| **Data Mutability** | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ❌ No (content-addressed) |
-| **Censorship Resistance** | 🟢 High | 🟡 Medium | 🔴 Low | 🟡 Medium | 🟢 High |
-| **Blockchain Requirement** | ❌ No | ❌ No | ❌ No | ✅ Yes (Optimism) | ❌ No |
-| **Transaction Fees** | ❌ None | ❌ None | ❌ None | ✅ Gas fees | ❌ None |
-| **Always-Online Requirement** | 🟡 Partial (Homeservers) | 🟡 Partial (relays) | ❌ No (PDSs) | 🟡 Partial (hubs) | ✅ Yes (for hosting) |
-| **Mobile-Friendly** | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | 🟡 Limited |
-| **Data Portability** | ✅ Full | ✅ Full | 🟡 Partial | 🟡 Partial | ✅ Full |
-| **Maturity** | 🚧 Beta | ✅ Production | ✅ Production | ✅ Production | ✅ Production |
-
-Legend: ✅ Yes | ❌ No | 🟡 Partial | 🟢 High | 🔴 Low | 🚧 Work in Progress
-
----
-
-## Detailed Comparisons
-
-### Pubky vs Nostr
-
-**What They Have in Common:**
-- Self-sovereign cryptographic identity
-- No blockchain or transaction fees
-- Data portability through key ownership
-- Open protocol and implementations
-
-**Key Differences:**
-
-| Aspect | Pubky | Nostr |
-|--------|-------|-------|
-| **Storage Model** | Homeservers (HTTP/HTTPS) | Relays (WebSocket) |
-| **Discovery** | Mainline DHT (15+ years proven) | Relay lists (client-configured) |
-| **Data Structure** | Key-value store (files) | Event stream (signed messages) |
-| **Homeserver Discovery** | Automatic via PKARR → DHT | Manual relay configuration |
-| **Always-Online** | Not required (Homeservers) | Relays must stay online |
-| **Semantic Tagging** | Built-in (Semantic Social Graph) | Application-level |
-| **API Protocol** | RESTful HTTP | WebSocket subscriptions |
-| **Scalability** | Proven DHT infrastructure | Relay-dependent |
-
-**When to Choose Pubky:**
-- Need censorship-resistant discovery (DHT-based)
-- Want familiar HTTP/REST APIs
-- Building apps requiring mutable file storage
-- Need semantic social graph features
-
-**When to Choose Nostr:**
-- Want real-time event streaming
-- Prefer WebSocket-based architecture
-- Ecosystem maturity matters (more clients/relays)
-- Simpler relay model appeals to you
-
----
-
-### Pubky vs Bluesky (AT Protocol)
-
-**What They Have in Common:**
-- User data portability
-- Federation-capable architecture
-- Personal data servers
-- Social media focus
-
-**Key Differences:**
-
-| Aspect | Pubky | Bluesky |
-|--------|-------|---------|
-| **Identity** | Public keys (truly self-sovereign) | DIDs + DNS handles (hybrid) |
-| **Discovery** | Mainline DHT (decentralized) | DID directory (centralized) |
-| **Account Portability** | Automatic (update PKARR) | Requires DID transfer |
-| **Handle System** | Optional vanity names | DNS-based handles required |
-| **Infrastructure Control** | User chooses Homeserver | Bluesky PBC controls directory |
-| **Censorship Resistance** | High (DHT-based) | Low (centralized components) |
-| **Data Format** | Flexible key-value | Lexicon-based schemas |
-| **Current State** | Beta | Production |
-
-**Key Concern with Bluesky:**
-- **Centralization**: DID directory (plc.directory) is controlled by Bluesky PBC
-- **Single point of failure**: If the directory is compromised, identity resolution breaks
-- **Governance**: Protocol changes controlled by one entity
-
-**When to Choose Pubky:**
-- True self-sovereignty is critical
-- No dependence on centralized services
-- Prefer proven DHT technology
-- Building for censorship-resistant use cases
-
-**When to Choose Bluesky:**
-- Want production-ready ecosystem now
-- Large existing user base matters
-- Familiar with ActivityPub/federation
-- DNS-based handles are important
-
----
-
-### Pubky vs Farcaster
-
-**What They Have in Common:**
-- Decentralized social protocol
-- User-controlled data
-- Multiple client support
-
-**Key Differences:**
-
-| Aspect | Pubky | Farcaster |
-|--------|-------|-----------|
-| **Identity** | Off-chain (key pairs) | On-chain (Ethereum addresses) |
-| **Registration** | Free (generate keys) | Paid (on-chain transaction) |
-| **Storage** | Homeservers (HTTP) | Hubs (P2P gossip) |
-| **Fees** | None | Gas fees on Optimism |
-| **Blockchain** | None | Optimism L2 required |
-| **Scalability** | HTTP server scale | Hub network scale |
-| **Discovery** | Mainline DHT | On-chain registry |
-| **Complexity** | Simpler (no chain) | More complex (chain + hubs) |
-
-**Trade-offs:**
-
-**Pubky Advantages:**
-- No blockchain dependency
-- No transaction fees
-- Simpler architecture
-- Faster onboarding (instant key generation)
-
-**Farcaster Advantages:**
-- On-chain identity verification
-- Ethereum ecosystem integration
-- Stronger identity guarantees
-- Production maturity
-
-**When to Choose Pubky:**
-- Want to avoid blockchain complexity
-- No transaction fees requirement
-- Prefer HTTP-based architecture
-- Need fastest possible onboarding
-
-**When to Choose Farcaster:**
-- Ethereum integration is valuable
-- On-chain verification important
-- Already in crypto ecosystem
-- Production maturity required
-
----
-
-### Pubky vs IPFS
-
-**What They Have in Common:**
-- Decentralized data storage
-- Content distribution
-- No central authority
-
-**Key Differences:**
-
-| Aspect | Pubky | IPFS |
-|--------|-------|------|
-| **Primary Focus** | Mutable identity + data | Immutable content distribution |
-| **Addressing** | Identity-first (public keys) | Content-first (CIDs) |
-| **Mutability** | Native (update anytime) | Requires IPNS or external pointers |
-| **Use Case** | Applications with identity | Content delivery and archival |
-| **Data Model** | Key-value (per user) | Merkle DAG (content) |
-| **Discovery** | Mainline DHT (identity) | IPFS DHT (content) |
-| **Always-Online** | No (Homeservers persist) | Yes (to host your content) |
-| **Update Mechanism** | Direct (PUT/DELETE) | Republish with new CID |
-
-**Complementary Technologies:**
-Pubky and IPFS can work together:
-- Store large immutable content on IPFS
-- Reference IPFS CIDs in Pubky Homeserver data
-- Use Pubky for identity, IPFS for content delivery
-
-**When to Choose Pubky:**
-- Building identity-centric applications
-- Need mutable user data
-- Want simple HTTP APIs
-- Social/collaboration apps
-
-**When to Choose IPFS:**
-- Content immutability is critical
-- Building CDN or archival system
-- Deduplication important
-- Large file distribution
-
----
-
-## Architecture Comparison
-
-### Data Flow Comparison
-
-**Pubky:**
-```
-User Key → PKARR (DHT) → Homeserver → HTTP API → Apps
-```
-
-**Nostr:**
-```
-User Key → Relay List → Relays (WebSocket) → Apps
-```
-
-**Bluesky:**
-```
-DID → Directory → PDS → Lexicon API → Apps
-```
-
-**Farcaster:**
-```
-Ethereum Address → On-chain Registry → Hubs (P2P) → Apps
-```
-
-### Trust Model Comparison
-
-| Protocol | Trust Requirement |
-|----------|------------------|
-| **Pubky** | Trust Homeserver for availability (not integrity) |
-| **Nostr** | Trust relays for availability (not integrity) |
-| **Bluesky** | Trust Bluesky PBC for DID directory |
-| **Farcaster** | Trust Optimism L2 and hub operators |
-| **IPFS** | Trust no one (content-addressed) |
-
----
-
-## Migration Paths
-
-### Moving to Pubky From...
-
-**From Nostr:**
-- Export event history
-- Convert to Pubky data format
-- Publish to Homeserver
-- Update discovery to PKARR
-
-**From Bluesky:**
-- Export PDS data
-- Generate Pubky keys
-- Migrate posts/profile
-- Publish PKARR record
-
-**From Centralized Platforms:**
-- Export data (if available)
-- Create Pubky identity
-- Import and republish content
-- Announce migration
-
----
-
-## Ecosystem Maturity
-
-| Protocol | Launch Year | Status | Notable Apps |
-|----------|-------------|--------|--------------|
-| **Pubky** | 2024 | Beta | Pubky App |
-| **Nostr** | 2020 | Production | Damus, Amethyst, Primal |
-| **Bluesky** | 2023 | Production | Bluesky Social |
-| **Farcaster** | 2021 | Production | Warpcast |
-| **IPFS** | 2015 | Production | Brave, Opera, many apps |
-
----
-
-## Common Misconceptions
-
-### "Pubky is just another Nostr"
-**False**: While both use keys for identity, Pubky uses HTTP Homeservers and Mainline DHT for discovery, not relays and manual configuration.
-
-### "Bluesky is decentralized like Pubky"
-**Partial**: Bluesky has decentralized data servers but centralized identity (DID directory controlled by Bluesky PBC).
-
-### "Farcaster is more secure because it uses blockchain"
-**Nuanced**: Blockchain provides different guarantees, not inherently more security. Pubky's cryptographic signatures provide strong integrity without fees.
-
-### "IPFS can do everything Pubky does"
-**False**: IPFS is content-addressed and immutable. Pubky is identity-addressed and mutable. Different use cases.
-
----
-
-## Bottom Line: Choose Based on Your Needs
-
-**Choose Pubky if:**
-- ✅ Self-sovereignty without compromise is critical
-- ✅ Censorship resistance is a top priority
-- ✅ You want proven, scalable infrastructure (Mainline DHT)
-- ✅ No blockchain dependency is important
-- ✅ HTTP/REST APIs are preferred
-- ✅ Building social/collaborative applications
-- ✅ Fast-growing ecosystem
-
-**Choose Nostr if:**
-- ✅ Real-time event streaming is core to your app
-- ✅ Existing ecosystem maturity matters now
-- ✅ WebSocket-based architecture fits your needs
-- ✅ Want maximum client/relay options today
-
-**Choose Bluesky if:**
-- ✅ Need production-ready ecosystem immediately
-- ✅ Federation model familiar from Mastodon
-- ✅ DNS-based handles are important
-- ✅ Okay with some centralized components
-
-**Choose Farcaster if:**
-- ✅ Ethereum ecosystem integration valuable
-- ✅ On-chain verification important
-- ✅ Transaction fees acceptable
-- ✅ Already in crypto ecosystem
-
-**Choose IPFS if:**
-- ✅ Content immutability is required
-- ✅ Building CDN or archival system
-- ✅ Content-addressed data model fits
-- ✅ Deduplication is valuable
+Pubky combines public-key identity, signed service discovery through [PKARR](https://github.com/pubky/pkarr), and mutable files on a user-chosen [Homeserver](https://github.com/pubky/pubky-homeserver). This is useful when building a web app whose users should keep their identity and data independently of the app's operator.
 
+For example, a document can keep the same public-key-based address as its contents change or its owner changes hosting providers. Apps use familiar HTTP storage operations, while discovering the user's chosen server without requiring ownership of a conventional domain name.
+
+That combination is Pubky's main advantage. Several alternatives also separate apps from storage, support portable identity, or let users edit data.
+
+## Personal storage and identity
+
+### Solid
+
+[Solid](https://solidproject.org/TR/protocol) lets applications access user-controlled storage, commonly called Pods, through HTTP. It supports both linked data and ordinary files, with permissions determining which applications can access them. Identity uses a WebID URL, which can be hosted separately from the data.
+
+Pubky is particularly relevant when you want the identity and its discovery mechanism to remain independent of conventional domain ownership. Solid is worth evaluating when its linked-data conventions and Web standards fit your application.
+
+### remoteStorage
+
+[remoteStorage](https://remotestorage.io/protocol.html) is a close comparison: user-selected storage, HTTP files, and application access authorized through OAuth. It discovers storage using WebFinger and a domain-based user address.
+
+Pubky adds a key-based identity and PKARR discovery to a similarly familiar storage model. For applications that need local changes synchronized automatically, consider that [remoteStorage.js already provides offline synchronization](https://remotestorage.io/rs.js/docs/why.html); choosing Pubky does not provide that application behavior automatically.
+
+### Peergos
+
+[Peergos](https://book.peergos.org/security/capabilities.html) provides an encrypted filesystem with controlled sharing. Its [identity infrastructure](https://book.peergos.org/security/pki.html) maps usernames to public keys and storage providers through a mirrored directory. It also supports [provider migration](https://book.peergos.org/features/migration.html) while preserving identity and links.
+
+Pubky's public-key addresses avoid allocating names in a global username registry. Peergos deserves particular attention for private file collaboration; ordinary public Pubky records have a different confidentiality and trust model.
+
+## Shared social data
+
+### Nostr
+
+[Nostr](https://github.com/nostr-protocol/nips/blob/master/01.md) distributes signed events through relays. Clients can verify an event independently of the relay that delivered it. [Published relay lists](https://github.com/nostr-protocol/nips/blob/master/65.md) help clients find where users read and publish.
+
+Pubky offers a direct model for reading and updating the current file at a stable path. Nostr expresses updates through replacement events and [deletion requests](https://github.com/nostr-protocol/nips/blob/master/09.md). Pubky's approach can suit mutable documents; Nostr's signatures suit independently verifiable event distribution. Neither can erase copies other people have already retained.
+
+### AT Protocol
+
+[AT Protocol](https://atproto.com/specs/repository), used by Bluesky, stores records in signed repositories, with schemas and separately stored [blobs](https://atproto.com/specs/blob). Its [identity system](https://atproto.com/guides/identity) supports `did:plc` and `did:web`, and [account migration](https://atproto.com/guides/account-migration) is an implemented workflow.
+
+Pubky offers public-key discovery without a PLC identity directory or domain-based DID, and file storage without requiring AT Protocol's repository format. AT Protocol's signed repositories provide verification that ordinary public Pubky files do not. Both approaches still need shared data conventions for applications to interoperate.
+
+## Peer-to-peer application platforms
+
+### Freenet
+
+[Freenet](https://freenet.org/build/manual/components/contracts/) replicates mutable application state, with WebAssembly contracts validating updates. Applications define their own identity and authorization rules. This is the project formerly called Locutus, distinct from the older Freenet now called Hyphanet.
+
+Pubky supplies a common user identity and hosted HTTP storage model. It can fit a web application that needs users to publish files without implementing replicated contract state. Freenet is relevant when replicated state and its validation rules are central to the application.
+
+### Holepunch / Pear
+
+[Pear's stack](https://docs.pears.com/p2p/explanation/how-the-stack-fits-together/) combines peer discovery, verifiable logs, file storage, multiwriter data, and an application runtime. Hypercore is one component of this broader stack.
+
+Pubky fits conventional browser applications backed by user-selected servers. Pear is relevant when applications need to exchange and replicate data directly between peers. Compare the whole application and hosting model, rather than treating Hypercore alone as its equivalent to Pubky.
+
+## What to check before choosing
+
+Pubky's [Security Model](/explore/pubky-protocol/security-model/) includes trust in the Homeserver for public file integrity and availability. Signed discovery does not automatically sign stored files. [Changing providers](/explore/concepts/credible-exit/) also requires preserving and moving data; updating discovery alone is not migration. Use the [Getting Started guide](/explore/pubky-protocol/getting-started/) to assess how the workflow fits your application.
