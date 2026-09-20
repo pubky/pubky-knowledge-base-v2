@@ -824,16 +824,11 @@ const icons = {
       display: flex;
       flex-direction: column;
       align-items: stretch;
-      gap: var(--spacing-12);
+      gap: var(--spacing-8);
     }
 
-    /* Figma Mobile: title block (node 34793:62483) = h-296 — retain vertical
-       space around the wrapped title while aligning it with the link list. */
-    .community-title-col {
-      min-height: 296px;
-    }
-
-    /* Figma Mobile: link rows show title only (description + arrow hidden). */
+    /* Stacked layout: use a regular heading and show only the link titles. */
+    .community-title-arrow,
     .community-link-desc,
     .community-link-arrow {
       display: none;
