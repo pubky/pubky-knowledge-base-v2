@@ -12,28 +12,3 @@ updates:
       prefix: "deps"
       prefix-development: "deps-dev"
       include: "scope"
-
-  - package-ecosystem: "npm"
-    directory: "/snippets/react-native"
-    schedule:
-      interval: "daily"
-    cooldown:
-      default-days: 7
-    versioning-strategy: increase
-    labels: ["dependencies"]
-    commit-message:
-      prefix: "deps"
-      prefix-development: "deps-dev"
-      include: "scope"
-
-  - package-ecosystem: "cargo"
-    directory: "/snippets/rust"
-    schedule:
-      interval: "daily"
-    cooldown:
-      default-days: 7
-    versioning-strategy: auto
-    labels: ["dependencies"]
-    commit-message:
-      prefix: "deps"
-      include: "scope"

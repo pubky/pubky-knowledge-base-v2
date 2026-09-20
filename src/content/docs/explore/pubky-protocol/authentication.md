@@ -2,36 +2,30 @@
 title: "authentication"
 ---
 
-Pubky uses decentralized authentication where users control their own cryptographic keys. There are no central identity providers.
+Pubky apps request scoped access to a user's Homeserver through grant authentication. A key manager such as [Pubky Ring](/explore/technologies/pubky-ring/) lets the user approve the request without giving the app their identity key.
 
-## Key Concepts
+## From approval to a session
 
-- **Authenticator**: Any software or hardware capable of [Ed25519](https://en.wikipedia.org/wiki/EdDSA#Ed25519) signing, such as [Pubky Ring](/explore/technologies/pubky-ring/).
-- **Capabilities**: Permissions defining what an app can access (e.g., `/pub/pubky.app/:rw` has read and write permissions for the `/pub/pubky.app/` directory).
-- **Grant**: A signed authorization that binds capabilities to an app's client ID and proof-of-possession key.
-- **Proof-of-possession (PoP) key**: An app-specific key required to use a grant.
+An application asks for the permissions its features need, such as reading and writing files in its own storage path. It presents an authorization link or QR code. The user reviews the request in their authenticator, which approves access and delivers an encrypted grant through an [HTTP Relay](/explore/technologies/http-relay/). The SDK turns that approval into a session the app can use for authenticated requests.
 
-## Participants
+```mermaid
+flowchart TD
+    Request["App requests scoped access"] --> Approve["User approves in authenticator"]
+    Approve --> Relay["HTTP Relay carries encrypted grant"]
+    Relay --> Session["SDK creates the app's session"]
+    Session --> Access["App accesses the Homeserver"]
+```
 
-- **Authenticator**: App holding user's keypair (e.g., [Pubky Ring](/explore/technologies/pubky-ring/))
-- **3rd Party App**: Application requesting access
-- **[HTTP Relay](/explore/technologies/http-relay/)**: Forwards encrypted grants between Ring and the app
-- **[Homeserver](/explore/pubky-protocol/homeserver/)**: Verifies grants and issues sessions
+The app's session is distinct from the identity key. Its permissions limit what it can do, and grants can be revoked. Reading someone else's public data does not require their approval; writing data or accessing authenticated storage does. The [Security Model](/explore/pubky-protocol/security-model/) explains these boundaries.
 
-## User Flow with Pubky Ring
+Review requested scopes before approving an app. Root grants carry account-level privileges and should be reserved for trusted account-management tools.
 
-Apps display a QR code that users scan with [Pubky Ring](/explore/technologies/pubky-ring/). The user reviews the requested permissions and approves them, allowing the app to establish a session with their [Homeserver](/explore/pubky-protocol/homeserver/).
+## Implement the flow
 
-## Grant Lifecycle
+Use the maintained SDK guides to implement this flow:
 
-Grant-based signup uses a short-lived root-capability signup grant to create an account without creating a session. Applications then establish sessions with their own scoped grants and can inspect the current grant-backed session's metadata.
+- [JavaScript grant authentication](https://github.com/pubky/pubky-homeserver/blob/main/pubky-sdk/bindings/js/pkg/README.md#grantauthflow-pubkyauth).
+- [Rust QR authentication](https://github.com/pubky/pubky-homeserver/blob/main/pubky-sdk/README.md#pubky-qr-auth-for-third-party-and-keyless-apps).
+- [Browser session persistence example](https://github.com/pubky/pubky-homeserver/blob/main/examples/javascript/5-browser-session-persistence/README.md).
 
-A session with the exact root capability `/:rw` can list and revoke active grants. This access should be reserved for trusted identity or session managers. Signing out of a grant-backed session revokes its backing grant, and revoking any grant invalidates every bearer session issued from it. See the [Client OpenAPI specification](https://github.com/pubky/pubky-homeserver/blob/main/pubky-homeserver/openapi-client.yml) for the raw endpoints.
-
-## Relay Security
-
-The [HTTP Relay](/explore/technologies/http-relay/) encrypts grants between the authenticator and the requesting app using a shared relay secret. The relay itself only sees encrypted blobs. A grant also requires the app's matching PoP key before it can be exchanged for a bearer token. Messages are persisted for up to 5 minutes and deleted after retrieval. See [Security Model](/explore/pubky-protocol/security-model/) for the full trust analysis.
-
-## Trust Assumptions
-
-**Key management software must be trusted**: [Pubky Ring](/explore/technologies/pubky-ring/) keeps keys out of third-party apps, but apps that handle keys directly must be fully trusted. This is inherent to any self-custody system.
+For raw endpoints, see the [Homeserver API references](/explore/pubky-protocol/homeserver/#http-api). For key custody and Homeserver trust, read the [Security Model](/explore/pubky-protocol/security-model/).

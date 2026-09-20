@@ -2,18 +2,16 @@
 title: "introduction"
 ---
 
-The Backend is responsible for collecting ([aggregators](/explore/pubky-apps/indexing-and-aggregation/aggregator/)) and organizing ([indexer](/explore/pubky-apps/indexing-and-aggregation/indexer/)) data from various sources, known as [Homeservers](/explore/pubky-protocol/homeserver/).
+Homeservers store records under individual users' identities. A social feed needs to connect those records: which posts were written by people you follow, which replies belong to a conversation, or which resources carry a particular tag.
 
-![Pubky App backend architecture showing aggregators collecting data from Homeservers, indexers normalizing data, and web servers providing API access](/images/pubky-backend.png)
+An application backend can collect public records from multiple [Homeservers](/explore/pubky-protocol/homeserver/) and make those queries available:
 
-Imagine you're trying to find a specific document in a large library. The backend is like a librarian who searches through the shelves, finds the right documents, and prepares them for you to use. This ensures that the data is accurate, up-to-date, and in a format that's easy to work with.
+- **Aggregation** collects the records the service chooses to include.
+- **Indexing** organizes those records for queries such as feeds and search.
+- **An API** exposes the resulting views to clients.
 
-### Main components
+These are responsibilities, not a required set of separate services. [Pubky Nexus](/explore/pubky-apps/indexing-and-aggregation/pubky-nexus/) implements them for pubky.app social data.
 
-- [Aggregators](/explore/pubky-apps/indexing-and-aggregation/aggregator/) execute a **data retrieval protocol** to obtain data from **data storage**, initiating a process that retrieves and collects data from various sources.
-- [Indexers](/explore/pubky-apps/indexing-and-aggregation/indexer/) receive aggregated data from the **Aggregators** and initiate a rigorous **data normalization** process, transforming and converting the data into a standardized format to ensure consistency and accuracy.
-- [Web servers](/explore/pubky-apps/indexing-and-aggregation/web-server/) provide the requested data to [Pubky client](/explore/pubky-apps/reference-app/introduction/)
+The resulting index is a derived view. It does not replace the original Homeserver records, and an instance only returns data within its indexing coverage and policies. Different services can build different views over the same published data.
 
-### Production Implementation
-
-[Pubky Nexus](/explore/pubky-apps/indexing-and-aggregation/pubky-nexus/) is the production-grade implementation of this backend architecture, powering [Pubky App](/explore/pubky-apps/introduction/)'s social features with real-time aggregation, high-performance indexing, and a comprehensive REST API.
+See [App Architectures](/explore/pubky-apps/app-architectures/introduction/) to decide whether your application needs a backend.

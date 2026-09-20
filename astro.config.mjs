@@ -10,6 +10,130 @@ import remarkSnippet from './plugins/remark-snippet.mjs';
 export default defineConfig({
 	site: process.env.SITE_URL || 'https://pubky.org',
 	redirects: {
+		'/faq/': {
+			status: 301,
+			destination: '/overview/',
+		},
+		'/explore/technologies/pubky-cli/': {
+			status: 301,
+			destination: '/explore/pubky-protocol/getting-started/',
+		},
+		'/tldr/': {
+			status: 301,
+			destination: '/overview/',
+		},
+		'/explore/pubky-apps/eli5/': {
+			status: 301,
+			destination: '/explore/pubky-apps/introduction/',
+		},
+		'/explore/pubky-apps/reference-app/introduction/': {
+			status: 301,
+			destination: '/explore/pubky-apps/reference-app/pubky-app/',
+		},
+		'/explore/pubky-apps/app-architectures/client-homeserver/': {
+			status: 301,
+			destination: '/explore/pubky-apps/app-architectures/introduction/',
+		},
+		'/explore/pubky-apps/app-architectures/custom-backend/': {
+			status: 301,
+			destination: '/explore/pubky-apps/app-architectures/introduction/',
+		},
+		'/explore/pubky-apps/app-architectures/global-aggregators/': {
+			status: 301,
+			destination: '/explore/pubky-apps/app-architectures/introduction/',
+		},
+		'/explore/pubky-apps/indexing-and-aggregation/aggregator/': {
+			status: 301,
+			destination: '/explore/pubky-apps/indexing-and-aggregation/introduction/',
+		},
+		'/explore/pubky-apps/indexing-and-aggregation/indexer/': {
+			status: 301,
+			destination: '/explore/pubky-apps/indexing-and-aggregation/introduction/',
+		},
+		'/explore/pubky-apps/indexing-and-aggregation/web-server/': {
+			status: 301,
+			destination: '/explore/pubky-apps/indexing-and-aggregation/introduction/',
+		},
+		'/explore/pubky-apps/reference-app/features/bookmarks/': {
+			status: 301,
+			destination: '/explore/pubky-apps/reference-app/pubky-app/',
+		},
+		'/explore/pubky-apps/reference-app/features/layouts/': {
+			status: 301,
+			destination: '/explore/pubky-apps/reference-app/pubky-app/',
+		},
+		'/explore/pubky-apps/reference-app/features/notifications/': {
+			status: 301,
+			destination: '/explore/pubky-apps/reference-app/pubky-app/',
+		},
+		'/explore/pubky-apps/reference-app/features/perspectives/': {
+			status: 301,
+			destination: '/explore/pubky-apps/reference-app/pubky-app/',
+		},
+		'/explore/pubky-apps/reference-app/features/posts/': {
+			status: 301,
+			destination: '/explore/pubky-apps/reference-app/pubky-app/',
+		},
+		'/explore/pubky-apps/reference-app/features/profiles/': {
+			status: 301,
+			destination: '/explore/pubky-apps/reference-app/pubky-app/',
+		},
+		'/explore/pubky-apps/reference-app/features/search/': {
+			status: 301,
+			destination: '/explore/pubky-apps/reference-app/pubky-app/',
+		},
+		'/explore/pubky-apps/reference-app/features/tags/': {
+			status: 301,
+			destination: '/explore/pubky-apps/reference-app/pubky-app/',
+		},
+		'/explore/pubky-apps/reference-app/features/trends/': {
+			status: 301,
+			destination: '/explore/pubky-apps/reference-app/pubky-app/',
+		},
+		'/explore/pubky-protocol/pkarr/architecture/': {
+			status: 301,
+			destination: '/explore/pubky-protocol/pkarr/introduction/',
+		},
+		'/explore/pubky-protocol/pkarr/eli5/': {
+			status: 301,
+			destination: '/explore/pubky-protocol/pkarr/introduction/',
+		},
+		'/explore/pubky-protocol/pkarr/expectations/': {
+			status: 301,
+			destination: '/explore/pubky-protocol/pkarr/introduction/',
+		},
+		'/explore/pubky-protocol/pkarr/getting-started/': {
+			status: 301,
+			destination: '/explore/pubky-protocol/pkarr/introduction/',
+		},
+		'/explore/pubky-protocol/pkarr/why-pkarr/': {
+			status: 301,
+			destination: '/explore/pubky-protocol/pkarr/introduction/',
+		},
+		'/explore/technologies/dht/': {
+			status: 301,
+			destination: '/explore/technologies/mainline-dht/',
+		},
+		'/explore/technologies/dns/': {
+			status: 301,
+			destination: '/explore/technologies/pkdns/',
+		},
+		'/explore/technologies/doh/': {
+			status: 301,
+			destination: '/explore/technologies/pkdns/',
+		},
+		'/explore/technologies/https/': {
+			status: 301,
+			destination: '/explore/pubky-protocol/security-model/#transport-security',
+		},
+		'/explore/technologies/key-pair/': {
+			status: 301,
+			destination: '/explore/pubky-protocol/security-model/#key-custody',
+		},
+		'/explore/technologies/pubky-moderation/': {
+			status: 301,
+			destination: '/explore/concepts/censorship/',
+		},
 		'/docs': {
 			status: 301,
 			destination: '/',
@@ -56,23 +180,23 @@ export default defineConfig({
 		},
 		'/explore/pubkycore/pkarr/why-pkarr/': {
 			status: 301,
-			destination: '/explore/pubky-protocol/pkarr/why-pkarr/',
+			destination: '/explore/pubky-protocol/pkarr/introduction/',
 		},
 		'/explore/pubkycore/pkarr/getting-started/': {
 			status: 301,
-			destination: '/explore/pubky-protocol/pkarr/getting-started/',
+			destination: '/explore/pubky-protocol/pkarr/introduction/',
 		},
 		'/explore/pubkycore/pkarr/expectations/': {
 			status: 301,
-			destination: '/explore/pubky-protocol/pkarr/expectations/',
+			destination: '/explore/pubky-protocol/pkarr/introduction/',
 		},
 		'/explore/pubkycore/pkarr/architecture/': {
 			status: 301,
-			destination: '/explore/pubky-protocol/pkarr/architecture/',
+			destination: '/explore/pubky-protocol/pkarr/introduction/',
 		},
 		'/explore/pubkycore/pkarr/eli5/': {
 			status: 301,
-			destination: '/explore/pubky-protocol/pkarr/eli5/',
+			destination: '/explore/pubky-protocol/pkarr/introduction/',
 		},
 	},
 	base: process.env.BASE_PATH || '/',
@@ -116,36 +240,17 @@ export default defineConfig({
 						'index',
 						'overview',
 						'comparisons',
-						'faq',
 						'troubleshooting',
 						'contributing',
 						'getting-started',
 						'the-vision-of-pubky',
 						'glossary',
-						'tldr',
-						'explore/technologies/https',
-						'explore/technologies/key-pair',
-						'explore/technologies/dht',
-						'explore/technologies/dns',
-						'explore/technologies/doh',
 						'explore/technologies/pubky-explorer',
 						'explore/technologies/pubky-ring',
 						'explore/pubky-protocol/eli5',
-						'explore/pubky-protocol/pkarr/eli5',
-						'explore/pubky-protocol/pkarr/getting-started',
-						'explore/pubky-protocol/pkarr/why-pkarr',
-						'explore/pubky-protocol/pkarr/expectations',
-						'explore/pubky-apps/eli5',
 						'explore/pubky-apps/app-architectures/introduction',
-						'explore/pubky-apps/app-architectures/client-homeserver',
-						'explore/pubky-apps/app-architectures/global-aggregators',
 						'explore/pubky-apps/indexing-and-aggregation/introduction',
-						'explore/pubky-apps/indexing-and-aggregation/aggregator',
-						'explore/pubky-apps/indexing-and-aggregation/indexer',
-						'explore/pubky-apps/indexing-and-aggregation/web-server',
-						'explore/pubky-apps/reference-app/introduction',
 						'explore/pubky-apps/reference-app/pubky-app',
-						'explore/pubky-apps/reference-app/features/**',
 						'explore/concepts/censorship',
 						'explore/concepts/credible-exit',
 						'resources',
@@ -173,8 +278,6 @@ export default defineConfig({
 				{ label: 'Home', slug: 'index' },
 				{ label: 'Overview', slug: 'overview' },
 				{ label: 'Getting Started', slug: 'getting-started' },
-				{ label: 'TL;DR', slug: 'tldr' },
-				{ label: 'FAQ', slug: 'faq' },
 				{ label: 'Glossary', slug: 'glossary' },
 				{ label: 'Architecture', slug: 'architecture' },
 				{ label: 'The Vision of Pubky', slug: 'the-vision-of-pubky' },
@@ -204,11 +307,6 @@ export default defineConfig({
 							label: 'Pkarr',
 							items: [
 								{ label: 'Introduction', slug: 'explore/pubky-protocol/pkarr/introduction' },
-								{ label: 'Why Pkarr', slug: 'explore/pubky-protocol/pkarr/why-pkarr' },
-								{ label: 'Getting Started', slug: 'explore/pubky-protocol/pkarr/getting-started' },
-								{ label: 'Expectations', slug: 'explore/pubky-protocol/pkarr/expectations' },
-								{ label: 'Architecture', slug: 'explore/pubky-protocol/pkarr/architecture' },
-								{ label: 'ELI5', slug: 'explore/pubky-protocol/pkarr/eli5' },
 							],
 						},
 					],
@@ -217,41 +315,24 @@ export default defineConfig({
 					label: 'Pubky Apps',
 					items: [
 						{ label: 'Introduction', slug: 'explore/pubky-apps/introduction' },
-						{ label: 'ELI5', slug: 'explore/pubky-apps/eli5' },
 						{ label: 'App Specs', slug: 'explore/pubky-apps/app-specs' },
 						{
 							label: 'App Architectures',
 							items: [
 								{ label: 'Introduction', slug: 'explore/pubky-apps/app-architectures/introduction' },
-								{ label: 'Client ↔ Homeserver', slug: 'explore/pubky-apps/app-architectures/client-homeserver' },
-								{ label: 'Global Aggregators', slug: 'explore/pubky-apps/app-architectures/global-aggregators' },
-								{ label: 'Custom Backend', slug: 'explore/pubky-apps/app-architectures/custom-backend' },
 							],
 						},
 						{
 							label: 'Indexing & Aggregation',
 							items: [
 								{ label: 'Introduction', slug: 'explore/pubky-apps/indexing-and-aggregation/introduction' },
-								{ label: 'Indexer', slug: 'explore/pubky-apps/indexing-and-aggregation/indexer' },
-								{ label: 'Aggregator', slug: 'explore/pubky-apps/indexing-and-aggregation/aggregator' },
 								{ label: 'Pubky Nexus', slug: 'explore/pubky-apps/indexing-and-aggregation/pubky-nexus' },
-								{ label: 'Web Server', slug: 'explore/pubky-apps/indexing-and-aggregation/web-server' },
 							],
 						},
 						{
 							label: 'Reference App',
 							items: [
-								{ label: 'Introduction', slug: 'explore/pubky-apps/reference-app/introduction' },
 								{ label: 'pubky.app', slug: 'explore/pubky-apps/reference-app/pubky-app' },
-								{ label: 'Bookmarks', slug: 'explore/pubky-apps/reference-app/features/bookmarks' },
-								{ label: 'Layouts', slug: 'explore/pubky-apps/reference-app/features/layouts' },
-								{ label: 'Notifications', slug: 'explore/pubky-apps/reference-app/features/notifications' },
-								{ label: 'Perspectives', slug: 'explore/pubky-apps/reference-app/features/perspectives' },
-								{ label: 'Posts', slug: 'explore/pubky-apps/reference-app/features/posts' },
-								{ label: 'Profiles', slug: 'explore/pubky-apps/reference-app/features/profiles' },
-								{ label: 'Search', slug: 'explore/pubky-apps/reference-app/features/search' },
-								{ label: 'Tags', slug: 'explore/pubky-apps/reference-app/features/tags' },
-								{ label: 'Trends', slug: 'explore/pubky-apps/reference-app/features/trends' },
 							],
 						},
 					],

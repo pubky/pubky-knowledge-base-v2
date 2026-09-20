@@ -6,26 +6,6 @@ on:
   pull_request:
 
 jobs:
-  rust:
-    name: Rust snippets
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v6
-
-      - uses: dtolnay/rust-toolchain@stable
-        with:
-          components: clippy, rustfmt
-
-      - uses: Swatinem/rust-cache@v2
-        with:
-          workspaces: snippets/rust
-
-      - name: Install system dependencies
-        run: sudo apt-get update && sudo apt-get install -y pkg-config libssl-dev
-
-      - name: Validate snippets
-        run: npm run check:snippets:rust
-
   js:
     name: JS/TS snippets
     runs-on: ubuntu-latest
@@ -35,22 +15,24 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            snippets/js/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
 
       - name: Validate snippet references
         run: npm run check:snippet-fences
 
       - name: Install (vanilla JS)
         working-directory: snippets/js
-        run: npm install
+        run: npm ci
 
       - name: Validate snippets (vanilla JS)
         working-directory: snippets/js
         run: npm run check
 
-      - name: Install (React Native)
-        working-directory: snippets/react-native
-        run: npm install --legacy-peer-deps
-
-      - name: Validate snippets (React Native)
-        working-directory: snippets/react-native
-        run: npm run check
+      - name: Build and validate documentation
+        run: npm run build

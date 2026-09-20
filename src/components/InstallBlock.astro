@@ -13,8 +13,8 @@ const SITE_URL = (import.meta.env.SITE_URL || "https://pubky.org").replace(/\/+$
 const aiPrompt = `Pubky: open protocol for key-based, censorship-resistant web apps. Public key identity, homeserver storage, Mainline DHT discovery over HTTP/REST.
 
 Fetch the docs and help me build with Pubky:
-- Full (~110k tokens): ${SITE_URL}/llms-full.txt
-- Compact (~6k tokens): ${SITE_URL}/llms-small.txt`;
+- Full: ${SITE_URL}/llms-full.txt
+- Compact: ${SITE_URL}/llms-small.txt`;
 
 const aiLinks = [
   { name: "Claude", url: `https://claude.ai/new?q=${encodeURIComponent(aiPrompt)}`, icon: "claude" },
