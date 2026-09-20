@@ -378,13 +378,13 @@ const icons = {
   </section>
 
   <!-- Figma: Join our Community (node 34690:85373) — two-column 50/50 with 48px gap.
-       Left column = centered title + arrow line. Right column = 4 link rows separated by hairlines. -->
+       Left column = vertically centered, left-aligned title + arrow. Right column = 4 link rows separated by hairlines. -->
   <section id="community" class="home-section community-section">
     <div class="community-title-col">
       <h2 class="community-title">
         <a class="home-section-title-link" href="#community">Join our Community</a>
       </h2>
-      {/* Figma: 304px arrow line below title (Vector 21 in node 34690:87121) */}
+      {/* Figma: arrow below title (Vector 21 in node 34690:87121), scaled to the title width. */}
       <svg class="community-title-arrow" width="304" height="22" viewBox="0 0 304 22" fill="none" aria-hidden="true">
         <path d="M0 11H302M302 11L292 1M302 11L292 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
       </svg>
@@ -597,9 +597,7 @@ const icons = {
     grid-auto-rows: 1fr;
   }
 
-  /* Figma: Community (node 34690:85373) — 2-col grid, gap spacing-12(48px). Grid (vs flex)
-     guarantees the two columns are exactly equal width regardless of the title col's px-12
-     padding (a flex:1 basis:0 + padding combo widens the padded column by ~48px). */
+  /* Figma: Community (node 34690:85373) — equal-width 2-col grid, gap spacing-12(48px). */
   .community-section {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -607,15 +605,16 @@ const icons = {
     gap: var(--spacing-12);
   }
 
-  /* Figma: Title col (node 34690:85374) — flex-col, gap spacing-6(24), px spacing-12(48), centered */
+  /* Figma: Title col (node 34690:85374) — flex-col, gap spacing-6(24), adapted to align left. */
   .community-title-col {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     gap: var(--spacing-6);
-    padding: 0 var(--spacing-12);
+    width: fit-content;
+    max-width: 100%;
     min-width: 0;
   }
 
@@ -627,12 +626,14 @@ const icons = {
     line-height: var(--text-5xl-lh);
     font-weight: 700;
     color: var(--base-foreground);
-    text-align: center;
+    text-align: left;
   }
 
   .community-title-arrow {
     color: var(--base-foreground);
     flex-shrink: 0;
+    width: 100%;
+    height: auto;
   }
 
   /* Figma: Frame 2 (node 34690:87065) — flex-col gap spacing-5(20), 4 link rows
@@ -826,13 +827,10 @@ const icons = {
       gap: var(--spacing-12);
     }
 
-    /* Figma Mobile: title block (node 34793:62483) = h-296 px-8(32) — fixed
-       height keeps space above/below the wrapped 2-line H1; 32px horizontal
-       padding constrains the H1 to 278px wide (Figma) so "Join our Community"
-       wraps to 2 lines. */
+    /* Figma Mobile: title block (node 34793:62483) = h-296 — retain vertical
+       space around the wrapped title while aligning it with the link list. */
     .community-title-col {
       min-height: 296px;
-      padding: 0 var(--spacing-8);
     }
 
     /* Figma Mobile: link rows show title only (description + arrow hidden). */
