@@ -64,10 +64,9 @@ Pubky Ring is built with **React Native**, providing:
 
 ### Session Management
 Pubky Ring manages authentication sessions for connected apps:
-- Session creation with capability tokens
-- Session expiration and renewal
+- App-specific grant approval with scoped capabilities
+- Grant and session revocation
 - Multi-device session coordination
-- Session revocation
 
 ## Deep Linking & Integration
 
@@ -310,4 +309,3 @@ Always verify releases to ensure you're installing authentic, untampered builds.
 ---
 
 **Pubky Ring is the secure, self-custodial foundation for your presence in the Pubky ecosystem. Download it to get started with decentralized identity management.**
-
