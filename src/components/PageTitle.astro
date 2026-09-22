@@ -26,38 +26,20 @@ const markdownPath = id === '404' ? null : docsMarkdownPath(Astro.url.pathname);
 </div>
 
 <script>
+  import { enhanceClipboardButton } from '../scripts/clipboard';
+
   function enhanceMarkdownActions() {
     document.querySelectorAll<HTMLButtonElement>('[data-markdown-copy]').forEach((button) => {
-      if (button.dataset.copyReady) return;
       const status = button.closest('.doc-title-tools')?.querySelector<HTMLElement>('[role="status"]');
-      const label = button.querySelector<HTMLElement>('[data-copy-label]');
       const markdownPath = button.dataset.markdownCopy;
-      if (!status || !label || !markdownPath) return;
-      button.dataset.copyReady = 'true';
-      button.hidden = false;
-      let resetTimer: ReturnType<typeof setTimeout> | undefined;
+      if (!status || !markdownPath) return;
 
-      button.addEventListener('click', async () => {
-        clearTimeout(resetTimer);
-        button.disabled = true;
-        label.textContent = 'Copy link';
-        button.setAttribute('aria-label', 'Copy link to this page’s Markdown');
-        status.textContent = '';
-        try {
-          await navigator.clipboard.writeText(new URL(markdownPath, window.location.origin).href);
-          label.textContent = 'Copied';
-          button.setAttribute('aria-label', 'Copied Markdown link');
-          status.textContent = 'Markdown link copied.';
-          resetTimer = setTimeout(() => {
-            label.textContent = 'Copy link';
-            button.setAttribute('aria-label', 'Copy link to this page’s Markdown');
-            status.textContent = '';
-          }, 2500);
-        } catch {
-          status.textContent = 'Couldn’t copy. Open Markdown and copy the address.';
-        } finally {
-          button.disabled = false;
-        }
+      enhanceClipboardButton(button, {
+        text: () => new URL(markdownPath, window.location.origin).href,
+        status,
+        successMessage: 'Markdown link copied.',
+        failureMessage: 'Couldn’t copy. Open Markdown and copy the address.',
+        successAriaLabel: 'Copied Markdown link',
       });
     });
   }

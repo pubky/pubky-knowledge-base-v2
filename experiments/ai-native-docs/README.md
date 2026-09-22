@@ -15,19 +15,8 @@ This adapts the supplied `vibe-self-host` workflow to a static documentation fro
 ## Review
 
 - [Research and recommendations](research.md)
-- [Original landing, desktop](evidence/before-desktop.png)
-- [Updated landing, desktop](evidence/after-desktop.png)
-- [Updated landing, mobile](evidence/after-mobile.png)
-- [AI resources, desktop](evidence/ai-resources-desktop.png)
-- [AI resources, mobile](evidence/ai-resources-mobile.png)
-- [Network illumination during a sweep](evidence/ai-network-shimmer.png)
-- [Document title actions, desktop](evidence/doc-actions-desktop.png)
-- [Document title actions, mobile](evidence/doc-actions-mobile.png)
-- [Browser check results](evidence/browser-checks.json)
-- [Network motion and layout checks](evidence/mesh-checks.json)
-- [Public deployment checks](evidence/public-checks.json)
 
-Validation passed: production build and generated-Markdown checks; all 22 internal homepage links; Markdown endpoints and discovery metadata; six viewport widths from 320 to 1920 pixels for the hero and short/long document titles; restored provider destinations, encoded prompts and icon assets; visible resource links without a disclosure; touch targets and keyboard focus; clipboard success and failure fallbacks; SDK tabs and command copying; and native links/disclosures without JavaScript. Network checks confirm changing rendered frames, network-only illumination, a shimmer every 12 seconds, suspension offscreen and when hidden, live reduced-motion changes, and static fallbacks without JavaScript or canvas. The lettering stays vertically centered, with 291.6px type on desktop, 218.7px on narrower layouts, a 16px right inset, and space between A and I; Skills has the largest resource heading, and desktop launcher/card bottom edges align. No browser runtime errors were observed. Security review of the changed execution paths found no actionable issues. The static deployment configuration is unchanged.
+Repeatable build and browser checks are documented in the [repository README](../../README.md#browser-checks). The browser suite covers resource visibility, clipboard feedback and fallbacks, SDK tabs, Markdown actions, responsive layouts, no-JavaScript behavior, and reduced-motion/network cleanup. The original one-off screenshots and JSON check reports are not retained in the repository.
 
 ## Run locally
 
@@ -48,4 +37,4 @@ Deploy only the tested static output on a separate Vercel project. The build out
 
 Package a completed build using [vercel-output.json](vercel-output.json) as `.vercel/output/config.json`, and copy `dist/` to `.vercel/output/static/`. Link the directory to the separate experiment project, then use `vercel deploy --prebuilt --prod`. The `--prod` target here is the experiment project's public alias; it does not deploy to pubky.org.
 
-The public branch contains the source, research and visual evidence; no registry PR is opened.
+The public branch contains the source and research; no registry PR is opened.

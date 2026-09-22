@@ -1,6 +1,7 @@
 ---
 import { withBase } from '../utils/base-path';
 import { Tabs, TabItem } from '@astrojs/starlight/components';
+import AiResources from './AiResources.astro';
 
 const commands = [
   { label: "npm", command: "npm install @synonymdev/pubky" },
@@ -88,86 +89,41 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
       </Tabs>
       <p id="sdk-copy-status" class="copy-status" role="status" aria-live="polite" aria-atomic="true"></p>
     </div>
-    <div class="ai-resources-wrap">
-      <section class="ai-resources" aria-label="AI resources">
-        <span class="ai-resources-watermark" aria-hidden="true">AI<canvas class="ai-network-canvas" aria-hidden="true"></canvas></span>
-        <a class="ai-resources-primary" href="https://github.com/pubky/agent-skills" target="_blank" rel="noopener noreferrer" aria-label="Agent skills (opens in new tab)">
-          <strong>Agent skills</strong>
-          <span>Pubky workflows for your LLM coding agents</span>
-        </a>
-        <div class="ai-resources-group">
-          <a class="ai-resources-title" href="https://context7.com/?q=pubky" target="_blank" rel="noopener noreferrer" aria-label="Search Pubky on Context7 (opens in new tab)">
-            <strong>Context7</strong>
-            <span>API documentation and examples.</span>
-          </a>
-          <div class="ai-resources-repositories">
-            <a href="https://context7.com/pubky/pubky-homeserver" target="_blank" rel="noopener noreferrer" aria-label="Pubky Homeserver on Context7 (opens in new tab)">Homeserver</a>
-            <a href="https://context7.com/pubky/pkarr" target="_blank" rel="noopener noreferrer" aria-label="PKARR on Context7 (opens in new tab)">PKARR</a>
-          </div>
-        </div>
-        <a href="https://deepwiki.com/pubky/pubky-homeserver" target="_blank" rel="noopener noreferrer" aria-label="Pubky Homeserver on DeepWiki (opens in new tab)">
-          <strong>DeepWiki</strong>
-          <span>AI explanations of the Pubky codebase.</span>
-        </a>
-      </section>
-    </div>
+    <AiResources />
   </div>
 </div>
 </div>
 
 <script>
-  import '../scripts/ai-network';
+  import { enhanceClipboardButton } from '../scripts/clipboard';
 
   function enhanceLandingCopy() {
     document.querySelectorAll<HTMLButtonElement>('.install-block [data-copy-text]').forEach((button) => {
-      if (button.dataset.copyReady) return;
-      button.dataset.copyReady = 'true';
-      button.hidden = false;
+      const status = document.getElementById(button.dataset.copyStatus ?? '');
+      const text = button.dataset.copyText;
+      if (!status || !text) return;
+      const isPrompt = button.dataset.copyKind === 'prompt';
 
-      const label = button.querySelector<HTMLElement>('[data-copy-label]');
-      const originalLabel = label?.textContent ?? '';
-      const originalAriaLabel = button.getAttribute('aria-label');
-      let resetTimer: ReturnType<typeof setTimeout> | undefined;
-
-      button.addEventListener('click', async () => {
-        const status = document.getElementById(button.dataset.copyStatus ?? '');
-        const text = button.dataset.copyText;
-        if (!status || !text) return;
-
-        clearTimeout(resetTimer);
-        status.textContent = '';
-        if (label) label.textContent = originalLabel;
-        button.disabled = true;
-        try {
-          await navigator.clipboard.writeText(text);
-          if (label) label.textContent = 'Copied';
-          else button.setAttribute('aria-label', 'Install command copied');
-          status.textContent = button.dataset.copyKind === 'prompt'
-            ? 'Prompt copied. Paste it into your coding assistant.'
-            : 'Install command copied.';
-          resetTimer = setTimeout(() => {
-            if (label) label.textContent = originalLabel;
-            if (originalAriaLabel) button.setAttribute('aria-label', originalAriaLabel);
-          }, 2500);
-        } catch {
-          if (originalAriaLabel) button.setAttribute('aria-label', originalAriaLabel);
-          if (button.dataset.copyKind === 'prompt') {
-            const promptDetails = document.getElementById('pubky-starter-prompt');
-            if (promptDetails instanceof HTMLDetailsElement) promptDetails.open = true;
-            status.textContent = 'Couldn’t copy. Select the prompt shown above and copy it manually.';
-          } else {
-            status.textContent = 'Couldn’t copy. Select the install command and copy it manually.';
-          }
-        } finally {
-          button.disabled = false;
-        }
+      enhanceClipboardButton(button, {
+        text,
+        status,
+        successMessage: isPrompt
+          ? 'Prompt copied. Paste it into your coding assistant.'
+          : 'Install command copied.',
+        failureMessage: isPrompt
+          ? 'Couldn’t copy. Select the prompt shown above and copy it manually.'
+          : 'Couldn’t copy. Select the install command and copy it manually.',
+        successAriaLabel: isPrompt ? 'Prompt copied' : 'Install command copied',
+        onFailure: isPrompt ? () => {
+          const promptDetails = document.getElementById('pubky-starter-prompt');
+          if (promptDetails instanceof HTMLDetailsElement) promptDetails.open = true;
+        } : undefined,
       });
     });
   }
 
   enhanceLandingCopy();
   document.addEventListener('astro:page-load', enhanceLandingCopy);
-
 </script>
 
 <style is:global>
@@ -513,146 +469,6 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
     background: var(--alpha-white-5);
   }
 
-  /* Match the resource card to the original SDK terminal width. */
-  .ai-resources-wrap {
-    position: relative;
-    width: 500px;
-    max-width: 100%;
-  }
-  /* A visible resource box uses the existing terminal palette and geometry. */
-  .ai-resources {
-    position: relative;
-    isolation: isolate;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: var(--spacing-3);
-    width: 500px;
-    max-width: 100%;
-    min-height: calc(var(--text-6xl-lh) * 4.5 + var(--spacing-6));
-    box-sizing: border-box;
-    padding: var(--spacing-4);
-    border: var(--landing-border-width) solid var(--base-border);
-    border-radius: var(--radius-xl);
-    background: var(--base-background);
-  }
-  /* Oversized type carries the decorative mesh behind the resource links. */
-  .ai-resources-watermark {
-    position: absolute;
-    z-index: 0;
-    top: 50%;
-    right: var(--spacing-4);
-    transform: translateY(-50%) rotate(-12deg);
-    font-family: "Inter Tight", "Inter", system-ui, sans-serif;
-    font-size: calc(var(--text-6xl-size) * 4.05);
-    font-weight: 700;
-    line-height: calc(var(--text-6xl-lh) * 4.05);
-    letter-spacing: calc(var(--spacing-2) * -1);
-    color: transparent;
-    pointer-events: none;
-    user-select: none;
-  }
-  .ai-network-canvas {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    display: none;
-    width: 100%;
-    height: 100%;
-    opacity: 0.34;
-    pointer-events: none;
-  }
-  .ai-resources[data-ai-network-ready] .ai-network-canvas { display: block; }
-  .ai-resources[data-ai-network-ready] .ai-resources-watermark::before { opacity: 0; }
-  /* Without canvas, only the clipped net defines the letters; there is no fill. */
-  .ai-resources-watermark::before {
-    z-index: 2;
-    content: 'AI';
-    position: absolute;
-    inset: 0;
-    font: inherit;
-    letter-spacing: inherit;
-    color: transparent;
-    background-clip: text;
-    -webkit-background-clip: text;
-    pointer-events: none;
-  }
-  .ai-resources-watermark::before {
-    opacity: 0.8;
-    background-image:
-      repeating-linear-gradient(
-        60deg,
-        var(--alpha-white-16) 0 var(--landing-border-width),
-        transparent var(--landing-border-width) var(--spacing-2)
-      ),
-      repeating-linear-gradient(
-        -60deg,
-        var(--alpha-white-16) 0 var(--landing-border-width),
-        transparent var(--landing-border-width) var(--spacing-2)
-      );
-  }
-  .ai-resources > a,
-  .ai-resources-group {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-1);
-    padding: var(--spacing-2);
-  }
-  .ai-resources a {
-    min-width: var(--landing-touch-target);
-    min-height: var(--landing-touch-target);
-    box-sizing: border-box;
-    border-radius: var(--radius-sm);
-    color: var(--base-foreground);
-    text-decoration: none;
-    transition: background var(--landing-motion) ease;
-  }
-  .ai-resources a:hover { background: var(--alpha-white-5); }
-  .ai-resources strong {
-    font-size: var(--text-sm-size);
-    line-height: var(--text-sm-lh);
-    font-weight: 600;
-  }
-  .ai-resources > a > span,
-  .ai-resources-title > span {
-    font-size: var(--text-xs-size);
-    line-height: var(--text-xs-lh);
-    color: var(--base-secondary-foreground);
-  }
-  /* A single frame and aligned copy keep Skills prominent without nested panels. */
-  .ai-resources .ai-resources-primary {
-    gap: var(--spacing-2);
-  }
-  .ai-resources .ai-resources-primary strong {
-    font-family: "Inter Tight", "Inter", system-ui, sans-serif;
-    font-size: var(--text-2xl-size);
-    line-height: var(--text-2xl-lh);
-    font-weight: 700;
-  }
-  .ai-resources .ai-resources-primary > span {
-    font-size: var(--text-sm-size);
-    line-height: var(--text-sm-lh);
-  }
-  .ai-resources-title {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--spacing-1);
-    width: fit-content;
-  }
-  .ai-resources-repositories { display: flex; flex-wrap: wrap; gap: var(--spacing-4); }
-  .ai-resources-repositories a {
-    display: inline-flex;
-    align-items: flex-start;
-    padding-top: var(--spacing-1);
-    font-size: var(--text-xs-size);
-    line-height: var(--text-xs-lh);
-    text-decoration: underline;
-    text-underline-offset: var(--spacing-1);
-  }
   .prompt-details { width: 100%; }
   .prompt-details > summary {
     display: flex;
@@ -799,11 +615,6 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
       width: 100%;
     }
 
-    .ai-resources-watermark {
-      font-size: calc(var(--text-6xl-size) * 3.0375);
-      line-height: calc(var(--text-6xl-lh) * 3.0375);
-    }
-
     .install-command {
       font-size: var(--text-sm-size);
       line-height: var(--text-sm-lh);
@@ -812,9 +623,7 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .ai-network-canvas { display: none; }
     .install-actions .btn,
-    .ai-resources a,
     .prompt-details > summary,
     .copy-prompt-btn,
     .open-with-btn,
