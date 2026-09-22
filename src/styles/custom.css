@@ -87,7 +87,7 @@
 	--alpha-white-5: rgba(255, 255, 255, 0.045);
 	--base-secondary-hover: #3a3a3f;
 
-	/* AI landing experiment — extends the existing Pubky palette and type scale. */
+	/* AI landing page — extends the existing Pubky palette and type scale. */
 	--landing-touch-target: 44px;
 	--landing-border-width: 1px;
 	--landing-motion: 160ms;

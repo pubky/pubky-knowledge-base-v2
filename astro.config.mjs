@@ -6,9 +6,6 @@ import starlightLlmsTxt from 'starlight-llms-txt';
 import rehypeBasePath from './plugins/rehype-base-path.mjs';
 import remarkSnippet from './plugins/remark-snippet.mjs';
 
-// Isolate the public experiment from production analytics and search indexing.
-const isVibe = process.env.PUBKY_DOCS_VIBE === 'true';
-
 // https://astro.build/config
 export default defineConfig({
 	site: process.env.SITE_URL || 'https://pubky.org',
@@ -89,17 +86,14 @@ export default defineConfig({
 			},
 			favicon: '/favicon.svg',
 			head: [
-				...(isVibe ? [{
-					tag: 'meta',
-					attrs: { name: 'robots', content: 'noindex' },
-				}] : [{
+				{
 					tag: 'script',
 					attrs: {
 						defer: true,
 						'data-domain': 'pubky.org',
 						src: 'https://_analytics.synonym.to/js/script.outbound-links.js',
 					},
-				}]),
+				},
 				// Open Graph card metadata. The og:image itself is emitted per-page by
 				// the custom Head component (src/components/Head.astro) — default card
 				// for the homepage, generated per-page card elsewhere. All cards are 1200x630.
