@@ -46,7 +46,17 @@ Run commands from the project root:
 | `npm run dev` | Start the local dev server at `localhost:4321` |
 | `npm run build` | Build the site to `dist/` and generate AI-readable docs |
 | `npm run preview` | Preview the production build locally |
+| `npm run test:browser` | Check the production build in Chromium (build first) |
 | `npm run astro ...` | Run Astro CLI commands |
+
+### Browser checks
+
+After `npm ci`, install Chromium with `npx playwright install --with-deps chromium`.
+Run `npm run build` followed by `npm run test:browser`. Playwright starts a local
+production preview on port 4322 and checks clipboard feedback, Markdown links,
+SDK tabs, responsive layouts, and JavaScript/reduced-motion fallbacks. External
+requests are stubbed so checks do not send analytics or depend on third-party
+services. The same build and checks run on pull requests and pushes to `main`.
 
 ## Social Cards (Open Graph)
 
@@ -66,6 +76,9 @@ by `src/components/Head.astro`.
   the tags point at production and the image won't load locally.
 
 ## AI-Readable Docs
+
+Documentation pages provide Markdown and Copy link controls beside the title.
+The homepage links to agent resources and offers a reusable starter prompt for coding assistants.
 
 AI tools can reference the docs through these plain Markdown endpoints:
 

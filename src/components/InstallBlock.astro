@@ -1,6 +1,7 @@
 ---
 import { withBase } from '../utils/base-path';
 import { Tabs, TabItem } from '@astrojs/starlight/components';
+import AiResources from './AiResources.astro';
 
 const commands = [
   { label: "npm", command: "npm install @synonymdev/pubky" },
@@ -8,13 +9,14 @@ const commands = [
   { label: "Rust", command: "cargo add pubky" },
 ];
 
-const SITE_URL = (import.meta.env.SITE_URL || "https://pubky.org").replace(/\/+$/, "");
+// Keep the starter prompt tied to the maintained production documentation.
+const aiPrompt = `Help me build an app with Pubky: public-key identity and user-owned data.
 
-const aiPrompt = `Pubky: open protocol for key-based, censorship-resistant web apps. Public key identity, homeserver storage, Mainline DHT discovery over HTTP/REST.
+First ask what I want to build and which language or framework I use.
 
-Fetch the docs and help me build with Pubky:
-- Full (~110k tokens): ${SITE_URL}/llms-full.txt
-- Compact (~6k tokens): ${SITE_URL}/llms-small.txt`;
+Read https://pubky.org/llms-small.txt, then fetch only the relevant .md pages. Start with https://pubky.org/explore/pubky-protocol/getting-started.md when appropriate.
+
+Before writing code, check my installed SDK version against its maintained upstream documentation. Cite the sources you use and flag anything you cannot verify.`;
 
 const aiLinks = [
   { name: "Claude", url: `https://claude.ai/new?q=${encodeURIComponent(aiPrompt)}`, icon: "claude" },
@@ -45,14 +47,10 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
         <img class="btn-icon" src={withBase('/images/user.svg')} width="16" height="16" alt="" aria-hidden="true" />
         <span>Human Docs</span>
       </a>
-      <a href="https://github.com/pubky/pubky-ai-kit/blob/main/pubky-dev-context.md" class="btn btn-ai-kit" target="_blank" rel="noopener noreferrer" aria-label="AI Kit (opens in new tab)">
-        <img class="btn-icon" src={withBase('/images/icons/file.svg')} width="16" height="16" alt="" aria-hidden="true" />
-        <span>AI Kit</span>
-      </a>
     </div>
 
     <div class="open-with">
-      <span class="open-with-label">Open with:</span>
+      <span class="open-with-label">pubky.org for your LLM</span>
       <div class="open-with-row">
         <div class="open-with-links">
           {aiLinks.map((link) => (
@@ -60,18 +58,17 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
               <span class="ai-icon" data-icon={link.icon} aria-hidden="true" style={iconUrl(link.icon)}></span>
             </a>
           ))}
-          <button class="copy-prompt-btn" aria-label="Copy prompt to clipboard" data-tooltip="Copy prompt" data-prompt={aiPrompt}>
-            <span class="copy-prompt-label">Prompt</span>
-            <img class="copy-prompt-icon" src={withBase('/images/icons/line-copy.svg')} width="16" height="16" alt="" aria-hidden="true" />
-            <svg class="copy-prompt-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#28c840" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg>
+          <button type="button" class="copy-prompt-btn" aria-label="Copy prompt to clipboard" data-tooltip="Copy prompt" data-copy-text={aiPrompt} data-copy-kind="prompt" data-copy-status="starter-copy-status" hidden>
+            <span class="copy-prompt-label" data-copy-label>Prompt</span>
+            <img src={withBase('/images/icons/line-copy.svg')} width="16" height="16" alt="" aria-hidden="true" />
           </button>
         </div>
-        {/* Arrow-Animation */}
-        <img class="open-with-arrow" src={withBase('/images/icons/arrow-dashed-left.svg')} width="82" height="22" alt="" aria-hidden="true" />
-        <span class="open-with-llm" aria-hidden="true">LLM Support</span>
       </div>
+      <details class="prompt-details" id="pubky-starter-prompt">
+        <summary>Show starter prompt</summary>
+        <pre class="starter-prompt" tabindex="0">{aiPrompt}</pre>
+      </details>
+      <p id="starter-copy-status" class="copy-status" role="status" aria-live="polite" aria-atomic="true"></p>
     </div>
   </div>
 
@@ -83,58 +80,56 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
             <div class="install-command">
               <span class="prompt">$</span>
               <span class="cmd-text">{cmd.command}</span>
-              <button class="copy-btn" data-command={cmd.command} aria-label="Copy to clipboard" aria-live="polite">
-                <svg class="copy-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                </svg>
-                <svg class="check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="20 6 9 17 4 12"></polyline>
-                </svg>
+              <button type="button" class="copy-btn" data-copy-text={cmd.command} data-copy-kind="command" data-copy-status="sdk-copy-status" aria-label={`Copy ${cmd.label} install command`} hidden>
+                <img src={withBase('/images/icons/line-copy.svg')} width="20" height="20" alt="" aria-hidden="true" />
               </button>
             </div>
           </TabItem>
         ))}
       </Tabs>
+      <p id="sdk-copy-status" class="copy-status" role="status" aria-live="polite" aria-atomic="true"></p>
     </div>
+    <AiResources />
   </div>
 </div>
 </div>
 
 <script>
-  document.querySelectorAll('.install-block').forEach((block) => {
-    block.querySelectorAll('.copy-prompt-btn').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const prompt = btn.getAttribute('data-prompt') || '';
-        navigator.clipboard.writeText(prompt).catch(() => {});
-        btn.classList.add('copied');
-        btn.setAttribute('data-tooltip', 'Copied!');
-        btn.setAttribute('aria-label', 'Copied!');
-        setTimeout(() => {
-          btn.classList.remove('copied');
-          btn.setAttribute('data-tooltip', 'Copy prompt');
-          btn.setAttribute('aria-label', 'Copy prompt to clipboard');
-        }, 1500);
-      });
-    });
+  import { enhanceClipboardButton } from '../scripts/clipboard';
 
-    block.querySelectorAll('.copy-btn').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const command = btn.getAttribute('data-command') || '';
-        navigator.clipboard.writeText(command).catch(() => {});
-        btn.classList.add('copied');
-        btn.setAttribute('aria-label', 'Copied!');
-        setTimeout(() => { btn.classList.remove('copied'); btn.setAttribute('aria-label', 'Copy to clipboard'); }, 1500);
+  function enhanceLandingCopy() {
+    document.querySelectorAll<HTMLButtonElement>('.install-block [data-copy-text]').forEach((button) => {
+      const status = document.getElementById(button.dataset.copyStatus ?? '');
+      const text = button.dataset.copyText;
+      if (!status || !text) return;
+      const isPrompt = button.dataset.copyKind === 'prompt';
+
+      enhanceClipboardButton(button, {
+        text,
+        status,
+        successMessage: isPrompt
+          ? 'Prompt copied. Paste it into your coding assistant.'
+          : 'Install command copied.',
+        failureMessage: isPrompt
+          ? 'Couldn’t copy. Select the prompt shown above and copy it manually.'
+          : 'Couldn’t copy. Select the install command and copy it manually.',
+        successAriaLabel: isPrompt ? 'Prompt copied' : 'Install command copied',
+        onFailure: isPrompt ? () => {
+          const promptDetails = document.getElementById('pubky-starter-prompt');
+          if (promptDetails instanceof HTMLDetailsElement) promptDetails.open = true;
+        } : undefined,
       });
     });
-  });
+  }
+
+  enhanceLandingCopy();
 </script>
 
 <style is:global>
   /* ── Install section (full-width hero wrapper) ── */
   .install-section {
     position: relative;
-    overflow: hidden;
+    overflow: visible;
     width: 100vw;
     margin-left: calc(50% - 50vw);
     box-sizing: border-box;
@@ -170,7 +165,7 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
     position: relative;
     z-index: 1;
     display: flex;
-    align-items: flex-start;
+    align-items: stretch;
     justify-content: space-between;
     max-width: 1280px;
     margin: 0 auto;
@@ -185,7 +180,8 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
     flex: 1;
     display: flex;
     flex-direction: column;
-    height: 500px;
+    min-width: 0;
+    min-height: 500px;
     padding-top: var(--spacing-10);
   }
 
@@ -262,26 +258,14 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
     color: var(--base-foreground);
   }
 
-  /* Figma: AI Kit variant — bg alpha/white-16, text base/secondary-foreground(#d4d4db) */
-  .install-actions .btn-ai-kit {
-    background: var(--alpha-white-16);
-    color: var(--base-secondary-foreground);
-  }
-
-  .install-actions .btn-ai-kit:hover {
-    background: rgba(255, 255, 255, 0.24); /* Not in Figma — brighter than alpha-white-16 for hover feedback */
-    color: var(--base-foreground);
-  }
-
   /* ── Open with row ── */
-  /* Figma: AI section = flex-col, gap spacing-2(8), justify center */
+  /* Keep the launcher at the bottom of the desktop hero, opposite the AI card. */
   .open-with {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-2);
-    margin-top: var(--spacing-6);
-    flex: 1;
-    justify-content: center;
+    margin-top: auto;
+    padding-top: var(--spacing-12);
   }
 
   /* Figma: P (node 34690:85321) = Inter Tight Medium, text-base(16/24), foreground */
@@ -293,15 +277,16 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
     line-height: var(--text-base-lh);
   }
 
-  /* Buttons box + highlight arrow. gap 21px = no spacing token fits. */
+  /* Preserve the original provider row with a quiet, static border. */
   .open-with-row {
+    position: relative;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 21px;
     align-self: flex-start;
+    max-width: 100%;
   }
 
-  /* Bordered box wrapping the AI buttons. Border pulses white via highlight below. */
   .open-with-links {
     display: flex;
     align-items: center;
@@ -310,70 +295,6 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
     background: var(--base-background);
     border: 1px solid var(--base-card);
     border-radius: var(--radius-lg);
-  }
-
-  /* Highlight arrow. 82x22 = exact SVG vector size. */
-  .open-with-arrow {
-    width: 82px;
-    height: 22px;
-    flex-shrink: 0;
-  }
-
-  /* Label right of the arrow. Names what the highlight points at.
-     Inter Tight Medium, text-base(16/24), white. */
-  .open-with-llm {
-    flex-shrink: 0;
-    font-size: var(--text-base-size);
-    line-height: var(--text-base-lh);
-    font-weight: 500;
-    color: var(--base-foreground);
-    white-space: nowrap;
-  }
-
-  /* Box highlight + arrow share ONE timeline via this 0→1 driver, animated on the
-     always-present .open-with-row. Two separate animations would desync because the
-     arrow is display:none on mobile — crossing the breakpoint resets only its clock.
-     A single animated property on a never-hidden parent keeps both in lockstep. */
-  @property --ai-flash {
-    syntax: "<number>";
-    initial-value: 0;
-    inherits: true;
-  }
-  /* Separate slide driver so the arrow fades out IN PLACE (slide held at 0 through
-     the fade) and only resets to the offset once invisible. */
-  @property --ai-slide {
-    syntax: "<number>";
-    initial-value: 0;
-    inherits: true;
-  }
-
-  /* ~5s loop: idle dark, fade border white + slide arrow in, hold, fade out in place. */
-  @media (prefers-reduced-motion: no-preference) {
-    .open-with-row {
-      animation: ai-flash 5s ease-in-out infinite;
-    }
-
-    .open-with-links {
-      border-color: color-mix(in srgb, var(--base-card), var(--base-foreground) calc(var(--ai-flash) * 100%));
-    }
-
-    /* Both tied to the same animation so the arrow always tracks the box. */
-    .open-with-arrow {
-      opacity: var(--ai-flash);
-      transform: translateX(calc(var(--ai-slide) * 24px));
-    }
-
-    /* Label fades in with the arrow; held in place (no slide). */
-    .open-with-llm {
-      opacity: var(--ai-flash);
-    }
-  }
-
-  @keyframes ai-flash {
-    0%, 28%  { --ai-flash: 0; --ai-slide: 1; }
-    36%, 60% { --ai-flash: 1; --ai-slide: 0; }
-    68%      { --ai-flash: 0; --ai-slide: 0; } /* faded out at final position */
-    100%     { --ai-flash: 0; --ai-slide: 1; } /* reset offset while invisible */
   }
 
   .open-with-btn {
@@ -419,7 +340,9 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
   }
 
   .open-with-btn[data-tooltip]:hover::after,
-  .copy-prompt-btn[data-tooltip]:hover::after {
+  .open-with-btn[data-tooltip]:focus-visible::after,
+  .copy-prompt-btn[data-tooltip]:hover::after,
+  .copy-prompt-btn[data-tooltip]:focus-visible::after {
     opacity: 1;
   }
 
@@ -455,10 +378,6 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
     line-height: var(--text-sm-lh);
   }
 
-  .copy-prompt-btn .copy-prompt-check { display: none; }
-  .copy-prompt-btn.copied .copy-prompt-icon { display: none; }
-  .copy-prompt-btn.copied .copy-prompt-check { display: block; }
-
   /* Figma: Logos = 40x40, border-radius rounded-sm(6) */
   .ai-icon {
     display: inline-block;
@@ -475,17 +394,17 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
   .ai-icon[data-icon="grok"] { background-color: white; }
 
   /* ── Right column ── */
-  /* Figma: flex-1, flex-col, gap spacing-6(24), items center, centered vertically.
-     500px height matches install-left — one-off layout dimension.
-     Background pattern lives on .install-section::before, not here. */
+  /* Keep the SDK above the resource card and align the card with the launcher. */
   .install-right {
+    margin: 0;
     flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
     gap: var(--spacing-6);
-    height: 500px;
+    min-width: 0;
+    min-height: 500px;
   }
 
   /* ── Install terminal (Starlight Tabs) ── */
@@ -496,6 +415,11 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
 
   .install-terminal starlight-tabs > [role="tabpanel"] {
     padding: var(--spacing-4);
+  }
+
+  .install-terminal starlight-tabs [role="tab"] {
+    min-width: var(--landing-touch-target);
+    min-height: var(--landing-touch-target);
   }
 
   /* Figma: Large typography = text-lg(18/28) semibold */
@@ -528,8 +452,8 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
     border: none;
     color: var(--base-muted-foreground);
     cursor: pointer;
-    width: 36px;
-    height: 36px;
+    width: var(--landing-touch-target);
+    height: var(--landing-touch-target);
     padding: var(--spacing-1);
     border-radius: var(--radius-full);
     transition: all 0.15s ease;
@@ -541,12 +465,49 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
 
   .copy-btn:hover {
     color: var(--base-foreground);
-    background: rgba(255, 255, 255, 0.06);
+    background: var(--alpha-white-5);
   }
 
-  .copy-btn .check-icon { display: none; }
-  .copy-btn.copied .copy-icon { display: none; }
-  .copy-btn.copied .check-icon { display: block; color: #28c840; }
+  .prompt-details { width: 100%; }
+  .prompt-details > summary {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    width: fit-content;
+    min-height: var(--landing-touch-target);
+    color: var(--base-muted-foreground);
+    cursor: pointer;
+    font-size: var(--text-sm-size);
+    line-height: var(--text-sm-lh);
+    transition: color var(--landing-motion) ease;
+  }
+  .prompt-details > summary::before { content: '+'; }
+  .prompt-details[open] > summary::before { content: '−'; }
+  .prompt-details > summary:hover { color: var(--base-foreground); }
+  .starter-prompt {
+    margin: 0;
+    padding: var(--spacing-4);
+    border: var(--landing-border-width) solid var(--base-border);
+    border-radius: var(--radius-md);
+    background: var(--base-background);
+    color: var(--base-secondary-foreground);
+    font-family: var(--sl-font);
+    font-size: var(--text-sm-size);
+    line-height: var(--text-sm-lh);
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    user-select: text;
+  }
+  .copy-status {
+    margin: 0;
+    font-size: var(--text-xs-size);
+    line-height: var(--text-xs-lh);
+    color: var(--base-secondary-foreground);
+  }
+  .copy-status:not(:empty) { margin-top: var(--spacing-2); }
+  .install-terminal .copy-status { padding-inline: var(--spacing-4); }
+  .install-block button[hidden] { display: none; }
+  .install-block button:disabled { cursor: wait; }
 
   /* ── Mobile ── */
   /* Figma: Mobile 390px — hero stacks vertically, heading 60px/1, buttons keep 60px height flex-1, 24px side padding.
@@ -571,24 +532,27 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
        padding so hero content stays within the 342px content width aligned
        with the home sections below (which inherit the same Starlight padding). */
     .install-block {
+      display: flex;
       flex-direction: column;
-      gap: var(--spacing-12);
+      align-items: stretch;
+      gap: var(--spacing-6);
       padding: 0 var(--spacing-6);
     }
 
     .install-left {
       padding-top: var(--spacing-4);
-      height: auto;
+      min-height: 0;
     }
 
-    /* Figma Mobile (node 34784:60725): the SDK block has py-4(16), and its
-       Content frame contains an empty Typography/H3 placeholder (32px) plus
-       gap-6(24) above the terminal. We don't render the H3, so absorb its
-       space into padding-top: 16 + 32 + 24 = 72px. */
+    .open-with {
+      margin-top: var(--spacing-10);
+      padding-top: 0;
+    }
+
+    /* Keep the SDK terminal and AI resources together in document order. */
     .install-right {
-      padding: calc(var(--spacing-4) + var(--spacing-8) + var(--spacing-6)) 0
-        var(--spacing-4);
-      height: auto;
+      padding: 0 0 var(--spacing-4);
+      min-height: 0;
       align-items: center;
       width: 100%;
     }
@@ -615,8 +579,7 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
       overflow-wrap: break-word;
     }
 
-    /* Figma Mobile: Buttons stack as 2-up grid for GitHub+Human Docs, then AI Kit full-width.
-       Row gap spacing-6(24), column gap spacing-6(24) */
+    /* Preserve the original two-column GitHub and Human Docs button row. */
     .install-actions {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -628,25 +591,22 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
       white-space: nowrap;
     }
 
-    /* Figma: AI Kit spans both columns on mobile */
-    .install-actions .btn-ai-kit {
-      grid-column: 1 / -1;
-    }
-
-    /* Mobile: 32x32 icons, tighter box, no arrow — fit one row. */
+    /* Restore the original mobile icons and spacing; wrap only when needed. */
     .ai-icon {
       width: 32px;
       height: 32px;
     }
 
     .open-with-links {
+      flex-wrap: wrap;
+      max-width: 100%;
+      box-sizing: border-box;
       gap: var(--spacing-2);
       padding: var(--spacing-3) var(--spacing-4);
     }
-
-    .open-with-arrow,
-    .open-with-llm {
-      display: none;
+    .copy-prompt-btn {
+      flex-shrink: 0;
+      padding-inline: var(--spacing-3);
     }
 
     .install-terminal {
@@ -657,5 +617,17 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
       font-size: var(--text-sm-size);
       line-height: var(--text-sm-lh);
     }
+    .cmd-text { overflow-wrap: anywhere; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .install-actions .btn,
+    .prompt-details > summary,
+    .copy-prompt-btn,
+    .open-with-btn,
+    .open-with-btn[data-tooltip]::after,
+    .copy-prompt-btn[data-tooltip]::after,
+    .copy-btn,
+    .install-terminal starlight-tabs [role="tab"] { transition: none; }
   }
 </style>
