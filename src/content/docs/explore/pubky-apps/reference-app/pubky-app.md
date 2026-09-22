@@ -2,55 +2,41 @@
 title: "pubky.app"
 ---
 
-Web portal for the Pubky ecosystem — a publisher and social feed for the decentralized web.
+[pubky.app](https://pubky.app) is a social application and reference implementation built on the [Pubky protocol](/explore/pubky-protocol/introduction/). People publish posts, follow one another, and discover content through feeds and tags. Developers can study how it combines user-controlled storage with an indexed social graph and a responsive web interface.
 
-## Overview
+## Tags and perspectives
 
-pubky.app is a social media-like web application built on top of the [Pubky protocol](/explore/pubky-protocol/introduction/). It serves as the flagship example of how to build applications using the Pubky [SDK](/explore/pubky-protocol/sdk/) for authentication and data storage, combined with [Nexus](/explore/pubky-apps/indexing-and-aggregation/pubky-nexus/) for data [aggregation](/explore/pubky-apps/indexing-and-aggregation/aggregator/) and [indexing](/explore/pubky-apps/indexing-and-aggregation/indexer/), turning distributed data into fast-loading feeds and a navigable social graph.
+Tags are free-text labels people apply to profiles and posts, including those written by someone else. Each annotation records who applied the label and what it describes. A post might be tagged `tutorial` by one reader and `privacy` by another; those labels add context beyond a single like count.
 
-- **GitHub**: https://github.com/pubky/pubky-app
-- **Platform**: Web (Next.js progressive web app)
-- **Status**: Active development
+Perspectives are saved views of a feed, combining filters and presentation settings. They let readers return to a particular view of the social data. Tags and follow relationships provide the building blocks for the broader [semantic social graph](/explore/concepts/semantic-social-graph/).
 
-The application follows a local-first architecture where writes commit to local IndexedDB immediately for instant UI feedback, then sync to the [homeserver](/explore/pubky-protocol/homeserver/) in the background.
+Bookmarks are [public social records](https://github.com/pubky/pubky-app-specs/blob/main/SPEC.md#pubkyappbookmark). Treat bookmarked links as public data.
 
-## Tech Stack
+## Reference architecture
 
-- **Next.js 16 / React 19 / TypeScript** — Core framework
-- **Tailwind CSS 4 / Shadcn UI / Radix UI** — Styling and components
-- **Zustand** — Global state management
-- **Dexie** — IndexedDB wrapper for local-first persistence
-- **TanStack Query** — Data fetching with caching
-- **@synonymdev/pubky** — WASM [SDK](/explore/pubky-protocol/sdk/) for homeserver communication
-- **[pubky-app-specs](/explore/pubky-apps/app-specs/)** — Shared data specifications
+The application separates publishing, indexing, and presentation:
 
-## Key Features
+```mermaid
+flowchart TD
+    App["pubky.app + browser cache"] -->|"Write via SDK"| HS["Users' Homeservers"]
+    HS -->|"Public records and events"| Nexus["Nexus"]
+    Nexus -->|"Read and refresh"| App
+```
 
-- **Social feeds** (home, hot/trending, search) via [Nexus](/explore/pubky-apps/indexing-and-aggregation/pubky-nexus/)
-- **Profiles, posts, bookmarks, notifications**
-- **QR Code Authentication** via [Pubky Ring](/explore/technologies/pubky-ring/)
-- **Offline support** — PWA with service worker caching and local-first writes
+1. **The frontend keeps data locally.** Its browser database holds records and feed data so the interface can show cached content and respond to user actions promptly.
+2. **Users publish to Homeservers.** The [SDK](/explore/pubky-protocol/sdk/) writes social records using the user's authorization. The records follow [App Specs](/explore/pubky-apps/app-specs/) so other compatible apps can understand them.
+3. **Nexus follows changes.** Homeserver event feeds let [Nexus](/explore/pubky-apps/indexing-and-aggregation/pubky-nexus/) discover updates, fetch public records, and index content and relationships across users.
+4. **The frontend refreshes from Nexus.** Indexed results update the local cache, which the interface reads to present feeds, profiles, and search results.
 
-## Codebase Structure
+Local changes and indexed views do not become visible everywhere at once: the Homeserver write and subsequent Nexus indexing must complete. The upstream [local-first design](https://github.com/pubky/pubky-app/blob/dev/docs/local-first.md) explains the read, write, and refresh behavior in detail.
 
-The codebase is organized in layers with strict separation of concerns:
+## Building on the same data
 
-| Layer | Responsibility |
-|-------|----------------|
-| **Controllers** | Entry point for UI actions |
-| **Coordinators** | System-initiated actions (polling, auth changes, TTL) |
-| **Application** | Business logic orchestration |
-| **Services** | IO boundaries (local, homeserver, nexus) |
-| **Models** | Dexie-based IndexedDB persistence |
-| **Stores** | UI state via Zustand |
+Another app can reuse the social data without adopting pubky.app's interface. It can read known records directly from Homeservers, query Nexus for indexed views, and contribute compatible records with the user's authorization. For example, a topic reader could use existing profiles and follow relationships while presenting a different feed.
 
-### Data Flow
-1. **Writes** go to [homeserver](/explore/pubky-protocol/homeserver/) via [SDK](/explore/pubky-protocol/sdk/)
-2. [Nexus](/explore/pubky-apps/indexing-and-aggregation/pubky-nexus/) polls [homeserver](/explore/pubky-protocol/homeserver/) for changes via the `/events/` endpoint
-3. Nexus indexes and aggregates data
-4. **Reads** come from Nexus for performance
-5. Local Dexie cache provides offline access
+[App Specs](/explore/pubky-apps/app-specs/) explains this interoperability and Universal Tags, which let applications add annotations to resources beyond pubky.app posts and profiles. Choose the pieces your app needs; the [app architecture guide](/explore/pubky-apps/app-architectures/introduction/) covers the alternatives.
 
-All user data is stored under `/pub/pubky.app/` on the homeserver following the [pubky-app-specs](/explore/pubky-apps/app-specs/) schema.
+For development and integration, use the maintained sources:
 
-See the [repository](https://github.com/pubky/pubky-app) for routes, environment configuration, and development setup.
+- [App repository](https://github.com/pubky/pubky-app): source code and development setup.
+- [Developer documentation](https://github.com/pubky/pubky-app/blob/dev/docs/README.md): architecture, data flow, local storage, PWA behavior, and configuration.

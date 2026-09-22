@@ -2,71 +2,31 @@
 title: "Pubky SDK: Client Libraries for Decentralized Applications"
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
-import TabUrlSync from '../../../../components/TabUrlSync.astro';
+The Pubky SDK handles Homeserver discovery, authentication, and storage access for applications. Start with the guide for your platform; each implementation maintains its own API and integration instructions.
 
-<TabUrlSync syncKey="sdk-lang" param="lang" />
-
-:::note
-For upgrades from SDK versions earlier than v0.10, see the [v0.10 Migration Guide](https://github.com/pubky/pubky-homeserver/tree/main/docs/v0.10-migration).
-:::
-
-The Pubky SDK provides client libraries for building applications on [Pubky Core](/explore/pubky-protocol/introduction). It handles the hard parts (key-based auth, homeserver discovery, transport) so you can focus on your app logic using familiar HTTP-style operations.
-
-New to Pubky? Start with the [Introduction](/explore/pubky-protocol/introduction) for background on identities, homeservers, and storage paths. For a hands-on walkthrough, see the [Developer Guide](/explore/pubky-protocol/getting-started/).
-
-## Supported Platforms
-
-| Platform | Language | Status | Package |
-|----------|----------|--------|---------|
-| **Rust** | Rust | ✅ Stable | [crates.io/crates/pubky](https://crates.io/crates/pubky) |
-| **Web/Node** | JavaScript/TypeScript | ✅ Stable | [@synonymdev/pubky](https://www.npmjs.com/package/@synonymdev/pubky) |
-| **React Native** | JavaScript/TypeScript | ✅ Stable | [@synonymdev/react-native-pubky](https://www.npmjs.com/package/@synonymdev/react-native-pubky) |
-| **iOS** | Swift | 🚧 Beta | [pubky-core-ffi](https://github.com/pubky/pubky-core-ffi) |
-| **Android** | Kotlin | 🚧 Beta | [pubky-core-ffi](https://github.com/pubky/pubky-core-ffi) |
-
-All platforms share a consistent API surface. The React Native SDK uses mobile-optimized UniFFI bindings but exposes the same API as the JavaScript SDK.
-
-## API Reference
-
-- **Rust**: [docs.rs/pubky](https://docs.rs/pubky)
-- **JavaScript/TypeScript**: [TypeDoc Reference](https://pubky.github.io/pubky-homeserver/js-sdk-typedoc/)
-- **HTTP APIs**: [Client OpenAPI](https://github.com/pubky/pubky-homeserver/blob/main/pubky-homeserver/openapi-client.yml) and [Admin OpenAPI](https://github.com/pubky/pubky-homeserver/blob/main/pubky-homeserver/openapi-admin.yml)
+| Platform | Guide | API reference |
+| --- | --- | --- |
+| JavaScript / TypeScript | [SDK README](https://github.com/pubky/pubky-homeserver/blob/main/pubky-sdk/bindings/js/pkg/README.md) | [TypeDoc](https://pubky.github.io/pubky-homeserver/js-sdk-typedoc/) |
+| Rust | [SDK README](https://github.com/pubky/pubky-homeserver/blob/main/pubky-sdk/README.md) | [Rust API](https://docs.rs/pubky/latest/pubky/) |
+| React Native | [React Native SDK](https://github.com/pubky/react-native-pubky) | See the package documentation |
+| Swift / Kotlin | [Pubky Core Mobile SDK](https://github.com/pubky/pubky-core-ffi) | See the bindings documentation |
 
 ## How It Works
 
-The SDK is organized around a small set of actors that mirror the developer workflow:
+The main SDK types follow the steps an application takes:
 
-1. **Pubky** — Your top-level client. Create one at startup and share it across your app. It manages the HTTP client, connection pool, and homeserver resolution via PKARR. It then hands off authenticated work to signers and sessions.
+| Type | Role in an application |
+| --- | --- |
+| `Pubky` | The client used to discover Homeservers and start authenticated or public operations. |
+| `PubkySigner` | Holds an identity key for operations that require it, such as creating a development account. Third-party apps normally request access through an external authenticator. |
+| `PubkySession` | Represents authenticated access to a user's Homeserver, with the permissions granted to the app. |
+| `SessionStorage` | Reads and writes files within that session's permissions. |
+| `PublicStorage` | Reads public data without signing in. |
 
-2. **PubkySigner** — Holds a private key and proves identity. Use it to sign up for a homeserver, sign in, or approve auth requests from other apps.
+For example, an app can use a session to save a user's own data and public storage to read another user's published profile. [Authentication](/explore/pubky-protocol/authentication/) explains how an app obtains access without taking custody of the identity key. Refer to your platform's documentation for its supported types and behavior.
 
-3. **PubkySession** — Your authenticated handle after signing in. Thread-safe, cheap to clone, and carries your credentials. Supports export/restore for surviving process restarts.
+## Build and explore
 
-4. **SessionStorage** — Read and write your data with simple path-based operations (`get`, `put`, `delete`, `list`). The SDK resolves homeservers and attaches credentials automatically.
+Follow the [Developer Guide](/explore/pubky-protocol/getting-started/) for a self-contained walkthrough that writes and reads data on a local testnet. The upstream [examples directory](https://github.com/pubky/pubky-homeserver/tree/main/examples) covers further workflows, including authorization, persistence, and event streams.
 
-5. **PublicStorage** — Read anyone's public data without signing in. No keys or session needed.
-
-For event-driven apps, **EventStreamBuilder** lets you subscribe to real-time changes via SSE. **Pkdns** handles discovery of users' homeservers via PKARR records. **GrantManager** provides admin-level permission management. **BrowserSessionStore** persists grant sessions in browsers.
-
-## Quick Example
-
-Sign in and read/write data. Account creation (signup) is generally handled outside of your app. See the [Developer Guide](/explore/pubky-protocol/getting-started/) for testnet setup where you bootstrap accounts for development.
-
-<div class="terminal-tabs">
-<Tabs syncKey="sdk-lang">
-  <TabItem label="JavaScript">
-    ```js snippet="snippets/js/src/sdk.ts:js_quick_example"
-    ```
-  </TabItem>
-  <TabItem label="Rust">
-    ```rust snippet="snippets/rust/src/lib.rs:rust_quick_example"
-    ```
-  </TabItem>
-</Tabs>
-</div>
-
-## Resources
-
-- **Repository**: [github.com/pubky/pubky-homeserver](https://github.com/pubky/pubky-homeserver)
-- **Examples**: [Full working examples](https://github.com/pubky/pubky-homeserver/tree/main/examples) covering testnet setup, signup, auth flows, CRUD operations, and event streaming
+Use the API references above for method signatures, return values, and errors. For integrations that need raw HTTP, see the [Homeserver API references](/explore/pubky-protocol/homeserver/#http-api).

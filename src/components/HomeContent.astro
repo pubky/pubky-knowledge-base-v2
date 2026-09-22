@@ -5,7 +5,7 @@ import ImageCard from "./ImageCard.astro";
 import DemoCard from "./DemoCard.astro";
 import { withBase } from "../utils/base-path";
 
-// Figma: Demos (node 34702:87731) — 12 cards
+// Figma: Demos (node 34702:87731) — 14 cards
 const demos = [
   {
     title: "App Template",
@@ -133,6 +133,30 @@ const demos = [
     ],
   },
   {
+    title: "Uploadky",
+    description: "File sharing with files stored on your Pubky homeserver.",
+    actions: [
+      { label: "Demo", href: "https://uploadky.vercel.app/", variant: "secondary" as const },
+      {
+        label: "GitHub",
+        href: "https://github.com/PastaGringo/uploadky",
+        variant: "outline" as const,
+      },
+    ],
+  },
+  {
+    title: "TC Wiki",
+    description: "TimechainWiki is a Bitcoin encyclopedia with reader annotations synced through Nostr or Pubky.",
+    actions: [
+      { label: "Demo", href: "https://timechain.wiki/", variant: "secondary" as const },
+      {
+        label: "GitHub",
+        href: "https://github.com/RadVladdy/timechain-wiki",
+        variant: "outline" as const,
+      },
+    ],
+  },
+  {
     title: "PKDNS",
     description:
       "A DNS server providing self-sovereign and censorship-resistant domain names based on PKARR.",
@@ -228,9 +252,9 @@ const icons = {
     <div class="home-section-box">
     <div class="card-grid card-grid-4">
       <TextCard
-        title="TL;DR"
-        description="30-second overview of the entire ecosystem"
-        href="/tldr/"
+        title="Overview"
+        description="Start here for the protocol and its applications"
+        href="/overview/"
         icon={icons.timer}
       />
       <TextCard
@@ -246,9 +270,9 @@ const icons = {
         icon={icons.file}
       />
       <TextCard
-        title="FAQ"
-        description="63+ questions answered across key topics and features"
-        href="/faq/"
+        title="Help"
+        description="Find support and report a problem"
+        href="/troubleshooting/"
         icon={icons.circleHelp}
       />
     </div>
@@ -309,7 +333,6 @@ const icons = {
           image="/images/cards/developer-tools.png"
           tags={[
             { label: "Docker Stack", href: "/explore/technologies/pubky-docker/" },
-            { label: "CLI", href: "/explore/technologies/pubky-cli/" },
             { label: "Explorer", href: "/explore/technologies/pubky-explorer/" },
             { label: "PKDNS", href: "/explore/technologies/pkdns/" },
           ]}
@@ -320,7 +343,7 @@ const icons = {
           tags={[
             { label: "Architecture", href: "/explore/pubky-apps/app-architectures/introduction/" },
             { label: "Indexing", href: "/explore/pubky-apps/indexing-and-aggregation/introduction/" },
-            { label: "Reference App", href: "/explore/pubky-apps/reference-app/introduction/" },
+            { label: "Reference App", href: "/explore/pubky-apps/reference-app/pubky-app/" },
           ]}
         />
       </div>

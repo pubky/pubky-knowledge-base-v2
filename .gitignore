@@ -25,7 +25,6 @@ snippets/rust/target/
 
 # JS/TS snippet artifacts
 snippets/js/node_modules/
-snippets/js/package-lock.json
 snippets/react-native/node_modules/
 snippets/react-native/package-lock.json
 

@@ -20,14 +20,16 @@ For new pages or significant changes, open an issue first and follow the [Contri
 
 ### Checked code snippets
 
-JavaScript, TypeScript, and Rust examples must live in `snippets/` and be referenced from Markdown:
+The [protocol Getting Started guide](src/content/docs/explore/pubky-protocol/getting-started.md) keeps a self-contained, checked walkthrough. Preserve that learning journey; link to maintained upstream examples for additional SDK workflows.
+
+Its JavaScript/TypeScript examples live in `snippets/js/` and are included in Markdown by named section:
 
 ````md
-```javascript snippet="snippets/js/src/sdk.ts:js_quick_example"
+```javascript snippet="snippets/js/src/example.ts:example"
 ```
 ````
 
-Named sections use `// --8<-- [start:name]` and `// --8<-- [end:name]`; CI validates the complete source file.
+Named sections use `// --8<-- [start:name]` and `// --8<-- [end:name]`. Install the locked snippet dependencies with `npm --prefix snippets/js ci`, then run `npm run check:snippets` to validate fence and reference rules, TypeScript types, ESLint rules (including deprecated APIs), and formatting. The build checks source inclusion and generated Markdown. Changes to SDK behavior also require testing the affected workflow; static checks cannot prove that signup or storage requests succeed.
 
 ## Related Resources
 
@@ -43,8 +45,11 @@ Run commands from the project root:
 | Command | Action |
 | :-- | :-- |
 | `npm install` | Install dependencies |
+| `npm --prefix snippets/js ci` | Install the locked tutorial dependencies |
 | `npm run dev` | Start the local dev server at `localhost:4321` |
 | `npm run build` | Build the site to `dist/` and generate AI-readable docs |
+| `npm run check:snippets` | Validate snippet references, types, lint, and formatting |
+| `npm run check:snippets:js` | Run the JavaScript/TypeScript snippet checks |
 | `npm run preview` | Preview the production build locally |
 | `npm run astro ...` | Run Astro CLI commands |
 

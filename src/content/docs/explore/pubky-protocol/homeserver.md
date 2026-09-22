@@ -2,54 +2,17 @@
 title: "Homeserver"
 ---
 
-The Pubky network allows multiple, independent data stores, known as "Homeservers." This improves [censorship-resistance](/explore/concepts/censorship/) and prevents any single entity from controlling the flow of information, or locking people & data in as a walled garden.
+A Homeserver stores and serves data for public-key identities. Users choose their provider; [PKARR](/explore/pubky-protocol/pkarr/introduction/) lets applications discover that provider from the user's public key.
 
-Homeservers are meant to represent a primary place to retrieve data from a specific [PKARR](/explore/pubky-protocol/pkarr/introduction/) public key, but the user can redefine the location of their Homeserver at will by updating their [PKARR](/explore/pubky-protocol/pkarr/introduction/) record in the [Mainline DHT](/explore/technologies/mainline-dht/).
+## Its role in an app
 
-## Architecture
+Think of a Homeserver as storage an application can use on the user's behalf. A user authorizes the app, and the app writes files within the permissions it receives. Other apps can read public files and interpret them when they understand the data format.
 
-The Homeserver implementation consists of several components: the main HTTP API server (supporting both ICANN HTTP and [PubkyTLS](/glossary/#pubkytls)), an admin server, a Prometheus metrics server, and republishers that keep user and server keys alive on the DHT.
+The Homeserver serves those files even when the user's device is offline, provided the service remains available. It does not decide what a social feed should show or how a search result should rank. An application or [indexer](/explore/pubky-apps/indexing-and-aggregation/introduction/) handles those views.
 
-See the [repository](https://github.com/pubky/pubky-homeserver/tree/main/pubky-homeserver) for API details and configuration.
+Users can choose a provider instead of operating a server themselves. Provider policies determine signup requirements and service limits. Keeping an identity independent of its provider enables [Credible Exit](/explore/concepts/credible-exit/), but moving files and updating discovery still require working tools and available copies.
 
-## HTTP API
-
-For routes, parameters, and response schemas, use the maintained upstream specifications:
-
-- **[Client OpenAPI](https://github.com/pubky/pubky-homeserver/blob/main/pubky-homeserver/openapi-client.yml)**: Authentication, file storage, event streams, and signup-token validation.
-- **[Admin OpenAPI](https://github.com/pubky/pubky-homeserver/blob/main/pubky-homeserver/openapi-admin.yml)**: Server administration, signup tokens, user quotas, and WebDAV.
-
-For app development, use the [SDK](/explore/pubky-protocol/sdk/), which handles authentication, Homeserver discovery, and transport.
-
-## Public vs Private Data
-
-Current implementations only support public, unencrypted data. Encrypted data and guarded (access-controlled) data are planned — see [Security Model](/explore/pubky-protocol/security-model/) for the trust implications.
-
-## Event Stream
-
-Homeservers expose event streams for clients to sync data changes:
-
-- `GET /events-stream` — SSE real-time stream with user and path filters. Primary event API, used by clients to subscribe to specific users on third-party homeservers without processing unwanted traffic
-- `GET /events/` — Paginated event feed for all users on the homeserver (cursor-based, 1000 events per batch)
-
-
-## Transport Security
-
-Homeservers expose two endpoint types: a [PubkyTLS](/glossary/#pubkytls) direct endpoint (TLS with Raw Public Keys, RFC 7250) and an ICANN endpoint intended to sit behind a reverse proxy with standard X.509 TLS.
-
-SDK clients running outside the browser (for example Rust CLI/server apps or native mobile apps using the SDK bindings) prefer the [PubkyTLS](/glossary/#pubkytls) direct endpoint. When the PKARR record also advertises an ICANN endpoint and the direct endpoint is unreachable, SDK clients automatically use the ICANN endpoint instead. Browsers and legacy clients use the ICANN endpoint from the start. See [Transport Security](/explore/pubky-protocol/security-model/#transport-security) for details.
-
-This is useful for Homeservers whose direct [PubkyTLS](/glossary/#pubkytls) socket is not reachable from every network, for example behind NAT or a tunnel, while their ICANN domain remains reachable through conventional HTTPS infrastructure.
-
-## User Data Control and Credible Exit
-
-- The current network is being bootstrapped by Synonym's first Homeserver — over time, more independent Homeserver operators and Pubky applications are needed for the network to fully decentralize
-- Anyone can run their own Homeserver and set their own terms
-- Homeserver operators can use [Homegate](/explore/technologies/homegate/) for signup verification, implementing SMS or Lightning Network verification to prevent spam while preserving user privacy
-- For practical [credible exit](/explore/concepts/credible-exit/), users should maintain local copies and snapshots with [Pubky Backup](/explore/technologies/pubky-backup/). Homeserver mirroring is planned but not yet implemented
-- Users can migrate to a new Homeserver by signing up there, re-uploading their data, and updating their own [PKARR](/explore/pubky-protocol/pkarr/introduction/) record
-
-See [Security Model](/explore/pubky-protocol/security-model/) for the full trust analysis and failure recovery scenarios.
+The upstream [Private Storage guide](https://github.com/pubky/pubky-homeserver/blob/main/docs/PRIVATE_STORAGE.md) defines the public and authenticated storage namespaces. Access control still trusts the operator; see the [Security Model](/explore/pubky-protocol/security-model/).
 
 ## Running a Homeserver
 
@@ -62,3 +25,12 @@ For local development and testing with a fixed-port testnet, follow the
 [Pubky Testnet README](https://github.com/pubky/pubky-homeserver/blob/main/pubky-testnet/README.md).
 For a full walkthrough of setting up a local stack and building your first app, see the
 [Developer Guide](/explore/pubky-protocol/getting-started).
+
+## HTTP API
+
+For routes, parameters, and response schemas, use the maintained upstream specifications:
+
+- **[Client OpenAPI](https://github.com/pubky/pubky-homeserver/blob/main/pubky-homeserver/openapi-client.yml)**: Authentication, file storage, event streams, and signup-token validation.
+- **[Admin OpenAPI](https://github.com/pubky/pubky-homeserver/blob/main/pubky-homeserver/openapi-admin.yml)**: Server administration, signup tokens, user quotas, and WebDAV.
+
+For app development, use the [SDK](/explore/pubky-protocol/sdk/), which handles authentication, Homeserver discovery, and transport.

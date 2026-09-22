@@ -2,31 +2,34 @@
 title: "introduction"
 ---
 
-## Public-Key Addressable Resource Records
+PKARR (Public-Key Addressable Resource Records) associates a public key with signed discovery records. In Pubky, these records connect a user's identity to their Homeserver, so the identity can stay the same when the hosting location changes.
 
-[PKARR](https://github.com/pubky/pkarr) is a revolutionary system that bridges the gap between the Domain Name System ([DNS](/explore/technologies/dns/)) and peer-to-peer overlay networks. It allows self-issued public keys to function as sovereign, publicly addressable domains. This means that anyone with a private key can have a domain that is accessible to everyone.
+## Finding someone without fixing their location
 
-The core idea is to streamline the process of publishing and resolving resource records for keys, leveraging the Distributed Hash Table ([DHT](/explore/technologies/dht/)) for efficient and scalable data distribution.
+A public key is a stable identifier, but it does not tell an app which server to contact. PKARR supplies that missing step: the identity owner signs a small set of records describing where services can be reached. Those records are distributed through the [Mainline DHT](/explore/technologies/mainline-dht/), a network of nodes that can store and look up records by key.
 
-## Key Features
+For Pubky, this means an app can start with a user's public key, discover their Homeserver, and then fetch a file. Posts and profiles stay on the Homeserver; they are not stored in the DHT.
 
-- **Simplicity**: PKARR streamlines the integration between [DNS](/explore/technologies/dns/) and peer-to-peer networks.
-- **Sovereignty**: Public keys can be used as domains, enabling users to maintain control over their digital identities.
-- **Accessibility**: The system is designed to be accessible to anyone capable of maintaining a private key. [Pubky Ring](/explore/technologies/pubky-ring/) provides a user-friendly mobile app for managing these keys securely.
-- **Scalability and Resilience**: Designed with scalability and resilience in mind, using the [Mainline DHT](/explore/technologies/mainline-dht/) for storing ephemeral data, and employing caching strategies to minimize [DHT](/explore/technologies/dht/) traffic.
-- **Compatibility with Existing Applications**: Supports existing applications through [DNS](/explore/technologies/dns/) over [HTTPS](/explore/technologies/https/) ([DoH](/explore/technologies/doh/)) queries to PKARR servers, ensuring broad compatibility.
+```mermaid
+flowchart TD
+    Key[User's public key] --> Lookup[Resolve signed PKARR records]
+    Lookup --> Host[Find Homeserver]
+    Host --> Data[Read application data]
+```
 
-## How It Works
+The records use DNS's familiar record format, but publishing an identity's PKARR records does not require registering a conventional domain name. When hosting changes, new records can point to the new location while the public key remains the same. The signature lets clients verify who authorized a discovery record; it does not authenticate the contents of files served by that host.
 
-1. **Publishing Records**: To publish resource records for a key, create a small encoded [DNS](/explore/technologies/dns/) packet (<= 1000 bytes), sign it, and publish it on the DHT. This can be done directly or through a relay if necessary.
-2. **Resolving Records**: To find resources associated with a key, applications can query the [DHT](/explore/technologies/dht/) directly or through a relay, verifying the signature themselves.
-3. **Fallback for Existing Applications**: Applications unaware of PKARR can make normal [DNS](/explore/technologies/dns/) Queries over [HTTPS](/explore/technologies/https/) (DoH) to PKARR servers, ensuring accessibility.
-4. **Caching and Republishing**: Both clients and PKARR servers cache records extensively to improve scalability. The [DHT](/explore/technologies/dht/) drops records after a few hours, necessitating periodic republishing to keep records alive.
+## What applications need to account for
 
-For more technical details on PKARR's architecture and how it works, refer to the [architecture](/explore/pubky-protocol/pkarr/architecture/) note.
+Records need to be republished to remain available, and caches can delay changes. Browser applications can use PKARR relays to reach discovery services. These are separate from the [HTTP Relay](/explore/technologies/http-relay/) used during app authorization.
 
-## Getting Started
+Pubky app developers normally use the [Pubky SDK](/explore/pubky-protocol/sdk/) to handle discovery. [PKDNS](/explore/technologies/pkdns/) provides a bridge for software that uses conventional DNS.
 
-[To start using PKARR](/explore/pubky-protocol/pkarr/getting-started/), you can visit the [web app demo](https://pkdns.net) or explore the Rust examples provided in [PKARR repository](https://github.com/pubky/pkarr).
+## Go deeper
 
-To access public-key domains from your browser, use [PKDNS](/explore/technologies/pkdns/), a DNS server that resolves PKARR records. You can use public [PKDNS](/explore/technologies/pkdns/) instances or run your own server—see the [PKDNS](/explore/technologies/pkdns/) documentation for setup instructions.
+The PKARR repository maintains the detailed explanations and integration instructions:
+
+- [Introduction](https://github.com/pubky/pkarr/blob/main/docs/introduction.md): motivation, concepts, and trade-offs.
+- [Quickstart](https://github.com/pubky/pkarr/blob/main/docs/quickstart.md): publishing and resolving records.
+- [Integration Guide](https://github.com/pubky/pkarr/blob/main/docs/integration.md): application configuration, browser support, caching, and republishing.
+- [Specifications](https://github.com/pubky/pkarr/tree/main/design): packet format, relays, endpoint discovery, and TLS.

@@ -36,7 +36,7 @@ Run the homeserver and testnet via Docker compose:
 docker compose up homeserver -d
 ```
 
-You now have a local Pubky testnet ready for app development. An isolated DHT is running, the HTTP relay is local, and the Homeserver publishes its PKARR identity to the local DHT. This means local clients can discover your Homeserver the same way they would on the public network, but everything stays on your machine. Your testnet Homeserver's pubky is always `8pinxxgqs41n4aididenw5apqp1urfmzdztr8jt4abrkdn435ewo`.
+You now have a local Pubky testnet ready for app development. An isolated DHT is running, the HTTP relay is local, and the Homeserver publishes its PKARR identity to the local DHT. This means local clients can discover your Homeserver the same way they would on the public network, with local testnet services. The Docker stack publishes ports and uses development credentials; run it only on an isolated development machine or network, with disposable data and identities. Your testnet Homeserver's pubky is always `8pinxxgqs41n4aididenw5apqp1urfmzdztr8jt4abrkdn435ewo`.
 
 :::note[Testnet state is ephemeral]
 When the Docker containers are restarted the files stored on the Homeserver and user PKARR records in the local DHT are reset. The testnet Homeserver does however have a stable, predefined pubky.
@@ -52,15 +52,11 @@ With `.env` set to the default `NETWORK=testnet`, these ports are exposed:
 | `6287` | Homeserver [PubkyTLS](/glossary/#pubkytls) | Direct Pubky TLS endpoint for SDK and native clients. |
 | `6288` | Homeserver admin HTTP | Local admin endpoint exposed by Pubky Docker. |
 
-:::note[Pubky CLI]
-For manual user and Homeserver operations while developing locally, you can use [Pubky CLI](https://github.com/pubky/pubky-homeserver/tree/main/examples/javascript).
-:::
-
-For source builds, see [Optional: Build from source](/explore/technologies/pubky-docker/#build-from-source).
+For source builds, see [Optional: Build from source](https://github.com/pubky/pubky-docker/blob/main/Readme.md).
 
 ### Step 2: Initialize Project with the SDK
 
-What follows is a step-by-step guide to building your first Pubky app. If you prefer to start from a ready-made project, jump to the [basic Pubky app template](#38-basic-pubky-app-template).
+What follows is a step-by-step guide to building your first Pubky app. If you prefer to start from a ready-made project, jump to the [basic Pubky app template](#39-basic-pubky-app-template).
 
 :::note[Reference docs]
 For full API details see the reference documenation for [JavaScript](https://pubky.github.io/pubky-homeserver/js-sdk-typedoc/) and [Rust](https://docs.rs/pubky).
@@ -133,10 +129,10 @@ This creates a demo identity for the hello-world app and logs its pubky to the b
 ```js snippet="snippets/js/src/getting-started.ts:js_getting_started_signup"
 ```
 
-This creates an account on the local Homeserver and publishes the user's Homeserver mapping (PKARR). Because [local signup is set to `open`](https://github.com/pubky/pubky-docker/blob/75b1121f3e90b9b44d9416ca4f5ba87a4984e800/homeserver.config.toml#L5), we pass `null` instead of a signup token.
+This creates an account on the local Homeserver and publishes the user's Homeserver mapping (PKARR). Because [local signup is set to `open`](https://github.com/pubky/pubky-docker/blob/main/homeserver.config.toml), we pass `null` instead of a signup token.
 
 :::note[Homeserver signup]
-This guide performs Homeserver signup inside the app because it is the shortest path to a working local example. In a real-world flow, however, Homeserver signup is not the responsibility of a Pubky app. Assume users already have an account on a Homeserver. If not, direct them to a separate signup flow, such as [the onboarding on pubky.app](https://pubky.app/onboarding/human), instead of implementing it in the app. The template in Step 3.8 follows this pattern.
+This guide performs Homeserver signup inside the app because it is the shortest path to a working local example. In a real-world flow, however, Homeserver signup is not the responsibility of a Pubky app. Assume users already have an account on a Homeserver. If not, direct them to a separate signup flow, such as [the onboarding on pubky.app](https://pubky.app/onboarding/human), instead of implementing it in the app. The template in Step 3.9 follows this pattern.
 :::
 
 Run `npm run dev` and open the printed URL in your browser. Look at the logs in your browser console. You should see that the signup request succeeded and that you successfully published your Homeserver configuration (= PKARR).
@@ -188,7 +184,7 @@ The hosted app connects to `localhost`; allow local-network access if prompted. 
 Nice. Your first Pubky app works.
 :::
 
-#### 3.8 Basic Pubky app template
+#### 3.9 Basic Pubky app template
 
 As a next step, try [this template](https://pubky.github.io/pubky-app-templates/) as a fuller starting point for a fresh Pubky app.
 
@@ -245,7 +241,7 @@ If building a social app, leverage [Pubky Nexus](/explore/pubky-apps/indexing-an
 - User recommendations
 - Notifications
 
-```javascript snippet="snippets/js/src/quick-start-getting-started.ts:js_nexus_global_feed"
+```javascript snippet="snippets/js/src/getting-started.ts:js_nexus_global_feed"
 ```
 
 📊 [Nexus API Docs](https://nexus.pubky.app/swagger-ui/)
@@ -276,14 +272,14 @@ To connect your app to the production Pubky network, replace the client from Ste
 
 `new Pubky()` stops using the local endpoints. The app instead resolves [PKARR](/explore/pubky-protocol/pkarr/introduction/) records from the [Mainline DHT](/explore/technologies/mainline-dht/), connects to the Homeserver resolved from each user's PKARR record, and uses a public [HTTP relay](/explore/technologies/http-relay/) for authentication.
 
-Steps 3.3–3.5 use development-only identity and Homeserver shortcuts. For production, use [Pubky Ring](/explore/technologies/pubky-ring/); the [basic Pubky app template](#38-basic-pubky-app-template) already implements that flow.
+Steps 3.3–3.5 use development-only identity and Homeserver shortcuts. For production, use [Pubky Ring](/explore/technologies/pubky-ring/); the [basic Pubky app template](#39-basic-pubky-app-template) already implements that flow.
 
 <details>
 <summary><strong>Optional: Configure custom relays</strong></summary>
 
 Browsers cannot query the UDP-based Mainline DHT directly, so the SDK uses HTTPS gateways called **PKARR relays**. See the [current default relay list](https://github.com/pubky/pkarr/blob/main/pkarr/src/lib.rs). To use custom PKARR relays:
 
-```javascript snippet="snippets/js/src/troubleshooting.ts:js_pkarr_relay_config"
+```javascript snippet="snippets/js/src/getting-started.ts:js_pkarr_relay_config"
 ```
 
 PKARR relays are separate from the [HTTP relay](/explore/technologies/http-relay/) that transfers encrypted Pubky Ring authentication messages. To use a custom HTTP relay with the SDK:
@@ -301,57 +297,11 @@ The basic template maps [`VITE_PUBKY_HTTP_RELAY`](https://github.com/pubky/pubky
 2. Use the app to create some sample data.
 3. Enter your pubky in [Pubky Explorer](https://explorer.pubky.app) and verify the files created by the app.
 
-### Guides Coming Next
-
-- **Other languages and platforms**: Build the same hello-world app with Rust, React Native, and native mobile tooling.
-- **Run the Homeserver natively**: Start the local testnet without Docker Compose and configure local signup.
-- **Build social Pubky apps**: Use the larger Pubky Docker stack with indexers, aggregators, and [pubky.app](/explore/pubky-apps/reference-app/pubky-app/)-compatible data flows.
-
 ### Next Steps
 
 - **Explore SDK examples:** See the [Pubky Homeserver examples](https://github.com/pubky/pubky-homeserver/tree/main/examples) for runnable workflows.
-- **Browse practical snippets:** See the [Pubky SDK guide](/explore/pubky-protocol/sdk/) for storage, authentication, events, sessions, and testing.
+- **Find SDK references:** See the [Pubky SDK guide](/explore/pubky-protocol/sdk/) for supported platforms, API references, and upstream examples.
 - **Choose an app architecture:** Compare [client-only, aggregator, and custom-backend designs](/explore/pubky-apps/app-architectures/introduction/).
-- **Security model:** Review the [security considerations for app developers](/explore/pubky-protocol/security-model/#for-app-developers).
+- **Security model:** Review the [security considerations for app developers](/explore/pubky-protocol/security-model/).
 
 Need help? See [Troubleshooting](/troubleshooting/) or ask in [Telegram](https://t.me/pubkycore).
-
----
-
-## Common First Questions
-
-**Q: Do users need to download Pubky Ring to use my app?**
-A: Currently yes for secure key management, though apps can implement their own key storage. Pubky Ring provides the best UX for multi-app identity.
-
-**Q: Is Pubky compatible with Nostr/Bluesky/etc?**
-A: Not directly. Pubky uses a different architecture (Homeservers + PKARR vs relays/PDSs). See [Comparisons](/comparisons/) for details.
-
-**Q: How do I handle user authentication?**
-A: The SDK handles authentication with capability-scoped grants. No passwords or OAuth needed. See [Authentication](/explore/pubky-protocol/authentication/).
-
-**Q: Can I build private apps?**
-A: Currently Pubky is optimized for public data. Private/encrypted features are coming via [Pubky Noise](/explore/technologies/pubky-noise/).
-
-**Q: How do I make money?**
-A: Several models work: Homeserver hosting, indexing services (like Nexus), premium features, or payments via [Paykit](/explore/technologies/paykit/) (WIP).
-
----
-
-## Resources
-
-### Documentation
-- **[Main Documentation](/)**: Complete knowledge base
-- **[Glossary](/glossary/)**: Quick term reference
-- **[FAQ](/faq/)**: 63+ questions answered
-- **[TLDR](/tldr/)**: 30-second overview
-
-### Technical
-- **[HTTP API References](/explore/pubky-protocol/homeserver/#http-api)**: Client and admin OpenAPI specifications
-- **[SDK Guide](/explore/pubky-protocol/sdk/)**: Client library docs
-- **[Rust Docs](https://docs.rs/pubky)**: Rust crate documentation
-- **[Official Docs](https://pubky.github.io/pubky-homeserver/)**: Protocol specification
-
-### Community
-- **Telegram**: [t.me/pubkycore](https://t.me/pubkycore)
-- **GitHub**: [github.com/pubky](https://github.com/pubky)
-- **Live App**: [pubky.app](https://pubky.app)
