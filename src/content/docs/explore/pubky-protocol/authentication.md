@@ -7,7 +7,7 @@ Pubky uses decentralized authentication where users control their own cryptograp
 ## Key Concepts
 
 - **Authenticator**: Any software or hardware capable of [Ed25519](https://en.wikipedia.org/wiki/EdDSA#Ed25519) signing, such as [Pubky Ring](/explore/technologies/pubky-ring/).
-- **Capabilities**: Permissions defining what an app can access (e.g., `/pub/pubky.app/:rw` has read and write permissions for the `/pub/pubky.app/` directory).
+- **Capabilities**: Permissions defining what an app can access, such as publishing to its own data area.
 - **Grant**: A signed authorization that binds capabilities to an app's client ID and proof-of-possession key.
 - **Proof-of-possession (PoP) key**: An app-specific key required to use a grant.
 

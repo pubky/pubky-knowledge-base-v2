@@ -64,46 +64,18 @@ pubky-cli tools verify-pkarr <public-key>
 **Common Causes:**
 
 1. **HTTPS Not Configured**
-   - Homeservers REQUIRE HTTPS (not HTTP)
-   - **Solution**: Configure TLS certificate:
-   ```bash
-   # Using Let's Encrypt
-   certbot --nginx -d yourdomain.com
-   ```
+   - **Solution**: Follow the [Deployment Guide](https://github.com/pubky/pubky-homeserver/blob/main/docs/DEPLOY.md) for the transport and certificate setup appropriate to your deployment.
 
 2. **Firewall Blocking Ports**
-   - Default port: 6287 (PubkyTLS)
-   - **Solution**: Open the firewall port:
-   ```bash
-   # UFW example
-   sudo ufw allow 6287/tcp
-   ```
+   - **Solution**: Follow the network requirements in the [Deployment Guide](https://github.com/pubky/pubky-homeserver/blob/main/docs/DEPLOY.md). Keep the privileged admin interface private and protected; applications need access to the client API.
 
 3. **Homeserver Not Running**
-   - **Solution**: Verify Homeserver is running:
-   ```bash
-   # Check process
-   ps aux | grep pubky-homeserver
-   
-   # Check logs
-   journalctl -u pubky-homeserver -f
-   ```
+   - **Solution**: Use the [Install Guide](https://github.com/pubky/pubky-homeserver/blob/main/docs/INSTALL.md) to check the service and its logs.
 
-4. **PKDNS Resolution Failure**
-   - Browser can't resolve public-key domain
-   - **Solution**: Use PKDNS-enabled resolver or DoH:
-   ```javascript snippet="snippets/js/src/troubleshooting.ts:js_direct_homeserver_url"
-   ```
+4. **Discovery Failure**
+   - **Solution**: Use the [SDK](/explore/pubky-protocol/sdk/) to resolve Pubky resources and select the transport. Check [PKARR and discovery troubleshooting](#pkarr--discovery-issues) if the user's Homeserver cannot be found.
 
-**Test Connection:**
-
-```bash
-# Direct test
-curl https://your-homeserver.com/
-
-# Via public key (requires PKDNS)
-curl $(pkdns resolve <public-key>)/
-```
+For raw HTTP diagnostics, consult the [client OpenAPI specification](https://github.com/pubky/pubky-homeserver/blob/main/pubky-homeserver/openapi-client.yml). For privileged operator diagnostics, consult the [admin OpenAPI specification](https://github.com/pubky/pubky-homeserver/blob/main/pubky-homeserver/openapi-admin.yml).
 
 ---
 
@@ -157,21 +129,20 @@ See the [Pubky Docker README](https://github.com/pubky/pubky-docker#readme) for 
 
 ## Data Operations Issues
 
-### PUT/DELETE Operations Fail
+### Storage Operations Fail
 
 **Symptom**: Can't store or delete data on Homeserver
 
 **Common Causes:**
 
 1. **Invalid Path**
-   - Path must start with `/pub/` for public data
-   - **Solution**: Use correct path format:
+   - Check path requirements in the [client OpenAPI specification](https://github.com/pubky/pubky-homeserver/blob/main/pubky-homeserver/openapi-client.yml).
+   - **Solution**: Use the SDK to write to your application's storage path:
    ```javascript snippet="snippets/js/src/troubleshooting.ts:js_valid_storage_path"
    ```
 
-2. **Data Too Large**
-   - Homeserver has size limits (default: ~10MB per file)
-   - **Solution**: Split large data or increase Homeserver limit
+2. **Storage Limits**
+   - **Solution**: Check the reported error and ask the Homeserver operator about the applicable limits. Operators can consult the [admin OpenAPI specification](https://github.com/pubky/pubky-homeserver/blob/main/pubky-homeserver/openapi-admin.yml) for quota management.
 
 3. **Rate Limiting**
    - Too many requests in short time
@@ -334,9 +305,6 @@ Open DevTools → Network tab → Filter: pubky
 # Test PKARR
 curl "https://pkarr.pubky.org/<public-key>"
 
-# Test homeserver
-curl -v "https://homeserver.com/pub/..."
-
 # Check DNS
 dig @8.8.8.8 <public-key>
 
@@ -351,7 +319,6 @@ pubky-cli user session ./recovery.file
 
 # Test data operations
 pubky-cli user get /pub/test ./recovery.file
-
-# Admin diagnostics
-PUBKY_ADMIN_PASSWORD=admin pubky-cli admin info
 ```
+
+For operator commands and credential configuration, follow the [Pubky CLI documentation](https://github.com/pubky/pubky-cli).

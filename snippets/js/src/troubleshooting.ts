@@ -46,13 +46,6 @@ async function snippet_force_reauth() {
   // --8<-- [end:js_force_reauth]
 }
 
-function snippet_direct_homeserver_url() {
-  // --8<-- [start:js_direct_homeserver_url]
-  // In browser, use full HTTPS URL
-  const url = `https://your-homeserver.com/pub/...`;
-  // --8<-- [end:js_direct_homeserver_url]
-}
-
 async function snippet_valid_storage_path() {
   // --8<-- [start:js_valid_storage_path]
   await session.storage.putText("/pub/myapp/data.json", data);
