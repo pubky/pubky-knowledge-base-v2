@@ -4,7 +4,6 @@ interface ClipboardOptions {
   successMessage: string;
   failureMessage: string;
   successAriaLabel: string;
-  onSuccess?: () => void;
   onFailure?: () => void;
 }
 
@@ -60,6 +59,5 @@ export function enhanceClipboardButton(button: HTMLButtonElement, options: Clipb
         options.status.textContent = '';
       }
     }, 2500);
-    options.onSuccess?.();
   });
 }

@@ -1,38 +1,30 @@
-<div class="ai-resources-wrap">
-  <section class="ai-resources" aria-label="AI resources">
-    <span class="ai-resources-watermark" aria-hidden="true">AI<canvas class="ai-network-canvas" aria-hidden="true"></canvas></span>
-    <a class="ai-resources-primary" href="https://github.com/pubky/agent-skills" target="_blank" rel="noopener noreferrer" aria-label="Agent skills (opens in new tab)">
-      <strong>Agent skills</strong>
-      <span>Pubky workflows for your LLM coding agents</span>
+<section class="ai-resources" aria-label="AI resources">
+  <span class="ai-resources-watermark" aria-hidden="true">AI<canvas class="ai-network-canvas" aria-hidden="true"></canvas></span>
+  <a class="ai-resources-primary" href="https://github.com/pubky/agent-skills" target="_blank" rel="noopener noreferrer" aria-label="Agent skills (opens in new tab)">
+    <strong>Agent skills</strong>
+    <span>Pubky workflows for your LLM coding agents</span>
+  </a>
+  <div class="ai-resources-group">
+    <a class="ai-resources-title" href="https://context7.com/?q=pubky" target="_blank" rel="noopener noreferrer" aria-label="Search Pubky on Context7 (opens in new tab)">
+      <strong>Context7</strong>
+      <span>API documentation and examples.</span>
     </a>
-    <div class="ai-resources-group">
-      <a class="ai-resources-title" href="https://context7.com/?q=pubky" target="_blank" rel="noopener noreferrer" aria-label="Search Pubky on Context7 (opens in new tab)">
-        <strong>Context7</strong>
-        <span>API documentation and examples.</span>
-      </a>
-      <div class="ai-resources-repositories">
-        <a href="https://context7.com/pubky/pubky-homeserver" target="_blank" rel="noopener noreferrer" aria-label="Pubky Homeserver on Context7 (opens in new tab)">Homeserver</a>
-        <a href="https://context7.com/pubky/pkarr" target="_blank" rel="noopener noreferrer" aria-label="PKARR on Context7 (opens in new tab)">PKARR</a>
-      </div>
+    <div class="ai-resources-repositories">
+      <a href="https://context7.com/pubky/pubky-homeserver" target="_blank" rel="noopener noreferrer" aria-label="Pubky Homeserver on Context7 (opens in new tab)">Homeserver</a>
+      <a href="https://context7.com/pubky/pkarr" target="_blank" rel="noopener noreferrer" aria-label="PKARR on Context7 (opens in new tab)">PKARR</a>
     </div>
-    <a href="https://deepwiki.com/pubky/pubky-homeserver" target="_blank" rel="noopener noreferrer" aria-label="Pubky Homeserver on DeepWiki (opens in new tab)">
-      <strong>DeepWiki</strong>
-      <span>AI explanations of the Pubky codebase.</span>
-    </a>
-  </section>
-</div>
+  </div>
+  <a href="https://deepwiki.com/pubky/pubky-homeserver" target="_blank" rel="noopener noreferrer" aria-label="Pubky Homeserver on DeepWiki (opens in new tab)">
+    <strong>DeepWiki</strong>
+    <span>AI explanations of the Pubky codebase.</span>
+  </a>
+</section>
 
 <script>
   import '../scripts/ai-network-animation';
 </script>
 
 <style>
-  /* Match the resource card to the original SDK terminal width. */
-  .ai-resources-wrap {
-    position: relative;
-    width: 500px;
-    max-width: 100%;
-  }
   /* A visible resource box uses the existing terminal palette and geometry. */
   .ai-resources {
     position: relative;
@@ -91,8 +83,6 @@
     background-clip: text;
     -webkit-background-clip: text;
     pointer-events: none;
-  }
-  .ai-resources-watermark::before {
     opacity: 0.8;
     background-image:
       repeating-linear-gradient(

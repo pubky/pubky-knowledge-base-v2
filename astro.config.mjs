@@ -158,7 +158,6 @@ export default defineConfig({
 				Hero: './src/components/HeroOverride.astro',
 				Header: './src/components/Header.astro',
 				PageTitle: './src/components/PageTitle.astro',
-				Footer: './src/components/Footer.astro',
 			},
 			social: [
 				{ icon: 'github', label: 'GitHub', href: 'https://github.com/pubky' },

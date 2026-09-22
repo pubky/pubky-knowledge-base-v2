@@ -44,7 +44,6 @@ const markdownPath = id === '404' ? null : docsMarkdownPath(Astro.url.pathname);
     });
   }
   enhanceMarkdownActions();
-  document.addEventListener('astro:page-load', enhanceMarkdownActions);
 </script>
 
 <style>

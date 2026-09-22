@@ -119,8 +119,6 @@ function createNetwork(root: HTMLElement): () => void {
     });
     const cycleTime = elapsed % SWEEP_CYCLE;
     const sweeping = cycleTime >= SWEEP_START && cycleTime < SWEEP_START + SWEEP_DURATION;
-    const state = sweeping ? 'sweeping' : 'resting';
-    if (root.dataset.aiShimmer !== state) root.dataset.aiShimmer = state;
     const band = Math.max(width, height) * 0.16;
     const progress = (cycleTime - SWEEP_START) / SWEEP_DURATION;
     const center = -band + (width + height * 0.3 + band * 2) * progress;
@@ -197,7 +195,6 @@ function createNetwork(root: HTMLElement): () => void {
     root.dataset.aiMotion = reduced ? 'reduced' : 'playing';
     if (usable) root.dataset.aiNetworkReady = 'true';
     else delete root.dataset.aiNetworkReady;
-    if (!usable) root.dataset.aiShimmer = 'resting';
     const running = usable && visible && !document.hidden;
     if (!running) {
       stop();
@@ -284,7 +281,6 @@ function createNetwork(root: HTMLElement): () => void {
     delete root.dataset.aiMotion;
     delete root.dataset.aiRunning;
     delete root.dataset.aiNetworkReady;
-    delete root.dataset.aiShimmer;
     maskPixels = undefined;
     edges = [];
     canvas.width = canvas.height = mask.width = mask.height = 0;
@@ -309,8 +305,6 @@ function disposeNetworks() {
 }
 
 mountNetworks();
-document.addEventListener('astro:page-load', mountNetworks);
-document.addEventListener('astro:before-swap', disposeNetworks);
 window.addEventListener('pagehide', disposeNetworks);
 window.addEventListener('pageshow', mountNetworks);
 

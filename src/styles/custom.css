@@ -91,7 +91,6 @@
 	--landing-touch-target: 44px;
 	--landing-border-width: 1px;
 	--landing-motion: 160ms;
-	--landing-shadow: 0 16px 64px rgba(0, 0, 0, 0.28);
 
 	/* Shadows */
 	--shadow-xs: 0 1px 2px rgba(5, 5, 10, 0.2);

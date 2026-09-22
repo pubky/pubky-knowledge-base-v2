@@ -35,6 +35,13 @@ async function mockClipboard(page, reject = false) {
   }, reject);
 }
 
+async function expectFitsViewport(locator, width) {
+  const bounds = await locator.boundingBox();
+  expect(bounds).not.toBeNull();
+  expect(bounds.x).toBeGreaterThanOrEqual(-1);
+  expect(bounds.x + bounds.width).toBeLessThanOrEqual(width + 1);
+}
+
 for (const width of [320, 390, 1280]) {
   test(`homepage resources and Markdown controls fit a ${width}px viewport`, async ({ page }) => {
     await page.setViewportSize({ width, height: 900 });
@@ -48,30 +55,28 @@ for (const width of [320, 390, 1280]) {
       await expect(link).toHaveAttribute('rel', /noopener/);
     }
     for (const locator of [resources, page.locator('.install-terminal'), page.locator('.open-with-links')]) {
-      const bounds = await locator.boundingBox();
-      expect(bounds).not.toBeNull();
-      expect(bounds.x).toBeGreaterThanOrEqual(-1);
-      expect(bounds.x + bounds.width).toBeLessThanOrEqual(width + 1);
+      await expectFitsViewport(locator, width);
     }
 
     await page.goto('/getting-started/');
     const actions = page.getByRole('group', { name: 'Markdown for this page' });
     await expect(actions.getByRole('link')).toBeVisible();
     await expect(actions.getByRole('button')).toBeVisible();
-    const bounds = await actions.boundingBox();
-    expect(bounds).not.toBeNull();
-    expect(bounds.x).toBeGreaterThanOrEqual(-1);
-    expect(bounds.x + bounds.width).toBeLessThanOrEqual(width + 1);
+    await expectFitsViewport(actions, width);
   });
 }
 
-test('copies the starter prompt and keyboard-selected SDK command once after reinitialization', async ({ page }) => {
+test('copies Markdown, then the prompt and keyboard-selected SDK command after going back', async ({ page, baseURL }) => {
   await mockClipboard(page);
   await page.goto('/');
-  await page.evaluate(() => {
-    document.dispatchEvent(new Event('astro:page-load'));
-    document.dispatchEvent(new Event('astro:page-load'));
-  });
+  await page.getByRole('link', { name: 'Human Docs', exact: true }).click();
+  await expect(page).toHaveURL('/overview/');
+  await page.getByRole('group', { name: 'Markdown for this page' }).getByRole('button').click();
+  await expect(page.locator('.markdown-copy-status')).toHaveText('Markdown link copied.');
+  expect(await page.evaluate(() => window.copiedTexts)).toEqual([`${baseURL}/overview.md`]);
+
+  await page.goBack();
+  await expect(page).toHaveURL('/');
   const copyPrompt = page.locator('[data-copy-kind="prompt"]');
   const prompt = await page.locator('.starter-prompt').textContent();
   await copyPrompt.click();
@@ -161,7 +166,7 @@ test('Markdown clipboard denial preserves the direct link and retry control', as
   await expect(actions.getByRole('link')).toHaveAttribute('href', '/getting-started.md');
 });
 
-test('respects reduced motion and releases the decorative network on page replacement', async ({ page }) => {
+test('respects reduced motion and restores the decorative network after navigation back', async ({ page }) => {
   await page.goto('/');
   const resources = page.getByRole('region', { name: 'AI resources' });
   await resources.scrollIntoViewIfNeeded();
@@ -172,11 +177,28 @@ test('respects reduced motion and releases the decorative network on page replac
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   await expect(resources).toHaveAttribute('data-ai-running', 'true');
   await expect(resources).toHaveAttribute('data-ai-network-ready', 'true');
-  await page.evaluate(() => document.dispatchEvent(new Event('astro:before-swap')));
-  await expect(resources).not.toHaveAttribute('data-ai-running');
-  await expect(resources.locator('canvas')).toHaveAttribute('width', '0');
-  await page.evaluate(() => document.dispatchEvent(new Event('astro:page-load')));
+
+  // Observe cleanup after the application's native pagehide handler runs.
+  await resources.evaluate((root) => {
+    window.addEventListener('pagehide', () => {
+      sessionStorage.setItem('networkAfterPagehide', JSON.stringify({
+        running: root.hasAttribute('data-ai-running'),
+        canvasWidth: root.querySelector('canvas').width,
+      }));
+    }, { once: true });
+  });
+  await page.getByRole('link', { name: 'Human Docs', exact: true }).click();
+  await expect(page).toHaveURL('/overview/');
+  expect(await page.evaluate(() => JSON.parse(sessionStorage.getItem('networkAfterPagehide')))).toEqual({
+    running: false,
+    canvasWidth: 0,
+  });
+
+  await page.goBack();
+  await expect(page).toHaveURL('/');
+  await resources.scrollIntoViewIfNeeded();
   await expect(resources).toHaveAttribute('data-ai-running', 'true');
+  await expect(resources).toHaveAttribute('data-ai-network-ready', 'true');
 
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await expect(resources).toHaveAttribute('data-ai-running', 'false');

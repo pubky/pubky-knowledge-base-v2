@@ -60,7 +60,7 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
           ))}
           <button type="button" class="copy-prompt-btn" aria-label="Copy prompt to clipboard" data-tooltip="Copy prompt" data-copy-text={aiPrompt} data-copy-kind="prompt" data-copy-status="starter-copy-status" hidden>
             <span class="copy-prompt-label" data-copy-label>Prompt</span>
-            <img class="copy-prompt-icon" src={withBase('/images/icons/line-copy.svg')} width="16" height="16" alt="" aria-hidden="true" />
+            <img src={withBase('/images/icons/line-copy.svg')} width="16" height="16" alt="" aria-hidden="true" />
           </button>
         </div>
       </div>
@@ -81,7 +81,7 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
               <span class="prompt">$</span>
               <span class="cmd-text">{cmd.command}</span>
               <button type="button" class="copy-btn" data-copy-text={cmd.command} data-copy-kind="command" data-copy-status="sdk-copy-status" aria-label={`Copy ${cmd.label} install command`} hidden>
-                <img class="copy-icon" src={withBase('/images/icons/line-copy.svg')} width="20" height="20" alt="" aria-hidden="true" />
+                <img src={withBase('/images/icons/line-copy.svg')} width="20" height="20" alt="" aria-hidden="true" />
               </button>
             </div>
           </TabItem>
@@ -123,7 +123,6 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
   }
 
   enhanceLandingCopy();
-  document.addEventListener('astro:page-load', enhanceLandingCopy);
 </script>
 
 <style is:global>
@@ -598,7 +597,6 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
       height: 32px;
     }
 
-    .open-with-row { max-width: 100%; }
     .open-with-links {
       flex-wrap: wrap;
       max-width: 100%;
