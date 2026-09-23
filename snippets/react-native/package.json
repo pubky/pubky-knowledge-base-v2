@@ -9,7 +9,7 @@
     "format:check": "prettier --check src/"
   },
   "dependencies": {
-    "@synonymdev/react-native-pubky": "0.13.0"
+    "@synonymdev/react-native-pubky": "0.14.0"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
