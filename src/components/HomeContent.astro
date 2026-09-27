@@ -5,7 +5,7 @@ import ImageCard from "./ImageCard.astro";
 import DemoCard from "./DemoCard.astro";
 import { withBase } from "../utils/base-path";
 
-// Figma: Demos (node 34702:87731) — 14 cards
+// Figma: Demos (node 34702:87731)
 const demos = [
   {
     title: "App Template",
@@ -98,28 +98,6 @@ const demos = [
       {
         label: "GitHub",
         href: "https://github.com/gillohner/mapky-app",
-        variant: "outline" as const,
-      },
-    ],
-  },
-  {
-    title: "Passport",
-    description:
-      "Pubky Passport uses Google login to create or access an encrypted Pubky key in Google Drive, where neither Google nor the Pubky Passport server can decrypt it alone.",
-    actions: [
-      {
-        label: "Demo",
-        href: "https://passport.buhlerlabs.com",
-        variant: "secondary" as const,
-      },
-      {
-        label: "GitHub",
-        href: "https://github.com/SeverinAlexB/pubky-passport-prague26",
-        variant: "outline" as const,
-      },
-      {
-        label: "Blog",
-        href: "https://medium.com/pubky/pubky-passport-a-familiar-sign-in-flow-for-sovereign-identity-ee07097ba02e",
         variant: "outline" as const,
       },
     ],
@@ -286,7 +264,7 @@ const icons = {
       <h2 class="home-section-title">
         <a class="home-section-title-link" href="#for-users">For Users</a>
       </h2>
-      <div class="card-grid card-grid-3">
+      <div class="card-grid card-grid-4 user-apps-grid">
         <ImageCard
           title="Pubky"
           titleIcon={pubkyBrandGreen}
@@ -301,6 +279,14 @@ const icons = {
           links={[
             { label: "Website", href: "https://pubkyring.app/", external: true },
             { label: "Learn More", href: "/explore/technologies/pubky-ring/" },
+          ]}
+        />
+        <DemoCard
+          title="Passport"
+          description="Create a Pubky identity and sign in to apps with Google. Your key stays in your browser, with an encrypted backup in Google Drive."
+          actions={[
+            { label: "Open", href: "https://passport.pubky.app/", variant: "secondary" },
+            { label: "Learn More", href: "/explore/technologies/pubky-passport/", variant: "outline" },
           ]}
         />
         <ImageCard
@@ -815,7 +801,8 @@ const icons = {
        other card grids — step down to 2 columns here instead of waiting for the
        shared 767px rule. Same specificity as .card-grid-4, so it has to sit
        before the 767/639 blocks for those to still win at narrower widths. */
-    .demos-grid {
+    .demos-grid,
+    .user-apps-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }

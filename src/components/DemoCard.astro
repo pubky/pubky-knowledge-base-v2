@@ -1,4 +1,6 @@
 ---
+import { withBase } from "../utils/base-path";
+
 interface Action {
   label: string;
   href: string;
@@ -12,6 +14,7 @@ interface Props {
 }
 
 const { title, description, actions } = Astro.props;
+const isExternal = (href: string) => href.startsWith("http");
 ---
 
 <div class="demo-card not-content">
@@ -22,11 +25,11 @@ const { title, description, actions } = Astro.props;
   <div class="demo-card-actions">
     {actions.map((action) => (
       <a
-        href={action.href}
+        href={isExternal(action.href) ? action.href : withBase(action.href)}
         class:list={["demo-card-btn", `demo-card-btn-${action.variant ?? "secondary"}`]}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label={`${action.label} (opens in new tab)`}
+        target={isExternal(action.href) ? "_blank" : undefined}
+        rel={isExternal(action.href) ? "noopener noreferrer" : undefined}
+        aria-label={isExternal(action.href) ? `${action.label} (opens in new tab)` : undefined}
       >
         {action.label}
       </a>
@@ -121,7 +124,7 @@ const { title, description, actions } = Astro.props;
     align-items: center;
     justify-content: center;
     gap: var(--spacing-2);
-    height: 40px;
+    min-height: var(--landing-touch-target);
     padding: var(--spacing-2-5) var(--spacing-4);
     border-radius: var(--radius-full);
     font-size: var(--text-sm-size);
