@@ -89,9 +89,9 @@ const eventDate = (value: string) => {
     align-items: center;
     gap: var(--spacing-8);
     padding: var(--spacing-8);
-    border: var(--landing-border-width) solid var(--alpha-white-16);
+    border: var(--landing-border-width) solid var(--announcement-border);
     border-radius: var(--radius-xl);
-    background: linear-gradient(115deg, var(--base-card), var(--base-background));
+    background: linear-gradient(115deg, var(--announcement-background-start), var(--announcement-background-end));
     box-shadow: var(--shadow-sm);
   }
   .announcement-with-event {
@@ -121,7 +121,7 @@ const eventDate = (value: string) => {
     text-transform: uppercase;
     letter-spacing: 0.1em;
   }
-  .announcement-month { color: var(--base-secondary-foreground); }
+  .announcement-month { color: var(--announcement-accent); }
   .announcement-day {
     font-family: 'Inter Tight', 'Inter', system-ui, sans-serif;
     font-size: var(--text-5xl-size);
@@ -136,7 +136,7 @@ const eventDate = (value: string) => {
   }
   .announcement-time { color: var(--base-foreground); font-weight: 600; white-space: nowrap; }
   .announcement-copy { min-width: 0; }
-  .announcement-label { margin: 0 0 var(--spacing-3); color: var(--base-secondary-foreground); }
+  .announcement-label { margin: 0 0 var(--spacing-3); color: var(--announcement-accent); }
   .announcement h2 {
     margin: 0;
     color: var(--base-foreground);
