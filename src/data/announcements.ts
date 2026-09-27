@@ -18,7 +18,7 @@ export const announcements: Announcement[] = [
     label: 'You’re invited',
     title: 'Pubky Community Call #4',
     description:
-      'New SDK, AI tooling, new Pubky app features, self-hosting on Umbrel, and more. Join the conversation.',
+      'SDK updates, AI tools, app features, and self-hosting on Umbrel.',
     startsAt: '2026-09-27T00:00:00Z',
     endsAt: '2026-10-07T18:00:00Z',
     eventStartsAt: '2026-10-07T16:00:00Z',
@@ -27,7 +27,7 @@ export const announcements: Announcement[] = [
       href: 'https://meet.google.com/xny-ztvd-zyk',
     },
     secondaryLink: {
-      label: 'Discuss on Pubky',
+      label: 'Announcement on pubky.app',
       href: 'https://pubky.app/post/ihaqcthsdbk751sxctk849bdr7yz7a934qen5gmpcbwcur49i97y/0035REMNNEZ1G',
     },
   },

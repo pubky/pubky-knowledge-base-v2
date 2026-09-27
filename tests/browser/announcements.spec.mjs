@@ -52,7 +52,7 @@ for (const { label, timestamp, active } of [
       await expect(announcement).toBeVisible();
       await expect(announcement.getByRole('heading')).toHaveText('Pubky Community Call #4');
       await expect(announcement.getByRole('link', { name: /^Join the call/ })).toHaveAttribute('href', 'https://meet.google.com/xny-ztvd-zyk');
-      await expect(announcement.getByRole('link', { name: /^Discuss on Pubky/ })).toHaveAttribute('href', POST_URL);
+      await expect(announcement.getByRole('link', { name: /^Announcement on pubky\.app/ })).toHaveAttribute('href', POST_URL);
       await expect(announcement.locator('time[datetime="2026-10-07T16:00:00Z"]')).toBeVisible();
     } else {
       await expect(announcement).toBeHidden();
@@ -152,7 +152,7 @@ for (const width of [320, 390, 1280]) {
     await page.goto('/');
     const region = page.getByRole('region', { name: 'Latest announcements' });
     const join = region.getByRole('link', { name: /^Join the call/ });
-    const discuss = region.getByRole('link', { name: /^Discuss on Pubky/ });
+    const discuss = region.getByRole('link', { name: /^Announcement on pubky\.app/ });
     for (const locator of [region, region.locator('[data-announcement]'), join, discuss]) {
       await expect(locator).toBeVisible();
       await expectFitsViewport(locator, width);
