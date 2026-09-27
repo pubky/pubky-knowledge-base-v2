@@ -194,29 +194,19 @@ For connections to public-key Homeserver addresses (for example `https://_pubky.
 - **Native SDK targets (Rust SDK and native mobile bindings, not browser/WASM)**: Prefer [PubkyTLS](/glossary/#pubkytls) with raw public key verification. If the PKARR record also advertises an ICANN endpoint and the direct endpoint cannot be reached, the SDK automatically falls back to the ICANN endpoint.
 - **WASM/Browser**: Uses standard HTTPS through the ICANN-compatible path (browsers don't support raw public key TLS)
 
-For Pubky resources, pass the Pubky URL or resource to the SDK and let it build the request. The SDK resolves PKARR, chooses PubkyTLS or standard HTTPS for the runtime, and adds `pubky-host` when an HTTPS Homeserver endpoint needs the target public key. During ICANN fallback, the HTTPS request goes to the ICANN domain, so `pubky-host: <public-key>` tells the Homeserver which user namespace the request is for. Only set that header or choose endpoints yourself when deliberately using the raw Homeserver HTTP API.
-
 **ICANN hosts** (regular domains) use standard HTTPS certificate checks: the certificate must chain to a trusted root and match the requested hostname. On native SDK targets, [PubkyTLS](/glossary/#pubkytls) verifies public-key Homeserver connections directly against the public key from PKARR.
 
 ## Authentication Security
 
 ### Grant Authentication
 
-The authenticator signs an app-specific grant containing the client ID, approved capabilities, expiry, and the app's proof-of-possession public key. The app exchanges the grant and a PoP proof for a short-lived bearer token. The SDK refreshes the bearer without requiring the user's identity key again.
+Grants connect a user's approval to a particular app and its permitted access. The app proves possession of its own key to establish a session, keeping the user's identity key out of routine application requests. The [SDK](/explore/pubky-protocol/sdk/) manages this flow.
 
-Grants can be listed and revoked individually. Revoking a grant invalidates its sessions.
+See [Authentication](/explore/pubky-protocol/authentication/#grant-lifecycle) for signup, sessions, and grant revocation.
 
 ### Capability Scoping
 
-Capabilities follow the principle of least privilege:
-
-```
-/pub/my-app/:rw       # Read+write to specific directory only
-/pub/file.txt:r       # Read-only single file
-/:rw                  # Root access (avoid when possible)
-```
-
-Apps should request minimal capabilities. A trailing slash defines a directory scope; without it, a capability covers only the exact path. Users can review requests in [Pubky Ring](/explore/technologies/pubky-ring/) before approval.
+Capabilities follow the principle of least privilege. Apps should request only the access they need, and users can review requests in [Pubky Ring](/explore/technologies/pubky-ring/) before approval. Reserve broad account-management privileges for trusted identity or session managers. For capability syntax and enforcement rules, use the [client OpenAPI specification](https://github.com/pubky/pubky-homeserver/blob/main/pubky-homeserver/openapi-client.yml).
 
 ### Relay Security
 

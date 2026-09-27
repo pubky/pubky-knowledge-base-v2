@@ -277,13 +277,9 @@ pubky-cli/
 
 ### Connection Issues
 
-```bash
-# Verify homeserver is running
-curl http://127.0.0.1:6287/
+Use the [Homeserver Install Guide](https://github.com/pubky/pubky-homeserver/blob/main/docs/INSTALL.md) to check the service and its logs, and the [Deployment Guide](https://github.com/pubky/pubky-homeserver/blob/main/docs/DEPLOY.md) for network setup. Keep admin access private and protected.
 
-# Check admin API
-curl http://127.0.0.1:6288/
-```
+For direct HTTP diagnostics, consult the maintained [client](https://github.com/pubky/pubky-homeserver/blob/main/pubky-homeserver/openapi-client.yml) and [admin](https://github.com/pubky/pubky-homeserver/blob/main/pubky-homeserver/openapi-admin.yml) OpenAPI specifications.
 
 ### Recovery File Errors
 

@@ -45,7 +45,7 @@ _pubky HTTPS 0 <homeserver-public-key>
 . HTTPS 10 homeserver.example.com port=443
 ```
 
-SDK clients resolve the full `_pubky.<user-public-key>` name so the alias reaches the Homeserver endpoint records. Native SDK clients prefer the direct endpoint when it is reachable and fall back to the ICANN endpoint automatically; browsers use the ICANN-compatible path. During ICANN fallback, the request is sent to the ICANN domain with the user public key preserved in the `pubky-host` header.
+SDK clients resolve the full `_pubky.<user-public-key>` name so the alias reaches the Homeserver endpoint records. Native SDK clients prefer the direct endpoint when it is reachable and fall back to the ICANN endpoint automatically; browsers use the ICANN-compatible path. For Homeserver HTTP request routing, see the [client OpenAPI specification](https://github.com/pubky/pubky-homeserver/blob/main/pubky-homeserver/openapi-client.yml).
 
 ## Caching
 

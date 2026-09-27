@@ -46,7 +46,7 @@ The codebase is organized in layers with strict separation of concerns:
 
 ### Data Flow
 1. **Writes** go to [homeserver](/explore/pubky-protocol/homeserver/) via [SDK](/explore/pubky-protocol/sdk/)
-2. [Nexus](/explore/pubky-apps/indexing-and-aggregation/pubky-nexus/) polls [homeserver](/explore/pubky-protocol/homeserver/) for changes via the `/events/` endpoint
+2. [Nexus](/explore/pubky-apps/indexing-and-aggregation/pubky-nexus/) discovers changes through [Homeserver events](/explore/pubky-protocol/homeserver/#event-stream)
 3. Nexus indexes and aggregates data
 4. **Reads** come from Nexus for performance
 5. Local Dexie cache provides offline access

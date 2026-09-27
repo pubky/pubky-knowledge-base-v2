@@ -15,7 +15,7 @@ Content moderation service for the Pubky ecosystem, designed to protect [homeser
 
 ## Moderation Flows
 
-1. **Homeserver moderation**: Raw media content at `<public key>/` (except `pubky.app/`). Syncs homeserver `/events/`, resolves pubky resources to HTTPS URLs, and submits to Checkstep. Enforces decisions via homeserver admin API.
+1. **Homeserver moderation**: Raw media content at `<public key>/` (except `pubky.app/`). Follows [Homeserver events](/explore/pubky-protocol/homeserver/#event-stream), resolves pubky resources to HTTPS URLs, and submits to Checkstep. Enforces decisions via the privileged [Homeserver admin API](https://github.com/pubky/pubky-homeserver/blob/main/pubky-homeserver/openapi-admin.yml).
 
 2. **Nexus moderation**: Social content at `<public key>/pubky.app/`. Syncs [Nexus](/explore/pubky-apps/indexing-and-aggregation/pubky-nexus/) `/v0/events`, parses social entities (profiles, posts, tags, threads), and sends to Checkstep with partial content support. Enforces via moderation bot tagging and homeserver admin API.
 

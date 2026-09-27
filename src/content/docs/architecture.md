@@ -132,13 +132,9 @@ flowchart LR
 - **User Choice**: Pick any Homeserver or run your own
 - **Data Ownership**: You control your data
 - **Portability**: Switch Homeservers without losing data
-- **Storage layout**: Files for user data; PostgreSQL for the homeserver's internal metadata (users, quotas, events — not exposed through the API)
+- **Storage layout**: Files for user data; PostgreSQL for the Homeserver's internal metadata
 
-**API Operations:**
-- `PUT /pub/app/path` - Store data
-- `GET /pub/app/path` - Retrieve data
-- `DELETE /pub/app/path` - Delete data
-- `LIST /pub/app/` - List directory
+Applications manage user files through the [SDK](/explore/pubky-protocol/sdk/). For direct HTTP integrations, use the maintained [client OpenAPI specification](https://github.com/pubky/pubky-homeserver/blob/main/pubky-homeserver/openapi-client.yml).
 
 ---
 
@@ -291,27 +287,6 @@ sequenceDiagram
 ### Authentication
 
 See [Authentication](/explore/pubky-protocol/authentication/) for the full authentication flow.
-
-### Data Integrity
-
-**All data operations are signed:**
-1. Client creates data
-2. Client signs hash with private key
-3. Homeserver verifies signature
-4. Data stored with signature
-5. Anyone can verify authenticity
-
-### Trust Model
-
-**What you trust:**
-- ✅ Mathematics (cryptography)
-- ✅ Your own keys
-- ⚠️ Your Homeserver for availability (not integrity)
-
-**What you DON'T trust:**
-- ❌ Central authorities
-- ❌ DNS registrars
-- ❌ Server operators to verify data (math does it)
 
 ---
 
