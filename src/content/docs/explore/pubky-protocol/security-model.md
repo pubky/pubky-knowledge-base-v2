@@ -13,7 +13,7 @@ This is achieved through:
 - Identity based routing. Knowing identity is enough to locate data
 - Local data portability via [Pubky Backup](/explore/technologies/pubky-backup/) for public `/pub/...` data (Homeserver mirroring planned but not yet implemented)
 - Optional data signing to detect tampering (planned for apps that need it)
-- End-to-end encryption for encrypted data (planned; homeserver cannot read)
+- Application-managed encryption for data that should remain confidential from the Homeserver
 
 ## Trust Philosophy: "It is OK to trust when there is a Credible Exit"
 
@@ -70,13 +70,12 @@ The security model considers three primary threat actors:
 ### Homeserver Operators
 
 **Current Capabilities:**
-- Can read all user data (public and private)
+- Can read public and private data unless the app encrypts it before upload
 - Can tamper with user data without detection
 - Can deny service (refuse to serve data)
 - Can log access patterns (who reads what)
 
 **After Planned Improvements:**
-- Cannot read encrypted data
 - Cannot modify signed data without detection (for apps using signing)
 - Can still deny service (availability attacks)
 - Can still observe metadata (access patterns)
@@ -150,22 +149,21 @@ The [SDK](/explore/pubky-protocol/sdk/) will optionally sign data on behalf of t
 
 **Important**: Signing will be optional per-app. Not every use case requires cryptographic verification of data integrity, and signing adds storage and processing overhead.
 
-### Guarded Data (Planned)
+<span id="guarded-data-planned"></span>
 
-Guarded data access control will be enforced by the homeserver, requiring authentication to read. Path conventions are TBD. This is not encryption — the homeserver can still read the data.
+### Guarded Data
+
+Homeservers enforce access control for data under `/priv/`. Apps need a session for the storage owner's identity and permissions covering the requested access. The Homeserver operator can still read the contents unless the app encrypts them.
 
 **Use case:** Data that should be non-public but where trusting the homeserver is acceptable.
 
-### Encrypted Data (Planned)
+See [Private Storage](/explore/pubky-protocol/private-storage/) for the overview and upstream access rules.
 
-End-to-end encryption for encrypted data. Homeserver stores ciphertext and cannot read the content.
+<span id="encrypted-data-planned"></span>
 
-**After implementation:**
-- Homeserver sees only encrypted blobs
-- Only authorized parties can decrypt
-- Metadata (access patterns, data sizes) still visible to homeserver
+### Encrypted Data
 
-**Quantum Computing Rationale**: The layered approach (encrypted data behind guarded paths) provides defense-in-depth. As quantum computing advances, encryption that is secure today may be cracked in the future. By requiring authentication to access encrypted data, if the encryption is eventually cracked, the access control layer remains as a second barrier.
+Applications can encrypt content before uploading it and manage decryption keys themselves. The Homeserver then stores ciphertext, while access patterns and data sizes remain visible. `/priv/` adds access control; it does not provide encryption or key management. [Pubky Noise](/explore/technologies/pubky-noise/) addresses encrypted communication channels between peers.
 
 ### Homeserver Mirroring (Planned, Not Yet Started)
 
