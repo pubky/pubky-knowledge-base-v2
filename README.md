@@ -58,6 +58,22 @@ SDK tabs, responsive layouts, and JavaScript/reduced-motion fallbacks. External
 requests are stubbed so checks do not send analytics or depend on third-party
 services. The same build and checks run on pull requests and pushes to `main`.
 
+## Homepage announcements
+
+Edit [src/data/announcements.ts](src/data/announcements.ts) to add or remove
+announcements, in display order. Each entry has text, HTTPS action links, and
+`startsAt` / `endsAt` ISO timestamps with an explicit timezone (`Z` means UTC).
+Use a start in the past to publish immediately. `eventStartsAt` optionally adds
+an event date and time; it is separate from the announcement's visibility window.
+Invalid dates, reversed windows, and duplicate IDs fail the build.
+
+After deployment, the browser shows each announcement from its start (inclusive)
+until its end (exclusive), including in open tabs, without another build. It uses
+the visitor's device clock and JavaScript; without JavaScript the announcement
+stays hidden to avoid showing expired information. The section takes no space
+when no entries are active. Only add public information: scheduled content is
+included in the static page source even outside its visibility window.
+
 ## Social Cards (Open Graph)
 
 Shared links render a 1200×630 preview card. The homepage uses the static

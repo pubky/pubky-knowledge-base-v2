@@ -1,0 +1,212 @@
+---
+import { announcements } from '../data/announcements';
+import { withBase } from '../utils/base-path';
+
+const eventDate = (value: string) => {
+  const date = new Date(value);
+  const options = { timeZone: 'UTC' };
+  return {
+    month: date.toLocaleDateString('en-US', { ...options, month: 'short' }),
+    day: date.toLocaleDateString('en-US', { ...options, day: '2-digit' }),
+    weekday: date.toLocaleDateString('en-US', { ...options, weekday: 'long' }),
+    time: `${date.toLocaleTimeString('en-GB', { ...options, hour: '2-digit', minute: '2-digit' })} UTC`,
+    full: `${date.toLocaleDateString('en-US', { ...options, weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })}, ${date.toLocaleTimeString('en-GB', { ...options, hour: '2-digit', minute: '2-digit' })} UTC`,
+  };
+};
+---
+
+<scheduled-announcements class="announcements not-content" role="region" aria-label="Latest announcements" hidden>
+  <div class="announcement-container">
+    {announcements.map((announcement) => {
+      const date = announcement.eventStartsAt ? eventDate(announcement.eventStartsAt) : undefined;
+      return (
+        <article
+          class:list={['announcement', { 'announcement-with-event': date }]}
+          data-announcement
+          data-starts-at={announcement.startsAt}
+          data-ends-at={announcement.endsAt}
+          aria-labelledby={`announcement-${announcement.id}`}
+          hidden
+        >
+          {date && (
+            <time class="announcement-date" datetime={announcement.eventStartsAt} aria-label={date.full}>
+              <span class="announcement-date-number" aria-hidden="true">
+                <span class="announcement-month">{date.month}</span>
+                <span class="announcement-day">{date.day}</span>
+              </span>
+              <span class="announcement-date-detail" aria-hidden="true">
+                <span>{date.weekday}</span>
+                <span class="announcement-time">{date.time}</span>
+              </span>
+            </time>
+          )}
+          <div class="announcement-copy">
+            <p class="announcement-label">{announcement.label}</p>
+            <h2 id={`announcement-${announcement.id}`}>{announcement.title}</h2>
+            <p class="announcement-description">{announcement.description}</p>
+          </div>
+          <div class="announcement-actions">
+            <a class="announcement-primary" href={announcement.primaryLink.href} target="_blank" rel="noopener noreferrer" aria-label={`${announcement.primaryLink.label} (opens in new tab)`}>
+              <span>{announcement.primaryLink.label}</span>
+              <img src={withBase('/images/icons/arrow-right.svg')} width="16" height="16" alt="" aria-hidden="true" />
+            </a>
+            {announcement.secondaryLink && (
+              <a class="announcement-secondary" href={announcement.secondaryLink.href} target="_blank" rel="noopener noreferrer" aria-label={`${announcement.secondaryLink.label} (opens in new tab)`}>
+                {announcement.secondaryLink.label}
+              </a>
+            )}
+          </div>
+        </article>
+      );
+    })}
+  </div>
+</scheduled-announcements>
+
+<script>
+  import '../scripts/announcements';
+</script>
+
+<style>
+  /* New announcement treatment using the existing Pubky design tokens. */
+  .announcements {
+    display: block;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    padding-top: var(--spacing-6);
+    box-sizing: border-box;
+  }
+  .announcements[hidden], .announcement[hidden] { display: none; }
+  .announcement-container {
+    display: grid;
+    gap: var(--spacing-4);
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-10);
+  }
+  .announcement {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: var(--spacing-8);
+    padding: var(--spacing-8);
+    border: var(--landing-border-width) solid var(--alpha-white-16);
+    border-radius: var(--radius-xl);
+    background: linear-gradient(115deg, var(--base-card), var(--base-background));
+    box-shadow: var(--shadow-sm);
+  }
+  .announcement-with-event {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+  }
+  .announcement-date {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-3);
+    padding: var(--spacing-4) var(--spacing-6);
+    border: var(--landing-border-width) solid var(--alpha-white-10);
+    border-radius: var(--radius-lg);
+    background: var(--alpha-white-5);
+    color: var(--base-foreground);
+    text-align: center;
+  }
+  .announcement-date-number, .announcement-date-detail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .announcement-month, .announcement-label {
+    font-size: var(--text-xs-size);
+    line-height: var(--text-xs-lh);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .announcement-month { color: var(--base-secondary-foreground); }
+  .announcement-day {
+    font-family: 'Inter Tight', 'Inter', system-ui, sans-serif;
+    font-size: var(--text-5xl-size);
+    line-height: var(--text-5xl-lh);
+    font-weight: 600;
+  }
+  .announcement-date-detail {
+    gap: var(--spacing-1);
+    font-size: var(--text-xs-size);
+    line-height: var(--text-xs-lh);
+    color: var(--base-secondary-foreground);
+  }
+  .announcement-time { color: var(--base-foreground); font-weight: 600; white-space: nowrap; }
+  .announcement-copy { min-width: 0; }
+  .announcement-label { margin: 0 0 var(--spacing-3); color: var(--base-secondary-foreground); }
+  .announcement h2 {
+    margin: 0;
+    color: var(--base-foreground);
+    font-family: 'Inter Tight', 'Inter', system-ui, sans-serif;
+    font-size: var(--text-4xl-size);
+    line-height: var(--text-4xl-lh);
+    font-weight: 600;
+    text-wrap: balance;
+  }
+  .announcement-description {
+    margin: var(--spacing-3) 0 0;
+    max-width: 60ch;
+    color: var(--base-secondary-foreground);
+    font-size: var(--text-base-size);
+    line-height: var(--text-base-lh);
+  }
+  .announcement-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--spacing-2);
+  }
+  .announcement-actions a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-3);
+    min-height: var(--landing-touch-target);
+    padding: var(--spacing-3) var(--spacing-5);
+    box-sizing: border-box;
+    border: var(--landing-border-width) solid transparent;
+    border-radius: var(--radius-full);
+    font-size: var(--text-sm-size);
+    line-height: var(--text-sm-lh);
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background var(--landing-motion) ease, border-color var(--landing-motion) ease;
+  }
+  .announcement-primary { background: var(--base-foreground); color: var(--base-background); }
+  .announcement-primary:hover { background: var(--base-secondary-foreground); }
+  .announcement-primary img { filter: invert(1); transition: transform var(--landing-motion) ease; }
+  .announcement-primary:hover img { transform: translateX(var(--spacing-1)); }
+  .announcement-actions .announcement-secondary { border-color: var(--base-border); color: var(--base-foreground); }
+  .announcement-secondary:hover { background: var(--alpha-white-10); }
+
+  @media (max-width: 1049px) {
+    .announcements { width: auto; margin-left: 0; padding-top: var(--spacing-4); }
+    .announcement-container { padding: 0; }
+    .announcement { grid-template-columns: minmax(0, 1fr); gap: var(--spacing-6); }
+    .announcement-with-event { grid-template-columns: auto minmax(0, 1fr); }
+    .announcement-date { grid-row: span 2; }
+    .announcement-actions { flex-direction: row; flex-wrap: wrap; }
+    .announcement h2 { font-size: var(--text-3xl-size); line-height: var(--text-3xl-lh); }
+  }
+  @media (max-width: 639px) {
+    .announcement { grid-template-columns: minmax(0, 1fr); padding: var(--spacing-6); gap: var(--spacing-5); }
+    .announcement-date {
+      grid-row: auto;
+      flex-direction: row;
+      justify-content: flex-start;
+      gap: var(--spacing-5);
+      padding: var(--spacing-3) var(--spacing-4);
+    }
+    .announcement-date-detail { align-items: flex-start; font-size: var(--text-sm-size); line-height: var(--text-sm-lh); }
+    .announcement-day { font-size: var(--text-4xl-size); line-height: var(--text-4xl-lh); }
+    .announcement-actions { flex-direction: column; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .announcement-actions a, .announcement-primary img { transition: none; }
+    .announcement-primary:hover img { transform: none; }
+  }
+</style>
