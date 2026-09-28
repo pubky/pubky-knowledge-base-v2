@@ -15,7 +15,7 @@
     "@eslint/js": "^10.0.1",
     "@types/react": "^19.0.0",
     "eslint": "^10.11.0",
-    "prettier": "^3.8.1",
+    "prettier": "^3.9.8",
     "react": "^19.3.0",
     "react-native": "^0.87.1",
     "typescript": "^6.0.3",
