@@ -87,6 +87,12 @@
 	--alpha-white-5: rgba(255, 255, 255, 0.045);
 	--base-secondary-hover: #3a3a3f;
 
+	/* A restrained cool accent for prominent homepage announcements. */
+	--announcement-background-start: #142234;
+	--announcement-background-end: #0b0f19;
+	--announcement-border: rgba(147, 197, 253, 0.25);
+	--announcement-accent: #b3d4fc;
+
 	/* AI landing page — extends the existing Pubky palette and type scale. */
 	--landing-touch-target: 44px;
 	--landing-border-width: 1px;
