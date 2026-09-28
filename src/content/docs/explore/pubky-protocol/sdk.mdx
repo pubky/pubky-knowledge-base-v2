@@ -25,7 +25,7 @@ New to Pubky? Start with the [Introduction](/explore/pubky-protocol/introduction
 | **iOS** | Swift | 🚧 Beta | [pubky-core-ffi](https://github.com/pubky/pubky-core-ffi) |
 | **Android** | Kotlin | 🚧 Beta | [pubky-core-ffi](https://github.com/pubky/pubky-core-ffi) |
 
-All platforms share a consistent API surface. The React Native SDK uses mobile-optimized UniFFI bindings but exposes the same API as the JavaScript SDK.
+Core identity, authentication, and storage workflows are available across platforms, but API coverage varies by binding. The React Native SDK uses mobile-optimized UniFFI bindings.
 
 ## API Reference
 
@@ -48,6 +48,8 @@ The SDK is organized around a small set of actors that mirror the developer work
 5. **PublicStorage** — Read anyone's public data without signing in. No keys or session needed.
 
 For event-driven apps, **EventStreamBuilder** lets you subscribe to real-time changes via SSE. **Pkdns** handles discovery of users' homeservers via PKARR records. **GrantManager** provides admin-level permission management. **BrowserSessionStore** persists grant sessions in browsers.
+
+For client resource limits, see the SDK's [error-body limits](https://github.com/pubky/pubky-homeserver/blob/main/pubky-sdk/README.md#error-body-limits) and [event-stream limits](https://github.com/pubky/pubky-homeserver/blob/main/pubky-sdk/README.md#event-stream-limits). The Rust SDK also provides [storage lock helpers](https://docs.rs/pubky/latest/pubky/struct.SessionStorage.html#method.lock) for coordinating writes.
 
 ## Quick Example
 
