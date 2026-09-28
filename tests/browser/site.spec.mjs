@@ -205,6 +205,18 @@ test('respects reduced motion and restores the decorative network after navigati
   await expect(resources).not.toHaveAttribute('data-ai-network-ready', 'true');
 });
 
+test('Loopky demo card offers the website and the repository', async ({ page }) => {
+  await page.goto('/');
+  const card = page.locator('.demo-card').filter({ has: page.getByRole('heading', { level: 3, name: 'Loopky' }) });
+  await expect(card).toHaveCount(1);
+  const actions = card.locator('.demo-card-btn');
+  await expect(actions).toHaveCount(2);
+  await expect(actions.nth(0)).toHaveText('Website');
+  await expect(actions.nth(0)).toHaveAttribute('href', 'https://loopky.app');
+  await expect(actions.nth(1)).toHaveText('GitHub');
+  await expect(actions.nth(1)).toHaveAttribute('href', 'https://github.com/jvsena42/loopky');
+});
+
 test.describe('without JavaScript', () => {
   test.use({ javaScriptEnabled: false });
 
