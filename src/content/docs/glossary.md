@@ -36,6 +36,11 @@ Traditional system for translating domain names to IP addresses. [PKDNS](/explor
 **[DNS over HTTPS (DoH)](/explore/technologies/doh/)**
 Protocol for encrypting DNS queries using HTTPS, preventing surveillance and tampering.
 
+## G
+
+**Guarded Data**
+Data under `/priv/` that a [Homeserver](/explore/pubky-protocol/homeserver/) exposes only to an authenticated session for the owner's identity. It is access control, not encryption: the operator can still read the contents unless the app encrypts them. See [Private Storage](/explore/pubky-protocol/private-storage/).
+
 ## H
 
 **[Homeserver](/explore/pubky-protocol/homeserver/)**
@@ -77,6 +82,9 @@ Self-issued, signed DNS-like records published to the Mainline DHT. Each record 
 
 **[PKDNS](/explore/technologies/pkdns/)**
 DNS server that resolves public-key domains by fetching PKARR records from the Mainline DHT, bridging traditional DNS with decentralized identity.
+
+**[Private Storage](/explore/pubky-protocol/private-storage/)**
+Storage under `/priv/` on a [Homeserver](/explore/pubky-protocol/homeserver/), readable only with an authenticated session for the data owner's identity and capabilities covering the requested path. It provides access control, not encryption; apps that need confidentiality from the operator encrypt the data themselves.
 
 **Proof of Possession (PoP)**
 A cryptographic check that an application controls the private key bound to a grant. The application presents a signed PoP proof when exchanging the grant for a bearer token, so the grant cannot be used on its own. See [Authentication](/explore/pubky-protocol/authentication/).
