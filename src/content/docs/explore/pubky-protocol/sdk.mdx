@@ -70,11 +70,9 @@ Sign in and read/write data. Account creation (signup) is generally handled outs
 
 ## Storage Locking
 
-When several clients update the same file, storage locks help coordinate read-modify-write workflows. They require a Homeserver that supports WebDAV storage locks. The Rust SDK provides lock helpers on `SessionStorage`; the JavaScript bindings do not expose equivalent helpers.
+Storage locks help applications coordinate updates to the same file on Homeservers that support WebDAV storage locks. Applications opt in through the Rust SDK's `SessionStorage` helpers; ordinary storage operations do not acquire locks automatically. The JavaScript bindings do not expose these helpers.
 
-Acquire a lock before reading the file, apply your changes, write using the lock, and release it when finished. Refresh the lock if you need more time. If another client holds it, wait and retry; if your lock expires, acquire a new lock and read the file again before retrying the update. See the [Rust storage-lock example and API reference](https://docs.rs/pubky/latest/pubky/struct.StorageLock.html#example).
-
-Locks coordinate individual file updates; they do not provide general transaction or crash-safety guarantees. An upload started without a lock can still finish after another client acquires one. See the Locking section of the [client OpenAPI specification](https://github.com/pubky/pubky-homeserver/blob/main/pubky-homeserver/openapi-client.yml) for the protocol, guarantees, and limitations.
+The application manages the lock lifecycle and retries; the SDK handles requests and lock tokens. The Homeserver keeps a lock alive during a write made with it. See the [Rust storage-lock example](https://docs.rs/pubky/latest/pubky/struct.StorageLock.html#example) and [lock API](https://docs.rs/pubky/latest/pubky/struct.SessionStorage.html#method.lock) for usage and renewal behavior, and the Locking section of the [client OpenAPI specification](https://github.com/pubky/pubky-homeserver/blob/main/pubky-homeserver/openapi-client.yml) for protocol guarantees and limitations.
 
 ## Resources
 
