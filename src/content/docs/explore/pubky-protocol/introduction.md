@@ -54,7 +54,7 @@ Pubky's distributed architecture provides user autonomy through credible exit be
 - **Docker support**: Easy deployment and testing
 
 ### Production-Ready
-- **Persistent file storage**: Homeservers let apps create, read, update, delete, and list files under publicly readable `/pub/` or access-controlled [`/priv/`](/explore/pubky-protocol/private-storage/) paths.
+- **Persistent file storage**: Homeservers let apps create, read, update, delete, and list files under publicly readable `/pub/` or access-controlled, unencrypted [`/priv/`](/explore/pubky-protocol/private-storage/) paths.
 - **Rate limiting**: Built-in DDoS protection
 - **Metrics and monitoring**: Prometheus-compatible metrics
 - **Admin API**: Server management and diagnostics
