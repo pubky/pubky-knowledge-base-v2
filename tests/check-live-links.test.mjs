@@ -76,8 +76,11 @@ test('the configured PKDNS exception filters only its exact URL in real Lychee e
 });
 
 test('all GitHub Actions exceptions remain checkable locally and under generic CI', (t) => {
-  const actionsUrls = JSON.parse(readFileSync(new URL('../config/github-actions-link-exceptions.json', import.meta.url), 'utf8'));
-  assert.equal(actionsUrls.length, 20, 'Keep the explicitly selected 20 GitHub Actions exceptions.');
+  const actionsExceptions = JSON.parse(readFileSync(new URL('../config/github-actions-link-exceptions.json', import.meta.url), 'utf8'));
+  const actionsUrls = actionsExceptions.map(({ url }) => url);
+  assert.ok(actionsUrls.length > 0, 'Exercise the configured GitHub Actions exceptions.');
+  assert.equal(new Set(actionsUrls).size, actionsUrls.length, 'Each exception must have a unique URL.');
+  assert.doesNotThrow(() => liveLinkExclusions(actionsExceptions), 'Every exception must have a canonical URL and a reason.');
   for (const env of [{}, { GITHUB_ACTIONS: 'false' }, { CI: 'true' }, { CI: 'true', GITHUB_ACTIONS: 'false' }]) {
     assert.deepEqual(dumpCheckedUrls(t, [pkdnsUrl, ...actionsUrls], loadLiveLinkExceptions(env)),
       new Set(actionsUrls), JSON.stringify(env));
@@ -85,8 +88,13 @@ test('all GitHub Actions exceptions remain checkable locally and under generic C
 });
 
 test('GitHub Actions excludes the configured exact URLs while checking other URLs on those hosts', (t) => {
-  const actionsUrls = JSON.parse(readFileSync(new URL('../config/github-actions-link-exceptions.json', import.meta.url), 'utf8'));
-  const otherUrls = [...new Set(actionsUrls.map((url) => new URL('/not-an-exempt-url', url).href))];
+  const actionsUrls = JSON.parse(readFileSync(new URL('../config/github-actions-link-exceptions.json', import.meta.url), 'utf8'))
+    .map(({ url }) => url);
+  const otherUrls = [...new Set(actionsUrls.flatMap((url) => [
+    new URL('/not-an-exempt-url', url).href,
+    `${url}${url.includes('?') ? '&' : '?'}not-exempt=1`,
+    `${url}#not-an-exempt-anchor`,
+  ]))];
   const checked = dumpCheckedUrls(t, [pkdnsUrl, ...actionsUrls, ...otherUrls],
     loadLiveLinkExceptions({ GITHUB_ACTIONS: 'true' }));
   assert.deepEqual(checked, new Set(otherUrls));

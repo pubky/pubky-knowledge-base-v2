@@ -15,10 +15,9 @@ const browserHeaders = [
 export function loadLiveLinkExceptions(env = process.env) {
   const exceptions = JSON.parse(readFileSync(join(projectRoot, 'config/live-link-exceptions.json'), 'utf8'));
   if (env.GITHUB_ACTIONS === 'true') {
-    // These exact URLs returned 403 on GitHub runners but passed locally.
-    // They are unverifiable from GitHub Actions; local runs still check them.
-    const urls = JSON.parse(readFileSync(join(projectRoot, 'config/github-actions-link-exceptions.json'), 'utf8'));
-    exceptions.push(...urls.map((url) => ({ url, reason: 'Returns 403 from GitHub Actions; checked locally.' })));
+    // These exact URLs block or rate-limit GitHub runners. Each entry records
+    // the observed failure; local and other CI runs still check them.
+    exceptions.push(...JSON.parse(readFileSync(join(projectRoot, 'config/github-actions-link-exceptions.json'), 'utf8')));
   }
   return exceptions;
 }
