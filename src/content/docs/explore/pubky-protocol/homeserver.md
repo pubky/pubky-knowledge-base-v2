@@ -16,7 +16,7 @@ Homeservers also support [storage locking](/explore/pubky-protocol/sdk/#storage-
 
 ## Public vs Private Data
 
-Current implementations only support public, unencrypted data. Encrypted data and guarded (access-controlled) data are planned — see [Security Model](/explore/pubky-protocol/security-model/) for the trust implications.
+Homeservers provide publicly readable `/pub/` storage and access-controlled (not encrypted) `/priv/` storage. See [Private Storage](/explore/pubky-protocol/private-storage/) for an overview and upstream guides.
 
 ## Event Stream
 

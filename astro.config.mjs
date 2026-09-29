@@ -194,6 +194,7 @@ export default defineConfig({
 						{ label: 'ELI5', slug: 'explore/pubky-protocol/eli5' },
 						{ label: 'Authentication', slug: 'explore/pubky-protocol/authentication' },
 						{ label: 'Homeserver', slug: 'explore/pubky-protocol/homeserver' },
+						{ label: 'Private Storage', slug: 'explore/pubky-protocol/private-storage' },
 						{ label: 'API', slug: 'explore/pubky-protocol/api' },
 						{ label: 'SDK', slug: 'explore/pubky-protocol/sdk' },
 						{ label: 'Security Model', slug: 'explore/pubky-protocol/security-model' },
