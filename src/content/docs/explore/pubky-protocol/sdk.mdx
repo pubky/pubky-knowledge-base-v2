@@ -25,7 +25,7 @@ New to Pubky? Start with the [Introduction](/explore/pubky-protocol/introduction
 | **iOS** | Swift | 🚧 Beta | [pubky-core-ffi](https://github.com/pubky/pubky-core-ffi) |
 | **Android** | Kotlin | 🚧 Beta | [pubky-core-ffi](https://github.com/pubky/pubky-core-ffi) |
 
-All platforms share a consistent API surface. The React Native SDK uses mobile-optimized UniFFI bindings but exposes the same API as the JavaScript SDK.
+The JavaScript SDK wraps the Rust SDK through WebAssembly. React Native uses separate UniFFI bindings with their own [API documentation](https://github.com/pubky/react-native-pubky#readme).
 
 ## API Reference
 
@@ -49,6 +49,8 @@ The SDK is organized around a small set of actors that mirror the developer work
 
 For event-driven apps, **EventStreamBuilder** lets you subscribe to real-time changes via SSE. **Pkdns** handles discovery of users' homeservers via PKARR records. **GrantManager** provides admin-level permission management. **BrowserSessionStore** persists grant sessions in browsers.
 
+For client resource limits, see the SDK's [error-body limits](https://github.com/pubky/pubky-homeserver/blob/main/pubky-sdk/README.md#error-body-limits) and [event-stream limits](https://github.com/pubky/pubky-homeserver/blob/main/pubky-sdk/README.md#event-stream-limits).
+
 ## Quick Example
 
 Sign in and read/write data. Account creation (signup) is generally handled outside of your app. See the [Developer Guide](/explore/pubky-protocol/getting-started/) for testnet setup where you bootstrap accounts for development.
@@ -65,6 +67,12 @@ Sign in and read/write data. Account creation (signup) is generally handled outs
   </TabItem>
 </Tabs>
 </div>
+
+## Storage Locking
+
+Storage locks help applications coordinate updates to the same file on Homeservers that support WebDAV storage locks. Applications opt in through the Rust SDK's `SessionStorage` helpers; ordinary storage operations do not acquire locks automatically. The JavaScript bindings do not expose these helpers.
+
+The application manages the lock lifecycle and retries; the SDK handles requests and lock tokens. The Homeserver keeps a lock alive during a write made with it. See the [Rust storage-lock example](https://docs.rs/pubky/latest/pubky/struct.StorageLock.html#example) and [lock API](https://docs.rs/pubky/latest/pubky/struct.SessionStorage.html#method.lock) for usage and renewal behavior, and the Locking section of the [client OpenAPI specification](https://github.com/pubky/pubky-homeserver/blob/main/pubky-homeserver/openapi-client.yml) for protocol guarantees and limitations.
 
 ## Resources
 

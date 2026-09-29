@@ -12,6 +12,8 @@ The Homeserver implementation consists of several components: the main HTTP API 
 
 The [client OpenAPI specification](https://github.com/pubky/pubky-homeserver/blob/main/pubky-homeserver/openapi-client.yml) defines the API used by applications. Privileged operator tasks are covered by the separate [admin OpenAPI specification](https://github.com/pubky/pubky-homeserver/blob/main/pubky-homeserver/openapi-admin.yml). For configuration, follow the [Install Guide](https://github.com/pubky/pubky-homeserver/blob/main/docs/INSTALL.md).
 
+Homeservers also support [storage locking](/explore/pubky-protocol/sdk/#storage-locking) to help applications coordinate concurrent updates to the same file.
+
 ## Public vs Private Data
 
 Current implementations only support public, unencrypted data. Encrypted data and guarded (access-controlled) data are planned — see [Security Model](/explore/pubky-protocol/security-model/) for the trust implications.

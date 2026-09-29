@@ -209,6 +209,8 @@ See the [Pubky Docker README](https://github.com/pubky/pubky-docker#readme) for 
 
 ## Common Error Messages
 
+HTTP error details may be truncated by the SDK's error-body limit. See the [SDK error-body limits](https://github.com/pubky/pubky-homeserver/blob/main/pubky-sdk/README.md#error-body-limits) for configuration and diagnostics.
+
 ### "Failed to fetch PKARR record"
 
 **Causes**: DHT unreachable, record doesn't exist, network issues
@@ -270,7 +272,7 @@ When reporting bugs, include:
 ```markdown
 ## Environment
 - OS: macOS 14.2
-- SDK: @synonymdev/pubky@0.10.0
+- SDK: @synonymdev/pubky@0.13.0
 - Browser: Chrome 120
 
 ## Steps to Reproduce
