@@ -16,7 +16,7 @@ const clientId = "my-app.example";
 const signUpRes = await signUp(
   secretKey,
   "pubky://8pinxxgqs41n4aididenw5apqp1urfmzdztr8jt4abrkdn435ewo",
-  undefined,
+  undefined, // No signup token
   clientId,
 );
 
