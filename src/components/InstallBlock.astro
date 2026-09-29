@@ -9,14 +9,14 @@ const commands = [
   { label: "Rust", command: "cargo add pubky" },
 ];
 
-// Keep the starter prompt tied to the maintained production documentation.
-const aiPrompt = `Help me build an app with Pubky: public-key identity and user-owned data.
+// Keep the starter prompt tied to the production documentation.
+const aiPrompt = `Help me explore Pubky. Start at https://pubky.org/llms.txt and use the linked index or full documentation as needed.
 
-First ask what I want to build and which language or framework I use.
+Ask what I’d like to know or do. Follow my interests.
 
-Read https://pubky.org/llms-small.txt, then fetch only the relevant .md pages. Start with https://pubky.org/explore/pubky-protocol/getting-started.md when appropriate.
+Cite sources and flag anything you cannot verify or access.
 
-Before writing code, check my installed SDK version against its maintained upstream documentation. Cite the sources you use and flag anything you cannot verify.`;
+If we write code, confirm my language or framework and SDK version, then check the corresponding upstream documentation.`;
 
 const aiLinks = [
   { name: "Claude", url: `https://claude.ai/new?q=${encodeURIComponent(aiPrompt)}`, icon: "claude" },
@@ -108,7 +108,7 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
         text,
         status,
         successMessage: isPrompt
-          ? 'Prompt copied. Paste it into your coding assistant.'
+          ? 'Prompt copied. Paste it into your AI assistant.'
           : 'Install command copied.',
         failureMessage: isPrompt
           ? 'Couldn’t copy. Select the prompt shown above and copy it manually.'

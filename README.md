@@ -94,7 +94,7 @@ by `src/components/Head.astro`.
 ## AI-Readable Docs
 
 Documentation pages provide Markdown and Copy link controls beside the title.
-The homepage links to agent resources and offers a reusable starter prompt for coding assistants.
+The homepage links to agent resources and offers a reusable starter prompt for exploring Pubky with an LLM.
 
 AI tools can reference the docs through these plain Markdown endpoints:
 
