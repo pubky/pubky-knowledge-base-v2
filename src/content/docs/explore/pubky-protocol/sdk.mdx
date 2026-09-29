@@ -25,7 +25,7 @@ New to Pubky? Start with the [Introduction](/explore/pubky-protocol/introduction
 | **iOS** | Swift | 🚧 Beta | [pubky-core-ffi](https://github.com/pubky/pubky-core-ffi) |
 | **Android** | Kotlin | 🚧 Beta | [pubky-core-ffi](https://github.com/pubky/pubky-core-ffi) |
 
-Core identity, authentication, and storage workflows are available across platforms, but API coverage varies by binding. The React Native SDK uses mobile-optimized UniFFI bindings.
+The JavaScript SDK wraps the Rust SDK through WebAssembly. React Native uses separate UniFFI bindings with their own [API documentation](https://github.com/pubky/react-native-pubky#readme).
 
 ## API Reference
 
@@ -49,7 +49,7 @@ The SDK is organized around a small set of actors that mirror the developer work
 
 For event-driven apps, **EventStreamBuilder** lets you subscribe to real-time changes via SSE. **Pkdns** handles discovery of users' homeservers via PKARR records. **GrantManager** provides admin-level permission management. **BrowserSessionStore** persists grant sessions in browsers.
 
-For client resource limits, see the SDK's [error-body limits](https://github.com/pubky/pubky-homeserver/blob/main/pubky-sdk/README.md#error-body-limits) and [event-stream limits](https://github.com/pubky/pubky-homeserver/blob/main/pubky-sdk/README.md#event-stream-limits). The Rust SDK also provides [storage lock helpers](https://docs.rs/pubky/latest/pubky/struct.SessionStorage.html#method.lock) for coordinating writes.
+For client resource limits, see the SDK's [error-body limits](https://github.com/pubky/pubky-homeserver/blob/main/pubky-sdk/README.md#error-body-limits) and [event-stream limits](https://github.com/pubky/pubky-homeserver/blob/main/pubky-sdk/README.md#event-stream-limits).
 
 ## Quick Example
 
@@ -67,6 +67,14 @@ Sign in and read/write data. Account creation (signup) is generally handled outs
   </TabItem>
 </Tabs>
 </div>
+
+## Storage Locking
+
+When several clients update the same file, storage locks help coordinate read-modify-write workflows. They require a Homeserver that supports WebDAV storage locks. The Rust SDK provides lock helpers on `SessionStorage`; the JavaScript bindings do not expose equivalent helpers.
+
+Acquire a lock before reading the file, apply your changes, write using the lock, and release it when finished. Refresh the lock if you need more time. If another client holds it, wait and retry; if your lock expires, acquire a new lock and read the file again before retrying the update. See the [Rust storage-lock example and API reference](https://docs.rs/pubky/latest/pubky/struct.StorageLock.html#example).
+
+Locks coordinate individual file updates; they do not provide general transaction or crash-safety guarantees. An upload started without a lock can still finish after another client acquires one. See the Locking section of the [client OpenAPI specification](https://github.com/pubky/pubky-homeserver/blob/main/pubky-homeserver/openapi-client.yml) for the protocol, guarantees, and limitations.
 
 ## Resources
 
