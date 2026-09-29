@@ -1,0 +1,1 @@
+Inter SemiBold Latin WOFF, copied unchanged from [`@fontsource/inter` 5.2.8](https://www.npmjs.com/package/@fontsource/inter/v/5.2.8), is used to render page-specific Open Graph cards. See [LICENSE](LICENSE) for the SIL Open Font License.

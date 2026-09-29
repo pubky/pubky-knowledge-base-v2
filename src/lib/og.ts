@@ -10,7 +10,7 @@ import sharp from 'sharp';
 
 const root = process.cwd();
 const templatePath = path.join(root, 'src/assets/og/og-card-template.png');
-const fontPath = path.join(root, 'node_modules/@fontsource/inter/files/inter-latin-600-normal.woff');
+const fontPath = path.join(root, 'public/images/fonts/inter/inter-latin-600-normal.woff');
 
 const template = fs.readFileSync(templatePath);
 const interSemiBold = fs.readFileSync(fontPath);

@@ -1703,12 +1703,8 @@ dependencies = [
 name = "pubky-doc-snippets"
 version = "0.1.0"
 dependencies = [
- "anyhow",
- "futures-util",
  "pubky",
- "serde",
  "serde_json",
- "tokio",
 ]
 
 [[package]]

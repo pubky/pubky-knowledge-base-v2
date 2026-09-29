@@ -10,7 +10,7 @@
 // Snippets from: src/content/docs/explore/pubky-protocol/sdk.md
 // =============================================================================
 
-async fn snippet_quick_example() -> anyhow::Result<()> {
+async fn snippet_quick_example() -> Result<(), Box<dyn std::error::Error>> {
     // --8<-- [start:rust_quick_example]
     use pubky::{ClientId, Keypair, Pubky};
 
