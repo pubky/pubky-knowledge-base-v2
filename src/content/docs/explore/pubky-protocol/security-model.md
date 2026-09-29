@@ -153,7 +153,7 @@ The [SDK](/explore/pubky-protocol/sdk/) will optionally sign data on behalf of t
 
 ### Guarded Data
 
-Homeservers enforce access control for data under `/priv/`. Apps need a session for the storage owner's identity and permissions covering the requested access. The Homeserver operator can still read the contents unless the app encrypts them.
+Homeservers enforce access control for data under `/priv/`. Apps need a session for the storage owner's identity and permissions covering the requested access. This is access control, not encryption: the Homeserver operator can still read the contents unless the app encrypts them.
 
 **Use case:** Data that should be non-public but where trusting the homeserver is acceptable.
 

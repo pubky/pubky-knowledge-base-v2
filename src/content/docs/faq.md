@@ -188,7 +188,7 @@ Host it on a Homeserver and link it in your PKARR.
 <a id="q32"></a>
 ### Q32. Is Pubky suitable for private sharing?
 
-Apps can store non-public data under [`/priv/`](/explore/pubky-protocol/private-storage/), with access authorized for the storage owner's identity. Sharing private content with other users requires an app-level design; `/priv/` alone does not provide it. [Pubky Noise](/explore/technologies/pubky-noise/) provides encrypted peer-to-peer communication channels.
+Apps can store non-public data under [`/priv/`](/explore/pubky-protocol/private-storage/), with access authorized for the storage owner's identity. This is access control, not encryption: the Homeserver operator can still read the contents unless the app encrypts them. Sharing private content with other users requires an app-level design; `/priv/` alone does not provide it. [Pubky Noise](/explore/technologies/pubky-noise/) provides encrypted peer-to-peer communication channels.
 
 <a id="q33"></a>
 ### Q33. Where does moderation happen?

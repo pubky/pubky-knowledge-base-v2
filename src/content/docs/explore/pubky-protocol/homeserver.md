@@ -14,7 +14,7 @@ The [client OpenAPI specification](https://github.com/pubky/pubky-homeserver/blo
 
 ## Public vs Private Data
 
-Homeservers provide publicly readable `/pub/` storage and access-controlled `/priv/` storage. Private storage requires the owner's session with the appropriate permissions, but the Homeserver operator can still read its contents unless the app encrypts them. See [Private Storage](/explore/pubky-protocol/private-storage/) for an overview and upstream guides.
+Homeservers provide publicly readable `/pub/` storage and access-controlled (not encrypted) `/priv/` storage. See [Private Storage](/explore/pubky-protocol/private-storage/) for an overview and upstream guides.
 
 ## Event Stream
 
