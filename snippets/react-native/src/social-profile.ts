@@ -4,8 +4,10 @@ declare const homeserverUrl: string;
 // --8<-- [start:rn_social_profile]
 import { signUp, put, get } from "@synonymdev/react-native-pubky";
 
+const clientId = "my-app.example";
+
 // Sign up
-const signUpRes = await signUp(secretKey, homeserverUrl);
+const signUpRes = await signUp(secretKey, homeserverUrl, undefined, clientId);
 if (signUpRes.isErr()) throw new Error(signUpRes.error.message);
 
 // Create profile (following pubky-app-specs)
@@ -21,6 +23,7 @@ const putRes = await put(
   "pubky://alice-pubkey/pub/pubky.app/profile.json",
   profile,
   secretKey,
+  clientId,
 );
 
 // Read profile

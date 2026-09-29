@@ -10,10 +10,14 @@ import {
   getHomeserver,
 } from "@synonymdev/react-native-pubky";
 
+const clientId = "my-app.example";
+
 // Standard signup
 const signUpRes = await signUp(
   secretKey,
   "pubky://8pinxxgqs41n4aididenw5apqp1urfmzdztr8jt4abrkdn435ewo",
+  undefined,
+  clientId,
 );
 
 // Signup with token (for gated homeservers)
@@ -21,10 +25,11 @@ const signUpWithTokenRes = await signUp(
   secretKey,
   "pubky://8pinxxgqs41n4aididenw5apqp1urfmzdztr8jt4abrkdn435ewo",
   "your_signup_token",
+  clientId,
 );
 
 // Sign in
-const signInRes = await signIn(secretKey);
+const signInRes = await signIn(secretKey, clientId);
 
 // Get homeserver
 const homeserverRes = await getHomeserver(publicKey);
