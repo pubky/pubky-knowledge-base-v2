@@ -211,6 +211,7 @@ const icons = {
   timer: '/images/icons/timer.svg',
   codeXml: '/images/icons/code-xml.svg',
   file: '/images/icons/file.svg',
+  circleHelp: '/images/icons/circle-help.svg',
   // Key Concepts
   fingerprint: '/images/icons/fingerprint.svg',
   shieldOff: '/images/icons/shield-off.svg',
@@ -232,34 +233,72 @@ const icons = {
     <div class="home-section-box">
     <div class="card-grid card-grid-3">
       <TextCard
-        title="Overview"
-        description="Start here for the protocol and its applications"
-        href="/overview/"
-        icon={icons.timer}
-      />
-      <TextCard
-        title="Getting Started"
-        description="User guide to identity, pubky.app, and your data"
-        href="/getting-started/"
+        title="Build an app"
+        description="Read and write your first Homeserver record with the Developer Guide."
+        href="/build/developer-guide/"
         icon={icons.codeXml}
       />
       <TextCard
-        title="Glossary"
-        description="Quick reference for key terms"
-        href="/glossary/"
+        title="Understand Pubky"
+        description="Learn what Pubky is, how it works, and why it exists."
+        href="/overview/"
         icon={icons.file}
+      />
+      <TextCard
+        title="Try Pubky"
+        description="Create your identity, join pubky.app, and explore your data."
+        href="/getting-started/"
+        icon={icons.timer}
       />
     </div>
     </div>
   </section>
 
-  <!-- For Users + For Developers — wrapped to equalize card heights across both sections -->
+  <!-- Developer guides and user apps share the existing card layout. -->
   <div class="image-card-sections">
+    <section id="for-developers" class="home-section">
+      <h2 class="home-section-title">
+        <a class="home-section-title-link" href="#for-developers">For Developers</a>
+      </h2>
+      <div class="card-grid card-grid-3">
+        <ImageCard
+          title="Build an app"
+          description="Choose an architecture and connect your app to Pubky."
+          image="/images/cards/pubky-core.png"
+          tags={[
+            { label: "SDK", href: "/build/sdk/" },
+            { label: "App architectures", href: "/build/app-architectures/" },
+            { label: "Authentication", href: "/build/authentication/" },
+          ]}
+        />
+        <ImageCard
+          title="Shared social data"
+          description="Build apps that use shared records, tags, and social connections."
+          image="/images/cards/pubky-apps.png"
+          tags={[
+            { label: "pubky-app-specs", href: "/social-data/pubky-app-specs/" },
+            { label: "Indexing", href: "/social-data/indexing-and-aggregation/" },
+            { label: "Nexus", href: "/social-data/pubky-nexus/" },
+          ]}
+        />
+        <ImageCard
+          title="Development tools"
+          description="Run a local testnet, inspect data, and find project references."
+          image="/images/cards/developer-tools.png"
+          tags={[
+            { label: "Docker", href: "/build/pubky-docker/" },
+            { label: "Explorer", href: "/build/pubky-explorer/" },
+            { label: "Resources", href: "/resources/" },
+          ]}
+        />
+      </div>
+    </section>
+
     <section id="for-users" class="home-section">
       <h2 class="home-section-title">
         <a class="home-section-title-link" href="#for-users">For Users</a>
       </h2>
-      <div class="card-grid card-grid-4 user-apps-grid">
+      <div class="card-grid card-grid-3 user-apps-grid">
         <ImageCard
           title="Pubky"
           titleIcon={pubkyBrandGreen}
@@ -273,7 +312,7 @@ const icons = {
           image="/images/cards/pubky-ring.png"
           links={[
             { label: "Website", href: "https://pubkyring.app/", external: true },
-            { label: "Learn More", href: "/explore/technologies/pubky-ring/" },
+            { label: "Learn More", href: "/use/pubky-ring/" },
           ]}
         />
         <DemoCard
@@ -281,86 +320,68 @@ const icons = {
           description="Create a Pubky identity and sign in to apps with Google. Your key stays in your browser, with an encrypted backup in Google Drive."
           actions={[
             { label: "Open", href: "https://passport.pubky.app/", variant: "secondary" },
-            { label: "Learn More", href: "/explore/technologies/pubky-passport/", variant: "outline" },
-          ]}
-        />
-        <ImageCard
-          title="Pubky Explorer"
-          image="/images/cards/pubky-explorer.png"
-          links={[
-            { label: "Explore", href: "https://explorer.pubky.app", external: true },
-            { label: "Learn More", href: "/explore/technologies/pubky-explorer/" },
-          ]}
-        />
-      </div>
-    </section>
-
-    <section id="for-developers" class="home-section">
-      <h2 class="home-section-title">
-        <a class="home-section-title-link" href="#for-developers">For Developers</a>
-      </h2>
-      <div class="card-grid card-grid-3">
-        <ImageCard
-          title="Pubky Homeserver"
-          titleIcon={pubkyBrandWhite}
-          image="/images/cards/pubky-core.png"
-          tags={[
-            { label: "Developer Guide", href: "/explore/pubky-protocol/developer-guide/" },
-            { label: "SDK", href: "/explore/pubky-protocol/sdk/" },
-            { label: "Homeserver", href: "/explore/pubky-protocol/homeserver/" },
-          ]}
-        />
-        <ImageCard
-          title="Developer Tools"
-          image="/images/cards/developer-tools.png"
-          tags={[
-            { label: "Docker Stack", href: "/explore/technologies/pubky-docker/" },
-            { label: "Explorer", href: "/explore/technologies/pubky-explorer/" },
-            { label: "PKDNS", href: "/explore/technologies/pkdns/" },
-          ]}
-        />
-        <ImageCard
-          title="Pubky Apps"
-          image="/images/cards/pubky-apps.png"
-          tags={[
-            { label: "Architecture", href: "/explore/pubky-apps/app-architectures/introduction/" },
-            { label: "Indexing", href: "/explore/pubky-apps/indexing-and-aggregation/introduction/" },
-            { label: "Reference App", href: "/explore/pubky-apps/reference-app/pubky-app/" },
+            { label: "Learn More", href: "/use/pubky-passport/", variant: "outline" },
           ]}
         />
       </div>
     </section>
   </div>
 
-  <!-- Key Concepts -->
+  <!-- Keep the existing anchor for links to this section. -->
   <section id="key-concepts" class="home-section key-concepts">
     <h2 class="home-section-title">
-      <a class="home-section-title-link" href="#key-concepts">Key Concepts</a>
+      <a class="home-section-title-link" href={withBase('/#key-concepts')}>Understand the system</a>
     </h2>
     <div class="card-grid card-grid-4">
       <TextCard
-        title="PKDNS"
-        description="Decentralized, censorship-resistant DNS for public-key domains."
-        href="/explore/technologies/pkdns/"
+        title="System Architecture"
+        description="See how identity, discovery, storage, and applications fit together."
+        href="/architecture/"
+        icon={icons.lineChart}
+      />
+      <TextCard
+        title="PKARR"
+        description="Discover services using signed records addressed by public keys."
+        href="/components/pkarr/"
         icon={icons.fingerprint}
       />
       <TextCard
-        title="Censorship Resistance"
-        description="Why centralized platforms fail and how Pubky solves it."
-        href="/explore/concepts/censorship/"
-        icon={icons.shieldOff}
-      />
-      <TextCard
-        title="Credible Exit"
-        description="Freedom to switch providers without losing data."
-        href="/explore/concepts/credible-exit/"
+        title="Homeserver"
+        description="Understand where Pubky users store data and how apps access it."
+        href="/components/homeserver/"
         icon={icons.arrowLeftRight}
       />
       <TextCard
-        title="Semantic Social Graph"
-        description="Tagged relationships and user-controlled filtering."
-        href="/explore/concepts/semantic-social-graph/"
-        icon={icons.lineChart}
+        title="Security Model"
+        description="Understand key custody, app permissions, and trust boundaries."
+        href="/build/security-model/"
+        icon={icons.shieldOff}
+      />
+    </div>
+  </section>
+
+  <section id="reference" class="home-section">
+    <h2 class="home-section-title">
+      <a class="home-section-title-link" href={withBase('/#reference')}>Reference &amp; community</a>
+    </h2>
+    <div class="card-grid card-grid-3">
+      <TextCard
+        title="Glossary"
+        description="Look up terms used throughout the docs."
+        href="/glossary/"
+        icon={icons.file}
+      />
+      <TextCard
+        title="Resources"
+        description="Find project repositories, documentation, and tools."
+        href="/resources/"
+        icon={icons.codeXml}
+      />
+      <TextCard
+        title="Contributing"
+        description="Find community contacts and report bugs or security issues."
+        href="/contributing/"
+        icon={icons.circleHelp}
       />
     </div>
   </section>
@@ -369,9 +390,9 @@ const icons = {
   <section id="demos" class="home-section demos">
     <div class="demos-header">
       <h2 class="home-section-title">
-        <a class="home-section-title-link" href="#demos">Demos</a>
+        <a class="home-section-title-link" href={withBase('/#demos')}>Apps and examples</a>
       </h2>
-      <p class="demos-subtitle">Try some proof of concepts built on the Pubky protocol. What will you create?</p>
+      <p class="demos-subtitle">Explore apps and examples built on Pubky.</p>
     </div>
     <div class="card-grid card-grid-4 demos-grid">
       {demos.map((demo) => (
@@ -420,17 +441,6 @@ const icons = {
           <span class="community-link-title">GitHub</span>
           <span class="community-link-tail">
             <span class="community-link-desc">Source code and repositories.</span>
-            <span class="community-link-arrow" aria-hidden="true">
-              <img src={withBase('/images/icons/arrow-right.svg')} alt="" width="20" height="20" />
-            </span>
-          </span>
-        </a>
-      </li>
-      <li>
-        <a href={withBase('/contributing/')} class="community-link">
-          <span class="community-link-title">Contributing</span>
-          <span class="community-link-tail">
-            <span class="community-link-desc">How to contribute to Pubky.</span>
             <span class="community-link-arrow" aria-hidden="true">
               <img src={withBase('/images/icons/arrow-right.svg')} alt="" width="20" height="20" />
             </span>

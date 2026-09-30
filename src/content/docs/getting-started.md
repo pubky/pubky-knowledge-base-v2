@@ -3,7 +3,7 @@ title: "Getting Started"
 ---
 
 :::note[Developer Guide]
-This guide helps you try Pubky **as a user**; if you want to build on Pubky, start with the [Developer Guide](/explore/pubky-protocol/developer-guide/).
+This guide helps you try Pubky **as a user**; if you want to build on Pubky, start with the [Developer Guide](/build/developer-guide/).
 :::
 
 Welcome to Pubky! You’ll create your identity, sign in to pubky.app, and inspect and back up the data you publish.
@@ -18,7 +18,7 @@ flowchart LR
 
 ## Step 1: Download Pubky Ring
 
-**[Pubky Ring](/explore/technologies/pubky-ring/)** is your key manager for the Pubky ecosystem. It stores your identity and lets you authorize Pubky apps without creating a platform-owned account.
+**[Pubky Ring](/use/pubky-ring/)** is your key manager for the Pubky ecosystem. It stores your identity and lets you authorize Pubky apps without creating a platform-owned account.
 
 - **iOS**: Download from the [App Store](https://apps.apple.com/us/app/pubky-ring/id6739356756)
 - **Android**: Download from [Google Play](https://play.google.com/store/apps/details?id=to.pubky.ring)
@@ -53,7 +53,7 @@ What makes it different:
 
 - You define on which Homeserver your own data is stored. You are in control.
 - Your feed is shaped by your choices, not by a platform’s engagement algorithm.
-- Pubky is designed for [censorship resistance](/explore/concepts/censorship/) and [credible exit](/explore/concepts/credible-exit/).
+- Pubky is designed for [censorship resistance](/learn/censorship-resistance/) and [credible exit](/learn/credible-exit/).
 
 ## Explore Other Pubky Apps
 
@@ -66,7 +66,7 @@ Your Pubky Ring identity can be used across different Pubky apps. When you autho
 
 ## Step 4: Explore Your Data
 
-Use **[Pubky Explorer](/explore/technologies/pubky-explorer/)** ([explorer.pubky.app](https://explorer.pubky.app)) to browse your data.
+Use **[Pubky Explorer](/build/pubky-explorer/)** ([explorer.pubky.app](https://explorer.pubky.app)) to browse your data.
 
 1. Enter your pubky or navigate to a path.
 2. Browse your files and directories.
@@ -80,7 +80,7 @@ Example paths:
 
 ## Step 5: Back Up Your Published Data
 
-Install **[Pubky Backup](/explore/technologies/pubky-backup/)** to keep local copies of your data and preserve your data sovereignty.
+Install **[Pubky Backup](/use/pubky-backup/)** to keep local copies of your data and preserve your data sovereignty.
 
 Use [Pubky Backup README](https://github.com/pubky/pubky-backup/blob/main/README.md) and [release builds](https://github.com/pubky/pubky-backup/releases) for download and install instructions.
 
@@ -90,8 +90,8 @@ Pubky Backup does not replace your recovery phrase. The recovery phrase protects
 
 - **Join the community**: [Telegram](https://t.me/pubkycore)
 - **Learn more**: Read the [Overview](/overview/)
-- **Understand the tech**: Check out [Pubky protocol introduction](/explore/pubky-protocol/introduction/)
-- **Explore concepts**: Learn about the [Semantic Social Graph](/explore/concepts/semantic-social-graph/)
+- **Understand the tech**: Check out [System Architecture](/architecture/)
+- **Explore concepts**: Learn about the [Semantic Social Graph](/social-data/semantic-social-graph/)
 
 ## Common First Questions
 
@@ -105,4 +105,4 @@ Yes. Users can choose a public Homeserver provider. Running your own is optional
 
 **Where is my data stored?**
 
-Your public app data is stored on a Homeserver, which is linked to your pubky through [PKARR](/explore/pubky-protocol/pkarr/introduction/). You can change your Homeserver in Pubky Ring, and [Pubky Explorer](https://explorer.pubky.app) lets you inspect what is currently stored there.
+Your public app data is stored on a Homeserver, which is linked to your pubky through [PKARR](/components/pkarr/). You can change your Homeserver in Pubky Ring, and [Pubky Explorer](https://explorer.pubky.app) lets you inspect what is currently stored there.

@@ -1,0 +1,46 @@
+---
+title: "Pubky SDK: Client Libraries for Decentralized Applications"
+---
+
+The Pubky SDK handles Homeserver discovery, authentication, and storage access for applications. Start with the guide for your platform; each implementation maintains its own API and integration instructions.
+
+| Platform | Guide | API reference |
+| --- | --- | --- |
+| JavaScript / TypeScript | [SDK README](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-sdk/bindings/js/pkg/README.md) | [TypeDoc](https://pubky.github.io/pubky-homeserver/js-sdk-typedoc/) |
+| Rust | [SDK README](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-sdk/README.md) | [Rust API](https://docs.rs/pubky/latest/pubky/) |
+| React Native | [React Native SDK](https://github.com/pubky/react-native-pubky) | See the package documentation |
+| Swift / Kotlin | [Pubky Core Mobile SDK](https://github.com/pubky/pubky-core-ffi) | See the bindings documentation |
+
+## How It Works
+
+The main SDK types follow the steps an application takes:
+
+| Type | Role in an application |
+| --- | --- |
+| `Pubky` | The client used to discover Homeservers and start authenticated or public operations. |
+| `PubkySigner` | Holds an identity key for operations that require it, such as creating a development account. Third-party apps normally request access through an external authenticator. |
+| `PubkySession` | Represents authenticated access to a user's Homeserver, with the permissions granted to the app. |
+| `SessionStorage` | Reads and writes files within that session's permissions. |
+| `PublicStorage` | Reads public data without signing in. |
+
+For example, an app can use a session to save a user's own data and public storage to read another user's published profile. [Authentication](/build/authentication/) explains how an app obtains access without taking custody of the identity key. Refer to your platform's documentation for its supported types and behavior.
+
+## Homeserver connections
+
+Native Rust clients prefer [PubkyTLS](/glossary/#pubkytls), which verifies the Homeserver's public key directly. If PKARR advertises an ICANN HTTPS endpoint, the SDK can use it when the direct endpoint is absent or fails its TCP reachability check. Browser clients reach public Homeservers through the ICANN HTTPS endpoint. ICANN connections use standard HTTPS certificate validation, so their trust depends on the conventional domain and certificate authorities.
+
+The native fallback concerns TCP reachability: a later TLS or request failure does not trigger it. See the SDK's [transport selection and tests](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-sdk/src/client/http_targets/native.rs) for the exact behavior. Native clients behind HTTPS proxies also have [reported discovery and routing limitations](https://github.com/pubky/pubky-homeserver/issues/657). For public connection setup, follow the [Homeserver Deployment Guide](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/docs/DEPLOY.md).
+
+## Storage Locking
+
+Storage locks help applications coordinate updates to the same file on Homeservers that support WebDAV storage locks. Applications opt in through the Rust SDK's `SessionStorage` helpers; ordinary storage operations do not acquire locks automatically. The JavaScript bindings do not expose these helpers.
+
+The application manages the lock lifecycle and retries; the SDK handles requests and lock tokens. The Homeserver keeps a lock alive during a write made with it. See the [Rust storage-lock example](https://docs.rs/pubky/latest/pubky/struct.StorageLock.html#example) and [lock API](https://docs.rs/pubky/latest/pubky/struct.SessionStorage.html#method.lock) for usage and renewal behavior, and the Locking section of the [client OpenAPI specification](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-homeserver/openapi-client.yml) for protocol guarantees and limitations.
+
+## Build and explore
+
+Follow the [Developer Guide](/build/developer-guide/) for a self-contained walkthrough that writes and reads data on a local testnet. The [examples directory](https://github.com/pubky/pubky-homeserver/tree/{{pinned_homeserver_release}}/examples) covers further workflows, including authorization, persistence, and event streams.
+
+Use the API references above for method signatures, return values, and errors. For integrations that need raw HTTP, see the [Homeserver API references](/components/homeserver/#http-api).
+
+For client resource limits, see the SDK's [error-body limits](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-sdk/README.md#error-body-limits) and [event-stream limits](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-sdk/README.md#event-stream-limits).
