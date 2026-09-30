@@ -272,7 +272,7 @@ When reporting bugs, include:
 ```markdown
 ## Environment
 - OS: macOS 14.2
-- SDK: @synonymdev/pubky@0.13.0
+- SDK: @synonymdev/pubky@0.14.0
 - Browser: Chrome 120
 
 ## Steps to Reproduce

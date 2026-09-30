@@ -41,7 +41,7 @@ The SDK is organized around a small set of actors that mirror the developer work
 
 2. **PubkySigner** — Holds a private key and proves identity. Use it to sign up for a homeserver, sign in, or approve auth requests from other apps.
 
-3. **PubkySession** — Your authenticated handle after signing in. Thread-safe, cheap to clone, and carries your credentials. Supports export/restore for surviving process restarts.
+3. **PubkySession** — Your authenticated handle after signing in. Thread-safe, cheap to clone, and carries your credentials. Supports export/restore for surviving process restarts; see the SDK's [keypair and session persistence guidance](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-sdk/README.md#keypair-and-session-persistence) for restoring grant-backed sessions.
 
 4. **SessionStorage** — Read and write your data with simple path-based operations (`get`, `put`, `delete`, `list`). The SDK resolves homeservers and attaches credentials automatically.
 
