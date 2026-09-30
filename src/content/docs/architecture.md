@@ -18,12 +18,12 @@ flowchart TD
 | PKARR | Publish and resolve signed discovery records | [PKARR documentation](https://github.com/pubky/pkarr/blob/main/docs/introduction.md) |
 | Homeserver | Store user data and enforce access permissions | [Homeserver documentation](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/README.md) |
 | SDK | Connect applications to discovery, authorization, and storage | [SDK guides](/explore/pubky-protocol/sdk/) |
-| App Specs | Define interoperable social data | [App Specs](/explore/pubky-apps/app-specs/) |
+| pubky-app-specs | Define interoperable social data | [pubky-app-specs](/explore/pubky-apps/pubky-app-specs/) |
 | Nexus | Index public social data and serve derived views | [Nexus documentation](/explore/pubky-apps/indexing-and-aggregation/pubky-nexus/) |
 
 ## Following a social post
 
-A social client writes a post to the user's Homeserver. Nexus reads public changes, validates them against the App Specs, and indexes them. Clients query Nexus for feeds and search results. The index is a derived view; changing or removing an index entry does not change the original Homeserver file. The [pubky.app reference architecture](/explore/pubky-apps/reference-app/pubky-app/) follows this journey through the frontend's local cache, storage, and indexing.
+A social client writes a post to the user's Homeserver. Nexus reads public changes, validates them against pubky-app-specs schemas, and indexes them. Clients query Nexus for feeds and search results. The index is a derived view; changing or removing an index entry does not change the original Homeserver file. The [pubky.app reference architecture](/explore/pubky-apps/reference-app/pubky-app/) follows this journey through the frontend's local cache, storage, and indexing.
 
 Discovery records are signed. Stored application files are not automatically signed by the protocol, so clients also trust the Homeserver for their contents. See the [Security Model](/explore/pubky-protocol/security-model/) for the trust boundaries.
 

@@ -24,7 +24,7 @@ flowchart TD
 ```
 
 1. **The frontend keeps data locally.** Its browser database holds records and feed data so the interface can show cached content and respond to user actions promptly.
-2. **Users publish to Homeservers.** The [SDK](/explore/pubky-protocol/sdk/) writes social records using the user's authorization. The records follow [App Specs](/explore/pubky-apps/app-specs/) so other compatible apps can understand them.
+2. **Users publish to Homeservers.** The [SDK](/explore/pubky-protocol/sdk/) writes social records using the user's authorization. The records follow [pubky-app-specs](/explore/pubky-apps/pubky-app-specs/) so other compatible apps can understand them.
 3. **Nexus follows changes.** [Homeserver event feeds](/explore/pubky-protocol/homeserver/#http-api) let [Nexus](/explore/pubky-apps/indexing-and-aggregation/pubky-nexus/) discover updates, fetch public records, and index content and relationships across users.
 4. **The frontend refreshes from Nexus.** Indexed results update the local cache, which the interface reads to present feeds, profiles, and search results.
 
@@ -34,7 +34,7 @@ Local changes and indexed views do not become visible everywhere at once: the Ho
 
 Another app can reuse the social data without adopting pubky.app's interface. It can read known records directly from Homeservers, query Nexus for indexed views, and contribute compatible records with the user's authorization. For example, a topic reader could use existing profiles and follow relationships while presenting a different feed.
 
-[App Specs](/explore/pubky-apps/app-specs/) explains this interoperability and Universal Tags, which let applications add annotations to resources beyond pubky.app posts and profiles. Choose the pieces your app needs; the [app architecture guide](/explore/pubky-apps/app-architectures/introduction/) covers the alternatives.
+[pubky-app-specs](/explore/pubky-apps/pubky-app-specs/) explains this interoperability and Universal Tags, which let applications add annotations to resources beyond pubky.app posts and profiles. Choose the pieces your app needs; the [app architecture guide](/explore/pubky-apps/app-architectures/introduction/) covers the alternatives.
 
 For development and integration, use the maintained sources:
 

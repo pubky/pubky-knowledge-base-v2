@@ -11,6 +11,10 @@ import remarkReleaseLinks from './plugins/remark-release-links.mjs';
 export default defineConfig({
 	site: process.env.SITE_URL || 'https://pubky.org',
 	redirects: {
+		'/explore/pubky-apps/app-specs/': {
+			status: 301,
+			destination: '/explore/pubky-apps/pubky-app-specs/',
+		},
 		'/faq/': {
 			status: 301,
 			destination: '/overview/',
@@ -321,7 +325,7 @@ export default defineConfig({
 					label: 'Pubky Apps',
 					items: [
 						{ label: 'Introduction', slug: 'explore/pubky-apps/introduction' },
-						{ label: 'App Specs', slug: 'explore/pubky-apps/app-specs' },
+						{ label: 'pubky-app-specs', slug: 'explore/pubky-apps/pubky-app-specs' },
 						{
 							label: 'App Architectures',
 							items: [

@@ -7,7 +7,6 @@ Quick reference for terms used throughout the Pubky ecosystem.
 | Term | Meaning in Pubky |
 | --- | --- |
 | [Aggregator / indexer](/explore/pubky-apps/indexing-and-aggregation/introduction/) | A service that collects records and organizes them for application queries. |
-| [App Specs](/explore/pubky-apps/app-specs/) | Shared data models for social applications that interoperate with pubky.app. |
 | [Credible Exit](/explore/concepts/credible-exit/) | The practical ability to leave a provider with your identity and usable data. |
 | [Grant](/explore/pubky-protocol/authentication/) | A signed authorization for an application to act within approved scopes. |
 | [Guarded Data](/explore/pubky-protocol/private-storage/) | Access-controlled data, distinct from encrypted data. See Private Storage. |
@@ -20,6 +19,7 @@ Quick reference for terms used throughout the Pubky ecosystem.
 | [Pubky](/overview/) | The protocol and ecosystem; also the name for a user's public-key identity. |
 | [Pubky app](/explore/pubky-apps/introduction/) | Any application built on the Pubky protocol. |
 | [pubky.app](/explore/pubky-apps/reference-app/pubky-app/) | The reference social application. |
+| [pubky-app-specs](/explore/pubky-apps/pubky-app-specs/) | Shared data models for social applications that interoperate with pubky.app. |
 | [Pubky Ring](/explore/technologies/pubky-ring/) | A key manager used to hold identities and approve application access. |
 | [SDK](/explore/pubky-protocol/sdk/) | Client libraries for building applications on the protocol. |
 | [Semantic Social Graph](/explore/concepts/semantic-social-graph/) | Relationships between people and content that preserve the meaning of each connection. |

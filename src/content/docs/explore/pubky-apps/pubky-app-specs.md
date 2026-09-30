@@ -1,5 +1,5 @@
 ---
-title: "App Specs"
+title: "pubky-app-specs"
 ---
 
 Shared data model specifications for the Pubky social app ecosystem, with [pubky.app](/explore/pubky-apps/reference-app/pubky-app/) as the reference implementation.
