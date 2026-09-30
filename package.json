@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "npm run check:github-links && npm run check:release-links && astro build && node scripts/copy-md-sources.mjs && node scripts/generate-llms-small.mjs && node scripts/check-generated-markdown.mjs && node --test tests/check-md-links.test.mjs",
+    "build": "npm run check:github-links && npm run check:release-links && astro build && node scripts/copy-md-sources.mjs && node scripts/preserve-redirects.mjs && node scripts/generate-llms-small.mjs && node scripts/check-generated-markdown.mjs && node --test tests/check-md-links.test.mjs tests/preserve-redirects.test.mjs",
     "preview": "astro preview",
     "test:browser": "playwright test",
     "astro": "astro",
