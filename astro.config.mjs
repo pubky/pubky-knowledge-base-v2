@@ -36,7 +36,11 @@ export default defineConfig({
 		},
 		'/explore/pubkycore/api/': {
 			status: 301,
-			destination: '/explore/pubky-protocol/api/',
+			destination: '/explore/pubky-protocol/homeserver/#http-api',
+		},
+		'/explore/pubky-protocol/api/': {
+			status: 301,
+			destination: '/explore/pubky-protocol/homeserver/#http-api',
 		},
 		'/explore/pubkycore/sdk/': {
 			status: 301,
@@ -195,7 +199,6 @@ export default defineConfig({
 						{ label: 'Authentication', slug: 'explore/pubky-protocol/authentication' },
 						{ label: 'Homeserver', slug: 'explore/pubky-protocol/homeserver' },
 						{ label: 'Private Storage', slug: 'explore/pubky-protocol/private-storage' },
-						{ label: 'API', slug: 'explore/pubky-protocol/api' },
 						{ label: 'SDK', slug: 'explore/pubky-protocol/sdk' },
 						{ label: 'Security Model', slug: 'explore/pubky-protocol/security-model' },
 						{
