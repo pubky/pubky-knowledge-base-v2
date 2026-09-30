@@ -12,7 +12,7 @@ The Homeserver serves those files even when the user's device is offline, provid
 
 Users can choose a provider instead of operating a server themselves. Provider policies determine signup requirements and service limits. Keeping an identity independent of its provider enables [Credible Exit](/explore/concepts/credible-exit/), but moving files and updating discovery still require working tools and available copies.
 
-Homeservers provide publicly readable `/pub/` storage and access-controlled (not encrypted) `/priv/` storage. See [Private Storage](/explore/pubky-protocol/private-storage/) for an overview and upstream guides. Access control still trusts the operator; see the [Security Model](/explore/pubky-protocol/security-model/).
+Homeservers provide publicly readable `/pub/` storage and access-controlled (not encrypted) `/priv/` storage. See [Private Storage](/explore/pubky-protocol/private-storage/) for an overview and guides. Access control still trusts the operator; see the [Security Model](/explore/pubky-protocol/security-model/).
 
 Homeservers also support [storage locking](/explore/pubky-protocol/sdk/#storage-locking) to help applications coordinate concurrent updates to the same file.
 
@@ -30,7 +30,7 @@ For a full walkthrough of setting up a local stack and building your first app, 
 
 ## HTTP API
 
-For routes, parameters, and response schemas, use the upstream specifications:
+For routes, parameters, and response schemas, use the specifications:
 
 - **[Client OpenAPI](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-homeserver/openapi-client.yml)**: Authentication, file storage, event streams, and signup-token validation.
 - **[Admin OpenAPI](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-homeserver/openapi-admin.yml)**: Server administration, signup tokens, user quotas, and WebDAV.

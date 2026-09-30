@@ -13,7 +13,7 @@ flowchart TD
     Nexus -->|Feeds and search| App
 ```
 
-| Component | Responsibility | Maintained documentation |
+| Component | Responsibility | Documentation |
 | --- | --- | --- |
 | PKARR | Publish and resolve signed discovery records | [PKARR documentation](https://github.com/pubky/pkarr/blob/main/docs/introduction.md) |
 | Homeserver | Store user data and enforce access permissions | [Homeserver documentation](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/README.md) |

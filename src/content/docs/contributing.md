@@ -10,7 +10,7 @@ We welcome contributions made with the help of AI tools, but you are fully respo
 
 Contribute to [pubky-knowledge-base-v2](https://github.com/pubky/pubky-knowledge-base-v2). Its [README](https://github.com/pubky/pubky-knowledge-base-v2/blob/main/README.md) covers local development and checked examples, and the [documentation maintenance rules](https://github.com/pubky/pubky-knowledge-base-v2/blob/main/.ai-rules.md#documentation-maintenance) define what belongs here.
 
-Link to maintained project documentation instead of copying it. Corrections to a project's installation, API, or configuration guide belong in that project's repository.
+Link to project documentation instead of copying it. Corrections to a project's installation, API, or configuration guide belong in that project's repository.
 
 ## Code and bug reports
 

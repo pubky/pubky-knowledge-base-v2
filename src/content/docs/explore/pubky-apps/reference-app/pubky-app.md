@@ -28,17 +28,17 @@ flowchart TD
 3. **Nexus follows changes.** [Homeserver event feeds](/explore/pubky-protocol/homeserver/#http-api) let [Nexus](/explore/pubky-apps/indexing-and-aggregation/pubky-nexus/) discover updates, fetch public records, and index content and relationships across users.
 4. **The frontend refreshes from Nexus.** Indexed results update the local cache, which the interface reads to present feeds, profiles, and search results.
 
-Local changes and indexed views do not become visible everywhere at once: the Homeserver write and subsequent Nexus indexing must complete. The upstream [local-first design](https://github.com/pubky/pubky-app/blob/dev/docs/local-first.md) explains the read, write, and refresh behavior in detail.
+Local changes and indexed views do not become visible everywhere at once: the Homeserver write and subsequent Nexus indexing must complete. The [local-first design](https://github.com/pubky/pubky-app/blob/dev/docs/local-first.md) explains the read, write, and refresh behavior in detail.
 
 ## Building on the same data
 
 Another app can reuse the social data without adopting pubky.app's interface. It can read known records directly from Homeservers, query Nexus for indexed views, and contribute compatible records with the user's authorization. For example, a topic reader could use existing profiles and follow relationships while presenting a different feed.
 
-[Universal Tags](/explore/pubky-apps/pubky-app-specs/#universal-tags) let people label resources beyond pubky.app posts and profiles, such as tagging an article `tutorial`. Other apps can reuse those annotations to organize content and discover the people who tagged it.
+[pubky-app-specs](/explore/pubky-apps/pubky-app-specs/) defines the shared data model that makes this interoperability possible. Its [Universal Tags](/explore/pubky-apps/pubky-app-specs/#universal-tags) let people label resources beyond pubky.app posts and profiles, such as an article tagged `tutorial`, so apps can discover both resources and the people who tagged them.
 
 Choose the pieces your app needs; the [app architecture guide](/explore/pubky-apps/app-architectures/introduction/) covers the alternatives.
 
-For development and integration, use the maintained sources:
+For development and integration, see:
 
 - [App repository](https://github.com/pubky/pubky-app): source code and development setup.
 - [Developer documentation](https://github.com/pubky/pubky-app/blob/dev/docs/README.md): architecture, data flow, local storage, PWA behavior, and configuration.

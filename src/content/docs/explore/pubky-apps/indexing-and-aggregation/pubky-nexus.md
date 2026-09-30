@@ -14,7 +14,7 @@ Nexus does not write a user's posts on their behalf, and its index does not repl
 
 ## Using or running Nexus
 
-Use the maintained upstream sources for implementation and operation:
+For implementation and operation, see:
 
 - [Nexus README](https://github.com/pubky/pubky-nexus): architecture, setup, configuration, migrations, and testing.
 - [API reference](https://nexus.pubky.app/swagger-ui/): endpoints and response schemas for the public instance.

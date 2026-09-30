@@ -8,14 +8,14 @@ Pubky separates identity from hosting, but applications still depend on key cust
 
 Anyone holding an identity's private key can act as that identity. Losing every copy makes the identity unrecoverable. Changing Homeservers or revoking app sessions does not make a compromised identity key safe again.
 
-Use an authenticator you trust and request only the app permissions you need. See [Authentication](/explore/pubky-protocol/authentication/) for the maintained integration guides.
+Use an authenticator you trust and request only the app permissions you need. See [Authentication](/explore/pubky-protocol/authentication/) for the integration guides.
 
 ## Homeserver trust
 
 <span id="guarded-data"></span>
 <span id="guarded-data-planned"></span>
 
-Data under `/pub/` is public. Access to `/priv/` requires a session for the storage owner's identity and permissions covering the requested access. This is access control, not encryption: Homeserver administrators can still read and write tenant data. See [Private Storage](/explore/pubky-protocol/private-storage/) for an overview and the upstream [Private Storage guide](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/docs/PRIVATE_STORAGE.md) for access rules.
+Data under `/pub/` is public. Access to `/priv/` requires a session for the storage owner's identity and permissions covering the requested access. This is access control, not encryption: Homeserver administrators can still read and write tenant data. See [Private Storage](/explore/pubky-protocol/private-storage/) for an overview and the [Private Storage guide](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/docs/PRIVATE_STORAGE.md) for access rules.
 
 <span id="encrypted-data"></span>
 <span id="encrypted-data-planned"></span>

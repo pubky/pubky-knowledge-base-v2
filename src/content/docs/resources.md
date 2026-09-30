@@ -15,7 +15,7 @@ A curated directory of websites, applications, repositories, packages, and commu
 ## AI Resources
 
 - Pubky documentation for LLMs: [overview](https://pubky.org/llms.txt), [page index](https://pubky.org/llms-small.txt), and [full documentation](https://pubky.org/llms-full.txt)
-- [Pubky agent skills](https://github.com/pubky/agent-skills) — Maintained skills for AI coding tools working with Pubky
+- [Pubky agent skills](https://github.com/pubky/agent-skills) — Skills for AI coding tools working with Pubky
 - [Nexus Scout](https://nexus-scout.pubky.app/) — Read-only query gateway for AI agents exploring the Pubky social graph ([agent guide](https://nexus-scout.pubky.app/llms.txt), [source](https://github.com/pubky/nexus-scout))
 
 ## Live Applications
