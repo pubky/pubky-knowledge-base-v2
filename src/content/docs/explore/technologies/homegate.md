@@ -601,7 +601,7 @@ Potential improvements for Homegate:
 ## Resources
 
 - **Repository**: [https://github.com/pubky/homegate](https://github.com/pubky/homegate)
-- **OpenAPI Spec**: [openapi.yaml](https://github.com/pubky/homegate/blob/main/openapi.yaml)
+- **OpenAPI Spec**: [openapi.yaml](https://github.com/pubky/homegate/blob/master/openapi.yaml)
 - **Prelude Documentation**: [https://docs.prelude.so/](https://docs.prelude.so/)
 - **PhoenixD Documentation**: [https://github.com/ACINQ/phoenixd](https://github.com/ACINQ/phoenixd)
 

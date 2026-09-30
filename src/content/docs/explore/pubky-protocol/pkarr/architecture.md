@@ -17,7 +17,7 @@ In-depth look at the architecture of [PKARR](/explore/pubky-protocol/pkarr/intro
 SignedPacket = public-key(32) + signature(64) + timestamp(8) + dns-packet(≤1000)
 ```
 
-Maximum total size: 1104 bytes. Public keys are encoded as 52-character z-base32 strings for DNS compatibility. All packets are Ed25519-signed, ensuring authenticity and integrity. Published to the DHT using BEP44 mutable item operations. The `dns-packet` is a standard compressed DNS packet (see [Supported DNS Record Types](#supported-dns-record-types) below).
+Maximum total size: 1104 bytes. Public keys are encoded as 52-character z-base32 strings for DNS compatibility. All packets are Ed25519-signed, ensuring authenticity and integrity. Published to the DHT using BEP44 mutable item operations. The `dns-packet` is a standard compressed DNS packet (see [Common DNS Record Types](#common-dns-record-types) below).
 
 See the [PKARR repository](https://github.com/pubky/pkarr) for the full format specification and API reference.
 
@@ -45,7 +45,7 @@ _pubky HTTPS 0 <homeserver-public-key>
 . HTTPS 10 homeserver.example.com port=443
 ```
 
-SDK clients resolve the full `_pubky.<user-public-key>` name so the alias reaches the Homeserver endpoint records. Native SDK clients prefer the direct endpoint when it is reachable and fall back to the ICANN endpoint automatically; browsers use the ICANN-compatible path. For Homeserver HTTP request routing, see the [client OpenAPI specification](https://github.com/pubky/pubky-homeserver/blob/main/pubky-homeserver/openapi-client.yml).
+SDK clients resolve the full `_pubky.<user-public-key>` name so the alias reaches the Homeserver endpoint records. Native SDK clients prefer the direct endpoint when it is reachable and fall back to the ICANN endpoint automatically; browsers use the ICANN-compatible path. For Homeserver HTTP request routing, see the [client OpenAPI specification](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-homeserver/openapi-client.yml).
 
 ## Caching
 

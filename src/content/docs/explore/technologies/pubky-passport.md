@@ -13,4 +13,4 @@ Passport creates and uses your secret key in the browser, with an encrypted back
 
 You can download a password-protected recovery file or move your identity to Pubky Ring. Do this before detaching Google: detachment deletes the Drive backups and leaves your identity in the browser, making independent recovery essential if you lose that browser's data.
 
-See the [Passport README](https://github.com/pubky/pubky-passport#readme) for details. Developers adding Passport sign-in should follow the upstream [integration guide](https://github.com/pubky/pubky-passport/blob/main/docs/integration.md).
+See the [Passport README](https://github.com/pubky/pubky-passport/blob/main/README.md) for details. Developers adding Passport sign-in should follow the upstream [integration guide](https://github.com/pubky/pubky-passport/blob/main/docs/integration.md).

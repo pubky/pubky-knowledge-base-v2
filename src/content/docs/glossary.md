@@ -39,7 +39,7 @@ Protocol for encrypting DNS queries using HTTPS, preventing surveillance and tam
 ## G
 
 **Guarded Data**
-See [Private Storage](#private-storage). The [Security Model](/explore/pubky-protocol/security-model/#guarded-data) uses "guarded" to distinguish access-controlled data from encrypted data.
+See [Private Storage](/glossary/#private-storage). The [Security Model](/explore/pubky-protocol/security-model/#guarded-data) uses "guarded" to distinguish access-controlled data from encrypted data.
 
 ## H
 
@@ -83,7 +83,7 @@ Self-issued, signed DNS-like records published to the Mainline DHT. Each record 
 **[PKDNS](/explore/technologies/pkdns/)**
 DNS server that resolves public-key domains by fetching PKARR records from the Mainline DHT, bridging traditional DNS with decentralized identity.
 
-<a id="private-storage"></a>
+<span id="private-storage"></span>
 
 **[Private Storage](/explore/pubky-protocol/private-storage/)**
 Storage under `/priv/` on a [Homeserver](/explore/pubky-protocol/homeserver/), readable only with an authenticated session for the data owner's identity and capabilities covering the requested path. It provides access control, not encryption; apps that need confidentiality from the operator encrypt the data themselves.
@@ -113,7 +113,7 @@ Command-line tool for interacting with Pubky Homeservers, providing user operati
 **[Pubky Protocol](/explore/pubky-protocol/introduction/)**
 The protocol encompassing the Homeserver, SDK, PKARR and specifications for building decentralized applications on Pubky.
 
-<a id="pubkytls"></a>
+<span id="pubkytls"></span>
 
 **PubkyTLS**
 Pubky's TLS transport for Homeserver connections addressed by public key. It uses TLS with Raw Public Keys (RFC 7250), so the server public key is verified directly instead of through an X.509 certificate authority chain.

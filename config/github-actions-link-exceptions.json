@@ -1,0 +1,124 @@
+[
+  {
+    "url": "https://bitcoinerrorlog.medium.com/how-to-think-about-data-on-bitcoin-a5a80442ef68",
+    "reason": "Returns HTTP 403 from GitHub Actions; previously checked locally. Local checks continue to validate this URL."
+  },
+  {
+    "url": "https://bitcoinerrorlog.substack.com/p/fiat-will-never-die-long-live-bitcoin",
+    "reason": "Returns HTTP 403 from GitHub Actions; previously checked locally. Local checks continue to validate this URL."
+  },
+  {
+    "url": "https://bitcoinerrorlog.substack.com/p/welcome-to-the-atomic-economy",
+    "reason": "Returns HTTP 403 from GitHub Actions; previously checked locally. Local checks continue to validate this URL."
+  },
+  {
+    "url": "https://chat.openai.com/",
+    "ignoreQuery": true,
+    "reason": "The starter-prompt link returned HTTP 403 after retries in GitHub Actions run 36752613079. Ignore its query so prompt edits do not invalidate the exception; local checks still validate the full URL."
+  },
+  {
+    "url": "https://claude.ai/new",
+    "ignoreQuery": true,
+    "reason": "The starter-prompt link returned HTTP 403 after retries in GitHub Actions run 36545303150. Ignore its query so prompt edits do not invalidate the exception; local checks still validate the full URL."
+  },
+  {
+    "url": "https://deepwiki.com/pubky/pubky-homeserver",
+    "reason": "Vercel serves a browser challenge as HTTP 429; it persisted after retries in GitHub Actions runs 36545303150 and 36593343989. Local checks continue to validate this page."
+  },
+  {
+    "url": "https://deepwiki.com/pubky/pubky-nexus",
+    "reason": "Vercel serves a browser challenge as HTTP 429; it persisted after retries in GitHub Actions runs 36545303150 and 36593343989. Local checks continue to validate this page."
+  },
+  {
+    "url": "https://medium.com/@synonym_to/pubky-launch-260f36ba8fe3",
+    "reason": "Returns HTTP 403 from GitHub Actions; previously checked locally. Local checks continue to validate this URL."
+  },
+  {
+    "url": "https://medium.com/bitcoinerrorlog/who-secures-bitcoin-95b19bbcda3c",
+    "reason": "Returns HTTP 403 from GitHub Actions; previously checked locally. Local checks continue to validate this URL."
+  },
+  {
+    "url": "https://medium.com/pubky",
+    "reason": "Returns HTTP 403 from GitHub Actions; previously checked locally. Local checks continue to validate this URL."
+  },
+  {
+    "url": "https://medium.com/pubky/building-blocks-for-the-atomic-economy-aeeba8ccde8e",
+    "reason": "Returns HTTP 403 from GitHub Actions; previously checked locally. Local checks continue to validate this URL."
+  },
+  {
+    "url": "https://medium.com/pubky/corporate-vs-community-led-open-source-development-491a03da58e6",
+    "reason": "Returns HTTP 403 from GitHub Actions; previously checked locally. Local checks continue to validate this URL."
+  },
+  {
+    "url": "https://medium.com/pubky/how-to-host-a-public-key-domain-website-v0-6-0-ubuntu-24-04-57e6f2cb6f77",
+    "reason": "Returns HTTP 403 from GitHub Actions; previously checked locally. Local checks continue to validate this URL."
+  },
+  {
+    "url": "https://medium.com/pubky/mainline-dht-censorship-explained-b62763db39cb",
+    "reason": "Returns HTTP 403 from GitHub Actions; previously checked locally. Local checks continue to validate this URL."
+  },
+  {
+    "url": "https://medium.com/pubky/mypubky-a-portable-link-in-bio-built-on-pubky-identity-c15169ae744a",
+    "reason": "GitHub Actions returned HTTP 403 after retries in run 36545303150. Local checks continue to validate this article."
+  },
+  {
+    "url": "https://medium.com/pubky/no-registry-a-marketing-push-for-pkdns-4e6d6fae58e4",
+    "reason": "GitHub Actions returned HTTP 403 after retries in run 36545303150. Local checks continue to validate this article."
+  },
+  {
+    "url": "https://medium.com/pubky/opening-pubky-4bdca7dc4c77",
+    "reason": "GitHub Actions returned HTTP 403 after retries in run 36545303150. Local checks continue to validate this article."
+  },
+  {
+    "url": "https://medium.com/pubky/payky-a-universal-pay-page-built-on-pubky-identity-756d08a64cc4",
+    "reason": "GitHub Actions returned HTTP 403 after retries in run 36545303150. Local checks continue to validate this article."
+  },
+  {
+    "url": "https://medium.com/pubky/pubky-invites-a-reputation-gated-onboarding-flow-for-new-users-2428c2e4beea",
+    "reason": "GitHub Actions returned HTTP 403 after retries in run 36545303150. Local checks continue to validate this article."
+  },
+  {
+    "url": "https://medium.com/pubky/pubky-lab-a-simple-playground-for-testing-pubky-sdk-calls-3294a3186607",
+    "reason": "GitHub Actions returned HTTP 403 after retries in run 36545303150. Local checks continue to validate this article."
+  },
+  {
+    "url": "https://medium.com/pubky/pubky-the-next-web-3287b35408f1",
+    "reason": "Returns HTTP 403 from GitHub Actions; previously checked locally. Local checks continue to validate this URL."
+  },
+  {
+    "url": "https://medium.com/pubky/public-key-domains-censorship-resistance-explained-33d0333e6123",
+    "reason": "Returns HTTP 403 from GitHub Actions; previously checked locally. Local checks continue to validate this URL."
+  },
+  {
+    "url": "https://medium.com/pubky/the-atomic-economy-reclaiming-society-from-the-inside-out-574504dfe326",
+    "reason": "Returns HTTP 403 from GitHub Actions; previously checked locally. Local checks continue to validate this URL."
+  },
+  {
+    "url": "https://subconscious.substack.com/p/credible-exit",
+    "reason": "Returns HTTP 403 from GitHub Actions; previously checked locally. Local checks continue to validate this URL."
+  },
+  {
+    "url": "https://www.npmjs.com/package/@fontsource/inter/v/5.2.8",
+    "reason": "The npm package page returned HTTP 403 after retries in GitHub Actions run 36593343989. Local checks continue to validate this font attribution link."
+  },
+  {
+    "url": "https://www.npmjs.com/package/@synonymdev/pkarr",
+    "reason": "Returns HTTP 403 from GitHub Actions; previously checked locally. Local checks continue to validate this URL."
+  },
+  {
+    "url": "https://www.npmjs.com/package/@synonymdev/pubky",
+    "reason": "Returns HTTP 403 from GitHub Actions; previously checked locally. Local checks continue to validate this URL."
+  },
+  {
+    "url": "https://www.npmjs.com/package/@synonymdev/react-native-pubky",
+    "reason": "Returns HTTP 403 from GitHub Actions; previously checked locally. Local checks continue to validate this URL."
+  },
+  {
+    "url": "https://www.npmjs.com/package/pubky-app-specs",
+    "reason": "Returns HTTP 403 from GitHub Actions; previously checked locally. Local checks continue to validate this URL."
+  },
+  {
+    "url": "https://x.com/getpubky",
+    "reason": "Returns HTTP 403 from GitHub Actions; previously checked locally. Local checks continue to validate this URL."
+  }
+]

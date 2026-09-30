@@ -8,7 +8,7 @@ title: "Pubky Docker"
 Pubky Docker is intended for local development, testing, and experimentation—not production hosting.
 :::
 
-For current setup instructions, configuration, and development workflows, see the [Pubky Docker README](https://github.com/pubky/pubky-docker#readme).
+For current setup instructions, configuration, and development workflows, see the [Pubky Docker README](https://github.com/pubky/pubky-docker/blob/main/Readme.md).
 
 ## Testnet Architecture
 

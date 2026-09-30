@@ -180,7 +180,7 @@ cargo test
 ```
 
 If integration tests require `pubky-testnet`, follow the
-[Pubky Testnet README](https://github.com/pubky/pubky-homeserver/blob/main/pubky-testnet/README.md)
+[Pubky Testnet README](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-testnet/README.md)
 for local database setup.
 
 ### Example Workflow
@@ -277,9 +277,9 @@ pubky-cli/
 
 ### Connection Issues
 
-Use the [Homeserver Install Guide](https://github.com/pubky/pubky-homeserver/blob/main/docs/INSTALL.md) to check the service and its logs, and the [Deployment Guide](https://github.com/pubky/pubky-homeserver/blob/main/docs/DEPLOY.md) for network setup. Keep admin access private and protected.
+Use the [Homeserver Install Guide](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/docs/INSTALL.md) to check the service and its logs, and the [Deployment Guide](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/docs/DEPLOY.md) for network setup. Keep admin access private and protected.
 
-For direct HTTP diagnostics, consult the maintained [client](https://github.com/pubky/pubky-homeserver/blob/main/pubky-homeserver/openapi-client.yml) and [admin](https://github.com/pubky/pubky-homeserver/blob/main/pubky-homeserver/openapi-admin.yml) OpenAPI specifications.
+For direct HTTP diagnostics, consult the maintained [client](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-homeserver/openapi-client.yml) and [admin](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-homeserver/openapi-admin.yml) OpenAPI specifications.
 
 ### Recovery File Errors
 

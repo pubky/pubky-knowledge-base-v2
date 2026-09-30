@@ -6,7 +6,7 @@ rust-version = "1.89"
 publish = false
 
 [dependencies]
-pubky = { version = "=0.13.0", features = ["json"] }
+pubky = { version = "=0.14.0", features = ["json"] }
 serde_json = "1.0"
 
 [lints.clippy]

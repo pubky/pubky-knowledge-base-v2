@@ -1,0 +1,20 @@
+# Check published links and anchors, including assets. Code samples and non-web
+# protocols are examples, not destinations that an HTTP request can validate.
+no_progress = true
+no_ignore = true
+format = "json"
+include_fragments = "anchor-only"
+include_verbatim = false
+include_mail = false
+scheme = ["https", "http", "file"]
+exclude_all_private = true
+index_files = ["index.html"]
+
+# Retry transient failures, but never count timeouts or error statuses as live.
+max_concurrency = 16
+host_concurrency = 2
+host_request_interval = "200ms"
+max_retries = 2
+retry_wait_time = 2
+timeout = 20
+max_redirects = 5
