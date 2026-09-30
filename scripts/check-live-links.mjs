@@ -15,7 +15,7 @@ const browserHeaders = [
 export function loadLiveLinkExceptions(env = process.env) {
   const exceptions = JSON.parse(readFileSync(join(projectRoot, 'config/live-link-exceptions.json'), 'utf8'));
   if (env.GITHUB_ACTIONS === 'true') {
-    // These exact URLs block or rate-limit GitHub runners. Each entry records
+    // These destinations block or rate-limit GitHub runners. Each entry records
     // the observed failure; local and other CI runs still check them.
     exceptions.push(...JSON.parse(readFileSync(join(projectRoot, 'config/github-actions-link-exceptions.json'), 'utf8')));
   }
@@ -24,16 +24,25 @@ export function loadLiveLinkExceptions(env = process.env) {
 
 export function liveLinkExclusions(exceptions) {
   if (!Array.isArray(exceptions)) throw new Error('Live-link exceptions must be an array.');
-  return exceptions.map(({ url, reason }) => {
+  return exceptions.map((exception) => {
+    const { url, reason, ignoreQuery } = exception;
     if (typeof url !== 'string' || !URL.canParse(url) || !/^https?:\/\//.test(url) ||
         typeof reason !== 'string' || !reason.trim() || /[\s*]/.test(url)) {
-      throw new Error('Each live-link exception needs an exact HTTP(S) URL and a reason.');
+      throw new Error('Each live-link exception needs an HTTP(S) URL and a reason.');
     }
     const target = new URL(url);
     if (target.username || target.password || target.href !== url) {
       throw new Error(`Use a canonical URL without credentials for a live-link exception: ${url}`);
     }
-    return `^${escapeRegex(url)}$`;
+    if (Object.hasOwn(exception, 'ignoreQuery') && typeof ignoreQuery !== 'boolean') {
+      throw new Error('Live-link exception ignoreQuery must be a boolean.');
+    }
+    if (ignoreQuery && /[?#]/.test(url)) {
+      throw new Error(`An ignoreQuery exception URL must not contain a query or fragment: ${url}`);
+    }
+    return ignoreQuery
+      ? `^${escapeRegex(url)}(?:\\?[^#]*)?$`
+      : `^${escapeRegex(url)}$`;
   });
 }
 

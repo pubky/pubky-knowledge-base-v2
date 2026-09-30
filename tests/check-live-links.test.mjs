@@ -44,18 +44,62 @@ function dumpCheckedUrls(t, urls, exceptions) {
 
 test('live-link exceptions escape URL syntax and match only the exact destination', () => {
   const url = 'https://resolver.example/guide.v1+(draft)?mode=a+b#setup';
-  const [pattern] = liveLinkExclusions([{ url, reason: 'This exact destination needs a configured resolver.' }]);
-  const exclusion = new RegExp(pattern);
-  assert.equal(exclusion.test(url), true);
-  for (const other of [
-    url.replace('resolver.example', 'other.example'),
-    url.replace('resolver.example', 'resolverXexample'),
-    url.replace('guide.v1+(draft)', 'other-guide'),
-    url.replace('guide.v1+(draft)', 'guideXv11draft'),
-    url.replace('mode=a+b', 'mode=other'),
-    url.replace('#setup', '#other'),
-    `${url}/extra`,
-  ]) assert.equal(exclusion.test(other), false, other);
+  for (const options of [{}, { ignoreQuery: false }]) {
+    const [pattern] = liveLinkExclusions([{ url, reason: 'This exact destination needs a configured resolver.', ...options }]);
+    const exclusion = new RegExp(pattern);
+    assert.equal(exclusion.test(url), true);
+    for (const other of [
+      url.replace('resolver.example', 'other.example'),
+      url.replace('resolver.example', 'resolverXexample'),
+      url.replace('guide.v1+(draft)', 'other-guide'),
+      url.replace('guide.v1+(draft)', 'guideXv11draft'),
+      url.replace('mode=a+b', 'mode=other'),
+      url.replace('#setup', '#other'),
+      `${url}/extra`,
+    ]) assert.equal(exclusion.test(other), false, other);
+  }
+});
+
+test('ignoreQuery permits queries only on the same scheme, host, and path without fragments', () => {
+  for (const scheme of ['http', 'https']) {
+    const url = `${scheme}://resolver.example/guide.v1+(draft)`;
+    const [pattern] = liveLinkExclusions([{ url, reason: 'The endpoint blocks CI regardless of query.', ignoreQuery: true }]);
+    const exclusion = new RegExp(pattern);
+    for (const allowed of [url, `${url}?`, `${url}?q=first`, `${url}?q=new%20prompt%23section&other=a+b`]) {
+      assert.equal(exclusion.test(allowed), true, allowed);
+    }
+    for (const checked of [
+      url.replace(`${scheme}:`, `${scheme === 'https' ? 'http' : 'https'}:`),
+      url.replace('resolver.example', 'other.example'),
+      url.replace('resolver.example', 'resolverXexample'),
+      url.replace('resolver.example', 'resolver.example.evil.test'),
+      url.replace('resolver.example', 'user:password@resolver.example'),
+      url.replace('guide.v1+(draft)', 'guideXv11draft'),
+      `${url}/`,
+      `${url}/extra?q=prompt`,
+      `${url}#`,
+      `${url}#setup`,
+      `${url}?q=prompt#`,
+      `${url}?q=prompt#setup`,
+    ]) assert.equal(exclusion.test(checked), false, checked);
+  }
+});
+
+test('ignoreQuery rejects nonboolean flags and bases with queries, fragments, credentials, or noncanonical URLs', () => {
+  const reason = 'The endpoint blocks CI regardless of query.';
+  for (const ignoreQuery of [undefined, null, 0, 1, 'true', 'false', {}, []]) {
+    assert.throws(() => liveLinkExclusions([{ url: 'https://resolver.example/', reason, ignoreQuery }]));
+  }
+  for (const url of [
+    'https://resolver.example/?q=prompt',
+    'https://resolver.example/?',
+    'https://resolver.example/#setup',
+    'https://resolver.example/#',
+    'https://user:password@resolver.example/',
+    'ftp://resolver.example/',
+    'https://resolver.example',
+    'https://RESOLVER.example/',
+  ]) assert.throws(() => liveLinkExclusions([{ url, reason, ignoreQuery: true }]), url);
 });
 
 test('live-link exceptions reject missing reasons and wildcard URLs', () => {
@@ -77,7 +121,8 @@ test('the configured PKDNS exception filters only its exact URL in real Lychee e
 
 test('all GitHub Actions exceptions remain checkable locally and under generic CI', (t) => {
   const actionsExceptions = JSON.parse(readFileSync(new URL('../config/github-actions-link-exceptions.json', import.meta.url), 'utf8'));
-  const actionsUrls = actionsExceptions.map(({ url }) => url);
+  const actionsUrls = actionsExceptions.flatMap(({ url, ignoreQuery }) =>
+    ignoreQuery ? [url, `${url}?q=old%20prompt`, `${url}?q=new%20prompt&other=1`] : [url]);
   assert.ok(actionsUrls.length > 0, 'Exercise the configured GitHub Actions exceptions.');
   assert.equal(new Set(actionsUrls).size, actionsUrls.length, 'Each exception must have a unique URL.');
   assert.doesNotThrow(() => liveLinkExclusions(actionsExceptions), 'Every exception must have a canonical URL and a reason.');
@@ -87,12 +132,15 @@ test('all GitHub Actions exceptions remain checkable locally and under generic C
   }
 });
 
-test('GitHub Actions excludes the configured exact URLs while checking other URLs on those hosts', (t) => {
-  const actionsUrls = JSON.parse(readFileSync(new URL('../config/github-actions-link-exceptions.json', import.meta.url), 'utf8'))
-    .map(({ url }) => url);
-  const otherUrls = [...new Set(actionsUrls.flatMap((url) => [
+test('GitHub Actions ignores queries only for opted-in paths while keeping exact exceptions query-sensitive', (t) => {
+  const actionsExceptions = JSON.parse(readFileSync(new URL('../config/github-actions-link-exceptions.json', import.meta.url), 'utf8'));
+  assert.deepEqual(actionsExceptions.filter(({ ignoreQuery }) => ignoreQuery).map(({ url }) => url).sort(),
+    ['https://chat.openai.com/', 'https://claude.ai/new'], 'Only the two starter-prompt endpoints should ignore queries.');
+  const actionsUrls = actionsExceptions.flatMap(({ url, ignoreQuery }) =>
+    ignoreQuery ? [url, `${url}?q=old%20prompt`, `${url}?q=new%20prompt&other=1`] : [url]);
+  const otherUrls = [...new Set(actionsExceptions.flatMap(({ url, ignoreQuery }) => [
     new URL('/not-an-exempt-url', url).href,
-    `${url}${url.includes('?') ? '&' : '?'}not-exempt=1`,
+    ...(ignoreQuery ? [`${url}?q=prompt#not-an-exempt-anchor`] : [`${url}${url.includes('?') ? '&' : '?'}not-exempt=1`]),
     `${url}#not-an-exempt-anchor`,
   ]))];
   const checked = dumpCheckedUrls(t, [pkdnsUrl, ...actionsUrls, ...otherUrls],

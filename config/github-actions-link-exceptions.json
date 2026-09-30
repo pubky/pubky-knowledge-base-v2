@@ -12,12 +12,14 @@
     "reason": "Returns HTTP 403 from GitHub Actions; previously checked locally. Local checks continue to validate this URL."
   },
   {
-    "url": "https://chat.openai.com/?q=Help%20me%20explore%20Pubky.%20Start%20at%20https%3A%2F%2Fpubky.org%2Fllms.txt%20and%20use%20the%20linked%20index%20or%20full%20documentation%20as%20needed.%0A%0AAsk%20what%20I%E2%80%99d%20like%20to%20know%20or%20do.%20Follow%20my%20interests.%0A%0ACite%20sources%20and%20flag%20anything%20you%20cannot%20verify%20or%20access.%0A%0AIf%20we%20write%20code%2C%20confirm%20my%20language%20or%20framework%20and%20SDK%20version%2C%20then%20check%20the%20corresponding%20upstream%20documentation.",
-    "reason": "GitHub Actions returned HTTP 403 after retries in run 36752613079. This exact starter-prompt URL remains checked locally."
+    "url": "https://chat.openai.com/",
+    "ignoreQuery": true,
+    "reason": "The starter-prompt link returned HTTP 403 after retries in GitHub Actions run 36752613079. Ignore its query so prompt edits do not invalidate the exception; local checks still validate the full URL."
   },
   {
-    "url": "https://claude.ai/new?q=Help%20me%20explore%20Pubky.%20Start%20at%20https%3A%2F%2Fpubky.org%2Fllms.txt%20and%20use%20the%20linked%20index%20or%20full%20documentation%20as%20needed.%0A%0AAsk%20what%20I%E2%80%99d%20like%20to%20know%20or%20do.%20Follow%20my%20interests.%0A%0ACite%20sources%20and%20flag%20anything%20you%20cannot%20verify%20or%20access.%0A%0AIf%20we%20write%20code%2C%20confirm%20my%20language%20or%20framework%20and%20SDK%20version%2C%20then%20check%20the%20corresponding%20upstream%20documentation.",
-    "reason": "The previous starter-prompt URL returned HTTP 403 after retries in GitHub Actions run 36545303150. This exception follows the current prompt and remains checked locally."
+    "url": "https://claude.ai/new",
+    "ignoreQuery": true,
+    "reason": "The starter-prompt link returned HTTP 403 after retries in GitHub Actions run 36545303150. Ignore its query so prompt edits do not invalidate the exception; local checks still validate the full URL."
   },
   {
     "url": "https://deepwiki.com/pubky/pubky-homeserver",
