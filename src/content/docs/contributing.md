@@ -6,17 +6,9 @@ title: "Contributing to Pubky"
 We welcome contributions made with the help of AI tools, but you are fully responsible for what you submit. You must understand, review, and be able to explain every change in your PR. Unreviewed AI-generated submissions — bulk changes, hallucinated references, or PRs the author cannot explain — will be closed without review.
 :::
 
-## Documentation
-
-Contribute to [pubky-knowledge-base-v2](https://github.com/pubky/pubky-knowledge-base-v2). Its [README](https://github.com/pubky/pubky-knowledge-base-v2/blob/main/README.md) covers local development and checked examples, and the [documentation maintenance rules](https://github.com/pubky/pubky-knowledge-base-v2/blob/main/.ai-rules.md#documentation-maintenance) define what belongs here.
-
-Link to project documentation instead of copying it. Corrections to a project's installation, API, or configuration guide belong in that project's repository.
-
 ## Code and bug reports
 
-Find the project through [Resources](/resources/) and follow its contribution and testing instructions.
-
-Search existing issues before reporting a problem. Include the component and version, platform, reproduction steps, expected result, and the error message. Remove recovery phrases, private keys, tokens, session credentials, and personal data from logs and screenshots.
+Search existing issues before opening a report; include reproduction steps and the affected software version.
 
 ## Security
 
