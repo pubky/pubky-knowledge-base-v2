@@ -31,6 +31,10 @@ export default defineConfig({
 			status: 301,
 			destination: '/explore/pubky-apps/introduction/',
 		},
+		'/explore/pubky-protocol/eli5/': {
+			status: 301,
+			destination: '/explore/pubky-protocol/introduction/',
+		},
 		'/explore/pubky-apps/reference-app/introduction/': {
 			status: 301,
 			destination: '/explore/pubky-apps/reference-app/pubky-app/',
@@ -157,7 +161,7 @@ export default defineConfig({
 		},
 		'/explore/pubkycore/eli5/': {
 			status: 301,
-			destination: '/explore/pubky-protocol/eli5/',
+			destination: '/explore/pubky-protocol/introduction/',
 		},
 		'/explore/pubkycore/authentication/': {
 			status: 301,
@@ -256,7 +260,6 @@ export default defineConfig({
 						'glossary',
 						'explore/technologies/pubky-explorer',
 						'explore/technologies/pubky-ring',
-						'explore/pubky-protocol/eli5',
 						'explore/pubky-apps/app-architectures/introduction',
 						'explore/pubky-apps/indexing-and-aggregation/introduction',
 						'explore/pubky-apps/reference-app/pubky-app',
@@ -307,7 +310,6 @@ export default defineConfig({
 					items: [
 						{ label: 'Introduction', slug: 'explore/pubky-protocol/introduction' },
 						{ label: 'Developer Guide', slug: 'explore/pubky-protocol/developer-guide' },
-						{ label: 'ELI5', slug: 'explore/pubky-protocol/eli5' },
 						{ label: 'Authentication', slug: 'explore/pubky-protocol/authentication' },
 						{ label: 'Homeserver', slug: 'explore/pubky-protocol/homeserver' },
 						{ label: 'Private Storage', slug: 'explore/pubky-protocol/private-storage' },
