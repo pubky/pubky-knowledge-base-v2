@@ -16,7 +16,7 @@ flowchart TD
     Session --> Access["App accesses the Homeserver"]
 ```
 
-The app's session is distinct from the identity key. Its permissions limit what it can do, and grants can be revoked. Reading someone else's public data does not require their approval; writing data or accessing authenticated storage does. The [Security Model](/explore/pubky-protocol/security-model/) explains these boundaries.
+The app's session is distinct from the identity key. Its permissions limit what it can access on the Homeserver, and grants can be revoked. Reading someone else's public data does not require their approval; writing data or accessing authenticated storage does. The [Security Model](/explore/pubky-protocol/security-model/) explains these boundaries.
 
 Review requested scopes before approving an app. Root grants carry account-level privileges and should be reserved for trusted account-management tools.
 

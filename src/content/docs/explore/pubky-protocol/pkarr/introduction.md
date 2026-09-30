@@ -6,7 +6,7 @@ PKARR (Public-Key Addressable Resource Records) associates a public key with sig
 
 ## Finding someone without fixing their location
 
-A public key is a stable identifier, but it does not tell an app which server to contact. PKARR supplies that missing step: the identity owner signs a small set of records describing where services can be reached. Those records are distributed through the [Mainline DHT](/explore/technologies/mainline-dht/), a network of nodes that can store and look up records by key.
+A public key is a stable identifier, but it does not tell an app which server to contact. PKARR supplies that missing step: the identity owner signs a small set of records describing where services can be reached. Those records are distributed through the [Mainline DHT](/explore/technologies/mainline-dht/), a censorship-resistant, decentralized network.
 
 For Pubky, this means an app can start with a user's public key, discover their Homeserver, and then fetch a file. Posts and profiles stay on the Homeserver; they are not stored in the DHT.
 
