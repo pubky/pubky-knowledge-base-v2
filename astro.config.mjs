@@ -27,6 +27,10 @@ export default defineConfig({
 			status: 301,
 			destination: '/overview/',
 		},
+		'/the-vision-of-pubky/': {
+			status: 301,
+			destination: '/overview/#the-broader-vision',
+		},
 		'/explore/pubky-apps/eli5/': {
 			status: 301,
 			destination: '/explore/pubky-apps/introduction/',
@@ -256,7 +260,6 @@ export default defineConfig({
 						'troubleshooting',
 						'contributing',
 						'getting-started',
-						'the-vision-of-pubky',
 						'glossary',
 						'explore/technologies/pubky-explorer',
 						'explore/technologies/pubky-ring',
@@ -292,7 +295,6 @@ export default defineConfig({
 				{ label: 'Getting Started', slug: 'getting-started' },
 				{ label: 'Glossary', slug: 'glossary' },
 				{ label: 'Architecture', slug: 'architecture' },
-				{ label: 'The Vision of Pubky', slug: 'the-vision-of-pubky' },
 				{ label: 'Comparisons', slug: 'comparisons' },
 				{ label: 'Contributing', slug: 'contributing' },
 				{ label: 'Resources', slug: 'resources' },
