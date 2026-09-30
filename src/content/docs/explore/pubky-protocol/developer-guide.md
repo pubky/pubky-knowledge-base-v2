@@ -237,7 +237,7 @@ For now, this section collects references. A dedicated guide will follow.
 - [eventky.app](https://eventky.app/) ([source](https://github.com/gillohner/eventky))
 - [mapky.app](https://mapky.app/) ([source](https://github.com/gillohner/mapky-app))
 
-**Social App (Pubky App Specs):**
+**Social App (pubky-app-specs):**
 - [pubky-app-specs](https://github.com/pubky/pubky-app-specs) - Data models for social features and interoperability with [pubky.app](/explore/pubky-apps/reference-app/pubky-app/)
 - [npm: pubky-app-specs](https://www.npmjs.com/package/pubky-app-specs) / [crates.io: pubky-app-specs](https://crates.io/crates/pubky-app-specs)
 
