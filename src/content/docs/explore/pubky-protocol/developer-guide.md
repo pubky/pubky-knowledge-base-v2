@@ -308,7 +308,7 @@ The basic template maps [`VITE_PUBKY_HTTP_RELAY`](https://github.com/pubky/pubky
 ### Next Steps
 
 - **Explore SDK examples:** See the [Pubky Homeserver examples](https://github.com/pubky/pubky-homeserver/tree/{{pinned_homeserver_release}}/examples) for runnable workflows.
-- **Find SDK references:** See the [Pubky SDK guide](/explore/pubky-protocol/sdk/) for supported platforms, API references, and upstream examples.
+- **Find SDK references:** See the [Pubky SDK guide](/explore/pubky-protocol/sdk/) for supported platforms, API references, and examples.
 - **Choose an app architecture:** Compare [client-only, aggregator, and custom-backend designs](/explore/pubky-apps/app-architectures/introduction/).
 - **Security model:** Review the [security considerations for app developers](/explore/pubky-protocol/security-model/).
 

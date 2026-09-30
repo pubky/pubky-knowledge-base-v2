@@ -22,7 +22,7 @@ Review requested scopes before approving an app. Root grants carry account-level
 
 ## Implement the flow
 
-Use the maintained SDK guides to implement this flow:
+Use the SDK guides to implement this flow:
 
 - [JavaScript grant authentication](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-sdk/bindings/js/pkg/README.md#grantauthflow-pubkyauth).
 - [Rust QR authentication](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-sdk/README.md#pubky-qr-auth-for-third-party-and-keyless-apps).

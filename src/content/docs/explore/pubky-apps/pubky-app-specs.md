@@ -24,32 +24,20 @@ A Universal Tag expresses a named relation from a user to a resource. For exampl
 | Relation | The tag's label | `tutorial` |
 | Object | The resource being tagged | The article's URI |
 
-The tag is part of Alice's data on her Homeserver, stored separately from the article. She can add context to someone else's resource without editing it. Universal Tags extend this pattern beyond pubky.app profiles and posts to other resources identified by URIs.
+The tag is stored on Alice's Homeserver, separately from the article. It adds context without changing the resource and can describe resources beyond pubky.app posts and profiles. Another app could reuse the annotation to organize reading material. Labels express their authors' assessments; apps choose whose annotations to include.
 
-### Reusing annotations across apps
+Tags support discovery in both directions:
 
-Tags provide shared context that applications can reuse. Alice might label an article `tutorial` through a reading app. A learning app could use that annotation to organize reading material, while a social client presents the same article in a conversation. Each app can build its own experience using the shared annotation.
+- **Find resources through people:** show the articles Alice tagged `tutorial`.
+- **Find people through resources:** show who tagged an article `tutorial`, including people previously unknown to the app who use another app or Homeserver.
 
-Authorship lets applications choose whose annotations to include. A label expresses its author's assessment; different people can describe the same resource differently.
+These connections form part of the [semantic social graph](/explore/concepts/semantic-social-graph/).
 
-### Discovering resources and people
+Apps publish tag records to the user's Homeserver with their authorization. They can read known annotations directly or query Nexus for indexed resources and taggers. See the [tag model](https://github.com/pubky/pubky-app-specs/blob/main/SPEC.md#pubkyapptag) for record formats and validation, and the [Nexus API reference](https://nexus.pubky.app/swagger-ui/) for supported queries.
 
-Applications can explore these relations in either direction:
+Nexus discovery is limited to the [users and Homeservers its instance indexes](https://github.com/pubky/pubky-nexus/blob/main/docs/decentralization.md): someone can be new to your app while already known to its indexer.
 
-- **From a person to resources:** find the articles Alice tagged `tutorial` to build a reading list.
-- **From a resource to people:** find who tagged an article `tutorial` to discover readers with similar interests.
-
-The second direction can introduce people previously unknown to the app, including people using another app or Homeserver. Starting with an article, a reading app could discover Alice through her tag, then explore her other public annotations to find more resources or offer readers a way to connect with her.
-
-These connections contribute to the [semantic social graph](/explore/concepts/semantic-social-graph/): the resource, the label, and the person applying it can all be useful starting points for discovery.
-
-### Publishing and finding tags
-
-An app publishes a tag record to the user's Homeserver with their authorization. Other apps can read known annotations directly or query Nexus for indexed resources, labels, and the people who applied them. Use the upstream [tag model](https://github.com/pubky/pubky-app-specs/blob/main/SPEC.md#pubkyapptag) for record formats and validation, and the [Nexus API reference](https://nexus.pubky.app/swagger-ui/) for supported resource and tagger queries.
-
-Discovery through Nexus depends on the [users and Homeservers that the instance indexes](https://github.com/pubky/pubky-nexus/blob/main/docs/decentralization.md). A person can be new to your app while their tags are already known to its indexer. Querying one index does not guarantee discovery of every tag or author across the network.
-
-## Maintained specifications and libraries
+## Specifications and libraries
 
 - [Data model specification](https://github.com/pubky/pubky-app-specs/blob/main/SPEC.md): schemas, paths, and validation rules.
 - [Library README](https://github.com/pubky/pubky-app-specs): Rust usage and links to the API reference.

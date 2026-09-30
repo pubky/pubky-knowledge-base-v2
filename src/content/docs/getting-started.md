@@ -16,7 +16,7 @@ Keep a secure backup of your identity using Ring's recovery options. A backup of
 
 [Pubky Explorer](https://explorer.pubky.app/) lets you inspect public files on a Homeserver. Data published under `/pub/` can be read by others, including files an application does not display in its interface.
 
-[Pubky Backup](/explore/technologies/pubky-backup/) keeps local copies of published Homeserver data. Its maintained guide covers installation and the scope of those backups.
+[Pubky Backup](/explore/technologies/pubky-backup/) keeps local copies of published Homeserver data. Its guide covers installation and the scope of those backups.
 
 Your identity is independent of its hosting provider. Moving your files and retaining your identity are separate concerns; see [Credible Exit](/explore/concepts/credible-exit/) for the practical limits.
 

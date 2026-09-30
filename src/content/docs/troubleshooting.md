@@ -2,7 +2,7 @@
 title: "Troubleshooting Guide"
 ---
 
-Start with the problem you are seeing, then follow the guide maintained with the relevant project:
+Start with the problem you are seeing, then follow the relevant project's guide:
 
 | Problem | Start here |
 | --- | --- |
