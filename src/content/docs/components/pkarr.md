@@ -1,5 +1,5 @@
 ---
-title: "introduction"
+title: "PKARR"
 ---
 
 PKARR (Public-Key Addressable Resource Records) associates a public key with signed discovery records. In Pubky, these records connect a user's identity to their Homeserver, so the identity can stay the same when the hosting location changes.

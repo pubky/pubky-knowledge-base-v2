@@ -1,5 +1,5 @@
 ---
-title: "authentication"
+title: "Authentication"
 ---
 
 Pubky apps request scoped access to a user's Homeserver through grant authentication. A key manager such as [Pubky Ring](/use/pubky-ring/) lets the user approve the request without giving the app their identity key.
