@@ -2,7 +2,7 @@
 title: "Homeserver"
 ---
 
-A Homeserver stores and serves data for public-key identities. Users choose their provider; [PKARR](/explore/pubky-protocol/pkarr/introduction/) lets applications discover that provider from the user's public key.
+A Homeserver stores and serves data for Pubky users. Users self-host their Homeserver or choose a provider. [PKARR](/explore/pubky-protocol/pkarr/introduction/) lets applications discover the Homeserver from the user's public key.
 
 ## Its role in an app
 
@@ -10,9 +10,11 @@ Think of a Homeserver as storage an application can use on the user's behalf. A 
 
 The Homeserver serves those files even when the user's device is offline, provided the service remains available. It does not decide what a social feed should show or how a search result should rank. An application or [indexer](/explore/pubky-apps/indexing-and-aggregation/introduction/) handles those views.
 
-Users can choose a provider instead of operating a server themselves. Provider policies determine signup requirements and service limits. Keeping an identity independent of its provider enables [Credible Exit](/explore/concepts/credible-exit/), but moving files and updating discovery still require working tools and available copies.
+The Pubky protocol separates identity from hosting, enabling [Credible Exit](/explore/concepts/credible-exit/), but moving files and updating discovery still require working tools and available copies.
 
 Homeservers provide publicly readable `/pub/` storage and access-controlled (not encrypted) `/priv/` storage. See [Private Storage](/explore/pubky-protocol/private-storage/) for an overview and guides. Access control still trusts the operator; see the [Security Model](/explore/pubky-protocol/security-model/).
+
+Homeservers provide [event streams](#http-api) that let apps and indexers follow changes to stored files.
 
 Homeservers also support [storage locking](/explore/pubky-protocol/sdk/#storage-locking) to help applications coordinate concurrent updates to the same file.
 
