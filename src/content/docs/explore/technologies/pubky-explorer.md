@@ -10,6 +10,6 @@ Enter a public key or a Pubky URI to browse its public directories and inspect i
 
 Explorer shows stored files, while [Nexus](/explore/pubky-apps/indexing-and-aggregation/pubky-nexus/) builds indexed views across users. A file can exist on a Homeserver before it appears in an app's indexed view. Explorer is therefore useful when separating a storage problem from an indexing or display problem.
 
-Use the [testnet Explorer](https://explorer.pubky.app/testnet/) to inspect data created in the [Developer Guide](/explore/pubky-protocol/developer-guide/). Public network data and local testnet data use different discovery networks, so choose the corresponding Explorer.
+Use the [testnet Explorer](https://explorer.pubky.app/testnet/) to inspect data created on the local testnet.
 
 See the [Pubky Explorer README](https://github.com/pubky/pubky-explorer/blob/main/README.md) for the usage demonstration, testnet connection, and development setup.
