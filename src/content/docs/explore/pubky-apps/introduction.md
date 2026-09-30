@@ -8,7 +8,7 @@ Pubky apps use the [Pubky protocol](/explore/pubky-protocol/introduction/) for i
 
 ## Building an app
 
-- Start with [Developer Guide](/explore/pubky-protocol/developer-guide/) to read and write your first Homeserver record.
+- Start with the [Developer Guide](/explore/pubky-protocol/developer-guide/) to read and write your first Homeserver record.
 - Choose an [app architecture](/explore/pubky-apps/app-architectures/introduction/) according to the data and queries your app needs.
 - Use [pubky-app-specs](/explore/pubky-apps/pubky-app-specs/) when working with pubky.app social data, and [Pubky Nexus](/explore/pubky-apps/indexing-and-aggregation/pubky-nexus/) when its indexed views are useful.
 
