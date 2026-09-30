@@ -418,7 +418,7 @@ export default defineConfig({
 					label: 'Use Pubky',
 					collapsed: true,
 					items: [
-						{ label: 'Getting Started for Users', slug: 'getting-started' },
+						{ label: 'First Steps', slug: 'getting-started' },
 						{ label: 'Pubky Ring', slug: 'use/pubky-ring' },
 						{ label: 'Pubky Passport', slug: 'use/pubky-passport' },
 						{ label: 'Pubky Backup', slug: 'use/pubky-backup' },

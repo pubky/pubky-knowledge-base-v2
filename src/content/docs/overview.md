@@ -33,7 +33,7 @@ The **Atomic Economy** extends these ideas into a broader vision of economic and
 
 ## Quick Start
 
-- **Try Pubky:** [Getting Started](/getting-started/) introduces the user journey.
+- **Try Pubky:** [First Steps](/getting-started/) introduces the user journey.
 - **Build an app:** the [Developer Guide](/build/developer-guide/) walks through writing and reading your first Pubky data.
 - **Choose an app design:** compare [App Architectures](/build/app-architectures/).
 - **Understand the system:** [Architecture](/architecture/) explains the component boundaries; the [Security Model](/build/security-model/) covers trust and limitations.
