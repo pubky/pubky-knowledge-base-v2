@@ -111,7 +111,7 @@ Open `src/main.ts` and replace the `document.querySelector('#app')!.textContent 
 
 #### 3.1 Import the SDK and enable info logs
 
-```js snippet="snippets/js/src/getting-started.ts:js_getting_started_imports"
+```js snippet="snippets/js/src/developer-guide.ts:js_developer_guide_imports"
 ```
 
 This loads the Pubky SDK and sends info logs to the browser console.
@@ -120,21 +120,21 @@ To see the logs in your browser console, make sure you have the right log level 
 
 #### 3.2 Connect to the local testnet
 
-```js snippet="snippets/js/src/getting-started.ts:js_getting_started_testnet"
+```js snippet="snippets/js/src/developer-guide.ts:js_developer_guide_testnet"
 ```
 
 This tells the SDK to use the local testnet services started by Pubky Docker instead of the production Pubky network.
 
 #### 3.3 Create a new user identity
 
-```js snippet="snippets/js/src/getting-started.ts:js_getting_started_identity"
+```js snippet="snippets/js/src/developer-guide.ts:js_developer_guide_identity"
 ```
 
 This creates a demo identity for the hello-world app and logs its pubky to the browser console.
 
 #### 3.4 Sign up on the local Homeserver
 
-```js snippet="snippets/js/src/getting-started.ts:js_getting_started_signup"
+```js snippet="snippets/js/src/developer-guide.ts:js_developer_guide_signup"
 ```
 
 This creates an account on the local Homeserver and publishes the user's Homeserver mapping (PKARR). Because [local signup is set to `open`](https://github.com/pubky/pubky-docker/blob/main/homeserver.config.toml), we pass `null` instead of a signup token.
@@ -151,14 +151,14 @@ During first signup, the browser console may show a `404` for a request to `http
 
 #### 3.5 Sign in
 
-```js snippet="snippets/js/src/getting-started.ts:js_getting_started_signin"
+```js snippet="snippets/js/src/developer-guide.ts:js_developer_guide_signin"
 ```
 
 This creates a Homeserver session for the demo user.
 
 #### 3.6 Write to Homeserver storage
 
-```js snippet="snippets/js/src/getting-started.ts:js_getting_started_write"
+```js snippet="snippets/js/src/developer-guide.ts:js_developer_guide_write"
 ```
 
 This writes a simple JSON file onto the signed-in user's Homeserver public storage.
@@ -175,7 +175,7 @@ That said, keep fields together when you read and update them as a unit. Splitti
 
 #### 3.7 Read the JSON back
 
-```js snippet="snippets/js/src/getting-started.ts:js_getting_started_read"
+```js snippet="snippets/js/src/developer-guide.ts:js_developer_guide_read"
 ```
 
 This fetches the same JSON file from Homeserver storage and renders it in the template's `#app` element, proving that signup, signin, write, and read all worked.
@@ -249,7 +249,7 @@ If building a social app, leverage [Pubky Nexus](/explore/pubky-apps/indexing-an
 - User recommendations
 - Notifications
 
-```javascript snippet="snippets/js/src/getting-started.ts:js_nexus_global_feed"
+```javascript snippet="snippets/js/src/developer-guide.ts:js_nexus_global_feed"
 ```
 
 📊 [Nexus API Docs](https://nexus.pubky.app/swagger-ui/)
@@ -287,12 +287,12 @@ Steps 3.3–3.5 use development-only identity and Homeserver shortcuts. For prod
 
 Browsers cannot query the UDP-based Mainline DHT directly, so the SDK uses HTTPS gateways called **PKARR relays**. See the [current default relay list](https://github.com/pubky/pkarr/blob/main/pkarr/src/lib.rs). To use custom PKARR relays:
 
-```javascript snippet="snippets/js/src/getting-started.ts:js_pkarr_relay_config"
+```javascript snippet="snippets/js/src/developer-guide.ts:js_pkarr_relay_config"
 ```
 
 PKARR relays are separate from the [HTTP relay](/explore/technologies/http-relay/) that transfers encrypted Pubky Ring authentication messages. To use a custom HTTP relay with the SDK:
 
-```javascript snippet="snippets/js/src/getting-started.ts:js_custom_auth_relay"
+```javascript snippet="snippets/js/src/developer-guide.ts:js_custom_auth_relay"
 ```
 
 The basic template maps [`VITE_PUBKY_HTTP_RELAY`](https://github.com/pubky/pubky-app-templates/blob/main/basic-pubky-app/src/config.ts) to the same SDK option.

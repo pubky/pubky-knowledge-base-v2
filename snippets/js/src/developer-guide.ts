@@ -1,6 +1,6 @@
 import { Client } from "@synonymdev/pubky";
 
-// --8<-- [start:js_getting_started_imports]
+// --8<-- [start:js_developer_guide_imports]
 import { Keypair, Pubky, PublicKey, setLogLevel } from "@synonymdev/pubky";
 
 try {
@@ -11,43 +11,43 @@ try {
     error,
   );
 }
-// --8<-- [end:js_getting_started_imports]
+// --8<-- [end:js_developer_guide_imports]
 
-// --8<-- [start:js_getting_started_testnet]
+// --8<-- [start:js_developer_guide_testnet]
 const pubky = Pubky.testnet();
-// --8<-- [end:js_getting_started_testnet]
+// --8<-- [end:js_developer_guide_testnet]
 
-// --8<-- [start:js_getting_started_identity]
+// --8<-- [start:js_developer_guide_identity]
 const keypair = Keypair.random();
 const signer = pubky.signer(keypair);
 console.log("Your pubky:", signer.publicKey.z32());
-// --8<-- [end:js_getting_started_identity]
+// --8<-- [end:js_developer_guide_identity]
 
-// --8<-- [start:js_getting_started_signup]
+// --8<-- [start:js_developer_guide_signup]
 const homeserver = PublicKey.from(
   "pubky8pinxxgqs41n4aididenw5apqp1urfmzdztr8jt4abrkdn435ewo",
 );
 
 await signer.signup(homeserver, null);
-// --8<-- [end:js_getting_started_signup]
+// --8<-- [end:js_developer_guide_signup]
 
-// --8<-- [start:js_getting_started_signin]
+// --8<-- [start:js_developer_guide_signin]
 const session = await signer.signin("myapp.example");
-// --8<-- [end:js_getting_started_signin]
+// --8<-- [end:js_developer_guide_signin]
 
-// --8<-- [start:js_getting_started_write]
+// --8<-- [start:js_developer_guide_write]
 const path = "/pub/hello-world/data.json";
 await session.storage.putJson(path, { message: "Hello Pubkyverse!" });
-// --8<-- [end:js_getting_started_write]
+// --8<-- [end:js_developer_guide_write]
 
-// --8<-- [start:js_getting_started_read]
+// --8<-- [start:js_developer_guide_read]
 const data = await session.storage.getJson(path);
 document.querySelector<HTMLDivElement>("#app")!.textContent = JSON.stringify(
   data,
   null,
   2,
 );
-// --8<-- [end:js_getting_started_read]
+// --8<-- [end:js_developer_guide_read]
 
 // --8<-- [start:js_custom_auth_relay]
 import { AuthFlowKind } from "@synonymdev/pubky";

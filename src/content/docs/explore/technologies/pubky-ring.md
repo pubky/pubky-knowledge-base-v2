@@ -14,6 +14,6 @@ Keep a separate backup of your identity key using Ring's backup options. Identit
 
 ## For app developers
 
-Use the [Pubky SDK](/explore/pubky-protocol/sdk/) to request app authorization. The [Ring Simulator](https://simulator.pubkyring.app/) is an experimental browser authenticator for local testnet development; the [Getting Started guide](/explore/pubky-protocol/getting-started/) shows it alongside a working app.
+Use the [Pubky SDK](/explore/pubky-protocol/sdk/) to request app authorization. The [Ring Simulator](https://simulator.pubkyring.app/) is an experimental browser authenticator for local testnet development; the [Developer Guide](/explore/pubky-protocol/developer-guide/) shows it alongside a working app.
 
 For Ring's development setup and implementation, see the [Pubky Ring README](https://github.com/pubky/pubky-ring/blob/main/README.md).

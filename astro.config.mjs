@@ -17,7 +17,7 @@ export default defineConfig({
 		},
 		'/explore/technologies/pubky-cli/': {
 			status: 301,
-			destination: '/explore/pubky-protocol/getting-started/',
+			destination: '/explore/pubky-protocol/developer-guide/',
 		},
 		'/tldr/': {
 			status: 301,
@@ -143,9 +143,13 @@ export default defineConfig({
 			status: 301,
 			destination: '/explore/pubky-protocol/introduction/',
 		},
+		'/explore/pubky-protocol/getting-started/': {
+			status: 301,
+			destination: '/explore/pubky-protocol/developer-guide/',
+		},
 		'/explore/pubkycore/getting-started/': {
 			status: 301,
-			destination: '/explore/pubky-protocol/getting-started/',
+			destination: '/explore/pubky-protocol/developer-guide/',
 		},
 		'/explore/pubkycore/eli5/': {
 			status: 301,
@@ -298,7 +302,7 @@ export default defineConfig({
 					label: 'Pubky Protocol',
 					items: [
 						{ label: 'Introduction', slug: 'explore/pubky-protocol/introduction' },
-						{ label: 'Developer Guide', slug: 'explore/pubky-protocol/getting-started' },
+						{ label: 'Developer Guide', slug: 'explore/pubky-protocol/developer-guide' },
 						{ label: 'ELI5', slug: 'explore/pubky-protocol/eli5' },
 						{ label: 'Authentication', slug: 'explore/pubky-protocol/authentication' },
 						{ label: 'Homeserver', slug: 'explore/pubky-protocol/homeserver' },

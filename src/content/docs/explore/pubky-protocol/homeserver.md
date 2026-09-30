@@ -26,7 +26,7 @@ publicly reachable see the
 For local development and testing with a fixed-port testnet, follow the
 [Pubky Testnet README](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-testnet/README.md).
 For a full walkthrough of setting up a local stack and building your first app, see the
-[Developer Guide](/explore/pubky-protocol/getting-started).
+[Developer Guide](/explore/pubky-protocol/developer-guide).
 
 ## HTTP API
 

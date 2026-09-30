@@ -12,7 +12,7 @@ Pubky applications choose how to read data according to the queries they need. H
 
 ## Choosing a starting point
 
-Direct access is enough for the [Getting Started](/explore/pubky-protocol/getting-started/) walkthrough: the app writes a record and knows where to read it. A feed across many users needs more work. Fetching every user's records in the browser can become expensive, and the client still needs to discover which records matter.
+Direct access is enough for the [Developer Guide](/explore/pubky-protocol/developer-guide/): the app writes a record and knows where to read it. A feed across many users needs more work. Fetching every user's records in the browser can become expensive, and the client still needs to discover which records matter.
 
 An [indexing service](/explore/pubky-apps/indexing-and-aggregation/introduction/) can collect those records once and serve queries to many clients. [Pubky Nexus](/explore/pubky-apps/indexing-and-aggregation/pubky-nexus/) supplies this for the shared social data model. If your app uses different data or needs different queries, a custom backend can index just what it needs.
 
