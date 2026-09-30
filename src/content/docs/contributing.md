@@ -14,7 +14,9 @@ Link to project documentation instead of copying it. Corrections to a project's 
 
 ## Code and bug reports
 
-Find the project through [Resources](/resources/) and follow its contribution and testing instructions. Search existing issues before opening a report; include reproduction steps and the affected software version. [Troubleshooting](/troubleshooting/) can help identify the responsible component.
+Find the project through [Resources](/resources/) and follow its contribution and testing instructions.
+
+Search existing issues before reporting a problem. Include the component and version, platform, reproduction steps, expected result, and the error message. Remove recovery phrases, private keys, tokens, session credentials, and personal data from logs and screenshots.
 
 ## Security
 

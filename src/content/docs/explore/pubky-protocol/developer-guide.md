@@ -316,4 +316,4 @@ The basic template maps [`VITE_PUBKY_HTTP_RELAY`](https://github.com/pubky/pubky
 - **Choose an app architecture:** Compare [client-only, aggregator, and custom-backend designs](/explore/pubky-apps/app-architectures/introduction/).
 - **Security model:** Review the [security considerations for app developers](/explore/pubky-protocol/security-model/).
 
-Need help? See [Troubleshooting](/troubleshooting/) or ask in [Telegram](https://t.me/pubkycore).
+Need help? Ask on pubky.app or [Telegram](https://t.me/pubkycore).

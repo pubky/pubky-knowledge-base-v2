@@ -31,6 +31,10 @@ export default defineConfig({
 			status: 301,
 			destination: '/overview/#the-broader-vision',
 		},
+		'/troubleshooting/': {
+			status: 301,
+			destination: '/contributing/#code-and-bug-reports',
+		},
 		'/explore/pubky-apps/eli5/': {
 			status: 301,
 			destination: '/explore/pubky-apps/introduction/',
@@ -257,7 +261,6 @@ export default defineConfig({
 						'index',
 						'overview',
 						'comparisons',
-						'troubleshooting',
 						'contributing',
 						'getting-started',
 						'glossary',
@@ -298,7 +301,6 @@ export default defineConfig({
 				{ label: 'Comparisons', slug: 'comparisons' },
 				{ label: 'Contributing', slug: 'contributing' },
 				{ label: 'Resources', slug: 'resources' },
-				{ label: 'Troubleshooting', slug: 'troubleshooting' },
 				{
 					label: 'Concepts',
 					items: [
