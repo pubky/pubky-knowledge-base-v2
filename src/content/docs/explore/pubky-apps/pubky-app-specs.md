@@ -16,11 +16,38 @@ To contribute compatible data, an app publishes records to the user's Homeserver
 
 ## Universal Tags
 
-Tags add attributed labels to existing resources. The tag belongs to the person applying it and is stored on their Homeserver, separately from the resource it describes. This lets people enrich someone else's content without editing it.
+A Universal Tag expresses a named relation from a user to a resource. For example, Alice tags an article `tutorial`:
 
-Universal Tags extend that approach beyond pubky.app profiles and posts to resources identified by URIs. A reading app could tag an article `tutorial`; another app could use those annotations to help readers discover it. Nexus indexes supported Universal Tag records and exposes resource queries through its [API reference](https://nexus.pubky.app/swagger-ui/).
+| Part | Meaning | Example |
+| --- | --- | --- |
+| Subject | Who applied the tag | Alice's Pubky identity |
+| Relation | The tag's label | `tutorial` |
+| Object | The resource being tagged | The article's URI |
 
-Tags and relationships together form the [semantic social graph](/explore/concepts/semantic-social-graph/). Third-party apps can use this metadata as well as the underlying content.
+The tag is part of Alice's data on her Homeserver, stored separately from the article. She can add context to someone else's resource without editing it. Universal Tags extend this pattern beyond pubky.app profiles and posts to other resources identified by URIs.
+
+### Reusing annotations across apps
+
+Tags provide shared context that applications can reuse. Alice might label an article `tutorial` through a reading app. A learning app could use that annotation to organize reading material, while a social client presents the same article in a conversation. Each app can build its own experience using the shared annotation.
+
+Authorship lets applications choose whose annotations to include. A label expresses its author's assessment; different people can describe the same resource differently.
+
+### Discovering resources and people
+
+Applications can explore these relations in either direction:
+
+- **From a person to resources:** find the articles Alice tagged `tutorial` to build a reading list.
+- **From a resource to people:** find who tagged an article `tutorial` to discover readers with similar interests.
+
+The second direction can introduce people previously unknown to the app, including people using another app or Homeserver. Starting with an article, a reading app could discover Alice through her tag, then explore her other public annotations to find more resources or offer readers a way to connect with her.
+
+These connections contribute to the [semantic social graph](/explore/concepts/semantic-social-graph/): the resource, the label, and the person applying it can all be useful starting points for discovery.
+
+### Publishing and finding tags
+
+An app publishes a tag record to the user's Homeserver with their authorization. Other apps can read known annotations directly or query Nexus for indexed resources, labels, and the people who applied them. Use the upstream [tag model](https://github.com/pubky/pubky-app-specs/blob/main/SPEC.md#pubkyapptag) for record formats and validation, and the [Nexus API reference](https://nexus.pubky.app/swagger-ui/) for supported resource and tagger queries.
+
+Discovery through Nexus depends on the [users and Homeservers that the instance indexes](https://github.com/pubky/pubky-nexus/blob/main/docs/decentralization.md). A person can be new to your app while their tags are already known to its indexer. Querying one index does not guarantee discovery of every tag or author across the network.
 
 ## Maintained specifications and libraries
 

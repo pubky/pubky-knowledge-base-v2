@@ -24,6 +24,7 @@ Quick reference for terms used throughout the Pubky ecosystem.
 | [SDK](/explore/pubky-protocol/sdk/) | Client libraries for building applications on the protocol. |
 | [Semantic Social Graph](/explore/concepts/semantic-social-graph/) | Relationships between people and content that preserve the meaning of each connection. |
 | [Session](/explore/pubky-protocol/authentication/) | An application's authenticated access to a Homeserver. |
+| [Universal Tags](/explore/pubky-apps/pubky-app-specs/#universal-tags) | Named relations from users to URI-addressed resources, reusable across apps to organize and discover resources and the people tagging them. |
 
 <span id="pubkytls"></span>
 
