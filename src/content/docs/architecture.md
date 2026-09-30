@@ -8,18 +8,56 @@ This page provides a comprehensive overview of the Pubky ecosystem architecture,
 
 ## System Architecture
 
-```mermaid
-%%{init: {'flowchart': {'wrappingWidth': 260}}}%%
-flowchart TB
-    Identity["Identity Layer<br/>Pubky Ring · Key Pairs"]
-    Discovery["Discovery Layer<br/>PKARR Records · Mainline DHT<br/>PKDNS Servers"]
-    Storage["Storage Layer<br/>Homeserver 1 · Homeserver 2<br/>Homeserver N"]
-    Apps["Application Layer<br/>Pubky App · Pubky Nexus<br/>Pubky Backup · Custom Apps"]
+<div role="region" aria-label="System architecture diagram; scroll horizontally to view all components" tabindex="0" style="overflow-x: auto;">
+<div style="width: max-content;">
 
-    Identity --> Discovery
-    Discovery --> Storage
-    Storage <--> Apps
+```mermaid
+%%{init: {'flowchart': {'useMaxWidth': false, 'nodeSpacing': 16, 'rankSpacing': 25, 'padding': 10, 'subGraphTitleMargin': {'top': 4, 'bottom': 12}}}}%%
+flowchart TB
+    subgraph Identity[Identity Layer]
+        Ring["Pubky<br/>Ring"]
+        Keys[Key Pairs]
+    end
+
+    subgraph Discovery[Discovery Layer]
+        PKARR["PKARR<br/>Records"]
+        DHT["Mainline<br/>DHT"]
+        PKDNS["PKDNS<br/>Servers"]
+    end
+
+    subgraph Storage[Storage Layer]
+        HS1["Homeserver<br/>1"]
+        HS2["Homeserver<br/>2"]
+        HSN["Homeserver<br/>N"]
+    end
+
+    subgraph Apps[Application Layer]
+        PubkyApp["Pubky<br/>App"]
+        Nexus["Pubky<br/>Nexus"]
+        Backup["Pubky<br/>Backup"]
+        Custom[Custom Apps]
+    end
+
+    Ring --> Keys
+    Keys --> PKARR
+    PKARR --> DHT
+    PKDNS --> DHT
+    PKARR --> HS1
+    HS1 --> Nexus
+    HS2 --> Nexus
+    HS1 --> Backup
+    Nexus --> PubkyApp
+    Custom --> HS1
+
+    %% Invisible links stack components without adding relationships.
+    PKARR ~~~ PKDNS
+    HS1 ~~~ HS2
+    HS2 ~~~ HSN
+    Backup ~~~ Nexus
 ```
+
+</div>
+</div>
 
 ---
 
