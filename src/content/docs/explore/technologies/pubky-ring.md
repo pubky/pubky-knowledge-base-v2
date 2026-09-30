@@ -6,7 +6,7 @@ Pubky Ring is the key manager and identity application for the Pubky ecosystem. 
 
 An app requests permission to use your identity and access particular data on your [Homeserver](/explore/pubky-protocol/homeserver/). You review that request in Ring, which issues a grant for the approved access. This lets an app work with your data without receiving your identity's private key. See [authentication](/explore/pubky-protocol/authentication/) for how the app, Ring, and Homeserver fit together.
 
-Visit the [Pubky Ring website](https://pubkyring.app/) for downloads.
+Visit the [Pubky Ring website](https://pubkyring.app/) for installs.
 
 ## Protecting your identity
 
