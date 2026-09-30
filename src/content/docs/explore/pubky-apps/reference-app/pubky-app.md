@@ -34,7 +34,9 @@ Local changes and indexed views do not become visible everywhere at once: the Ho
 
 Another app can reuse the social data without adopting pubky.app's interface. It can read known records directly from Homeservers, query Nexus for indexed views, and contribute compatible records with the user's authorization. For example, a topic reader could use existing profiles and follow relationships while presenting a different feed.
 
-[pubky-app-specs](/explore/pubky-apps/pubky-app-specs/) explains this interoperability and Universal Tags, which let applications add annotations to resources beyond pubky.app posts and profiles. Choose the pieces your app needs; the [app architecture guide](/explore/pubky-apps/app-architectures/introduction/) covers the alternatives.
+[Universal Tags](/explore/pubky-apps/pubky-app-specs/#universal-tags) let people label resources beyond pubky.app posts and profiles, such as tagging an article `tutorial`. Other apps can reuse those annotations to organize content and discover the people who tagged it.
+
+Choose the pieces your app needs; the [app architecture guide](/explore/pubky-apps/app-architectures/introduction/) covers the alternatives.
 
 For development and integration, use the maintained sources:
 
