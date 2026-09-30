@@ -2,7 +2,7 @@
 title: "Pubky Docker"
 ---
 
-**[Pubky Docker](https://github.com/pubky/pubky-docker)** runs a full local Pubky environment, including Pubky Homeserver, Homegate, and the Pubky Social components Pubky Nexus and pubky.app.
+**[Pubky Docker](https://github.com/pubky/pubky-docker)** runs a full local Pubky environment, including Pubky Homeserver, Homegate, and the Pubky 'social' components Pubky Nexus and pubky.app.
 
 Use it to develop an app against a disposable local testnet, or to test changes across the social application's components. The [Developer Guide](/explore/pubky-protocol/developer-guide/) uses it to provide a Homeserver for your first app. You do not need to run the full stack for every SDK integration.
 
