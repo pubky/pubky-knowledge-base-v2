@@ -415,6 +415,16 @@ export default defineConfig({
 					],
 				},
 				{
+					label: 'Use Pubky',
+					collapsed: true,
+					items: [
+						{ label: 'Getting Started for Users', slug: 'getting-started' },
+						{ label: 'Pubky Ring', slug: 'use/pubky-ring' },
+						{ label: 'Pubky Passport', slug: 'use/pubky-passport' },
+						{ label: 'Pubky Backup', slug: 'use/pubky-backup' },
+					],
+				},
+				{
 					label: 'Build an app',
 					collapsed: true,
 					items: [
@@ -437,16 +447,6 @@ export default defineConfig({
 						{ label: 'Indexing & Aggregation', slug: 'social-data/indexing-and-aggregation' },
 						{ label: 'Pubky Nexus', slug: 'social-data/pubky-nexus' },
 						{ label: 'pubky.app Reference App', slug: 'social-data/pubky-app' },
-					],
-				},
-				{
-					label: 'Use Pubky',
-					collapsed: true,
-					items: [
-						{ label: 'Getting Started for Users', slug: 'getting-started' },
-						{ label: 'Pubky Ring', slug: 'use/pubky-ring' },
-						{ label: 'Pubky Passport', slug: 'use/pubky-passport' },
-						{ label: 'Pubky Backup', slug: 'use/pubky-backup' },
 					],
 				},
 				{
