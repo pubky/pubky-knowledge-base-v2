@@ -20,7 +20,7 @@ For new pages or significant changes, open an issue first and follow the [Contri
 
 ### Checked code snippets
 
-The [protocol Getting Started guide](src/content/docs/explore/pubky-protocol/getting-started.md) keeps a self-contained, checked walkthrough. Preserve that learning journey; link to maintained upstream examples for additional SDK workflows.
+The [Developer Guide](src/content/docs/explore/pubky-protocol/developer-guide.md) keeps a self-contained, checked walkthrough. Preserve that learning journey; link to maintained upstream examples for additional SDK workflows.
 
 Its JavaScript/TypeScript examples live in `snippets/js/` and are included in Markdown by named section:
 

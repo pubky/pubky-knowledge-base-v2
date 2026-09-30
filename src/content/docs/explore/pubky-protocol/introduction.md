@@ -10,7 +10,7 @@ This separation supports [credible exit](/explore/concepts/credible-exit/): chan
 
 ## Where to start
 
-- **Build an app:** follow the [Developer Guide](/explore/pubky-protocol/getting-started/).
+- **Build an app:** follow the [Developer Guide](/explore/pubky-protocol/developer-guide/).
 - **Understand app design:** explore [Pubky App Architectures](/explore/pubky-apps/app-architectures/introduction/).
 - **Run a Homeserver:** use the upstream [Install Guide](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/docs/INSTALL.md) and [Deployment Guide](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/docs/DEPLOY.md).
 - **Work on the protocol:** the [Pubky repository](https://github.com/pubky/pubky-homeserver) contains the Homeserver, SDKs, local testnet, and examples.

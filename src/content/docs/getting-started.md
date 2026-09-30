@@ -2,7 +2,7 @@
 title: "Getting Started"
 ---
 
-This page helps you try Pubky as a user. To build an application, start with the [Developer Guide](/explore/pubky-protocol/getting-started/).
+This page helps you try Pubky as a user. To build an application, start with the [Developer Guide](/explore/pubky-protocol/developer-guide/).
 
 ## Create an identity and try an app
 

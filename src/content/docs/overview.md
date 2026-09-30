@@ -21,7 +21,7 @@ These choices do not eliminate trust in software or hosting providers. The [Secu
 ## Quick Start
 
 - **Try Pubky:** [Getting Started](/getting-started/) introduces the user journey.
-- **Build an app:** the [Developer Guide](/explore/pubky-protocol/getting-started/) walks through writing and reading your first Pubky data.
+- **Build an app:** the [Developer Guide](/explore/pubky-protocol/developer-guide/) walks through writing and reading your first Pubky data.
 - **Understand the system:** [Architecture](/architecture/) explains the component boundaries; the [Security Model](/explore/pubky-protocol/security-model/) covers trust and limitations.
 - **Find a project or tool:** use the [Resources](/resources/) directory.
 
