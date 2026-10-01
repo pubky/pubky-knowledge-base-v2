@@ -5,26 +5,34 @@ test.beforeEach(async ({ context, baseURL }) => {
     ? route.continue() : route.fulfill({ status: 200, body: '' }));
 });
 
-test('old documentation links retain query strings and section links', async ({ page, request }) => {
-  await page.goto('/explore/pubky-protocol/sdk/?source=bookmark#how-it-works');
-  await expect(page).toHaveURL('/build/sdk/?source=bookmark#how-it-works');
-  await expect(page.locator('#how-it-works')).toBeVisible();
+const legacySdkPaths = ['/explore/pubky-protocol/sdk', '/build/sdk'];
 
+for (const path of legacySdkPaths) {
+  test(`${path} retains query strings, section links, and Markdown content`, async ({ page, request }) => {
+    await page.goto(`${path}/?source=bookmark#how-it-works`);
+    await expect(page).toHaveURL('/sdk/?source=bookmark#how-it-works');
+    await expect(page.locator('#how-it-works')).toBeVisible();
+
+    const legacy = await request.get(`${path}.md`);
+    const canonical = await request.get('/sdk.md');
+    expect(legacy.ok()).toBeTruthy();
+    expect(canonical.ok()).toBeTruthy();
+    expect(await legacy.text()).toEqual(await canonical.text());
+  });
+}
+
+test('old documentation links retain their replacement section', async ({ page }) => {
   await page.goto('/the-vision-of-pubky/?source=bookmark#obsolete-section');
   await expect(page).toHaveURL('/overview/?source=bookmark#the-broader-vision');
-
-  const legacy = await request.get('/explore/pubky-protocol/sdk.md');
-  const canonical = await request.get('/build/sdk.md');
-  expect(legacy.ok()).toBeTruthy();
-  expect(canonical.ok()).toBeTruthy();
-  expect(await legacy.text()).toEqual(await canonical.text());
 });
 
 test.describe('without JavaScript', () => {
   test.use({ javaScriptEnabled: false });
-  test('old URLs still reach their canonical page', async ({ page }) => {
-    await page.goto('/explore/pubky-protocol/sdk/');
-    await expect(page).toHaveURL('/build/sdk/');
-    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Pubky SDK');
-  });
+  for (const path of legacySdkPaths) {
+    test(`${path} still reaches its canonical page`, async ({ page }) => {
+      await page.goto(`${path}/`);
+      await expect(page).toHaveURL('/sdk/');
+      await expect(page.getByRole('heading', { level: 1 })).toHaveText('Pubky SDK');
+    });
+  }
 });

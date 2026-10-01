@@ -3,7 +3,7 @@ title: "Pubky Passport"
 description: "Create and recover a Pubky identity with Google and sign in to Pubky apps from your browser."
 ---
 
-Pubky Passport is a browser-based signer for Pubky. It lets you create an identity and approve sign-in requests from Pubky apps without installing a mobile app. It plays a similar role to [Pubky Ring](/use/pubky-ring/), which manages identities on your phone.
+Pubky Passport is a browser-based signer for Pubky. It lets you create an identity and approve sign-in requests from Pubky apps without installing a mobile app. It plays a similar role to [Pubky Ring](/pubky-ring/), which manages identities on your phone.
 
 [Open Pubky Passport](https://passport.pubky.app/) and choose **Continue with Google**. Passport creates your Pubky identity or restores the one backed up for that Google account. When an app asks to sign in, you review its requested permissions before approving access.
 

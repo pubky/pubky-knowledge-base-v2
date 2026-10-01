@@ -20,7 +20,7 @@ For new pages or significant changes, open an issue first and follow the [Contri
 
 ### Checked code snippets
 
-The [Developer Guide](src/content/docs/build/developer-guide.md) keeps a self-contained, checked walkthrough. Preserve that learning journey; link to SDK examples for additional workflows.
+The [Developer Guide](src/content/docs/developer-guide.md) keeps a self-contained, checked walkthrough. Preserve that learning journey; link to SDK examples for additional workflows.
 
 Its JavaScript/TypeScript examples live in `snippets/js/` and are included in Markdown by named section:
 
@@ -38,7 +38,7 @@ Use `blob/{{pinned_homeserver_release}}/...` or `tree/{{pinned_homeserver_releas
 ## Related Resources
 
 - **GitHub**: [github.com/pubky](https://github.com/pubky)
-- **Pubky Homeserver**: [github.com/pubky/pubky-homeserver](https://github.com/pubky/pubky-homeserver) ([SDK resources](https://pubky.org/build/sdk/))
+- **Pubky Homeserver**: [github.com/pubky/pubky-homeserver](https://github.com/pubky/pubky-homeserver) ([SDK resources](https://pubky.org/sdk/))
 - **Telegram**: [t.me/pubkycore](https://t.me/pubkycore)
 - **Live App**: [pubky.app](https://pubky.app)
 
@@ -113,7 +113,7 @@ AI tools can reference the docs through these plain Markdown endpoints:
 - [https://pubky.org/llms-full.txt](https://pubky.org/llms-full.txt)
 - [https://pubky.org/llms-small.txt](https://pubky.org/llms-small.txt)
 
-[llms-small.txt](https://pubky.org/llms-small.txt) links to per-page Markdown files. You can also open them directly by adding `.md` to a docs path, for example [pubky.org/getting-started.md](https://pubky.org/getting-started.md) or [pubky.org/build/sdk.md](https://pubky.org/build/sdk.md).
+[llms-small.txt](https://pubky.org/llms-small.txt) links to per-page Markdown files. You can also open them directly by adding `.md` to a docs path, for example [pubky.org/getting-started.md](https://pubky.org/getting-started.md) or [pubky.org/sdk.md](https://pubky.org/sdk.md).
 
 Locally, `npm run build` generates the same files in `dist/`.
 

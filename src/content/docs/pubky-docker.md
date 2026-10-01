@@ -4,7 +4,7 @@ title: "Pubky Docker"
 
 **[Pubky Docker](https://github.com/pubky/pubky-docker)** runs a full local Pubky environment, including Pubky Homeserver, Homegate, and the Pubky 'social' components Pubky Nexus and pubky.app.
 
-Use it to develop an app against a disposable local testnet, or to test changes across the social application's components. The [Developer Guide](/build/developer-guide/) uses it to provide a Homeserver for your first app. You do not need to run the full stack for every SDK integration.
+Use it to develop an app against a disposable local testnet, or to test changes across the social application's components. The [Developer Guide](/developer-guide/) uses it to provide a Homeserver for your first app. You do not need to run the full stack for every SDK integration.
 
 :::caution[Warning]
 Pubky Docker is intended for local development, testing, and experimentation—not production hosting.
@@ -56,7 +56,7 @@ flowchart TB
     Authenticator -->|auth| Services
 ```
 
-For authorization during local development, the [Ring Simulator](https://simulator.pubkyring.app/) can act as the authenticator. The [authentication overview](/build/authentication/) explains that flow.
+For authorization during local development, the [Ring Simulator](https://simulator.pubkyring.app/) can act as the authenticator. The [authentication overview](/authentication/) explains that flow.
 
 For setup, configuration, and running specific component revisions, see the [Pubky Docker README](https://github.com/pubky/pubky-docker/blob/main/Readme.md).
 

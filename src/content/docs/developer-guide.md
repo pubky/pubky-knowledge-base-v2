@@ -22,9 +22,9 @@ To follow along, you will need [Docker](https://docs.docker.com/get-started/get-
 If you do not want to use Docker, see the [native Pubky testnet setup](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-testnet/README.md).
 :::
 
-In order to build our App we'll need to setup a local homeserver and testnet - we'll use [Pubky Docker](/build/pubky-docker/) to spin up a local development environment.
+In order to build our App we'll need to setup a local homeserver and testnet - we'll use [Pubky Docker](/pubky-docker/) to spin up a local development environment.
 
-Note: [Pubky Docker](/build/pubky-docker/)  can run a full [pubky.app](/learn/pubky-app/)-compatible social stack too, but we will keep this setup minimal.
+Note: [Pubky Docker](/pubky-docker/)  can run a full [pubky.app](/pubky-app/)-compatible social stack too, but we will keep this setup minimal.
 
 ```bash
 git clone https://github.com/pubky/pubky-docker.git && cd pubky-docker && cp .env-sample .env
@@ -54,8 +54,8 @@ With `.env` set to the default `NETWORK=testnet`, these ports are exposed:
 
 | Port | Service | Purpose |
 | --- | --- | --- |
-| `15411` | [PKARR](/components/pkarr/) relay | Used by the Pubky SDK to publish and resolve testnet PKARR records over HTTP, instead of using the [Mainline DHT](/components/mainline-dht/). |
-| `15412` | [HTTP relay](/components/http-relay/) | Runs the local relay used by Pubky authentication flows. |
+| `15411` | [PKARR](/pkarr/) relay | Used by the Pubky SDK to publish and resolve testnet PKARR records over HTTP, instead of using the [Mainline DHT](/mainline-dht/). |
+| `15412` | [HTTP relay](/http-relay/) | Runs the local relay used by Pubky authentication flows. |
 | `6286` | Homeserver ICANN HTTP | Clear-text HTTP endpoint used for browser and localhost fallback. |
 | `6287` | Homeserver [PubkyTLS](/glossary/#pubkytls) | Direct Pubky TLS endpoint for SDK and native clients. |
 | `6288` | Homeserver admin HTTP | Local admin endpoint exposed by Pubky Docker. |
@@ -74,7 +74,7 @@ What follows is a step-by-step guide to building your first Pubky app. If you pr
 For full API details see the reference documenation for [JavaScript](https://pubky.github.io/pubky-homeserver/js-sdk-typedoc/) and [Rust](https://docs.rs/pubky).
 :::
 
-With the Homeserver running, clone this empty Vite template and install the [Pubky SDK](/build/sdk/):
+With the Homeserver running, clone this empty Vite template and install the [Pubky SDK](/sdk/):
 
 ```bash
 npx tiged pubky/pubky-app-templates/vite-starter pubky-hello-world
@@ -105,7 +105,7 @@ npm install @synonymdev/react-native-pubky
 cd ios && pod install  # iOS only
 ```
 
-**iOS/Android Native**: See [SDK Documentation](/build/sdk/) for UniFFI bindings via `pubky-core-ffi`.
+**iOS/Android Native**: See [SDK Documentation](/sdk/) for UniFFI bindings via `pubky-core-ffi`.
 
 </details>
 
@@ -242,12 +242,12 @@ For now, this section collects references. A dedicated guide will follow.
 - [mapky.app](https://mapky.app/) ([source](https://github.com/gillohner/mapky-app))
 
 **Social App (pubky-app-specs):**
-- [pubky-app-specs](https://github.com/pubky/pubky-app-specs) - Data models for social features and interoperability with [pubky.app](/learn/pubky-app/)
+- [pubky-app-specs](https://github.com/pubky/pubky-app-specs) - Data models for social features and interoperability with [pubky.app](/pubky-app/)
 - [npm: pubky-app-specs](https://www.npmjs.com/package/pubky-app-specs) / [crates.io: pubky-app-specs](https://crates.io/crates/pubky-app-specs)
 
 **Use Pubky Nexus for Social Features:**
 
-If building a social app, leverage [Pubky Nexus](/components/pubky-nexus/) for:
+If building a social app, leverage [Pubky Nexus](/pubky-nexus/) for:
 - Real-time feeds and timelines
 - Search and discovery
 - User recommendations
@@ -260,7 +260,7 @@ If building a social app, leverage [Pubky Nexus](/components/pubky-nexus/) for:
 
 **Add Payments (WIP):**
 
-[Paykit](/components/paykit/) protocol (work in progress) will enable:
+[Paykit](/paykit/) protocol (work in progress) will enable:
 - Payment discovery via Pubky public keys
 - Public or private payment details for Bitcoin onchain, Lightning, and other rails
 - Encrypted receipt access for payers
@@ -268,7 +268,7 @@ If building a social app, leverage [Pubky Nexus](/components/pubky-nexus/) for:
 
 **Add Encryption (WIP):**
 
-[Pubky Noise](/components/pubky-noise/) (work in progress) provides:
+[Pubky Noise](/pubky-noise/) (work in progress) provides:
 - Encrypted peer-to-peer channels
 - Private messaging
 - Secure data sharing
@@ -282,9 +282,9 @@ To connect your app to the production Pubky network, replace the client from Ste
 + const pubky = new Pubky();
 ```
 
-`new Pubky()` stops using the local endpoints. The app instead resolves [PKARR](/components/pkarr/) records from the [Mainline DHT](/components/mainline-dht/), connects to the Homeserver resolved from each user's PKARR record, and uses a public [HTTP relay](/components/http-relay/) for authentication.
+`new Pubky()` stops using the local endpoints. The app instead resolves [PKARR](/pkarr/) records from the [Mainline DHT](/mainline-dht/), connects to the Homeserver resolved from each user's PKARR record, and uses a public [HTTP relay](/http-relay/) for authentication.
 
-Steps 3.3–3.5 use development-only identity and Homeserver shortcuts. For production, use [Pubky Ring](/use/pubky-ring/); the [basic Pubky app template](#39-basic-pubky-app-template) already implements that flow.
+Steps 3.3–3.5 use development-only identity and Homeserver shortcuts. For production, use [Pubky Ring](/pubky-ring/); the [basic Pubky app template](#39-basic-pubky-app-template) already implements that flow.
 
 <details>
 <summary><strong>Optional: Configure custom relays</strong></summary>
@@ -294,7 +294,7 @@ Browsers cannot query the UDP-based Mainline DHT directly, so the SDK uses HTTPS
 ```javascript snippet="snippets/js/src/developer-guide.ts:js_pkarr_relay_config"
 ```
 
-PKARR relays are separate from the [HTTP relay](/components/http-relay/) that transfers encrypted Pubky Ring authentication messages. To use a custom HTTP relay with the SDK:
+PKARR relays are separate from the [HTTP relay](/http-relay/) that transfers encrypted Pubky Ring authentication messages. To use a custom HTTP relay with the SDK:
 
 ```javascript snippet="snippets/js/src/developer-guide.ts:js_custom_auth_relay"
 ```
@@ -312,8 +312,8 @@ The basic template maps [`VITE_PUBKY_HTTP_RELAY`](https://github.com/pubky/pubky
 ### Next Steps
 
 - **Explore SDK examples:** See the [Pubky Homeserver examples](https://github.com/pubky/pubky-homeserver/tree/{{pinned_homeserver_release}}/examples) for runnable workflows.
-- **Find SDK references:** See the [Pubky SDK guide](/build/sdk/) for supported platforms, API references, and examples.
-- **Choose an app architecture:** Compare [client-only, aggregator, and custom-backend designs](/build/app-architectures/).
-- **Security model:** Review the [security considerations for app developers](/learn/security-model/).
+- **Find SDK references:** See the [Pubky SDK guide](/sdk/) for supported platforms, API references, and examples.
+- **Choose an app architecture:** Compare [client-only, aggregator, and custom-backend designs](/app-architectures/).
+- **Security model:** Review the [security considerations for app developers](/security-model/).
 
 Need help? Ask on pubky.app or [Telegram](https://t.me/pubkycore).
