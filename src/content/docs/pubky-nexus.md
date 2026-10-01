@@ -17,5 +17,9 @@ Nexus does not write a user's posts on their behalf, and its index does not repl
 For implementation and operation, see:
 
 - [Nexus README](https://github.com/pubky/pubky-nexus): architecture, setup, configuration, migrations, and testing.
-- [API reference](https://nexus.pubky.app/swagger-ui/): endpoints and response schemas for the public instance.
+- [Swagger UI](https://nexus.pubky.app/swagger-ui/) and [OpenAPI specification (JSON)](https://nexus.pubky.app/api-docs/v0/openapi.json): endpoints and response schemas for the public instance.
 - [Indexing coverage and Homeserver configuration](https://github.com/pubky/pubky-nexus/blob/main/docs/decentralization.md): how an instance selects Homeservers and users to index.
+
+## Exploring the graph with Nexus Scout
+
+[Nexus Scout](https://nexus-scout.pubky.app/) lets AI agents and developers run read-only Cypher queries over the Pubky social graph and receive JSON results. The public instance uses a periodically refreshed replica, so results can lag behind the Nexus API. See the [agent guide](https://nexus-scout.pubky.app/llms.txt) for schema discovery, query examples, and limits.
