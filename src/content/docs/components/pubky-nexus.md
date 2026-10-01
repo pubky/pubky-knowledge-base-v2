@@ -2,7 +2,7 @@
 title: "Pubky Nexus"
 ---
 
-Pubky Nexus indexes public social data from [Homeservers](/components/homeserver/) using the [pubky-app-specs](/social-data/pubky-app-specs/) data model and serves it through an API for [pubky.app](/learn/pubky-app/) and compatible clients. It is an application service, not a requirement for every Pubky app.
+[Pubky Nexus](https://github.com/pubky/pubky-nexus) indexes public social data from [Homeservers](/components/homeserver/) using the [pubky-app-specs](/social-data/pubky-app-specs/) data model and serves it through an API for [pubky.app](/learn/pubky-app/) and compatible clients. It is an application service, not a requirement for every Pubky app.
 
 ## When Nexus is useful
 

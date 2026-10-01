@@ -2,7 +2,7 @@
 title: "HTTP Relay"
 ---
 
-HTTP relay service for forwarding encrypted grants during Pubky [authentication](/build/authentication/) flows.
+[HTTP relay](https://github.com/pubky/http-relay) service for forwarding encrypted grants during Pubky [authentication](/build/authentication/) flows.
 
 In the Pubky Auth flow, a third-party app needs to receive a grant from the user's authenticator ([Pubky Ring](/use/pubky-ring/)). The relay solves this by providing a temporary rendezvous point where encrypted grants can be deposited and retrieved.
 
