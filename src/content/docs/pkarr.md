@@ -23,6 +23,8 @@ The records use DNS's familiar record format, but publishing an identity's PKARR
 
 Records need to be republished to remain available, and caches can delay changes. PKARR relays let browsers reach discovery services and can also help native services with [limited DHT reachability](/mainline-dht/#cloud-network-reachability). These are separate from the [HTTP Relay](/http-relay/) used during app authorization.
 
+The [PKARR churn study](https://github.com/pubky/pkarr-churn/blob/main/results-node_decay.md) investigates how nodes leaving the DHT affect record availability, and how replication and republishing can balance availability against network load. Its survival estimates and proposed republishing schedules describe experimental conditions, not guaranteed retention or SDK defaults. DNS record TTLs guide caching; they do not set how long DHT nodes retain a record.
+
 Pubky app developers normally use the [Pubky SDK](/sdk/) to handle discovery. [PKDNS](/pkdns/) provides a bridge for software that uses conventional DNS.
 
 ## Go deeper
