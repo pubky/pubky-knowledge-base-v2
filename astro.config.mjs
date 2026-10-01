@@ -425,7 +425,6 @@ export default defineConfig({
 						{ label: 'Semantic Social Graph', slug: 'learn/semantic-social-graph' },
 						{ label: 'Credible Exit', slug: 'learn/credible-exit' },
 						{ label: 'Censorship Resistance', slug: 'learn/censorship-resistance' },
-						{ label: 'Comparisons', slug: 'comparisons' },
 					],
 				},
 				{
@@ -493,6 +492,7 @@ export default defineConfig({
 					collapsed: true,
 					items: [
 						{ label: 'Glossary', slug: 'glossary' },
+						{ label: 'Comparisons', slug: 'comparisons' },
 						{ label: 'Resources', slug: 'resources' },
 					],
 				},
