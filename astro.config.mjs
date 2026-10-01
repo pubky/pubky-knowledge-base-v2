@@ -446,33 +446,15 @@ export default defineConfig({
 					label: 'Development',
 					collapsed: true,
 					items: [
-						{
-							label: 'Build an app',
-							collapsed: true,
-							items: [
-								{ label: 'Developer Guide', slug: 'build/developer-guide' },
-								{ label: 'SDK', slug: 'build/sdk' },
-								{ label: 'App Architectures', slug: 'build/app-architectures' },
-								{ label: 'Authentication', slug: 'build/authentication' },
-								{ label: 'Private Storage', slug: 'build/private-storage' },
-							],
-						},
-						{
-							label: 'Shared social data',
-							collapsed: true,
-							items: [
-								{ label: 'pubky-app-specs', slug: 'social-data/pubky-app-specs' },
-								{ label: 'Indexing & Aggregation', slug: 'social-data/indexing-and-aggregation' },
-							],
-						},
-						{
-							label: 'Development tools',
-							collapsed: true,
-							items: [
-								{ label: 'Pubky Docker', slug: 'build/pubky-docker' },
-								{ label: 'Pubky Explorer', slug: 'build/pubky-explorer' },
-							],
-						},
+						{ label: 'Developer Guide', slug: 'build/developer-guide' },
+						{ label: 'SDK', slug: 'build/sdk' },
+						{ label: 'App Architectures', slug: 'build/app-architectures' },
+						{ label: 'Authentication', slug: 'build/authentication' },
+						{ label: 'Private Storage', slug: 'build/private-storage' },
+						{ label: 'pubky-app-specs', slug: 'social-data/pubky-app-specs' },
+						{ label: 'Indexing & Aggregation', slug: 'social-data/indexing-and-aggregation' },
+						{ label: 'Pubky Docker', slug: 'build/pubky-docker' },
+						{ label: 'Pubky Explorer', slug: 'build/pubky-explorer' },
 						{ label: 'Contributing', slug: 'contributing' },
 					],
 				},
