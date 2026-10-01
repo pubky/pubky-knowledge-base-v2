@@ -6,22 +6,26 @@ const { id } = Astro.locals.starlightRoute;
 const markdownPath = id === '404' ? null : docsMarkdownPath(Astro.url.pathname);
 ---
 
-<div class="doc-title-row not-content">
-  <Default />
-  {markdownPath && (
-    <div class="doc-title-tools" data-pagefind-ignore>
-      <div class="markdown-actions" role="group" aria-label="Markdown for this page">
-        <a href={markdownPath} target="_blank" rel="noopener noreferrer" aria-label="View Markdown for this page (opens in new tab)">
-          <img src={withBase('/images/icons/file.svg')} width="16" height="16" alt="" aria-hidden="true" />
-          Markdown
-        </a>
-        <button type="button" data-markdown-copy={markdownPath} aria-label="Copy link to this page’s Markdown" hidden>
-          <img src={withBase('/images/icons/line-copy.svg')} width="16" height="16" alt="" aria-hidden="true" />
-          <span data-copy-label>Copy link</span>
-        </button>
+<div class="doc-title not-content">
+  <div class="doc-title-row">
+    <Default />
+    {markdownPath && (
+      <div class="doc-title-tools" data-pagefind-ignore>
+        <div class="markdown-actions" role="group" aria-label="Markdown for this page">
+          <a href={markdownPath} target="_blank" rel="noopener noreferrer" aria-label="View Markdown for this page (opens in new tab)" title="View Markdown (opens in new tab)">
+            <img src={withBase('/images/icons/file.svg')} width="16" height="16" alt="" aria-hidden="true" />
+            <span>Markdown</span>
+          </a>
+          <button type="button" data-markdown-copy={markdownPath} aria-label="Copy link to this page’s Markdown" title="Copy Markdown link" hidden>
+            <img src={withBase('/images/icons/line-copy.svg')} width="16" height="16" alt="" aria-hidden="true" />
+            <span data-copy-label>Copy link</span>
+          </button>
+        </div>
       </div>
-      <p class="markdown-copy-status" role="status" aria-live="polite" aria-atomic="true"></p>
-    </div>
+    )}
+  </div>
+  {markdownPath && (
+    <p class="markdown-copy-status" role="status" aria-live="polite" aria-atomic="true" data-pagefind-ignore></p>
   )}
 </div>
 
@@ -30,7 +34,7 @@ const markdownPath = id === '404' ? null : docsMarkdownPath(Astro.url.pathname);
 
   function enhanceMarkdownActions() {
     document.querySelectorAll<HTMLButtonElement>('[data-markdown-copy]').forEach((button) => {
-      const status = button.closest('.doc-title-tools')?.querySelector<HTMLElement>('[role="status"]');
+      const status = button.closest('.doc-title')?.querySelector<HTMLElement>('[role="status"]');
       const markdownPath = button.dataset.markdownCopy;
       if (!status || !markdownPath) return;
 
@@ -48,9 +52,9 @@ const markdownPath = id === '404' ? null : docsMarkdownPath(Astro.url.pathname);
 
 <style>
   /* Page utilities follow the existing Pubky spacing, palette, and controls. */
+  .doc-title { container: doc-title / inline-size; }
   .doc-title-row {
     display: flex;
-    flex-wrap: wrap;
     align-items: center;
     gap: var(--spacing-4);
     padding-top: var(--spacing-4);
@@ -59,9 +63,11 @@ const markdownPath = id === '404' ? null : docsMarkdownPath(Astro.url.pathname);
     flex: 1 1 auto;
     min-width: 0;
     margin: 0;
-    overflow-wrap: anywhere;
+    font-size: var(--text-4xl-size);
+    line-height: var(--text-4xl-lh);
+    white-space: nowrap;
   }
-  .doc-title-tools { flex: 0 0 auto; max-width: 100%; }
+  .doc-title-tools { flex: 0 0 auto; }
   .markdown-actions {
     display: inline-flex;
     align-items: stretch;
@@ -104,24 +110,52 @@ const markdownPath = id === '404' ? null : docsMarkdownPath(Astro.url.pathname);
     color: var(--base-foreground);
   }
   .markdown-actions img { flex-shrink: 0; }
+  .markdown-actions [data-copy-label] { min-width: 8ch; }
   .markdown-actions button[hidden] { display: none; }
   .markdown-actions button:disabled { cursor: wait; }
   .markdown-copy-status {
     max-width: 30ch;
     margin: 0;
+    margin-left: auto;
     color: var(--base-secondary-foreground);
     font-size: var(--text-xs-size);
     line-height: var(--text-xs-lh);
   }
   .markdown-copy-status:not(:empty) { margin-top: var(--spacing-2); }
-  @media (max-width: 639px) {
-    .doc-title-row { flex-direction: column; align-items: stretch; }
-    .doc-title-tools { align-self: flex-start; }
+  @container doc-title (max-width: 44rem) {
+    .doc-title-row { gap: var(--spacing-2); }
+    .doc-title-row :global(h1) {
+      font-size: var(--text-3xl-size);
+      line-height: var(--text-3xl-lh);
+    }
+    .markdown-actions a, .markdown-actions button {
+      width: var(--landing-touch-target);
+      padding: var(--spacing-2);
+    }
+    .markdown-actions span { display: none; }
+  }
+  @container doc-title (max-width: 28rem) {
+    .doc-title-row :global(h1) {
+      font-size: var(--text-2xl-size);
+      line-height: var(--text-2xl-lh);
+    }
+  }
+  @container doc-title (max-width: 24rem) {
+    .doc-title-row :global(h1) {
+      font-size: var(--text-lg-size);
+      line-height: var(--text-lg-lh);
+    }
+  }
+  @container doc-title (max-width: 20rem) {
+    .doc-title-row :global(h1) {
+      font-size: var(--text-base-size);
+      line-height: var(--text-base-lh);
+    }
   }
   @media (prefers-reduced-motion: reduce) {
     .markdown-actions a, .markdown-actions button { transition: none; }
   }
   @media print {
-    .doc-title-tools { display: none; }
+    .doc-title-tools, .markdown-copy-status { display: none; }
   }
 </style>

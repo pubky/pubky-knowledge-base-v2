@@ -5,20 +5,21 @@ interface Props {
   titleIcon?: string;
   description?: string;
   image: string;
+  imageFit?: 'cover' | 'contain';
   tags?: { label: string; href: string }[];
   links?: { label: string; href: string; external?: boolean }[];
 }
 
 import { withBase } from '../utils/base-path';
 
-const { title, titleSuffix, titleIcon, description, image, tags = [], links = [] } = Astro.props;
+const { title, titleSuffix, titleIcon, description, image, imageFit = 'cover', tags = [], links = [] } = Astro.props;
 const imageSrc = withBase(image);
 const hrefFor = (href: string, external = href.startsWith('http')) => external ? href : withBase(href);
 ---
 
 <div class="image-card">
   <div class="image-card-thumbnail">
-    <img src={imageSrc} alt={title} loading="lazy" />
+    <img src={imageSrc} alt={[title, titleSuffix].filter(Boolean).join(' ')} class:list={{ 'image-contain': imageFit === 'contain' }} loading="lazy" />
   </div>
   <div class="image-card-content">
     <h3 class="image-card-title">
@@ -92,6 +93,10 @@ const hrefFor = (href: string, external = href.startsWith('http')) => external ?
     display: block;
   }
 
+  .image-card-thumbnail img.image-contain {
+    object-fit: contain;
+  }
+
   /* Figma: flex-col, gap spacing/4 (16px), items-start — items stack from the top with
      a fixed gap; any extra card height stays empty at the bottom (no space-between). */
   .image-card-content {
@@ -145,8 +150,8 @@ const hrefFor = (href: string, external = href.startsWith('http')) => external ?
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    /* Figma: h = 40px, px = spacing/4 (16px) */
-    height: 40px;
+    /* Figma: h = 40px, expanded to the minimum accessible touch target. */
+    height: var(--landing-touch-target);
     padding: 0 var(--spacing-4);
     background: var(--alpha-white-5);
     border: 1px solid var(--base-border);
