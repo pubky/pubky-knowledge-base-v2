@@ -2,11 +2,11 @@
 title: "pubky-app-specs"
 ---
 
-Shared data model specifications for the Pubky 'social' app ecosystem, with [pubky.app](/social-data/pubky-app/) as the reference implementation.
+Shared data model specifications for the Pubky 'social' app ecosystem, with [pubky.app](/learn/pubky-app/) as the reference implementation.
 
 ## Overview
 
-`pubky-app-specs` defines the canonical data schemas for social application data stored on Pubky [homeservers](/components/homeserver/). It provides validation rules, serialization logic, and type definitions used by both *Pubky apps* and the [Pubky Nexus](/social-data/pubky-nexus/) indexer to ensure interoperability with [pubky.app](/social-data/pubky-app/). Note that this is *only* required for Pubky 'social' apps: Pubky apps that read or write pubky.app social data, including profiles, posts and collections, follows, mutes, tags, bookmarks, and feeds. Pubky apps that do not rely on that social data should ignore `pubky-app-specs` and rely solely on their own application-specific schemas.
+`pubky-app-specs` defines the canonical data schemas for social application data stored on Pubky [homeservers](/components/homeserver/). It provides validation rules, serialization logic, and type definitions used by both *Pubky apps* and the [Pubky Nexus](/components/pubky-nexus/) indexer to ensure interoperability with [pubky.app](/learn/pubky-app/). Note that this is *only* required for Pubky 'social' apps: Pubky apps that read or write pubky.app social data, including profiles, posts and collections, follows, mutes, tags, bookmarks, and feeds. Pubky apps that do not rely on that social data should ignore `pubky-app-specs` and rely solely on their own application-specific schemas.
 
 ## Reusing social data
 
@@ -31,7 +31,7 @@ Tags support discovery in both directions:
 - **Find resources through people:** show the articles Alice tagged `tutorial`.
 - **Find people through resources:** show who tagged an article `tutorial`, including people previously unknown to the app who use another app or Homeserver.
 
-These connections form part of the [semantic social graph](/social-data/semantic-social-graph/).
+These connections form part of the [semantic social graph](/learn/semantic-social-graph/).
 
 Apps publish tag records to the user's Homeserver with their authorization. They can read known annotations directly or query Nexus for indexed resources and taggers. See the [tag model](https://github.com/pubky/pubky-app-specs/blob/main/SPEC.md#pubkyapptag) for record formats and validation, and the [Nexus API reference](https://nexus.pubky.app/swagger-ui/) for supported queries.
 

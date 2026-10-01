@@ -53,7 +53,7 @@ export default defineConfig({
 		},
 		'/explore/pubky-apps/reference-app/introduction/': {
 			status: 301,
-			destination: '/social-data/pubky-app/',
+			destination: '/learn/pubky-app/',
 		},
 		'/explore/pubky-apps/app-architectures/client-homeserver/': {
 			status: 301,
@@ -81,39 +81,39 @@ export default defineConfig({
 		},
 		'/explore/pubky-apps/reference-app/features/bookmarks/': {
 			status: 301,
-			destination: '/social-data/pubky-app/',
+			destination: '/learn/pubky-app/',
 		},
 		'/explore/pubky-apps/reference-app/features/layouts/': {
 			status: 301,
-			destination: '/social-data/pubky-app/',
+			destination: '/learn/pubky-app/',
 		},
 		'/explore/pubky-apps/reference-app/features/notifications/': {
 			status: 301,
-			destination: '/social-data/pubky-app/',
+			destination: '/learn/pubky-app/',
 		},
 		'/explore/pubky-apps/reference-app/features/perspectives/': {
 			status: 301,
-			destination: '/social-data/pubky-app/',
+			destination: '/learn/pubky-app/',
 		},
 		'/explore/pubky-apps/reference-app/features/posts/': {
 			status: 301,
-			destination: '/social-data/pubky-app/',
+			destination: '/learn/pubky-app/',
 		},
 		'/explore/pubky-apps/reference-app/features/profiles/': {
 			status: 301,
-			destination: '/social-data/pubky-app/',
+			destination: '/learn/pubky-app/',
 		},
 		'/explore/pubky-apps/reference-app/features/search/': {
 			status: 301,
-			destination: '/social-data/pubky-app/',
+			destination: '/learn/pubky-app/',
 		},
 		'/explore/pubky-apps/reference-app/features/tags/': {
 			status: 301,
-			destination: '/social-data/pubky-app/',
+			destination: '/learn/pubky-app/',
 		},
 		'/explore/pubky-apps/reference-app/features/trends/': {
 			status: 301,
-			destination: '/social-data/pubky-app/',
+			destination: '/learn/pubky-app/',
 		},
 		'/explore/pubky-protocol/pkarr/architecture/': {
 			status: 301,
@@ -273,7 +273,7 @@ export default defineConfig({
 		},
 		'/explore/concepts/semantic-social-graph/': {
 			status: 301,
-			destination: '/social-data/semantic-social-graph/',
+			destination: '/learn/semantic-social-graph/',
 		},
 		'/explore/pubky-apps/indexing-and-aggregation/introduction/': {
 			status: 301,
@@ -281,11 +281,11 @@ export default defineConfig({
 		},
 		'/explore/pubky-apps/indexing-and-aggregation/pubky-nexus/': {
 			status: 301,
-			destination: '/social-data/pubky-nexus/',
+			destination: '/components/pubky-nexus/',
 		},
 		'/explore/pubky-apps/reference-app/pubky-app/': {
 			status: 301,
-			destination: '/social-data/pubky-app/',
+			destination: '/learn/pubky-app/',
 		},
 		'/explore/technologies/pubky-ring/': {
 			status: 301,
@@ -330,6 +330,18 @@ export default defineConfig({
 		'/explore/technologies/paykit/': {
 			status: 301,
 			destination: '/components/paykit/',
+		},
+		'/social-data/pubky-app/': {
+			status: 301,
+			destination: '/learn/pubky-app/',
+		},
+		'/social-data/semantic-social-graph/': {
+			status: 301,
+			destination: '/learn/semantic-social-graph/',
+		},
+		'/social-data/pubky-nexus/': {
+			status: 301,
+			destination: '/components/pubky-nexus/',
 		},
 	},
 	base: process.env.BASE_PATH || '/',
@@ -378,7 +390,7 @@ export default defineConfig({
 						'build/pubky-explorer',
 						'use/pubky-ring',
 						'social-data/indexing-and-aggregation',
-						'social-data/pubky-app',
+						'learn/pubky-app',
 						'learn/censorship-resistance',
 						'learn/credible-exit',
 						'resources',
@@ -409,9 +421,11 @@ export default defineConfig({
 					items: [
 						{ label: 'Overview', slug: 'overview' },
 						{ label: 'System Architecture', slug: 'architecture' },
-						{ label: 'Comparisons', slug: 'comparisons' },
+						{ label: 'pubky.app Reference App', slug: 'learn/pubky-app' },
+						{ label: 'Semantic Social Graph', slug: 'learn/semantic-social-graph' },
 						{ label: 'Credible Exit', slug: 'learn/credible-exit' },
 						{ label: 'Censorship Resistance', slug: 'learn/censorship-resistance' },
+						{ label: 'Comparisons', slug: 'comparisons' },
 					],
 				},
 				{
@@ -425,28 +439,38 @@ export default defineConfig({
 					],
 				},
 				{
-					label: 'Build an app',
+					label: 'Development',
 					collapsed: true,
 					items: [
-						{ label: 'Developer Guide', slug: 'build/developer-guide' },
-						{ label: 'SDK', slug: 'build/sdk' },
-						{ label: 'App Architectures', slug: 'build/app-architectures' },
-						{ label: 'Authentication', slug: 'build/authentication' },
-						{ label: 'Private Storage', slug: 'build/private-storage' },
-						{ label: 'Security Model', slug: 'build/security-model' },
-						{ label: 'Pubky Docker', slug: 'build/pubky-docker' },
-						{ label: 'Pubky Explorer', slug: 'build/pubky-explorer' },
-					],
-				},
-				{
-					label: 'Shared social data',
-					collapsed: true,
-					items: [
-						{ label: 'pubky-app-specs', slug: 'social-data/pubky-app-specs' },
-						{ label: 'Semantic Social Graph', slug: 'social-data/semantic-social-graph' },
-						{ label: 'Indexing & Aggregation', slug: 'social-data/indexing-and-aggregation' },
-						{ label: 'Pubky Nexus', slug: 'social-data/pubky-nexus' },
-						{ label: 'pubky.app Reference App', slug: 'social-data/pubky-app' },
+						{
+							label: 'Build an app',
+							collapsed: true,
+							items: [
+								{ label: 'Developer Guide', slug: 'build/developer-guide' },
+								{ label: 'SDK', slug: 'build/sdk' },
+								{ label: 'App Architectures', slug: 'build/app-architectures' },
+								{ label: 'Authentication', slug: 'build/authentication' },
+								{ label: 'Private Storage', slug: 'build/private-storage' },
+								{ label: 'Security Model', slug: 'build/security-model' },
+							],
+						},
+						{
+							label: 'Shared social data',
+							collapsed: true,
+							items: [
+								{ label: 'pubky-app-specs', slug: 'social-data/pubky-app-specs' },
+								{ label: 'Indexing & Aggregation', slug: 'social-data/indexing-and-aggregation' },
+							],
+						},
+						{
+							label: 'Development tools',
+							collapsed: true,
+							items: [
+								{ label: 'Pubky Docker', slug: 'build/pubky-docker' },
+								{ label: 'Pubky Explorer', slug: 'build/pubky-explorer' },
+							],
+						},
+						{ label: 'Contributing', slug: 'contributing' },
 					],
 				},
 				{
@@ -455,6 +479,7 @@ export default defineConfig({
 					items: [
 						{ label: 'Homeserver', slug: 'components/homeserver' },
 						{ label: 'Homegate', slug: 'components/homegate' },
+						{ label: 'Pubky Nexus', slug: 'components/pubky-nexus' },
 						{ label: 'PKARR', slug: 'components/pkarr' },
 						{ label: 'Mainline DHT', slug: 'components/mainline-dht' },
 						{ label: 'PKDNS', slug: 'components/pkdns' },
@@ -464,12 +489,11 @@ export default defineConfig({
 					],
 				},
 				{
-					label: 'Reference & community',
+					label: 'Reference',
 					collapsed: true,
 					items: [
 						{ label: 'Glossary', slug: 'glossary' },
 						{ label: 'Resources', slug: 'resources' },
-						{ label: 'Contributing', slug: 'contributing' },
 					],
 				},
 			],

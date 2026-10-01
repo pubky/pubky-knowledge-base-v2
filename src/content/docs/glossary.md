@@ -69,8 +69,8 @@ The Distributed Hash Table used by BitTorrent, with 10+ million nodes globally. 
 
 ## N
 
-**[Nexus](/social-data/pubky-nexus/)** (Pubky Nexus)
-Production-grade indexing and aggregation service for [pubky.app](/social-data/pubky-app/). Provides high-performance social graph API, search, and real-time notifications.
+**[Nexus](/components/pubky-nexus/)** (Pubky Nexus)
+Production-grade indexing and aggregation service for [pubky.app](/learn/pubky-app/). Provides high-performance social graph API, search, and real-time notifications.
 
 **[Noise](/components/pubky-noise/)** (Pubky Noise)
 Noise Protocol implementation for encrypted peer-to-peer communication in the Pubky ecosystem (work in progress).
@@ -104,8 +104,8 @@ The public half of a cryptographic key pair. In Pubky, this serves as your perma
 **Pubky app**
 Any application built on the [Pubky protocol](/overview/). A Pubky app uses the Pubky [SDK](/build/sdk/) and [Homeservers](/components/homeserver/) for authentication and data storage. See [App Architectures](/build/app-architectures/).
 
-**[pubky.app](/social-data/pubky-app/)**
-The reference implementation of a Pubky app — a decentralized social media application built by Synonym, live at [pubky.app](https://pubky.app). It demonstrates how to build social applications on the Pubky protocol using [Nexus](/social-data/pubky-nexus/) for indexing and the [pubky-app-specs](/social-data/pubky-app-specs/) data model.
+**[pubky.app](/learn/pubky-app/)**
+The reference implementation of a Pubky app — a decentralized social media application built by Synonym, live at [pubky.app](https://pubky.app). It demonstrates how to build social applications on the Pubky protocol using [Nexus](/components/pubky-nexus/) for indexing and the [pubky-app-specs](/social-data/pubky-app-specs/) data model.
 
 **[Pubky Backup](/use/pubky-backup/)**
 Desktop app for keeping local copies of published Homeserver data. Current app details are in the [Pubky Backup README](https://github.com/pubky/pubky-backup/blob/main/README.md).
@@ -128,7 +128,7 @@ Web-based file browser for exploring public data on Pubky Homeservers. Available
 Mobile key manager app (iOS/Android) for securely managing pubkys, authorizing applications, and handling sessions.
 
 **[pubky-app-specs](/social-data/pubky-app-specs/)**
-Formal data model specifications for [pubky.app](/social-data/pubky-app/), defining structures for users, posts, tags, and other social features. Any Pubky app that follows these specs can interoperate with pubky.app and its ecosystem.
+Formal data model specifications for [pubky.app](/learn/pubky-app/), defining structures for users, posts, tags, and other social features. Any Pubky app that follows these specs can interoperate with pubky.app and its ecosystem.
 
 ## R
 
@@ -143,7 +143,7 @@ Client libraries for building Pubky applications, available in Rust, JavaScript/
 **Self-Sovereign Identity**
 Identity that is fully controlled by the individual, not dependent on any centralized authority or service provider. Pubky implements this via cryptographic key pairs.
 
-**[Semantic Social Graph](/social-data/semantic-social-graph/)**
+**[Semantic Social Graph](/learn/semantic-social-graph/)**
 A social network where relationships are tagged with meaningful metadata, enabling personalized content filtering, trust-based discovery, and user-controlled feeds.
 
 **Session**
@@ -152,9 +152,9 @@ A time-limited authentication state that allows a client to access a Homeserver 
 ## T
 
 **Tag**
-User-defined label attached to posts, files, or other users to add semantic meaning and enable filtering/discovery in the [Semantic Social Graph](/social-data/semantic-social-graph/).
+User-defined label attached to posts, files, or other users to add semantic meaning and enable filtering/discovery in the [Semantic Social Graph](/learn/semantic-social-graph/).
 
 ## W
 
 **Web of Trust**
-Traditional model where trust propagates through social connections. Pubky extends this with the [Semantic Social Graph](/social-data/semantic-social-graph/), adding semantic context to trust relationships.
+Traditional model where trust propagates through social connections. Pubky extends this with the [Semantic Social Graph](/learn/semantic-social-graph/), adding semantic context to trust relationships.
