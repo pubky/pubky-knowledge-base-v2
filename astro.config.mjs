@@ -96,7 +96,7 @@ export default defineConfig({
 					attrs: {
 						defer: true,
 						'data-domain': 'pubky.org',
-						src: 'https://_analytics.synonym.to/js/script.outbound-links.js',
+						src: 'https://analytics.synonym.to/js/script.outbound-links.js',
 					},
 				},
 				// Open Graph card metadata. The og:image itself is emitted per-page by
