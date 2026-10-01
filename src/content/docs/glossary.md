@@ -49,6 +49,9 @@ A web server that stores user data in a filesystem over a simple HTTP API. Inter
 **[Homegate](/explore/technologies/homegate/)**
 A signup verification service for Homeservers, providing SMS and Lightning Network payment verification to prevent spam while preserving privacy.
 
+**[Homeserver CLI](https://github.com/pubky/pubky-homeserver/tree/{{pinned_homeserver_release}}/homeservercli)**
+Command-line tool for interacting with Pubky Homeservers, providing user operations, admin functions, and testing utilities.
+
 ## I
 
 **Indexer**
@@ -106,9 +109,6 @@ The reference implementation of a Pubky app — a decentralized social media app
 
 **[Pubky Backup](/explore/technologies/pubky-backup/)**
 Desktop app for keeping local copies of published Homeserver data. Current app details are in the [Pubky Backup README](https://github.com/pubky/pubky-backup/blob/main/README.md).
-
-**[Pubky CLI](/explore/pubky-protocol/developer-guide/)**
-Command-line tool for interacting with Pubky Homeservers, providing user operations, admin functions, and testing utilities.
 
 **[Pubky Protocol](/explore/pubky-protocol/introduction/)**
 The protocol encompassing the Homeserver, SDK, PKARR and specifications for building decentralized applications on Pubky.
