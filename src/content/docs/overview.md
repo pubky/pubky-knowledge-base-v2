@@ -35,8 +35,5 @@ The **Atomic Economy** extends these ideas into a broader vision of economic and
 
 - **Try Pubky:** [First Steps](/getting-started/) introduces the user journey.
 - **Build an app:** the [Developer Guide](/build/developer-guide/) walks through writing and reading your first Pubky data.
-- **Choose an app design:** compare [App Architectures](/build/app-architectures/).
-- **Understand the system:** [Architecture](/architecture/) explains the component boundaries; the [Security Model](/learn/security-model/) covers trust and limitations.
 - **Run a Homeserver:** follow the [Install Guide](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/docs/INSTALL.md) and [Deployment Guide](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/docs/DEPLOY.md).
-- **Work on the protocol:** the [Pubky repository](https://github.com/pubky/pubky-homeserver) contains the Homeserver, SDKs, local testnet, and examples.
 - **Find a project or tool:** use the [Resources](/resources/) directory.
