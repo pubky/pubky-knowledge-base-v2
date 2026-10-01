@@ -2,7 +2,7 @@
 title: "Homeserver"
 ---
 
-A Homeserver stores and serves data for Pubky users. Users self-host their Homeserver or choose a provider. [PKARR](/components/pkarr/) lets applications discover the Homeserver from the user's public key.
+[A Homeserver](https://github.com/pubky/pubky-homeserver) stores and serves data for Pubky users. Users self-host their Homeserver or choose a provider. [PKARR](/components/pkarr/) lets applications discover the Homeserver from the user's public key.
 
 ## Its role in an app
 

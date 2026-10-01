@@ -2,11 +2,11 @@
 title: "Paykit: Decentralized Payment Protocol (Work in Progress)"
 ---
 
-> ⚠️ **NOTE**: Paykit is currently under active development and is **NOT production-ready**. The protocol and implementation are subject to significant changes. Integration work in Bitkit serves as a testbed for protocol development.
+> ⚠️ **NOTE**: [Paykit](https://github.com/pubky/paykit-rs) is currently under active development and is **NOT production-ready**. The protocol and implementation are subject to significant changes. Integration work in Bitkit serves as a testbed for protocol development.
 
 ## Overview
 
-Paykit is a payment protocol built on Pubky for payment discovery and coordination across multiple payment methods, including Bitcoin on-chain and Lightning. Apps can start from a Pubky public key, discover public payment details, privately share payment details over encrypted channels, and let payers retrieve encrypted receipts.
+[Paykit](https://github.com/pubky/paykit-rs) is a payment protocol built on Pubky for payment discovery and coordination across multiple payment methods, including Bitcoin on-chain and Lightning. Apps can start from a Pubky public key, discover public payment details, privately share payment details over encrypted channels, and let payers retrieve encrypted receipts.
 
 ## Core Concept
 

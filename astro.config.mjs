@@ -481,12 +481,12 @@ export default defineConfig({
 					collapsed: true,
 					items: [
 						{ label: 'Homeserver', slug: 'components/homeserver' },
-						{ label: 'Homegate', slug: 'components/homegate' },
 						{ label: 'Pubky Nexus', slug: 'components/pubky-nexus' },
 						{ label: 'PKARR', slug: 'components/pkarr' },
 						{ label: 'Mainline DHT', slug: 'components/mainline-dht' },
 						{ label: 'PKDNS', slug: 'components/pkdns' },
 						{ label: 'HTTP Relay', slug: 'components/http-relay' },
+						{ label: 'Homegate', slug: 'components/homegate' },
 						{ label: 'Pubky Noise', slug: 'components/pubky-noise' },
 						{ label: 'Paykit', slug: 'components/paykit' },
 					],
