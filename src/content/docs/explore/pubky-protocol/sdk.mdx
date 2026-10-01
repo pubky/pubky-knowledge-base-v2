@@ -25,6 +25,12 @@ The main SDK types follow the steps an application takes:
 
 For example, an app can use a session to save a user's own data and public storage to read another user's published profile. [Authentication](/explore/pubky-protocol/authentication/) explains how an app obtains access without taking custody of the identity key. Refer to your platform's documentation for its supported types and behavior.
 
+## Homeserver connections
+
+Native Rust clients prefer [PubkyTLS](/glossary/#pubkytls), which verifies the Homeserver's public key directly. If PKARR advertises an ICANN HTTPS endpoint, the SDK can use it when the direct endpoint is absent or fails its TCP reachability check. Browser clients reach public Homeservers through the ICANN HTTPS endpoint. ICANN connections use standard HTTPS certificate validation, so their trust depends on the conventional domain and certificate authorities.
+
+The native fallback concerns TCP reachability: a later TLS or request failure does not trigger it. See the SDK's [transport selection and tests](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-sdk/src/client/http_targets/native.rs) for the exact behavior. Native clients behind HTTPS proxies also have [reported discovery and routing limitations](https://github.com/pubky/pubky-homeserver/issues/657). For public connection setup, follow the [Homeserver Deployment Guide](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/docs/DEPLOY.md).
+
 ## Storage Locking
 
 Storage locks help applications coordinate updates to the same file on Homeservers that support WebDAV storage locks. Applications opt in through the Rust SDK's `SessionStorage` helpers; ordinary storage operations do not acquire locks automatically. The JavaScript bindings do not expose these helpers.

@@ -21,7 +21,7 @@ The records use DNS's familiar record format, but publishing an identity's PKARR
 
 ## What applications need to account for
 
-Records need to be republished to remain available, and caches can delay changes. Browser applications can use PKARR relays to reach discovery services. These are separate from the [HTTP Relay](/explore/technologies/http-relay/) used during app authorization.
+Records need to be republished to remain available, and caches can delay changes. PKARR relays let browsers reach discovery services and can also help native services with [limited DHT reachability](/explore/technologies/mainline-dht/#cloud-network-reachability). These are separate from the [HTTP Relay](/explore/technologies/http-relay/) used during app authorization.
 
 Pubky app developers normally use the [Pubky SDK](/explore/pubky-protocol/sdk/) to handle discovery. [PKDNS](/explore/technologies/pkdns/) provides a bridge for software that uses conventional DNS.
 
