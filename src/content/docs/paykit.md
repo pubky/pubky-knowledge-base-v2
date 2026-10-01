@@ -10,13 +10,13 @@ title: "Paykit"
 
 ## Core Concept
 
-Paykit uses a payee's Pubky public key as the stable starting point for payment discovery. Instead of asking for an address or invoice out of band, an app can look up the published payment details on a [Homeserver](/components/homeserver/) under `/pub/paykit/v0/{payment_endpoint_identifier}`.
+Paykit uses a payee's Pubky public key as the stable starting point for payment discovery. Instead of asking for an address or invoice out of band, an app can look up the published payment details on a [Homeserver](/homeserver/) under `/pub/paykit/v0/{payment_endpoint_identifier}`.
 
 This enables applications where users can pay directly to profiles while still letting the integrating wallet or payment processor decide which payment rail to use.
 
 ## How Paykit Works
 
-Paykit uses Pubky Homeservers for payment data and [Pubky Noise](/components/pubky-noise/) for private Paykit messages.
+Paykit uses Pubky Homeservers for payment data and [Pubky Noise](/pubky-noise/) for private Paykit messages.
 
 ### Public Payment Details
 
@@ -58,7 +58,7 @@ Applications could use Paykit discovery around store checkouts, service bookings
 
 ## Related Research
 
-**Atomicity Protocol** - Peer-to-peer mutual credit system research exploring trust-based payment routing using Pubky's [Semantic Social Graph](/learn/semantic-social-graph/). Designed as settlement infrastructure for credit issuance and transfer across economic scales from peer-to-peer to institutional banking. Currently in research phase.
+**Atomicity Protocol** - Peer-to-peer mutual credit system research exploring trust-based payment routing using Pubky's [Semantic Social Graph](/semantic-social-graph/). Designed as settlement infrastructure for credit issuance and transfer across economic scales from peer-to-peer to institutional banking. Currently in research phase.
 
 ## References
 

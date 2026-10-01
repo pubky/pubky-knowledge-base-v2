@@ -19,11 +19,11 @@ test.beforeEach(async ({ context, page, baseURL }) => {
 });
 
 const pages = [
-  ['/build/sdk/', 'Pubky SDK'],
-  ['/build/private-storage/', 'Private Storage'],
+  ['/sdk/', 'Pubky SDK'],
+  ['/private-storage/', 'Private Storage'],
   ['/architecture/', 'System Architecture'],
-  ['/learn/semantic-social-graph/', 'Semantic Social Graph'],
-  ['/social-data/indexing-and-aggregation/', 'Indexing & Aggregation'],
+  ['/semantic-social-graph/', 'Semantic Social Graph'],
+  ['/indexing-and-aggregation/', 'Indexing & Aggregation'],
 ];
 
 async function expectTitleRow(page, width) {
@@ -87,7 +87,7 @@ for (const width of [1440, 320]) {
           },
         });
       }, denied);
-      await page.goto('/learn/semantic-social-graph/');
+      await page.goto('/semantic-social-graph/');
       const copy = page.locator('[data-markdown-copy]');
       await expect(copy).toBeVisible();
       await page.evaluate(() => window.pageTitleFontReady);

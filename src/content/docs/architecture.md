@@ -65,10 +65,10 @@ flowchart TB
 
 ### Identity Layer
 
-The foundation of Pubky is cryptographic identity based on **[key pairs](/learn/security-model/#key-custody)**.
+The foundation of Pubky is cryptographic identity based on **[key pairs](/security-model/#key-custody)**.
 
 **Components:**
-- **[Pubky Ring](/use/pubky-ring/)**: Mobile app for secure key management
+- **[Pubky Ring](/pubky-ring/)**: Mobile app for secure key management
 - **Key Pairs**: Ed25519 public/private key pairs
 - **Recovery Files**: Encrypted backups for key recovery
 
@@ -91,9 +91,9 @@ The foundation of Pubky is cryptographic identity based on **[key pairs](/learn/
 The discovery layer enables finding Homeservers and resolving identities without central servers.
 
 **Components:**
-- **[PKARR](/components/pkarr/)**: Public Key Addressable Resource Records
-- **[Mainline DHT](/components/mainline-dht/)**: Distributed Hash Table (10M+ nodes)
-- **[PKDNS](/components/pkdns/)**: DNS servers for resolving public-key domains
+- **[PKARR](/pkarr/)**: Public Key Addressable Resource Records
+- **[Mainline DHT](/mainline-dht/)**: Distributed Hash Table (10M+ nodes)
+- **[PKDNS](/pkdns/)**: DNS servers for resolving public-key domains
 
 **How It Works:**
 
@@ -125,7 +125,7 @@ sequenceDiagram
 
 ### Storage Layer
 
-**[Homeservers](/components/homeserver/)** store user data in a filesystem over a simple HTTP API, similar to WebDAV.
+**[Homeservers](/homeserver/)** store user data in a filesystem over a simple HTTP API, similar to WebDAV.
 
 **Architecture:**
 
@@ -147,7 +147,7 @@ flowchart LR
 - **Portability**: Switch Homeservers without losing data
 - **Storage layout**: Files for user data; PostgreSQL for the Homeserver's internal metadata
 
-Applications manage user files through the [SDK](/build/sdk/). For direct HTTP integrations, use the maintained [client OpenAPI specification](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-homeserver/openapi-client.yml).
+Applications manage user files through the [SDK](/sdk/). For direct HTTP integrations, use the maintained [client OpenAPI specification](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-homeserver/openapi-client.yml).
 
 ---
 
@@ -176,7 +176,7 @@ flowchart LR
     Agg --> Client[Client App]
 ```
 
-**Use Case**: Social feeds, search, discovery (e.g., [Pubky Nexus](/components/pubky-nexus/))
+**Use Case**: Social feeds, search, discovery (e.g., [Pubky Nexus](/pubky-nexus/))
 
 #### 3. Custom Backend
 

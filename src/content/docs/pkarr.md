@@ -6,7 +6,7 @@ title: "PKARR"
 
 ## Finding someone without fixing their location
 
-A public key is a stable identifier, but it does not tell an app which server to contact. PKARR supplies that missing step: the identity owner signs a small set of records describing where services can be reached. Those records are distributed through the [Mainline DHT](/components/mainline-dht/), a censorship-resistant, decentralized network.
+A public key is a stable identifier, but it does not tell an app which server to contact. PKARR supplies that missing step: the identity owner signs a small set of records describing where services can be reached. Those records are distributed through the [Mainline DHT](/mainline-dht/), a censorship-resistant, decentralized network.
 
 For Pubky, this means an app can start with a user's public key, discover their Homeserver, and then fetch a file. Posts and profiles stay on the Homeserver; they are not stored in the DHT.
 
@@ -21,9 +21,9 @@ The records use DNS's familiar record format, but publishing an identity's PKARR
 
 ## What applications need to account for
 
-Records need to be republished to remain available, and caches can delay changes. PKARR relays let browsers reach discovery services and can also help native services with [limited DHT reachability](/components/mainline-dht/#cloud-network-reachability). These are separate from the [HTTP Relay](/components/http-relay/) used during app authorization.
+Records need to be republished to remain available, and caches can delay changes. PKARR relays let browsers reach discovery services and can also help native services with [limited DHT reachability](/mainline-dht/#cloud-network-reachability). These are separate from the [HTTP Relay](/http-relay/) used during app authorization.
 
-Pubky app developers normally use the [Pubky SDK](/build/sdk/) to handle discovery. [PKDNS](/components/pkdns/) provides a bridge for software that uses conventional DNS.
+Pubky app developers normally use the [Pubky SDK](/sdk/) to handle discovery. [PKDNS](/pkdns/) provides a bridge for software that uses conventional DNS.
 
 ## Go deeper
 
