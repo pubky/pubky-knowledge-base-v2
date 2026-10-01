@@ -24,7 +24,7 @@ If you do not want to use Docker, see the [native Pubky testnet setup](https://g
 
 In order to build our App we'll need to setup a local homeserver and testnet - we'll use [Pubky Docker](/build/pubky-docker/) to spin up a local development environment.
 
-Note: [Pubky Docker](/build/pubky-docker/)  can run a full [pubky.app](/social-data/pubky-app/)-compatible social stack too, but we will keep this setup minimal.
+Note: [Pubky Docker](/build/pubky-docker/)  can run a full [pubky.app](/learn/pubky-app/)-compatible social stack too, but we will keep this setup minimal.
 
 ```bash
 git clone https://github.com/pubky/pubky-docker.git && cd pubky-docker && cp .env-sample .env
@@ -242,12 +242,12 @@ For now, this section collects references. A dedicated guide will follow.
 - [mapky.app](https://mapky.app/) ([source](https://github.com/gillohner/mapky-app))
 
 **Social App (pubky-app-specs):**
-- [pubky-app-specs](https://github.com/pubky/pubky-app-specs) - Data models for social features and interoperability with [pubky.app](/social-data/pubky-app/)
+- [pubky-app-specs](https://github.com/pubky/pubky-app-specs) - Data models for social features and interoperability with [pubky.app](/learn/pubky-app/)
 - [npm: pubky-app-specs](https://www.npmjs.com/package/pubky-app-specs) / [crates.io: pubky-app-specs](https://crates.io/crates/pubky-app-specs)
 
 **Use Pubky Nexus for Social Features:**
 
-If building a social app, leverage [Pubky Nexus](/social-data/pubky-nexus/) for:
+If building a social app, leverage [Pubky Nexus](/components/pubky-nexus/) for:
 - Real-time feeds and timelines
 - Search and discovery
 - User recommendations

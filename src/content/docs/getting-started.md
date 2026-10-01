@@ -91,7 +91,7 @@ Pubky Backup does not replace your recovery phrase. The recovery phrase protects
 - **Join the community**: [Telegram](https://t.me/pubkycore)
 - **Learn more**: Read the [Overview](/overview/)
 - **Understand the tech**: Check out [System Architecture](/architecture/)
-- **Explore concepts**: Learn about the [Semantic Social Graph](/social-data/semantic-social-graph/)
+- **Explore concepts**: Learn about the [Semantic Social Graph](/learn/semantic-social-graph/)
 
 ## Common First Questions
 

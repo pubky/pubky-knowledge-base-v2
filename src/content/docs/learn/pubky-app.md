@@ -8,7 +8,7 @@ title: "pubky.app"
 
 Tags are free-text labels people apply to profiles and posts, including those written by someone else. Each annotation records who applied the label and what it describes. A post might be tagged `tutorial` by one reader and `privacy` by another; those labels add context beyond a single like count.
 
-Perspectives are saved views of a feed, combining filters and presentation settings. They let readers return to a particular view of the social data. Tags and follow relationships provide the building blocks for the broader [semantic social graph](/social-data/semantic-social-graph/).
+Perspectives are saved views of a feed, combining filters and presentation settings. They let readers return to a particular view of the social data. Tags and follow relationships provide the building blocks for the broader [semantic social graph](/learn/semantic-social-graph/).
 
 Bookmarks are [public social records](https://github.com/pubky/pubky-app-specs/blob/main/SPEC.md#pubkyappbookmark). Treat bookmarked links as public data.
 
@@ -25,7 +25,7 @@ flowchart TD
 
 1. **The frontend keeps data locally.** Its browser database holds records and feed data so the interface can show cached content and respond to user actions promptly.
 2. **Users publish to Homeservers.** The [SDK](/build/sdk/) writes social records using the user's authorization. The records follow [pubky-app-specs](/social-data/pubky-app-specs/) so other compatible apps can understand them.
-3. **Nexus follows changes.** [Homeserver event feeds](/components/homeserver/#http-api) let [Nexus](/social-data/pubky-nexus/) discover updates, fetch public records, and index content and relationships across users.
+3. **Nexus follows changes.** [Homeserver event feeds](/components/homeserver/#http-api) let [Nexus](/components/pubky-nexus/) discover updates, fetch public records, and index content and relationships across users.
 4. **The frontend refreshes from Nexus.** Indexed results update the local cache, which the interface reads to present feeds, profiles, and search results.
 
 Local changes and indexed views do not become visible everywhere at once: the Homeserver write and subsequent Nexus indexing must complete. The [local-first design](https://github.com/pubky/pubky-app/blob/dev/docs/local-first.md) explains the read, write, and refresh behavior in detail.

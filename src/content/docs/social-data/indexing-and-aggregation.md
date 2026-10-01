@@ -10,7 +10,7 @@ An application backend can collect public records from multiple [Homeservers](/c
 - **Indexing** organizes those records for queries such as feeds and search.
 - **An API** exposes the resulting views to clients.
 
-These are responsibilities, not a required set of separate services. [Pubky Nexus](/social-data/pubky-nexus/) implements them for pubky.app social data.
+These are responsibilities, not a required set of separate services. [Pubky Nexus](/components/pubky-nexus/) implements them for pubky.app social data.
 
 The resulting index is a derived view. It does not replace the original Homeserver records, and an instance only returns data within its indexing coverage and policies. Different services can build different views over the same published data.
 

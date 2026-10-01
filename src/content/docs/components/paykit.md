@@ -58,7 +58,7 @@ Applications could use Paykit discovery around store checkouts, service bookings
 
 ## Related Research
 
-**Atomicity Protocol** - Peer-to-peer mutual credit system research exploring trust-based payment routing using Pubky's [Semantic Social Graph](/social-data/semantic-social-graph/). Designed as settlement infrastructure for credit issuance and transfer across economic scales from peer-to-peer to institutional banking. Currently in research phase.
+**Atomicity Protocol** - Peer-to-peer mutual credit system research exploring trust-based payment routing using Pubky's [Semantic Social Graph](/learn/semantic-social-graph/). Designed as settlement infrastructure for credit issuance and transfer across economic scales from peer-to-peer to institutional banking. Currently in research phase.
 
 ## References
 

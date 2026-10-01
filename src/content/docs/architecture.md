@@ -176,7 +176,7 @@ flowchart LR
     Agg --> Client[Client App]
 ```
 
-**Use Case**: Social feeds, search, discovery (e.g., [Pubky Nexus](/social-data/pubky-nexus/))
+**Use Case**: Social feeds, search, discovery (e.g., [Pubky Nexus](/components/pubky-nexus/))
 
 #### 3. Custom Backend
 

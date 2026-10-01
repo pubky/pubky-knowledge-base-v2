@@ -8,7 +8,7 @@ title: "Pubky Explorer"
 
 Enter a public key or a Pubky URI to browse its public directories and inspect individual files. For app developers, this helps answer concrete questions: was a record written, is it at the expected path, and what does its JSON contain?
 
-Explorer shows stored files, while [Nexus](/social-data/pubky-nexus/) builds indexed views across users. A file can exist on a Homeserver before it appears in an app's indexed view. Explorer is therefore useful when separating a storage problem from an indexing or display problem.
+Explorer shows stored files, while [Nexus](/components/pubky-nexus/) builds indexed views across users. A file can exist on a Homeserver before it appears in an app's indexed view. Explorer is therefore useful when separating a storage problem from an indexing or display problem.
 
 Use the [testnet Explorer](https://explorer.pubky.app/testnet/) to inspect data created on the local testnet.
 

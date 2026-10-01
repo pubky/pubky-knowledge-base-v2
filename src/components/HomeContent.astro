@@ -211,7 +211,6 @@ const icons = {
   timer: '/images/icons/timer.svg',
   codeXml: '/images/icons/code-xml.svg',
   file: '/images/icons/file.svg',
-  circleHelp: '/images/icons/circle-help.svg',
   // Key Concepts
   fingerprint: '/images/icons/fingerprint.svg',
   shieldOff: '/images/icons/shield-off.svg',
@@ -264,7 +263,7 @@ const icons = {
   <div class="image-card-sections">
     <section id="for-developers" class="home-section">
       <h2 class="home-section-title">
-        <a class="home-section-title-link" href="#for-developers">For Developers</a>
+        <a class="home-section-title-link" href={withBase('/#for-developers')}>Development</a>
       </h2>
       <div class="card-grid card-grid-3">
         <ImageCard
@@ -284,7 +283,7 @@ const icons = {
           tags={[
             { label: "pubky-app-specs", href: "/social-data/pubky-app-specs/" },
             { label: "Indexing", href: "/social-data/indexing-and-aggregation/" },
-            { label: "Nexus", href: "/social-data/pubky-nexus/" },
+            { label: "Nexus", href: "/components/pubky-nexus/" },
           ]}
         />
         <ImageCard
@@ -296,6 +295,7 @@ const icons = {
             { label: "Explorer", href: "/build/pubky-explorer/" },
             { label: "Resources", href: "/resources/" },
           ]}
+          links={[{ label: "Contributing", href: "/contributing/" }]}
         />
       </div>
     </section>
@@ -309,7 +309,10 @@ const icons = {
           title="Pubky"
           titleIcon={pubkyBrandGreen}
           image="/images/cards/pubky.png"
-          links={[{ label: "Join pubky.app", href: "https://pubky.app", external: true }]}
+          links={[
+            { label: "Join pubky.app", href: "https://pubky.app", external: true },
+            { label: "Learn More", href: "/learn/pubky-app/" },
+          ]}
         />
         <ImageCard
           title="Pubky"
@@ -368,9 +371,9 @@ const icons = {
 
   <section id="reference" class="home-section">
     <h2 class="home-section-title">
-      <a class="home-section-title-link" href={withBase('/#reference')}>Reference &amp; community</a>
+      <a class="home-section-title-link" href={withBase('/#reference')}>Reference</a>
     </h2>
-    <div class="card-grid card-grid-3">
+    <div class="card-grid card-grid-2">
       <TextCard
         title="Glossary"
         description="Look up terms used throughout the docs."
@@ -382,12 +385,6 @@ const icons = {
         description="Find project repositories, documentation, and tools."
         href="/resources/"
         icon={icons.codeXml}
-      />
-      <TextCard
-        title="Contributing"
-        description="Find community contacts and report bugs or security issues."
-        href="/contributing/"
-        icon={icons.circleHelp}
       />
     </div>
   </section>
@@ -546,6 +543,10 @@ const icons = {
   /* minmax(0, …) not 1fr: plain 1fr refuses to shrink a column below its card's
      min-content, and .home-content's overflow: hidden then silently cuts off
      whatever sticks out. */
+  .card-grid-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .card-grid-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
@@ -857,6 +858,7 @@ const icons = {
 
   /* 639px breakpoint — card grids collapse to single column */
   @media (max-width: 639px) {
+    .card-grid-2,
     .card-grid-3,
     .card-grid-4 {
       grid-template-columns: minmax(0, 1fr);
