@@ -6,4 +6,4 @@ title: "Homegate"
 
 It is an optional service for operators who want an onboarding gate before admitting users to their Homeserver. It controls signup, while [Pubky authentication](/authentication/) controls an app's authorized access to an existing user's data.
 
-See the [Homegate README](https://github.com/pubky/homegate/blob/master/README.md) for configuration, verification providers, and the API specification.
+See the [Homegate README](https://github.com/pubky/homegate/blob/master/README.md) for configuration and verification providers, and the [API specification](https://github.com/pubky/homegate/blob/master/openapi.yaml) for endpoint details.
