@@ -1,5 +1,5 @@
 ---
-title: "Paykit: Decentralized Payment Protocol (Work in Progress)"
+title: "Paykit"
 ---
 
 > ⚠️ **NOTE**: [Paykit](https://github.com/pubky/paykit-rs) is currently under active development and is **NOT production-ready**. The protocol and implementation are subject to significant changes. Integration work in Bitkit serves as a testbed for protocol development.

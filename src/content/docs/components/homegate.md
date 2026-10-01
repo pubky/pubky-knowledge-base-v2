@@ -1,5 +1,5 @@
 ---
-title: "Homegate: Homeserver Signup Gatekeeping Service"
+title: "Homegate"
 ---
 
 **[Homegate](https://github.com/pubky/homegate)** is a backend service that manages and controls signups for [Pubky Homeservers](/components/homeserver/). Pubky's social app uses it during onboarding; the enabled verification methods depend on the operator's configuration.

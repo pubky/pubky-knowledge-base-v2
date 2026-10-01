@@ -2,7 +2,7 @@
 title: "pubky-app-specs"
 ---
 
-Shared data model specifications for the Pubky 'social' app ecosystem, with [pubky.app](/learn/pubky-app/) as the reference implementation.
+[pubky-app-specs](https://github.com/pubky/pubky-app-specs) defines shared data models for the Pubky 'social' app ecosystem, with [pubky.app](/learn/pubky-app/) as the reference implementation.
 
 ## Overview
 

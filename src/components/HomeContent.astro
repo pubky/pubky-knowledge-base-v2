@@ -213,7 +213,6 @@ const icons = {
   file: '/images/icons/file.svg',
   // Key Concepts
   fingerprint: '/images/icons/fingerprint.svg',
-  shieldOff: '/images/icons/shield-off.svg',
   arrowLeftRight: '/images/icons/arrow-left-right.svg',
   lineChart: '/images/icons/line-chart.svg',
 };
@@ -274,6 +273,7 @@ const icons = {
             { label: "SDK", href: "/build/sdk/" },
             { label: "App architectures", href: "/build/app-architectures/" },
             { label: "Authentication", href: "/build/authentication/" },
+            { label: "App templates", href: "https://pubky.github.io/pubky-app-templates/" },
           ]}
         />
         <ImageCard
@@ -284,6 +284,7 @@ const icons = {
             { label: "pubky-app-specs", href: "/social-data/pubky-app-specs/" },
             { label: "Indexing", href: "/social-data/indexing-and-aggregation/" },
             { label: "Nexus", href: "/components/pubky-nexus/" },
+            { label: "Social graph", href: "/learn/semantic-social-graph/" },
           ]}
         />
         <ImageCard
@@ -324,12 +325,15 @@ const icons = {
             { label: "Learn More", href: "/use/pubky-ring/" },
           ]}
         />
-        <DemoCard
-          title="Passport"
-          description="Create a Pubky identity and sign in to apps with Google. Your key stays in your browser, with an encrypted backup in Google Drive."
-          actions={[
-            { label: "Open", href: "https://passport.pubky.app/", variant: "secondary" },
-            { label: "Learn More", href: "/use/pubky-passport/", variant: "outline" },
+        <ImageCard
+          title="Pubky"
+          titleSuffix="Passport"
+          titleIcon={pubkyBrandWhite}
+          image="/images/cards/pubky-passport.png"
+          imageFit="contain"
+          links={[
+            { label: "Open", href: "https://passport.pubky.app/", external: true },
+            { label: "Learn More", href: "/use/pubky-passport/" },
           ]}
         />
       </div>
@@ -339,9 +343,15 @@ const icons = {
   <!-- Keep the existing anchor for links to this section. -->
   <section id="key-concepts" class="home-section key-concepts">
     <h2 class="home-section-title">
-      <a class="home-section-title-link" href={withBase('/#key-concepts')}>Understand the system</a>
+      <a class="home-section-title-link" href={withBase('/#key-concepts')}>Key concepts</a>
     </h2>
     <div class="card-grid card-grid-4">
+      <TextCard
+        title="PKDNS"
+        description="Resolve public-key domains through DNS."
+        href="/components/pkdns/"
+        icon={icons.fingerprint}
+      />
       <TextCard
         title="System Architecture"
         description="See how identity, discovery, storage, and applications fit together."
@@ -349,42 +359,16 @@ const icons = {
         icon={icons.lineChart}
       />
       <TextCard
-        title="PKARR"
-        description="Discover services using signed records addressed by public keys."
-        href="/components/pkarr/"
-        icon={icons.fingerprint}
+        title="Semantic Social Graph"
+        description="Explore labeled connections between people and content."
+        href="/learn/semantic-social-graph/"
+        icon={icons.lineChart}
       />
       <TextCard
-        title="Homeserver"
-        description="Understand where Pubky users store data and how apps access it."
-        href="/components/homeserver/"
+        title="Credible Exit"
+        description="Keep your identity, data, and connections when leaving a service."
+        href="/learn/credible-exit/"
         icon={icons.arrowLeftRight}
-      />
-      <TextCard
-        title="Security Model"
-        description="Understand key custody, app permissions, and trust boundaries."
-        href="/learn/security-model/"
-        icon={icons.shieldOff}
-      />
-    </div>
-  </section>
-
-  <section id="reference" class="home-section">
-    <h2 class="home-section-title">
-      <a class="home-section-title-link" href={withBase('/#reference')}>Reference</a>
-    </h2>
-    <div class="card-grid card-grid-2">
-      <TextCard
-        title="Glossary"
-        description="Look up terms used throughout the docs."
-        href="/glossary/"
-        icon={icons.file}
-      />
-      <TextCard
-        title="Resources"
-        description="Find project repositories, documentation, and tools."
-        href="/resources/"
-        icon={icons.codeXml}
       />
     </div>
   </section>
@@ -393,9 +377,9 @@ const icons = {
   <section id="demos" class="home-section demos">
     <div class="demos-header">
       <h2 class="home-section-title">
-        <a class="home-section-title-link" href={withBase('/#demos')}>Apps and examples</a>
+        <a class="home-section-title-link" href={withBase('/#demos')}>Demos</a>
       </h2>
-      <p class="demos-subtitle">Explore apps and examples built on Pubky.</p>
+      <p class="demos-subtitle">Try some proof of concepts built on the Pubky protocol. What will you create?</p>
     </div>
     <div class="card-grid card-grid-4 demos-grid">
       {demos.map((demo) => (
@@ -543,10 +527,6 @@ const icons = {
   /* minmax(0, …) not 1fr: plain 1fr refuses to shrink a column below its card's
      min-content, and .home-content's overflow: hidden then silently cuts off
      whatever sticks out. */
-  .card-grid-2 {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
   .card-grid-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
@@ -858,7 +838,6 @@ const icons = {
 
   /* 639px breakpoint — card grids collapse to single column */
   @media (max-width: 639px) {
-    .card-grid-2,
     .card-grid-3,
     .card-grid-4 {
       grid-template-columns: minmax(0, 1fr);

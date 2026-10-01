@@ -25,6 +25,6 @@ test.describe('without JavaScript', () => {
   test('old URLs still reach their canonical page', async ({ page }) => {
     await page.goto('/explore/pubky-protocol/sdk/');
     await expect(page).toHaveURL('/build/sdk/');
-    await expect(page.getByRole('heading', { level: 1 })).toHaveText(/^Pubky SDK:/);
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Pubky SDK');
   });
 });
