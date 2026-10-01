@@ -30,4 +30,4 @@ PKARR records can expire, lookups can fail, and caches can delay a hosting chang
 
 ## Transport Security
 
-Transport encryption protects a connection, not data from the Homeserver handling it. The [Homeserver Deployment Guide](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/docs/DEPLOY.md) covers the supported connection and deployment options; the [PKARR TLS specification](https://github.com/pubky/pkarr/blob/main/design/tls.md) describes public-key verification.
+Transport encryption protects a connection, not data from the Homeserver handling it. The [SDK connection overview](/explore/pubky-protocol/sdk/#homeserver-connections) explains platform differences and fallback to conventional HTTPS. The [Homeserver Deployment Guide](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/docs/DEPLOY.md) covers the supported connection and deployment options; the [PKARR TLS specification](https://github.com/pubky/pkarr/blob/main/design/tls.md) describes public-key verification.
