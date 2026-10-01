@@ -23,7 +23,7 @@ On a service that owns both your account and its database, changing applications
 
 For a developer, this means building on familiar web applications and HTTP storage while letting users choose their identity and hosting. An app can access a user's files directly or use an indexer when it needs to search across many users. The [architecture overview](/architecture/) explains how those pieces fit together.
 
-These choices do not eliminate trust in software or hosting providers. The [Security Model](/build/security-model/) explains key custody, public data, and what a Homeserver operator can do.
+These choices do not eliminate trust in software or hosting providers. The [Security Model](/learn/security-model/) explains key custody, public data, and what a Homeserver operator can do.
 
 ## The broader vision
 
@@ -36,7 +36,7 @@ The **Atomic Economy** extends these ideas into a broader vision of economic and
 - **Try Pubky:** [First Steps](/getting-started/) introduces the user journey.
 - **Build an app:** the [Developer Guide](/build/developer-guide/) walks through writing and reading your first Pubky data.
 - **Choose an app design:** compare [App Architectures](/build/app-architectures/).
-- **Understand the system:** [Architecture](/architecture/) explains the component boundaries; the [Security Model](/build/security-model/) covers trust and limitations.
+- **Understand the system:** [Architecture](/architecture/) explains the component boundaries; the [Security Model](/learn/security-model/) covers trust and limitations.
 - **Run a Homeserver:** follow the [Install Guide](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/docs/INSTALL.md) and [Deployment Guide](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/docs/DEPLOY.md).
 - **Work on the protocol:** the [Pubky repository](https://github.com/pubky/pubky-homeserver) contains the Homeserver, SDKs, local testnet, and examples.
 - **Find a project or tool:** use the [Resources](/resources/) directory.

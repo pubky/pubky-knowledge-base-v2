@@ -12,7 +12,7 @@ Existing `/pub/` data remains public. Choosing `/priv/` for private storage does
 
 ## Privacy and Trust
 
-Homeserver operators and privileged administrators can read unencrypted `/priv/` content. Apps that need confidentiality from the Homeserver must encrypt their data and manage the encryption keys themselves. See the [Security Model](/build/security-model/) for the trust placed in Homeservers.
+Homeserver operators and privileged administrators can read unencrypted `/priv/` content. Apps that need confidentiality from the Homeserver must encrypt their data and manage the encryption keys themselves. See the [Security Model](/learn/security-model/) for the trust placed in Homeservers.
 
 ## Documentation
 

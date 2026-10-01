@@ -149,11 +149,11 @@ export default defineConfig({
 		},
 		'/explore/technologies/https/': {
 			status: 301,
-			destination: '/build/security-model/#transport-security',
+			destination: '/learn/security-model/#transport-security',
 		},
 		'/explore/technologies/key-pair/': {
 			status: 301,
-			destination: '/build/security-model/#key-custody',
+			destination: '/learn/security-model/#key-custody',
 		},
 		'/explore/technologies/pubky-moderation/': {
 			status: 301,
@@ -201,7 +201,7 @@ export default defineConfig({
 		},
 		'/explore/pubkycore/security-model/': {
 			status: 301,
-			destination: '/build/security-model/',
+			destination: '/learn/security-model/',
 		},
 		'/explore/pubkycore/pkarr/introduction/': {
 			status: 301,
@@ -257,7 +257,7 @@ export default defineConfig({
 		},
 		'/explore/pubky-protocol/security-model/': {
 			status: 301,
-			destination: '/build/security-model/',
+			destination: '/learn/security-model/',
 		},
 		'/explore/technologies/pubky-docker/': {
 			status: 301,
@@ -343,6 +343,10 @@ export default defineConfig({
 			status: 301,
 			destination: '/components/pubky-nexus/',
 		},
+		'/build/security-model/': {
+			status: 301,
+			destination: '/learn/security-model/',
+		},
 	},
 	base: process.env.BASE_PATH || '/',
 	markdown: {
@@ -421,6 +425,7 @@ export default defineConfig({
 					items: [
 						{ label: 'Overview', slug: 'overview' },
 						{ label: 'System Architecture', slug: 'architecture' },
+						{ label: 'Security Model', slug: 'learn/security-model' },
 						{ label: 'pubky.app Reference App', slug: 'learn/pubky-app' },
 						{ label: 'Semantic Social Graph', slug: 'learn/semantic-social-graph' },
 						{ label: 'Credible Exit', slug: 'learn/credible-exit' },
@@ -450,7 +455,6 @@ export default defineConfig({
 								{ label: 'App Architectures', slug: 'build/app-architectures' },
 								{ label: 'Authentication', slug: 'build/authentication' },
 								{ label: 'Private Storage', slug: 'build/private-storage' },
-								{ label: 'Security Model', slug: 'build/security-model' },
 							],
 						},
 						{
