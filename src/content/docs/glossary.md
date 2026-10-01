@@ -39,7 +39,7 @@ Protocol for encrypting DNS queries using HTTPS, preventing surveillance and tam
 ## G
 
 **Guarded Data**
-See [Private Storage](/glossary/#private-storage). The [Security Model](/build/security-model/#guarded-data) uses "guarded" to distinguish access-controlled data from encrypted data.
+See [Private Storage](/glossary/#private-storage). The [Security Model](/learn/security-model/#guarded-data) uses "guarded" to distinguish access-controlled data from encrypted data.
 
 ## H
 
@@ -59,7 +59,7 @@ See **Aggregator**. A service that crawls and indexes data from Homeservers to p
 
 ## K
 
-**[Key Pair](/build/security-model/#key-custody)**
+**[Key Pair](/learn/security-model/#key-custody)**
 A pair of cryptographic keys (public and private) used for identity, authentication, and encryption. In Pubky, your public key IS your identity.
 
 ## M

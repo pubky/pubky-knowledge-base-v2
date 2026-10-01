@@ -16,7 +16,7 @@ flowchart TD
     Session --> Access["App accesses the Homeserver"]
 ```
 
-The app's session is distinct from the identity key. Its permissions limit what it can access on the Homeserver, and grants can be revoked. Reading someone else's public data does not require their approval; writing data or accessing authenticated storage does. The [Security Model](/build/security-model/) explains these boundaries.
+The app's session is distinct from the identity key. Its permissions limit what it can access on the Homeserver, and grants can be revoked. Reading someone else's public data does not require their approval; writing data or accessing authenticated storage does. The [Security Model](/learn/security-model/) explains these boundaries.
 
 Review requested scopes before approving an app. Root grants carry account-level privileges and should be reserved for trusted account-management tools.
 
@@ -28,4 +28,4 @@ Use the SDK guides to implement this flow:
 - [Rust QR authentication](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-sdk/README.md#pubky-qr-auth-for-third-party-and-keyless-apps).
 - [Browser session persistence example](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/examples/javascript/5-browser-session-persistence/README.md).
 
-For raw endpoints, see the [Homeserver API references](/components/homeserver/#http-api). For key custody and Homeserver trust, read the [Security Model](/build/security-model/).
+For raw endpoints, see the [Homeserver API references](/components/homeserver/#http-api). For key custody and Homeserver trust, read the [Security Model](/learn/security-model/).

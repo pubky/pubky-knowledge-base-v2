@@ -12,7 +12,7 @@ The Homeserver serves those files even when the user's device is offline, provid
 
 The Pubky protocol separates identity from hosting, enabling [Credible Exit](/learn/credible-exit/), but moving files and updating discovery still require working tools and available copies.
 
-Homeservers provide publicly readable `/pub/` storage and access-controlled (not encrypted) `/priv/` storage. See [Private Storage](/build/private-storage/) for an overview and guides. Access control still trusts the operator; see the [Security Model](/build/security-model/).
+Homeservers provide publicly readable `/pub/` storage and access-controlled (not encrypted) `/priv/` storage. See [Private Storage](/build/private-storage/) for an overview and guides. Access control still trusts the operator; see the [Security Model](/learn/security-model/).
 
 Homeservers provide [event streams](#http-api) that let apps and indexers follow changes to stored files.
 

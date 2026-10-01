@@ -65,7 +65,7 @@ flowchart TB
 
 ### Identity Layer
 
-The foundation of Pubky is cryptographic identity based on **[key pairs](/build/security-model/#key-custody)**.
+The foundation of Pubky is cryptographic identity based on **[key pairs](/learn/security-model/#key-custody)**.
 
 **Components:**
 - **[Pubky Ring](/use/pubky-ring/)**: Mobile app for secure key management

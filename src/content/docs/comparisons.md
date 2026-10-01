@@ -58,4 +58,4 @@ Pubky fits conventional browser applications backed by user-selected servers. Pe
 
 ## What to check before choosing
 
-Pubky's [Security Model](/build/security-model/) includes trust in the Homeserver for public file integrity and availability. Signed discovery does not automatically sign stored files. [Changing providers](/learn/credible-exit/) also requires preserving and moving data; updating discovery alone is not migration. Use the [Developer Guide](/build/developer-guide/) to assess how the workflow fits your application.
+Pubky's [Security Model](/learn/security-model/) includes trust in the Homeserver for public file integrity and availability. Signed discovery does not automatically sign stored files. [Changing providers](/learn/credible-exit/) also requires preserving and moving data; updating discovery alone is not migration. Use the [Developer Guide](/build/developer-guide/) to assess how the workflow fits your application.
