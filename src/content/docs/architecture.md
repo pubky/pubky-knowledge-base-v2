@@ -8,32 +8,36 @@ This page provides a comprehensive overview of the Pubky ecosystem architecture,
 
 ## System Architecture
 
+<div role="region" aria-label="System architecture diagram; scroll horizontally to view all components" tabindex="0" style="overflow-x: auto;">
+<div style="width: max-content;">
+
 ```mermaid
+%%{init: {'flowchart': {'useMaxWidth': false, 'nodeSpacing': 16, 'rankSpacing': 25, 'padding': 10, 'subGraphTitleMargin': {'top': 4, 'bottom': 12}}}}%%
 flowchart TB
     subgraph Identity[Identity Layer]
-        Ring[Pubky Ring]
+        Ring["Pubky<br/>Ring"]
         Keys[Key Pairs]
     end
-    
+
     subgraph Discovery[Discovery Layer]
-        PKARR[PKARR Records]
-        DHT[Mainline DHT]
-        PKDNS[PKDNS Servers]
+        PKARR["PKARR<br/>Records"]
+        DHT["Mainline<br/>DHT"]
+        PKDNS["PKDNS<br/>Servers"]
     end
-    
+
     subgraph Storage[Storage Layer]
-        HS1[Homeserver 1]
-        HS2[Homeserver 2]
-        HSN[Homeserver N]
+        HS1["Homeserver<br/>1"]
+        HS2["Homeserver<br/>2"]
+        HSN["Homeserver<br/>N"]
     end
-    
+
     subgraph Apps[Application Layer]
-        PubkyApp[Pubky App]
-        Nexus[Pubky Nexus]
-        Backup[Pubky Backup]
+        PubkyApp["Pubky<br/>App"]
+        Nexus["Pubky<br/>Nexus"]
+        Backup["Pubky<br/>Backup"]
         Custom[Custom Apps]
     end
-    
+
     Ring --> Keys
     Keys --> PKARR
     PKARR --> DHT
@@ -44,7 +48,16 @@ flowchart TB
     HS1 --> Backup
     Nexus --> PubkyApp
     Custom --> HS1
+
+    %% Invisible links stack components without adding relationships.
+    PKARR ~~~ PKDNS
+    HS1 ~~~ HS2
+    HS2 ~~~ HSN
+    Backup ~~~ Nexus
 ```
+
+</div>
+</div>
 
 ---
 
@@ -52,7 +65,7 @@ flowchart TB
 
 ### Identity Layer
 
-The foundation of Pubky is cryptographic identity based on **[key pairs](/explore/technologies/key-pair/)**.
+The foundation of Pubky is cryptographic identity based on **[key pairs](/explore/pubky-protocol/security-model/#key-custody)**.
 
 **Components:**
 - **[Pubky Ring](/explore/technologies/pubky-ring/)**: Mobile app for secure key management
@@ -91,7 +104,7 @@ sequenceDiagram
     participant DHT as Mainline DHT
     participant PKDNS
     participant HS as Homeserver
-    
+
     User->>Ring: Create Identity
     Ring->>DHT: Publish PKARR Record
     Note over DHT: Record contains homeserver URL
@@ -121,7 +134,7 @@ flowchart LR
     User1[User 1] --> HS1[Homeserver A]
     User2[User 2] --> HS1
     User3[User 3] --> HS2[Homeserver B]
-    
+
     HS1 --> FS1[(User files)]
     HS1 --> PG1[(PostgreSQL metadata)]
     HS2 --> FS2[(User files)]
@@ -190,7 +203,7 @@ sequenceDiagram
     participant App as Pubky App
     participant HS as Homeserver
     participant Nexus
-    
+
     User->>Ring: Authorize App
     Ring->>App: Grant
     App->>HS: Exchange grant + PoP proof
@@ -206,172 +219,3 @@ sequenceDiagram
     App->>Nexus: GET /v0/stream/posts
     Nexus->>App: Feed with new post
 ```
-
----
-
-## Component Responsibilities
-
-### Pubky Homeserver
-
-**[Pubky Homeserver](/explore/pubky-protocol/introduction/)** provides:
-- Protocol specification
-- Homeserver implementation
-- SDK for all platforms
-- Authentication system
-- API standards
-
-**Repository**: [github.com/pubky/pubky-homeserver](https://github.com/pubky/pubky-homeserver)
-
-### Pubky Ring
-
-**[Pubky Ring](/explore/technologies/pubky-ring/)** handles:
-- Key generation and storage
-- App authorization
-- Session management
-- Recovery file creation
-
-**Platforms**: iOS, Android (React Native)
-
-### Pubky Nexus
-
-**[Pubky Nexus](/explore/pubky-apps/indexing-and-aggregation/pubky-nexus/)** provides:
-- Real-time aggregation
-- Social graph indexing
-- Search and discovery
-- High-performance API
-
-### Pubky Backup
-
-**[Pubky Backup](/explore/technologies/pubky-backup/)** is a desktop app for backing up published Homeserver data locally. Use the [Pubky Backup README](https://github.com/pubky/pubky-backup/blob/main/README.md) for install and feature details, and the [pubky-backup-core README](https://github.com/pubky/pubky-backup/blob/main/src-tauri/pubky-backup-core/README.md) for sync, storage, and API architecture.
-
-### PKDNS
-
-**[PKDNS](/explore/technologies/pkdns/)** enables:
-- Public-key domain resolution
-- DNS-over-HTTPS support
-- Traditional ICANN domain support
-- Self-hosted or public instances
-
-**Repository**: [github.com/pubky/pkdns](https://github.com/pubky/pkdns)
-
-### Homegate
-
-**[Homegate](/explore/technologies/homegate/)** provides:
-- SMS verification
-- Lightning payment verification
-- Spam prevention
-- Privacy-preserving signup
-
-**Repository**: [github.com/pubky/homegate](https://github.com/pubky/homegate)
-
----
-
-## Infrastructure Tools
-
-### Development Tools
-
-- **[Pubky Docker](/explore/technologies/pubky-docker/)**: Full stack in one command
-- **[Pubky CLI](/explore/technologies/pubky-cli/)**: Command-line Homeserver management
-- **[Pubky Explorer](/explore/technologies/pubky-explorer/)**: Web-based data browser
-- **[Pubky Backup](/explore/technologies/pubky-backup/)**: Desktop backup and snapshot tool for published Homeserver data
-
-### Work in Progress
-
-- **[Paykit](/explore/technologies/paykit/)**: Payment protocol
-- **[Pubky Noise](/explore/technologies/pubky-noise/)**: Encrypted communication
-
----
-
-## Security Model
-
-### Authentication
-
-See [Authentication](/explore/pubky-protocol/authentication/) for the full authentication flow.
-
----
-
-## Scalability Characteristics
-
-### Horizontal Scaling
-
-| Component | Scaling Method |
-|-----------|----------------|
-| **Homeservers** | Add more servers, users distribute naturally |
-| **PKDNS** | Run multiple instances, cache aggressively |
-| **Nexus** | Shard by user/data type, read replicas |
-| **Mainline DHT** | Already 10M+ nodes, proven at scale |
-
-### Performance Metrics
-
-**Typical Latencies:**
-- PKARR lookup (cached): < 100ms
-- PKARR lookup (DHT): 500-2000ms
-- Homeserver GET: 50-200ms
-- Nexus API: 10-50ms (sub-millisecond for cached)
-
----
-
-## Comparison to Other Architectures
-
-### vs Traditional Web (Client-Server)
-
-| Aspect | Traditional | Pubky |
-|--------|-------------|-------|
-| Identity | Username@service | Public key (permanent) |
-| Data Storage | Company servers | User-chosen Homeservers |
-| Portability | Locked-in | Full portability |
-| Censorship | Easy | Very difficult |
-
-### vs Blockchain
-
-| Aspect | Blockchain | Pubky |
-|--------|-----------|-------|
-| Fees | Transaction fees | None |
-| Speed | Slow (blocks) | Instant (HTTP) |
-| Storage | Expensive | Cheap (standard hosting) |
-| Scalability | Limited | Web-scale |
-
-### vs Pure P2P
-
-| Aspect | Pure P2P | Pubky |
-|--------|----------|-------|
-| Availability | Must be online | Homeservers always on |
-| Mobile-Friendly | Difficult | Native support |
-| Performance | Variable | Consistent |
-| Discovery | Complex | DHT + PKDNS |
-
----
-
-## Deployment Patterns
-
-### Personal Use
-
-```
-User Device → Pubky Ring → Personal Homeserver
-```
-
-**Best for**: Personal data, backups, full control
-
-### Small Team
-
-```
-Team Members → Shared Homeserver → Team Apps
-```
-
-**Best for**: Collaborative projects, startups
-
-### Social Application
-
-```
-Users → Public Homeservers → Nexus Aggregator → Social App
-```
-
-**Best for**: Social media, discovery platforms
-
-### Enterprise
-
-```
-Users → Enterprise Homeserver + Custom Aggregator + Private Nexus → Internal Apps
-```
-
-**Best for**: Organizations with custom requirements

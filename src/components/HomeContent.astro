@@ -211,7 +211,6 @@ const icons = {
   timer: '/images/icons/timer.svg',
   codeXml: '/images/icons/code-xml.svg',
   file: '/images/icons/file.svg',
-  circleHelp: '/images/icons/circle-help.svg',
   // Key Concepts
   fingerprint: '/images/icons/fingerprint.svg',
   shieldOff: '/images/icons/shield-off.svg',
@@ -231,11 +230,11 @@ const icons = {
       <a class="home-section-title-link" href="#quick-start">Quick Start</a>
     </h2>
     <div class="home-section-box">
-    <div class="card-grid card-grid-4">
+    <div class="card-grid card-grid-3">
       <TextCard
-        title="TL;DR"
-        description="30-second overview of the entire ecosystem"
-        href="/tldr/"
+        title="Overview"
+        description="Start here for the protocol and its applications"
+        href="/overview/"
         icon={icons.timer}
       />
       <TextCard
@@ -249,12 +248,6 @@ const icons = {
         description="Quick reference for key terms"
         href="/glossary/"
         icon={icons.file}
-      />
-      <TextCard
-        title="FAQ"
-        description="63+ questions answered across key topics and features"
-        href="/faq/"
-        icon={icons.circleHelp}
       />
     </div>
     </div>
@@ -312,7 +305,7 @@ const icons = {
           titleIcon={pubkyBrandWhite}
           image="/images/cards/pubky-core.png"
           tags={[
-            { label: "Getting started", href: "/explore/pubky-protocol/getting-started/" },
+            { label: "Developer Guide", href: "/explore/pubky-protocol/developer-guide/" },
             { label: "SDK", href: "/explore/pubky-protocol/sdk/" },
             { label: "Homeserver", href: "/explore/pubky-protocol/homeserver/" },
           ]}
@@ -322,7 +315,6 @@ const icons = {
           image="/images/cards/developer-tools.png"
           tags={[
             { label: "Docker Stack", href: "/explore/technologies/pubky-docker/" },
-            { label: "CLI", href: "/explore/technologies/pubky-cli/" },
             { label: "Explorer", href: "/explore/technologies/pubky-explorer/" },
             { label: "PKDNS", href: "/explore/technologies/pkdns/" },
           ]}
@@ -333,7 +325,7 @@ const icons = {
           tags={[
             { label: "Architecture", href: "/explore/pubky-apps/app-architectures/introduction/" },
             { label: "Indexing", href: "/explore/pubky-apps/indexing-and-aggregation/introduction/" },
-            { label: "Reference App", href: "/explore/pubky-apps/reference-app/introduction/" },
+            { label: "Reference App", href: "/explore/pubky-apps/reference-app/pubky-app/" },
           ]}
         />
       </div>

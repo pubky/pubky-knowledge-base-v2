@@ -16,7 +16,7 @@ Today, most platforms hold your data hostage. They make it difficult to leave, a
 
 Here are some of the best examples of Credible Exit in practice:
 
-- **Domain Name System (DNS)**: [DNS](/explore/technologies/dns/) is a classic example of a system that allows for a credible exit. If you no longer want your domain hosted with one provider, you can transfer it to another without losing control over your domain name.
+- **Domain Name System (DNS)**: DNS is a classic example of a system that allows for a credible exit. If you no longer want your domain hosted with one provider, you can transfer it to another without losing control over your domain name.
 - **Email Protocols (IMAP/SMTP)**: Email is another example. Users can change email providers while keeping the same email address, ensuring they don't lose their communication history or contacts.
 - **Bitcoin Wallets**: Bitcoin wallets offer credible exit by allowing users to export private keys and import them into another wallet provider, retaining full control over their funds and transactions.
 
