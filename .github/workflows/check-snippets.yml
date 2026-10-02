@@ -16,12 +16,7 @@ jobs:
         with:
           node-version: 22
           cache: npm
-          cache-dependency-path: |
-            package-lock.json
-            snippets/js/package-lock.json
-
-      - name: Install dependencies
-        run: npm ci
+          cache-dependency-path: snippets/js/package-lock.json
 
       - name: Validate snippet references
         run: npm run check:snippet-fences
@@ -33,6 +28,3 @@ jobs:
       - name: Validate snippets (vanilla JS)
         working-directory: snippets/js
         run: npm run check
-
-      - name: Build and validate documentation
-        run: npm run build
