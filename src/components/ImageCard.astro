@@ -6,7 +6,7 @@ interface Props {
   description?: string;
   image: string;
   imageFit?: 'cover' | 'contain';
-  tags?: { label: string; href: string }[];
+  tags?: { label: string; href: string; external?: boolean }[];
   links?: { label: string; href: string; external?: boolean }[];
 }
 
@@ -32,7 +32,15 @@ const hrefFor = (href: string, external = href.startsWith('http')) => external ?
     {tags.length > 0 && (
       <div class="image-card-tags">
         {tags.map((tag) => (
-          <a href={hrefFor(tag.href)} class="image-card-tag">{tag.label}</a>
+          <a
+            href={hrefFor(tag.href, tag.external)}
+            class="image-card-tag"
+            target={tag.external ? "_blank" : undefined}
+            rel={tag.external ? "noopener noreferrer" : undefined}
+            aria-label={tag.external ? `${tag.label} (opens in new tab)` : undefined}
+          >
+            {tag.label}
+          </a>
         ))}
       </div>
     )}

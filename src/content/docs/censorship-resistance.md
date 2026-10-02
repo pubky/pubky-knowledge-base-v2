@@ -18,7 +18,7 @@ However, this doesn't mean we should accept censorship without a solution. Inste
 
 In **Pubky**, the approach is not to eliminate censorship entirely—because some level of censorship will always exist where there are centralized components—but rather to provide users with a way to **circumvent** it when it happens.
 
-- **Flexible Hosting**: Pubky provides a flexible hosting model using trusted servers known as [Homeservers](/homeserver/). While these servers may be subject to censorship, Pubky ensures that users have the ability to migrate away from a censoring server whenever needed. Users can move their data, identities, and connections seamlessly, meaning they retain control even in the face of censorship.
+- **Flexible Hosting**: Pubky provides a flexible hosting model using trusted servers known as [Homeservers](/homeserver/). While these servers may be subject to censorship, Pubky ensures that users have the ability to migrate away from a censoring server whenever needed. Users keep their identities and connections when they move, and can re-upload their data to another Homeserver, meaning they retain control even in the face of censorship.
 
 - **Decentralized Identity**: In Pubky, user identities are not dependent on any single server. By using **self-issued public keys**, users maintain their identity even if they change hosting providers. This prevents identity loss when moving away from a server that engages in censorship.
 

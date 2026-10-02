@@ -71,7 +71,7 @@ For source builds, see [Optional: Build from source](https://github.com/pubky/pu
 What follows is a step-by-step guide to building your first Pubky app. If you prefer to start from a ready-made project, jump to the [basic Pubky app template](#39-basic-pubky-app-template).
 
 :::note[Reference docs]
-For full API details see the reference documenation for [JavaScript](https://pubky.github.io/pubky-homeserver/js-sdk-typedoc/) and [Rust](https://docs.rs/pubky).
+For full API details see the reference documentation for [JavaScript](https://pubky.github.io/pubky-homeserver/js-sdk-typedoc/) and [Rust](https://docs.rs/pubky).
 :::
 
 With the Homeserver running, clone this empty Vite template and install the [Pubky SDK](/sdk/):

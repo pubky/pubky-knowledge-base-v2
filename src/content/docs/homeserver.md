@@ -20,15 +20,9 @@ Homeservers also support [storage locking](/sdk/#storage-locking) to help applic
 
 ## Running a Homeserver
 
-For installing, configuring, and running a Homeserver, follow the
-[Install Guide](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/docs/INSTALL.md). To make it
-publicly reachable see the
-[Deployment Guide](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/docs/DEPLOY.md).
+For installing, configuring, and running a Homeserver, follow the [Install Guide](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/docs/INSTALL.md). To make it publicly reachable see the [Deployment Guide](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/docs/DEPLOY.md).
 
-For local development and testing with a fixed-port testnet, follow the
-[Pubky Testnet README](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-testnet/README.md).
-For a full walkthrough of setting up a local stack and building your first app, see the
-[Developer Guide](/developer-guide).
+For local development and testing with a fixed-port testnet, follow the [Pubky Testnet README](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-testnet/README.md). For a full walkthrough of setting up a local stack and building your first app, see the [Developer Guide](/developer-guide/).
 
 ## HTTP API
 
