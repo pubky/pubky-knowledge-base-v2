@@ -235,10 +235,6 @@ export default defineConfig({
 			status: 301,
 			destination: '/censorship-resistance/',
 		},
-		'/explore/pubky-protocol/developer-guide/': {
-			status: 301,
-			destination: '/developer-guide/',
-		},
 		'/explore/pubky-protocol/sdk/': {
 			status: 301,
 			destination: '/sdk/',
@@ -266,10 +262,6 @@ export default defineConfig({
 		'/explore/technologies/pubky-explorer/': {
 			status: 301,
 			destination: '/pubky-explorer/',
-		},
-		'/explore/pubky-apps/pubky-app-specs/': {
-			status: 301,
-			destination: '/pubky-app-specs/',
 		},
 		'/explore/concepts/semantic-social-graph/': {
 			status: 301,
@@ -330,126 +322,6 @@ export default defineConfig({
 		'/explore/technologies/paykit/': {
 			status: 301,
 			destination: '/paykit/',
-		},
-		'/social-data/pubky-app/': {
-			status: 301,
-			destination: '/pubky-app/',
-		},
-		'/social-data/semantic-social-graph/': {
-			status: 301,
-			destination: '/semantic-social-graph/',
-		},
-		'/social-data/pubky-nexus/': {
-			status: 301,
-			destination: '/pubky-nexus/',
-		},
-		'/build/security-model/': {
-			status: 301,
-			destination: '/security-model/',
-		},
-		'/build/app-architectures/': {
-			status: 301,
-			destination: '/app-architectures/',
-		},
-		'/build/authentication/': {
-			status: 301,
-			destination: '/authentication/',
-		},
-		'/build/developer-guide/': {
-			status: 301,
-			destination: '/developer-guide/',
-		},
-		'/build/private-storage/': {
-			status: 301,
-			destination: '/private-storage/',
-		},
-		'/build/pubky-docker/': {
-			status: 301,
-			destination: '/pubky-docker/',
-		},
-		'/build/pubky-explorer/': {
-			status: 301,
-			destination: '/pubky-explorer/',
-		},
-		'/build/sdk/': {
-			status: 301,
-			destination: '/sdk/',
-		},
-		'/components/homegate/': {
-			status: 301,
-			destination: '/homegate/',
-		},
-		'/components/homeserver/': {
-			status: 301,
-			destination: '/homeserver/',
-		},
-		'/components/http-relay/': {
-			status: 301,
-			destination: '/http-relay/',
-		},
-		'/components/mainline-dht/': {
-			status: 301,
-			destination: '/mainline-dht/',
-		},
-		'/components/paykit/': {
-			status: 301,
-			destination: '/paykit/',
-		},
-		'/components/pkarr/': {
-			status: 301,
-			destination: '/pkarr/',
-		},
-		'/components/pkdns/': {
-			status: 301,
-			destination: '/pkdns/',
-		},
-		'/components/pubky-nexus/': {
-			status: 301,
-			destination: '/pubky-nexus/',
-		},
-		'/components/pubky-noise/': {
-			status: 301,
-			destination: '/pubky-noise/',
-		},
-		'/learn/censorship-resistance/': {
-			status: 301,
-			destination: '/censorship-resistance/',
-		},
-		'/learn/credible-exit/': {
-			status: 301,
-			destination: '/credible-exit/',
-		},
-		'/learn/pubky-app/': {
-			status: 301,
-			destination: '/pubky-app/',
-		},
-		'/learn/security-model/': {
-			status: 301,
-			destination: '/security-model/',
-		},
-		'/learn/semantic-social-graph/': {
-			status: 301,
-			destination: '/semantic-social-graph/',
-		},
-		'/social-data/indexing-and-aggregation/': {
-			status: 301,
-			destination: '/indexing-and-aggregation/',
-		},
-		'/social-data/pubky-app-specs/': {
-			status: 301,
-			destination: '/pubky-app-specs/',
-		},
-		'/use/pubky-backup/': {
-			status: 301,
-			destination: '/pubky-backup/',
-		},
-		'/use/pubky-passport/': {
-			status: 301,
-			destination: '/pubky-passport/',
-		},
-		'/use/pubky-ring/': {
-			status: 301,
-			destination: '/pubky-ring/',
 		},
 	},
 	base: process.env.BASE_PATH || '/',

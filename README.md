@@ -117,4 +117,4 @@ AI tools can reference the docs through these plain Markdown endpoints:
 
 Locally, `npm run build` generates the same files in `dist/`.
 
-Old documentation URLs redirect to their current pages. The build preserves query strings and section links when JavaScript is enabled; without it, a refresh redirect still opens the destination page. Explicit destination sections take precedence. Old `.md` URLs serve copies of the current Markdown export, regenerated with every build.
+Old documentation URLs redirect to their current pages.
