@@ -20,6 +20,12 @@ The app's session is distinct from the identity key. Its permissions limit what 
 
 Review requested scopes before approving an app. Root grants carry account-level privileges and should be reserved for trusted account-management tools.
 
+## Signing out
+
+Signing out an active grant-backed session through the SDK revokes its grant. Revocation invalidates every session issued from that grant and prevents saved credentials for it from restoring access. Separate grants, including those issued to the same app, are unaffected.
+
+Removing saved browser session data only forgets it locally; it does not revoke the grant on the Homeserver. If the session token is no longer valid, SDK sign-out can report success without revoking the grant.
+
 ## Implement the flow
 
 Use the SDK guides to implement this flow:
