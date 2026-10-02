@@ -1,5 +1,5 @@
 ---
-title: "How Pubky Compares to Other Protocols"
+title: "Comparisons"
 ---
 
 Pubky combines public-key identity, signed service discovery through [PKARR](https://github.com/pubky/pkarr), and mutable files on a user-chosen [Homeserver](https://github.com/pubky/pubky-homeserver). This is useful when building a web app whose users should keep their identity and data independently of the app's operator.
@@ -58,4 +58,4 @@ Pubky fits conventional browser applications backed by user-selected servers. Pe
 
 ## What to check before choosing
 
-Pubky's [Security Model](/explore/pubky-protocol/security-model/) includes trust in the Homeserver for public file integrity and availability. Signed discovery does not automatically sign stored files. [Changing providers](/explore/concepts/credible-exit/) also requires preserving and moving data; updating discovery alone is not migration. Use the [Developer Guide](/explore/pubky-protocol/developer-guide/) to assess how the workflow fits your application.
+Pubky's [Security Model](/security-model/) includes trust in the Homeserver for public file integrity and availability. Signed discovery does not automatically sign stored files. [Changing providers](/credible-exit/) also requires preserving and moving data; updating discovery alone is not migration. Use the [Developer Guide](/developer-guide/) to assess how the workflow fits your application.

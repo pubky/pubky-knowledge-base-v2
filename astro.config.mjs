@@ -11,9 +11,17 @@ import remarkReleaseLinks from './plugins/remark-release-links.mjs';
 export default defineConfig({
 	site: process.env.SITE_URL || 'https://pubky.org',
 	redirects: {
+		'/explore/pubky-protocol/introduction/': {
+			status: 301,
+			destination: '/overview/',
+		},
+		'/explore/pubky-apps/introduction/': {
+			status: 301,
+			destination: '/app-architectures/',
+		},
 		'/explore/pubky-apps/app-specs/': {
 			status: 301,
-			destination: '/explore/pubky-apps/pubky-app-specs/',
+			destination: '/pubky-app-specs/',
 		},
 		'/faq/': {
 			status: 301,
@@ -21,7 +29,7 @@ export default defineConfig({
 		},
 		'/explore/technologies/pubky-cli/': {
 			status: 301,
-			destination: '/explore/pubky-protocol/developer-guide/',
+			destination: '/developer-guide/',
 		},
 		'/tldr/': {
 			status: 301,
@@ -37,119 +45,119 @@ export default defineConfig({
 		},
 		'/explore/pubky-apps/eli5/': {
 			status: 301,
-			destination: '/explore/pubky-apps/introduction/',
+			destination: '/app-architectures/',
 		},
 		'/explore/pubky-protocol/eli5/': {
 			status: 301,
-			destination: '/explore/pubky-protocol/introduction/',
+			destination: '/overview/',
 		},
 		'/explore/pubky-apps/reference-app/introduction/': {
 			status: 301,
-			destination: '/explore/pubky-apps/reference-app/pubky-app/',
+			destination: '/pubky-app/',
 		},
 		'/explore/pubky-apps/app-architectures/client-homeserver/': {
 			status: 301,
-			destination: '/explore/pubky-apps/app-architectures/introduction/',
+			destination: '/app-architectures/',
 		},
 		'/explore/pubky-apps/app-architectures/custom-backend/': {
 			status: 301,
-			destination: '/explore/pubky-apps/app-architectures/introduction/',
+			destination: '/app-architectures/',
 		},
 		'/explore/pubky-apps/app-architectures/global-aggregators/': {
 			status: 301,
-			destination: '/explore/pubky-apps/app-architectures/introduction/',
+			destination: '/app-architectures/',
 		},
 		'/explore/pubky-apps/indexing-and-aggregation/aggregator/': {
 			status: 301,
-			destination: '/explore/pubky-apps/indexing-and-aggregation/introduction/',
+			destination: '/indexing-and-aggregation/',
 		},
 		'/explore/pubky-apps/indexing-and-aggregation/indexer/': {
 			status: 301,
-			destination: '/explore/pubky-apps/indexing-and-aggregation/introduction/',
+			destination: '/indexing-and-aggregation/',
 		},
 		'/explore/pubky-apps/indexing-and-aggregation/web-server/': {
 			status: 301,
-			destination: '/explore/pubky-apps/indexing-and-aggregation/introduction/',
+			destination: '/indexing-and-aggregation/',
 		},
 		'/explore/pubky-apps/reference-app/features/bookmarks/': {
 			status: 301,
-			destination: '/explore/pubky-apps/reference-app/pubky-app/',
+			destination: '/pubky-app/',
 		},
 		'/explore/pubky-apps/reference-app/features/layouts/': {
 			status: 301,
-			destination: '/explore/pubky-apps/reference-app/pubky-app/',
+			destination: '/pubky-app/',
 		},
 		'/explore/pubky-apps/reference-app/features/notifications/': {
 			status: 301,
-			destination: '/explore/pubky-apps/reference-app/pubky-app/',
+			destination: '/pubky-app/',
 		},
 		'/explore/pubky-apps/reference-app/features/perspectives/': {
 			status: 301,
-			destination: '/explore/pubky-apps/reference-app/pubky-app/',
+			destination: '/pubky-app/',
 		},
 		'/explore/pubky-apps/reference-app/features/posts/': {
 			status: 301,
-			destination: '/explore/pubky-apps/reference-app/pubky-app/',
+			destination: '/pubky-app/',
 		},
 		'/explore/pubky-apps/reference-app/features/profiles/': {
 			status: 301,
-			destination: '/explore/pubky-apps/reference-app/pubky-app/',
+			destination: '/pubky-app/',
 		},
 		'/explore/pubky-apps/reference-app/features/search/': {
 			status: 301,
-			destination: '/explore/pubky-apps/reference-app/pubky-app/',
+			destination: '/pubky-app/',
 		},
 		'/explore/pubky-apps/reference-app/features/tags/': {
 			status: 301,
-			destination: '/explore/pubky-apps/reference-app/pubky-app/',
+			destination: '/pubky-app/',
 		},
 		'/explore/pubky-apps/reference-app/features/trends/': {
 			status: 301,
-			destination: '/explore/pubky-apps/reference-app/pubky-app/',
+			destination: '/pubky-app/',
 		},
 		'/explore/pubky-protocol/pkarr/architecture/': {
 			status: 301,
-			destination: '/explore/pubky-protocol/pkarr/introduction/',
+			destination: '/pkarr/',
 		},
 		'/explore/pubky-protocol/pkarr/eli5/': {
 			status: 301,
-			destination: '/explore/pubky-protocol/pkarr/introduction/',
+			destination: '/pkarr/',
 		},
 		'/explore/pubky-protocol/pkarr/expectations/': {
 			status: 301,
-			destination: '/explore/pubky-protocol/pkarr/introduction/',
+			destination: '/pkarr/',
 		},
 		'/explore/pubky-protocol/pkarr/getting-started/': {
 			status: 301,
-			destination: '/explore/pubky-protocol/pkarr/introduction/',
+			destination: '/pkarr/',
 		},
 		'/explore/pubky-protocol/pkarr/why-pkarr/': {
 			status: 301,
-			destination: '/explore/pubky-protocol/pkarr/introduction/',
+			destination: '/pkarr/',
 		},
 		'/explore/technologies/dht/': {
 			status: 301,
-			destination: '/explore/technologies/mainline-dht/',
+			destination: '/mainline-dht/',
 		},
 		'/explore/technologies/dns/': {
 			status: 301,
-			destination: '/explore/technologies/pkdns/',
+			destination: '/pkdns/',
 		},
 		'/explore/technologies/doh/': {
 			status: 301,
-			destination: '/explore/technologies/pkdns/',
+			destination: '/pkdns/',
 		},
 		'/explore/technologies/https/': {
 			status: 301,
-			destination: '/explore/pubky-protocol/security-model/#transport-security',
+			destination: '/security-model/#transport-security',
 		},
 		'/explore/technologies/key-pair/': {
 			status: 301,
-			destination: '/explore/pubky-protocol/security-model/#key-custody',
+			destination: '/security-model/#key-custody',
 		},
 		'/explore/technologies/pubky-moderation/': {
 			status: 301,
-			destination: '/explore/concepts/censorship/',
+			destination: '/censorship-resistance/',
 		},
 		'/docs': {
 			status: 301,
@@ -157,67 +165,163 @@ export default defineConfig({
 		},
 		'/explore/pubkycore/introduction/': {
 			status: 301,
-			destination: '/explore/pubky-protocol/introduction/',
+			destination: '/overview/',
 		},
 		'/explore/pubky-protocol/getting-started/': {
 			status: 301,
-			destination: '/explore/pubky-protocol/developer-guide/',
+			destination: '/developer-guide/',
 		},
 		'/explore/pubkycore/getting-started/': {
 			status: 301,
-			destination: '/explore/pubky-protocol/developer-guide/',
+			destination: '/developer-guide/',
 		},
 		'/explore/pubkycore/eli5/': {
 			status: 301,
-			destination: '/explore/pubky-protocol/introduction/',
+			destination: '/overview/',
 		},
 		'/explore/pubkycore/authentication/': {
 			status: 301,
-			destination: '/explore/pubky-protocol/authentication/',
+			destination: '/authentication/',
 		},
 		'/explore/pubkycore/homeserver/': {
 			status: 301,
-			destination: '/explore/pubky-protocol/homeserver/',
+			destination: '/homeserver/',
 		},
 		'/explore/pubkycore/api/': {
 			status: 301,
-			destination: '/explore/pubky-protocol/homeserver/#http-api',
+			destination: '/homeserver/#http-api',
 		},
 		'/explore/pubky-protocol/api/': {
 			status: 301,
-			destination: '/explore/pubky-protocol/homeserver/#http-api',
+			destination: '/homeserver/#http-api',
 		},
 		'/explore/pubkycore/sdk/': {
 			status: 301,
-			destination: '/explore/pubky-protocol/sdk/',
+			destination: '/sdk/',
 		},
 		'/explore/pubkycore/security-model/': {
 			status: 301,
-			destination: '/explore/pubky-protocol/security-model/',
+			destination: '/security-model/',
 		},
 		'/explore/pubkycore/pkarr/introduction/': {
 			status: 301,
-			destination: '/explore/pubky-protocol/pkarr/introduction/',
+			destination: '/pkarr/',
 		},
 		'/explore/pubkycore/pkarr/why-pkarr/': {
 			status: 301,
-			destination: '/explore/pubky-protocol/pkarr/introduction/',
+			destination: '/pkarr/',
 		},
 		'/explore/pubkycore/pkarr/getting-started/': {
 			status: 301,
-			destination: '/explore/pubky-protocol/pkarr/introduction/',
+			destination: '/pkarr/',
 		},
 		'/explore/pubkycore/pkarr/expectations/': {
 			status: 301,
-			destination: '/explore/pubky-protocol/pkarr/introduction/',
+			destination: '/pkarr/',
 		},
 		'/explore/pubkycore/pkarr/architecture/': {
 			status: 301,
-			destination: '/explore/pubky-protocol/pkarr/introduction/',
+			destination: '/pkarr/',
 		},
 		'/explore/pubkycore/pkarr/eli5/': {
 			status: 301,
-			destination: '/explore/pubky-protocol/pkarr/introduction/',
+			destination: '/pkarr/',
+		},
+		'/explore/concepts/credible-exit/': {
+			status: 301,
+			destination: '/credible-exit/',
+		},
+		'/explore/concepts/censorship/': {
+			status: 301,
+			destination: '/censorship-resistance/',
+		},
+		'/explore/pubky-protocol/sdk/': {
+			status: 301,
+			destination: '/sdk/',
+		},
+		'/explore/pubky-apps/app-architectures/introduction/': {
+			status: 301,
+			destination: '/app-architectures/',
+		},
+		'/explore/pubky-protocol/authentication/': {
+			status: 301,
+			destination: '/authentication/',
+		},
+		'/explore/pubky-protocol/private-storage/': {
+			status: 301,
+			destination: '/private-storage/',
+		},
+		'/explore/pubky-protocol/security-model/': {
+			status: 301,
+			destination: '/security-model/',
+		},
+		'/explore/technologies/pubky-docker/': {
+			status: 301,
+			destination: '/pubky-docker/',
+		},
+		'/explore/technologies/pubky-explorer/': {
+			status: 301,
+			destination: '/pubky-explorer/',
+		},
+		'/explore/concepts/semantic-social-graph/': {
+			status: 301,
+			destination: '/semantic-social-graph/',
+		},
+		'/explore/pubky-apps/indexing-and-aggregation/introduction/': {
+			status: 301,
+			destination: '/indexing-and-aggregation/',
+		},
+		'/explore/pubky-apps/indexing-and-aggregation/pubky-nexus/': {
+			status: 301,
+			destination: '/pubky-nexus/',
+		},
+		'/explore/pubky-apps/reference-app/pubky-app/': {
+			status: 301,
+			destination: '/pubky-app/',
+		},
+		'/explore/technologies/pubky-ring/': {
+			status: 301,
+			destination: '/pubky-ring/',
+		},
+		'/explore/technologies/pubky-passport/': {
+			status: 301,
+			destination: '/pubky-passport/',
+		},
+		'/explore/technologies/pubky-backup/': {
+			status: 301,
+			destination: '/pubky-backup/',
+		},
+		'/explore/pubky-protocol/homeserver/': {
+			status: 301,
+			destination: '/homeserver/',
+		},
+		'/explore/technologies/homegate/': {
+			status: 301,
+			destination: '/homegate/',
+		},
+		'/explore/pubky-protocol/pkarr/introduction/': {
+			status: 301,
+			destination: '/pkarr/',
+		},
+		'/explore/technologies/mainline-dht/': {
+			status: 301,
+			destination: '/mainline-dht/',
+		},
+		'/explore/technologies/pkdns/': {
+			status: 301,
+			destination: '/pkdns/',
+		},
+		'/explore/technologies/http-relay/': {
+			status: 301,
+			destination: '/http-relay/',
+		},
+		'/explore/technologies/pubky-noise/': {
+			status: 301,
+			destination: '/pubky-noise/',
+		},
+		'/explore/technologies/paykit/': {
+			status: 301,
+			destination: '/paykit/',
 		},
 	},
 	base: process.env.BASE_PATH || '/',
@@ -259,18 +363,16 @@ export default defineConfig({
 						'via the Mainline DHT — all over simple HTTP/REST APIs.',
 					exclude: [
 						'index',
-						'overview',
 						'comparisons',
 						'contributing',
 						'getting-started',
 						'glossary',
-						'explore/technologies/pubky-explorer',
-						'explore/technologies/pubky-ring',
-						'explore/pubky-apps/app-architectures/introduction',
-						'explore/pubky-apps/indexing-and-aggregation/introduction',
-						'explore/pubky-apps/reference-app/pubky-app',
-						'explore/concepts/censorship',
-						'explore/concepts/credible-exit',
+						'pubky-explorer',
+						'pubky-ring',
+						'indexing-and-aggregation',
+						'pubky-app',
+						'censorship-resistance',
+						'credible-exit',
 						'resources',
 					],
 				}),
@@ -293,69 +395,68 @@ export default defineConfig({
 				{ icon: 'telegram', label: 'Telegram', href: 'https://t.me/pubkycore' },
 			],
 			sidebar: [
-				{ label: 'Home', slug: 'index' },
-				{ label: 'Overview', slug: 'overview' },
-				{ label: 'Getting Started', slug: 'getting-started' },
-				{ label: 'Glossary', slug: 'glossary' },
-				{ label: 'Architecture', slug: 'architecture' },
-				{ label: 'Comparisons', slug: 'comparisons' },
-				{ label: 'Contributing', slug: 'contributing' },
-				{ label: 'Resources', slug: 'resources' },
 				{
-					label: 'Concepts',
+					label: 'Learn about Pubky',
+					collapsed: true,
 					items: [
-						{ label: 'Censorship', slug: 'explore/concepts/censorship' },
-						{ label: 'Credible Exit', slug: 'explore/concepts/credible-exit' },
-						{ label: 'Semantic Social Graph', slug: 'explore/concepts/semantic-social-graph' },
+						{ label: 'Overview', slug: 'overview' },
+						{ label: 'System Architecture', slug: 'architecture' },
+						{ label: 'Security Model', slug: 'security-model' },
+						{ label: 'pubky.app Reference App', slug: 'pubky-app' },
+						{ label: 'Semantic Social Graph', slug: 'semantic-social-graph' },
+						{ label: 'Credible Exit', slug: 'credible-exit' },
+						{ label: 'Censorship Resistance', slug: 'censorship-resistance' },
 					],
 				},
 				{
-					label: 'Pubky Protocol',
+					label: 'Use Pubky',
+					collapsed: true,
 					items: [
-						{ label: 'Introduction', slug: 'explore/pubky-protocol/introduction' },
-						{ label: 'Developer Guide', slug: 'explore/pubky-protocol/developer-guide' },
-						{ label: 'Authentication', slug: 'explore/pubky-protocol/authentication' },
-						{ label: 'Homeserver', slug: 'explore/pubky-protocol/homeserver' },
-						{ label: 'Private Storage', slug: 'explore/pubky-protocol/private-storage' },
-						{ label: 'SDK', slug: 'explore/pubky-protocol/sdk' },
-						{ label: 'Security Model', slug: 'explore/pubky-protocol/security-model' },
-						{
-							label: 'Pkarr',
-							items: [
-								{ label: 'Introduction', slug: 'explore/pubky-protocol/pkarr/introduction' },
-							],
-						},
+						{ label: 'First Steps', slug: 'getting-started' },
+						{ label: 'Pubky Ring', slug: 'pubky-ring' },
+						{ label: 'Pubky Passport', slug: 'pubky-passport' },
+						{ label: 'Pubky Backup', slug: 'pubky-backup' },
 					],
 				},
 				{
-					label: 'Pubky Apps',
+					label: 'Development',
+					collapsed: true,
 					items: [
-						{ label: 'Introduction', slug: 'explore/pubky-apps/introduction' },
-						{ label: 'pubky-app-specs', slug: 'explore/pubky-apps/pubky-app-specs' },
-						{
-							label: 'App Architectures',
-							items: [
-								{ label: 'Introduction', slug: 'explore/pubky-apps/app-architectures/introduction' },
-							],
-						},
-						{
-							label: 'Indexing & Aggregation',
-							items: [
-								{ label: 'Introduction', slug: 'explore/pubky-apps/indexing-and-aggregation/introduction' },
-								{ label: 'Pubky Nexus', slug: 'explore/pubky-apps/indexing-and-aggregation/pubky-nexus' },
-							],
-						},
-						{
-							label: 'Reference App',
-							items: [
-								{ label: 'pubky.app', slug: 'explore/pubky-apps/reference-app/pubky-app' },
-							],
-						},
+						{ label: 'Developer Guide', slug: 'developer-guide' },
+						{ label: 'SDK', slug: 'sdk' },
+						{ label: 'App Architectures', slug: 'app-architectures' },
+						{ label: 'Authentication', slug: 'authentication' },
+						{ label: 'Private Storage', slug: 'private-storage' },
+						{ label: 'pubky-app-specs', slug: 'pubky-app-specs' },
+						{ label: 'Indexing & Aggregation', slug: 'indexing-and-aggregation' },
+						{ label: 'Pubky Docker', slug: 'pubky-docker' },
+						{ label: 'Pubky Explorer', slug: 'pubky-explorer' },
+						{ label: 'Contributing', slug: 'contributing' },
 					],
 				},
 				{
-					label: 'Technologies',
-					autogenerate: { directory: 'explore/technologies' },
+					label: 'Components & services',
+					collapsed: true,
+					items: [
+						{ label: 'Homeserver', slug: 'homeserver' },
+						{ label: 'Pubky Nexus', slug: 'pubky-nexus' },
+						{ label: 'PKARR', slug: 'pkarr' },
+						{ label: 'Mainline DHT', slug: 'mainline-dht' },
+						{ label: 'PKDNS', slug: 'pkdns' },
+						{ label: 'HTTP Relay', slug: 'http-relay' },
+						{ label: 'Homegate', slug: 'homegate' },
+						{ label: 'Pubky Noise', slug: 'pubky-noise' },
+						{ label: 'Paykit', slug: 'paykit' },
+					],
+				},
+				{
+					label: 'Reference',
+					collapsed: true,
+					items: [
+						{ label: 'Glossary', slug: 'glossary' },
+						{ label: 'Comparisons', slug: 'comparisons' },
+						{ label: 'Resources', slug: 'resources' },
+					],
 				},
 			],
 		}),

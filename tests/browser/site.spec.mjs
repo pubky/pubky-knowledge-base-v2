@@ -145,7 +145,7 @@ test('opens generated Markdown and copies its absolute URL with reset feedback',
   await expect(link).toHaveAttribute('href', '/getting-started.md');
   const markdown = await request.get(await link.getAttribute('href'));
   expect(markdown.ok()).toBeTruthy();
-  expect(await markdown.text()).toContain('title: "Getting Started"');
+  expect(await markdown.text()).toContain('title: "First Steps"');
 
   const button = actions.getByRole('button');
   await button.click();

@@ -1,5 +1,5 @@
 ---
-title: "Contributing to Pubky"
+title: "Contributing"
 ---
 
 :::caution[AI-Assisted Contributions]
