@@ -262,7 +262,8 @@ const icons = {
   <div class="image-card-sections">
     <section id="for-developers" class="home-section">
       <h2 class="home-section-title">
-        <a class="home-section-title-link" href="#for-developers">Development</a>
+        {/* Root-relative: llms-full.txt copies this heading, where a bare #for-developers has no matching "Development" anchor. */}
+        <a class="home-section-title-link" href={withBase('/#for-developers')}>Development</a>
       </h2>
       <div class="card-grid card-grid-3">
         <ImageCard
