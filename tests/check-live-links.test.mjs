@@ -4,7 +4,7 @@ import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'nod
 import { tmpdir } from 'node:os';
 import { delimiter, dirname, join } from 'node:path';
 import test, { before } from 'node:test';
-import { canRetryHttp1, checkLiveLinks, liveLinkExclusions, loadLiveLinkExceptions } from '../scripts/check-live-links.mjs';
+import { canRetryHttp1, checkLiveLinks, githubRawFallback, liveLinkExclusions, loadLiveLinkExceptions } from '../scripts/check-live-links.mjs';
 
 const siteUrl = 'https://knowledge.example.test';
 const pkdnsUrl = 'http://7fmjpcuuzf54hw18bsgi3zihzyh4awseeuq5tmojefaezjbd64cy/';
@@ -244,6 +244,57 @@ test('links missing the configured BASE_PATH prefix fail', (t) => {
 const http2Failure = { status: { text: 'Error', details: 'HTTP/2 protocol error. Connection closed.' } };
 const forbiddenFailure = { status: { text: '403 Forbidden', code: 403 } };
 const cachedFailure = { status: { text: 'Error (cached)' } };
+const unavailableFailure = { status: { text: '503 Service Unavailable', code: 503 } };
+
+test('GitHub raw fallback maps file links and validates supported line fragments', () => {
+  const url = 'https://github.com/pubky/pubky-core/blob/v0.6.0/docs/INSTALL.md';
+  const rawUrl = 'https://raw.githubusercontent.com/pubky/pubky-core/v0.6.0/docs/INSTALL.md';
+  for (const failure of [http2Failure, ...[403, 429, 500, 502, 503, 504].map((code) => ({ status: { code } }))]) {
+    for (const [fragment, lastLine] of [['', null], ['#L1', 1], ['#L5', 5], ['#L2-L5', 5]]) {
+      assert.deepEqual(githubRawFallback(url + fragment, [cachedFailure, failure, cachedFailure]),
+        { url: rawUrl, lastLine }, `${fragment}: ${JSON.stringify(failure)}`);
+    }
+  }
+});
+
+test('GitHub raw fallback declines unconfirmed failures and broken destinations', () => {
+  const url = 'https://github.com/pubky/pubky-core/blob/main/README.md';
+  for (const failures of [
+    [],
+    [cachedFailure],
+    [{ status: { code: 404, text: '404 Not Found' } }],
+    [unavailableFailure, { status: { code: 404, text: '404 Not Found' } }],
+    [forbiddenFailure, { status: { text: 'Cannot find fragment' } }],
+    [unavailableFailure, { status: { text: 'Connection timed out' } }],
+  ]) assert.equal(githubRawFallback(url, failures), null, JSON.stringify(failures));
+});
+
+test('GitHub raw fallback rejects other origins, unsafe paths, queries, and unsupported fragments', () => {
+  const url = 'https://github.com/pubky/pubky-core/blob/main/README.md';
+  for (const other of [
+    url.replace('https:', 'http:'),
+    url.replace('https:', 'ftp:'),
+    url.replace('github.com', 'github.com.evil.test'),
+    url.replace('github.com', 'raw.githubusercontent.com'),
+    url.replace('github.com', 'github.com:443'),
+    url.replace('github.com', 'github.com:8443'),
+    url.replace('github.com', 'user@github.com'),
+    url.replace('github.com', 'user:password@github.com'),
+    url.replace('/blob/', '/tree/'),
+    url.replace('/README.md', ''),
+    url.replace('/README.md', '/'),
+    url.replace('/README.md', '/docs//README.md'),
+    url.replace('/README.md', '/docs/../README.md'),
+    url.replace('/README.md', '/docs/./README.md'),
+    url.replace('/README.md', '/README%2emd'),
+    url.replace('/README.md', '/READ%20ME.md'),
+    `${url}?plain=1`,
+    `${url}?`,
+    ...['#', '#setup', '#L0', '#L-1', '#L1.5', '#L5-L2', '#L1-L0', '#L1-L2-L3',
+      '#L9007199254740992', '#L1-L9007199254740992'].map((fragment) => url + fragment),
+    'not a URL',
+  ]) assert.equal(githubRawFallback(other, [unavailableFailure]), null, other);
+});
 
 test('HTTP/1.1 fallback accepts HTTP/2 or 403 failures and their cached duplicates', () => {
   for (const failure of [http2Failure, forbiddenFailure]) {
@@ -281,7 +332,8 @@ test('HTTP/1.1 fallback rejects credentials, fragment checks, non-HTTP URLs, and
   }
 });
 
-function checkWithRetryReports(t, firstFailures, retryFailures, retrySuccesses, { curlStatus = 403, curlExitCode = 22 } = {}) {
+function checkWithRetryReports(t, firstFailures, retryFailures, retrySuccesses,
+  { curlStatus = 403, curlExitCode = 22, curlBody = '' } = {}) {
   const directory = mkdtempSync(join(tmpdir(), 'pubky-lychee-retry-test-'));
   t.after(() => rmSync(directory, { recursive: true, force: true }));
   const executable = join(directory, 'lychee.cjs');
@@ -292,8 +344,11 @@ function checkWithRetryReports(t, firstFailures, retryFailures, retrySuccesses, 
 const fs = require('node:fs');
 const callsFile = ${JSON.stringify(curlCallsFile)};
 const calls = JSON.parse(fs.readFileSync(callsFile, 'utf8'));
-calls.push(process.argv.slice(2));
+const args = process.argv.slice(2);
+calls.push(args);
 fs.writeFileSync(callsFile, JSON.stringify(calls));
+const output = args[args.indexOf('--output') + 1];
+if (args.includes('--output') && output !== '/dev/null') fs.writeFileSync(output, ${JSON.stringify(curlBody)});
 process.stdout.write(${JSON.stringify(String(curlStatus))});
 process.exitCode = ${JSON.stringify(curlExitCode)};
 `, { mode: 0o700 });
@@ -393,4 +448,76 @@ test('HTTP/1.1 fallback retains original diagnostics for 403, 404, and unsuccess
     assert.equal(curlCalls.length, 1);
     assert.deepEqual(report.failures, [{ ...failure, source: 'dist/index.html' }]);
   }
+});
+
+test('a fresh 404 prevents raw GitHub and HTTP/1.1 fallbacks from clearing an initial transport failure', (t) => {
+  for (const url of [
+    'https://github.com/pubky/pubky-core/blob/main/README.md',
+    'https://external.example/guide',
+  ]) {
+    const failure = { url, ...forbiddenFailure };
+    const { report, curlCalls } = checkWithRetryReports(t, [failure], [
+      { url, status: { text: '404 Not Found', code: 404 } },
+    ], [], { curlStatus: 200, curlExitCode: 0, curlBody: 'Present\n' });
+    assert.deepEqual(report.failures, [{ ...failure, source: 'dist/index.html' }]);
+    assert.deepEqual(curlCalls, [], 'A confirmed 404 must not be retried through a fallback.');
+  }
+});
+
+test('GitHub raw fallback recovers 503 and cached duplicates only after a successful bounded GET', (t) => {
+  const url = 'https://github.com/pubky/pubky-core/blob/v0.6.0/docs/INSTALL.md';
+  const failures = [{ url, ...unavailableFailure }, { url, ...cachedFailure }];
+  const { report, curlCalls } = checkWithRetryReports(t, failures, [{ url, ...cachedFailure }], [],
+    { curlStatus: 200, curlExitCode: 0, curlBody: 'Install\n' });
+  assert.deepEqual(report.failures, []);
+  assert.equal(curlCalls.length, 1);
+  const args = curlCalls[0];
+  assert.equal(args[args.indexOf('--url') + 1], 'https://raw.githubusercontent.com/pubky/pubky-core/v0.6.0/docs/INSTALL.md');
+  assert.ok(args.includes('--fail'));
+  assert.ok(!args.includes('--head') && !args.includes('-I'), 'Recovery requires fetching the file.');
+  assert.ok(!args.includes('--location') && !args.includes('-L'), 'Raw fallback must not follow redirects.');
+  assert.ok(Number(args[args.indexOf('--max-filesize') + 1]) > 0, 'Downloaded file size must be bounded.');
+  assert.notEqual(args[args.indexOf('--output') + 1], '/dev/null', 'Keep the body for line validation.');
+});
+
+test('GitHub line fragments recover only when every referenced line exists', (t) => {
+  for (const [fragment, curlBody, recovered] of [
+    ['#L5', '1\n2\n3\n4\n5\n', true],
+    ['#L2-L5', '1\n2\n3\n4\n5', true],
+    ['#L5', '1\n2\n3\n4\n', false],
+    ['#L2-L5', '1\n2\n3\n4', false],
+    ['#L1', '', false],
+    ['#L1', '\n', true],
+  ]) {
+    const failure = { url: `https://github.com/pubky/pubky-core/blob/main/README.md${fragment}`, ...unavailableFailure };
+    const { report, curlCalls } = checkWithRetryReports(t, [failure], [failure], [],
+      { curlStatus: 200, curlExitCode: 0, curlBody });
+    assert.equal(curlCalls.length, 1);
+    assert.deepEqual(report.failures, recovered ? [] : [{ ...failure, source: 'dist/index.html' }],
+      `${fragment}, body=${JSON.stringify(curlBody)}`);
+  }
+});
+
+test('GitHub raw fallback retains diagnostics for non-2xx responses and unsuccessful curl exits', (t) => {
+  const failure = { url: 'https://github.com/pubky/pubky-core/blob/main/README.md#L5', ...unavailableFailure, span: { line: 12 } };
+  for (const response of [
+    { curlStatus: 301, curlExitCode: 0 },
+    { curlStatus: 403, curlExitCode: 0 },
+    { curlStatus: 404, curlExitCode: 0 },
+    { curlStatus: 200, curlExitCode: 22 },
+    { curlStatus: 200, curlExitCode: 63 },
+  ]) {
+    const { report, curlCalls } = checkWithRetryReports(t, [failure], [failure], [],
+      { ...response, curlBody: '1\n2\n3\n4\n5\n' });
+    assert.equal(curlCalls.length, 1);
+    assert.deepEqual(report.failures, [{ ...failure, source: 'dist/index.html' }]);
+  }
+});
+
+test('GitHub ordinary anchors cannot recover through raw content', (t) => {
+  const failure = { url: 'https://github.com/pubky/pubky-core/blob/main/README.md#setup', ...forbiddenFailure };
+  const { report, curlCalls } = checkWithRetryReports(t, [failure], [failure], [],
+    { curlStatus: 200, curlExitCode: 0, curlBody: '# Setup\n' });
+  assert.deepEqual(curlCalls, []);
+  assert.deepEqual(report.failures, [{ ...failure, source: 'dist/index.html' }]);
 });

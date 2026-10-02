@@ -85,6 +85,52 @@ function retryHttp1(url, env) {
   return result.status === 0 && /^2\d\d$/.test(result.stdout.trim());
 }
 
+// GitHub's blob viewer can return 503 while the exact file is still available
+// from its raw host. Only retry failures consistent with request filtering or
+// temporary unavailability, never a confirmed missing file or fragment.
+export function githubRawFallback(url, failures) {
+  if (!URL.canParse(url)) return null;
+  const target = new URL(url);
+  if (target.origin !== 'https://github.com' || target.href !== url || target.username || target.password ||
+      url.includes('?') || url.endsWith('#')) return null;
+  const parts = target.pathname.slice(1).split('/');
+  if (parts.length < 5 || parts[2] !== 'blob' ||
+      parts.some((part) => !/^[A-Za-z0-9_.-]+$/.test(part) || part === '.' || part === '..')) return null;
+  const retryable = ({ status }) => [403, 429, 500, 502, 503, 504].includes(status.code) ||
+    status.details?.startsWith('HTTP/2 protocol error.');
+  if (!failures.some(retryable) ||
+      !failures.every((failure) => retryable(failure) || failure.status.text === 'Error (cached)')) return null;
+  let lastLine = null;
+  if (target.hash) {
+    // Raw responses cannot validate rendered Markdown headings. GitHub line
+    // anchors can be checked against the fetched file without losing the hash.
+    const lines = /^#L([1-9]\d*)(?:-L([1-9]\d*))?$/.exec(target.hash);
+    if (!lines) return null;
+    const firstLine = Number(lines[1]);
+    lastLine = Number(lines[2] || lines[1]);
+    if (!Number.isSafeInteger(firstLine) || !Number.isSafeInteger(lastLine) || lastLine < firstLine) return null;
+  }
+  const [owner, repo, , ref, ...path] = parts;
+  return { url: `https://raw.githubusercontent.com/${owner}/${repo}/${ref}/${path.join('/')}`, lastLine };
+}
+
+function retryGithubRaw(target, temporary, env) {
+  const bodyFile = join(temporary, 'github-raw');
+  rmSync(bodyFile, { force: true });
+  const result = spawnSync('curl', [
+    '--disable', '--http1.1', '--silent', '--show-error', '--fail',
+    '--proto', '=https', '--connect-timeout', '10', '--max-time', '30',
+    '--max-filesize', '5242880', '--output', bodyFile, '--write-out', '%{http_code}', '--url', target.url,
+  ], { encoding: 'utf8', timeout: 35_000, env });
+  // Do not follow redirects: verification must stay on the fixed raw host.
+  if (result.status !== 0 || !/^2\d\d$/.test(result.stdout.trim())) return false;
+  if (target.lastLine === null) return true;
+  const body = readFileSync(bodyFile, 'utf8');
+  if (body.includes('\0')) return false;
+  const lineCount = body.length ? body.split('\n').length - Number(body.endsWith('\n')) : 0;
+  return target.lastLine <= lineCount;
+}
+
 export function checkLiveLinks({
   distDir = resolve(projectRoot, 'dist'),
   siteUrl = process.env.SITE_URL || 'https://pubky.org',
@@ -153,6 +199,7 @@ export function checkLiveLinks({
       for (const entry of entries) failures.push({ ...entry, source: displaySource });
     }
     const recovered = new Set();
+    const retryFailures = [];
     if (!offline) {
       // Some hosts intermittently block a request (e.g. 403) without triggering
       // Lychee's built-in retries. Recheck only failed external URLs once, with
@@ -166,13 +213,21 @@ export function checkLiveLinks({
         writeFileSync(retryInputs, retryFile + '\n');
         // Lychee includes success_map only when detailed statistics are enabled.
         const retryReport = runLychee(retryInputs, true);
+        retryFailures.push(...Object.values(retryReport.error_map).flat(), ...Object.values(retryReport.timeout_map).flat());
         for (const entries of Object.values(retryReport.success_map)) {
           for (const { url } of entries) recovered.add(url);
         }
         if (recovered.size) console.log(`Live-link recheck passed for ${recovered.size} external URL(s).`);
       }
       for (const url of new Set(failures.map(({ url }) => url))) {
-        if (!recovered.has(url) && canRetryHttp1(url, failures.filter((failure) => failure.url === url)) && retryHttp1(url, env)) {
+        if (recovered.has(url)) continue;
+        // A later 404 or fragment error must veto a transport fallback too.
+        const evidence = [...failures, ...retryFailures].filter((failure) => failure.url === url);
+        const rawTarget = githubRawFallback(url, evidence);
+        if (rawTarget && retryGithubRaw(rawTarget, temporary, env)) {
+          recovered.add(url);
+          console.log(`GitHub raw-file check passed: ${url}`);
+        } else if (canRetryHttp1(url, evidence) && retryHttp1(url, env)) {
           recovered.add(url);
           console.log(`HTTP/1.1 check passed: ${url}`);
         }
