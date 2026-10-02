@@ -13,12 +13,8 @@ Use an authenticator you trust and request only the app permissions you need. Se
 ## Homeserver trust
 
 <span id="guarded-data"></span>
-<span id="guarded-data-planned"></span>
 
 Data under `/pub/` is public. Access to `/priv/` requires a session for the storage owner's identity and permissions covering the requested access. This is access control, not encryption: Homeserver administrators can still read and write tenant data. See [Private Storage](/private-storage/) for an overview and the [Private Storage guide](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/docs/PRIVATE_STORAGE.md) for access rules.
-
-<span id="encrypted-data"></span>
-<span id="encrypted-data-planned"></span>
 
 Applications can encrypt content before uploading it and manage decryption keys themselves. The Homeserver then stores ciphertext, while access patterns and data sizes remain visible. `/priv/` adds access control; it does not provide encryption or key management.
 

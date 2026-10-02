@@ -29,8 +29,6 @@ These choices do not eliminate trust in software or hosting providers. The [Secu
 
 The **Atomic Economy** extends these ideas into a broader vision of economic and social coordination. Start with [The Atomic Economy: Reclaiming Society from the Inside Out](https://medium.com/pubky/the-atomic-economy-reclaiming-society-from-the-inside-out-574504dfe326), then explore the original [essays and talks](/resources/#philosophical-foundations). These describe motivations and possibilities; [Architecture](/architecture/) explains the implemented components and their boundaries.
 
-<span id="where-to-start"></span>
-
 ## Quick Start
 
 - **Try Pubky:** [First Steps](/getting-started/) introduces the user journey.

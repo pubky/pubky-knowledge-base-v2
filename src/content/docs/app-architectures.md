@@ -12,8 +12,6 @@ Apps can define their own schemas and backends, or reuse [pubky.app](/pubky-app/
 | Custom backend | The app needs search, feeds, or relationships across many users. | Collecting relevant records, maintaining indexes, and serving queries. |
 | Shared aggregator | Several clients need the same indexed data. | Choosing a service whose coverage and filtering policies suit the app. |
 
-<span id="building-an-app"></span>
-
 ## Choosing a starting point
 
 Direct access is enough for the [Developer Guide](/developer-guide/): the app writes a record and knows where to read it. A feed across many users needs more work. Fetching every user's records in the browser can become expensive, and the client still needs to discover which records matter.
