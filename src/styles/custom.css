@@ -94,6 +94,7 @@
 	--announcement-accent: #b3d4fc;
 
 	/* AI landing page — extends the existing Pubky palette and type scale. */
+	--landing-panel-width: 540px;
 	--landing-touch-target: 44px;
 	--landing-border-width: 1px;
 	--landing-motion: 160ms;
