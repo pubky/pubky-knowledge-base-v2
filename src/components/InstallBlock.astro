@@ -394,13 +394,13 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
   .ai-icon[data-icon="grok"] { background-color: white; }
 
   /* ── Right column ── */
-  /* Keep the SDK above the resource card and align the card with the launcher. */
+  /* Keep the SDK above the resource card, both aligned with the page content edge. */
   .install-right {
     margin: 0;
     flex: 1;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-end;
     justify-content: flex-end;
     gap: var(--spacing-6);
     min-width: 0;
@@ -408,9 +408,10 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
   }
 
   /* ── Install terminal (Starlight Tabs) ── */
-  /* Figma: 500x140 terminal */
+  /* Share the resource card width while fitting the available column. */
   .install-terminal {
-    width: 500px;
+    width: var(--landing-panel-width);
+    max-width: 100%;
   }
 
   .install-terminal starlight-tabs > [role="tabpanel"] {
@@ -553,7 +554,7 @@ const installSectionBg = `--install-section-bg: url("${withBase('/images/bg-squa
     .install-right {
       padding: 0 0 var(--spacing-4);
       min-height: 0;
-      align-items: center;
+      align-items: flex-end;
       width: 100%;
     }
 
