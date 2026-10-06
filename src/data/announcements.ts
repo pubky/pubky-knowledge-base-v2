@@ -27,7 +27,7 @@ export const announcements: Announcement[] = [
       href: 'https://meet.google.com/xny-ztvd-zyk',
     },
     secondaryLink: {
-      label: 'Announcement on pubky.app',
+      label: 'Read the announcement',
       href: 'https://pubky.app/post/ihaqcthsdbk751sxctk849bdr7yz7a934qen5gmpcbwcur49i97y/0035REMNNEZ1G',
     },
   },
