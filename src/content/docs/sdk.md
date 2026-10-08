@@ -29,13 +29,22 @@ For example, an app can use a session to save a user's own data and public stora
 
 Native Rust clients prefer [PubkyTLS](/glossary/#pubkytls), which verifies the Homeserver's public key directly. If PKARR advertises an ICANN HTTPS endpoint, the SDK can use it when the direct endpoint is absent or fails its TCP reachability check. Browser clients reach public Homeservers through the ICANN HTTPS endpoint. ICANN connections use standard HTTPS certificate validation, so their trust depends on the conventional domain and certificate authorities.
 
+Native Rust clients can use the [HTTP client builder](https://docs.rs/pubky/latest/pubky/struct.PubkyHttpClientBuilder.html#method.add_root_certificates_pem) to trust additional certificate authorities for ICANN HTTPS.
+
 The native fallback concerns TCP reachability: a later TLS or request failure does not trigger it. See the SDK's [transport selection and tests](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-sdk/src/client/http_targets/native.rs) for the exact behavior. Native clients behind HTTPS proxies also have [reported discovery and routing limitations](https://github.com/pubky/pubky-homeserver/issues/657). For public connection setup, follow the [Homeserver Deployment Guide](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/docs/DEPLOY.md).
 
 ## Storage Locking
 
-Storage locks help applications coordinate updates to the same file on Homeservers that support WebDAV storage locks. Applications opt in through the Rust SDK's `SessionStorage` helpers; ordinary storage operations do not acquire locks automatically. The JavaScript bindings do not expose these helpers.
+Storage locks help applications coordinate updates to the same file on Homeservers that support WebDAV storage locks. Applications opt in through the SDK's `SessionStorage` helpers; ordinary storage operations do not acquire locks automatically.
 
-The application manages the lock lifecycle and retries; the SDK handles requests and lock tokens. The Homeserver keeps a lock alive during a write made with it. See the [Rust storage-lock example](https://docs.rs/pubky/latest/pubky/struct.StorageLock.html#example) and [lock API](https://docs.rs/pubky/latest/pubky/struct.SessionStorage.html#method.lock) for usage and renewal behavior, and the Locking section of the [client OpenAPI specification](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-homeserver/openapi-client.yml) for protocol guarantees and limitations.
+The application manages the lock lifecycle and retries; the SDK handles requests and lock tokens. The Homeserver keeps a lock alive during a write made with it.
+
+For usage and renewal details:
+
+- JavaScript: [storage-lock example](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-sdk/bindings/js/pkg/README.md#sessionstorage-readwrite) and [lock API](https://pubky.github.io/pubky-homeserver/js-sdk-typedoc/classes/SessionStorage.html#lock).
+- Rust: [storage-lock example](https://docs.rs/pubky/latest/pubky/struct.StorageLock.html#example) and [lock API](https://docs.rs/pubky/latest/pubky/struct.SessionStorage.html#method.lock).
+
+The Locking section of the [client OpenAPI specification](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-homeserver/openapi-client.yml) describes protocol guarantees and limitations.
 
 ## Build and explore
 
