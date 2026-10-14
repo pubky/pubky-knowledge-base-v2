@@ -8,7 +8,7 @@ The most valuable contribution to Pubky is an app people can use. Every new app 
 
 Start with the [Developer Guide](/developer-guide/). It walks you through running a local Homeserver, installing the SDK, and building a first app that signs a user in and reads and writes their data. It ends with the [app templates](https://pubky.github.io/pubky-app-templates/), a working project to grow from.
 
-Share what you build in [Telegram](https://t.me/pubkycore). Apps ready for others to use can be listed under [Community Projects](/resources/#community-projects).
+Share what you build in [Telegram](https://t.me/pubkychat). Apps ready for others to use can be listed under [Community Projects](/resources/#community-projects).
 
 ## Report bugs and request features
 

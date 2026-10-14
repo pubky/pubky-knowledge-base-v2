@@ -392,7 +392,7 @@ export default defineConfig({
 				{ icon: 'github', label: 'GitHub', href: 'https://github.com/pubky' },
 				{ icon: 'youtube', label: 'YouTube', href: 'https://www.youtube.com/channel/UCyNruUjynpzvQXNTxbJBLmg' },
 				{ icon: 'x.com', label: 'X', href: 'https://x.com/getpubky' },
-				{ icon: 'telegram', label: 'Telegram', href: 'https://t.me/pubkycore' },
+				{ icon: 'telegram', label: 'Telegram', href: 'https://t.me/pubkychat' },
 			],
 			sidebar: [
 				{
