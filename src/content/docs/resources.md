@@ -106,7 +106,7 @@ Essays, talks, and resources exploring the vision, principles, and philosophy be
 ### Essays & Manifestos
 
 - [The Age of Social Intelligence](https://pubky.app/post/gujx6qd8ksydh1makdphd3bxu351d9b8waqka8hfg6q7hnqkxexo/0034WADK62XRG) (03/29/2026) — Why social intelligence is the missing layer as AI scales, and the Semantic Social Graph as open cognitive infrastructure
-- [Nostr vs Pubky: The Basics](https://pubky.app/post/gujx6qd8ksydh1makdphd3bxu351d9b8waqka8hfg6q7hnqkxexo/0034M0VM2ETV0) — John Carvalho compares the protocols' approaches to identity, discovery, and data ownership
+- [Nostr vs Pubky: The Basics](https://pubky.app/post/gujx6qd8ksydh1makdphd3bxu351d9b8waqka8hfg6q7hnqkxexo/0034M0VM2ETV0) — BitcoinErrorLog compares the protocols' approaches to identity, discovery, and data ownership
 - [How to Fix Spam, Bots, and AI Slop on the World Wide Web](https://howtofixtheweb.com) (03/16/2026) — The Semantic Social Graph as the real algorithm to replace centralized feed curation
 - [Opening Pubky](https://medium.com/pubky/opening-pubky-4bdca7dc4c77) (01/30/2026) — The public launch, portable identity, and building apps around user-owned data
 - [Building Blocks for the Atomic Economy](https://medium.com/pubky/building-blocks-for-the-atomic-economy-aeeba8ccde8e) (10/17/2025) — How each technical primitive maps to a philosophical principle of sovereignty
