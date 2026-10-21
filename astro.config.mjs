@@ -41,7 +41,7 @@ export default defineConfig({
 		},
 		'/troubleshooting/': {
 			status: 301,
-			destination: '/contributing/#code-and-bug-reports',
+			destination: '/contributing/#report-bugs-and-request-features',
 		},
 		'/explore/pubky-apps/eli5/': {
 			status: 301,
