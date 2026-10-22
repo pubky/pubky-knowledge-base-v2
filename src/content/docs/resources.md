@@ -80,7 +80,7 @@ All under [github.com/pubky](https://github.com/pubky):
 ## Community Channels
 
 - [Pubky on pubky.app](https://pubky.app/profile/ihaqcthsdbk751sxctk849bdr7yz7a934qen5gmpcbwcur49i97y) — Official Pubky profile
-- [Telegram: pubkycore](https://t.me/pubkycore) — Community chat
+- [Telegram: pubkychat](https://t.me/pubkychat) — Community chat
 - [Discord](https://discord.gg/DxTBJXvJxn) — Developer community
 - [X/Twitter: @getpubky](https://x.com/getpubky) — Official updates
 - [YouTube](https://www.youtube.com/channel/UCyNruUjynpzvQXNTxbJBLmg) — Tutorials, demos, roundtables, presentations

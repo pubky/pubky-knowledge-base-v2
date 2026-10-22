@@ -194,7 +194,7 @@ Browsers may search instead of resolve domains:
 - **Docker Image**: [https://hub.docker.com/r/synonymsoft/pkdns](https://hub.docker.com/r/synonymsoft/pkdns)
 - **Public Servers**: [servers.txt](https://github.com/pubky/pkdns/blob/master/servers.txt)
 - **Zone Explorer**: [https://pkdns.net](https://pkdns.net)
-- **Telegram Chat**: [https://t.me/pubkycore](https://t.me/pubkycore)
+- **Telegram Chat**: [https://t.me/pubkychat](https://t.me/pubkychat)
 
 ### Documentation
 

@@ -41,7 +41,7 @@ export default defineConfig({
 		},
 		'/troubleshooting/': {
 			status: 301,
-			destination: '/contributing/#code-and-bug-reports',
+			destination: '/contributing/#report-bugs-and-request-features',
 		},
 		'/explore/pubky-apps/eli5/': {
 			status: 301,
@@ -392,7 +392,7 @@ export default defineConfig({
 				{ icon: 'github', label: 'GitHub', href: 'https://github.com/pubky' },
 				{ icon: 'youtube', label: 'YouTube', href: 'https://www.youtube.com/channel/UCyNruUjynpzvQXNTxbJBLmg' },
 				{ icon: 'x.com', label: 'X', href: 'https://x.com/getpubky' },
-				{ icon: 'telegram', label: 'Telegram', href: 'https://t.me/pubkycore' },
+				{ icon: 'telegram', label: 'Telegram', href: 'https://t.me/pubkychat' },
 			],
 			sidebar: [
 				{
