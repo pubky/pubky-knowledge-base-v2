@@ -1,5 +1,5 @@
 ---
-title: "Get Started with Pubky"
+title: "First Steps"
 description: "Try Pubky as a user: create an identity with Pubky Ring, sign in to pubky.app, explore your public data, and back up what you publish."
 ---
 

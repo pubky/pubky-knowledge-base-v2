@@ -1,5 +1,5 @@
 ---
-title: "Pubky Compared with Other Protocols"
+title: "Comparisons"
 description: "Compare Pubky with Solid, remoteStorage, Peergos, Nostr, AT Protocol, and peer-to-peer platforms across identity, storage, and data portability."
 ---
 

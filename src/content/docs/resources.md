@@ -1,5 +1,5 @@
 ---
-title: "Pubky Ecosystem Resources"
+title: "Resources"
 description: "Find Pubky applications, documentation, developer tools, repositories, packages, and community channels in one ecosystem directory."
 ---
 
