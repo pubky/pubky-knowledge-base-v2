@@ -1,5 +1,6 @@
 ---
 title: "Security Model"
+description: "Understand Pubky's trust boundaries: identity key custody, Homeserver access to data, discovery availability, and transport security."
 ---
 
 Pubky separates identity from hosting, but applications still depend on key custody, Homeserver behavior, and network availability. [Credible exit](/credible-exit/) reduces dependence on a provider; it does not remove these trust boundaries.

@@ -1,5 +1,6 @@
 ---
 title: "PKARR"
+description: "Learn how PKARR connects public-key identities to signed service discovery records, letting Pubky users change hosting without changing identity."
 ---
 
 [PKARR](https://github.com/pubky/pkarr) (Public-Key Addressable Resource Records) associates a public key with signed discovery records. In Pubky, these records connect a user's identity to their Homeserver, so the identity can stay the same when the hosting location changes.

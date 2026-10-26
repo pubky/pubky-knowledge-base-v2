@@ -1,5 +1,6 @@
 ---
 title: "Credible Exit"
+description: "Understand credible exit in Pubky: keeping your identity, data, and connections when leaving a provider, and what makes migration practical."
 ---
 
 **Credible Exit** is the ability to leave a platform or service without losing access to your data, identity, or connections, ensuring full user control and portability.

@@ -1,5 +1,6 @@
 ---
 title: "pubky-app-specs"
+description: "Explore the shared schemas for Pubky social apps, including profiles, posts, tags, and relationships, and how to reuse them with SDKs and Nexus."
 ---
 
 [pubky-app-specs](https://github.com/pubky/pubky-app-specs) defines shared data models for the Pubky 'social' app ecosystem, with [pubky.app](/pubky-app/) as the reference implementation.

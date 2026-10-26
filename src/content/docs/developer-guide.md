@@ -1,5 +1,6 @@
 ---
 title: "Developer Guide"
+description: "Build your first Pubky app with a local testnet and the JavaScript SDK. Create an identity, sign in, and write and read a JSON file."
 ---
 
 ```mermaid

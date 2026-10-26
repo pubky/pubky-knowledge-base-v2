@@ -1,5 +1,6 @@
 ---
 title: "System Architecture"
+description: "See how public-key identity, PKARR discovery, Homeserver storage, and applications fit together in the Pubky architecture."
 ---
 
 This page provides a comprehensive overview of the Pubky ecosystem architecture, showing how all components work together to enable decentralized, censorship-resistant applications.

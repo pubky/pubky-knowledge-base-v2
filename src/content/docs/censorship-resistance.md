@@ -1,5 +1,6 @@
 ---
 title: "Censorship"
+description: "Explore how Pubky separates identity from hosting to help users respond to censorship, and understand the limits of migration and backups."
 ---
 
 **Censorship** is the suppression or control of speech, communication, or information by a governing body or authority, often resulting in a lack of free expression and limited user autonomy.

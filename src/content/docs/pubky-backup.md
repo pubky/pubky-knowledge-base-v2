@@ -1,5 +1,6 @@
 ---
 title: "Pubky Backup"
+description: "Keep local copies and snapshots of published Pubky Homeserver data. Learn what Pubky Backup protects and how it differs from identity key backup."
 ---
 
 **[Pubky Backup](https://github.com/pubky/pubky-backup)** is the desktop backup app for maintaining a local copy of published Homeserver data. It helps preserve access to your files if your hosting provider becomes unavailable or you decide to leave.

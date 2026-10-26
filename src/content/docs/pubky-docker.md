@@ -1,5 +1,6 @@
 ---
 title: "Pubky Docker"
+description: "Run a local Pubky testnet for app development and experimentation, with Homeserver, discovery, authentication, and social components."
 ---
 
 **[Pubky Docker](https://github.com/pubky/pubky-docker)** runs a full local Pubky environment, including Pubky Homeserver, Homegate, and the Pubky 'social' components Pubky Nexus and pubky.app.

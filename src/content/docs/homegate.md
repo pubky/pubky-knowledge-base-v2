@@ -1,5 +1,6 @@
 ---
 title: "Homegate"
+description: "Learn how Homegate controls signup to Pubky Homeservers and where to find its configuration, verification providers, and API specification."
 ---
 
 **[Homegate](https://github.com/pubky/homegate)** is a backend service that manages and controls signups for [Pubky Homeservers](/homeserver/). Pubky's social app uses it during onboarding; the enabled verification methods depend on the operator's configuration.

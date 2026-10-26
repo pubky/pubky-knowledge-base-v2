@@ -1,5 +1,6 @@
 ---
 title: "Contributing"
+description: "Find out how to contribute to Pubky, report bugs and security issues, and join the community to ask questions and share your work."
 ---
 
 :::caution[AI-Assisted Contributions]

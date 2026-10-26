@@ -1,5 +1,6 @@
 ---
 title: "Overview"
+description: "Learn what Pubky is, why it separates identity from hosting, and how public keys, PKARR, and Homeservers let apps work with user-controlled data."
 ---
 
 ## What is Pubky?

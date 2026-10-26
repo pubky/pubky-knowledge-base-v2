@@ -1,5 +1,6 @@
 ---
 title: "Pubky Explorer"
+description: "Browse public Pubky Homeserver files by public key or Pubky URI, inspect JSON records, and check data written by apps on mainnet or testnet."
 ---
 
 **Pubky Explorer** is a web-based file browser for exploring public data stored on [Pubky Homeservers](/homeserver/). It is useful for inspecting the files behind an app's view of that data.

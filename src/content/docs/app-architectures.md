@@ -1,5 +1,6 @@
 ---
 title: "App Architectures"
+description: "Choose how your Pubky app reads user data: directly from Homeservers, through a custom backend, or with a shared indexer such as Nexus."
 ---
 
 Pubky applications use the [Pubky protocol](/overview/) for identity and data storage. Users publish records to their Homeservers; apps choose how to read them according to the queries they need. Writing a user's records still goes through their Homeserver, whichever read approach the app uses.
