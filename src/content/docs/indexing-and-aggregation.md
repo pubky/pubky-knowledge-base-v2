@@ -1,5 +1,6 @@
 ---
 title: "Indexing & Aggregation"
+description: "Learn how Pubky applications collect and index public Homeserver records to serve feeds, search, and other views across users."
 ---
 
 Homeservers store records under individual users' identities. A social feed needs to connect those records: which posts were written by people you follow, which replies belong to a conversation, or which resources carry a particular tag.

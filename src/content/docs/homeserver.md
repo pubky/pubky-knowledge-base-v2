@@ -1,5 +1,6 @@
 ---
 title: "Homeserver"
+description: "Understand how a Pubky Homeserver stores user data, how apps discover and access it, and where to find installation, deployment, and API guides."
 ---
 
 [A Homeserver](https://github.com/pubky/pubky-homeserver) stores and serves data for Pubky users. Users self-host their Homeserver or choose a provider. [PKARR](/pkarr/) lets applications discover the Homeserver from the user's public key.

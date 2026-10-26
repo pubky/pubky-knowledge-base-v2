@@ -1,5 +1,6 @@
 ---
 title: "Paykit"
+description: "Explore Paykit, an experimental protocol built on Pubky for payment discovery, private coordination, and encrypted receipts across payment methods."
 ---
 
 > ⚠️ **NOTE**: [Paykit](https://github.com/pubky/paykit-rs) is currently under active development and is **NOT production-ready**. The protocol and implementation are subject to significant changes. Integration work in Bitkit serves as a testbed for protocol development.

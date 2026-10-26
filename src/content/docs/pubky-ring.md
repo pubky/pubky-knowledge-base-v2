@@ -1,5 +1,6 @@
 ---
 title: "Pubky Ring"
+description: "Use Pubky Ring to manage your identity keys, approve app access, and back up your identity. Find downloads and developer integration guides."
 ---
 
 Pubky Ring is the key manager and identity application for the Pubky ecosystem. It holds your identity keys and lets you approve access requests from apps.

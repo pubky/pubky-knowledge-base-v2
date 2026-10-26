@@ -1,5 +1,6 @@
 ---
 title: "Mainline DHT"
+description: "Understand how Pubky uses BitTorrent's Mainline DHT for signed service discovery through PKARR, including network reachability considerations."
 ---
 
 Pubky uses BitTorrent's Mainline distributed hash table through [PKARR](/pkarr/) to discover where a public key's services are hosted. Application data lives on [Homeservers](/homeserver/); the DHT holds the discovery records.

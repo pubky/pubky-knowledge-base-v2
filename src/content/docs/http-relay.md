@@ -1,5 +1,6 @@
 ---
 title: "HTTP Relay"
+description: "Understand the HTTP Relay's role in delivering encrypted grants between Pubky apps and authenticators during sign-in."
 ---
 
 [HTTP relay](https://github.com/pubky/http-relay) service for forwarding encrypted grants during Pubky [authentication](/authentication/) flows.

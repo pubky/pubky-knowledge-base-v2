@@ -1,5 +1,6 @@
 ---
 title: "Private Storage"
+description: "Understand Pubky Homeserver private storage, its access controls, and why applications must encrypt data to keep it confidential from the operator."
 ---
 
 Apps can use `/priv/` on a [Homeserver](/homeserver/) for non-public, user-specific data, such as preferences or drafts. This keeps app state attached to the user's Pubky identity without publishing it for everyone to read. Private storage controls who can access the data; it does not encrypt it. The Homeserver can still read the contents unless the app encrypts them.

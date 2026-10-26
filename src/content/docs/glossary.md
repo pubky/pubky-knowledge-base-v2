@@ -1,5 +1,6 @@
 ---
-title: "Glossary"
+title: "Pubky Glossary"
+description: "Look up Pubky terms, including Homeservers, PKARR, grants, public-key identities, and the semantic social graph."
 ---
 
 Quick reference for terms used throughout the Pubky ecosystem.

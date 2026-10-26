@@ -1,5 +1,6 @@
 ---
 title: "PKDNS"
+description: "Learn how PKDNS resolves public-key domains through PKARR and the Mainline DHT, connecting decentralized discovery with standard DNS clients."
 ---
 
 **[PKDNS](https://github.com/pubky/pkdns)** is a DNS server that enables self-sovereign and censorship-resistant domain names by resolving [PKARR](/pkarr/) (Public Key Addressable Resource Records) hosted on the [Mainline DHT](/mainline-dht/). It bridges the gap between traditional DNS infrastructure and public key-based domains, allowing clients configured to use it to access the decentralized web using standard DNS protocols.

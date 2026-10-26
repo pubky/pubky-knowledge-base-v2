@@ -1,5 +1,6 @@
 ---
 title: "Authentication"
+description: "Learn how Pubky apps request scoped Homeserver access through grants, authenticators, and SDK sessions without receiving a user's identity key."
 ---
 
 Pubky apps request scoped access to a user's Homeserver through grant authentication. A key manager such as [Pubky Ring](/pubky-ring/) lets the user approve the request without giving the app their identity key.

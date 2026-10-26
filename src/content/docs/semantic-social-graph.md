@@ -1,5 +1,6 @@
 ---
 title: "Semantic Social Graph"
+description: "Learn how Pubky represents follows, tags, replies, and other labeled relationships, and how Nexus uses them to build contextual social views."
 ---
 
 A semantic social graph goes beyond simple follow/friend connections. Every link between users and content is stored as a labeled edge, so the graph preserves not just *that* two things are connected but *how*.

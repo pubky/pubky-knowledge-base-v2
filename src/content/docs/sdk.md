@@ -1,5 +1,6 @@
 ---
 title: "Pubky SDK"
+description: "Find Pubky SDK guides and API references for JavaScript, Rust, and mobile apps, with an overview of discovery, authentication, and storage."
 ---
 
 The Pubky SDK handles Homeserver discovery, authentication, and storage access for applications. Start with the guide for your platform; each implementation maintains its own API and integration instructions.

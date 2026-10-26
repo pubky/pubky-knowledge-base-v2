@@ -1,5 +1,6 @@
 ---
-title: "Comparisons"
+title: "Pubky Compared with Other Protocols"
+description: "Compare Pubky with Solid, remoteStorage, Peergos, Nostr, AT Protocol, and peer-to-peer platforms across identity, storage, and data portability."
 ---
 
 Pubky combines public-key identity, signed service discovery through [PKARR](https://github.com/pubky/pkarr), and mutable files on a user-chosen [Homeserver](https://github.com/pubky/pubky-homeserver). This is useful when building a web app whose users should keep their identity and data independently of the app's operator.

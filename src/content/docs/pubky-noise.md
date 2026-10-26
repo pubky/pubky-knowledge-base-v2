@@ -1,5 +1,6 @@
 ---
 title: "Pubky Noise"
+description: "Explore Pubky Noise, a library under development for encrypted communication between Pubky identities through Homeserver storage."
 ---
 
 [Pubky Noise](https://github.com/pubky/pubky-noise) is a library under development for encrypted communication through [Homeservers](/homeserver/). It lets applications exchange encrypted messages through hosted storage without requiring both participants to be online together.

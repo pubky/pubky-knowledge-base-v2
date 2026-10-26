@@ -1,5 +1,6 @@
 ---
 title: "pubky.app"
+description: "Explore pubky.app, the Pubky social reference app, and how it combines Homeserver records, tags, feeds, and the Nexus indexer."
 ---
 
 [pubky.app](https://pubky.app) is a social application and reference implementation built on the [Pubky protocol](/overview/). People publish posts, follow one another, and discover content through feeds and tags. Developers can study how it combines user-controlled storage with an indexed social graph and a responsive web interface.
