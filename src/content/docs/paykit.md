@@ -23,7 +23,7 @@ An identity's App Registry lists its participating Paykit-enabled payment soluti
 
 ### Private payment coordination
 
-Paykit apps can establish an Encrypted Link between two identities. Over this link, a payee can share a Private Payment List containing receiving details for that counterparty. The payee can keep those details separate from the payment methods they publish publicly.
+Paykit-enabled payment solutions can establish an Encrypted Link between two identities. Over this link, a payee can share a Private Payment List containing receiving details for that counterparty. The payee can keep those details separate from the payment methods they publish publicly.
 
 ### Payment requests and allowances
 
