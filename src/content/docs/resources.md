@@ -26,6 +26,7 @@ A curated directory of websites, applications, repositories, packages, and commu
 ## Live Applications
 
 - [pubky.app](https://pubky.app/) — Decentralized social media app ([source](https://github.com/pubky/pubky-app))
+- [Pubky Market](https://shop.pubky.app/) — Shops, listings, and seller-direct checkout on Pubky ([overview](/pubky-market/), [source](https://github.com/pubky/pubky-marketplace))
 - [mypubky.com](https://mypubky.com/) — Shareable bio page for your profile, links, posts, and payment options ([source](https://github.com/pubky/mypubky))
 - [pubkyring.app](https://pubkyring.app/) — Pubky Ring key manager ([source](https://github.com/pubky/pubky-ring))
 - [passport.pubky.app](https://passport.pubky.app/) — Pubky Passport browser signer with Google sign-in and encrypted recovery backups ([source](https://github.com/pubky/pubky-passport))
