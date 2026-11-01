@@ -5,7 +5,7 @@ description: "Learn how Paykit uses Pubky identities to discover payment details
 
 ## Overview
 
-[Paykit](https://paykit.to/) is an open payment coordination protocol built on Pubky. Wallets and services use a recipient's Pubky identity to discover receiving details and exchange private payment requests, proofs, and encrypted receipts. Funds move through the payment method the wallet chooses, such as Bitcoin on-chain or Lightning.
+[Paykit](https://paykit.to/) is an open payment coordination protocol built on Pubky. Wallets and services use a recipient's Pubky identity to discover receiving details and exchange private payment requests, proofs, and encrypted receipts. Funds move through the payment method the wallet chooses, such as Bitcoin on-chain, Lightning, or USDT.
 
 ## Core concept
 
