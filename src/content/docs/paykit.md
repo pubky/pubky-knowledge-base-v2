@@ -19,7 +19,7 @@ Paykit uses Pubky Homeservers for payment data and [Pubky Noise](/pubky-noise/) 
 
 ### Public payment details
 
-An identity's App Registry lists its participating Paykit apps. Each app publishes its own payment endpoints: identifiers and receiving details for the payment methods it supports. A payer's wallet discovers these endpoints and determines which methods it can use. Anyone who knows the payee's Pubky public key can read the public details. See the [protocol overview](https://github.com/pubky/paykit-rs#pubky-routing) for discovery and data organization.
+An identity's App Registry lists its participating Paykit-enabled payment solutions. Each solution publishes its own payment endpoints: identifiers and receiving details for the payment methods it supports. A payer's wallet discovers these endpoints and determines which methods it can use. Anyone who knows the payee's Pubky public key can read the public details. See the [protocol overview](https://github.com/pubky/paykit-rs#pubky-routing) for discovery and data organization.
 
 ### Private payment coordination
 
