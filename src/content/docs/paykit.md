@@ -3,8 +3,6 @@ title: "Paykit"
 description: "Learn how Paykit uses Pubky identities to discover payment details and coordinate private requests, allowances, and encrypted receipts."
 ---
 
-> ⚠️ **Experimental**: Paykit is not for production use. Review the [release notes](https://github.com/pubky/paykit-rs/releases/latest) for integration requirements and known limitations before evaluating it.
-
 ## Overview
 
 [Paykit](https://paykit.to/) is an open payment coordination protocol built on Pubky. Wallets and services use a recipient's Pubky identity to discover receiving details and exchange private payment requests, proofs, and encrypted receipts. Funds move through the payment method the wallet chooses, such as Bitcoin on-chain or Lightning.
@@ -47,7 +45,7 @@ Paykit does not move funds, custody spending keys, or choose the final payment r
 
 ## Current status
 
-The implementation provides a stateless Rust protocol library, a stateful SDK, and Swift and Kotlin bindings. [Bitkit](https://bitkit.to/) integrates Paykit for contact payments. Available features and payment methods depend on the app; the experimental status applies even though packages have been released.
+Paykit is used in production in [Bitkit](https://bitkit.to/) for contact payments. The implementation provides a stateless Rust protocol library, a stateful SDK, and Swift and Kotlin bindings. Available features and payment methods depend on the app.
 
 If you're evaluating an integration, choose the resource that matches your role:
 
