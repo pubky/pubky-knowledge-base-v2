@@ -26,8 +26,6 @@ Publishing a listing and completing a sale are separate actions. A transaction s
 
 Payments go to the seller; Pubky Market does not custody funds or send refunds from a platform balance. Buyers and sellers still rely on the chosen payment method, the seller's fulfillment, and the transaction service's order decisions. Keeping a public catalog on a Homeserver does not make every commerce action independent of services.
 
-Available checkout methods depend on the seller and deployment. Use the live app's checkout for the options offered on a particular purchase.
-
 ## Explore or build
 
 - **Try Pubky Market:** [Open Pubky Market](https://shop.pubky.app/) to browse shops and listings.
