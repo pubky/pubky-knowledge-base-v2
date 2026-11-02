@@ -24,7 +24,7 @@ Publishing a listing and completing a sale are separate actions. A transaction s
 
 ## Payments and trust
 
-Payments go to the seller; Pubky Market does not custody funds or send refunds from a platform balance. Buyers and sellers still rely on the chosen payment method, the seller's fulfillment, and the transaction service's order decisions. Keeping a public catalog on a Homeserver does not make every commerce action independent of services.
+Payments go to the seller; Pubky Market does not custody funds or send refunds from a platform balance. Buyers and sellers still rely on the chosen payment method, the seller's fulfillment, and the transaction service's order decisions.
 
 ## Explore or build
 
