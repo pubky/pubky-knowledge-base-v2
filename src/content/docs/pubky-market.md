@@ -1,9 +1,9 @@
 ---
 title: "Pubky Market"
-description: "Learn how Pubky Market combines user-owned shops and listings with seller-direct payments and coordinated orders."
+description: "Learn how Pubky Market combines user-owned shops and listings with direct payments to sellers and coordinated orders."
 ---
 
-[Pubky Market](https://shop.pubky.app/) adds shops, listings, and seller-direct checkout to Pubky. Sellers publish a catalog under their Pubky identity, and buyers discover products, pay sellers, and follow their orders. Market supports physical and digital goods, with sale formats such as fixed-price listings, auctions, and timed releases called drops.
+[Pubky Market](https://shop.pubky.app/) adds shops and product listings to Pubky, with buyers paying sellers directly. Sellers publish a catalog under their Pubky identity, and buyers discover products and follow their orders. Market supports physical and digital goods, with sale formats such as fixed-price listings, auctions, and timed releases called drops.
 
 ## How Market uses Pubky
 
