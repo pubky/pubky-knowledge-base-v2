@@ -30,7 +30,7 @@ Available checkout methods depend on the seller and deployment. Use the live app
 
 ## Explore or build
 
-- **Try Pubky Market:** Open the app linked above to browse shops and listings.
+- **Try Pubky Market:** [Open Pubky Market](https://shop.pubky.app/) to browse shops and listings.
 - **Work on the client:** Start with the [developer onboarding guide](https://github.com/pubky/pubky-marketplace/blob/master/docs/ecommerce/onboarding.md).
 - **Build compatible records:** Use [Pubky Market Specs](https://github.com/pubky/pubky-market-specs) for the data model and Rust and JavaScript libraries.
 - **Integrate order operations:** Read the [transaction service](https://github.com/pubky/pubky-marketplace-service) and its linked seller-automation API reference.
