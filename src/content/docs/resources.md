@@ -49,6 +49,7 @@ All under [github.com/pubky](https://github.com/pubky):
 - [pkdns](https://github.com/pubky/pkdns) — DNS server resolving pkarr self-sovereign domains
 - [pkdns-resolver-extension](https://github.com/pubky/pkdns-resolver-extension) — Browser extension for PKDNS resolution
 - [homegate](https://github.com/pubky/homegate) — Gateway service
+- [Pubky Locks](https://github.com/pubky/locks) — Access control for creator-owned content ([overview](/pubky-locks/))
 - [pubky-docker](https://github.com/pubky/pubky-docker) — Local Pubky stack for development and experimentation on testnet
 - [umbrel-app-store](https://github.com/pubky/umbrel-app-store) — Install your own Pubky Homeserver on your Umbrel node
 - [pubky-cli](https://github.com/pubky/pubky-cli) — Command-line companion for interacting with Pubky homeservers

@@ -447,6 +447,7 @@ export default defineConfig({
 						{ label: 'Homegate', slug: 'homegate' },
 						{ label: 'Pubky Noise', slug: 'pubky-noise' },
 						{ label: 'Paykit', slug: 'paykit' },
+						{ label: 'Pubky Locks', slug: 'pubky-locks' },
 					],
 				},
 				{
