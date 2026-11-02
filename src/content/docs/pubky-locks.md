@@ -5,7 +5,7 @@ description: "Learn how Pubky Locks gives viewers access to creator-owned conten
 
 [Pubky Locks](https://github.com/pubky/locks) lets creators charge for access to content stored on their own [Homeserver](/homeserver/). A public content lock describes the access criteria, and a Lock Server checks whether a viewer satisfies them before serving the guarded content.
 
-[pubky.app](/pubky-app/) uses Locks for paid posts and articles. Creators publish a public teaser; viewers pay with a [Paykit](/paykit/)-enabled wallet to unlock the content. Availability of paid unlocks depends on the deployment and your region. The [pubky.app Locks guide](https://github.com/pubky/pubky-app/blob/dev/docs/locks.md) explains the integration and availability checks.
+[pubky.app](/pubky-app/) uses Locks for paid posts and articles. Creators publish a public teaser; viewers pay with a [Paykit](/paykit/)-enabled wallet (like [Bitkit](https://bitkit.to/)) to unlock the content. Availability of paid unlocks depends on the deployment and your region. The [pubky.app Locks guide](https://github.com/pubky/pubky-app/blob/dev/docs/locks.md) explains the integration and availability checks.
 
 ## How a paid unlock works
 
