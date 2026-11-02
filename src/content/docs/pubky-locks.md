@@ -5,7 +5,7 @@ description: "Learn how Pubky Locks gives viewers access to creator-owned conten
 
 [Pubky Locks](https://github.com/pubky/locks) lets creators charge for access to content stored on their own [Homeserver](/homeserver/). A public content lock describes the access criteria, and a Lock Server checks whether a viewer satisfies them before serving the guarded content.
 
-[pubky.app](/pubky-app/) uses Locks for paid posts and articles. Creators publish a public teaser; viewers pay with Bitkit to unlock the content. Availability of paid unlocks depends on the deployment and your region. The [pubky.app Locks guide](https://github.com/pubky/pubky-app/blob/dev/docs/locks.md) explains the integration and availability checks.
+[pubky.app](/pubky-app/) uses Locks for paid posts and articles. Creators publish a public teaser; viewers pay with a [Paykit](/paykit/)-enabled wallet to unlock the content. Availability of paid unlocks depends on the deployment and your region. The [pubky.app Locks guide](https://github.com/pubky/pubky-app/blob/dev/docs/locks.md) explains the integration and availability checks.
 
 ## How a paid unlock works
 
@@ -13,7 +13,7 @@ A paid article illustrates the roles of Pubky, Locks, and [Paykit](/paykit/):
 
 1. **Publish the content.** The creator authorizes a Lock Server to work with their content. The guarded article and its files stay on the creator's Homeserver. A public content lock records the price and identifies the guarded resources.
 2. **Share a preview.** A public teaser points viewers to the content lock without exposing the article itself.
-3. **Pay from a wallet.** The viewer starts an unlock request and pays through Bitkit. Paykit coordinates the payment request, and Paykit Server checks the payment. Available payment methods depend on the creator and server configuration.
+3. **Pay from a wallet.** The viewer starts an unlock request and pays through their wallet. Paykit coordinates the payment request, and Paykit Server checks the payment. The wallet must support Paykit payment requests and a payment method accepted by the creator and server.
 4. **Record the entitlement.** The Lock Server checks the payment against the content lock's policy. On success, it stores an entitlement record on the creator's Homeserver.
 5. **Read the content.** The viewer requests a temporary access credential, then uses it to retrieve the guarded article through the Lock Server.
 
