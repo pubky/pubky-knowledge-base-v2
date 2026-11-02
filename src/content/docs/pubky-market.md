@@ -20,7 +20,7 @@ Publishing a listing and completing a sale are separate actions. A transaction s
 3. The buyer pays the seller through an available payment method. The service reconciles the payment result before advancing the order.
 4. The seller fulfills the order, or the buyer receives the purchased digital delivery. Order history and signed receipts help the participants retain evidence of the transaction.
 
-[Paykit](/paykit/) coordinates payment discovery and requests, while [Pubky Locks](/pubky-locks/) provides proof-based access to guarded resources. Market integrates these building blocks with its order workflow. They do not replace the transaction service's inventory and order decisions.
+[Paykit](/paykit/) coordinates payment discovery and requests, while [Pubky Locks](/pubky-locks/) controls access to purchased content, such as paid articles and downloadable files. Market integrates these building blocks with its order workflow. They do not replace the transaction service's inventory and order decisions.
 
 ## Payments and trust
 
