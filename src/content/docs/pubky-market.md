@@ -29,6 +29,6 @@ Payments go to the seller; Pubky Market does not custody funds or send refunds f
 ## Explore or build
 
 - **Try Pubky Market:** [Open Pubky Market](https://shop.pubky.app/) to browse shops and listings.
-- **Work on the client:** Start with the [developer onboarding guide](https://github.com/pubky/pubky-marketplace/blob/master/docs/ecommerce/onboarding.md).
+- **Contribute to the Pubky Market web app:** Follow the [developer guide](https://github.com/pubky/pubky-marketplace/blob/master/docs/ecommerce/onboarding.md) to set up Pubky Market locally and contribute features or bug fixes.
 - **Build compatible records:** Use [Pubky Market Specs](https://github.com/pubky/pubky-market-specs) for the data model and Rust and JavaScript libraries.
-- **Integrate order operations:** Read the [transaction service](https://github.com/pubky/pubky-marketplace-service) and its linked seller-automation API reference.
+- **Automate shop operations:** Use the [seller automation API](https://github.com/pubky/pubky-marketplace-service/blob/main/docs/api.md) to synchronize inventory, export orders, receive order notifications, and update shipping or tracking information.
