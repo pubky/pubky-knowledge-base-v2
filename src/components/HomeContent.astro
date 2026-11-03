@@ -6,10 +6,23 @@ import ImageCard from "./ImageCard.astro";
 import DemoCard from "./DemoCard.astro";
 import { withBase } from "../utils/base-path";
 
+const demoFilters = [
+  { id: "apps", label: "Apps" },
+  { id: "mobile", label: "Mobile" },
+  { id: "social", label: "Social" },
+  { id: "productivity", label: "Productivity" },
+  { id: "learning", label: "Learning" },
+  { id: "payments", label: "Payments" },
+  { id: "utilities", label: "Utilities" },
+  { id: "development", label: "Development" },
+  { id: "community", label: "Community" },
+];
+
 // Figma: Demos (node 34702:87731)
 const demos = [
   {
     title: "App Template",
+    categories: ["development"],
     description:
       "Copy this Pubky app template to start your own app. It includes authentication, file storage, event stream subscriptions, and mainnet and local testnet builds.",
     actions: [
@@ -27,6 +40,7 @@ const demos = [
   },
   {
     title: "Loopky",
+    categories: ["apps", "mobile", "learning", "community"],
     description:
       "A modern mobile flashcard app with spaced repetition, social discovery, and user-owned data on Pubky.",
     actions: [
@@ -44,6 +58,7 @@ const demos = [
   },
   {
     title: "mypubky",
+    categories: ["apps", "social", "payments", "community"],
     description:
       "A shareable identity card that brings your Pubky identifier, avatar, bio, links, posts, profile tags, and Paykit-powered donation options into one visual page.",
     actions: [
@@ -62,6 +77,7 @@ const demos = [
   },
   {
     title: "Payky",
+    categories: ["apps", "payments", "community"],
     description:
       "A linktree like page for payments, based on Paykit, where the user can connect using Pubky Ring and add their payment details (crypto, fiat etc.) and share a link to the page with anyone.",
     actions: [
@@ -75,6 +91,7 @@ const demos = [
   },
   {
     title: "ABC",
+    categories: ["social", "community"],
     description:
       "Drop-In Pubky Comment Widget for Blogs\n\nSimple embeddable script that lets any website add Pubky-based comments.",
     actions: [
@@ -92,6 +109,7 @@ const demos = [
   },
   {
     title: "Mapky",
+    categories: ["apps", "utilities", "community"],
     description:
       "A social layer for OpenStreetMap with place reviews, posts, routes, collections, and geo-captures stored as user-owned data.",
     actions: [
@@ -105,6 +123,7 @@ const demos = [
   },
   {
     title: "Explorer",
+    categories: ["utilities"],
     description: "A file explorer that allows you to navigate data stored on your Homeserver.",
     actions: [
       { label: "Demo", href: "https://explorer.pubky.app/", variant: "secondary" as const },
@@ -117,6 +136,7 @@ const demos = [
   },
   {
     title: "Eventky",
+    categories: ["apps", "productivity", "community"],
     description:
       "A social calendar and event management app using existing calendar standards, with event data stored on each user’s homeserver.",
     actions: [
@@ -130,6 +150,7 @@ const demos = [
   },
   {
     title: "Pubky Notes",
+    categories: ["apps", "productivity", "community"],
     description:
       "A Markdown notebook with private storage on your Pubky homeserver, public sharing, and live collaboration.",
     actions: [
@@ -147,6 +168,7 @@ const demos = [
   },
   {
     title: "Uploadky",
+    categories: ["apps", "utilities", "community"],
     description: "File sharing with files stored on your Pubky homeserver.",
     actions: [
       { label: "Demo", href: "https://uploadky.vercel.app/", variant: "secondary" as const },
@@ -159,6 +181,7 @@ const demos = [
   },
   {
     title: "TC Wiki",
+    categories: ["apps", "learning", "community"],
     description: "TimechainWiki is a Bitcoin encyclopedia with reader annotations synced through Nostr or Pubky.",
     actions: [
       { label: "Demo", href: "https://timechain.wiki/", variant: "secondary" as const },
@@ -171,6 +194,7 @@ const demos = [
   },
   {
     title: "PKDNS",
+    categories: ["utilities"],
     description:
       "A DNS server providing self-sovereign and censorship-resistant domain names based on PKARR.",
     actions: [
@@ -184,6 +208,7 @@ const demos = [
   },
   {
     title: "PubkyLab",
+    categories: ["development", "community"],
     description:
       "An interactive web-based playground for testing and experimenting with the Pubky SDK.",
     actions: [
@@ -206,6 +231,7 @@ const demos = [
   },
   {
     title: "No Registry",
+    categories: ["utilities"],
     description: "Self-host PKDNS in under 10 minutes with a simple Pi-hole or Docker setup.",
     actions: [
       { label: "Website", href: "https://www.noregistry.com/", variant: "outline" as const },
@@ -218,6 +244,7 @@ const demos = [
   },
   {
     title: "Ghostly",
+    categories: ["apps", "social", "community"],
     description:
       "An encrypted P2P messenger with Pkarr contact discovery and identity verification through Pubky Ring or Passport.",
     actions: [
@@ -235,6 +262,7 @@ const demos = [
   },
   {
     title: "Pastalabs",
+    categories: ["development", "community"],
     description: "One builder’s collection of projects built with Pubky.",
     actions: [
       {
@@ -420,16 +448,24 @@ const icons = {
   </section>
 
   <!-- Demos — Figma node 34702:87731 -->
-  <section id="demos" class="home-section demos">
+  <section id="demos" class="home-section demos" data-demo-section>
     <div class="demos-header">
       <h2 class="home-section-title">
         <a class="home-section-title-link" href="#demos">Demos</a>
       </h2>
       <p class="demos-subtitle">Try some proof of concepts built on the Pubky protocol. What will you create?</p>
+      <div class="demo-filters" role="group" aria-label="Filter demos" hidden>
+        {demoFilters.map((filter) => (
+          <button type="button" class="demo-filter" data-demo-filter={filter.id} aria-pressed="false">
+            {filter.label}
+          </button>
+        ))}
+      </div>
+      <p class="sr-only" role="status" data-demo-status></p>
     </div>
     <div class="card-grid card-grid-4 demos-grid">
       {demos.map((demo) => (
-        <DemoCard title={demo.title} description={demo.description} actions={demo.actions} />
+        <DemoCard title={demo.title} description={demo.description} actions={demo.actions} categories={demo.categories} />
       ))}
     </div>
   </section>
@@ -495,6 +531,37 @@ const icons = {
     </div>
   </div>
 </div>
+
+<script>
+  const section = document.querySelector<HTMLElement>("[data-demo-section]");
+  if (section) {
+    const filters = section.querySelector<HTMLElement>(".demo-filters");
+    const buttons = section.querySelectorAll<HTMLButtonElement>("[data-demo-filter]");
+    const cards = section.querySelectorAll<HTMLElement>("[data-demo-categories]");
+    const status = section.querySelector<HTMLElement>("[data-demo-status]");
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const selected = button.getAttribute("aria-pressed") === "true" ? null : button.dataset.demoFilter;
+        buttons.forEach((chip) => {
+          chip.setAttribute("aria-pressed", String(chip === button && Boolean(selected)));
+        });
+        let visible = 0;
+        cards.forEach((card) => {
+          const categories = card.dataset.demoCategories?.split(" ") ?? [];
+          card.hidden = Boolean(selected && !categories.includes(selected));
+          if (!card.hidden) visible += 1;
+        });
+        if (status) {
+          status.textContent = selected
+            ? `Showing ${visible} ${button.textContent?.trim()} projects.`
+            : `Showing all ${visible} projects.`;
+        }
+      });
+    });
+    if (filters) filters.hidden = false;
+  }
+</script>
 
 <style is:global>
   .home-content {
@@ -636,6 +703,48 @@ const icons = {
     font-weight: 600;
     letter-spacing: -0.3px;
     color: rgba(255, 255, 255, 0.5);
+  }
+
+  /* Filter chips reuse the existing Figma pill-button tokens. Filtering is a
+     project addition; there is no separate filter-chip frame in the design. */
+  .demo-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-2);
+  }
+
+  .demo-filters[hidden] {
+    display: none;
+  }
+
+  .demo-filter {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: var(--landing-touch-target);
+    padding: var(--spacing-2-5) var(--spacing-4);
+    border: var(--landing-border-width) solid var(--base-border);
+    border-radius: var(--radius-full);
+    background: var(--alpha-white-5);
+    color: var(--base-foreground);
+    font: inherit;
+    font-size: var(--text-sm-size);
+    line-height: var(--text-sm-lh);
+    font-weight: 700;
+    cursor: pointer;
+    transition: background var(--landing-motion) ease, color var(--landing-motion) ease,
+      border-color var(--landing-motion) ease;
+  }
+
+  .demo-filter[aria-pressed="false"]:hover {
+    background: var(--base-secondary-hover);
+    border-color: var(--base-muted-foreground);
+  }
+
+  .demo-filter[aria-pressed="true"] {
+    background: var(--base-foreground);
+    border-color: var(--base-foreground);
+    color: var(--base-background);
   }
 
   /* Figma: Tiles = flex-wrap with gap 24px; 4 columns at 1280 (282px each) */

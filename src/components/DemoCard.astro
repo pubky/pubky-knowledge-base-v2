@@ -11,13 +11,14 @@ interface Props {
   title: string;
   description: string;
   actions: Action[];
+  categories: string[];
 }
 
-const { title, description, actions } = Astro.props;
+const { title, description, actions, categories } = Astro.props;
 const isExternal = (href: string) => href.startsWith("http");
 ---
 
-<div class="demo-card not-content">
+<div class="demo-card not-content" data-demo-categories={categories.join(" ")}>
   <div class="demo-card-copy">
     <h3 class="demo-card-title">{title}</h3>
     <p class="demo-card-description">{description}</p>
@@ -38,6 +39,10 @@ const isExternal = (href: string) => href.startsWith("http");
 </div>
 
 <style is:global>
+  .demo-card[hidden] {
+    display: none;
+  }
+
   /* Figma: Demo Cards (node 34784:60645) — 325h floor, p spacing-8(32),
      bg base/card, border 1px base/border, radius rounded-lg(12), justify-between
      so the actions row pins to the bottom of the card. min-height (not fixed
