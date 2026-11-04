@@ -10,9 +10,6 @@ const demoFilters = [
   { id: "apps", label: "Apps" },
   { id: "mobile", label: "Mobile" },
   { id: "social", label: "Social" },
-  { id: "productivity", label: "Productivity" },
-  { id: "learning", label: "Learning" },
-  { id: "payments", label: "Payments" },
   { id: "utilities", label: "Utilities" },
   { id: "development", label: "Development" },
   { id: "community", label: "Community" },
@@ -40,7 +37,7 @@ const demos = [
   },
   {
     title: "Loopky",
-    categories: ["apps", "mobile", "learning", "community"],
+    categories: ["apps", "mobile", "community"],
     description:
       "A modern mobile flashcard app with spaced repetition, social discovery, and user-owned data on Pubky.",
     actions: [
@@ -58,7 +55,7 @@ const demos = [
   },
   {
     title: "mypubky",
-    categories: ["apps", "social", "payments", "community"],
+    categories: ["apps", "social", "community"],
     description:
       "A shareable identity card that brings your Pubky identifier, avatar, bio, links, posts, profile tags, and Paykit-powered donation options into one visual page.",
     actions: [
@@ -77,7 +74,7 @@ const demos = [
   },
   {
     title: "Payky",
-    categories: ["apps", "payments", "community"],
+    categories: ["apps", "community"],
     description:
       "A linktree like page for payments, based on Paykit, where the user can connect using Pubky Ring and add their payment details (crypto, fiat etc.) and share a link to the page with anyone.",
     actions: [
@@ -136,7 +133,7 @@ const demos = [
   },
   {
     title: "Eventky",
-    categories: ["apps", "productivity", "community"],
+    categories: ["apps", "community"],
     description:
       "A social calendar and event management app using existing calendar standards, with event data stored on each user’s homeserver.",
     actions: [
@@ -150,7 +147,7 @@ const demos = [
   },
   {
     title: "Pubky Notes",
-    categories: ["apps", "productivity", "community"],
+    categories: ["apps", "community"],
     description:
       "A Markdown notebook with private storage on your Pubky homeserver, public sharing, and live collaboration.",
     actions: [
@@ -181,7 +178,7 @@ const demos = [
   },
   {
     title: "TC Wiki",
-    categories: ["apps", "learning", "community"],
+    categories: ["apps", "community"],
     description: "TimechainWiki is a Bitcoin encyclopedia with reader annotations synced through Nostr or Pubky.",
     actions: [
       { label: "Demo", href: "https://timechain.wiki/", variant: "secondary" as const },
