@@ -6,12 +6,13 @@ import test from 'node:test';
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { sidebar } from '../src/config/sidebar.mjs';
+import { parseDocMarkdown } from '../scripts/parse-doc-markdown.mjs';
 
 const DIST = 'dist';
 const SITE_URL = (process.env.SITE_URL || 'https://pubky.org').replace(/\/+$/, '');
 const slugs = sidebar.flatMap((group) => group.items.map((item) => item.slug));
 const titleOf = (slug) =>
-  readFileSync(join('src/content/docs', `${slug}.md`), 'utf-8').match(/^title:\s*"?(.+?)"?\s*$/m)[1];
+  parseDocMarkdown(readFileSync(join('src/content/docs', `${slug}.md`), 'utf-8'), `${slug}.md`).title;
 
 test('llms.txt links every sidebar page as Markdown, once, under its sidebar group', () => {
   const llms = readFileSync(join(DIST, 'llms.txt'), 'utf-8');

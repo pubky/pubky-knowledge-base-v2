@@ -3,12 +3,13 @@
 //   - llms.txt: an index in the llms.txt format (https://llmstxt.org), one
 //     section per sidebar group, each page linked as Markdown with its description
 //   - llms-full.txt: every documentation page in one file, without the homepage
-// Overwrites the plugin-generated versions after build. Absolute links in the
-// per-page files keep working when an agent reads llms-full.txt out of context.
+// Absolute links in the per-page files keep working when an agent reads
+// llms-full.txt out of context.
 
 import { readFileSync, writeFileSync } from 'fs';
 import { join } from 'path';
 import { sidebar } from '../src/config/sidebar.mjs';
+import { parseDocMarkdown } from './parse-doc-markdown.mjs';
 
 const DEST = 'dist';
 const SITE_URL = (process.env.SITE_URL || 'https://pubky.org').replace(/\/+$/, '');
@@ -20,17 +21,13 @@ const SUMMARY =
 
 function readPage(slug) {
 	const content = readFileSync(join(DEST, `${slug}.md`), 'utf-8');
-	const frontmatter = content.match(/^---\n([\s\S]*?)\n---\n*/);
-	if (!frontmatter) throw new Error(`${slug}.md has no frontmatter`);
-	const field = (name) => frontmatter[1].match(new RegExp(`^${name}:\\s*"?(.+?)"?\\s*$`, 'm'))?.[1];
-	const title = field('title');
-	if (!title) throw new Error(`${slug}.md has no title`);
+	const { title, description, body } = parseDocMarkdown(content, `${slug}.md`);
 	return {
 		slug,
 		title,
-		description: field('description') ?? '',
+		description,
 		url: `${SITE_URL}/${slug}.md`,
-		body: content.slice(frontmatter[0].length).trim(),
+		body: body.trim(),
 	};
 }
 

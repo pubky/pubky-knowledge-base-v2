@@ -115,6 +115,8 @@ AI tools can reference the docs through these plain Markdown endpoints:
 
 [llms-small.txt](https://pubky.org/llms-small.txt) links to per-page Markdown files. You can also open them directly by adding `.md` to a docs path, for example [pubky.org/getting-started.md](https://pubky.org/getting-started.md) or [pubky.org/sdk.md](https://pubky.org/sdk.md).
 
-Locally, `npm run build` generates the same files in `dist/`.
+Locally, `npm run build` generates these files in `dist/` using the scripts in
+`scripts/generate-llms-*.mjs`. Run `npm run preview` after building to inspect
+them over HTTP. The development server does not generate these files.
 
 Old documentation URLs redirect to their current pages.

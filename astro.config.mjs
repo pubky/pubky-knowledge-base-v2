@@ -2,7 +2,6 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import starlightClientMermaid from '@pasqal-io/starlight-client-mermaid';
-import starlightLlmsTxt from 'starlight-llms-txt';
 import { sidebar } from './src/config/sidebar.mjs';
 import rehypeBasePath from './plugins/rehype-base-path.mjs';
 import remarkSnippet from './plugins/remark-snippet.mjs';
@@ -356,27 +355,6 @@ export default defineConfig({
 			],
 			plugins: [
 				starlightClientMermaid(),
-				starlightLlmsTxt({
-					projectName: 'Pubky Documentation',
-					description:
-						'Pubky is an open protocol for key-based, censorship-resistant web applications. ' +
-						'It provides identity via public keys, data storage on homeservers, and discovery ' +
-						'via the Mainline DHT — all over simple HTTP/REST APIs.',
-					exclude: [
-						'index',
-						'comparisons',
-						'contributing',
-						'getting-started',
-						'glossary',
-						'pubky-explorer',
-						'pubky-ring',
-						'indexing-and-aggregation',
-						'pubky-app',
-						'censorship-resistance',
-						'credible-exit',
-						'resources',
-					],
-				}),
 			],
 			tableOfContents: false,
 			customCss: ['./src/styles/custom.css'],
