@@ -1,9 +1,9 @@
 // Generates llms-small.txt as a compact index linking to per-page .md files.
-// Overwrites the plugin-generated version after build.
 
 import { readFileSync, writeFileSync, readdirSync, statSync } from 'fs';
 import { join, relative, extname } from 'path';
 import { resolveReleaseLinks } from '../plugins/release-links.mjs';
+import { parseDocMarkdown } from './parse-doc-markdown.mjs';
 
 const SRC = 'src/content/docs';
 const DEST = 'dist/llms-small.txt';
@@ -24,25 +24,7 @@ function walkDir(dir) {
 	return files;
 }
 
-function stripFrontmatter(content) {
-	return content.replace(/^---[\s\S]*?---\n*/, '');
-}
-
-function extractTitle(content) {
-	const fm = content.match(/^---([\s\S]*?)---/);
-	if (!fm) return null;
-	const match = fm[1].match(/^title:\s*"?(.+?)"?\s*$/m);
-	return match ? match[1] : null;
-}
-
-function extractDescription(content) {
-	const fm = content.match(/^---([\s\S]*?)---/);
-	if (fm) {
-		const desc = fm[1].match(/^description:\s*"?(.+?)"?\s*$/m);
-		if (desc) return desc[1];
-	}
-
-	const body = stripFrontmatter(content);
+function extractDescription(body) {
 	for (const line of body.split('\n')) {
 		const trimmed = line.trim();
 		if (
@@ -95,14 +77,14 @@ const lines = [
 for (const { file, rel } of entries) {
 	const content = readFileSync(file, 'utf-8');
 	const slug = rel.replace(/\.(md|mdx)$/, '');
-	const title = extractTitle(content) || slug;
+	const { title, description, body } = parseDocMarkdown(content, rel);
 
 	if (INLINE.has(rel)) {
-		lines.push(`\n# ${title}\n\n${resolveReleaseLinks(stripFrontmatter(content).trim())}`);
+		lines.push(`\n# ${title}\n\n${resolveReleaseLinks(body.trim())}`);
 	} else {
-		const description = extractDescription(content);
+		const summary = description || extractDescription(body);
 		const url = `${SITE_URL}/${slug}.md`;
-		const entry = description ? `- [${title}](${url}): ${description}` : `- [${title}](${url})`;
+		const entry = summary ? `- [${title}](${url}): ${summary}` : `- [${title}](${url})`;
 		lines.push(entry);
 	}
 }
