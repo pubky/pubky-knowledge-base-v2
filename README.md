@@ -39,7 +39,7 @@ Use `blob/{{pinned_homeserver_release}}/...` or `tree/{{pinned_homeserver_releas
 
 - **GitHub**: [github.com/pubky](https://github.com/pubky)
 - **Pubky Homeserver**: [github.com/pubky/pubky-homeserver](https://github.com/pubky/pubky-homeserver) ([SDK resources](https://pubky.org/sdk/))
-- **Telegram**: [t.me/pubkycore](https://t.me/pubkycore)
+- **Telegram**: [t.me/pubkychat](https://t.me/pubkychat)
 - **Live App**: [pubky.app](https://pubky.app)
 
 ## Commands
