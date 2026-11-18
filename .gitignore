@@ -22,6 +22,9 @@ pnpm-debug.log*
 .env.production
 .env*.local
 
+# local agent instructions
+/.ai-rules.local.md
+
 # macOS-specific files
 .DS_Store
 
