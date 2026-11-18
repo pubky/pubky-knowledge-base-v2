@@ -21,11 +21,19 @@ The app's session is distinct from the identity key. Its permissions limit what 
 
 Review requested scopes before approving an app. Root grants carry account-level privileges and should be reserved for trusted account-management tools.
 
+## Browser sessions
+
+A grant has one current bearer token. Tabs on the same origin and browser profile coordinate its use through the SDK.
+
+Use the SDK's `browserSessionStore` to keep your app signed in across page reloads and tabs on the same origin. Save the session before making requests so the SDK can share it across tabs. Treat saved session data as credentials.
+
+Each app should request its own grant. Apps that share a grant across separate origins can invalidate each other's bearer tokens and interrupt sessions. See the [grant session lifecycle guide](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/docs/grant-session-lifecycle.md) for browser requirements, session persistence, and compatibility with older Homeservers.
+
 ## Signing out
 
 Signing out an active grant-backed session through the SDK revokes its grant. Revocation invalidates every session issued from that grant and prevents saved credentials for it from restoring access. Separate grants, including those issued to the same app, are unaffected.
 
-Removing saved browser session data only forgets it locally; it does not revoke the grant on the Homeserver. If the session token is no longer valid, SDK sign-out can report success without revoking the grant.
+Removing saved browser session data does not revoke the grant on the Homeserver. See the [grant session lifecycle guide](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/docs/grant-session-lifecycle.md) for browser sign-out behavior, failure recovery, and Homeserver compatibility.
 
 ## Implement the flow
 
