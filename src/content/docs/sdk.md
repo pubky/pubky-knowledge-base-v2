@@ -26,6 +26,8 @@ The main SDK types follow the steps an application takes:
 
 For example, an app can use a session to save a user's own data and public storage to read another user's published profile. [Authentication](/authentication/) explains how an app obtains access without taking custody of the identity key. Refer to your platform's documentation for its supported types and behavior.
 
+Apps can also [request scoped encryption keys](/authentication/#scoped-encryption-keys) for app-managed content encryption and [sign custom proofs](/authentication/#custom-proofs) that other services can verify offline.
+
 ## Homeserver connections
 
 Native Rust clients prefer [PubkyTLS](/glossary/#pubkytls), which verifies the Homeserver's public key directly. If PKARR advertises an ICANN HTTPS endpoint, the SDK can use it when the direct endpoint is absent or fails its TCP reachability check. Browser clients reach public Homeservers through the ICANN HTTPS endpoint. ICANN connections use standard HTTPS certificate validation, so their trust depends on the conventional domain and certificate authorities.

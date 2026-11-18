@@ -21,6 +21,19 @@ The app's session is distinct from the identity key. Its permissions limit what 
 
 Review requested scopes before approving an app. Root grants carry account-level privileges and should be reserved for trusted account-management tools.
 
+## Scoped encryption keys
+
+Apps can request symmetric encryption keys for specific storage paths alongside a grant. The `e` action requests keys; `r` and `w` control storage access independently. Key requests use signed approvals (`approvalFormat: "signedApprovalV1"` in JavaScript) and require a signer and Homeserver that support encryption scopes. Check the approved scopes: the signer can narrow or decline the request.
+
+```mermaid
+flowchart LR
+    Approval["User approves scopes"] -->|r / w| Storage["Homeserver read / write access"]
+    Approval -->|e| Keys["Scoped encryption keys"]
+    Keys --> Content["App encrypts and decrypts content"]
+```
+
+Signed approvals use Hybrid Public Key Encryption (HPKE) to deliver the grant and any approved keys to the requesting app. The SDK supplies keys; the app encrypts its content. Delivered keys remain usable after grant expiry or revocation. See the [scoped encryption keys guide](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/docs/scoped-encryption-keys.md) for examples and compatibility, and the [Security Model](/security-model/#scoped-encryption-keys) for key handling and trust boundaries.
+
 ## Browser sessions
 
 A grant has one current bearer token. Tabs on the same origin and browser profile coordinate its use through the SDK.
@@ -34,6 +47,12 @@ Each app should request its own grant. Apps that share a grant across separate o
 Signing out an active grant-backed session through the SDK revokes its grant. Revocation invalidates every session issued from that grant and prevents saved credentials for it from restoring access. Separate grants, including those issued to the same app, are unaffected.
 
 Removing saved browser session data does not revoke the grant on the Homeserver. See the [grant session lifecycle guide](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/docs/grant-session-lifecycle.md) for browser sign-out behavior, failure recovery, and Homeserver compatibility.
+
+## Custom proofs
+
+Grant sessions can sign custom JSON with the app's proof-of-possession key. A receiving service can verify the user's signature on the grant and the app's signature on the data offline, without contacting the Homeserver.
+
+The SDK verifier checks signatures and grant validity, but does not check revocation or prevent replay. The receiving service must enforce its own authorization and replay policies, including any audience, challenge, and freshness checks. See [Sign and verify custom data](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/docs/CUSTOM_POP.md) for examples and the verification contract.
 
 ## Implement the flow
 
