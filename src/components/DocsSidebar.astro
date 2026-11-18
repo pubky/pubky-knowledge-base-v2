@@ -1,0 +1,26 @@
+---
+import Default from '@astrojs/starlight/components/Sidebar.astro';
+import { pinned_homeserver_release } from '../config/releases.mjs';
+
+const { id } = Astro.locals.starlightRoute;
+const isDocsPage = id !== '' && id !== '404';
+---
+
+<Default><slot /></Default>
+{isDocsPage && (
+  <p class="sdk-version" data-sdk-version data-pagefind-ignore>
+    Covers Pubky SDK {pinned_homeserver_release}
+  </p>
+)}
+
+<style>
+  .sdk-version {
+    margin: 0;
+    margin-block-start: auto;
+    padding-block: var(--spacing-4);
+    border-block-start: var(--landing-border-width) solid var(--base-border);
+    color: var(--base-secondary-foreground);
+    font-size: var(--text-sm-size);
+    line-height: var(--text-sm-lh);
+  }
+</style>

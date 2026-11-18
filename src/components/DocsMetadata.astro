@@ -1,6 +1,5 @@
 ---
 import { isShallow, lastModified, sourcesFor } from '../../scripts/add-sitemap-lastmod.mjs';
-import { pinned_homeserver_release } from '../config/releases.mjs';
 
 const { id } = Astro.locals.starlightRoute;
 const isDocsPage = id !== '' && id !== '404';
@@ -27,7 +26,6 @@ const formattedDate = updatedDate?.toLocaleDateString('en', {
       Last updated:{' '}
       {updated ? <time datetime={updated}>{formattedDate}</time> : 'Unavailable'}
     </p>
-    <p>Updated for Pubky SDK {pinned_homeserver_release}</p>
   </div>
 )}
 
