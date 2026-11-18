@@ -18,7 +18,7 @@ The process of proving ownership of a public key through cryptographic signature
 ## C
 
 **Grant**
-A cryptographically signed authorization that gives a specific application scoped read and/or write access to a user's data. It expires and is bound to the application's proof-of-possession key.
+A cryptographically signed authorization bound to an application's proof-of-possession key. Its capabilities can authorize storage reads, writes, or delivery of scoped encryption keys. The grant expires; delivered encryption keys remain usable. See [Authentication](/authentication/).
 
 **Censorship Resistance**
 The property of being difficult or impossible to block, censor, or control by any single authority. Pubky achieves this through decentralized [Mainline DHT](/mainline-dht/) and distributed [Homeservers](/homeserver/).
@@ -93,7 +93,7 @@ DNS server that resolves public-key domains by fetching PKARR records from the M
 Storage under `/priv/` on a [Homeserver](/homeserver/), readable only with an authenticated session for the data owner's identity and capabilities covering the requested path. It provides access control, not encryption; apps that need confidentiality from the operator encrypt the data themselves.
 
 **Proof of Possession (PoP)**
-A cryptographic check that an application controls the private key bound to a grant. The application presents a signed PoP proof when exchanging the grant for a bearer token, so the grant cannot be used on its own. See [Authentication](/authentication/).
+A cryptographic check that an application controls the private key bound to a grant. The application presents a signed PoP proof when exchanging the grant for a bearer token, so the grant cannot be used on its own. [Custom proofs](/authentication/#custom-proofs) also let grant holders sign JSON that other services can verify offline.
 
 **Public Key**
 The public half of a cryptographic key pair. In Pubky, this serves as your permanent, self-sovereign identity (often called a "pubky").
@@ -137,6 +137,11 @@ Formal data model specifications for [pubky.app](/pubky-app/), defining structur
 Encrypted backup of a user's private key and identity information, protected by a passphrase. Used for key recovery and migration between devices.
 
 ## S
+
+<span id="scoped-encryption-keys"></span>
+
+**Scoped encryption keys**
+Symmetric keys delivered by a signer for user-approved storage paths through the `e` action. They enable app-managed content encryption independently of storage read/write permissions and remain usable after grant revocation or expiry. See [Authentication](/authentication/#scoped-encryption-keys).
 
 **[SDK](/sdk/)** (Software Development Kit)
 Client libraries for building Pubky applications, available in Rust, JavaScript/WASM, and native mobile (iOS/Android).
