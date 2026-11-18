@@ -21,6 +21,8 @@ The app's session is distinct from the identity key. Its permissions limit what 
 
 Review requested scopes before approving an app. Root grants carry account-level privileges and should be reserved for trusted account-management tools.
 
+Authenticators can approve fewer scopes or actions than an app requests, so apps should inspect the granted capabilities before enabling features. Signer developers use the [selective approval APIs](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/docs/scoped-encryption-keys.md#select-capabilities-on-the-signing-device) to apply the user's selection; `approveAuthRequest()` (JavaScript) and `approve_auth()` (Rust) approve the full request.
+
 ## Scoped encryption keys
 
 Apps can request symmetric encryption keys for specific storage paths alongside a grant. The `e` action requests keys; `r` and `w` control storage access independently. Key requests use signed approvals (`approvalFormat: "signedApprovalV1"` in JavaScript) and require a signer and Homeserver that support encryption scopes. Check the approved scopes: the signer can narrow or decline the request.

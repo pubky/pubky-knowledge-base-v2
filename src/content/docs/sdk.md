@@ -55,4 +55,4 @@ Follow the [Developer Guide](/developer-guide/) for a self-contained walkthrough
 
 Use the API references above for method signatures, return values, and errors. For integrations that need raw HTTP, see the [Homeserver API references](/homeserver/#http-api).
 
-For client resource limits, see the SDK's [error-body limits](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-sdk/README.md#error-body-limits) and [event-stream limits](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-sdk/README.md#event-stream-limits).
+For client resource limits, see the SDK's [authentication relay limits](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/docs/scoped-encryption-keys.md#relay-limits), [error-body limits](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-sdk/README.md#error-body-limits), and [event-stream limits](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-sdk/README.md#event-stream-limits).
