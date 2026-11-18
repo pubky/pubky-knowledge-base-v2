@@ -21,6 +21,12 @@ Applications can encrypt content before uploading it and manage decryption keys 
 
 A signed discovery record does not prove that stored application content is authentic. Applications must account for an operator altering, withholding, or deleting data, and observing access patterns. Keeping independent copies helps preserve data if a provider becomes unavailable; it does not by itself detect tampering.
 
+## Scoped encryption keys
+
+The SDK can deliver [user-approved encryption keys](/authentication/#scoped-encryption-keys) without exposing the identity secret. These keys are derived from the identity secret and storage paths. Revoking a grant or letting it expire cannot retract delivered keys: an app that received a key can still decrypt content encrypted under it, including future content. Request the narrowest scopes needed.
+
+Saved signed approvals contain encryption keys as plaintext in IndexedDB. Scripts on the same origin and anyone with a copy of the browser profile can read them, even when the delegated signing key is non-extractable. Treat session exports and saved records as sensitive key material. See the [scoped encryption keys guide](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/docs/scoped-encryption-keys.md#encryption-limitations) for encryption limitations, persistence, and offline recovery.
+
 ## Discovery and availability
 
 PKARR records can expire, lookups can fail, and caches can delay a hosting change. A new discovery record does not recover missing files or guarantee immediate reachability. See the [PKARR trade-offs](https://github.com/pubky/pkarr/blob/main/docs/introduction.md#the-trade-offs).
