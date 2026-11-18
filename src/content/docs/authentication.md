@@ -24,7 +24,7 @@ Review requested scopes before approving an app. Root grants carry account-level
 
 Use the SDK's `browserSessionStore` to keep your app signed in across page reloads and tabs on the same origin. Save the session before making requests so the SDK can share it across tabs. Treat saved session data as credentials.
 
-Each app should request its own grant. Reusing a grant across separate apps or origins can interrupt sessions that share the grant. See the [grant session lifecycle guide](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/docs/grant-session-lifecycle.md) for browser requirements, session persistence, and compatibility with older Homeservers.
+Each app should request its own grant. Apps that share a grant across separate origins can invalidate each other's bearer tokens and interrupt sessions. See the [grant session lifecycle guide](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/docs/grant-session-lifecycle.md) for browser requirements, session persistence, and compatibility with older Homeservers.
 
 ## Signing out
 
