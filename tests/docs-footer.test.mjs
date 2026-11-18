@@ -5,7 +5,7 @@ import { join } from 'node:path';
 import { isShallow } from '../scripts/add-sitemap-lastmod.mjs';
 import { pinned_homeserver_release } from '../src/config/releases.mjs';
 
-test('every docs page shows its SDK version and the same update date as its sitemap entry', () => {
+test('every docs page shows the shared SDK version in its menu and its own update date in the footer', () => {
 	const xml = readFileSync('dist/sitemap-0.xml', 'utf-8');
 	const base = (process.env.BASE_PATH || '/').replace(/^\/+|\/+$/g, '');
 	const shallow = isShallow();
@@ -17,7 +17,10 @@ test('every docs page shows its SDK version and the same update date as its site
 		const html = readFileSync(join('dist', path, 'index.html'), 'utf-8');
 		const metadata = html.match(/<div\b[^>]*data-docs-metadata[^>]*>([\s\S]*?)<\/div>/)?.[1];
 		assert.ok(metadata, `missing docs footer on ${pathname}`);
-		assert.ok(metadata.includes(`Updated for Pubky SDK ${pinned_homeserver_release}`), pathname);
+		const sdk = html.match(/<(?:div|p)\b[^>]*data-sdk-version[^>]*>([\s\S]*?)<\/(?:div|p)>/)?.[1];
+		assert.ok(sdk?.includes(`Covers Pubky SDK ${pinned_homeserver_release}`), `missing menu SDK version on ${pathname}`);
+		assert.equal([...html.matchAll(/data-sdk-version/g)].length, 1, `duplicate SDK version on ${pathname}`);
+		assert.ok(!metadata.includes('SDK'), `SDK version remains in page footer on ${pathname}`);
 		assert.ok(metadata.includes('Last updated:'), pathname);
 		if (shallow) {
 			assert.ok(metadata.includes('Unavailable'), pathname);
@@ -35,6 +38,8 @@ test('every docs page shows its SDK version and the same update date as its site
 
 test('the landing and error pages omit documentation metadata', () => {
 	for (const file of ['dist/index.html', 'dist/404.html']) {
-		assert.ok(!readFileSync(file, 'utf-8').includes('data-docs-metadata'), file);
+		const html = readFileSync(file, 'utf-8');
+		assert.ok(!html.includes('data-docs-metadata'), file);
+		assert.ok(!html.includes('data-sdk-version'), file);
 	}
 });

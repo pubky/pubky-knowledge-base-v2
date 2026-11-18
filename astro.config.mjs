@@ -367,6 +367,7 @@ export default defineConfig({
 				Header: './src/components/Header.astro',
 				PageTitle: './src/components/PageTitle.astro',
 				LastUpdated: './src/components/DocsMetadata.astro',
+				Sidebar: './src/components/DocsSidebar.astro',
 			},
 			social: [
 				{ icon: 'github', label: 'GitHub', href: 'https://github.com/pubky' },
