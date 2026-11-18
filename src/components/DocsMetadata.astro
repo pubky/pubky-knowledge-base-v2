@@ -1,0 +1,46 @@
+---
+import { isShallow, lastModified, sourcesFor } from '../../scripts/add-sitemap-lastmod.mjs';
+import { pinned_homeserver_release } from '../config/releases.mjs';
+
+const { id } = Astro.locals.starlightRoute;
+const isDocsPage = id !== '' && id !== '404';
+let updated: string | null = null;
+
+if (isDocsPage) {
+  try {
+    if (!isShallow()) updated = lastModified(sourcesFor(`/${id}/`));
+  } catch {
+    // A checkout without usable Git history has no reliable update date.
+  }
+}
+
+const updatedDate = updated ? new Date(updated) : null;
+const formattedDate = updatedDate?.toLocaleDateString('en', {
+  dateStyle: 'medium',
+  timeZone: 'UTC',
+});
+---
+
+{isDocsPage && (
+  <div class="docs-metadata" data-docs-metadata data-pagefind-ignore>
+    <p>
+      Last updated:{' '}
+      {updated ? <time datetime={updated}>{formattedDate}</time> : 'Unavailable'}
+    </p>
+    <p>Updated for Pubky SDK {pinned_homeserver_release}</p>
+  </div>
+)}
+
+<style>
+  .docs-metadata {
+    display: flex;
+    flex: 1 1 100%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--spacing-2) var(--spacing-6);
+    color: var(--base-secondary-foreground);
+    font-size: var(--text-sm-size);
+    line-height: var(--text-sm-lh);
+  }
+  .docs-metadata p { margin: 0; }
+</style>
