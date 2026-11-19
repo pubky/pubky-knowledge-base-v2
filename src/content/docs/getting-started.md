@@ -1,20 +1,20 @@
 ---
 title: "First Steps"
-description: "Try Pubky as a user: create an identity with Pubky Ring, sign in to pubky.app, explore your public data, and back up what you publish."
+description: "Try Pubky as a user: create an identity with Pubky Ring, sign in to pubky.app, explore your public data, and back up your Homeserver files."
 ---
 
 :::note[Developer Guide]
 This guide helps you try Pubky **as a user**; if you want to build on Pubky, start with the [Developer Guide](/developer-guide/).
 :::
 
-Welcome to Pubky! You’ll create your identity, sign in to pubky.app, and inspect and back up the data you publish.
+Welcome to Pubky! You’ll create your identity, sign in to pubky.app, inspect the data you publish, and back up your Homeserver files.
 
 ```mermaid
 flowchart LR
     Ring[Download Pubky Ring] --> Identity[Create Identity]
     Identity --> App[Try Pubky Apps]
     App --> Data[Explore Your Data]
-    Data --> Backup[Back Up Published Data]
+    Data --> Backup[Back Up Homeserver Files]
 ```
 
 ## Step 1: Download Pubky Ring
@@ -79,13 +79,13 @@ Example paths:
 - `pubky://your-key/pub/pubky.app/profile.json` - Your profile
 - `pubky://your-key/pub/pubky.app/posts/` - Your posts directory
 
-## Step 5: Back Up Your Published Data
+<span id="step-5-back-up-your-published-data"></span>
 
-Install **[Pubky Backup](/pubky-backup/)** to keep local copies of your data and preserve your data sovereignty.
+## Step 5: Back Up Your Homeserver Files
 
-Use [Pubky Backup README](https://github.com/pubky/pubky-backup/blob/main/README.md) and [release builds](https://github.com/pubky/pubky-backup/releases) for download and install instructions.
+Use **[Pubky Backup](/pubky-backup/)** to keep a local copy of your public files. Sign in with Pubky Ring to include private files. See the [Pubky Backup README](https://github.com/pubky/pubky-backup/blob/main/README.md) for downloads and setup.
 
-Pubky Backup does not replace your recovery phrase. The recovery phrase protects your identity key; Pubky Backup protects a local copy of your published data.
+Keep your recovery phrase separately so you can recover your identity key.
 
 ## Next Steps
 

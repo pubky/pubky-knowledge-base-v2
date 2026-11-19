@@ -27,11 +27,11 @@ Here are some of the best examples of Credible Exit in practice:
 
 In **Pubky**, Credible Exit is not just an idea—it's built into the architecture. Pubky combines decentralized routing and identity with flexible, user-controlled hosting to make sure you’re always in charge.
 
-- **Trusted Servers with a Safety Net**: When you join Pubky, you can use a trusted server to host your data. These servers are there to provide convenience, but you’re never stuck. If the server changes its policies or you simply want to move, Pubky allows you to seamlessly migrate your data to another server without any loss of content or followers.
+- **Choice of Homeserver**: You can choose a provider or host your own data. To switch providers, copy your data to the new Homeserver and update the discovery record for your identity to point to it.
 
 - **Decentralized Identity**: With Pubky, your identity is not tied to any one server. You use self-issued public keys that are recognized across the network. This means you can change where your data is hosted without losing your identity or connections.
 
-- **Data Portability**: [Pubky Backup](/pubky-backup/) is a desktop tool that stores local snapshots of a user's published Homeserver data. Re-uploading those local files to a new Homeserver is still a manual workflow today, while seamless restore and Homeserver mirroring are planned features.
+- **Data Portability**: [Pubky Backup](/pubky-backup/) stores local copies and snapshots of public Homeserver files and private files you authorize it to read. Restoring those files to another Homeserver requires a manual upload.
 
 > _NOTE_: During Pubky's initial bootstrapping phase, credible exit may not be fully practical until more Homeserver providers and migration tools mature. [Synonym](https://synonym.to/) is building tools to make it easy for businesses and users to self-host, and Pubky Backup reduces one important exit cost by keeping a local data copy.
 

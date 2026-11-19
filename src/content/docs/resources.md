@@ -43,7 +43,7 @@ All under [github.com/pubky](https://github.com/pubky):
 
 - [pubky-homeserver](https://github.com/pubky/pubky-homeserver) — Pubky Homeserver and protocol implementation
 - [homeserver-dashboard](https://github.com/pubky/homeserver-dashboard) — Admin dashboard for Pubky homeservers
-- [pubky-backup](https://github.com/pubky/pubky-backup) — Desktop app for local backups of published Homeserver data
+- [pubky-backup](https://github.com/pubky/pubky-backup) — Desktop app for local backups of public and authorized private Homeserver files
 - [pubky-nexus](https://github.com/pubky/pubky-nexus) — Aggregator and indexer for pubky.app
 - [pubky-app-templates](https://github.com/pubky/pubky-app-templates) — Starter templates for building Pubky apps ([demos](https://pubky.github.io/pubky-app-templates/))
 - [pubky-core-ffi](https://github.com/pubky/pubky-core-ffi) — Pubky Mobile SDK
