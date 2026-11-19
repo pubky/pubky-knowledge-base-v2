@@ -28,6 +28,8 @@ For example, an app can use a session to save a user's own data and public stora
 
 Apps can also [request scoped encryption keys](/authentication/#scoped-encryption-keys) for app-managed content encryption and [sign custom proofs](/authentication/#custom-proofs) that other services can verify offline.
 
+Account-management tools with read permission on `/` can [inspect storage usage and quota](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-sdk/bindings/js/pkg/README.md#signer--session).
+
 ## Homeserver connections
 
 Native Rust clients prefer [PubkyTLS](/glossary/#pubkytls), which verifies the Homeserver's public key directly. If PKARR advertises an ICANN HTTPS endpoint, the SDK can use it when the direct endpoint is absent or fails its TCP reachability check. Browser clients reach public Homeservers through the ICANN HTTPS endpoint. ICANN connections use standard HTTPS certificate validation, so their trust depends on the conventional domain and certificate authorities.
@@ -35,6 +37,10 @@ Native Rust clients prefer [PubkyTLS](/glossary/#pubkytls), which verifies the H
 Native Rust clients can use the [HTTP client builder](https://docs.rs/pubky/latest/pubky/struct.PubkyHttpClientBuilder.html#method.add_root_certificates_pem) to trust additional certificate authorities for ICANN HTTPS.
 
 The native fallback concerns TCP reachability: a later TLS or request failure does not trigger it. See the SDK's [transport selection and tests](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-sdk/src/client/http_targets/native.rs) for the exact behavior. Native clients behind HTTPS proxies also have [reported discovery and routing limitations](https://github.com/pubky/pubky-homeserver/issues/657). For public connection setup, follow the [Homeserver Deployment Guide](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/docs/DEPLOY.md).
+
+## Storage paths
+
+Pass plain paths such as `/pub/app/My File 100%.txt` to the SDK, without URL-encoding them. The SDK handles HTTP encoding; listings and event paths use the same plain names. See the [storage guide](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-sdk/bindings/js/pkg/README.md#storage) for path rules and listing cursors.
 
 ## Storage Locking
 

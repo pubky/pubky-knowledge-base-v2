@@ -11,6 +11,8 @@ Files under `/pub/` are publicly readable. Access to `/priv/` requires an authen
 
 Existing `/pub/` data remains public. Choosing `/priv/` for private storage does not retract previously published copies.
 
+Browsers may [cache private files](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-homeserver/README.md#caching-and-proxies). Signing out does not erase cached copies, though the Homeserver still checks access when the browser revalidates a file.
+
 ## Privacy and Trust
 
 Homeserver operators and privileged administrators can read unencrypted `/priv/` content. Apps that need confidentiality from the Homeserver must encrypt their data. They can [request scoped encryption keys](/authentication/#scoped-encryption-keys) through the SDK; the app still handles encryption and key storage. See the [Security Model](/security-model/) for the trust placed in Homeservers.
