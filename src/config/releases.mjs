@@ -1,2 +1,2 @@
 // Keep this release aligned with the documented JavaScript SDK version.
-export const pinned_homeserver_release = 'v0.16.1';
+export const pinned_homeserver_release = 'v0.16.2';
