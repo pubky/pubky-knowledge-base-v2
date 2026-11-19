@@ -11,7 +11,7 @@ Visit the [Pubky Ring website](https://pubkyring.app/) for installs.
 
 ## Manage app access
 
-Open your identity in Ring and select **Authorized Apps** to see its grants. Select a grant to review its permissions and expiration. To end access through that grant, choose **Revoke app access** and confirm with **Revoke**.
+Open an identity you manage in Ring and scroll to **Authorized Apps**. The section appears when the identity has grants to manage. Select a grant to review its permissions and expiration. To end access through that grant, choose **Revoke app access** and confirm with **Revoke**.
 
 ## Protecting your identity
 
@@ -23,7 +23,7 @@ When setting up your Pubky profile in [Bitkit](https://bitkit.to/), you can choo
 
 ## Refresh Homeserver discovery
 
-If apps are having trouble finding your Homeserver, go to **Settings** → **Republish records** and select **Republish all**. Ring refreshes the [PKARR records](/pkarr/) that point apps to the current Homeservers for your Ring-managed identities.
+If apps are having trouble finding your Homeserver, open **Settings** and select **Republish all** under **Republish records**. Ring refreshes the [PKARR records](/pkarr/) that point apps to the current Homeservers for your Ring-managed identities.
 
 ## For app developers
 
