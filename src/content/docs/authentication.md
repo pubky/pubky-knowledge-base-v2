@@ -23,7 +23,7 @@ Review requested scopes before approving an app. Root grants carry account-level
 
 Authenticators can approve fewer scopes or actions than an app requests, so apps should inspect the granted capabilities before enabling features. Signer developers use the [selective approval APIs](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/docs/scoped-encryption-keys.md#select-capabilities-on-the-signing-device) to apply the user's selection; `approveAuthRequest()` (JavaScript) and `approve_auth()` (Rust) approve the full request.
 
-When requesting more access for a known account, [require that identity in the sign-in request](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-sdk/bindings/js/pkg/README.md#require-the-signed-in-identity). The SDK rejects approvals from another identity. Leave this constraint out for first sign-in or account switching.
+When asking a signed-in user for additional permissions, [include their public key in the authorization request](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-sdk/bindings/js/pkg/README.md#require-the-signed-in-identity). This ensures the approval comes from the same account. Leave this constraint out for first sign-in or account switching.
 
 ## Scoped encryption keys
 
