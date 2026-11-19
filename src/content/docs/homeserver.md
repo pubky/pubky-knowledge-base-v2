@@ -21,7 +21,7 @@ Homeservers also support [storage locking](/sdk/#storage-locking) to help applic
 
 ## Static websites
 
-Homeservers can also serve static websites from a user's public storage when website serving is enabled. Opening a public-key site over HTTPS requires a key-aware browser and a separately published, signed PKARR record pointing to the Homeserver. See the [Websites guide](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/docs/WEBSITES.md) for publishing requirements and limitations.
+Homeservers can also serve static websites from a user's public storage when website serving is enabled. Opening `https://<public-key>/` requires browser support for PKARR discovery and TLS verification of public-key addresses, plus a signed PKARR record pointing to the Homeserver. See the [Websites guide](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/docs/WEBSITES.md) for publishing requirements and limitations.
 
 ## Running a Homeserver
 
