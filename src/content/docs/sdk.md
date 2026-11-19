@@ -49,6 +49,12 @@ For usage and renewal details:
 
 The Locking section of the [client OpenAPI specification](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-homeserver/openapi-client.yml) describes protocol guarantees and limitations.
 
+## Uploads and errors
+
+JavaScript apps can upload `Blob` or `File` inputs with `SessionStorage.putBlob()` and `putBlobLocked()` without copying file contents into WebAssembly memory. See the [JavaScript storage examples](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-sdk/bindings/js/pkg/README.md#sessionstorage-readwrite) for ordinary and locked uploads.
+
+The SDK distinguishes failed grant-refresh requests (`CredentialRefreshError`) from failures in the requested storage operation. Request-error categories describe the observed failure and do not establish retry safety: a timed-out write may already have committed. See [JavaScript errors](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-sdk/bindings/js/pkg/README.md#errors) and [Rust request errors](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-sdk/README.md#request-errors) for available metadata and handling examples.
+
 ## Build and explore
 
 Follow the [Developer Guide](/developer-guide/) for a self-contained walkthrough that writes and reads data on a local testnet. The [examples directory](https://github.com/pubky/pubky-homeserver/tree/{{pinned_homeserver_release}}/examples) covers further workflows, including authorization, persistence, and event streams.
