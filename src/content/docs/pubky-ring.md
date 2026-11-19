@@ -1,6 +1,6 @@
 ---
 title: "Pubky Ring"
-description: "Use Pubky Ring to manage your identity keys, approve app access, and back up your identity. Find downloads and developer integration guides."
+description: "Use Pubky Ring to manage and back up your Pubky identity, and approve or revoke app access."
 ---
 
 Pubky Ring is the key manager and identity application for the Pubky ecosystem. It holds your identity keys and lets you approve access requests from apps.
@@ -9,9 +9,21 @@ An app requests permission to use your identity and access particular data on yo
 
 Visit the [Pubky Ring website](https://pubkyring.app/) for installs.
 
+## Manage app access
+
+Open your identity in Ring and select **Authorized Apps** to see its grants. Select a grant to review its permissions and expiration. To end access through that grant, choose **Revoke app access** and confirm with **Revoke**.
+
 ## Protecting your identity
 
-Keep a separate backup of your identity key using Ring's backup options. Identity recovery and [backing up published data](/pubky-backup/) serve different purposes: recovering a key does not recover data lost by a Homeserver.
+Keep a separate backup of your identity key using Ring's backup options. Use [Pubky Backup](/pubky-backup/) to keep a copy of your Homeserver files.
+
+## Use your identity with Bitkit
+
+When setting up your Pubky profile in [Bitkit](https://bitkit.to/), you can choose an identity you already manage in Ring on the same device.
+
+## Refresh Homeserver discovery
+
+If apps are having trouble finding your Homeserver, go to **Settings** → **Republish records** and select **Republish all**. Ring refreshes the [PKARR records](/pkarr/) that point apps to the current Homeservers for your Ring-managed identities.
 
 ## For app developers
 
