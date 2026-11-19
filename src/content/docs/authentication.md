@@ -62,8 +62,8 @@ The SDK verifier checks signatures and grant validity, but does not check revoca
 
 Use the SDK guides to implement this flow:
 
-- [JavaScript grant authentication](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-sdk/bindings/js/pkg/README.md#grantauthflow-pubkyauth).
-- [Rust QR authentication](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-sdk/README.md#pubky-qr-auth-for-third-party-and-keyless-apps).
+- [JavaScript grant authentication example](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/examples/javascript/2-auth-flow/README.md).
+- [Rust grant authentication example](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/examples/rust/2-auth_flow/README.md).
 - [Browser session persistence example](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/examples/javascript/5-browser-session-persistence/README.md).
 
 For raw endpoints, see the [Homeserver API references](/homeserver/#http-api). For key custody and Homeserver trust, read the [Security Model](/security-model/).
