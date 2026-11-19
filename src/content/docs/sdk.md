@@ -49,6 +49,12 @@ For usage and renewal details:
 
 The Locking section of the [client OpenAPI specification](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-homeserver/openapi-client.yml) describes protocol guarantees and limitations.
 
+## Uploads and errors
+
+JavaScript apps support direct `Blob` and `File` uploads, including locked writes. See the [JavaScript storage examples](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-sdk/bindings/js/pkg/README.md#sessionstorage-readwrite).
+
+Structured errors help apps handle request and grant-refresh failures. A timed-out write may already have committed, so check retry safety before repeating it. See the [JavaScript](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-sdk/bindings/js/pkg/README.md#errors) and [Rust error guides](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-sdk/README.md#request-errors).
+
 ## Build and explore
 
 Follow the [Developer Guide](/developer-guide/) for a self-contained walkthrough that writes and reads data on a local testnet. The [examples directory](https://github.com/pubky/pubky-homeserver/tree/{{pinned_homeserver_release}}/examples) covers further workflows, including authorization, persistence, and event streams.

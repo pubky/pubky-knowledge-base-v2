@@ -19,6 +19,10 @@ Homeservers provide [event streams](#http-api) that let apps and indexers follow
 
 Homeservers also support [storage locking](/sdk/#storage-locking) to help applications coordinate concurrent updates to the same file.
 
+## Static websites
+
+Homeservers can also serve static websites from a user's public storage when website serving is enabled. Opening `https://<public-key>/` requires browser support for PKARR discovery and TLS verification of public-key addresses, plus a signed PKARR record pointing to the Homeserver. See the [Websites guide](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/docs/WEBSITES.md) for publishing requirements and limitations.
+
 ## Running a Homeserver
 
 For installing, configuring, and running a Homeserver, follow the [Install Guide](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/docs/INSTALL.md). To make it publicly reachable see the [Deployment Guide](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/docs/DEPLOY.md).

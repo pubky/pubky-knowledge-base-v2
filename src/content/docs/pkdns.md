@@ -124,6 +124,8 @@ Publish websites without:
 - Renewal requirements (keys don't expire)
 - Registrar control over your domain (records are published on the DHT)
 
+Homeservers can [serve websites from public storage](/homeserver/#static-websites) at public-key addresses.
+
 ### Decentralized Applications
 
 Enable dApps to use public-key addresses:
