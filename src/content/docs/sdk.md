@@ -51,9 +51,9 @@ The Locking section of the [client OpenAPI specification](https://github.com/pub
 
 ## Uploads and errors
 
-JavaScript apps can upload `Blob` or `File` inputs with `SessionStorage.putBlob()` and `putBlobLocked()` without copying file contents into WebAssembly memory. See the [JavaScript storage examples](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-sdk/bindings/js/pkg/README.md#sessionstorage-readwrite) for ordinary and locked uploads.
+JavaScript apps support direct `Blob` and `File` uploads, including locked writes. See the [JavaScript storage examples](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-sdk/bindings/js/pkg/README.md#sessionstorage-readwrite).
 
-The SDK distinguishes failed grant-refresh requests (`CredentialRefreshError`) from failures in the requested storage operation. Request-error categories describe the observed failure and do not establish retry safety: a timed-out write may already have committed. See [JavaScript errors](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-sdk/bindings/js/pkg/README.md#errors) and [Rust request errors](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-sdk/README.md#request-errors) for available metadata and handling examples.
+Structured errors help apps handle request and grant-refresh failures. A timed-out write may already have committed, so check retry safety before repeating it. See the [JavaScript](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-sdk/bindings/js/pkg/README.md#errors) and [Rust error guides](https://github.com/pubky/pubky-homeserver/blob/{{pinned_homeserver_release}}/pubky-sdk/README.md#request-errors).
 
 ## Build and explore
 
