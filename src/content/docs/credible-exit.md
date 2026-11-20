@@ -27,7 +27,7 @@ Here are some of the best examples of Credible Exit in practice:
 
 In **Pubky**, Credible Exit is not just an idea—it's built into the architecture. Pubky combines decentralized routing and identity with flexible, user-controlled hosting to make sure you’re always in charge.
 
-- **Choice of Homeserver**: You can choose a provider or host your own data. To switch providers, copy your data to the new Homeserver and update the discovery record for your identity to point to it.
+- **Choice of Homeserver**: You can choose a provider or host your own Homeserver. To switch providers, copy your data to the new Homeserver and update the discovery record for your identity to point to it.
 
 - **Decentralized Identity**: With Pubky, your identity is not tied to any one server. You use self-issued public keys that are recognized across the network. This means you can change where your data is hosted without losing your identity or connections.
 
