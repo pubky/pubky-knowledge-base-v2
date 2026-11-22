@@ -29,7 +29,7 @@ In **Pubky**, the approach is not to eliminate censorship entirely—because som
 
 - **Data Control**: Users should always have access to and control over their data, even if one hosting provider chooses to censor it. Pubky’s approach empowers users by ensuring they are not dependent on any one server.
 - **Migration and Interoperability**: The ability to migrate data, identities, and connections between different [Homeservers](/homeserver/) helps users remain resilient against censorship. Interoperable systems mean that even if one provider blocks content, another can provide access.
-- **Local Copies and Self-Hosting**: Users can keep local copies of their published data with [Pubky Backup](/pubky-backup/), and independent Homeserver operation gives users more control over where their information lives.
+- **Local Copies and Self-Hosting**: Users can keep local copies of their Homeserver files with [Pubky Backup](/pubky-backup/), and independent Homeserver operation gives users more control over where their information lives.
 
 ## Challenges and Considerations
 
