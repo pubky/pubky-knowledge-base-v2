@@ -83,7 +83,7 @@ Example paths:
 
 ## Step 5: Back Up Your Homeserver Files
 
-Use **[Pubky Backup](/pubky-backup/)** to keep a local copy of your public files. Sign in with Pubky Ring to include private files.
+Use **[Pubky Backup](/pubky-backup/)** to keep a local copy of your Homeserver files. Sign in with Pubky Ring to include private files.
 
 Use [Pubky Backup README](https://github.com/pubky/pubky-backup/blob/main/README.md) and [release builds](https://github.com/pubky/pubky-backup/releases) for download and install instructions.
 

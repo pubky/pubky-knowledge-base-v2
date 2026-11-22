@@ -1,6 +1,6 @@
 ---
 title: "Pubky Backup"
-description: "Keep local copies and snapshots of public and private Pubky Homeserver data. Learn how Pubky Backup works and when to authorize it with Pubky Ring."
+description: "Keep local copies and snapshots of your Homeserver data. Learn how Pubky Backup works and when to authorize it with Pubky Ring."
 ---
 
 **[Pubky Backup](https://github.com/pubky/pubky-backup)** keeps a local copy of files from a Homeserver. It helps preserve access to your files if your hosting provider becomes unavailable or you decide to leave.
