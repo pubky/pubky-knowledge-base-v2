@@ -3,7 +3,7 @@ title: "Pubky Backup"
 description: "Keep local copies and snapshots of your Homeserver data. Learn what Pubky Backup protects and how it differs from identity key backup."
 ---
 
-**[Pubky Backup](https://github.com/pubky/pubky-backup)** keeps a local copy of files from a Homeserver. It helps preserve access to your files if your hosting provider becomes unavailable or you decide to leave.
+**[Pubky Backup](https://github.com/pubky/pubky-backup)** keeps a local copy of files from a Homeserver. It helps preserve access to your files if your hosting provider becomes unavailable or [you decide to leave](/credible-exit/).
 
 Add a public key to back up that identity's public files. To include your private files, sign in to Pubky Backup and approve read access in [Pubky Ring](/pubky-ring/).
 
