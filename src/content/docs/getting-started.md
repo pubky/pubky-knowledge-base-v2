@@ -87,7 +87,7 @@ Use **[Pubky Backup](/pubky-backup/)** to keep a local copy of your public files
 
 Use [Pubky Backup README](https://github.com/pubky/pubky-backup/blob/main/README.md) and [release builds](https://github.com/pubky/pubky-backup/releases) for download and install instructions.
 
-Keep your recovery phrase separately so you can recover your identity key.
+Pubky Backup does not replace your recovery phrase. The recovery phrase protects your identity key; Pubky Backup protects a local copy of your uploaded data.
 
 ## Next Steps
 
