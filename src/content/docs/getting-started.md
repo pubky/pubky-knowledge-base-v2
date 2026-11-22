@@ -7,7 +7,7 @@ description: "Try Pubky as a user: create an identity with Pubky Ring, sign in t
 This guide helps you try Pubky **as a user**; if you want to build on Pubky, start with the [Developer Guide](/developer-guide/).
 :::
 
-Welcome to Pubky! You’ll create your identity, sign in to pubky.app, inspect the data you publish, and back up your Homeserver files.
+Welcome to Pubky! You’ll create your identity, sign in to pubky.app, and inspect and back up the data you publish.
 
 ```mermaid
 flowchart LR
