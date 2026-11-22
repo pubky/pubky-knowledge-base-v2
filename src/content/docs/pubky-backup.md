@@ -13,7 +13,7 @@ Add a public key to back up that identity's public files. To include your privat
 - **Synchronized data copy:** keeps a local copy of your Homeserver files.
 - **Snapshot:** preserves a point-in-time copy of your backup.
 
-Pubky Backup copies files as stored, including in snapshots. Encrypted files stay encrypted, and unencrypted files stay readable. Signing out stops private sync and leaves existing copies on disk.
+Pubky Backup copies files as stored, including in snapshots. Encrypted files stay encrypted. Signing out stops private sync and leaves existing copies on disk.
 
 Keeping both your keys and your data makes [credible exit](/credible-exit/) more practical. Moving to another Homeserver still requires you to restore your files manually.
 
