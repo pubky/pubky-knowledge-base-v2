@@ -15,7 +15,7 @@ export default defineConfig({
   },
   projects: [{ name: 'chromium', use: { ...devices['Desktop Chrome'] } }],
   webServer: {
-    command: 'npm run preview -- --host 127.0.0.1 --port 4322',
+    command: 'PORT=4322 NO_UPDATE_CHECK=1 npm run start:prod',
     url: 'http://127.0.0.1:4322',
     reuseExistingServer: false,
   },

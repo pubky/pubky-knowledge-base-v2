@@ -57,17 +57,58 @@ Run commands from the project root:
 | `npm run check:snippets` | Validate snippet references, types, lint, and formatting |
 | `npm run check:snippets:js` | Run the JavaScript/TypeScript snippet checks |
 | `npm run preview` | Preview the production build locally |
-| `npm run test:browser` | Check the production build in Chromium (build first) |
+| `npm run test:browser` | Check the production build and Node.js server in Chromium (build first) |
+| `npm run start:prod` | Serve `dist/` with the production Node.js static server (`PORT` defaults to `3000`) |
 | `npm run astro ...` | Run Astro CLI commands |
 
 ### Browser checks
 
 After `npm ci`, install Chromium with `npx playwright install --with-deps chromium`.
 Run `npm run build` followed by `npm run test:browser`. Playwright starts a local
-production preview on port 4322 and checks clipboard feedback, Markdown links,
+production Node.js server on port 4322 and checks clipboard feedback, Markdown links,
 SDK tabs, responsive layouts, and JavaScript/reduced-motion fallbacks. External
 requests are stubbed so checks do not send analytics or depend on third-party
 services. The same build and checks run on pull requests and pushes to `main`.
+
+## Cloud Run deployment
+
+[The deployment workflow](.github/workflows/deploy.yml) replaces GitHub Pages.
+It deploys the commit that passed the `Check code snippets` workflow on a push
+to `main`. Manual runs also validate snippets before building.
+The existing build and live-link checks run before image publication.
+
+- Service and image: `pubky-org`
+- Region: `europe-west6`
+- Registry: `europe-west6-docker.pkg.dev/infra-464608/synonym-private-repo`
+- Domain: `pubky.org`
+- Container port: `8080`
+
+Make the Actions secrets `GRC_INFRA_READ_WRITE` (Artifact Registry push credentials)
+and `CLOUDRUN_INFRA` (Cloud Run deployment credentials) available to this repository.
+The deployment account needs permission to deploy the service, act as its runtime
+service account, and configure unauthenticated invocation.
+
+The workflow builds the Astro site with full Git history before Docker packaging,
+preserving sitemap dates, Markdown and LLM exports, and redirect pages.
+The container runs a non-root Node.js static server. It does not use Nginx.
+
+Cloud Run ingress allows internal traffic and Cloud Load Balancing.
+Unauthenticated invocation lets the load balancer's serverless NEG reach the service.
+Configure the existing load balancer to route `pubky.org` to `pubky-org` in
+`europe-west6`. DNS, TLS, and load-balancer resources are managed separately.
+Disable GitHub Pages in repository settings at cutover; removing its workflow does
+not unpublish an existing Pages deployment.
+
+To test the container, build the site first:
+
+```bash
+npm ci
+npm run build
+docker build -t pubky-org .
+docker run --rm -p 8080:8080 pubky-org
+```
+
+Open `http://localhost:8080/`.
 
 ## Homepage announcements
 
